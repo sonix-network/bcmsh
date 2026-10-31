@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cmis &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ConFiG" href="config.html" />
+    <link rel="prev" title="cd" href="cd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Command reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#shell-commands">Shell commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#commands-for-other-chip-families">Commands for other chip families</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#logical-table-switch-mode">Logical-table switch mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#bcma-command-line"><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Command reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">cmis</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cmis">
+<h1><code class="docutils literal notranslate"><span class="pre">cmis</span></code><a class="headerlink" href="#cmis" title="Link to this heading"></a></h1>
+<p>A command of the separate <code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line; see <a class="reference internal" href="../index.html#bcmsh-other-interpreters"><span class="std std-ref">Commands for other chip families</span></a>.</p>
+<p>CMIS management user interface.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cmis &lt;id&gt; [lport=true] [NoneZero=true] &lt;sub-cmd&gt;
+</pre></div>
+</div>
+<p class="rubric">Built-in help</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This command is used to manage CMIS on the Broadcom SVKs.
+By default, &lt;id&gt; represents a Port Macro ID. Use 'lport=true'
+to specify a logical port instead. Use 'NoneZero=true' to
+show only non-zero values in dumps.
+
+Info
+    Show module's vendor and firmware information.
+Status
+    Show module's global operational status.
+MONitors
+    Show global monitors (e.g., temperature, voltage).
+PageRead &lt;bank&gt; &lt;page&gt; [offset] [bytes]
+    Dump CMIS memory page contents.
+PageWrite &lt;bank&gt; &lt;page&gt; &lt;offset&gt; &lt;data&gt;
+    Write a hex data string to a CMIS memory page.
+ADvertising
+    Show module's advertising capabilities.
+APPDescriptors
+    Show Application descriptors (supported interface technologies).
+cdb [&lt;cmd&gt; [args]]
+    Execute a CDB (Command Data Block) command. Use 'cdb' for list.
+ClockMeasure [&lt;ctrl&gt; &lt;value&gt;]
+    Show or set clocking and measurement controls.
+DiagCapability
+    Show diagnostics measurement capabilities.
+DiagFlags
+    Show diagnostics flags.
+DiagMasks [&lt;mask&gt; [&lt;val&gt;|&lt;LaneN=v&gt;..]]
+    Show or set masks for diagnostics flags.
+DiagUserPATtern [&lt;data&gt;]
+    Show or set the user pattern (up to 32 bytes).
+FWLoad &lt;file&gt; [Commit=&lt;0|1&gt;] [LPL=&lt;0|1&gt;] [Retries=&lt;n&gt;] [Delay=&lt;ms&gt;]
+    Upgrade module firmware from a binary file. This operation downloads
+    the image, executes the Run command to activate it, and optionally
+    executes the Commit command to make it permanent.
+    Options:
+      Commit  - Execute Commit command after successful Run (default: 0)
+      LPL     - Use Local Payload (LPL) for download (default: 0)
+      Retries - Max retry attempts (default: 3, range: 0-10)
+      Delay   - Delay in ms before executing Run command (default: 500)
+FWVersion
+    Display current firmware version information.
+LaneCtrl [&lt;ctrl&gt; [&lt;LaneN=v&gt;..]]
+    Show or set lane-specific direct effect controls.
+LaneDPInitCtrl [&lt;ctrl&gt; [&lt;LaneN=v&gt;..]]
+    Show or set data path initialization controls for host lanes.
+LaneDataPathState
+    Show lane-associated data path states.
+LaneDiag [OpticalPowerTxThreshold=&lt;f&gt;] [OpticalPowerRxThreshold=&lt;f&gt;]
+          [LaserBiasTxThreshold=&lt;f&gt;] [HostSideSNRThreshold=&lt;f&gt;]
+          [MediaSideSNRThreshold=&lt;f&gt;]
+    Show lane diagnostics (optical power, bias, SNR). With thresholds,
+    show only lanes below threshold. Use '-1' to scan all PMs (0-63).
+LaneFlags
+    Show lane-specific flags.
+laneBER | laneERRors | laneSNR | laneGatedBER | laneGatedERRors
+    Show various lane performance metrics.
+LaneMask [&lt;mask&gt; [&lt;LaneN=v&gt;..]]
+    Show or set masks for lane-specific flags.
+LaneLoopBack [&lt;cmd&gt; [&lt;LaneN=v&gt;..]]
+    Show or set Host/Media side loopback. Use 'capability' for info.
+LaneActiveCtrlSet
+    Show all lanes' active control set information.
+LaneStagedCtrlSet &lt;set&gt; [&lt;cmd&gt; [&lt;LaneN=v&gt;..]]
+    Show or configure a staged control set.
+LaneStagedApply &lt;set&gt; [&lt;cmd&gt; [&lt;LaneN=v&gt;..]]
+    Show or set an apply trigger on a staged control set.
+LaneStagedResult
+    Show the result from the last staged control apply.
+LaneStatus
+    Show lane-specific output status.
+LaneMonitors
+    Show media lane-specific monitors.
+ModuleCtrl [&lt;ctrl&gt; &lt;value&gt;]
+    Show or set module global controls (e.g., 'SoftwareReset 1').
+ModuleMasks [&lt;mask&gt; &lt;value&gt;]
+    Show or set masks for module global flags.
+MonitorThresholds
+    Show alarm and warning thresholds for all monitors.
+PatternGenCheckCapability
+    Show pattern generator and checker capabilities.
+PatternGenCtrls [&lt;ctrl&gt; &lt;value&gt;]
+    Show or set pattern generator controls.
+PatternCheckCtrls [&lt;ctrl&gt; &lt;value&gt;]
+    Show or set pattern checker controls.
+</pre></div>
+</div>
+<p class="rubric">Built-in examples</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1 info
+1 nz=true monitors
+1 lanediag
+1 lanediag opticalpowertxthreshold=10.0 opticalpowerrxthreshold=10.0
+1 lanediag opticalpowertxthreshold=10.0 laserbiastxthreshold=5.0
+-1 lanediag optt=10.0 oprt=10.0 lbtt=5.0 hssnrt=15.0 mssnrt=15.0
+1 pageread 0 0x10
+1 fwversion
+1 fwload /path/to/firmware.bin
+1 fwload /path/to/firmware.bin verify=1 commit=1
+1 fwload /path/to/firmware.bin retries=5 delay=1000
+1 modulectrl softwarereset 1
+1 lanectrl outputdisabletx lane0=1 lane3=1
+1 lanemask losmaskrx lane0=1
+1 lanestagedctrlset 0 adaptiveinputeqenabletx lane1=1
+1 lanestagedapply 0 applydpinit lane0=1
+1 cdb querystatus
+1 cdb epldump 0 0 128
+1 cdb enterpassword 0x12345678
+1 diagmasks patterncheckerlolmaskhost lane0=1
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cd.html" class="btn btn-neutral float-left" title="cd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="config.html" class="btn btn-neutral float-right" title="ConFiG" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1219 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In-band Flow Analyzer (IFA 2.0) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Changing the chip configuration live" href="live-config.html" />
+    <link rel="prev" title="VXLAN tunnels" href="vxlan.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">In-band Flow Analyzer (IFA 2.0)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-example-network">The example network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-embedded-application">The embedded application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recording-the-starting-state">Recording the starting state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-initiator">Setting up the initiator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-transit-node">Setting up a transit node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-stamps">Time stamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#capturing-the-probes">Capturing the probes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-probe">The probe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-metadata">The metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#removing-it-again">Removing it again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-missing">What is missing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">In-band Flow Analyzer (IFA 2.0)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="in-band-flow-analyzer-ifa-2-0">
+<h1>In-band Flow Analyzer (IFA 2.0)<a class="headerlink" href="#in-band-flow-analyzer-ifa-2-0" title="Link to this heading"></a></h1>
+<p><em>In-band Flow Analyzer</em> (IFA) is in-band network telemetry: switches add a
+small record about themselves to sampled packets of a flow, so that the
+last switch, or a capture at the receiving host, sees the path a packet
+took, which ports it used and the TTL at each hop. IFA 2.0 is described in
+the IETF draft <em>draft-kumar-ippm-ifa</em>. A switch can play three roles:</p>
+<ul class="simple">
+<li><p>the <strong>initiator</strong> picks packets of a flow, makes a copy (the <em>probe</em>),
+inserts an IFA header and its own metadata, and sends the probe along
+the same path as the original;</p></li>
+<li><p>a <strong>transit</strong> node adds its own metadata to every IFA probe it forwards;</p></li>
+<li><p>the <strong>terminator</strong> removes the IFA data and exports the collected
+metadata to a collector.</p></li>
+</ul>
+<p>Trident 3 does the initiator and transit work in the pipeline: the IFA
+flow of the CANCUN package, a few switch controls, field processor entries
+and an internal loopback port. The terminator’s export runs as an
+<a class="reference internal" href="../concepts/eapps.html"><span class="doc">embedded application</span></a> on one of the chip’s R5
+cores. SONiC images built from the community sources neither configure
+IFA nor ship the embedded application.</p>
+<p>This page sets up an initiator and a transit node by hand with Cint, the
+way the Broadcom SAI does it, captures the probes at the receiving host,
+and shows the result in Wireshark. Download the captures and a Wireshark
+dissector to follow along:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/67bc8ed2ba06e2e9764ee6f89e5b76de/ifa2-two-hops.pcap"><code class="xref download docutils literal notranslate"><span class="pre">ifa2-two-hops.pcap</span></code></a>: probes
+with metadata from two switches</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/9e86b1c448a2cacfadddcc138664518e/ifa2-one-hop.pcap"><code class="xref download docutils literal notranslate"><span class="pre">ifa2-one-hop.pcap</span></code></a>: probes
+with metadata from the initiator only</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/000d0f94e2969c61bfdb3ead542a2681/ifa2.lua"><code class="xref download docutils literal notranslate"><span class="pre">ifa2.lua</span></code></a>: Wireshark dissector for IFA
+2.0 with the Trident 3 metadata format</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Everything here changes the switch behind SONiC’s back: switch
+controls, flex flow tables, field processor entries, a mirror
+destination and port sampling. It is lost when <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts, and
+SONiC knows nothing about it. Try it on a lab switch, and remove it
+again (see <a class="reference internal" href="#removing-it-again">Removing it again</a>).</p>
+</div>
+<section id="the-example-network">
+<h2>The example network<a class="headerlink" href="#the-example-network" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Switch</p></th>
+<th class="head"><p>Role</p></th>
+<th class="head"><p>Device ID</p></th>
+<th class="head"><p>Ports on the path</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sw2</p></td>
+<td><p>initiator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x22222</span></code></p></td>
+<td><p>in <code class="docutils literal notranslate"><span class="pre">xe3</span></code> (12) from host A, out <code class="docutils literal notranslate"><span class="pre">ce27</span></code> (115)</p></td>
+</tr>
+<tr class="row-odd"><td><p>sw4</p></td>
+<td><p>transit</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x44444</span></code></p></td>
+<td><p>in <code class="docutils literal notranslate"><span class="pre">ce29</span></code> (123), out <code class="docutils literal notranslate"><span class="pre">xe3</span></code> (12) to host B</p></td>
+</tr>
+</tbody>
+</table>
+<p>Host A, 198.51.100.10, sends UDP packets to host B, 203.0.113.10; the two
+switches route between them. The flow is selected by source address,
+destination address and IP protocol 17. Probes are marked with IP protocol
+253, a number reserved for experiments.</p>
+</section>
+<section id="the-embedded-application">
+<h2>The embedded application<a class="headerlink" href="#the-embedded-application" title="Link to this heading"></a></h2>
+<p>The SAI loads the IFA 2.0 application before it configures any IFA role,
+so this page does the same on the initiator. The images come with the eApp
+package of Broadcom’s enterprise SONiC; copy the one for core 0 into the
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> container and load it with <a class="reference internal" href="../reference/mcsload.html#clicmd-mcsload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSLoad</span></code></a>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mcsstatus</span>
+<span class="go">uC 0 status: RESET</span>
+<span class="go">uC 1 status: RESET</span>
+<span class="go">drivshell&gt; mcsload 0 /root/BCM56870_0_ifa2.srec InitMCS=true</span>
+<span class="go">UC0 messaging system: up</span>
+<span class="go">drivshell&gt; mcsstatus</span>
+<span class="go">uC 0 status: Ok</span>
+<span class="go">version:  4.4.4.0 EA1 Wed Dec  6 18:05:42 PST 2023 IFA2</span>
+<span class="go">uC 1 status: RESET</span>
+</pre></div>
+</div>
+</div>
+<p>The SDK’s IFA module also needs the configuration variable
+<a class="reference internal" href="../concepts/config/variables/telemetry.html#confval-ifa_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ifa_enable</span></code></a>. It is read when the module initialises, so it can be
+added at run time with <a class="reference internal" href="../reference/config.html#clicmd-config-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">add</span></code></a> before calling
+<code class="docutils literal notranslate"><span class="pre">bcm_ifa_init</span></code>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; config add ifa_enable=1</span>
+<span class="go">drivshell&gt; config show ifa</span>
+<span class="go">    ifa_enable=1</span>
+<span class="go">drivshell&gt; cint /root/ifa_init.c</span>
+<span class="go">bcm_ifa_init: 0 (Ok)</span>
+<span class="go">bcm_ifa_config_info_get: 0 (Ok)</span>
+<span class="go">bcm_ifa_config_info_t cfg = {</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">ifa_init.c</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * ifa_init.c - initialise the SDK IFA module against the loaded IFA2 app</span>
+<span class="cm"> * and print its configuration.  Needs ifa_enable=1 (config add) and the</span>
+<span class="cm"> * IFA2 firmware running on a uC (mcsload).</span>
+<span class="cm"> * Run:  cint /root/ifa_init.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ii_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_ifa_config_info_t</span><span class="w"> </span><span class="n">cfg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_ifa_init</span><span class="p">(</span><span class="n">unit</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_ifa_init: %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bcm_ifa_config_info_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cfg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_ifa_config_info_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cfg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_ifa_config_info_get: %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">print</span><span class="w"> </span><span class="n">cfg</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ii_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE ifa_init</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>Both calls answering <code class="docutils literal notranslate"><span class="pre">Ok</span></code> shows that the SDK and the application talk to
+each other. The transit node, sw4, ran without the application and without
+<a class="reference internal" href="../concepts/config/variables/telemetry.html#confval-ifa_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ifa_enable</span></code></a>.</p>
+</section>
+<section id="recording-the-starting-state">
+<h2>Recording the starting state<a class="headerlink" href="#recording-the-starting-state" title="Link to this heading"></a></h2>
+<p>The setup below changes switch controls, the two internal loopback ports
+(65 and 131) and per-port controls. Print their values first, so that they
+can be put back afterwards:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">ifa2_state.c</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * ifa2_state.c - print the IFA 2.0 related switch state that</span>
+<span class="cm"> * ifa2_node.c changes: switch controls, loopback ports, per-port controls,</span>
+<span class="cm"> * sFlow mirror destinations and the IFA field group.  Read-only.</span>
+<span class="cm"> * Set st_ports to the ports used with ifa2_node.c.</span>
+<span class="cm"> * Run:  cint /root/ifa2_state.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">st_ports</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">115</span><span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">st_nports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">st_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">sc</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_t</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_switch_control_get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"  %-34s %d%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">" (error)"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">""</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">pc</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_t</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_port_control_get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"  port %3d %-26s %d%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">" (error)"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">""</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">st_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">vm</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">dest</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">lb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">131</span><span class="p">};</span>
+<span class="w">    </span><span class="n">bcm_field_entry_t</span><span class="w"> </span><span class="n">ents</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"switch controls:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"IFA2Enable"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2Enable</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"IFA2HeaderType"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2HeaderType</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"IFA2MetaDataFirstLookupType"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2MetaDataFirstLookupType</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"IFA2MetaDataSecondLookupType"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2MetaDataSecondLookupType</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"IFAMetaDataAdaptTable"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFAMetaDataAdaptTable</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"IFA2OverLAG"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2OverLAG</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"IFA2TruncationHdrLenUpdate"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2TruncationHdrLenUpdate</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sc</span><span class="p">(</span><span class="s">"SampleFlexRandomSeed"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchSampleFlexRandomSeed</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"loopback ports:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">lb</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gp</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pc</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span><span class="w"> </span><span class="s">"InternalLoopback"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlInternalLoopback</span><span class="p">);</span>
+<span class="w">        </span><span class="n">vm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">bcm_port_vlan_member_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">gp</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">vm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"  port %3d vlan_member flags      0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">lb</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">vm</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"ports:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">st_nports</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pc</span><span class="p">(</span><span class="n">st_ports</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x08000000</span><span class="p">,</span><span class="w"> </span><span class="s">"PacketProcssingPort"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlPacketProcssingPort</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pc</span><span class="p">(</span><span class="n">st_ports</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="s">"SampleFlexRate"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlSampleFlexRate</span><span class="p">);</span>
+<span class="w">        </span><span class="n">pc</span><span class="p">(</span><span class="n">st_ports</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="s">"SampleFlexDest"</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlSampleFlexDest</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_mirror_port_dest_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_MIRROR_PORT_INGRESS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_MIRROR_PORT_SFLOW</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"sFlow ingress mirror destinations: %d (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"  0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_field_entry_multi_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">st_group</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">ents</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"field group %d: rv %d (%s), %d entries</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">st_group</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">st_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE ifa2_state</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/ifa2_state.c</span>
+<span class="go">switch controls:</span>
+<span class="go">  IFA2Enable                         0</span>
+<span class="go">  IFA2HeaderType                     0</span>
+<span class="go">  IFA2MetaDataFirstLookupType        0</span>
+<span class="go">  IFA2MetaDataSecondLookupType       0</span>
+<span class="go">  IFAMetaDataAdaptTable              1</span>
+<span class="go">  IFA2OverLAG                        0</span>
+<span class="go">  IFA2TruncationHdrLenUpdate         0</span>
+<span class="go">  SampleFlexRandomSeed               112224882</span>
+<span class="go">loopback ports:</span>
+<span class="go">  port 134217793 InternalLoopback           1</span>
+<span class="go">  port  65 vlan_member flags      0x2</span>
+<span class="go">  port 134217859 InternalLoopback           1</span>
+<span class="go">  port 131 vlan_member flags      0x2</span>
+<span class="go">ports:</span>
+<span class="go">  port 134217740 PacketProcssingPort        0</span>
+<span class="go">  port  12 SampleFlexRate             0</span>
+<span class="go">  port  12 SampleFlexDest             0</span>
+<span class="go">  port 134217843 PacketProcssingPort        0</span>
+<span class="go">  port 115 SampleFlexRate             0</span>
+<span class="go">  port 115 SampleFlexDest             0</span>
+<span class="go">sFlow ingress mirror destinations: 0 (rv 0)</span>
+<span class="go">field group 200: rv -7 (Entry not found), 0 entries</span>
+<span class="go">DONE ifa2_state</span>
+</pre></div>
+</div>
+</div>
+<p>The ports print as <code class="docutils literal notranslate"><span class="pre">134217793</span></code> and so on: the program passes the
+loopback and packet-processing ports as gports (<code class="docutils literal notranslate"><span class="pre">0x08000000</span></code> plus the
+port number). <code class="docutils literal notranslate"><span class="pre">SampleFlexRandomSeed</span></code> reads differently every time; it
+shows the state of the sampling random generator, not a setting.</p>
+</section>
+<section id="setting-up-the-initiator">
+<h2>Setting up the initiator<a class="headerlink" href="#setting-up-the-initiator" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ifa2_node.c</span></code> makes the switch an initiator or a transit node. Set the
+variables at its top: the role, the device ID, the ports that should add
+metadata, and for the initiator the port and addresses of the flow.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">ifa2_node.c</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * ifa2_node.c - make this switch an IFA 2.0 initiator or transit node,</span>
+<span class="cm"> * the way the Broadcom SAI does it on Trident 3, for one UDP flow.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Set the variables at the top before running.  Every call prints its</span>
+<span class="cm"> * return code.  This changes switch state behind SONiC's back; undo it</span>
+<span class="cm"> * with ifa2_node_undo.c.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Run:  cint /root/ifa2_node.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">in_role</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">           </span><span class="cm">/* 1 = initiator, 2 = transit */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_device_id</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">0x22222</span><span class="p">;</span><span class="w">     </span><span class="cm">/* 20 bits, appears in the metadata */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_ifa_proto</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">253</span><span class="p">;</span><span class="w">         </span><span class="cm">/* IP protocol that marks IFA packets */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_max_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span><span class="w">         </span><span class="cm">/* metadata stack limit, 4-byte words */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_max_hops</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_ports</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">115</span><span class="p">};</span><span class="w">   </span><span class="cm">/* ports that add metadata on egress */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_nports</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_sample_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w">         </span><span class="cm">/* initiator: port the flow arrives on */</span>
+<span class="n">bcm_ip_t</span><span class="w"> </span><span class="n">in_sip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xC633640A</span><span class="p">;</span><span class="w">    </span><span class="cm">/* initiator flow: 198.51.100.10 ... */</span>
+<span class="n">bcm_ip_t</span><span class="w"> </span><span class="n">in_dip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xCB00710A</span><span class="p">;</span><span class="w">    </span><span class="cm">/* ... to 203.0.113.10, UDP */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">in_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span><span class="w">              </span><span class="cm">/* IFP group created for IFA */</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ck</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">what</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%-44s %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">what</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">field_id</span><span class="p">(</span><span class="n">bcm_flow_handle_t</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_flow_field_id_t</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_logical_field_id_get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Switch controls and internal loopback ports (all roles). */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">in_switch</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">lb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">131</span><span class="p">};</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2Enable=1"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2Enable</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2HeaderType"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2HeaderType</span><span class="p">,</span><span class="w"> </span><span class="n">in_ifa_proto</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2MetaDataFirstLookupType=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2MetaDataFirstLookupType</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2MetaDataSecondLookupType=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2MetaDataSecondLookupType</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFAMetaDataAdaptTable=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFAMetaDataAdaptTable</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2OverLAG=1"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2OverLAG</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2TruncationHdrLenUpdate=1"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2TruncationHdrLenUpdate</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">lb</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gp</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"InternalLoopback=1"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">gp</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlInternalLoopback</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"vlan_member_set(0)"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_vlan_member_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Flex flow "IFA": header templates and per-port metadata (all roles). */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">in_flex</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_handle_t</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_option_id_t</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_match_config_t</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_encap_config_t</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_logical_field_t</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"flow_handle_get IFA"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_handle_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="s">"IFA"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">bcm_flow_option_id_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"LOOKUP_LOOPBACK_SUBTYPE_ASSIGN_DISABLE_VLAN_CHECK_ACTION"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_flow_match_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">criteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_MATCH_CRITERIA_FLEX</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">flow_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">flow_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"flow_match_add loopback"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_match_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* IFA base header and metadata header for UDP (OPAQUE4 193). */</span>
+<span class="w">    </span><span class="n">bcm_flow_option_id_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"IFA_BASE_MD_HEADER_ASSIGN_LOOKUP"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_flow_encap_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">criteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_CRITERIA_FLEX</span><span class="p">;</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">valid_elements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_FLEX_KEY_VALID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_FLEX_DATA_VALID</span><span class="p">;</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">flow_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">flow_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_id</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"DIRECT_ASSIGNMENT_10_ACTION_SET"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2F110000</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">in_max_length</span><span class="p">;</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_id</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"DIRECT_ASSIGNMENT_11_ACTION_SET"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFF0000</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">in_max_hops</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_id</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"OPAQUE4"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">193</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"flow_encap_add IFA header (UDP)"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_encap_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* Per-port metadata: device ID, name space, egress port speed. */</span>
+<span class="w">    </span><span class="n">bcm_flow_option_id_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"IFA_MD_LOOKUP_1_ADAPT1_SINGLE"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">in_nports</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"PacketProcssingPort"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_ports</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x08000000</span><span class="p">,</span>
+<span class="w">                                   </span><span class="n">bcmPortControlPacketProcssingPort</span><span class="p">,</span><span class="w"> </span><span class="n">in_ports</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+<span class="w">        </span><span class="n">bcm_port_speed_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_ports</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">speed</span><span class="p">);</span>
+<span class="w">        </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">25000</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">40000</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">50000</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">100000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_ports</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gp</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_flow_encap_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="p">);</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">flow_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">criteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_CRITERIA_FLEX</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">valid_elements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_FLOW_PORT_VALID</span><span class="w"> </span><span class="o">|</span>
+<span class="w">                           </span><span class="n">BCM_FLOW_ENCAP_FLEX_KEY_VALID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_FLEX_DATA_VALID</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">flow_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">flow_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">        </span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_id</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"DEVICE_ID"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in_device_id</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFFFFF</span><span class="p">;</span>
+<span class="w">        </span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_id</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"LNS"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field_id</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"EGRESS_PORT_SPEED"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">code</span><span class="p">;</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"port %d speed %d code %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">in_ports</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="n">code</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"flow_encap_add port metadata"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_encap_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* IFP group with the qualifiers and actions IFA needs. */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">in_fp_group</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_field_group_config_t</span><span class="w"> </span><span class="n">g</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">bcm_field_group_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">);</span>
+<span class="w">    </span><span class="n">g</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FIELD_GROUP_CREATE_WITH_ID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_FIELD_GROUP_CREATE_WITH_ASET</span><span class="p">;</span>
+<span class="w">    </span><span class="n">g</span><span class="p">.</span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in_group</span><span class="p">;</span>
+<span class="w">    </span><span class="n">g</span><span class="p">.</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in_group</span><span class="p">;</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_INIT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifyStageIngress</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifyIfaVersion2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifySrcIp</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifyDstIp</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifyIpProtocol</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifySysHdrType</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifyPktType</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_QSET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">qset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldQualifyVlanFormat</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_INIT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionLoopbackType</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionIngSampleEnable</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionHiGigClassSelect</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressClassSelect</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionNewClassId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEncapIfaMetadataHdr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionIntEncapEnable</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressFlowControlEnable</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_FIELD_ASET_ADD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g</span><span class="p">.</span><span class="n">aset</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressFlowEncapEnable</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ck</span><span class="p">(</span><span class="s">"field_group_config_create"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_group_config_create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="cm">/* Initiator: mark the flow, sample it, and turn the copies into probes. */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">in_initiator</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_mirror_destination_t</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_field_entry_t</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c0</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Sampled copies go to internal loopback port 65. */</span>
+<span class="w">    </span><span class="n">bcm_mirror_destination_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gp</span><span class="p">);</span>
+<span class="w">    </span><span class="n">d</span><span class="p">.</span><span class="n">gport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">d</span><span class="p">.</span><span class="n">truncate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"mirror_destination_create"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_mirror_destination_create</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">d</span><span class="p">));</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"mirror_dest_id 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">mirror_dest_id</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"mirror_port_dest_add INGRESS|SFLOW"</span><span class="p">,</span>
+<span class="w">       </span><span class="n">bcm_mirror_port_dest_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_MIRROR_PORT_INGRESS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_MIRROR_PORT_SFLOW</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">d</span><span class="p">.</span><span class="n">mirror_dest_id</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* First pass: the user's flow. */</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_create flow"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_create</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_group</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">u</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_SrcIp</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">in_sip</span><span class="p">,</span><span class="w"> </span><span class="mh">0xFFFFFFFF</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_DstIp</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">in_dip</span><span class="p">,</span><span class="w"> </span><span class="mh">0xFFFFFFFF</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_IpProtocol</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"EgressFlowControl IfaHdrInsertionOverTrunk"</span><span class="p">,</span>
+<span class="w">       </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressFlowControlEnable</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">bcmFieldEgressFlowControlIfaHdrInsertionOverTrunk</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"LoopbackType Masquerade"</span><span class="p">,</span>
+<span class="w">       </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionLoopbackType</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldLoopbackTypeMasquerade</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IngSampleEnable"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionIngSampleEnable</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"EncapIfaMetadataHdr 193"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEncapIfaMetadataHdr</span><span class="p">,</span><span class="w"> </span><span class="mi">193</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_install flow"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_install</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">));</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"flow entry %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* Second pass: the looped-back copy becomes the IFA probe (UDP). */</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_create second pass"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_create</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_group</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bcm_field_entry_prio_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mh">0x7FFFFFFF</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_SysHdrType</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldSysHdrLoopbackCpuMasquerade</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionHiGigClassSelect</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressClassSelect</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionNewClassId</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_PktType</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldPktTypeUdpIfa</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressFlowControlEnable</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">bcmFieldEgressFlowControlIfaOverTrunkUdpUpdate</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_entry_copy</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_entry_copy</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_VlanFormat</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressFlowEncapEnable</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">bcmFieldEgressFlowEncapIfaProbeInitOverTrunkStagWithUdpUpdate</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_VlanFormat</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">c0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">c0</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressFlowEncapEnable</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">bcmFieldEgressFlowEncapIfaProbeInitOverTrunkUntagWithUdpUpdate</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_VlanFormat</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionEgressFlowEncapEnable</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">bcmFieldEgressFlowEncapIfaProbeInitOverTrunkDtagWithUdpUpdate</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_install second pass dtag"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_install</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_install second pass stag"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_install</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_install second pass untag"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_install</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">c0</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* Sample every packet of the flow (rate 1) to the mirror. */</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"SampleFlexRandomSeed"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchSampleFlexRandomSeed</span><span class="p">,</span><span class="w"> </span><span class="mi">77803</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"SampleFlexRate=1"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_sample_port</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlSampleFlexRate</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"SampleFlexDest=MIRROR"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_sample_port</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlSampleFlexDest</span><span class="p">,</span>
+<span class="w">                                                     </span><span class="n">BCM_PORT_CONTROL_SAMPLE_DEST_MIRROR</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Transit: add metadata to IFA 2.0 packets passing through. */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">in_transit</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_field_entry_t</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_create transit"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_create</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">in_group</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">t</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_IfaVersion2</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_field_qualify_SysHdrType</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldSysHdrNone</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IntEncapEnable"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_action_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">bcmFieldActionIntEncapEnable</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"entry_install transit"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_install</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">));</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"transit entry %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">in_switch</span><span class="p">();</span>
+<span class="n">in_flex</span><span class="p">();</span>
+<span class="n">in_fp_group</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">in_role</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">in_initiator</span><span class="p">();</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">in_transit</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE ifa2_node</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>What it does, for all roles:</p>
+<ul class="simple">
+<li><p>turns on IFA 2.0 in the pipeline and sets the IP protocol number that
+marks IFA packets (<code class="docutils literal notranslate"><span class="pre">bcmSwitchIFA2Enable</span></code>, <code class="docutils literal notranslate"><span class="pre">bcmSwitchIFA2HeaderType</span></code>);</p></li>
+<li><p>adds entries to the CANCUN <code class="docutils literal notranslate"><span class="pre">IFA</span></code> flow with the flow API: the IFA header
+and metadata header that the initiator inserts (version 2, local name
+space, maximum length 255 words, hop limit 31), and, for each port, the
+metadata this switch adds when a probe leaves through it (device ID, name
+space 1, port speed);</p></li>
+<li><p>creates a field processor group with the qualifiers and actions IFA uses.</p></li>
+</ul>
+<p>And for the initiator:</p>
+<ul class="simple">
+<li><p>a mirror destination on internal loopback port 65 for sFlow-sampled
+packets, and sampling of every packet (rate 1) on the flow’s input port;</p></li>
+<li><p>a field entry for the flow that samples the packet and marks it for IFA
+header insertion (<code class="docutils literal notranslate"><span class="pre">EncapIfaMetadataHdr</span></code>) on its second pass;</p></li>
+<li><p>three <em>second-pass</em> entries that match the sampled copy coming back from
+the loopback port (untagged, single- and double-tagged) and turn it into
+a probe.</p></li>
+</ul>
+<p>The original packet is forwarded unchanged; the probe follows it as a
+separate packet.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/ifa2_node.c</span>
+<span class="go">IFA2Enable=1                                 0 (Ok)</span>
+<span class="go">IFA2HeaderType                               0 (Ok)</span>
+<span class="go">IFA2MetaDataFirstLookupType=0                0 (Ok)</span>
+<span class="go">IFA2MetaDataSecondLookupType=0               0 (Ok)</span>
+<span class="go">IFAMetaDataAdaptTable=0                      0 (Ok)</span>
+<span class="go">IFA2OverLAG=1                                0 (Ok)</span>
+<span class="go">IFA2TruncationHdrLenUpdate=1                 0 (Ok)</span>
+<span class="go">InternalLoopback=1                           0 (Ok)</span>
+<span class="go">vlan_member_set(0)                           0 (Ok)</span>
+<span class="go">InternalLoopback=1                           0 (Ok)</span>
+<span class="go">vlan_member_set(0)                           0 (Ok)</span>
+<span class="go">flow_handle_get IFA                          0 (Ok)</span>
+<span class="go">flow_match_add loopback                      0 (Ok)</span>
+<span class="go">DIRECT_ASSIGNMENT_10_ACTION_SET              0 (Ok)</span>
+<span class="go">DIRECT_ASSIGNMENT_11_ACTION_SET              0 (Ok)</span>
+<span class="go">OPAQUE4                                      0 (Ok)</span>
+<span class="go">flow_encap_add IFA header (UDP)              0 (Ok)</span>
+<span class="go">PacketProcssingPort                          0 (Ok)</span>
+<span class="go">DEVICE_ID                                    0 (Ok)</span>
+<span class="go">LNS                                          0 (Ok)</span>
+<span class="go">EGRESS_PORT_SPEED                            0 (Ok)</span>
+<span class="go">port 12 speed 10000 code 0</span>
+<span class="go">flow_encap_add port metadata                 0 (Ok)</span>
+<span class="go">PacketProcssingPort                          0 (Ok)</span>
+<span class="go">DEVICE_ID                                    0 (Ok)</span>
+<span class="go">LNS                                          0 (Ok)</span>
+<span class="go">EGRESS_PORT_SPEED                            0 (Ok)</span>
+<span class="go">port 115 speed 100000 code 4</span>
+<span class="go">flow_encap_add port metadata                 0 (Ok)</span>
+<span class="go">field_group_config_create                    0 (Ok)</span>
+<span class="go">mirror_destination_create                    0 (Ok)</span>
+<span class="go">mirror_dest_id 0x3c000001</span>
+<span class="go">mirror_port_dest_add INGRESS|SFLOW           0 (Ok)</span>
+<span class="go">entry_create flow                            0 (Ok)</span>
+<span class="go">EgressFlowControl IfaHdrInsertionOverTrunk   0 (Ok)</span>
+<span class="go">LoopbackType Masquerade                      0 (Ok)</span>
+<span class="go">IngSampleEnable                              0 (Ok)</span>
+<span class="go">EncapIfaMetadataHdr 193                      0 (Ok)</span>
+<span class="go">entry_install flow                           0 (Ok)</span>
+<span class="go">flow entry 36</span>
+<span class="go">entry_create second pass                     0 (Ok)</span>
+<span class="go">entry_install second pass dtag               0 (Ok)</span>
+<span class="go">entry_install second pass stag               0 (Ok)</span>
+<span class="go">entry_install second pass untag              0 (Ok)</span>
+<span class="go">SampleFlexRandomSeed                         0 (Ok)</span>
+<span class="go">SampleFlexRate=1                             0 (Ok)</span>
+<span class="go">SampleFlexDest=MIRROR                        0 (Ok)</span>
+<span class="go">DONE ifa2_node</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="setting-up-a-transit-node">
+<h2>Setting up a transit node<a class="headerlink" href="#setting-up-a-transit-node" title="Link to this heading"></a></h2>
+<p>On the next switch, run the same program with <code class="docutils literal notranslate"><span class="pre">in_role</span> <span class="pre">=</span> <span class="pre">2</span></code>, its own
+device ID and its ports (<code class="docutils literal notranslate"><span class="pre">in_ports</span> <span class="pre">=</span> <span class="pre">{123,</span> <span class="pre">12}</span></code> on sw4). The transit role
+adds one field entry: packets with an IFA version 2 header get
+<code class="docutils literal notranslate"><span class="pre">IntEncapEnable</span></code>, and the per-port flow entries supply the metadata.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/ifa2_node.c</span>
+<span class="go">port 123 speed 100000 code 4</span>
+<span class="go">port 12 speed 10000 code 0</span>
+<span class="go">transit entry 37</span>
+<span class="go">DONE ifa2_node</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="time-stamps">
+<h2>Time stamps<a class="headerlink" href="#time-stamps" title="Link to this heading"></a></h2>
+<p>The SAI keeps the egress pipeline’s time of day in step with the chip’s
+time-stamp counter, every 500 ms. <code class="docutils literal notranslate"><span class="pre">ifa2_tod_sync.c</span></code> does this once:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">ifa2_tod_sync.c</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * ifa2_tod_sync.c - copy the timestamp counter into the egress-stage</span>
+<span class="cm"> * time of day, as the SAI's IFA timer does every 500 ms.  IFA metadata</span>
+<span class="cm"> * timestamps are only consistent after this.  Creates time interface 0</span>
+<span class="cm"> * if there is none.</span>
+<span class="cm"> * Run:  cint /root/ifa2_tod_sync.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ts_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_time_interface_t</span><span class="w"> </span><span class="n">ti</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_time_ts_counter_t</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_time_tod_t</span><span class="w"> </span><span class="n">tod</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint64</span><span class="w"> </span><span class="n">secs</span><span class="p">,</span><span class="w"> </span><span class="n">rem</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">bcm_time_interface_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ti</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_time_interface_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ti</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"time_interface_get: %d (%s) flags 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">ti</span><span class="p">.</span><span class="n">flags</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">ti</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_TIME_ENABLE</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_time_interface_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ti</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ti</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_TIME_ENABLE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_TIME_WITH_ID</span><span class="p">;</span>
+<span class="w">        </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_time_interface_add</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ti</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"time_interface_add: %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">sal_memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tod</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">tod</span><span class="p">));</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_time_tod_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_TIME_STAGE_EGRESS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tod</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"egress tod before: %d (%s) %u s %u ns</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tod</span><span class="p">.</span><span class="n">ts</span><span class="p">.</span><span class="n">seconds</span><span class="p">),</span><span class="w"> </span><span class="n">tod</span><span class="p">.</span><span class="n">ts</span><span class="p">.</span><span class="n">nanoseconds</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sal_memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_time_ts_counter_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"ts_counter_get: %d (%s) enable %d counter %d ns hi %u lo %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span>
+<span class="w">           </span><span class="n">c</span><span class="p">.</span><span class="n">enable</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">ts_counter</span><span class="p">,</span><span class="w"> </span><span class="n">COMPILER_64_HI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">.</span><span class="n">ts_counter_ns</span><span class="p">),</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">.</span><span class="n">ts_counter_ns</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">sal_memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tod</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">tod</span><span class="p">));</span>
+<span class="w">    </span><span class="n">tod</span><span class="p">.</span><span class="n">time_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">time_format</span><span class="p">;</span>
+<span class="w">    </span><span class="n">COMPILER_64_COPY</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secs</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">ts_counter_ns</span><span class="p">);</span>
+<span class="w">    </span><span class="n">COMPILER_64_UDIV_32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">secs</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">COMPILER_64_COPY</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">secs</span><span class="p">);</span>
+<span class="w">    </span><span class="n">COMPILER_64_UMUL_32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">COMPILER_64_COPY</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rem</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">ts_counter_ns</span><span class="p">);</span>
+<span class="w">    </span><span class="n">COMPILER_64_SUB_64</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rem</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span>
+<span class="w">    </span><span class="n">COMPILER_64_COPY</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tod</span><span class="p">.</span><span class="n">ts</span><span class="p">.</span><span class="n">seconds</span><span class="p">,</span><span class="w"> </span><span class="n">secs</span><span class="p">);</span>
+<span class="w">    </span><span class="n">tod</span><span class="p">.</span><span class="n">ts</span><span class="p">.</span><span class="n">nanoseconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rem</span><span class="p">);</span>
+<span class="w">    </span><span class="n">COMPILER_64_COPY</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tod</span><span class="p">.</span><span class="n">ts_adjustment_counter_ns</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">ts_counter_ns</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_time_tod_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_TIME_STAGE_EGRESS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tod</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"egress tod set: %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">sal_memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tod</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">tod</span><span class="p">));</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_time_tod_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_TIME_STAGE_EGRESS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tod</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"egress tod after: %d (%s) %u s %u ns</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tod</span><span class="p">.</span><span class="n">ts</span><span class="p">.</span><span class="n">seconds</span><span class="p">),</span><span class="w"> </span><span class="n">tod</span><span class="p">.</span><span class="n">ts</span><span class="p">.</span><span class="n">nanoseconds</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ts_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE ifa2_tod_sync</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/ifa2_tod_sync.c</span>
+<span class="go">time_interface_get: 0 (Ok) flags 0x1</span>
+<span class="go">egress tod before: 0 (Ok) 0 s 0 ns</span>
+<span class="go">ts_counter_get: 0 (Ok) enable 1 counter 0 ns hi 1152 lo 238009072</span>
+<span class="go">egress tod set: 0 (Ok)</span>
+<span class="go">egress tod after: 0 (Ok) 4948 s 40334064 ns</span>
+<span class="go">DONE ifa2_tod_sync</span>
+</pre></div>
+</div>
+</div>
+<p>Even then, the time fields in the metadata are not reliable with this
+manual setup: see <a class="reference internal" href="#the-metadata">The metadata</a>.</p>
+</section>
+<section id="capturing-the-probes">
+<h2>Capturing the probes<a class="headerlink" href="#capturing-the-probes" title="Link to this heading"></a></h2>
+<p>With both switches set up, host A sends five UDP packets to host B, and
+host B captures everything from host A:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">hostB# tcpdump -U -s0 -i eth0 -w ifa.pcap host 198.51.100.10</span>
+<span class="go">hostA$ python3 -c '</span>
+<span class="go">import socket, time</span>
+<span class="go">s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</span>
+<span class="go">for i in range(5):</span>
+<span class="go">    s.sendto(b"IFA test packet %d" % i, ("203.0.113.10", 5000)); time.sleep(0.2)'</span>
+</pre></div>
+</div>
+<p>Each UDP packet arrives twice: the original, and an IFA probe with IP
+protocol 253 whose IP packet is 73 bytes longer:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ tshark -X lua_script:ifa2.lua -r ifa2-two-hops.pcap
+    1   0.000000 198.51.100.10 → 203.0.113.10 UDP 60 53479 → 5000 Len=17
+    2   0.000002 198.51.100.10 → 203.0.113.10 IFA2 132 IFA2 2 hop(s), hop limit 30, next header 17
+    3   0.000078 203.0.113.10 → 198.51.100.10 ICMP 87 Destination unreachable (Port unreachable)
+    4   0.000206 203.0.113.10 → 198.51.100.10 ICMP 160 Destination unreachable (Protocol unreachable)
+</pre></div>
+</div>
+<p>Host B answers the probe with <em>protocol unreachable</em>: a host does not
+understand IFA. In a real deployment the last switch terminates the probes.
+On the initiator, the sampled copy shows up as extra traffic on the egress
+port: five packets in on <code class="docutils literal notranslate"><span class="pre">xe3</span></code>, ten out on <code class="docutils literal notranslate"><span class="pre">ce27</span></code>.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show counters changed xe3,ce27</span>
+<span class="go">CLMIB_RPKT.xe3                   :                   198                  +5</span>
+<span class="go">CLMIB_TPKT.xe3                   :                   246                  +6</span>
+<span class="go">CLMIB_RPKT.ce27          :                   181                  +6</span>
+<span class="go">CLMIB_TPKT.ce27          :                   190                 +10</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="the-probe">
+<h2>The probe<a class="headerlink" href="#the-probe" title="Link to this heading"></a></h2>
+<p>In Wireshark with the dissector loaded, a probe from the two-hop capture
+looks like this (<code class="docutils literal notranslate"><span class="pre">tshark</span> <span class="pre">-X</span> <span class="pre">lua_script:ifa2.lua</span> <span class="pre">-V</span></code>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>In-band Flow Analyzer 2.0
+    IFA header
+        0010 .... = Version: 2
+        .... 1111 = Global name space: Local name space (per hop) (0xf)
+        Next header: 17
+        Flags: 0x00
+        Max metadata length (4-byte words): 255
+    UDP header
+        UDP source port: 53479
+        UDP destination port: 5000
+        UDP length: 62
+        UDP checksum: 0x0000
+    IFA metadata header
+        Request vector: 0xff
+        Action vector: 0xff
+        Hop limit: 30
+        Current length (4-byte words): 16
+    Metadata stack (64 bytes, newest hop first)
+        Hop 1: device 0x44444, ingress port 123, egress port 12
+            Local name space: 1
+            Device ID: 0x44444
+            IP TTL: 62
+            Egress port speed: 10G (0)
+            Congestion: 0
+            Queue ID: 0
+            Rx timestamp, seconds: 5044
+            Egress system port: 12
+            Ingress system port: 123
+            Rx timestamp, nanoseconds: 13521694
+            Residence time, nanoseconds: 1000000698
+            Opaque data: 0x00000000
+            ...
+        Hop 2: device 0x22222, ingress port 12, egress port 115
+            Device ID: 0x22222
+            IP TTL: 63
+            Egress port speed: 100G (4)
+            ...
+Data (18 bytes)
+    Data: 4946412074657374207061636b6574203000
+</pre></div>
+</div>
+<p>The packet layout is:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 15.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Part</p></th>
+<th class="head"><p>Bytes</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IPv4 header</p></td>
+<td><p>20</p></td>
+<td><p>protocol 253 (IFA); total length includes everything below</p></td>
+</tr>
+<tr class="row-odd"><td><p>IFA header</p></td>
+<td><p>4</p></td>
+<td><p>version 2, global name space <code class="docutils literal notranslate"><span class="pre">0xF</span></code> (each hop uses its local name
+space), next header 17 (the original IP protocol), flags, maximum
+metadata length in 4-byte words</p></td>
+</tr>
+<tr class="row-even"><td><p>UDP header</p></td>
+<td><p>8</p></td>
+<td><p>the original ports; length grown by the IFA data, checksum 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Metadata header</p></td>
+<td><p>4</p></td>
+<td><p>request vector, action vector, hop limit (31 at the initiator, minus
+one per hop), current length of the metadata stack in 4-byte words</p></td>
+</tr>
+<tr class="row-even"><td><p>Metadata stack</p></td>
+<td><p>32 per hop</p></td>
+<td><p>the newest hop first</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload</p></td>
+<td></td>
+<td><p>the original UDP payload</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-metadata">
+<h2>The metadata<a class="headerlink" href="#the-metadata" title="Link to this heading"></a></h2>
+<p>Each Trident 3 hop adds 32 bytes in local name space 1:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Bits</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Local name space</p></td>
+<td><p>4</p></td>
+<td><p>always 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Device ID</p></td>
+<td><p>20</p></td>
+<td><p>the device ID configured on the switch</p></td>
+</tr>
+<tr class="row-even"><td><p>IP TTL</p></td>
+<td><p>8</p></td>
+<td><p>the packet’s TTL at this hop</p></td>
+</tr>
+<tr class="row-odd"><td><p>Egress port speed</p></td>
+<td><p>4</p></td>
+<td><p>0 = 10G, 1 = 25G, 2 = 40G, 3 = 50G, 4 = 100G, 5 = 200G, 6 = 400G</p></td>
+</tr>
+<tr class="row-even"><td><p>Congestion</p></td>
+<td><p>2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Queue ID</p></td>
+<td><p>6</p></td>
+<td><p>egress queue</p></td>
+</tr>
+<tr class="row-even"><td><p>Rx timestamp, seconds</p></td>
+<td><p>20</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Egress system port</p></td>
+<td><p>16</p></td>
+<td><p>the logical port number the probe left on</p></td>
+</tr>
+<tr class="row-even"><td><p>Ingress system port</p></td>
+<td><p>16</p></td>
+<td><p>the logical port number it arrived on</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rx timestamp, nanoseconds</p></td>
+<td><p>32</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Residence time, nanoseconds</p></td>
+<td><p>32</p></td>
+<td><p>time from ingress to egress</p></td>
+</tr>
+<tr class="row-odd"><td><p>Opaque data</p></td>
+<td><p>3 × 32</p></td>
+<td><p>zero unless configured</p></td>
+</tr>
+</tbody>
+</table>
+<p>Device ID, TTL, ports and port speed were correct for both hops in the
+captures. The time fields were not usable: the nanosecond field grows
+past one second without the seconds field changing, and the residence time
+reads about one second too high (1000000698 ns). The SAI also programs
+per-port time-stamp identifiers and refreshes the time of day every 500 ms;
+this page does neither.</p>
+</section>
+<section id="removing-it-again">
+<h2>Removing it again<a class="headerlink" href="#removing-it-again" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ifa2_node_undo.c</span></code> removes the field group, the mirror destination and
+the flow entries, and puts back the values recorded at the start. Set its
+variables to the ports used and the values <code class="docutils literal notranslate"><span class="pre">ifa2_state.c</span></code> printed.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">ifa2_node_undo.c</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * ifa2_node_undo.c - remove what ifa2_node.c set up and put back the</span>
+<span class="cm"> * values ifa2_state.c printed before.  Set the variables at the top to</span>
+<span class="cm"> * the same ports and group as in ifa2_node.c, and the before-values.</span>
+<span class="cm"> * Run:  cint /root/ifa2_node_undo.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">un_ports</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">115</span><span class="p">};</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">un_nports</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">un_sample_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">un_group</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">un_seed</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">112224882</span><span class="p">;</span><span class="w">   </span><span class="cm">/* SampleFlexRandomSeed before */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">un_adapt</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">           </span><span class="cm">/* IFAMetaDataAdaptTable before */</span>
+<span class="n">uint32</span><span class="w"> </span><span class="n">un_lb_vlan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2</span><span class="p">;</span><span class="w">         </span><span class="cm">/* vlan_member flags of ports 65/131 before */</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ck</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">what</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%-44s %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">what</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">un_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">lb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">131</span><span class="p">};</span>
+<span class="w">    </span><span class="n">bcm_field_entry_t</span><span class="w"> </span><span class="n">ents</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">dest</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_handle_t</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_option_id_t</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_match_config_t</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_encap_config_t</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_logical_field_t</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="n">bcm_flow_field_id_t</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Field entries and group. */</span>
+<span class="w">    </span><span class="n">bcm_field_entry_multi_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">un_group</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">ents</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_field_entry_remove</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">ents</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"field_entry_destroy"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_entry_destroy</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">ents</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"field_group_destroy"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_group_destroy</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">un_group</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* Sampling and the sFlow mirror destination. */</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"SampleFlexRate=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">un_sample_port</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlSampleFlexRate</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"SampleFlexDest=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">un_sample_port</span><span class="p">,</span><span class="w"> </span><span class="n">bcmPortControlSampleFlexDest</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"SampleFlexRandomSeed"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchSampleFlexRandomSeed</span><span class="p">,</span><span class="w"> </span><span class="n">un_seed</span><span class="p">));</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_mirror_port_dest_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_MIRROR_PORT_INGRESS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_MIRROR_PORT_SFLOW</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"mirror_port_dest_delete"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_mirror_port_dest_delete</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">               </span><span class="n">BCM_MIRROR_PORT_INGRESS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_MIRROR_PORT_SFLOW</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"mirror_destination_destroy"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_mirror_destination_destroy</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Flex flow entries. */</span>
+<span class="w">    </span><span class="n">bcm_flow_handle_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="s">"IFA"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_flow_option_id_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"IFA_MD_LOOKUP_1_ADAPT1_SINGLE"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">un_nports</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">un_ports</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gp</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_flow_encap_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="p">);</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">flow_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gp</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">criteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_CRITERIA_FLEX</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">valid_elements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_FLOW_PORT_VALID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_FLEX_KEY_VALID</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">flow_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">flow_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"flow_encap_delete port metadata"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_encap_delete</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"PacketProcssingPort=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">un_ports</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x08000000</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">bcmPortControlPacketProcssingPort</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">bcm_flow_option_id_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"IFA_BASE_MD_HEADER_ASSIGN_LOOKUP"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_flow_encap_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">criteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_CRITERIA_FLEX</span><span class="p">;</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">valid_elements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_ENCAP_FLEX_KEY_VALID</span><span class="p">;</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">flow_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">flow_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_flow_logical_field_id_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"OPAQUE4"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">);</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">193</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"flow_encap_delete IFA header (UDP)"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_encap_delete</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bcm_flow_option_id_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="s">"LOOKUP_LOOPBACK_SUBTYPE_ASSIGN_DISABLE_VLAN_CHECK_ACTION"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_flow_match_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">criteria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_FLOW_MATCH_CRITERIA_FLEX</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">flow_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">flow_option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"flow_match_delete loopback"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_flow_match_delete</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* Loopback ports and switch controls. */</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">lb</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gp</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ck</span><span class="p">(</span><span class="s">"vlan_member_set"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_vlan_member_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">gp</span><span class="p">,</span><span class="w"> </span><span class="n">un_lb_vlan</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2TruncationHdrLenUpdate=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2TruncationHdrLenUpdate</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2OverLAG=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2OverLAG</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFAMetaDataAdaptTable"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFAMetaDataAdaptTable</span><span class="p">,</span><span class="w"> </span><span class="n">un_adapt</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2HeaderType=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2HeaderType</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ck</span><span class="p">(</span><span class="s">"IFA2Enable=0"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_switch_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchIFA2Enable</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">un_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE ifa2_node_undo</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/ifa2_node_undo.c</span>
+<span class="go">field_entry_destroy                          0 (Ok)</span>
+<span class="go">field_entry_destroy                          0 (Ok)</span>
+<span class="go">field_entry_destroy                          0 (Ok)</span>
+<span class="go">field_entry_destroy                          0 (Ok)</span>
+<span class="go">field_group_destroy                          0 (Ok)</span>
+<span class="go">SampleFlexRate=0                             0 (Ok)</span>
+<span class="go">SampleFlexDest=0                             0 (Ok)</span>
+<span class="go">SampleFlexRandomSeed                         0 (Ok)</span>
+<span class="go">mirror_port_dest_delete                      0 (Ok)</span>
+<span class="go">mirror_destination_destroy                   0 (Ok)</span>
+<span class="go">flow_encap_delete port metadata              0 (Ok)</span>
+<span class="go">PacketProcssingPort=0                        0 (Ok)</span>
+<span class="go">flow_encap_delete port metadata              0 (Ok)</span>
+<span class="go">PacketProcssingPort=0                        0 (Ok)</span>
+<span class="go">flow_encap_delete IFA header (UDP)           0 (Ok)</span>
+<span class="go">flow_match_delete loopback                   0 (Ok)</span>
+<span class="go">vlan_member_set                              0 (Ok)</span>
+<span class="go">vlan_member_set                              0 (Ok)</span>
+<span class="go">IFA2TruncationHdrLenUpdate=0                 0 (Ok)</span>
+<span class="go">IFA2OverLAG=0                                0 (Ok)</span>
+<span class="go">IFAMetaDataAdaptTable                        0 (Ok)</span>
+<span class="go">IFA2HeaderType=0                             0 (Ok)</span>
+<span class="go">IFA2Enable=0                                 0 (Ok)</span>
+<span class="go">DONE ifa2_node_undo</span>
+</pre></div>
+</div>
+</div>
+<p>Running <code class="docutils literal notranslate"><span class="pre">ifa2_state.c</span></code> again shows the starting values. The loaded
+application, <a class="reference internal" href="../concepts/config/variables/telemetry.html#confval-ifa_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ifa_enable</span></code></a> and the time of day are only cleared by
+restarting <code class="docutils literal notranslate"><span class="pre">syncd</span></code>; after that both cores are in reset again.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mcsstatus</span>
+<span class="go">uC 0 status: RESET</span>
+<span class="go">uC 1 status: RESET</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="what-is-missing">
+<h2>What is missing<a class="headerlink" href="#what-is-missing" title="Link to this heading"></a></h2>
+<p>This setup stops at the probe. A terminator would match IFA packets,
+copy them with their metadata to the IFA application on an R5 core
+(CPU queues 46 and 47), and the application would export the metadata as
+IPFIX to a collector (<code class="docutils literal notranslate"><span class="pre">bcm_collector_create</span></code>, an export template,
+<code class="docutils literal notranslate"><span class="pre">bcm_ifa_collector_attach</span></code>). TCP flows need a second header template
+(OPAQUE4 194, next header 6) and the TCP second-pass entries.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vxlan.html" class="btn btn-neutral float-left" title="VXLAN tunnels" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="live-config.html" class="btn btn-neutral float-right" title="Changing the chip configuration live" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

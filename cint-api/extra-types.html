@@ -1,0 +1,2484 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structures and typedefs not in OpenBCM &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Enums not in OpenBCM" href="extra-enums.html" />
+    <link rel="prev" title="Functions not in OpenBCM" href="extra-functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions/index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Cint API on this build</a></li>
+      <li class="breadcrumb-item active">Structures and typedefs not in OpenBCM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="structures-and-typedefs-not-in-openbcm">
+<h1>Structures and typedefs not in OpenBCM<a class="headerlink" href="#structures-and-typedefs-not-in-openbcm" title="Link to this heading"></a></h1>
+<p>Structures and typedefs that the Cint interpreter on this build registers but that
+OpenBCM 6.5.27’s Cint does not, grouped by module. Back to
+<a class="reference internal" href="index.html"><span class="doc">Cint API on this build</span></a>.</p>
+<p>Each structure is shown with its members as Cint knows them and its size
+in bytes; <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&lt;type&gt;;</span></code> in Cint shows the same layout.</p>
+<section id="structures">
+<h2>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<section id="bcm-cosq-26">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_cosq_*</span></code> (26)<a class="headerlink" href="#bcm-cosq-26" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_cosq_ar_profile_params_t {  /* 44 bytes */
+    int weight_mantissa;
+    int weight_exponent;
+    int quant_level_0;
+    int quant_level_1;
+    int quant_level_2;
+    int weight_primary_quant_level_0;
+    int weight_primary_quant_level_1;
+    int weight_primary_quant_level_2;
+    int weight_alternate_quant_level_0;
+    int weight_alternate_quant_level_1;
+    int weight_alternate_quant_level_2;
+};
+
+struct bcm_cosq_bandwidth_config_t {  /* 16 bytes */
+    uint64 rate;
+    uint64 max_burst;
+};
+
+struct bcm_cosq_bandwidth_key_t {  /* 12 bytes */
+    bcm_gport_t gport;
+    bcm_cos_queue_t cosq;
+    bcm_cosq_bw_t type;
+};
+
+struct bcm_cosq_buffer_utilization_t {  /* 60 bytes */
+    uint32 mod_reserved_bytes;
+    uint32 dcn_reserved_bytes;
+    uint32 cbfs_reserved_bytes;
+    uint32 headroom_reserved_bytes;
+    uint32 reserved_bytes;
+    uint32 shared_bytes;
+    uint32 unused_bytes;
+    uint32 mc_cqe_mod_reserved_bytes;
+    uint32 mc_cqe_reserved_bytes;
+    uint32 mc_cqe_shared_bytes;
+    uint32 mc_cqe_unused_bytes;
+    uint32 rqe_reserved_bytes;
+    uint32 rqe_shared_bytes;
+    uint32 rqe_unused_bytes;
+    uint32 rqe_overshoot_bytes;
+};
+
+struct bcm_cosq_cbfs_shaper_t {  /* 16 bytes */
+    int flags;
+    uint32 gbits_sec;
+    uint32 max_accumulation_bytes;
+    uint32 max_burst_bytes;
+};
+
+struct bcm_cosq_color_resolution_t {  /* 12 bytes */
+    bcm_color_t input_color;
+    bcm_cosq_queue_fill_level_t queue_fill;
+    bcm_color_t resolved_color;
+};
+
+struct bcm_cosq_copy_to_secondary_map_action_t {  /* 8 bytes */
+    bcm_port_t egr_aux_port;
+    uint8 cos;
+    uint8 override_enable;
+};
+
+struct bcm_cosq_copy_to_secondary_map_match_t {  /* 12 bytes */
+    bcm_cosq_copy_to_secondary_reason_bmp_t reasons;
+    uint32 entropy;
+    uint32 primary_to_secondary_copy_profile_id;
+};
+
+struct bcm_cosq_copy_to_secondary_reason_bmp_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+
+struct bcm_cosq_drop_reason_status_key_t {  /* 8 bytes */
+    bcm_gport_t gport;
+    uint32 flags;
+};
+
+struct bcm_cosq_egress_editor_edit_instruction_t {  /* 212 bytes */
+    int start_byte;
+    int nof_bytes;
+    uint8 user_bytes[192];
+    uint8 mask;
+    uint8 serial_number;
+    uint32 operation_mode;
+    bcm_cosq_egress_editor_operation_type_t operation_type;
+};
+
+struct bcm_cosq_egress_editor_profile_config_t {  /* 40708 bytes */
+    bcm_cosq_egress_editor_edit_instruction_t edit_instruction[192];
+    int nof_edit_instructions;
+};
+
+struct bcm_cosq_fill_level_threshold_profile_t {  /* 8 bytes */
+    uint32 low_congestion_limit;
+    uint32 high_congestion_limit;
+};
+
+struct bcm_cosq_global_voq_trigger_event_t {  /* 16 bytes */
+    uint32 global_voq_id;
+    uint32 trend;
+    uint64 tod;
+};
+
+struct bcm_cosq_ingress_admit_profile_t {  /* 172 bytes */
+    int nof_tests;
+    bcm_cosq_ingress_admit_test_t admit_tests[42];
+};
+
+struct bcm_cosq_non_minmial_remap_t {  /* 20 bytes */
+    uint32 flags;
+    bcm_cos_t int_pri;
+    bcm_cos_queue_t cosq;
+    bcm_cos_t new_int_pri;
+    bcm_cos_queue_t new_cosq;
+};
+
+struct bcm_cosq_obq_profile_t {  /* 8 bytes */
+    bcm_cos_queue_t cosq;
+    int obq;
+};
+
+struct bcm_cosq_pkt_flow_param_override_t {  /* 8 bytes */
+    uint32 flags;
+    bcm_cos_queue_t cosq;
+};
+
+struct bcm_cosq_port_cbfc_rx_control_t {  /* 20 bytes */
+    uint8 enable;
+    uint32 credit_timer;
+    uint32 credit_threshold;
+    uint32 cf_min_spacing;
+    uint32 flags;
+};
+
+struct bcm_cosq_port_cbfc_rx_info_t {  /* 16 bytes */
+    uint32 buffer_credits;
+    uint32 lossless_vc_bitmap;
+    uint32 credit_size;
+    uint32 packet_overhead;
+};
+
+struct bcm_cosq_port_cbfc_rx_vc_info_t {  /* 1 bytes */
+    uint8 lossless;
+};
+
+struct bcm_cosq_port_cbfc_tx_info_t {  /* 20 bytes */
+    uint32 port_credits;
+    uint32 port_overshoot_credits;
+    uint32 credit_size;
+    uint32 packet_overhead;
+    uint32 flags;
+};
+
+struct bcm_cosq_port_cbfc_tx_vc_info_t {  /* 12 bytes */
+    uint8 lossless;
+    uint32 vc_min_credits;
+    uint32 flags;
+};
+
+struct bcm_cosq_port_cbfc_tx_vcgroup_info_t {  /* 8 bytes */
+    uint32 vc_grp_credits;
+    uint32 flags;
+};
+
+struct bcm_cosq_schedq_profile_t {  /* 8 bytes */
+    bcm_cos_queue_t cosq;
+    int schedq;
+};
+
+struct bcm_cosq_vc_cfg_t {  /* 4 bytes */
+    bcm_cos_queue_t cosq;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-edk-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_edk_*</span></code> (1)<a class="headerlink" href="#bcm-edk-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_edk_table_arg_t {  /* 4 bytes */
+    uint32 param0;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-fabric-3">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_fabric_*</span></code> (3)<a class="headerlink" href="#bcm-fabric-3" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_fabric_auto_isolate_info_t {  /* 32 bytes */
+    uint32 is_isolated;
+    uint32 nof_active_links;
+    uint32 wm_mesh_topo_debug;
+    uint32 is_wm_mesh_topo_debug_neg;
+    uint32 event_type;
+    uint32 reload_reason;
+    uint32 reload_status;
+    uint32 disabled_link;
+};
+
+struct bcm_fabric_jitter_wmk_info_t {  /* 24 bytes */
+    int source_id;
+    bcm_port_t source_link;
+    int pipe;
+    uint64 jitter_wmk;
+};
+
+struct bcm_fabric_jitter_wmk_key_t {  /* 8 bytes */
+    int block;
+    int pipe;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-field-16">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_field_*</span></code> (16)<a class="headerlink" href="#bcm-field-16" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_field_compression_hash_info_t {  /* 12 bytes */
+    bcm_field_compression_hash_type_t type;
+    uint8 hash_16bit_output_offset_0;
+    uint8 hash_16bit_output_offset_1;
+    uint16 hash_32bit_input_enable_bmp;
+    uint16 hash_16bit_input_enable_bmp;
+};
+
+struct bcm_field_copy_to_secondary_reason_bmp_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+
+struct bcm_field_copy_to_secondary_reason_info_t {  /* 24 bytes */
+    bcm_field_copy_to_secondary_reason_bmp_t data;
+    bcm_field_copy_to_secondary_reason_bmp_t mask;
+    bcm_gport_t mirror_destination[4];
+};
+
+struct bcm_field_copytocpu_reason_bmp_t {  /* 12 bytes */
+    SHR_BITDCL w[3];
+};
+
+struct bcm_field_drop_reason_bmp_t {  /* 20 bytes */
+    SHR_BITDCL w[5];
+};
+
+struct bcm_field_entry_traverse_info_t {  /* 8 bytes */
+    bcm_field_group_t fg_id;
+    int cores_group;
+};
+
+struct bcm_field_flexstate_config_t {  /* 8 bytes */
+    uint32 action_id;
+    uint32 counter_index;
+};
+
+struct bcm_field_group_config_update_t {  /* 636 bytes */
+    uint32 flags;
+    bcm_field_qset_t qset;
+    bcm_field_group_t group;
+    bcm_field_aset_t aset;
+    bcm_field_hintid_t hintid;
+};
+
+struct bcm_field_group_entry_copy_config_t {  /* 20 bytes */
+    bcm_field_group_t src_group;
+    bcm_field_entry_t src_entry;
+    bcm_field_group_t dst_group;
+    bcm_field_entry_t dst_entry;
+    uint32 flags;
+};
+
+struct bcm_field_itmh_action_info_t {  /* 16 bytes */
+    bcm_gport_t trap;
+    bcm_gport_t snoop;
+    bcm_gport_t mirror;
+    bcm_gport_t stat_sampling;
+};
+
+struct bcm_field_itmh_key_info_t {  /* 8 bytes */
+    bcm_field_itmh_key_type_t type;
+    uint32 action_index;
+};
+
+struct bcm_field_profile_idx_bmp_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+
+struct bcm_field_stage_action_info_t {  /* 152 bytes */
+    bcm_field_stage_t stage;
+    uint8 presel;
+    uint32 flags;
+    bcm_field_action_t action;
+    int total_size;
+    int num_offsets;
+    int offset_arr[16];
+    int size_arr[16];
+};
+
+struct bcm_field_stage_qual_info_t {  /* 1180 bytes */
+    bcm_field_stage_t stage;
+    uint8 presel;
+    bcm_field_qualify_t qual;
+    int total_size;
+    int num_offsets;
+    int offset_arr[128];
+    int size_arr[128];
+    uint8 fixed_key;
+    int num_selector_type;
+    bcm_field_qual_selector_type_t selector_types[16];
+    int selector_values[16];
+};
+
+struct bcm_field_stat_info_t {  /* 8 bytes */
+    int entry_number;
+    int pool_number;
+};
+
+struct bcm_field_stat_pool_t {  /* 264 bytes */
+    bcm_field_stage_t stage;
+    bcm_pbmp_t ports;
+    int pool_id;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexctr-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_flexctr_*</span></code> (1)<a class="headerlink" href="#bcm-flexctr-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_flexctr_cas_operation_t {  /* 376 bytes */
+    bcm_flexctr_cas_update_compare_t update_compare;
+    bcm_flexctr_cas_update_compare_opd_t update_compare_opd;
+    bcm_flexctr_value_operation_t compare_operation;
+    bcm_flexctr_value_operation_t operation_true;
+    bcm_flexctr_value_operation_t operation_false;
+    bcm_flexctr_cas_update_source_t update_pool;
+    bcm_flexctr_cas_update_source_t update_bus;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexinstr-7">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_flexinstr_*</span></code> (7)<a class="headerlink" href="#bcm-flexinstr-7" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_flexinstr_action_profile_t {  /* 24 bytes */
+    uint32 flags;
+    bcm_flexinstr_bw_sample_interval_selection_t interval_selection;
+    bcm_time_format_t timestamp_format;
+    bcm_flexinstr_pkt_edit_mode_t pkt_edit_mode;
+    int metadata_profile_id;
+    bcm_flexinstr_oper_mode_t oper_mode;
+};
+
+struct bcm_flexinstr_metadata_field_entry_t {  /* 16 bytes */
+    bcm_flexinstr_metadata_field_t field;
+    int start_offset;
+    int bit_width;
+    uint32 value;
+};
+
+struct bcm_flexinstr_metadata_field_info_t {  /* 4 bytes */
+    int size;
+};
+
+struct bcm_flexinstr_metrics_config_t {  /* 40 bytes */
+    uint32 flags;
+    uint16 pkt_metrics_offset;
+    uint16 pkt_metrics_width;
+    bcm_flexinstr_metrics_type_t local_metrics_type;
+    bcm_flexinstr_metrics_quantization_mode_t quantization_mode;
+    uint64 step_base;
+    uint64 step;
+    int range_profile_id;
+    bcm_flexinstr_metrics_operation_t metrics_operation;
+};
+
+struct bcm_flexinstr_range_entry_t {  /* 16 bytes */
+    uint64 max;
+    uint16 quantized_value;
+};
+
+struct bcm_flexinstr_signal_type_metrics_value_map_t {  /* 8 bytes */
+    bcm_flexinstr_signal_type_metrics_map_t metrics_map_4b;
+    bcm_flexinstr_signal_type_metrics_map_t metrics_map_8b;
+};
+
+struct bcm_flexinstr_srv6_pt_tts_profile_t {  /* 8 bytes */
+    int profile_id;
+    uint8 start_offset;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexstate-10">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_flexstate_*</span></code> (10)<a class="headerlink" href="#bcm-flexstate-10" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_flexstate_apu_alu_config_t {  /* 44 bytes */
+    bcm_flexstate_apu_object_t object_a;
+    bcm_flexstate_apu_object_t object_b;
+    uint32 mask_a;
+    uint32 mask_b;
+    uint8 right_rotate_a;
+    uint8 right_rotate_b;
+    uint32 const_0;
+    uint32 const_1;
+    uint32 const_2;
+    uint32 const_3;
+    bcm_flexstate_apu_alu_operation_t operation_c;
+    bcm_flexstate_apu_alu_operation_t operation_d;
+};
+
+struct bcm_flexstate_apu_match_t {  /* 52 bytes */
+    uint16 key_type;
+    uint16 key_type_mask;
+    uint32 cmd_c0;
+    uint32 cmd_c0_mask;
+    uint32 cmd_c1;
+    uint32 cmd_c1_mask;
+    uint32 cmd_c2;
+    uint32 cmd_c2_mask;
+    uint32 cmd_c3;
+    uint32 cmd_c3_mask;
+    uint32 cmd_e0;
+    uint32 cmd_e0_mask;
+    uint32 cmd_e1;
+    uint32 cmd_e1_mask;
+};
+
+struct bcm_flexstate_apu_misc_config_t {  /* 24 bytes */
+    bcm_flexstate_apu_cmd_t cmd_c0;
+    bcm_flexstate_apu_cmd_t cmd_c1;
+    bcm_flexstate_apu_cmd_t cmd_c2;
+    bcm_flexstate_apu_cmd_t cmd_c3;
+    bcm_flexstate_apu_output_object_t output_object_0;
+    bcm_flexstate_apu_output_object_t output_object_1;
+};
+
+struct bcm_flexstate_apu_object_info_t {  /* 8 bytes */
+    uint32 offset;
+    uint32 width;
+};
+
+struct bcm_flexstate_apu_tcam_config_t {  /* 24 bytes */
+    bcm_flexstate_apu_tcam_bank_mode_t bank_mode;
+    uint16 key_type;
+    bcm_flexstate_apu_tcam_mode_t block_0_mode;
+    bcm_flexstate_apu_tcam_mode_t block_1_mode;
+    bcm_flexstate_apu_tcam_mode_t block_2_mode;
+    bcm_flexstate_apu_tcam_mode_t block_3_mode;
+};
+
+struct bcm_flexstate_egr_apu_action_t {  /* 32 bytes */
+    uint32 flags;
+    uint8 new_ecn;
+    uint16 ep_recirc_profile;
+    uint16 ep_recirc_profile_strength;
+    uint16 ep_recirc_override_profile;
+    uint32 flexctr_action_id;
+    bcm_flexstate_apu_object_select_t object_0;
+    bcm_flexstate_apu_object_select_t object_1;
+    bcm_flexstate_apu_object_select_t object_2;
+    bcm_flexstate_apu_object_select_t object_3;
+};
+
+struct bcm_flexstate_ing_apu_action_t {  /* 40 bytes */
+    uint32 flags;
+    uint8 new_ecn;
+    uint8 new_cng;
+    bcm_cos_queue_t new_uc_cos;
+    bcm_cos_t new_int_pri;
+    uint32 flexctr_action_id;
+    uint32 class_id;
+    bcm_flexstate_apu_object_select_t object_0;
+    bcm_flexstate_apu_object_select_t object_1;
+    bcm_flexstate_apu_object_select_t object_2;
+    bcm_flexstate_apu_object_select_t object_3;
+};
+
+struct bcm_flexstate_object_info_t {  /* 8 bytes */
+    uint32 offset;
+    uint32 width;
+};
+
+struct bcm_flexstate_pool_info_t {  /* 264 bytes */
+    bcm_flexstate_stage_t stage;
+    bcm_pbmp_t ports;
+    uint32 pool_id;
+};
+
+struct bcm_flexstate_truth_table_t {  /* 8 bytes */
+    uint8 value[8];
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-flow-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_flow_*</span></code> (2)<a class="headerlink" href="#bcm-flow-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_flow_l3_intf_info_t {  /* 96 bytes */
+    uint32 flags;
+    uint32 valid_elements_set;
+    uint32 valid_elements_clear;
+    bcm_vrf_t vrf;
+    bcm_mac_t mac_addr;
+    bcm_flow_l3_ingress_info_t l3_ingress_info;
+    bcm_qos_ingress_model_t ingress_qos_model;
+    int ingress_qos_map_id;
+    int egress_qos_map_id;
+    uint32 ingress_stat_id;
+    uint32 egress_stat_id;
+    int ingress_stat_pp_profile;
+    int egress_stat_pp_profile;
+    uint32 hash_layers_disable;
+    uint64 additional_data;
+};
+
+struct bcm_flow_vpn_info_t {  /* 64 bytes */
+    uint32 flags;
+    uint32 valid_elements_set;
+    uint32 valid_elements_clear;
+    int field_class_id;
+    int aging_cycles;
+    uint32 stat_id;
+    int ingress_stat_pp_profile;
+    int egress_stat_pp_profile;
+    bcm_gport_t unknown_dest;
+    bcm_stg_t stg;
+    int distribution_id;
+    int limit;
+    bcm_flow_l2_ipmc_fwd_type_t ipv4_mc_fwd_type;
+    bcm_flow_l2_ipmc_fwd_type_t ipv6_mc_fwd_type;
+    uint64 additional_data;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-flowtracker-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_flowtracker_*</span></code> (2)<a class="headerlink" href="#bcm-flowtracker-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_flowtracker_event_data_t {  /* 4 bytes */
+    bcm_flowtracker_event_t event;
+};
+
+struct bcm_flowtracker_flush_control_t {  /* 2 bytes */
+    uint8 flush;
+    uint8 reset;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-glb-7">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_glb_*</span></code> (7)<a class="headerlink" href="#bcm-glb-7" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_glb_config_t {  /* 28 bytes */
+    uint32 glb_switch_id;
+    int path_quality_update_enable;
+    int path_quality_monitor_enable;
+    int monitor_interval_us;
+    int update_interval_us;
+    int msg_tx_interval_us;
+    int monitor_link_events_only;
+};
+
+struct bcm_glb_msg_encap_info_t {  /* 104 bytes */
+    bcm_glb_msg_transport_type_t transport_type;
+    bcm_glb_msg_eth_header_t eth;
+    bcm_glb_msg_ipv4_header_t ipv4;
+    bcm_glb_msg_ipv6_header_t ipv6;
+    bcm_glb_msg_udp_header_t udp;
+    uint16 max_packet_length;
+};
+
+struct bcm_glb_msg_eth_header_t {  /* 28 bytes */
+    bcm_mac_t dst_mac;
+    bcm_mac_t src_mac;
+    uint8 vlan_tag_structure;
+    uint16 outer_tpid;
+    uint16 inner_tpid;
+    bcm_vlan_tag_t outer_vlan_tag;
+    bcm_vlan_tag_t inner_vlan_tag;
+};
+
+struct bcm_glb_msg_ipv4_header_t {  /* 12 bytes */
+    bcm_ip_t src_ip;
+    bcm_ip_t dst_ip;
+    uint8 dscp;
+    uint8 ttl;
+};
+
+struct bcm_glb_msg_ipv6_header_t {  /* 44 bytes */
+    bcm_ip6_t src_ip;
+    bcm_ip6_t dst_ip;
+    uint8 traffic_class;
+    uint32 flow_label;
+    uint8 hop_limit;
+};
+
+struct bcm_glb_msg_udp_header_t {  /* 12 bytes */
+    uint32 flags;
+    bcm_l4_port_t src_port;
+    bcm_l4_port_t dst_port;
+};
+
+struct bcm_glb_path_info_t {  /* 16 bytes */
+    int enable;
+    uint32 flags;
+    uint32 dest_switch_id;
+    uint32 encap_id;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-ifa-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_ifa_*</span></code> (2)<a class="headerlink" href="#bcm-ifa-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_ifa_cosq_stat_control_t {  /* 12 bytes */
+    uint32 enable;
+    uint32 queue;
+    uint32 mapped_queue;
+};
+
+struct bcm_ifa_probe_express_t {  /* 20 bytes */
+    uint32 opaque_data_enable;
+    uint32 port_queue_counter_enable;
+    uint32 cosq_stat_enable;
+    uint32 data_queue;
+    uint32 probe_queue;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-inc-9">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_inc_*</span></code> (9)<a class="headerlink" href="#bcm-inc-9" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_inc_control_info_t {  /* 44 bytes */
+    bcm_l4_port_t l4_src_port;
+    bcm_l4_port_t l4_dst_port;
+    uint32 rdma_length;
+    uint16 payload_mtu;
+    uint16 l3_mtu;
+    uint16 retry_limit;
+    uint32 collective_req_timeout_usec;
+    uint32 collective_req_resend_time_usec;
+    uint8 mgmt_bth_opcode;
+    bcm_cos_queue_t data_cosq;
+    bcm_inc_mode_t mode;
+    int icrc_check_enable;
+};
+
+struct bcm_inc_cpu_tx_encap_t {  /* 76 bytes */
+    uint32 flags;
+    bcm_mac_t dst_mac;
+    bcm_mac_t src_mac;
+    bcm_vlan_t vlan_id;
+    uint16 tpid;
+    uint8 pri;
+    bcm_ipv4_ipv6_addr_t src_ip;
+    bcm_ipv4_ipv6_addr_t dst_ip;
+    bcm_cos_queue_t cosq;
+    int secondary_to_primary_pkt_control_ing_profile_id;
+    uint8 dscp_control;
+};
+
+struct bcm_inc_group_collective_stats_t {  /* 40 bytes */
+    uint32 num_complete;
+    uint64 collective_size;
+    uint32 retries;
+    uint64 wait_time_usecs;
+    uint64 completion_time_usecs;
+};
+
+struct bcm_inc_group_member_stats_t {  /* 248 bytes */
+    uint64 coll_req_tx_pkt_cnt;
+    uint64 coll_req_rx_pkt_cnt;
+    uint64 coll_req_ack_tx_pkt_cnt;
+    uint64 coll_req_ack_rx_pkt_cnt;
+    uint64 coll_req_nak_tx_pkt_cnt;
+    uint64 coll_req_nak_rx_pkt_cnt;
+    uint64 coll_ctrl_tx_pkt_cnt;
+    uint64 coll_ctrl_rx_pkt_cnt;
+    uint64 coll_ctrl_ack_tx_pkt_cnt;
+    uint64 coll_ctrl_ack_rx_pkt_cnt;
+    uint64 coll_ctrl_nak_tx_pkt_cnt;
+    uint64 coll_ctrl_nak_rx_pkt_cnt;
+    uint64 rd_req_tx_pkt_cnt;
+    uint64 rd_req_rx_pkt_cnt;
+    uint64 rd_nak_rx_pkt_cnt;
+    uint64 rd_resp_tx_pkt_cnt;
+    uint64 rd_resp_rx_pkt_cnt;
+    uint64 wr_out_tx_pkt_cnt;
+    uint64 wr_out_rx_pkt_cnt;
+    uint64 wr_out_ack_tx_pkt_cnt;
+    uint64 wr_out_ack_rx_pkt_cnt;
+    uint64 wr_out_nak_tx_pkt_cnt;
+    uint64 wr_out_nak_rx_pkt_cnt;
+    uint64 wr_in_tx_pkt_cnt;
+    uint64 wr_in_rx_pkt_cnt;
+    uint64 wr_in_ack_tx_pkt_cnt;
+    uint64 wr_in_ack_rx_pkt_cnt;
+    uint64 wr_in_nak_tx_pkt_cnt;
+    uint64 wr_in_nak_rx_pkt_cnt;
+    uint64 mgmt_tx_pkt_cnt;
+    uint64 mgmt_rx_pkt_cnt;
+};
+
+struct bcm_inc_group_member_t {  /* 100 bytes */
+    uint32 flags;
+    bcm_vlan_t ing_outer_vlan;
+    bcm_gport_t gport;
+    bcm_inc_group_member_type_t type;
+    bcm_qp_t local_qp_input;
+    bcm_qp_t local_qp_output;
+    bcm_qp_t local_qp_ctrl;
+    bcm_qp_t local_qp_mgmt;
+    bcm_qp_t remote_qp_input;
+    bcm_qp_t remote_qp_output;
+    bcm_qp_t remote_qp_ctrl;
+    bcm_qp_t remote_qp_mgmt;
+    bcm_ipv4_ipv6_addr_t local_ip;
+    bcm_ipv4_ipv6_addr_t remote_ip;
+    uint8 ttl;
+    bcm_if_t l3_egr_obj;
+    uint32 num_ranks;
+};
+
+struct bcm_inc_group_status_t {  /* 24 bytes */
+    uint64 collective_complete_count;
+    bcm_inc_collective_t cur_collective;
+    uint8 cur_collective_completion_percentage;
+    bcm_inc_group_exception_t exception;
+    int link_status;
+};
+
+struct bcm_inc_group_t {  /* 44 bytes */
+    uint32 flags;
+    uint8 ip_version;
+    uint16 pkey;
+    int downlink_speed;
+    uint32 rdma_op_timeout_usec;
+    uint32 collective_complete_ack_timeout_usec;
+    bcm_multicast_t mc_group_0;
+    bcm_multicast_t mc_group_1;
+    int cpu_tx_encap_id;
+    uint32 scale_factor;
+    uint32 cos_port_map_sel;
+    bcm_port_t aux_port;
+};
+
+struct bcm_inc_node_member_t {  /* 100 bytes */
+    bcm_inc_node_member_type_t type;
+    bcm_ipv4_ipv6_addr_t local_ip;
+    bcm_ipv4_ipv6_addr_t remote_ip;
+    bcm_qp_t local_qp_input;
+    bcm_qp_t local_qp_output;
+    bcm_qp_t local_qp_ctrl;
+    bcm_qp_t remote_qp_input;
+    bcm_qp_t remote_qp_output;
+    bcm_qp_t remote_qp_ctrl;
+    bcm_gport_t voq_qp_input;
+    bcm_gport_t voq_qp_output;
+    uint32 sspa_qp_input;
+    bcm_vlan_t vlan_qp_input;
+    uint32 sspa_qp_output;
+    bcm_vlan_t vlan_qp_output;
+    bcm_port_t inca_port_qp_input;
+    bcm_port_t inca_port_qp_output;
+};
+
+struct bcm_inc_node_t {  /* 76 bytes */
+    int group_id;
+    uint8 ip_version;
+    uint16 pkey;
+    int packet_size;
+    bcm_inc_collective_t collective;
+    bcm_qp_t mc_qp_input;
+    bcm_qp_t mc_qp_output;
+    bcm_ipv4_ipv6_addr_t mc_ip_qp_input;
+    bcm_ipv4_ipv6_addr_t mc_ip_qp_output;
+    bcm_inc_node_type_t type;
+    int compute_profile_id;
+    bcm_inc_rdma_type_t rdma_type;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-instru-13">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_instru_*</span></code> (13)<a class="headerlink" href="#bcm-instru-13" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_instru_eventor_builder_conf_appl_specific_t {  /* 12 bytes */
+    uint32 version;
+    uint32 length;
+    uint32 observation_domain;
+};
+
+struct bcm_instru_eventor_uptime_config_t {  /* 12 bytes */
+    uint32 flags;
+    uint32 enable;
+    uint32 start_time;
+};
+
+struct bcm_instru_fabric_event_cell_header_t {  /* 16 bytes */
+    uint32 flags;
+    uint32 dest_id;
+    uint32 src_id;
+    uint32 frag_id;
+};
+
+struct bcm_instru_fabric_event_global_capture_info_t {  /* 24 bytes */
+    bcm_instru_fabric_event_global_capture_rx_info_t *rx_info;
+    bcm_instru_fabric_event_global_capture_tx_info_t *tx_info;
+    int nof_pipes;
+};
+
+struct bcm_instru_fabric_event_global_capture_rx_info_t {  /* 16 bytes */
+    bcm_instru_fabric_event_index_info_t *link_occupancy;
+    int nof_links;
+};
+
+struct bcm_instru_fabric_event_global_capture_tx_info_t {  /* 32 bytes */
+    bcm_instru_fabric_event_index_info_t *link_occupancy;
+    int nof_links;
+    bcm_instru_fabric_tx_block_ocupancy_t *block_occupancy;
+    int nof_blocks;
+};
+
+struct bcm_instru_fabric_event_index_info_t {  /* 32 bytes */
+    int instance;
+    bcm_instru_fabric_event_index_load_t load;
+};
+
+struct bcm_instru_fabric_event_index_load_t {  /* 28 bytes */
+    bcm_instru_fabric_event_load_t info[3];
+    int nof_load_types;
+};
+
+struct bcm_instru_fabric_event_info_t {  /* 112 bytes */
+    uint32 flags;
+    bcm_instru_fabric_event_cell_header_t cell_header;
+    bcm_instru_fabric_event_t type;
+    bcm_instru_fabric_event_index_info_t info[2];
+    uint32 period;
+    uint64 time_of_day;
+    int data_offset;
+};
+
+struct bcm_instru_fabric_event_load_t {  /* 8 bytes */
+    bcm_instru_fabric_event_data_t type;
+    uint32 count;
+};
+
+struct bcm_instru_fabric_tx_block_ocupancy_t {  /* 16 bytes */
+    uint32 *fifo_load;
+    int nof_fifos;
+};
+
+struct bcm_instru_shel_event_type_config_t {  /* 8 bytes */
+    uint32 flags;
+    bcm_eventor_event_id_t event_id;
+};
+
+struct bcm_instru_stat_key_t {  /* 16 bytes */
+    bcm_gport_t gport;
+    uint32 flags;
+    uint32 index;
+    bcm_instru_stat_type_t stat_type;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-keepalive-3">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_keepalive_*</span></code> (3)<a class="headerlink" href="#bcm-keepalive-3" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_keepalive_session_status_t {  /* 8 bytes */
+    uint8 is_active;
+    uint16 tx_count;
+    uint16 remain;
+    uint16 total_count;
+};
+
+struct bcm_keepalive_session_t {  /* 24 bytes */
+    int tx_port;
+    int interval;
+    uint16 pkt_len;
+    uint8 *pkt_buf;
+};
+
+struct bcm_keepalive_status_t {  /* 16 bytes */
+    int init;
+    int start;
+    uint32 mem_used;
+    uint32 mem_total;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-knetsync-5">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_knetsync_*</span></code> (5)<a class="headerlink" href="#bcm-knetsync-5" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_knetsync_p2p_instance_t {  /* 12 bytes */
+    bcm_knetsync_clock_identity_t clock_identity;
+    uint16 max_p2p_enabled_ports;
+    uint8 is_two_step;
+};
+
+struct bcm_knetsync_p2p_port_config_t {  /* 116 bytes */
+    bcm_knetsync_p2p_port_network_info_t network_config;
+    bcm_knetsync_p2p_port_ptp_config_t ptp_config;
+};
+
+struct bcm_knetsync_p2p_port_network_info_t {  /* 100 bytes */
+    bcm_knetsync_ptp_protocol_t addr_type;
+    bcm_mac_t mac;
+    uint8 p2p_l2_header_len;
+    uint8 p2p_l2_header[64];
+    uint8 address[16];
+    uint16 rx_packets_vlan;
+    uint8 ttl;
+    uint8 ip_dscp;
+    uint8 is_multicast;
+};
+
+struct bcm_knetsync_p2p_port_ptp_config_t {  /* 16 bytes */
+    uint8 domain_number;
+    int log_pdelay_req_interval;
+    uint8 is_pdelay_enable;
+    bcm_knetsync_p2p_port_type_t p2p_port_type;
+};
+
+struct bcm_knetsync_p2p_port_stats_t {  /* 80 bytes */
+    uint64 tx_pdelay_req_count;
+    uint64 rx_pdelay_req_count;
+    uint64 tx_pdelay_resp_count;
+    uint64 rx_pdelay_resp_count;
+    uint64 tx_pdelay_resp_followup_count;
+    uint64 rx_pdelay_resp_followup_count;
+    int64 raw_link_delay_ns;
+    int32 neighbor_rate_ratio;
+    uint32 neighbor_prop_delay_ns;
+    uint64 pdelay_resp_timeout_count;
+    uint64 pdelay_resp_followup_timeout_count;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-l2-5">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_l2_*</span></code> (5)<a class="headerlink" href="#bcm-l2-5" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_l2_addr_count_t {  /* 20 bytes */
+    uint32 flags;
+    uint32 vsi;
+    bcm_gport_t gport;
+    int cores_group;
+    uint32 count;
+};
+
+struct bcm_l2_dense_addr_member_t {  /* 20 bytes */
+    uint32 flags;
+    bcm_gport_t port;
+    bcm_trunk_t tgid;
+    uint8 int_pri;
+    uint32 class_id;
+};
+
+struct bcm_l2_dense_addr_t {  /* 12 bytes */
+    uint32 flags;
+    bcm_mac_t mac;
+    bcm_vpn_t vpn;
+};
+
+struct bcm_l2_dense_info_t {  /* 12 bytes */
+    uint32 group_member_size;
+    bcm_mac_t mac_mask;
+};
+
+struct bcm_l2_mac_oui_compression_t {  /* 20 bytes */
+    int priority;
+    bcm_mac_t mac_oui;
+    bcm_mac_t mac_oui_mask;
+    uint32 compressed_oui;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-l3-16">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_l3_*</span></code> (16)<a class="headerlink" href="#bcm-l3-16" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_l3_ar_quality_metric_t {  /* 24 bytes */
+    uint32 threshold;
+    uint32 cost;
+    uint32 bias;
+    uint32 dr_threshold;
+    int reassignment_quality_delta;
+    uint8 enable;
+};
+
+struct bcm_l3_ar_resolution_t {  /* 8 bytes */
+    bcm_l3_ar_resolution_mode_t resolution_mode;
+    bcm_l3_ar_candidate_select_t candidate_select;
+};
+
+struct bcm_l3_ar_vc_map_t {  /* 28 bytes */
+    uint8 port_namespace;
+    int vc;
+    uint32 flags;
+    int primary_vc;
+    int alternate_vc;
+    int dr_vc;
+    bcm_l3_ar_resolution_mode_t resolution_mode;
+};
+
+struct bcm_l3_dense_member_t {  /* 12 bytes */
+    uint32 flags;
+    bcm_if_t egress_obj_id;
+    bcm_if_t ar_group_id;
+};
+
+struct bcm_l3_dense_route_t {  /* 80 bytes */
+    uint32 flags;
+    bcm_ip_t ip_addr;
+    bcm_ip_t ip_addr_mask;
+    bcm_ip6_t ip6_addr;
+    bcm_ip6_t ip6_addr_mask;
+    bcm_vrf_t vrf;
+    uint32 port_db_id;
+    int pp_pipe;
+    bcm_l3_dense_member_t default_member;
+    bcm_mac_t mac_ip_overlay;
+    bcm_mac_t mac_ip_overlay_mask;
+};
+
+struct bcm_l3_ecmp_dlb_member_quality_adjust_t {  /* 12 bytes */
+    bcm_if_t ecmp_intf;
+    bcm_if_t egress_intf;
+    bcm_l3_ecmp_dlb_quality_adjust_t adjust;
+};
+
+struct bcm_l3_ecmp_dlb_port_vc_quality_t {  /* 20 bytes */
+    bcm_l3_ecmp_port_vc_t port_vc;
+    uint32 flags;
+    uint32 quality_metric_A;
+    uint32 quality_metric_B;
+};
+
+struct bcm_l3_ecmp_dlb_quantization_threshold_t {  /* 12 bytes */
+    int egress_bytes;
+    int queued_bytes;
+    int physical_queued_bytes;
+};
+
+struct bcm_l3_ecmp_port_egress_t {  /* 264 bytes */
+    uint32 flags;
+    bcm_port_t port;
+    bcm_pbmp_t pbmp;
+};
+
+struct bcm_l3_ecmp_port_vc_t {  /* 8 bytes */
+    bcm_port_t port;
+    int vc;
+};
+
+struct bcm_l3_egress_forwarding_profile_t {  /* 12 bytes */
+    bcm_if_t egress_if;
+    uint32 flags;
+    uint32 afr_flags;
+};
+
+struct bcm_l3_large_nat_egress_control_t {  /* 24 bytes */
+    uint32 flags;
+    bcm_ip_t ip_addr;
+    bcm_if_t intf_id;
+    uint16 l4_port;
+    int nat_class_id;
+    uint8 nat_enable;
+    uint8 napt_enable;
+};
+
+struct bcm_l3_large_nat_ingress_t {  /* 28 bytes */
+    uint32 flags;
+    bcm_ip_t ip_addr;
+    bcm_vrf_t vrf;
+    uint16 l4_port;
+    uint8 ip_proto;
+    int nat_class_id;
+    bcm_l3_nat_id_t nat_id;
+    int realm_id;
+};
+
+struct bcm_l3_nat_info_t {  /* 72 bytes */
+    uint32 flags;
+    bcm_gport_t tunnel_gport;
+    bcm_vrf_t vrf;
+    bcm_if_t l3a_intf;
+    uint32 stat_id;
+    int stat_pp_profile;
+    int priority;
+    uint8 ip_proto;
+    bcm_ip_t sip_addr;
+    bcm_ip_t sip_addr_mask;
+    bcm_ip_t dip_addr;
+    bcm_ip_t dip_addr_mask;
+    uint16 l4_src_port;
+    uint16 l4_src_port_mask;
+    uint16 l4_dst_port;
+    uint16 l4_dst_port_mask;
+    bcm_ip_t new_sip_addr;
+    bcm_ip_t new_dip_addr;
+    bcm_l4_port_t new_l4_src_port;
+    bcm_l4_port_t new_l4_dst_port;
+};
+
+struct bcm_l3_nat_info_traverse_info_t {  /* 4 bytes */
+    uint32 flags;
+};
+
+struct bcm_l3_nat_ingress_counter_t {  /* 12 bytes */
+    int32 pipe_id;
+    bcm_l3_nat_id_t nat_id;
+    bcm_l3_nat_ingress_counter_type_t type;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-mirror-6">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_mirror_*</span></code> (6)<a class="headerlink" href="#bcm-mirror-6" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_mirror_egress_mod_event_profile_t {  /* 16 bytes */
+    uint8 reason_code;
+    uint32 sample_rate;
+    uint32 priority;
+    uint32 flags;
+};
+
+struct bcm_mirror_mon_sample_t {  /* 368 bytes */
+    bcm_gport_t mirror_dest_id;
+    bcm_switch_stage_t stage;
+    bcm_mon_action_type_t type;
+    bcm_mon_source_type_t source;
+    bcm_pbmp_t pbmp;
+    int sample_firstn;
+    uint32 sample_firstn_threshold;
+    int sample;
+    uint32 rate;
+    uint64 seed;
+    bcm_multi_word_value_t taus88_seed;
+};
+
+struct bcm_mirror_on_event_info_t {  /* 16 bytes */
+    int flags;
+    int event_enable;
+    bcm_port_t mirror_id;
+    int aging_enable;
+};
+
+struct bcm_mirror_on_event_key_t {  /* 20 bytes */
+    int flags;
+    bcm_mirror_on_event_type_t type;
+    int pp_admit_profile;
+    int event_reason_id;
+    int dp;
+};
+
+struct bcm_mirror_pkt_higig3_encap_t {  /* 32 bytes */
+    uint32 flags;
+    uint16 ethertype;
+    bcm_gport_t dst_gport;
+    bcm_multicast_t mc_group;
+    bcm_gport_t src_gport;
+    uint8 entropy;
+    bcm_color_t color;
+    uint8 int_cn;
+    uint8 int_pri;
+};
+
+struct bcm_mirror_sample_egress_ports_and_queues_t {  /* 260 bytes */
+    bcm_pbmp_t port_bmp;
+    uint32 queue_bmp;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-multi-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_multi_*</span></code> (1)<a class="headerlink" href="#bcm-multi-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_multi_word_value_t {  /* 68 bytes */
+    uint32 num_words;
+    uint32 value[16];
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-multicast-3">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_multicast_*</span></code> (3)<a class="headerlink" href="#bcm-multicast-3" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_multicast_egress_group_info_t {  /* 8 bytes */
+    int logical_port;
+    int cosq;
+};
+
+struct bcm_multicast_egress_group_replication_t {  /* 20 bytes */
+    bcm_port_t logical_port;
+    uint8 mirror_valid;
+    int nof_edit_profiles;
+    int edit_profile[2];
+};
+
+struct bcm_multicast_local_mapping_t {  /* 20 bytes */
+    uint32 flags;
+    bcm_multicast_t group;
+    bcm_core_t core_id;
+    int datapath_id;
+    bcm_gport_t dest;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-onesync-6">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_onesync_*</span></code> (6)<a class="headerlink" href="#bcm-onesync-6" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_onesync_info_t {  /* 8 bytes */
+    uint16 fw_cosq;
+    uint16 host_cosq;
+    bcm_core_t fw_core_number;
+};
+
+struct bcm_onesync_p2p_instance_t {  /* 12 bytes */
+    bcm_onesync_clock_identity_t clock_identity;
+    uint16 max_p2p_enabled_ports;
+    uint8 is_two_step;
+};
+
+struct bcm_onesync_p2p_port_config_t {  /* 116 bytes */
+    bcm_onesync_p2p_port_network_info_t network_config;
+    bcm_onesync_p2p_port_ptp_config_t ptp_config;
+};
+
+struct bcm_onesync_p2p_port_network_info_t {  /* 100 bytes */
+    bcm_onesync_ptp_protocol_t addr_type;
+    bcm_mac_t mac;
+    uint8 p2p_l2_header_len;
+    uint8 p2p_l2_header[64];
+    uint8 address[16];
+    uint16 rx_packets_vlan;
+    uint8 ttl;
+    uint8 ip_dscp;
+    uint8 is_multicast;
+};
+
+struct bcm_onesync_p2p_port_ptp_config_t {  /* 16 bytes */
+    uint8 domain_number;
+    int log_pdelay_req_interval;
+    uint8 is_pdelay_enable;
+    bcm_onesync_p2p_port_type_t p2p_port_type;
+};
+
+struct bcm_onesync_p2p_port_stats_t {  /* 80 bytes */
+    uint64 tx_pdelay_req_count;
+    uint64 rx_pdelay_req_count;
+    uint64 tx_pdelay_resp_count;
+    uint64 rx_pdelay_resp_count;
+    uint64 tx_pdelay_resp_followup_count;
+    uint64 rx_pdelay_resp_followup_count;
+    int64 raw_link_delay_ns;
+    int32 neighbor_rate_ratio;
+    uint32 neighbor_prop_delay_ns;
+    uint64 pdelay_resp_timeout_count;
+    uint64 pdelay_resp_followup_timeout_count;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-policer-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_policer_*</span></code> (2)<a class="headerlink" href="#bcm-policer-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_policer_group_config_t {  /* 712 bytes */
+    uint32 flags;
+    bcm_policer_config_t policer_config;
+    bcm_pbmp_t ports;
+    int pool_id[8];
+    int num_pool;
+};
+
+struct bcm_policer_info_t {  /* 24 bytes */
+    uint16 max_pol_pools;
+    uint32 max_pol_entries_per_pool;
+    uint32 max_pol_entries;
+    uint16 max_act_pools;
+    uint32 max_act_entries_per_pool;
+    uint32 max_act_entries;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-port-18">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_port_*</span></code> (18)<a class="headerlink" href="#bcm-port-18" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_port_cbfc_config_t {  /* 20 bytes */
+    int cc_enable;
+    uint32 cc_time_period;
+    bcm_port_cbfc_cc_counter_mode_t cc_counter_mode;
+    int cc_overhead;
+    uint32 cc_cell_size;
+};
+
+struct bcm_port_clm_config_t {  /* 8 bytes */
+    bcm_port_medium_t medium;
+    uint8 retry_times;
+};
+
+struct bcm_port_clm_delay_t {  /* 16 bytes */
+    uint64 delay_ns;
+    uint64 delay_fraction_ns;
+};
+
+struct bcm_port_clm_req_pkt_t {  /* 204 bytes */
+    uint32 len;
+    uint8 buf[200];
+};
+
+struct bcm_port_fec_stat_auto_collect_config_t {  /* 4 bytes */
+    uint32 interval_s;
+};
+
+struct bcm_port_fec_stat_auto_collect_data_t {  /* 248 bytes */
+    uint64 duration;
+    uint64 num_uncorrected_cws;
+    uint64 num_corrected_cws;
+    uint64 num_cws;
+    uint64 num_symbol_errors;
+    uint64 num_uncorrected_blks;
+    uint64 num_corrected_blks;
+    uint64 num_corrected_error_bits;
+    uint64 num_cw_counter_bins;
+    uint64 duration_per_bin[2];
+    uint64 cw_counter_bin_size[2];
+    uint64 cw_counters[18];
+};
+
+struct bcm_port_link_training_config_t {  /* 4 bytes */
+    bcm_port_local_pattern_t pattern;
+};
+
+struct bcm_port_llr_config_t {  /* 52 bytes */
+    bcm_port_t port;
+    int flags;
+    bcm_port_llr_ctrl_os_spacing_t ctrl_os_spacing;
+    uint32 init_count_max;
+    uint32 init_retry_interval;
+    uint32 outstanding_data_max;
+    uint32 outstanding_seq_max;
+    uint32 data_age_timer_max;
+    uint32 replay_timer_max;
+    uint32 replay_count_max;
+    uint32 link_down_timer_max;
+    bcm_port_llr_tx_behavior_t llr_init_behavior;
+    int replay_buffer_size;
+};
+
+struct bcm_port_llr_flush_data_t {  /* 4 bytes */
+    bcm_port_llr_flush_event_type_t event_type;
+};
+
+struct bcm_port_llr_status_t {  /* 12 bytes */
+    int llr_active_tx;
+    int llr_active_rx;
+    int replay_buffer_allocated;
+};
+
+struct bcm_port_mpi_diagnostic_t {  /* 24 bytes */
+    uint32 mse_value[4];
+    int slope;
+    int cut_off;
+};
+
+struct bcm_port_pch_timesync_config_t {  /* 8 bytes */
+    int pch_enable;
+    int rx_pkt_corrupt_enable;
+};
+
+struct bcm_port_phy_am_lock_status_t {  /* 136 bytes */
+    uint32 num_lanes;
+    uint32 fec_lane_num_per_lane;
+    uint32 am_lock_status_bitmap[32];
+};
+
+struct bcm_port_phy_mapping_info_t {  /* 8 bytes */
+    uint32 pipe_id;
+    uint32 pm_id;
+};
+
+struct bcm_port_phy_rx_afe_t {  /* 116 bytes */
+    int dfe[24];
+    uint32 num_of_dfe_taps;
+    int vga;
+    int pf;
+    int low_freq_pf;
+    int high_freq_pf;
+};
+
+struct bcm_port_phy_rx_ffe_t {  /* 28 bytes */
+    int n3;
+    int n2;
+    int n1;
+    int m;
+    int p1;
+    int p2;
+    uint32 num_of_ffe_taps;
+};
+
+struct bcm_port_phy_rx_t {  /* 144 bytes */
+    bcm_port_phy_rx_afe_t afe;
+    bcm_port_phy_rx_ffe_t ffe;
+};
+
+struct bcm_port_serdes_core_info_t {  /* 12 bytes */
+    uint32 ucode_version;
+    uint32 api_version;
+    uint32 afe_hw_version;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-postcard-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_postcard_*</span></code> (1)<a class="headerlink" href="#bcm-postcard-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_postcard_control_info_t {  /* 8 bytes */
+    uint8 dscp_marker;
+    int tunnel_encap_mode;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-ptp-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_ptp_*</span></code> (1)<a class="headerlink" href="#bcm-ptp-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_ptp_port_voq_map_config_t {  /* 16 bytes */
+    int port_num;
+    int sysport;
+    uint16 voq;
+    int tc;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-qos-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_qos_*</span></code> (1)<a class="headerlink" href="#bcm-qos-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_qos_stat_object_t {  /* 8 bytes */
+    int int_pri;
+    int vc;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-rx-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_rx_*</span></code> (1)<a class="headerlink" href="#bcm-rx-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_rx_channel_map_t {  /* 16 bytes */
+    uint32 cos_bmp[2];
+    int flags;
+    bcm_pkt_channel_type_t type;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-sat-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_sat_*</span></code> (2)<a class="headerlink" href="#bcm-sat-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_sat_ctf_field_select_t {  /* 12 bytes */
+    uint32 field_key_offset;
+    uint32 field_size;
+    uint32 field_offset;
+};
+
+struct bcm_sat_ctf_trap_config_t {  /* 28 bytes */
+    uint32 trap_id;
+    bcm_sat_ctf_field_select_t additional_fields[2];
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-stat-12">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_stat_*</span></code> (12)<a class="headerlink" href="#bcm-stat-12" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_stat_bitmap_t {  /* 64 bytes */
+    uint32 pbits[16];
+};
+
+struct bcm_stat_counter_control_t {  /* 24 bytes */
+    uint32 interval;
+    uint32 multiplier[5];
+};
+
+struct bcm_stat_cpx_database_key_t {  /* 4 bytes */
+    int cpx_id;
+};
+
+struct bcm_stat_mirror_mon_sample_count_t {  /* 280 bytes */
+    bcm_gport_t mirror_dest_id;
+    bcm_switch_stage_t stage;
+    bcm_mon_action_type_t type;
+    bcm_mon_source_type_t source;
+    bcm_pbmp_t pbmp;
+    uint64 sample_firstn_count;
+};
+
+struct bcm_stat_pkt_event_info_t {  /* 16 bytes */
+    char *evt_name;
+    int evt_id;
+};
+
+struct bcm_stat_rdb_ctrl_t {  /* 28 bytes */
+    uint32 flags;
+    uint32 lo_resume_val;
+    uint32 lo_limit_val;
+    uint32 mid_resume_val;
+    uint32 mid_limit_val;
+    uint32 hi_resume_val;
+    uint32 hi_limit_val;
+};
+
+struct bcm_stat_simple_port_ctr_cfg_t {  /* 152 bytes */
+    bcm_switch_stage_t dir;
+    bcm_stat_simple_port_ctr_id_t ctr_id;
+    uint64 cmd_flags;
+    uint32 ctr_update_bmp;
+    bcm_stat_bitmap_t trace_evt_mask;
+    bcm_stat_bitmap_t drop_evt_mask;
+    uint32 flex_ctr_obj;
+};
+
+struct bcm_stat_stif_qualifier_command_t {  /* 20 bytes */
+    int command_id;
+    int valid;
+    uint32 valid_mask;
+    int type;
+    uint32 type_mask;
+};
+
+struct bcm_stat_stif_record_qualifier_config_t {  /* 24 bytes */
+    int nof_qual_commands;
+    bcm_stat_stif_qualifier_command_t *qual_command;
+    int format_id;
+    int valid;
+};
+
+struct bcm_stat_stif_record_qualifier_key_t {  /* 4 bytes */
+    int qualifier_id;
+};
+
+struct bcm_stat_stif_report_format_t {  /* 16 bytes */
+    int nof_elements;
+    bcm_stat_stif_record_format_element_t *record_format_elements;
+};
+
+struct bcm_stat_switch_mon_action_sample_count_t {  /* 288 bytes */
+    uint32 actions;
+    bcm_switch_stage_t stage;
+    bcm_mon_action_type_t type;
+    bcm_mon_source_type_t source;
+    bcm_pbmp_t pbmp;
+    int ep_recirc_profile_id;
+    uint64 sample_firstn_count;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-subport-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_subport_*</span></code> (2)<a class="headerlink" href="#bcm-subport-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_subport_cos_to_e2ecc_pri_map_t {  /* 96 bytes */
+    int cos_to_e2ecc_pri_low[12];
+    int cos_to_e2ecc_pri_high[12];
+};
+
+struct bcm_subport_flow_control_config_t {  /* 16 bytes */
+    bcm_subport_svtag_ver_t svtag_ver;
+    uint16 ether_type;
+    uint16 opcode;
+    bcm_subport_fc_type_t fc_type;
+    uint32 priority;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-switch-37">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_switch_*</span></code> (37)<a class="headerlink" href="#bcm-switch-37" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_switch_afr_hdr_field_info_t {  /* 12 bytes */
+    bcm_switch_afr_hdr_field_t field;
+    uint8 start;
+    uint8 width;
+    bcm_mac_t mac_mask;
+};
+
+struct bcm_switch_afr_pkt_match_criteria_t {  /* 6 bytes */
+    uint16 ethertype;
+    uint16 dmac_msb_mask;
+    uint16 dmac_msb;
+};
+
+struct bcm_switch_cnm_header_config_t {  /* 16 bytes */
+    uint32 flags;
+    uint8 new_ip_ttl;
+    uint8 new_ip_dscp;
+    uint8 new_ip_ecn;
+    uint16 udp_dst_port;
+    int gms_profile_id;
+};
+
+struct bcm_switch_cnp_header_config_t {  /* 16 bytes */
+    uint32 flags;
+    bcm_mac_t new_src_mac;
+    uint8 new_ip_ttl;
+    uint8 new_ip_tos;
+    uint8 afr_hdr_ttl;
+};
+
+struct bcm_switch_components_info_key_t {  /* 8 bytes */
+    bcm_switch_components_type_t components_type;
+    uint32 key_mask;
+};
+
+struct bcm_switch_components_info_t {  /* 72 bytes */
+    char components_ver_str[64];
+    bcm_switch_components_firmware_oper_state_t firmware_oper_state;
+    uint32 info_mask;
+};
+
+struct bcm_switch_compressed_drop_reason_bmp_t {  /* 8 bytes */
+    SHR_BITDCL w[2];
+};
+
+struct bcm_switch_copy_to_secondary_map_action_t {  /* 20 bytes */
+    bcm_port_t egr_aux_port;
+    uint8 cos;
+    uint32 entry_priority;
+    uint8 truncate;
+    uint8 primary_to_secondary_copy_profile_id;
+    uint8 switch_to_secondary_suppress;
+    bcm_switch_copy_to_secondary_dst_type_t non_switch_copy_to_secondary_dst_type;
+};
+
+struct bcm_switch_copy_to_secondary_map_match_t {  /* 72 bytes */
+    bcm_switch_copytosecondary_reason_bmp_t reasons;
+    bcm_switch_copytosecondary_reason_bmp_t reasons_mask;
+    bcm_color_t color;
+    bcm_color_t color_mask;
+    uint32 int_pri;
+    uint32 int_pri_mask;
+    uint32 cos_map_sel;
+    uint32 cos_map_sel_mask;
+    uint32 entropy;
+    uint32 entropy_mask;
+    bcm_gport_t mirror_destination[4];
+    uint32 highestPriDropReason;
+    uint32 highestPriDropReasonMask;
+};
+
+struct bcm_switch_copytosecondary_reason_bmp_t {  /* 8 bytes */
+    SHR_BITDCL w[2];
+};
+
+struct bcm_switch_hla_appl_result_t {  /* 136 bytes */
+    uint32 flags;
+    int error;
+    uint8 message[128];
+};
+
+struct bcm_switch_hla_status_t {  /* 56 bytes */
+    uint32 flags;
+    uint16 version_major;
+    uint16 version_minor;
+    uint64 enhanced_chip_id;
+    uint32 hla_error;
+    int sec_error;
+    uint8 ccf_version;
+    uint8 total_cdbs;
+    uint8 last_cdb;
+    uint8 lc_version;
+    uint8 num_ecid_mismatch;
+    uint8 num_pid_mismatch;
+    uint16 last_state;
+    uint16 last_command;
+    uint32 license_loaded_count;
+    uint32 license_authed_count;
+    uint32 total_executed_count;
+    uint32 current_executed_count;
+};
+
+struct bcm_switch_mon_action_sample_t {  /* 368 bytes */
+    uint32 actions;
+    bcm_switch_stage_t stage;
+    bcm_mon_action_type_t type;
+    bcm_mon_source_type_t source;
+    bcm_pbmp_t pbmp;
+    int sample_firstn;
+    uint32 sample_firstn_threshold;
+    int sample;
+    uint32 rate;
+    uint64 seed;
+    bcm_multi_word_value_t taus88_seed;
+    int sample_mode;
+};
+
+struct bcm_switch_nonsw_pkt_to_secondary_enable_control_bmp_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+
+struct bcm_switch_nonsw_pkt_to_secondary_enable_control_t {  /* 12 bytes */
+    bcm_switch_nonsw_pkt_to_secondary_enable_control_bmp_t bitmap;
+    int mmu_drop_code;
+    int mirror_idx;
+};
+
+struct bcm_switch_pll_control_key_t {  /* 8 bytes */
+    bcm_switch_pll_type_t pll_type;
+    int instance;
+};
+
+struct bcm_switch_port_member_t {  /* 8 bytes */
+    bcm_switch_port_member_type_t type;
+    bcm_gport_t gport;
+};
+
+struct bcm_switch_port_source_t {  /* 12 bytes */
+    bcm_switch_port_source_type_t type;
+    bcm_gport_t gport;
+    bcm_vlan_t vlan;
+};
+
+struct bcm_switch_power_throttling_leaky_bucket_params_t {  /* 64 bytes */
+    uint32 ingress_packet_weight;
+    uint32 ingress_segment_weight;
+    uint32 ingress_byte_weight;
+    uint32 ocb_read_segment_weight;
+    uint32 ocb_read_byte_weight;
+    uint32 egress_packet_weight;
+    uint32 egress_segment_weight;
+    uint32 egress_byte_weight;
+    uint64 refresh_target_power;
+    uint64 range_thresholds[3];
+};
+
+struct bcm_switch_power_throttling_profile_t {  /* 20 bytes */
+    uint32 target_rate[5];
+};
+
+struct bcm_switch_power_throttling_state_t {  /* 12 bytes */
+    uint32 board_state;
+    uint32 temp_state;
+    uint32 leaky_bucket_state;
+};
+
+struct bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+
+struct bcm_switch_secondary_to_primary_pkt_control_egr_profile_t {  /* 4 bytes */
+    bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t pkt_control;
+};
+
+struct bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+
+struct bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+
+struct bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t {  /* 8 bytes */
+    SHR_BITDCL w[2];
+};
+
+struct bcm_switch_secondary_to_primary_pkt_control_ing_profile_t {  /* 24 bytes */
+    bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t pkt_control;
+    bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t ctc_suppress_control;
+    bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t drop_suppress_control;
+    bcm_switch_secondary_to_primary_ar_action_t ar_action;
+    int egr_pkt_control_profile_id;
+};
+
+struct bcm_switch_ser_pt_status_t {  /* 12 bytes */
+    bcm_switch_ser_recovery_type_t single_bit;
+    bcm_switch_ser_recovery_type_t double_bit;
+    bcm_switch_ser_check_type_t check_type;
+};
+
+struct bcm_switch_ser_report_config_t {  /* 16 bytes */
+    uint32 flags;
+    uint32 interval;
+    uint32 error_threshold;
+    uint32 single_bit_off_threshold;
+};
+
+struct bcm_switch_smartasf_config_t {  /* 12 bytes */
+    int level;
+    uint32 cooldown_time_secs;
+    uint32 stabilizing_time_secs;
+};
+
+struct bcm_switch_to_secondary_drop_control_bmp_t {  /* 8 bytes */
+    SHR_BITDCL w[2];
+};
+
+struct bcm_switch_to_secondary_drop_control_t {  /* 8 bytes */
+    bcm_switch_to_secondary_drop_control_bmp_t drops;
+};
+
+struct bcm_switch_to_secondary_map_action_t {  /* 16 bytes */
+    bcm_port_t egr_aux_port;
+    uint8 cos;
+    uint32 entry_priority;
+    uint8 switch_to_secondary_suppress;
+};
+
+struct bcm_switch_to_secondary_map_match_t {  /* 40 bytes */
+    bcm_switch_to_secondary_reason_t reasons;
+    uint8 reasons_mask;
+    bcm_color_t color;
+    bcm_color_t color_mask;
+    uint32 int_pri;
+    uint32 int_pri_mask;
+    uint32 cos_map_sel;
+    uint32 cos_map_sel_mask;
+    uint32 entropy;
+    uint32 entropy_mask;
+};
+
+struct bcm_switch_trim_header_config_t {  /* 8 bytes */
+    uint32 flags;
+    uint8 new_ip_dscp;
+    uint8 new_ip_ecn;
+};
+
+struct bcm_switch_truncate_length_profile_t {  /* 20 bytes */
+    bcm_switch_truncate_mode_t mode;
+    bcm_switch_truncate_pkt_type_t pkt_type;
+    int adjustment_length;
+    int pkt_hdr_length_update;
+    int header_id;
+};
+
+struct bcm_switch_vca_appl_profile_info_t {  /* 8 bytes */
+    int obj_select_profile_idx;
+    int key_select_profile_idx;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-telemetry-3">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_telemetry_*</span></code> (3)<a class="headerlink" href="#bcm-telemetry-3" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_telemetry_buffer_config_t {  /* 24 bytes */
+    uint64 buffer_address;
+    uint64 buffer_size;
+    uint32 poll_interval_usecs;
+    uint32 chunk_cnt;
+};
+
+struct bcm_telemetry_element_bmp_t {  /* 8 bytes */
+    SHR_BITDCL w[2];
+};
+
+struct bcm_telemetry_object_info_t {  /* 184 bytes */
+    bcm_telemetry_element_bmp_t uc_queue_bmp;
+    bcm_telemetry_element_bmp_t mc_queue_bmp;
+    bcm_telemetry_element_bmp_t pg_bmp;
+    bcm_telemetry_element_bmp_t buffer_pool_bmp;
+    uint32 flexctr_action_base_pool_id;
+    uint32 flexctr_action_base_index;
+    uint16 element_id[64];
+    uint32 enterprise_number;
+    uint32 flags;
+    bcm_telemetry_element_bmp_t pfc_class_bmp;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-time-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_time_*</span></code> (2)<a class="headerlink" href="#bcm-time-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_time_gpio_config_t {  /* 24 bytes */
+    int mode;
+    int low_interval;
+    int high_interval;
+    int enable_oneshot;
+    uint64 phase_adjust;
+};
+
+struct bcm_time_tod_leap_control_t {  /* 8 bytes */
+    uint8 leap_ctrl_enable;
+    bcm_time_leap_sec_control_mode_t leap_sec_control;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-twamp-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_twamp_*</span></code> (2)<a class="headerlink" href="#bcm-twamp-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_twamp_event_info_t {  /* 8 bytes */
+    uint32 old_sequence_number_rx;
+    uint32 new_sequence_number_rx;
+};
+
+struct bcm_twamp_event_types_t {  /* 4 bytes */
+    SHR_BITDCL w[1];
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-udf-3">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_udf_*</span></code> (3)<a class="headerlink" href="#bcm-udf-3" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_udf_chunk_alloc_info_t {  /* 16 bytes */
+    bcm_udf_chunk_container_id_t cont_id;
+    uint8 chunk_id;
+    uint8 gran;
+    uint32 valid_mask;
+    uint8 start_offset;
+};
+
+struct bcm_udf_chunk_alloc_type_info_t {  /* 8 bytes */
+    bcm_udf_cbmp_t container_1_chunk_bmap;
+    bcm_udf_cbmp_t container_2_chunk_bmap;
+};
+
+struct bcm_udf_pkt_format_action_config_t {  /* 276 bytes */
+    bcm_udf_pkt_format_action_t action;
+    bcm_pbmp_t ports;
+    int value;
+    bcm_gport_t mirror_dest_id;
+    bcm_udf_layer_t layer;
+    uint8 hash_mask[1];
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-vlan-8">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_vlan_*</span></code> (8)<a class="headerlink" href="#bcm-vlan-8" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_vlan_cross_connect_entry_t {  /* 32 bytes */
+    bcm_vlan_forward_t entry_type;
+    uint32 flags;
+    bcm_cos_t int_pri;
+    uint32 class_id;
+    bcm_vlan_t outer_vlan;
+    bcm_vlan_t inner_vlan;
+    bcm_gport_t gport;
+    bcm_multicast_t mc_group;
+    bcm_vlan_t forwarding_vlan;
+};
+
+struct bcm_vlan_mcast_override_pbmp_t {  /* 264 bytes */
+    bcm_pbmp_t pbmp;
+    bcm_vlan_mcast_override_action_t action;
+    bcm_vlan_mcast_override_type_t type;
+};
+
+struct bcm_vlan_mcast_override_t {  /* 1320 bytes */
+    bcm_vlan_mcast_override_pbmp_t mc;
+    bcm_vlan_mcast_override_pbmp_t umc;
+    bcm_vlan_mcast_override_pbmp_t uuc;
+    bcm_vlan_mcast_override_pbmp_t bc;
+    bcm_vlan_mcast_override_pbmp_t uc;
+};
+
+struct bcm_vlan_oam_mep_config_t {  /* 20 bytes */
+    int lmep_enable;
+    uint32 lmep_mdl_bmp;
+    int lm_enable;
+    uint32 lm_mdl;
+    uint32 lm_cos_bmp;
+};
+
+struct bcm_vlan_ovid_profile_t {  /* 4 bytes */
+    bcm_vlan_t ovid;
+    bcm_vlan_t afr_ovid;
+};
+
+struct bcm_vlan_param_data_t {  /* 16 bytes */
+    bcm_vrf_t vrf;
+    bcm_vrf_t vrf_mask;
+    bcm_vrf_t afr_vrf;
+    bcm_vrf_t afr_vrf_mask;
+};
+
+struct bcm_vlan_param_key_t {  /* 4 bytes */
+    bcm_vlan_t vlan;
+    bcm_vlan_t vlan_mask;
+};
+
+struct bcm_vlan_tenant_t {  /* 512 bytes */
+    bcm_pbmp_t ing_pbmp;
+    bcm_pbmp_t egr_pbmp;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcm-vxlan-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcm_vxlan_*</span></code> (2)<a class="headerlink" href="#bcm-vxlan-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcm_vxlan_sr_hop_info_t {  /* 20 bytes */
+    uint32 flags;
+    uint32 hop_id;
+    bcm_if_t egress_if;
+    uint32 stat_id;
+    int stat_pp_profile;
+};
+
+struct bcm_vxlan_vni_terminator_t {  /* 24 bytes */
+    uint32 flags;
+    uint32 match_vni;
+    uint32 match_network_domain;
+    bcm_gport_t vni_terminator_id;
+    int priority;
+    uint32 vsi;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcmlt-basic-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcmlt_basic_*</span></code> (1)<a class="headerlink" href="#bcmlt-basic-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcmlt_basic_field_info_t {  /* 40 bytes */
+    _Bool symbol;
+    _Bool key;
+    uint32_t fid;
+    uint32_t idx;
+    uint64_t val;
+    char *sym_val;
+    char *f_name;
+};
+</pre></div>
+</div>
+</section>
+<section id="bcmlt-field-1">
+<h3><code class="docutils literal notranslate"><span class="pre">bcmlt_field_*</span></code> (1)<a class="headerlink" href="#bcmlt-field-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcmlt_field_data_info_t {  /* 24 bytes */
+    bool symbol;
+    bool array;
+    uint32_t idx;
+    uint64_t val;
+    char *sym_val;
+};  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="bcmlt-wide-2">
+<h3><code class="docutils literal notranslate"><span class="pre">bcmlt_wide_*</span></code> (2)<a class="headerlink" href="#bcmlt-wide-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct bcmlt_wide_field_data_t {  /* 16 bytes */
+    uint32_t num_of_bits;
+    uint8_t *bytes;
+};
+
+struct bcmlt_wide_fld_def_t {  /* 48 bytes */
+    bcmlt_wide_field_data_t min;
+    bcmlt_wide_field_data_t max;
+    bcmlt_wide_field_data_t def;
+};
+</pre></div>
+</div>
+</section>
+<section id="cint-interpreter-2">
+<h3><code class="docutils literal notranslate"><span class="pre">cint_interpreter_*</span></code> (2)<a class="headerlink" href="#cint-interpreter-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct cint_interpreter_debug_state_t {  /* 16 bytes */
+    int dtrace;
+    int atrace;
+    int ftrace;
+    int aunique;
+};  /* declared in OpenBCM headers */
+
+struct cint_interpreter_state_t {  /* 28 bytes */
+    cint_interpreter_debug_state_t debug;
+    int parse_only;
+    int print_expr;
+};  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="cint-time-1">
+<h3><code class="docutils literal notranslate"><span class="pre">cint_time_*</span></code> (1)<a class="headerlink" href="#cint-time-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct cint_time_t {  /* 16 bytes */
+    time_t tv_sec;
+    long tv_usec;
+};
+</pre></div>
+</div>
+</section>
+<section id="cint-timespec-1">
+<h3><code class="docutils literal notranslate"><span class="pre">cint_timespec_*</span></code> (1)<a class="headerlink" href="#cint-timespec-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct cint_timespec_t {  /* 16 bytes */
+    time_t tv_sec;
+    long tv_nsec;
+};
+</pre></div>
+</div>
+</section>
+<section id="cint-tm-1">
+<h3><code class="docutils literal notranslate"><span class="pre">cint_tm_*</span></code> (1)<a class="headerlink" href="#cint-tm-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct cint_tm_t {  /* 56 bytes */
+    int tm_sec;
+    int tm_min;
+    int tm_hour;
+    int tm_mday;
+    int tm_mon;
+    int tm_year;
+    int tm_wday;
+    int tm_yday;
+    int tm_isdst;
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-eye-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_eye_*</span></code> (1)<a class="headerlink" href="#phymod-eye-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_eye_margin_value_t {  /* 48 bytes */
+    uint32_t left_eye[3];
+    uint32_t right_eye[3];
+    uint32_t upper_eye[3];
+    uint32_t lower_eye[3];
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-flt-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_flt_*</span></code> (1)<a class="headerlink" href="#phymod-flt-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_flt_diagnostic_t {  /* 4 bytes */
+    int16_t flt_m;
+    uint16_t flt_s;
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-mpi-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_mpi_*</span></code> (1)<a class="headerlink" href="#phymod-mpi-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_mpi_diagnostic_t {  /* 24 bytes */
+    uint32_t mse_values[4];
+    int32_t slope;
+    int32_t c0;
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-pch-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_pch_*</span></code> (1)<a class="headerlink" href="#phymod-pch-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_pch_config_t {  /* 8 bytes */
+    phymod_pch_mode_t pch_mode;
+    int rx_pkt_corrupt_en;
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-rs-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_rs_*</span></code> (1)<a class="headerlink" href="#phymod-rs-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_rs_fec_lane_map_per_logical_lane_t {  /* 64 bytes */
+    uint32_t rs_fec_lane_map[8];
+    uint32_t rs_fec_lane_map_valid[8];
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-rsfec-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_rsfec_*</span></code> (1)<a class="headerlink" href="#phymod-rsfec-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_rsfec_symbol_err_mem_info_t {  /* 8 bytes */
+    uint8_t rsfec_sym_err_mem_start_entry;
+    uint8_t num_rsfec_sym_err_mem_entry;
+    uint32_t rsfec_sym_err_mem_counter_bitmap;
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-serdes-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_serdes_*</span></code> (1)<a class="headerlink" href="#phymod-serdes-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_serdes_core_info_t {  /* 12 bytes */
+    uint32_t ucode_version;
+    uint32_t api_version;
+    uint32_t afe_hw_version;
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-sw-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_sw_*</span></code> (1)<a class="headerlink" href="#phymod-sw-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_sw_table_load_t {  /* 4 bytes */
+    phymod_speed_id_table_load_t spd_id_tbl_load;
+};
+</pre></div>
+</div>
+</section>
+<section id="phymod-uc-1">
+<h3><code class="docutils literal notranslate"><span class="pre">phymod_uc_*</span></code> (1)<a class="headerlink" href="#phymod-uc-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct phymod_uc_ram_var_t {  /* 4 bytes */
+    phymod_uc_ram_variable_t uc_ram_var;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-fdr-2">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_fdr_*</span></code> (2)<a class="headerlink" href="#portmod-fdr-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_fdr_port_control_t {  /* 20 bytes */
+    uint32 enable;
+    portmod_fdr_symbol_err_window_sz_t window_size;
+    uint32 symbol_error_threshold;
+    uint32 interrupt_enable;
+    uint32 s_value;
+};
+
+struct portmod_fdr_port_stats_t {  /* 184 bytes */
+    uint64 start_time;
+    uint64 end_time;
+    uint64 duration;
+    uint64 num_uncorr_cws;
+    uint64 num_cws;
+    uint64 num_symerrs;
+    uint64 s0_errs;
+    uint64 s1_errs;
+    uint64 s2_errs;
+    uint64 s3_errs;
+    uint64 s4_errs;
+    uint64 s5_errs;
+    uint64 s6_errs;
+    uint64 s7_errs;
+    uint64 s8_errs;
+    uint64 s9_errs;
+    uint64 s10_errs;
+    uint64 s11_errs;
+    uint64 s12_errs;
+    uint64 s13_errs;
+    uint64 s14_errs;
+    uint64 s15_errs;
+    uint64 s16_errs;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-fec-2">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_fec_*</span></code> (2)<a class="headerlink" href="#portmod-fec-2" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_fec_am_lock_status_t {  /* 148 bytes */
+    uint8_t num_lanes;
+    uint8_t fec_num_lane;
+    uint32_t live_status_bit_map[12];
+    uint32_t latch_low_status_bit_map[12];
+    uint32_t latch_high_status_bit_map[12];
+};
+
+struct portmod_fec_stat_auto_collect_wb_data_t {  /* 264 bytes */
+    pbmp_t pbmp;
+    uint32_t interval_s;
+    uint32_t flags;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-intr-1">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_intr_*</span></code> (1)<a class="headerlink" href="#portmod-intr-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_intr_info_t {  /* 184 bytes */
+    portmod_fifo_status_t tx_info;
+    portmod_ecc_intr_info_t ecc_info;
+    portmod_fdr_port_stats_t fdr_stats;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-pch-1">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_pch_*</span></code> (1)<a class="headerlink" href="#portmod-pch-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_pch_config_t {  /* 8 bytes */
+    portmod_pch_mode_t pch_mode;
+    int rx_pkt_corrupt_en;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-phy-3">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_phy_*</span></code> (3)<a class="headerlink" href="#portmod-phy-3" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_phy_rx_afe_t {  /* 116 bytes */
+    int dfe[24];
+    uint32 num_of_dfe_taps;
+    int vga;
+    int pf;
+    int low_freq_pf;
+    int high_freq_pf;
+};
+
+struct portmod_phy_rx_ffe_t {  /* 28 bytes */
+    int n3;
+    int n2;
+    int n1;
+    int m;
+    int p1;
+    int p2;
+    uint32 num_of_ffe_taps;
+};
+
+struct portmod_phy_rx_t {  /* 144 bytes */
+    portmod_phy_rx_afe_t afe;
+    portmod_phy_rx_ffe_t ffe;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-pm4x25u-1">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_pm4x25u_*</span></code> (1)<a class="headerlink" href="#portmod-pm4x25u-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_pm4x25u_create_info_t {  /* 448 bytes */
+    portmod_pm4x25_create_info_t pm4x25_info;
+    portmod_pm_qtc_create_info_t pm_qtc_info;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-pm8x50-1">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_pm8x50_*</span></code> (1)<a class="headerlink" href="#portmod-pm8x50-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_pm8x50_t5_create_info_t {  /* 240 bytes */
+    phymod_ref_clk_t ref_clk;
+    portmod_vco_type_t tvco;
+    portmod_vco_type_t ovco;
+    phymod_phy_access_t access;
+    phymod_lane_map_t lane_map;
+    phymod_polarity_t polarity;
+    portmod_mac_soft_reset_f portmod_mac_soft_reset;
+    int core_num;
+    phymod_afe_pll_t afe_pll;
+    uint32 pm_offset;
+    portmod_pm_interrupt_handler_f portmod_pm_interrupt_handler;
+};
+</pre></div>
+</div>
+</section>
+<section id="portmod-txpi-1">
+<h3><code class="docutils literal notranslate"><span class="pre">portmod_txpi_*</span></code> (1)<a class="headerlink" href="#portmod-txpi-1" title="Link to this heading"></a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct portmod_txpi_config_t {  /* 8 bytes */
+    uint32 enable;
+    uint32 mode;
+};
+</pre></div>
+</div>
+</section>
+</section>
+<section id="typedefs">
+<h2>Typedefs<a class="headerlink" href="#typedefs" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>typedef uint32 bcm_flow_vpn_t;
+typedef int bcm_glb_msg_encap_t;
+typedef uint32 bcm_keepalive_session_handle_t;
+typedef uint8 bcm_knetsync_clock_identity_t[8];
+typedef int bcm_mirror_egress_mod_event_group_t;
+typedef uint8 bcm_onesync_clock_identity_t[8];
+typedef uint32 bcm_qp_t;
+typedef int bcm_vc_t;
+typedef bcmltd_field_acc_t bcmlt_wide_field_data_t;
+typedef phymod_fec_error_injection_config_t portmod_fec_error_injection_config_t;
+typedef phymod_fec_error_injection_enable_t portmod_fec_error_injection_enable_t;
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="extra-functions.html" class="btn btn-neutral float-left" title="Functions not in OpenBCM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="extra-enums.html" class="btn btn-neutral float-right" title="Enums not in OpenBCM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

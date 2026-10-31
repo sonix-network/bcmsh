@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cint: the C interpreter &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Cint language" href="cint-language.html" />
+    <link rel="prev" title="SAI-specific variables" href="config/variables/sai.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration variables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cint: the C interpreter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cint-or-diag-commands">Cint or diag commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-and-leaving-the-interpreter">Starting and leaving the interpreter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-file">Running a file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#line-numbers-in-error-messages">Line numbers in error messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#include"><code class="docutils literal notranslate"><span class="pre">#include</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-interpreter-keeps-its-state">The interpreter keeps its state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registered-api">Registered API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#interpreter-commands">Interpreter commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#looking-up-a-function">Looking up a function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#built-in-functions">Built-in functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-diag-commands-from-cint">Running diag commands from Cint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bcmsai-cint">BCMSAI Cint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cint: the C interpreter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cint-the-c-interpreter">
+<h1>Cint: the C interpreter<a class="headerlink" href="#cint-the-c-interpreter" title="Link to this heading"></a></h1>
+<p><em>Cint</em> is a C interpreter built into the SDK. It runs C-like programs inside
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> and lets them call the SDK API (the <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> functions) directly,
+with real structures, enums and constants. Use it for API features that have
+no diag-shell command, to read state in the SDK’s own terms, or to repeat a
+sequence of calls from a script. Start it with <a class="reference internal" href="../reference/cint.html#clicmd-cint"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cint</span></code></a>.</p>
+<p>This chapter covers running Cint and the interpreter itself;
+<a class="reference internal" href="cint-language.html"><span class="doc">The Cint language</span></a> describes the C subset it accepts, and
+<a class="reference internal" href="../howto/cint-recipes.html"><span class="doc">Cint recipes</span></a> has ready-made read-only programs for Trident 3.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A Cint program runs inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code> with full access to the SDK. A call
+that changes state (<code class="docutils literal notranslate"><span class="pre">*_set</span></code>, <code class="docutils literal notranslate"><span class="pre">*_add</span></code>, <code class="docutils literal notranslate"><span class="pre">*_create</span></code>, <code class="docutils literal notranslate"><span class="pre">*_destroy</span></code>,
+<code class="docutils literal notranslate"><span class="pre">*_delete</span></code>…) changes the hardware behind the SAI’s back: SONiC does not
+know about the change, will not undo it, and may later fail or overwrite
+it. A wrong argument, such as a bad pointer or an array that is too small,
+can crash <code class="docutils literal notranslate"><span class="pre">syncd</span></code>; SONiC then restarts <code class="docutils literal notranslate"><span class="pre">syncd</span></code> and <code class="docutils literal notranslate"><span class="pre">swss</span></code> and traffic
+stops while the switch is reprogrammed. There is no way to interrupt a
+running program: a loop that never ends keeps the shell busy until
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> is restarted. On a production switch, run only read-only
+programs that you have read and understood.</p>
+</div>
+<section id="cint-or-diag-commands">
+<h2>Cint or diag commands<a class="headerlink" href="#cint-or-diag-commands" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>For displaying state, the diag commands (<a class="reference internal" href="../reference/l3.html#clicmd-l3-defip-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">defip</span> <span class="pre">show</span></code></a>,
+<a class="reference internal" href="../reference/l2.html#clicmd-l2-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">show</span></code></a>, <a class="reference internal" href="../reference/portstat.html#clicmd-portstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ps</span></code></a>, …) are quicker to use and
+harder to get wrong. Prefer them when they show what you need.</p></li>
+<li><p>Use Cint when no command shows it, when you want the API’s view of an
+object (the values SAI passed to the SDK, before they are encoded into
+table entries), or when you need to loop, filter or combine values. Cint
+can also run diag commands itself; see <a class="reference internal" href="#running-diag-commands-from-cint">Running diag commands from Cint</a>.</p></li>
+<li><p>Read the raw tables with <a class="reference internal" href="../reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a>, <a class="reference internal" href="../reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span></code></a> or
+<a class="reference internal" href="../reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a> when you need the hardware encoding rather than the API view.</p></li>
+</ul>
+</section>
+<section id="starting-and-leaving-the-interpreter">
+<h2>Starting and leaving the interpreter<a class="headerlink" href="#starting-and-leaving-the-interpreter" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cint</span></code> with no argument prints <code class="docutils literal notranslate"><span class="pre">Entering</span> <span class="pre">C</span> <span class="pre">Interpreter.</span> <span class="pre">Type</span> <span class="pre">'exit;'</span> <span class="pre">to</span>
+<span class="pre">quit.</span></code> and starts an interactive session at the <code class="docutils literal notranslate"><span class="pre">cint&gt;</span></code> prompt.
+Statements end with <code class="docutils literal notranslate"><span class="pre">;</span></code> and are run as soon as they are complete; a
+function definition or a <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">…</span> <span class="pre">}</span></code> block may span several lines. <code class="docutils literal notranslate"><span class="pre">exit;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">quit;</span></code> returns to <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>.</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt;cint</span>
+<span class="go">cint&gt; print bcm_info_t;</span>
+<span class="go">cint&gt; exit;</span>
+</pre></div>
+</div>
+</div>
+<p>Interactive mode needs a terminal, so use it through <a class="reference internal" href="../access.html#clicmd-bcmsh"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmsh</span></code></a>.
+Through <a class="reference internal" href="../access.html#clicmd-bcmcmd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmcmd</span></code></a> the shell stays at <code class="docutils literal notranslate"><span class="pre">cint&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> waits until
+its timeout; use a file instead.</p>
+</section>
+<section id="running-a-file">
+<h2>Running a file<a class="headerlink" href="#running-a-file" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">&lt;file&gt;</span> <span class="pre">[&lt;arg&gt;</span> <span class="pre">…]</span></code> reads and runs a file, then returns to
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>. The file is opened by <code class="docutils literal notranslate"><span class="pre">syncd</span></code>, so the path is a path
+<em>inside the</em> <code class="docutils literal notranslate"><span class="pre">syncd</span></code> <em>container</em>. Copy the file to <code class="docutils literal notranslate"><span class="pre">/root</span></code> there with
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span></code> (as root), and use an absolute path:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>docker<span class="w"> </span>cp<span class="w"> </span>port_status.c<span class="w"> </span>syncd:/root/
+<span class="gp">$ </span>bcmcmd<span class="w"> </span>-t<span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="s2">"cint /root/port_status.c"</span>
+</pre></div>
+</div>
+</div>
+<p>Do not copy into <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> or <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code>: inside the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container
+both are separate in-memory file systems, and <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span></code> writes
+underneath them, where <code class="docutils literal notranslate"><span class="pre">syncd</span></code> cannot see the file. <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span></code> still
+exits 0, and <code class="docutils literal notranslate"><span class="pre">cint</span></code> then reports <code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">open</span> <span class="pre">file</span></code>.</p>
+<p>A file is read and run one top-level statement at a time, as it is parsed.
+This has three consequences:</p>
+<ul class="simple">
+<li><p>Statements before an error have already run when the error is reported.</p></li>
+<li><p>After a syntax error, the rest of the file is still read and checked
+but nothing more is run. Every later line is skipped, including any cleanup
+code at the end of the file.</p></li>
+<li><p>A run-time error (an undeclared name, a wrong argument type, a failed
+<code class="docutils literal notranslate"><span class="pre">printf</span></code> conversion) abandons the top-level statement it occurs in. If
+that statement is a function call, the rest of the function, and of every
+function that called it, is skipped. The file continues with the next
+top-level statement.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">exit;</span></code> in a file stops reading it at that point.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cint</span></code> always returns success to the shell, even when the program failed
+or the file could not be opened, and <a class="reference internal" href="../access.html#clicmd-bcmcmd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmcmd</span></code></a> exits 0. Make your
+program print a final line such as <code class="docutils literal notranslate"><span class="pre">DONE</span></code> and check for it, and read the
+whole output for error lines.</p>
+<p><a class="reference internal" href="../access.html#clicmd-bcmcmd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmcmd</span></code></a> waits 30 seconds for the prompt by default. Programs that
+walk large tables (the L2 or route table) can take longer; give a larger
+<code class="docutils literal notranslate"><span class="pre">-t</span></code>. If <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> times out, the program keeps running inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code>.</p>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h3>
+<p>Words after the file name are passed to the program in two global
+variables: <code class="docutils literal notranslate"><span class="pre">ARGC</span></code> (an <code class="docutils literal notranslate"><span class="pre">int</span></code>) and <code class="docutils literal notranslate"><span class="pre">ARGV</span></code> (an array of strings),
+starting with the first word after the file name. At most 16 arguments are
+allowed. There is no <code class="docutils literal notranslate"><span class="pre">atoi</span></code> in Cint; convert numbers yourself (the
+<a class="reference internal" href="../howto/cint-recipes.html"><span class="doc">Cint recipes</span></a> show a small helper).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ARGC</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"first argument: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">ARGV</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="line-numbers-in-error-messages">
+<h3>Line numbers in error messages<a class="headerlink" href="#line-numbers-in-error-messages" title="Link to this heading"></a></h3>
+<p>Syntax errors always show the offending line and its number. Run-time errors
+are printed as <code class="docutils literal notranslate"><span class="pre">**</span> <span class="pre">error:</span> <span class="pre">&lt;message&gt;</span></code> without a location. To get the file and
+line in run-time errors too, put <code class="docutils literal notranslate"><span class="pre">allow_file_info</span></code> before the file name:</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint allow_file_info /root/port_status.c</span>
+</pre></div>
+</div>
+</div>
+<p>The word <code class="docutils literal notranslate"><span class="pre">allow_file_info</span></code> is then also passed to the program as
+<code class="docutils literal notranslate"><span class="pre">ARGV[0]</span></code>, so the program’s own arguments start at <code class="docutils literal notranslate"><span class="pre">ARGV[1]</span></code>.</p>
+</section>
+<section id="include">
+<h3><code class="docutils literal notranslate"><span class="pre">#include</span></code><a class="headerlink" href="#include" title="Link to this heading"></a></h3>
+<p>A file can include another with <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;/path/file.c&quot;</span></code>. A relative name
+is looked up from <code class="docutils literal notranslate"><span class="pre">syncd</span></code>’s working directory and then in the directories
+of the <code class="docutils literal notranslate"><span class="pre">CINT_INCLUDE_PATH</span></code> environment variable of <code class="docutils literal notranslate"><span class="pre">syncd</span></code>; use absolute
+paths. Includes may nest 64 deep. <code class="docutils literal notranslate"><span class="pre">#include</span></code> is the only preprocessor
+directive; see <a class="reference internal" href="cint-language.html"><span class="doc">The Cint language</span></a>.</p>
+</section>
+</section>
+<section id="the-interpreter-keeps-its-state">
+<h2>The interpreter keeps its state<a class="headerlink" href="#the-interpreter-keeps-its-state" title="Link to this heading"></a></h2>
+<p>The interpreter lives as long as <code class="docutils literal notranslate"><span class="pre">syncd</span></code>. Global variables and functions
+defined by one <code class="docutils literal notranslate"><span class="pre">cint</span></code> run are still there in the next run, and in the next
+interactive session. Two consequences:</p>
+<ul class="simple">
+<li><p>Running a file twice fails on the second run with <code class="docutils literal notranslate"><span class="pre">identifier</span> <span class="pre">'&lt;name&gt;'</span>
+<span class="pre">redeclared</span></code> for every global variable it declares. Defining a function
+again is allowed and replaces the old definition.</p></li>
+<li><p>A name defined by an earlier program can hide a mistake in a new one.</p></li>
+</ul>
+<p>Start files with <code class="docutils literal notranslate"><span class="pre">cint_reset();</span></code>, as Broadcom’s own examples do
+(<a class="reference internal" href="../sources.html#bcmsh-src-openbcm-cint"><span class="std std-ref">OpenBCM sdk-6.5.27 CINT interpreter sources (src/appl/cint, src/appl/diag/cint) and Trident 3 CINT examples with logs (src/examples/xgs/TD3)</span></a>). It discards everything defined so far and
+reloads the SDK’s functions and types. It affects only the interpreter, not
+the switch.</p>
+</section>
+<section id="registered-api">
+<h2>Registered API<a class="headerlink" href="#registered-api" title="Link to this heading"></a></h2>
+<p>Cint can only call functions and use types that were registered with it
+when the SDK was built. On this build that is:</p>
+<ul class="simple">
+<li><p>the SDK API: 10,521 <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> functions (1,445 of them SDK macros such as
+<code class="docutils literal notranslate"><span class="pre">BCM_GPORT_LOCAL_SET</span></code>, registered as functions), 1,385 structures,
+1,180 enums, 212 typedefs, 304 callback types and 11,916 constants;</p></li>
+<li><p>a few <code class="docutils literal notranslate"><span class="pre">soc_*</span></code> functions (<code class="docutils literal notranslate"><span class="pre">soc_mem_read</span></code>, <code class="docutils literal notranslate"><span class="pre">soc_property_get</span></code> …),
+<code class="docutils literal notranslate"><span class="pre">diag_*</span></code> register and memory helpers, <code class="docutils literal notranslate"><span class="pre">sal_*</span></code> utilities (<code class="docutils literal notranslate"><span class="pre">sal_memset</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sal_strcmp</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_sleep</span></code> …) and <code class="docutils literal notranslate"><span class="pre">COMPILER_64_*</span></code> helpers for 64-bit
+values;</p></li>
+<li><p>PHY and port-macro APIs (<code class="docutils literal notranslate"><span class="pre">phymod_*</span></code>, <code class="docutils literal notranslate"><span class="pre">portmod_*</span></code>);</p></li>
+<li><p>logical-table (<code class="docutils literal notranslate"><span class="pre">bcmlt_*</span></code>) and embedded-core (<code class="docutils literal notranslate"><span class="pre">edki_*</span></code>) functions, which
+belong to newer switch families and may not work on Trident 3;</p></li>
+<li><p>the interpreter’s built-ins, listed below.</p></li>
+</ul>
+<p>In total that is 11,457 functions, 1,585 structures, 1,294 enums, 331
+callback types and 12,482 constants. <a class="reference internal" href="../cint-api/index.html"><span class="doc">Cint API on this build</span></a> lists all of them
+with prototypes, and lists separately everything that is not in the public
+OpenBCM 6.5.27 release.</p>
+<p>A function that exists in the library but is not registered cannot be
+called, and an <code class="docutils literal notranslate"><span class="pre">extern</span></code> declaration does not change that: for example
+<code class="docutils literal notranslate"><span class="pre">soc_mem_search</span></code> is not available. Some registered functions are
+unusable because a type they need is missing; <code class="docutils literal notranslate"><span class="pre">soc_reg_get</span></code> fails because
+<code class="docutils literal notranslate"><span class="pre">soc_reg_t</span></code> is not a known type. Check a name with <code class="docutils literal notranslate"><span class="pre">cint_defined(&quot;name&quot;)</span></code>
+(1 if known) or list names with <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">list</span></code>.</p>
+<section id="interpreter-commands">
+<h3>Interpreter commands<a class="headerlink" href="#interpreter-commands" title="Link to this heading"></a></h3>
+<p>Statements starting with the word <code class="docutils literal notranslate"><span class="pre">cint</span></code> are commands to the interpreter
+itself. Arguments are bare words, not quoted strings.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">list</span> <span class="pre">[&lt;kind&gt;</span> <span class="pre">…]</span> <span class="pre">[&lt;substring&gt;];</span></code></dt><dd><p>List registered names containing <code class="docutils literal notranslate"><span class="pre">&lt;substring&gt;</span></code>, with their kind. <code class="docutils literal notranslate"><span class="pre">&lt;kind&gt;</span></code>
+restricts the list to <code class="docutils literal notranslate"><span class="pre">function</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code>, <code class="docutils literal notranslate"><span class="pre">enum</span></code>, <code class="docutils literal notranslate"><span class="pre">constant</span></code>,
+<code class="docutils literal notranslate"><span class="pre">atomic</span></code>, <code class="docutils literal notranslate"><span class="pre">fp</span></code> (callback types), <code class="docutils literal notranslate"><span class="pre">macro</span></code> or <code class="docutils literal notranslate"><span class="pre">iterator</span></code>. Without a
+substring the list is very long. Example: <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">list</span> <span class="pre">function</span>
+<span class="pre">bcm_port_info;</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">var</span> <span class="pre">&lt;name&gt;;</span></code></dt><dd><p>Show a variable’s type, address and size.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">typecheck;</span></code></dt><dd><p>Check every registered type for consistency.</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">load</span></code> (loading a shared library) and <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">yapi</span></code> are not included
+in this build and print an error.</p>
+<p>To see the layout of a structure or the values of an enum, <code class="docutils literal notranslate"><span class="pre">print</span></code> the type
+name:</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cint&gt; print bcm_port_info_t;</span>
+<span class="go">cint&gt; print bcm_stat_val_t;</span>
+<span class="go">cint&gt; cint list function bcm_port_info;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="looking-up-a-function">
+<span id="bcmsh-cint-reference"></span><h3>Looking up a function<a class="headerlink" href="#looking-up-a-function" title="Link to this heading"></a></h3>
+<p>Cint tells you whether a name exists and how a type is laid out, but not what
+a function does. Combine it with these references:</p>
+<dl class="simple">
+<dt>On the switch</dt><dd><p><code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">list</span> <span class="pre">function</span> <span class="pre">&lt;part</span> <span class="pre">of</span> <span class="pre">name&gt;;</span></code> finds functions, <code class="docutils literal notranslate"><span class="pre">print</span>
+<span class="pre">&lt;type&gt;;</span></code> shows a structure’s members and size or an enum’s values as this
+build has them, and <code class="docutils literal notranslate"><span class="pre">cint_defined(&quot;name&quot;)</span></code> checks a single name. When a
+public header and the switch disagree about a structure, the switch is
+right: its SDK is newer than any public release.</p>
+</dd>
+<dt>This guide</dt><dd><p><a class="reference internal" href="../cint-api/index.html"><span class="doc">Cint API on this build</span></a> has the prototype of every registered function,
+grouped by module, and separate lists of the functions, structures, enums
+and values, callback types and constants that are not in public OpenBCM.
+For those there is no public documentation; the prototype and layout are
+what you have to go on. <a class="reference internal" href="../howto/cint-recipes.html"><span class="doc">Cint recipes</span></a> has complete read-only
+programs for this switch.</p>
+</dd>
+<dt>OpenBCM headers</dt><dd><p>The public SDK API headers, one per module (<code class="docutils literal notranslate"><span class="pre">l3.h</span></code> for <code class="docutils literal notranslate"><span class="pre">bcm_l3_*</span></code>,
+<code class="docutils literal notranslate"><span class="pre">port.h</span></code> for <code class="docutils literal notranslate"><span class="pre">bcm_port_*</span></code>, <code class="docutils literal notranslate"><span class="pre">field.h</span></code> for <code class="docutils literal notranslate"><span class="pre">bcm_field_*</span></code> …), declare
+each function with its structures, flags and short comments. They are the
+closest thing to an API reference
+(<a class="reference internal" href="../sources.html#bcmsh-src-openbcm-bcm-api"><span class="std std-ref">OpenBCM sdk-6.5.27 SDK API headers (include/bcm/*.h) and the Cint registration data generated from them (bcm_cint_data.c)</span></a>).</p>
+</dd>
+<dt>OpenBCM example programs</dt><dd><p>Broadcom’s Cint examples for each XGS family, including a Trident 3 set
+with a summary table and console logs, show complete call sequences for
+VLANs, L3, MPLS, VXLAN, field processor and more
+(<a class="reference internal" href="../sources.html#bcmsh-src-openbcm-cint"><span class="std std-ref">OpenBCM sdk-6.5.27 CINT interpreter sources (src/appl/cint, src/appl/diag/cint) and Trident 3 CINT examples with logs (src/examples/xgs/TD3)</span></a>). They are written for a bare SDK
+(<code class="docutils literal notranslate"><span class="pre">BCM.0&gt;</span></code>) and set up the switch from scratch; read them for the call
+order, do not run them on a SONiC switch.</p>
+</dd>
+<dt>OpenNSL documentation</dt><dd><p>OpenNSL is a subset of the SDK API with the <code class="docutils literal notranslate"><span class="pre">opennsl_</span></code> prefix instead of
+<code class="docutils literal notranslate"><span class="pre">bcm_</span></code> (<code class="docutils literal notranslate"><span class="pre">opennsl_l3_route_add</span></code> for <code class="docutils literal notranslate"><span class="pre">bcm_l3_route_add</span></code>). Its API
+reference and overview pages for L2, L3, ports, COS, KNET, statistics and
+trunks explain parameters and flags that carry over to the <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code>
+functions (<a class="reference internal" href="../sources.html#bcmsh-src-opennsl-docs"><span class="std std-ref">OpenNSL 3.x documentation (doc/html) and sal/driver.h (opennsl_driver_shell)</span></a>).</p>
+</dd>
+<dt>Open-source network operating systems</dt><dd><p>FBOSS drives the <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> API on Trident and Tomahawk switches; its
+Broadcom agent shows production call sequences for egress objects, ECMP,
+routes, ports and ACLs (<a class="reference internal" href="../sources.html#bcmsh-src-fboss-bcm-api"><span class="std std-ref">FBOSS Broadcom agent (fboss/agent/hw/bcm): C++ code driving the bcm_* SDK API</span></a>). Stratum wraps
+about 150 <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> functions in a single file
+(<a class="reference internal" href="../sources.html#bcmsh-src-stratum-bcm-sdk-wrapper"><span class="std std-ref">Stratum BcmSdkWrapper (stratum/hal/lib/bcm/sdk/bcm_sdk_wrapper.cc): bcm_* SDK API calls</span></a>).</p>
+</dd>
+<dt>SDK release notes</dt><dd><p>Broadcom’s per-release spreadsheets of resolved issues and improvements
+name the <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> functions and structures each fix concerns
+(<a class="reference internal" href="../sources.html#bcmsh-src-openbcm-resolved-issues"><span class="std std-ref">SDK-6.5.20..6.5.27 Resolved-Issues-Improvements.xlsx (7 files)</span></a>).</p>
+</dd>
+</dl>
+<p>Broadcom’s SAI library, which makes the <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> calls on a SONiC switch,
+is not open source, so there is no public code showing which calls SONiC
+makes for a given SAI object. FBOSS and Stratum are the closest public
+equivalent.</p>
+</section>
+<section id="built-in-functions">
+<h3>Built-in functions<a class="headerlink" href="#built-in-functions" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">printf</span></code>, <code class="docutils literal notranslate"><span class="pre">sprintf</span></code>, <code class="docutils literal notranslate"><span class="pre">snprintf</span></code></p></td>
+<td><p>Formatted output; see <a class="reference internal" href="cint-language.html"><span class="doc">The Cint language</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cint_reset()</span></code></p></td>
+<td><p>Forget all variables and functions defined so far.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cint_defined(&quot;name&quot;)</span></code></p></td>
+<td><p>1 if <code class="docutils literal notranslate"><span class="pre">name</span></code> is a known variable, function, type, enum value or
+constant, else 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cint_variable_dump()</span></code></p></td>
+<td><p>Print all variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bshell(unit,</span> <span class="pre">&quot;command&quot;)</span></code></p></td>
+<td><p>Run a diag-shell command line; see below.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rcload_file_noargs(unit,</span> <span class="pre">&quot;file&quot;)</span></code></p></td>
+<td><p>Run an rc script (see <a class="reference internal" href="scripting.html"><span class="doc">Scripting</span></a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bcm_errmsg(rv)</span></code></p></td>
+<td><p>Text for an SDK return code, e.g. <code class="docutils literal notranslate"><span class="pre">Entry</span> <span class="pre">not</span> <span class="pre">found</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sal_sleep(sec)</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_usleep(usec)</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_time()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sal_time_usecs()</span></code></p></td>
+<td><p>Delays and time.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cint_timer_start</span></code>, <code class="docutils literal notranslate"><span class="pre">cint_timer_stop</span></code>, <code class="docutils literal notranslate"><span class="pre">cint_timer_get</span></code>,
+<code class="docutils literal notranslate"><span class="pre">clock_gettime</span></code></p></td>
+<td><p>Timing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sal_strcmp</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_strlen</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_memset</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_memcpy</span></code> …</p></td>
+<td><p>Replacements for the C library, which is not available.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Constants <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> are predefined.</p>
+</section>
+</section>
+<section id="running-diag-commands-from-cint">
+<h2>Running diag commands from Cint<a class="headerlink" href="#running-diag-commands-from-cint" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">bshell(unit,</span> <span class="pre">&quot;command</span> <span class="pre">line&quot;)</span></code> runs a diag-shell command line, as if typed
+at the prompt, and returns its result: 0 for success, a negative value for
+failure (−3 for an unknown command, which also prints <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command:</span>
+<span class="pre">&lt;word&gt;</span></code>). Its output goes to the same place as the program’s. It is useful
+for showing state between API calls, as Broadcom’s examples do with <code class="docutils literal notranslate"><span class="pre">l3</span>
+<span class="pre">egress</span> <span class="pre">show</span></code> or <code class="docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">show</span></code>. The same safety rules apply as at the prompt.</p>
+</section>
+<section id="bcmsai-cint">
+<h2>BCMSAI Cint<a class="headerlink" href="#bcmsai-cint" title="Link to this heading"></a></h2>
+<p>The SAI’s own <a class="reference internal" href="../reference/bcmsai.html#clicmd-bcmsai-cint"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span> <span class="pre">Cint</span></code></a> is not included in this build; it only
+prints a message. Use <a class="reference internal" href="../reference/cint.html#clicmd-cint"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cint</span></code></a>.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Message</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">open</span> <span class="pre">file</span> <span class="pre">'&lt;file&gt;'</span></code></p></td>
+<td><p>The path does not exist inside the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container. Copy the
+file to <code class="docutils literal notranslate"><span class="pre">/root</span></code> with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span></code> (not to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>; see
+<a class="reference internal" href="#running-a-file">Running a file</a>) and use an absolute path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">syntax</span> <span class="pre">error,</span> <span class="pre">unexpected</span> <span class="pre">…</span></code> with a <code class="docutils literal notranslate"><span class="pre">^^^</span></code> marker</p></td>
+<td><p>The line is not valid Cint. Common causes: a C cast such as
+<code class="docutils literal notranslate"><span class="pre">(int)</span> <span class="pre">x</span></code>, a declaration inside <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">(</span> <span class="pre">…</span> <span class="pre">)</span></code>, <code class="docutils literal notranslate"><span class="pre">#define</span></code>,
+<code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">tag</span> <span class="pre">var;</span></code> for a structure defined in Cint (write <code class="docutils literal notranslate"><span class="pre">tag</span>
+<span class="pre">var;</span></code>), a missing <code class="docutils literal notranslate"><span class="pre">;</span></code>. Nothing after this point in the file runs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">identifier</span> <span class="pre">'&lt;name&gt;'</span> <span class="pre">undeclared</span></code></p></td>
+<td><p>The name is not defined, or the function is not registered with Cint
+(check with <code class="docutils literal notranslate"><span class="pre">cint_defined</span></code>). <code class="docutils literal notranslate"><span class="pre">extern</span></code> does not help.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">identifier</span> <span class="pre">'&lt;name&gt;'</span> <span class="pre">redeclared</span></code></p></td>
+<td><p>The variable exists from an earlier run. Add <code class="docutils literal notranslate"><span class="pre">cint_reset();</span></code> at the
+top of the file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">identifier</span> <span class="pre">'&lt;name&gt;'</span> <span class="pre">has</span> <span class="pre">unknown</span> <span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">cannot</span> <span class="pre">declare</span> <span class="pre">variable</span>
+<span class="pre">of</span> <span class="pre">type</span> <span class="pre">'&lt;type&gt;'</span></code></p></td>
+<td><p>The type is not registered in this build.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">arg</span> <span class="pre">&lt;n&gt;</span> <span class="pre">to</span> <span class="pre">function</span> <span class="pre">'&lt;f&gt;'</span> <span class="pre">was</span> <span class="pre">wrong</span> <span class="pre">type:</span> <span class="pre">expected</span> <span class="pre">&lt;t&gt;,</span> <span class="pre">received</span>
+<span class="pre">&lt;t&gt;</span></code></p></td>
+<td><p>Pass a variable of the declared type; remember <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> for output
+parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wrong</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">parameters</span> <span class="pre">to</span> <span class="pre">function</span> <span class="pre">'&lt;f&gt;'</span></code></p></td>
+<td><p>Check the prototype with <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">list</span> <span class="pre">function</span> <span class="pre">&lt;f&gt;;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">printf</span> <span class="pre">expected</span> <span class="pre">integer</span> <span class="pre">type</span> <span class="pre">but</span> <span class="pre">received</span> <span class="pre">&lt;type&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">%d</span></code>/<code class="docutils literal notranslate"><span class="pre">%x</span></code> was given an enum or an SDK type such as <code class="docutils literal notranslate"><span class="pre">bcm_ip_t</span></code>
+or <code class="docutils literal notranslate"><span class="pre">uint64</span></code>. Copy the value to an <code class="docutils literal notranslate"><span class="pre">int</span></code> first, or use <code class="docutils literal notranslate"><span class="pre">$name</span></code>
+(see <a class="reference internal" href="cint-language.html"><span class="doc">The Cint language</span></a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">variable</span> <span class="pre">'&lt;name&gt;'</span> <span class="pre">is</span> <span class="pre">undefined</span></code></p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">$</span></code> in a <code class="docutils literal notranslate"><span class="pre">printf</span></code> format string is read as a variable name.
+Write <code class="docutils literal notranslate"><span class="pre">$</span></code> only for that purpose.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">attempt</span> <span class="pre">to</span> <span class="pre">dereference</span> <span class="pre">NULL</span> <span class="pre">pointer</span></code>, <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">subscript</span> <span class="pre">out</span> <span class="pre">of</span>
+<span class="pre">range</span></code></p></td>
+<td><p>Checked by Cint before the access; fix the program.</p></td>
+</tr>
+<tr class="row-even"><td><p>A negative number from an SDK call</p></td>
+<td><p>An SDK return code (<code class="docutils literal notranslate"><span class="pre">BCM_E_…</span></code>); print <code class="docutils literal notranslate"><span class="pre">bcm_errmsg(rv)</span></code>. See
+<a class="reference internal" href="cint-language.html"><span class="doc">The Cint language</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>No output at all and <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> exit 62</p></td>
+<td><p>The program is still running or the shell is at <code class="docutils literal notranslate"><span class="pre">cint&gt;</span></code>; see
+<a class="reference internal" href="#running-a-file">Running a file</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="config/variables/sai.html" class="btn btn-neutral float-left" title="SAI-specific variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cint-language.html" class="btn btn-neutral float-right" title="The Cint language" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

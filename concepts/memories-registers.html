@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memories and registers &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration variables" href="config.html" />
+    <link rel="prev" title="Ports and port bitmaps" href="ports.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Memories and registers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#finding-names">Finding names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table-views">Table views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table-suffixes">Table suffixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-references">Register references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fields-and-values">Fields and values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#display-options">Display options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#safety">Safety</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Memories and registers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memories-and-registers">
+<h1>Memories and registers<a class="headerlink" href="#memories-and-registers" title="Link to this heading"></a></h1>
+<p>The chip-access commands address the switch ASIC by the register and memory
+(table) names of the SDK’s chip description, for example <code class="docutils literal notranslate"><span class="pre">ING_CONFIG_64</span></code> (a
+register) or <code class="docutils literal notranslate"><span class="pre">L2X</span></code> and <code class="docutils literal notranslate"><span class="pre">EGR_L3_NEXT_HOP</span></code> (memories). They work below the
+BCM API and the SAI: they read and write the hardware directly, or the SDK’s
+cached copy of it. Reads show exactly what is programmed. Writes are not seen
+by the SDK or by SONiC; a write that contradicts what <code class="docutils literal notranslate"><span class="pre">syncd</span></code> programmed
+can break forwarding until <code class="docutils literal notranslate"><span class="pre">syncd</span></code> rewrites the entry or is restarted.</p>
+<section id="finding-names">
+<h2>Finding names<a class="headerlink" href="#finding-names" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a> lists every memory; <code class="docutils literal notranslate"><span class="pre">listmem</span> <span class="pre">&lt;TABLE&gt;</span></code> shows a table’s
+fields, and a name that is not a memory filters the list.</p></li>
+<li><p><a class="reference internal" href="../reference/listreg.html#clicmd-listreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listreg</span></code></a> <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> shows a register’s fields; a partial name lists
+matching registers.</p></li>
+<li><p>Names are the SDK’s, not always the hardware manual’s. Case does not
+matter, but names cannot be abbreviated: unlike command names, a register
+or memory name must be typed in full.</p></li>
+<li><p>Not every name from other Broadcom chips exists on a Trident 3. An unknown
+register prints <code class="docutils literal notranslate"><span class="pre">Syntax</span> <span class="pre">error</span> <span class="pre">parsing</span> <span class="pre">&quot;&lt;name&gt;&quot;</span></code>; an unknown table
+<code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">unknown</span> <span class="pre">table</span> <span class="pre">&quot;&lt;name&gt;&quot;</span></code>. In the SAI front-end a failed command also
+ends with <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">execute</span> <span class="pre">the</span> <span class="pre">diagnostic</span> <span class="pre">command.</span> <span class="pre">Error:</span> <span class="pre">Operation</span>
+<span class="pre">failed.</span></code></p></li>
+<li><p>Many tables and registers have aliases, and the shell accepts them, but
+output always uses the primary name. <code class="docutils literal notranslate"><span class="pre">L2X</span></code> is an alias of <code class="docutils literal notranslate"><span class="pre">L2_ENTRY</span></code>
+(<code class="docutils literal notranslate"><span class="pre">dump</span> <span class="pre">chg</span> <span class="pre">l2x</span></code> prints <code class="docutils literal notranslate"><span class="pre">L2_ENTRY.ipipe0[…]</span></code>), <code class="docutils literal notranslate"><span class="pre">VLAN_TAB</span></code> of
+<code class="docutils literal notranslate"><span class="pre">VLAN</span></code>, and <code class="docutils literal notranslate"><span class="pre">ING_CONFIG</span></code> of <code class="docutils literal notranslate"><span class="pre">ING_CONFIG_64</span></code>. <code class="docutils literal notranslate"><span class="pre">listmem</span></code> and
+<code class="docutils literal notranslate"><span class="pre">listreg</span></code> show the aliases (<code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">L2X.ipipe0</span> <span class="pre">aka</span> <span class="pre">L2_ENTRY</span> <span class="pre">alias</span>
+<span class="pre">L2X</span></code>).</p></li>
+</ul>
+</section>
+<section id="table-views">
+<h2>Table views<a class="headerlink" href="#table-views" title="Link to this heading"></a></h2>
+<p>Several names often describe the same hardware table.</p>
+<dl class="simple">
+<dt>Entry-format views</dt><dd><p>A hash table is described once per entry format, and one table can hold
+entries of several formats. The L2 table (<code class="docutils literal notranslate"><span class="pre">L2_ENTRY</span></code>, alias <code class="docutils literal notranslate"><span class="pre">L2X</span></code>) is
+the example: its fields carry a view prefix such as <code class="docutils literal notranslate"><span class="pre">L2:MAC_ADDR</span></code> or
+<code class="docutils literal notranslate"><span class="pre">VLAN:STATIC_BIT</span></code>, and <code class="docutils literal notranslate"><span class="pre">listmem</span> <span class="pre">L2X</span></code> marks it <code class="docutils literal notranslate"><span class="pre">multiview</span></code>. On a
+SONiC Trident 3 switch <code class="docutils literal notranslate"><span class="pre">listmem</span> <span class="pre">L2X</span></code> reports 32768 entries (indices
+0–32767). Pick the view whose fields you want decoded.</p>
+</dd>
+<dt>Per-pipe views</dt><dd><p>A Trident 3 has two pipelines. A table such as <code class="docutils literal notranslate"><span class="pre">IFP_TCAM_WIDE</span></code> also
+exists as <code class="docutils literal notranslate"><span class="pre">IFP_TCAM_WIDE_PIPE0</span></code> and <code class="docutils literal notranslate"><span class="pre">IFP_TCAM_WIDE_PIPE1</span></code>, which
+address one pipeline’s copy.</p>
+</dd>
+<dt>View prefix on the command line</dt><dd><p><a class="reference internal" href="../reference/write.html#clicmd-write"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Write</span></code></a>, <a class="reference internal" href="../reference/modify.html#clicmd-modify"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MODify</span></code></a>, <a class="reference internal" href="../reference/insert.html#clicmd-insert"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Insert</span></code></a> and
+<a class="reference internal" href="../reference/memwatch.html#clicmd-memwatch"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MemWatch</span></code></a> accept <code class="docutils literal notranslate"><span class="pre">&lt;view&gt;:&lt;table&gt;</span></code>; the view is then added to
+field names given without one.</p>
+</dd>
+</dl>
+<p>The index range of a table is shown by <code class="docutils literal notranslate"><span class="pre">listmem</span></code>. Some tables are sized at
+boot, so the range on a running switch can be smaller than the chip maximum.</p>
+</section>
+<section id="table-suffixes">
+<h2>Table suffixes<a class="headerlink" href="#table-suffixes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;TABLE&gt;.&lt;COPY&gt;</span></code></dt><dd><p>One copy (block) of a table that exists in several blocks, by block name
+and instance (for example <code class="docutils literal notranslate"><span class="pre">epipe0</span></code>) or, for per-port tables, by port
+name. Without it, reads use any copy and writes go to all copies. The
+block types of a Trident 3 are <code class="docutils literal notranslate"><span class="pre">ipipe</span></code>, <code class="docutils literal notranslate"><span class="pre">epipe</span></code>, <code class="docutils literal notranslate"><span class="pre">mmu_glb</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mmu_sc</span></code>, <code class="docutils literal notranslate"><span class="pre">mmu_sed</span></code>, <code class="docutils literal notranslate"><span class="pre">mmu_xpe</span></code>, <code class="docutils literal notranslate"><span class="pre">clport</span></code>, <code class="docutils literal notranslate"><span class="pre">xlport</span></code>, <code class="docutils literal notranslate"><span class="pre">cmic</span></code>,
+<code class="docutils literal notranslate"><span class="pre">iproc</span></code>, <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">ser</span></code>, <code class="docutils literal notranslate"><span class="pre">avs</span></code>, <code class="docutils literal notranslate"><span class="pre">lb</span></code>, <code class="docutils literal notranslate"><span class="pre">cpu</span></code> and <code class="docutils literal notranslate"><span class="pre">cch_pseudo</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;TABLE&gt;[&lt;n&gt;]</span></code></dt><dd><p>One element of a table <em>array</em> (<code class="docutils literal notranslate"><span class="pre">&lt;TABLE&gt;(&lt;n&gt;)</span></code> also works). An array
+table requires it; other tables reject it.</p>
+</dd>
+</dl>
+<p><a class="reference internal" href="../reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a>, <a class="reference internal" href="../reference/write.html#clicmd-write"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Write</span></code></a> and some others also take a pipeline keyword
+before the table: <code class="docutils literal notranslate"><span class="pre">pipe0</span></code> or <code class="docutils literal notranslate"><span class="pre">pipe1</span></code> on a Trident 3. <code class="docutils literal notranslate"><span class="pre">dump</span></code> refuses
+<code class="docutils literal notranslate"><span class="pre">pipe2</span></code> and above (<code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">chip</span> <span class="pre">is</span> <span class="pre">2,</span> <span class="pre">try</span> <span class="pre">to</span> <span class="pre">dump</span> <span class="pre">pipe_0/pipe_1</span></code>).</p>
+</section>
+<section id="register-references">
+<h2>Register references<a class="headerlink" href="#register-references" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">REG</span></code></dt><dd><p>Every instance: all ports of a port register, all blocks of a block
+register.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">REG.&lt;ports&gt;</span></code></dt><dd><p>A port register on some ports: <code class="docutils literal notranslate"><span class="pre">CLMAC_CTRL.ce0</span></code>, <code class="docutils literal notranslate"><span class="pre">CLMAC_CTRL.ce0-ce3</span></code>
+(see <a class="reference internal" href="ports.html"><span class="doc">Ports and port bitmaps</span></a>).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">REG.&lt;blocks&gt;</span></code></dt><dd><p>A block register in some blocks.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">REG.&lt;cos&gt;.&lt;blocks&gt;</span></code></dt><dd><p>A per-class-of-service register.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">REG[&lt;i&gt;]</span></code>, <code class="docutils literal notranslate"><span class="pre">REG[&lt;i&gt;-&lt;j&gt;]</span></code></dt><dd><p>Elements of a register array, for example <code class="docutils literal notranslate"><span class="pre">PROTOCOL_PKT_CONTROL[0]</span></code>
+(64 elements on a Trident 3).</p>
+</dd>
+</dl>
+<p>A leading <code class="docutils literal notranslate"><span class="pre">$</span></code> is ignored. A register instance is printed as
+<code class="docutils literal notranslate"><span class="pre">&lt;NAME&gt;.&lt;block&gt;[&lt;instance&gt;][&lt;address&gt;]=&lt;value&gt;:</span> <span class="pre">&lt;FIELD=value,...&gt;</span></code>, for
+example <code class="docutils literal notranslate"><span class="pre">CLMAC_CTRL.ce0[15][0x60000]=0xd040:</span> <span class="pre">&lt;TX_EN=0,RX_EN=0&gt;</span></code>. Long
+field lists wrap onto indented continuation lines.</p>
+<p><a class="reference internal" href="../reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Getreg</span></code></a>, <a class="reference internal" href="../reference/setreg.html#clicmd-setreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Setreg</span></code></a> and <a class="reference internal" href="../reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a> also take a <em>register
+type</em> before the register: <code class="docutils literal notranslate"><span class="pre">SOC</span></code> (the default; also <code class="docutils literal notranslate"><span class="pre">SCHAN</span></code>) for internal
+registers, <code class="docutils literal notranslate"><span class="pre">PCIM</span></code> for CMIC registers, <code class="docutils literal notranslate"><span class="pre">PCIC</span></code> for PCI configuration space,
+<code class="docutils literal notranslate"><span class="pre">IPROC</span></code>, <code class="docutils literal notranslate"><span class="pre">MCS</span></code>, <code class="docutils literal notranslate"><span class="pre">PHY</span></code> (MII, <code class="docutils literal notranslate"><span class="pre">phyID&lt;&lt;8|phyADDR</span></code>) and <code class="docutils literal notranslate"><span class="pre">MW</span></code>, <code class="docutils literal notranslate"><span class="pre">MH</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MB</span></code>, <code class="docutils literal notranslate"><span class="pre">MEM</span></code> for host memory. A register can also be given by address;
+use the names where possible.</p>
+</section>
+<section id="fields-and-values">
+<h2>Fields and values<a class="headerlink" href="#fields-and-values" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Values are decimal or <code class="docutils literal notranslate"><span class="pre">0x</span></code> hex; wide values are long hex strings.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;FIELD&gt;=&lt;VALUE&gt;</span></code> sets a field by name. Several assignments can be
+separated by commas or spaces: <code class="docutils literal notranslate"><span class="pre">A=1,B=2</span></code> and <code class="docutils literal notranslate"><span class="pre">A=1</span> <span class="pre">B=2</span></code> are the same.
+Field names are the ones <a class="reference internal" href="../reference/listreg.html#clicmd-listreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listreg</span></code></a> and <a class="reference internal" href="../reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a> print.</p></li>
+<li><p><a class="reference internal" href="../reference/setreg.html#clicmd-setreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Setreg</span></code></a> and <a class="reference internal" href="../reference/write.html#clicmd-write"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Write</span></code></a> with fields start from <strong>zero</strong>:
+every field you do not name is cleared. <a class="reference internal" href="../reference/modreg.html#clicmd-modreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Modreg</span></code></a> and
+<a class="reference internal" href="../reference/modify.html#clicmd-modify"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MODify</span></code></a> read first and change only the named fields.</p></li>
+<li><p>After the register or table name, <a class="reference internal" href="../reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Getreg</span></code></a> and <a class="reference internal" href="../reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a>
+accept field names; only those fields are printed.</p></li>
+</ul>
+</section>
+<section id="display-options">
+<h2>Display options<a class="headerlink" href="#display-options" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">raw</span></code></dt><dd><p>Raw words instead of decoded fields (<code class="docutils literal notranslate"><span class="pre">getreg</span></code>, <code class="docutils literal notranslate"><span class="pre">dump</span></code>).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hex</span></code></dt><dd><p>Hex data only, for scripts (<code class="docutils literal notranslate"><span class="pre">getreg</span></code>, <code class="docutils literal notranslate"><span class="pre">dump</span></code>).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">chg</span></code></dt><dd><p>Only fields, and for tables only entries, that differ from the reset
+value (<code class="docutils literal notranslate"><span class="pre">getreg</span></code>, <code class="docutils literal notranslate"><span class="pre">dump</span></code>). <code class="docutils literal notranslate"><span class="pre">dump</span> <span class="pre">chg</span> <span class="pre">&lt;TABLE&gt;</span></code> is the usual way to see
+what the SDK programmed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">all</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">dump</span></code>: include invalid entries. Without it, entries whose valid field
+is clear are skipped, and sorted tables are dumped only up to their entry
+count.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nocache</span></code></dt><dd><p>Read or write the hardware even when the SDK keeps a cached copy of the
+table (see <a class="reference internal" href="../reference/cache.html#clicmd-cache"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">CACHE</span></code></a>). Otherwise reads of cached tables come from
+the copy.</p>
+</dd>
+</dl>
+</section>
+<section id="safety">
+<h2>Safety<a class="headerlink" href="#safety" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">getreg</span></code>, <code class="docutils literal notranslate"><span class="pre">listreg</span></code>, <code class="docutils literal notranslate"><span class="pre">listmem</span></code>, <code class="docutils literal notranslate"><span class="pre">dump</span></code>, <code class="docutils literal notranslate"><span class="pre">search</span></code>, <code class="docutils literal notranslate"><span class="pre">lookup</span></code> and
+<code class="docutils literal notranslate"><span class="pre">check</span></code> only read. Reading a clear-on-read counter or a FIFO still
+changes it, and a large <code class="docutils literal notranslate"><span class="pre">dump</span></code> keeps the shell busy for a long time:
+<code class="docutils literal notranslate"><span class="pre">dump</span> <span class="pre">socmem</span> <span class="pre">diff</span></code> to a file took close to three minutes on a running
+switch, while <code class="docutils literal notranslate"><span class="pre">dump</span> <span class="pre">soc</span> <span class="pre">diff</span></code> (about 4900 registers) took a few
+seconds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setreg</span></code>, <code class="docutils literal notranslate"><span class="pre">modreg</span></code>, <code class="docutils literal notranslate"><span class="pre">editreg</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">modify</span></code>, <code class="docutils literal notranslate"><span class="pre">insert</span></code>,
+<code class="docutils literal notranslate"><span class="pre">delete</span></code>, <code class="docutils literal notranslate"><span class="pre">remove</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">pop</span></code> and <code class="docutils literal notranslate"><span class="pre">clear</span></code> change the ASIC
+behind the SDK’s and SONiC’s back. See each command’s page.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ports.html" class="btn btn-neutral float-left" title="Ports and port bitmaps" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="config.html" class="btn btn-neutral float-right" title="Configuration variables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

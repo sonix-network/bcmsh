@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_gport_* (387) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_ifa_* (56)" href="bcm-ifa.html" />
+    <link rel="prev" title="bcm_flowtracker_* (206)" href="bcm-flowtracker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_gport_*</span></code> (387)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-gport-387">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_gport_*</span></code> (387)<a class="headerlink" href="#bcm-gport-387" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_GPORT_AQM_FLOW_ID_GET(bcm_gport_t *_gport);
+void BCM_GPORT_AQM_FLOW_ID_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_AQM_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_AQM_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_BACKDOOR_FC_PROFILE_GET(bcm_gport_t *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_BACKDOOR_FC_PROFILE_SET(bcm_gport_t *_gport, int *_profile);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_CHILD_MODID_GET(int *_gport);
+int BCM_GPORT_CHILD_PORT_GET(int *_gport);
+void BCM_GPORT_CHILD_SET(int *_gport, bcm_module_t *_modid, int *_port);
+int BCM_GPORT_CONGESTION_COE_IDX_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_CONGESTION_COE_IDX_SET(int *_gport, int *_port, int *_index);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_CONGESTION_COE_SET(int *_gport, int *_port);
+int BCM_GPORT_CONGESTION_GET(int *_gport);
+void BCM_GPORT_CONGESTION_OOB_SET(int *_gport, int *_port);
+void BCM_GPORT_CONGESTION_SET(int *_gport, int *_port);
+int BCM_GPORT_DESTMOD_QUEUE_GROUP_QID_GET(int *_gport);
+void BCM_GPORT_DESTMOD_QUEUE_GROUP_SET(int *_gport, int *_qid);
+int BCM_GPORT_DESTMOD_QUEUE_GROUP_SYSPORTID_GET(int *_gport);
+void BCM_GPORT_DESTMOD_QUEUE_GROUP_SYSQID_SET(int *_gport, int *_sysport_id, int *_qid);
+int BCM_GPORT_DEVPORT(int *_device, int *_port);
+int BCM_GPORT_DEVPORT_DEVID_GET(int *_gport);
+int BCM_GPORT_DEVPORT_PORT_GET(int *_gport);
+void BCM_GPORT_DEVPORT_SET(int *_gport, int *_device, int *_port);
+int BCM_GPORT_EGRESS_CHILD_MODID_GET(bcm_gport_t *_egress_child_gport);
+int BCM_GPORT_EGRESS_CHILD_PORT_GET(bcm_gport_t *_egress_child_gport);
+void BCM_GPORT_EGRESS_CHILD_SET(bcm_gport_t *_egress_child_gport, int *_child_modid, int *_child_port);
+int BCM_GPORT_EGRESS_GROUP_GET(bcm_gport_t *_egress_group_gport);
+int BCM_GPORT_EGRESS_GROUP_MODID_GET(bcm_gport_t *_egress_group_gport);
+void BCM_GPORT_EGRESS_GROUP_SET(bcm_gport_t *_egress_group_gport, int *_child_modid, int *_egress_child);
+int BCM_GPORT_EGRESS_MODPORT_MODID_GET(int *_gport);
+int BCM_GPORT_EGRESS_MODPORT_PORT_GET(int *_gport);
+void BCM_GPORT_EGRESS_MODPORT_SET(int *_gport, int *_module, int *_port);
+int BCM_GPORT_END_TO_END_LATENCY_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_END_TO_END_LATENCY_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_EPON_LINK_GET(int *_gport);
+void BCM_GPORT_EPON_LINK_SET(int *_gport, int *_num);
+int BCM_GPORT_EXTENDER_PORT_ID_GET(int *_gport);
+void BCM_GPORT_EXTENDER_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_FLOW_AGG_GET(int *_gport);
+void BCM_GPORT_FLOW_AGG_SET(int *_gport, int *_flow_agg_id);
+int BCM_GPORT_FLOW_LIF_ID_GET(int *_gport);
+void BCM_GPORT_FLOW_LIF_ID_SET(int *_gport, int *_flow_lif_id);
+void BCM_GPORT_FLOW_LIF_TO_L3_ITF_LIF(int *_l3_itf_lif, int *_gport_flow_lif);
+int BCM_GPORT_FLOW_PORT_ID_GET(int *_gport);
+void BCM_GPORT_FLOW_PORT_ID_SET(int *_gport, int *_id);
+void BCM_GPORT_FORWARD_GROUP_TO_L3_ITF_FEC(int *_l3_itf_fec, int *_gport_forward_group);
+int BCM_GPORT_FORWARD_PORT_GET(int *_gport);
+void BCM_GPORT_FORWARD_PORT_SET(int *_gport, int *_id);
+int BCM_GPORT_GLOBAL_VOQ_BIN_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_GLOBAL_VOQ_BIN_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_GLOBAL_VOQ_INGRESS_PROFILE_GET(bcm_gport_t *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_GLOBAL_VOQ_INGRESS_PROFILE_SET(bcm_gport_t *_gport, int *_profile);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_GLOBAL_VOQ_TC_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_GLOBAL_VOQ_TC_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_INGRESS_LATENCY_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_INGRESS_LATENCY_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_IS_AQM_FLOW_ID(bcm_gport_t *_gport);
+int BCM_GPORT_IS_AQM_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_BACKDOOR_FC_PROFILE(bcm_gport_t *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_IS_BLACK_HOLE(int *_gport);
+int BCM_GPORT_IS_CHILD(int *_gport);
+int BCM_GPORT_IS_CONGESTION(int *_gport);
+int BCM_GPORT_IS_CONGESTION_COE(int *_gport);
+int BCM_GPORT_IS_CONGESTION_OOB(int *_gport);
+int BCM_GPORT_IS_COSQ(int *_gport);
+int BCM_GPORT_IS_DESTMOD_QUEUE_GROUP(int *_gport);
+int BCM_GPORT_IS_DEVPORT(int *_gport);
+int BCM_GPORT_IS_EGRESS_CHILD(int *_gport);
+int BCM_GPORT_IS_EGRESS_GROUP(int *_gport);
+int BCM_GPORT_IS_EGRESS_MODPORT(int *_gport);
+int BCM_GPORT_IS_END_TO_END_AQM_LATENCY_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_END_TO_END_LATENCY_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_EPON_LINK(int *_gport);
+int BCM_GPORT_IS_EXTENDER_PORT(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_COMMON_FABRIC(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_COMMON_LOCAL0(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_COMMON_LOCAL1(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_COMMON_MULTICAST_FABRIC(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_COMMON_UNICAST_FABRIC(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FABRIC(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FABRIC_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FABRIC_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FMQ_BESTEFFORT(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FMQ_BEST_EFFORT_MIX(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FMQ_BEST_EFFORT_OCB(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FMQ_GUARANTEED(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FMQ_GUARANTEED_MIX(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_FMQ_GUARANTEED_OCB(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL0(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL0_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL0_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL0_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL0_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL0_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL0_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL1(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL1_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL1_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL1_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL1_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL1_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_LOCAL1_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_SCOPE(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_FABRIC_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_FABRIC_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_FABRIC_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_FABRIC_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_FABRIC_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_FABRIC_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_LOCAL(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_LOCAL_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_CLOS_UNICAST_LOCAL_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_COMMON_DEV1(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_COMMON_DEV2(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_COMMON_DEV3(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_COMMON_LOCAL0(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_COMMON_LOCAL1(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_COMMON_MC(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV1(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV1_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV1_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV1_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV1_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV2(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV2_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV2_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV2_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV2_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV3(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV3_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV3_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV3_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV3_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV4(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV5(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV6(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_DEV7(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL0(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL0_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL0_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL0_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL0_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL1(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL1_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL1_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL1_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_LOCAL1_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_MC(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_MC_MIX_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_MC_MIX_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_MC_OCB_HIGH(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_MC_OCB_LOW(int *_gport);
+int BCM_GPORT_IS_FABRIC_MESH_SCOPE(int *_gport);
+int BCM_GPORT_IS_FLEXE_GROUP(int *_gport);
+int BCM_GPORT_IS_FLOW_AGG(int *_gport);
+int BCM_GPORT_IS_FLOW_LIF(int *_gport);
+int BCM_GPORT_IS_FLOW_PORT(int *_gport);
+int BCM_GPORT_IS_FORWARD_PORT(int *_gport);
+int BCM_GPORT_IS_GLOBAL_VOQ_BIN_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_GLOBAL_VOQ_INGRESS_PROFILE(bcm_gport_t *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_IS_GLOBAL_VOQ_TC_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_INGRESS_LATENCY_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_L2GRE_PORT(int *_gport);
+int BCM_GPORT_IS_LATENCY_AQM_FLOW_ID(bcm_gport_t *_gport);
+int BCM_GPORT_IS_LOCAL(int *_gport);
+int BCM_GPORT_IS_LOCAL_CPU(int *_gport);
+int BCM_GPORT_IS_LOCAL_CPU_HIGIG(int *_gport);
+int BCM_GPORT_IS_LOCAL_CPU_IEEE(int *_gport);
+int BCM_GPORT_IS_LOCAL_FABRIC(int *gport);
+int BCM_GPORT_IS_LOCAL_INTERFACE(int *gport);
+int BCM_GPORT_IS_MAC_PORT(int *_gport);
+int BCM_GPORT_IS_MCAST(int *_gport);
+int BCM_GPORT_IS_MCAST_QUEUE_GROUP(int *_gport);
+int BCM_GPORT_IS_MCAST_SUBSCRIBER_QUEUE_GROUP(int *_gport);
+int BCM_GPORT_IS_MIM_PORT(int *_gport);
+int BCM_GPORT_IS_MIRROR(int *_gport);
+int BCM_GPORT_IS_MIRROR_MIRROR(int *_gport);
+int BCM_GPORT_IS_MIRROR_SNOOP(int *_gport);
+int BCM_GPORT_IS_MIRROR_STAT_SAMPLE(int *_gport);
+int BCM_GPORT_IS_MODPORT(int *_gport);
+int BCM_GPORT_IS_MPLS_PORT(int *_gport);
+int BCM_GPORT_IS_NIF_RX_PRIORITY(int *_gport);
+int BCM_GPORT_IS_NIF_RX_PRIORITY_HIGH(int *_gport);
+int BCM_GPORT_IS_NIF_RX_PRIORITY_LOW(int *_gport);
+int BCM_GPORT_IS_NIF_RX_PRIORITY_TDM(int *_gport);
+int BCM_GPORT_IS_NIV_PORT(int *_gport);
+int BCM_GPORT_IS_OCB_GLOBAL_DROP_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_PHY(int *_gport);
+int BCM_GPORT_IS_PROFILE(int *_gport);
+int BCM_GPORT_IS_PROXY(int *_gport);
+int BCM_GPORT_IS_QUEUE_GROUP(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_IS_SCHEDULER(int *_gport);
+int BCM_GPORT_IS_SET(int *_gport);
+int BCM_GPORT_IS_SPECIAL(int *_gport);
+int BCM_GPORT_IS_SUBPORT_GROUP(int *_gport);
+int BCM_GPORT_IS_SUBPORT_PORT(int *_gport);
+int BCM_GPORT_IS_SYSTEM_PORT(int *_gport);
+int BCM_GPORT_IS_TDM_STREAM(int *_gport);
+int BCM_GPORT_IS_TRAP(int *_gport);
+int BCM_GPORT_IS_TRILL_PORT(int *_gport);
+int BCM_GPORT_IS_TRUNK(int *_gport);
+int BCM_GPORT_IS_TUNNEL(int *_gport);
+int BCM_GPORT_IS_UCAST_QUEUE_GROUP(int *_gport);
+int BCM_GPORT_IS_UCAST_SUBSCRIBER_QUEUE_GROUP(int *_gport);
+int BCM_GPORT_IS_VLAN_PORT(int *_gport);
+int BCM_GPORT_IS_VPLAG_PORT(int *_gport);
+int BCM_GPORT_IS_VP_GROUP(int *_gport);
+int BCM_GPORT_IS_VXLAN_PORT(int *_gport);
+int BCM_GPORT_IS_WLAN_PORT(int *_gport);
+int BCM_GPORT_L2GRE_PORT_ID_GET(int *_gport);
+void BCM_GPORT_L2GRE_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_LATENCY_AQM_FLOW_ID_GET(bcm_gport_t *_gport);
+void BCM_GPORT_LATENCY_AQM_FLOW_ID_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_LATENCY_END_TO_END_AQM_LATENCY_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_LATENCY_END_TO_END_AQM_LATENCY_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_LOCAL_FABRIC_GET(int *gport);
+int BCM_GPORT_LOCAL_FABRIC_SET(int *gport, int *link_id);
+int BCM_GPORT_LOCAL_GET(int *_gport);
+int BCM_GPORT_LOCAL_INTERFACE_GET(int *gport);
+int BCM_GPORT_LOCAL_INTERFACE_SET(int *gport, int *port);
+void BCM_GPORT_LOCAL_SET(int *_gport, int *_port);
+int BCM_GPORT_MAC_PORT_ID_GET(int *_gport);
+void BCM_GPORT_MAC_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_MCAST_DS_ID_GET(int *_gport);
+void BCM_GPORT_MCAST_DS_ID_SET(int *_gport, int *_ds_id);
+int BCM_GPORT_MCAST_GET(int *_gport);
+int BCM_GPORT_MCAST_QUEUE_GROUP_CORE_GET(int *_gport);
+void BCM_GPORT_MCAST_QUEUE_GROUP_CORE_QUEUE_SET(int *_gport, int *_core, int *_qid);
+int BCM_GPORT_MCAST_QUEUE_GROUP_GET(int *_gport);
+int BCM_GPORT_MCAST_QUEUE_GROUP_QID_GET(int *_gport);
+int BCM_GPORT_MCAST_QUEUE_GROUP_QUEUE_GET(int *_gport);
+void BCM_GPORT_MCAST_QUEUE_GROUP_QUEUE_SET(int *_gport, int *_qid);
+void BCM_GPORT_MCAST_QUEUE_GROUP_SET(int *_gport, int *_qid);
+int BCM_GPORT_MCAST_QUEUE_GROUP_SYSPORTID_GET(int *_gport);
+void BCM_GPORT_MCAST_QUEUE_GROUP_SYSQID_SET(int *_gport, int *_sysport_id, int *_qid);
+void BCM_GPORT_MCAST_SET(int *_gport, int *_mcast_id);
+int BCM_GPORT_MCAST_SUBSCRIBER_QUEUE_GROUP_QID_GET(int *_gport);
+void BCM_GPORT_MCAST_SUBSCRIBER_QUEUE_GROUP_QID_SET(int *_gport, int *_qid);
+int BCM_GPORT_MCAST_SUBSCRIBER_QUEUE_GROUP_SYSPORTID_GET(int *_gport);
+void BCM_GPORT_MCAST_SUBSCRIBER_QUEUE_GROUP_SYSQID_SET(int *_gport, int *_sysport_id, int *_qid);
+int BCM_GPORT_MIM_PORT_ID_GET(int *_gport);
+void BCM_GPORT_MIM_PORT_ID_SET(int *_gport, int *_id);
+void BCM_GPORT_MIRROR_FULL_SET(int *_gport, int *_value, int *_mir_subtype);
+int BCM_GPORT_MIRROR_GET(int *_gport);
+int BCM_GPORT_MIRROR_MIRROR_AND_STRENGTH_SET(int *_gport, int *_value, int *_strength);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_MIRROR_MIRROR_SET(int *_gport, int *_value);
+void BCM_GPORT_MIRROR_SET(int *_gport, int *_value);
+void BCM_GPORT_MIRROR_SNOOP_AND_STRENGTH_SET(int *_gport, int *_value, int *_strength);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_MIRROR_SNOOP_SET(int *_gport, int *_value);
+void BCM_GPORT_MIRROR_STAT_SAMPLE_AND_STRENGTH_SET(int *_gport, int *_value, int *_strength);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_MIRROR_STAT_SAMPLE_SET(int *_gport, int *_value);
+int BCM_GPORT_MIRROR_STRENGTH_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_MIRROR_SUBTYPE_GET(int *_gport);
+int BCM_GPORT_MODPORT_DATAPATH_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_MODPORT_MODID_GET(int *_gport);
+int BCM_GPORT_MODPORT_PORT_GET(int *_gport);
+void BCM_GPORT_MODPORT_SET(int *_gport, bcm_module_t *_module, int *_port);
+int BCM_GPORT_MODPORT_W_DATAPATH_SET(int *_gport, int *_module, int *_module_datapath, int *_port);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_MPLS_PORT_ID_GET(int *_gport);
+void BCM_GPORT_MPLS_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_NIF_RX_PRIORITY_GET(int *_gport);
+void BCM_GPORT_NIF_RX_PRIORITY_HIGH_SET(int *_gport, int *_port);
+void BCM_GPORT_NIF_RX_PRIORITY_LOW_SET(int *_gport, int *_port);
+void BCM_GPORT_NIF_RX_PRIORITY_TDM_SET(int *_gport, int *_port);
+int BCM_GPORT_NIV_PORT_ID_GET(int *_gport);
+void BCM_GPORT_NIV_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_OCB_GLOBAL_DROP_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_OCB_GLOBAL_DROP_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_PROFILE_GET(int *_gport);
+void BCM_GPORT_PROFILE_SET(int *_gport, int *_profile);
+int BCM_GPORT_PROXY_MODID_GET(int *_gport);
+int BCM_GPORT_PROXY_PORT_GET(int *_gport);
+void BCM_GPORT_PROXY_SET(int *_gport, bcm_module_t *_module, int *_port);
+int BCM_GPORT_QUEUE_GROUP_QID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_QUEUE_GROUP_QID_SET(int *_gport, int *_qid);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_QUEUE_GROUP_SYSPORTID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_GPORT_QUEUE_GROUP_SYSQID_SET(int *_gport, int *_sysport_id, int *_qid);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_SCHEDULER_CORE_GET(int *_gport);
+void BCM_GPORT_SCHEDULER_CORE_SET(int *_gport, int *_scheduler_id, int *_core_id);
+int BCM_GPORT_SCHEDULER_GET(int *_gport);
+void BCM_GPORT_SCHEDULER_NODE_SET(int *_gport, int *_scheduler_level, int *_scheduler_id);
+void BCM_GPORT_SCHEDULER_SET(int *_gport, int *_scheduler_id);
+int BCM_GPORT_SPECIAL(int *_value);
+int BCM_GPORT_SPECIAL_GET(int *_gport);
+void BCM_GPORT_SPECIAL_SET(int *_gport, int *_value);
+int BCM_GPORT_SUBPORT_GROUP_GET(int *_gport);
+void BCM_GPORT_SUBPORT_GROUP_SET(int *_gport, int *_id);
+int BCM_GPORT_SUBPORT_PORT_GET(int *_gport);
+void BCM_GPORT_SUBPORT_PORT_SET(int *_gport, int *_id);
+void BCM_GPORT_SUBPORT_PORT_SVTAG_SET(int *_gport, int *_id);  /* not in OpenBCM 6.5.27 */
+int BCM_GPORT_SUB_TYPE_FORWARD_GROUP_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_FORWARD_GROUP_SET(int *_gport, int *_fwd_group_val);
+int BCM_GPORT_SUB_TYPE_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_IN_LIF_SET(int *_gport, int *_in_lif_val);
+int BCM_GPORT_SUB_TYPE_IN_LIF_VAL_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_FORWARD_GROUP(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_IN_LIF(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_L3_VLAN_TRANSLATION(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_LIF(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_MPLS_PUSH_PROFILE(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_MULTICAST(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_OUT_LIF(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_PROTECTION(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_TRILL_OUTLIF(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_VIRTUAL_EGRESS_DEFAULT(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_VIRTUAL_EGRESS_MATCH(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_VIRTUAL_EGRESS_OAM_PRIMARY_VLAN(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_VIRTUAL_EGRESS_POINTED(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_VIRTUAL_INGRESS(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_VIRTUAL_INGRESS_NATIVE(int *_gport);
+int BCM_GPORT_SUB_TYPE_IS_VIRTUAL_INGRESS_NON_NATIVE(int *_gport);
+int BCM_GPORT_SUB_TYPE_L3_VLAN_TRANSLATION_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_L3_VLAN_TRANSLATION_SET(int *_gport, int *_vlan_translation_val);
+int BCM_GPORT_SUB_TYPE_LIF_EXC_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_LIF_SET(int *_gport, int *_exc_val, int *_lif_val);
+int BCM_GPORT_SUB_TYPE_LIF_VAL_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_MPLS_PUSH_PROFILE_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_MPLS_PUSH_PROFILE_SET(int *_gport, int *_mpls_push_profile_val);
+int BCM_GPORT_SUB_TYPE_MULTICAST_PS_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_MULTICAST_SET(int *_gport, int *_ps_val, int *_multicast_val);
+int BCM_GPORT_SUB_TYPE_MULTICAST_VAL_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_OUT_LIF_SET(int *_gport, int *_out_lif_val);
+int BCM_GPORT_SUB_TYPE_OUT_LIF_VAL_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_PROTECTION_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_PROTECTION_SET(int *_gport, int *_protection_val);
+int BCM_GPORT_SUB_TYPE_TRILL_OUTLIF_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_TRILL_OUTLIF_SET(int *_gport, int *_trill_outlif_val);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_DEFAULT_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_DEFAULT_SET(int *_gport, int *_virtual_id);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_MATCH_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_MATCH_SET(int *_gport, int *_virtual_id);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_OAM_PRIMARY_VLAN_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_OAM_PRIMARY_VLAN_SET(int *_gport, int *_virtual_id);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_POINTED_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_EGRESS_POINTED_SET(int *_gport, int *_virtual_egress_pointed_val);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_INGRESS_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_INGRESS_NATIVE_GET(int *_gport);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_INGRESS_NATIVE_SET(int *_gport, int *_virtual_id);
+int BCM_GPORT_SUB_TYPE_VIRTUAL_INGRESS_NON_NATIVE_GET(int *_gport);
+void BCM_GPORT_SUB_TYPE_VIRTUAL_INGRESS_NON_NATIVE_SET(int *_gport, int *_virtual_ingress_val);
+void BCM_GPORT_SUB_TYPE_VIRTUAL_INGRESS_SET(int *_gport, int *_virtual_ingress_val);
+int BCM_GPORT_SYSTEM_PORT_ID_GET(int *_gport);
+void BCM_GPORT_SYSTEM_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_TDM_STREAM_ID_GET(int *_gport);
+void BCM_GPORT_TDM_STREAM_SET(int *_gport, int *_port);
+int BCM_GPORT_TRAP_GET_ID(int *_gport);
+int BCM_GPORT_TRAP_GET_SNOOP_STRENGTH(int *_gport);
+int BCM_GPORT_TRAP_GET_STRENGTH(int *_gport);
+void BCM_GPORT_TRAP_SET(int *_gport, int *_trap_id, int *_trap_strength, int *_snoop_strength);
+int BCM_GPORT_TRILL_PORT_ID_GET(int *_gport);
+void BCM_GPORT_TRILL_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_TRUNK_GET(int *_gport);
+void BCM_GPORT_TRUNK_SET(int *_gport, int *_trunk_id);
+int BCM_GPORT_TUNNEL_ID_GET(int *_gport);
+void BCM_GPORT_TUNNEL_ID_SET(int *_gport, int *_tunnel_id);
+void BCM_GPORT_TUNNEL_TO_L3_ITF_LIF(int *_l3_itf_lif, int *_gport_tunnel);
+int BCM_GPORT_UCAST_QUEUE_GROUP_QID_GET(int *_gport);
+void BCM_GPORT_UCAST_QUEUE_GROUP_SET(int *_gport, int *_qid);
+int BCM_GPORT_UCAST_QUEUE_GROUP_SYSPORTID_GET(int *_gport);
+void BCM_GPORT_UCAST_QUEUE_GROUP_SYSQID_SET(int *_gport, int *_sysport_id, int *_qid);
+int BCM_GPORT_UCAST_SUBSCRIBER_QUEUE_GROUP_QID_GET(int *_gport);
+void BCM_GPORT_UCAST_SUBSCRIBER_QUEUE_GROUP_QID_SET(int *_gport, int *_qid);
+int BCM_GPORT_UCAST_SUBSCRIBER_QUEUE_GROUP_SYSPORTID_GET(int *_gport);
+void BCM_GPORT_UCAST_SUBSCRIBER_QUEUE_GROUP_SYSQID_SET(int *_gport, int *_sysport_id, int *_qid);
+int BCM_GPORT_UNICAST_QUEUE_GROUP_CORE_GET(int *_gport);
+void BCM_GPORT_UNICAST_QUEUE_GROUP_CORE_QUEUE_SET(int *_gport, int *_core, int *_qid);
+int BCM_GPORT_UNICAST_QUEUE_GROUP_QID_GET(int *_gport);
+void BCM_GPORT_UNICAST_QUEUE_GROUP_SET(int *_gport, int *_qid);
+int BCM_GPORT_VLAN_PORT_ID_GET(int *_gport);
+void BCM_GPORT_VLAN_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_VPLAG_PORT_ID_GET(int *_gport);
+void BCM_GPORT_VPLAG_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_VP_GROUP_GET(int *_gport);
+void BCM_GPORT_VP_GROUP_SET(int *_gport, int *_vp_group);
+int BCM_GPORT_VXLAN_PORT_ID_GET(int *_gport);
+void BCM_GPORT_VXLAN_PORT_ID_SET(int *_gport, int *_id);
+int BCM_GPORT_WLAN_PORT_ID_GET(int *_gport);
+void BCM_GPORT_WLAN_PORT_ID_SET(int *_gport, int *_id);
+int bcm_gport_stat_get(int unit, bcm_gport_t gport, bcm_core_t core_id, bcm_stat_counter_interface_type_t engine_source, bcm_stat_pp_info_t *stat_info);
+int bcm_gport_stat_set(int unit, bcm_gport_t gport, bcm_core_t core_id, bcm_stat_counter_interface_type_t engine_source, bcm_stat_pp_info_t stat_info);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-flowtracker.html" class="btn btn-neutral float-left" title="bcm_flowtracker_* (206)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-ifa.html" class="btn btn-neutral float-right" title="bcm_ifa_* (56)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

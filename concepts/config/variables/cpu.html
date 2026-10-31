@@ -1,0 +1,1165 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPU, DMA, interrupts and counters &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Chip, boot, warm boot and diagnostics" href="chip.html" />
+    <link rel="prev" title="Telemetry, timing and OAM" href="telemetry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Variable reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ports.html">Ports, lanes and SerDes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tables.html">Forwarding tables and routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acl.html">ACL, field processor and UDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmu.html">Buffers, queues and QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry, timing and OAM</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CPU, DMA, interrupts and counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chip.html">Chip, boot, warm boot and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sai.html">SAI-specific variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../config.html">Configuration variables</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Variable reference</a></li>
+      <li class="breadcrumb-item active">CPU, DMA, interrupts and counters</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cpu-dma-interrupts-and-counters">
+<h1>CPU, DMA, interrupts and counters<a class="headerlink" href="#cpu-dma-interrupts-and-counters" title="Link to this heading"></a></h1>
+<p>How the SDK talks to the chip over PCIe: packet and table DMA, S-channel, interrupts, counter collection and CPU threads.</p>
+<p>Set in several SONiC Trident 3 HWSKU files: <a class="reference internal" href="#confval-bcm_stat_flags"><code class="xref std std-confval docutils literal notranslate"><span class="pre">bcm_stat_flags</span></code></a>, <a class="reference internal" href="#confval-bcm_stat_interval"><code class="xref std std-confval docutils literal notranslate"><span class="pre">bcm_stat_interval</span></code></a>, <a class="reference internal" href="#confval-bcm_stat_jumbo"><code class="xref std std-confval docutils literal notranslate"><span class="pre">bcm_stat_jumbo</span></code></a>, <a class="reference internal" href="#confval-cdma_timeout_usec"><code class="xref std std-confval docutils literal notranslate"><span class="pre">cdma_timeout_usec</span></code></a>, <a class="reference internal" href="#confval-ctr_evict_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ctr_evict_enable</span></code></a>, <a class="reference internal" href="#confval-dma_desc_timeout_usec"><code class="xref std std-confval docutils literal notranslate"><span class="pre">dma_desc_timeout_usec</span></code></a>, <a class="reference internal" href="#confval-miim_intr_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">miim_intr_enable</span></code></a>, <a class="reference internal" href="#confval-pdma_descriptor_prefetch_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pdma_descriptor_prefetch_enable</span></code></a>, <a class="reference internal" href="#confval-pktdma_poll_mode_channel_bitmap"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pktdma_poll_mode_channel_bitmap</span></code></a>, <a class="reference internal" href="#confval-schan_intr_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">schan_intr_enable</span></code></a>, <a class="reference internal" href="#confval-tdma_intr_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">tdma_intr_enable</span></code></a>, <a class="reference internal" href="#confval-tdma_timeout_usec"><code class="xref std std-confval docutils literal notranslate"><span class="pre">tdma_timeout_usec</span></code></a>, <a class="reference internal" href="#confval-tslam_timeout_usec"><code class="xref std std-confval docutils literal notranslate"><span class="pre">tslam_timeout_usec</span></code></a>.</p>
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_esw_pscan_thread_pri">
+<span class="sig-name descname"><span class="pre">bcm_esw_pscan_thread_pri</span></span><a class="headerlink" href="#confval-bcm_esw_pscan_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the bcmPSCAN thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_rx_thread_pri">
+<span class="sig-name descname"><span class="pre">bcm_rx_thread_pri</span></span><a class="headerlink" href="#confval-bcm_rx_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the BCM RX thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_stat_flags">
+<span class="sig-name descname"><span class="pre">bcm_stat_flags</span></span><a class="headerlink" href="#confval-bcm_stat_flags" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Flag values to be ORd together: 0x0 indicates that counter DMA should NOT be used 0x1 indicates that counter DMA should be used (default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_stat_interval">
+<span class="sig-name descname"><span class="pre">bcm_stat_interval</span></span><a class="headerlink" href="#confval-bcm_stat_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Set stat collection interval in microseconds. Setting this to 0 will prevent counters from being started.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 16 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">2000000</span></code>, <code class="docutils literal notranslate"><span class="pre">1000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_stat_jumbo">
+<span class="sig-name descname"><span class="pre">bcm_stat_jumbo</span></span><a class="headerlink" href="#confval-bcm_stat_jumbo" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1518</span></code></dd>
+</dl>
+<p>Threshold value for oversize (*OVR) frame size. Values over 1518 affect the *OVR statistics computation</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">9236</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_stat_pbmp">
+<span class="sig-name descname"><span class="pre">bcm_stat_pbmp</span></span><a class="headerlink" href="#confval-bcm_stat_pbmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>BCM Statistics Collection: Set bitmap of ports on which stat collection will be enabled. Default is all ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_stat_sync_timeout">
+<span class="sig-name descname"><span class="pre">bcm_stat_sync_timeout</span></span><a class="headerlink" href="#confval-bcm_stat_sync_timeout" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Timeout delay in microseconds before bcm_stat_sync returns BCM_E_TIMEOUT</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_tx_queue_size">
+<span class="sig-name descname"><span class="pre">bcm_tx_queue_size</span></span><a class="headerlink" href="#confval-bcm_tx_queue_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the maximum number of packets which can start to allocate resources and transmit. Depending on the Tx resources, an appropriate value can get better performance. The range of suggested values is 64 to 512. If fewer than 10 threads may transmit simultaneously, this parameter can be left at the default value of 0.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_tx_thread_pri">
+<span class="sig-name descname"><span class="pre">bcm_tx_thread_pri</span></span><a class="headerlink" href="#confval-bcm_tx_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the BCM TX thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ccm_dma_enable">
+<span class="sig-name descname"><span class="pre">ccm_dma_enable</span></span><a class="headerlink" href="#confval-ccm_dma_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable/Disable CCM DMA</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ccmdma_intr_enable">
+<span class="sig-name descname"><span class="pre">ccmdma_intr_enable</span></span><a class="headerlink" href="#confval-ccmdma_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>CCM DMA operation should use interrupt rather than poll for completion</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ccmdma_timeout_usec">
+<span class="sig-name descname"><span class="pre">ccmdma_timeout_usec</span></span><a class="headerlink" href="#confval-ccmdma_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>CCM DMA operation timeout in microseconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cdma_timeout_usec">
+<span class="sig-name descname"><span class="pre">cdma_timeout_usec</span></span><a class="headerlink" href="#confval-cdma_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Counter DMA collection pass timeout in microseconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 24 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">3000000</span></code>, <code class="docutils literal notranslate"><span class="pre">15000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cmic_dma_abort_in_cold_boot">
+<span class="sig-name descname"><span class="pre">cmic_dma_abort_in_cold_boot</span></span><a class="headerlink" href="#confval-cmic_dma_abort_in_cold_boot" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Abort all pending DMA operations in cold boot as early as possible.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cmic_regtest_skip">
+<span class="sig-name descname"><span class="pre">cmic_regtest_skip</span></span><a class="headerlink" href="#confval-cmic_regtest_skip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cmicm_dcb_error_mitigate_enable">
+<span class="sig-name descname"><span class="pre">cmicm_dcb_error_mitigate_enable</span></span><a class="headerlink" href="#confval-cmicm_dcb_error_mitigate_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable retry and DMA restart incase of DCB count mismatch in CMICM.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cmicx_ls_hw_cfg_async_enable">
+<span class="sig-name descname"><span class="pre">cmicx_ls_hw_cfg_async_enable</span></span><a class="headerlink" href="#confval-cmicx_ls_hw_cfg_async_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable async communication when configuring m0 firmware based hardware linkscan.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cmicx_schan_num_cfg_count">
+<span class="sig-name descname"><span class="pre">cmicx_schan_num_cfg_count</span></span><a class="headerlink" href="#confval-cmicx_schan_num_cfg_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Count of CMICX SCHAN channels cofigured to be used in SDK.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-counter_collection_preempt_enable">
+<span class="sig-name descname"><span class="pre">counter_collection_preempt_enable</span></span><a class="headerlink" href="#confval-counter_collection_preempt_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable the counter collection preemption. Current counter collection will be preempted when the following APIs are active: - bcm_stat_sync_multi_get - bcm_stat_sync_multi_get32 Valid values: 0: Disable 1: Enable</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-counter_collection_preempt_max_period_usec">
+<span class="sig-name descname"><span class="pre">counter_collection_preempt_max_period_usec</span></span><a class="headerlink" href="#confval-counter_collection_preempt_max_period_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>The maximum time period in microseconds for counter collection preemption. When continous preemption time exceeds this maximum period, the preemption will be paused to allow a full counter collection completes Valid values: 0: No maximum period 1 ~ (2^31-1): 1 ~ 2,147,483,647 microseconds Note if this value is non-zero but less than current counter collection interval, the maximum preempt time period will be current counter collection interval,</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-counter_thread_pri">
+<span class="sig-name descname"><span class="pre">counter_thread_pri</span></span><a class="headerlink" href="#confval-counter_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Miscellaneous thread priorities; 0 is highest and 255 is lowest</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ctr_evict_dma_intr_enable">
+<span class="sig-name descname"><span class="pre">ctr_evict_dma_intr_enable</span></span><a class="headerlink" href="#confval-ctr_evict_dma_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ctr_evict_enable">
+<span class="sig-name descname"><span class="pre">ctr_evict_enable</span></span><a class="headerlink" href="#confval-ctr_evict_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dma_abort_timeout_usec">
+<span class="sig-name descname"><span class="pre">dma_abort_timeout_usec</span></span><a class="headerlink" href="#confval-dma_abort_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>timeout for DMA abort (of all DMA types) in microseconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dma_desc_intr_enable">
+<span class="sig-name descname"><span class="pre">dma_desc_intr_enable</span></span><a class="headerlink" href="#confval-dma_desc_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>SBUSDMA descriptor mode operation should use interrupt rather than poll for completion</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dma_desc_timeout_usec">
+<span class="sig-name descname"><span class="pre">dma_desc_timeout_usec</span></span><a class="headerlink" href="#confval-dma_desc_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>SBUSDMA descriptor mode operation timeout in microseconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">15000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dma_from_cache">
+<span class="sig-name descname"><span class="pre">dma_from_cache</span></span><a class="headerlink" href="#confval-dma_from_cache" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dma_mem_debug_enable">
+<span class="sig-name descname"><span class="pre">dma_mem_debug_enable</span></span><a class="headerlink" href="#confval-dma_mem_debug_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fschan_enable">
+<span class="sig-name descname"><span class="pre">fschan_enable</span></span><a class="headerlink" href="#confval-fschan_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable Fast SCHAN present in CMICm</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-host_memory_address_remap_entries_reserved_cmc">
+<span class="sig-name descname"><span class="pre">host_memory_address_remap_entries_reserved_cmc</span></span><a class="headerlink" href="#confval-host_memory_address_remap_entries_reserved_cmc" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Defines which entries in the remap table per cmc is reserved (for Arm) and cannot be used by SDK. value is a bitmap, each bit represent an entry of the table example: host_memory_address_remap_entries_cmc_&lt;cmc_index&gt;=0x12</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">host_memory_address_remap_entries_reserved_cmc_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">host_memory_address_remap_entries_reserved_cmc_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">host_memory_address_remap_entries_reserved_cmc</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-i2c_hclk_skip">
+<span class="sig-name descname"><span class="pre">i2c_hclk_skip</span></span><a class="headerlink" href="#confval-i2c_hclk_skip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>PCF8574 lpt2 and LTC4258 poe3 share the same I2C slave address. Set this to 1 to treat the device found at this slave address as POE.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-i2c_nvram_skip">
+<span class="sig-name descname"><span class="pre">i2c_nvram_skip</span></span><a class="headerlink" href="#confval-i2c_nvram_skip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>24c64 EEPROM and XFP share the same I2C slave address. Set this to 1 to treat the device found at this slave address as XFP.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-i2c_timeout_usec">
+<span class="sig-name descname"><span class="pre">i2c_timeout_usec</span></span><a class="headerlink" href="#confval-i2c_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>The maximum wait time for a I2C transaction to complete in interrupt-driven mode.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-indirect_access_timeout_usec">
+<span class="sig-name descname"><span class="pre">indirect_access_timeout_usec</span></span><a class="headerlink" href="#confval-indirect_access_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-iproc_shutdown">
+<span class="sig-name descname"><span class="pre">iproc_shutdown</span></span><a class="headerlink" href="#confval-iproc_shutdown" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-irq_adaptive_poll_mode">
+<span class="sig-name descname"><span class="pre">irq_adaptive_poll_mode</span></span><a class="headerlink" href="#confval-irq_adaptive_poll_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Adaptive IRQ poll mode. In case lot of interrupts are happening, interrupt thread switches to interrupt poll mode and switch back to kernel mode to wait for interrupt only when no interrupt status is pending. This feature is specific to cmicx based devices. Adaptive IRQ poll mode is enabled by default. It can be disabled by setting the configuration property to be 0.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-knet_filter_persist">
+<span class="sig-name descname"><span class="pre">knet_filter_persist</span></span><a class="headerlink" href="#confval-knet_filter_persist" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not create default KNET Rx filter and preserve existing KNET filters during BCM API initialization and shutdown.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-knetsync_pci_cosq">
+<span class="sig-name descname"><span class="pre">knetsync_pci_cosq</span></span><a class="headerlink" href="#confval-knetsync_pci_cosq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Reserved cosq on the host used for KNETSync packet handling between FW and the KO</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mdio_external_master">
+<span class="sig-name descname"><span class="pre">mdio_external_master</span></span><a class="headerlink" href="#confval-mdio_external_master" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow external MDIO master access. Otherwise, the switch device is the MDIO master.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mdio_output_delay">
+<span class="sig-name descname"><span class="pre">mdio_output_delay</span></span><a class="headerlink" href="#confval-mdio_output_delay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Number of clock delay between the rising edge of MDC and the starting data of MDIO By default, it sets the same clock delay on all MDIO rings. For CMICX devices,it can be suffixed with “_#” to selectively set it per MDIO ring.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">mdio_output_delay_&lt;N&gt;</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-memcmd_intr_enable">
+<span class="sig-name descname"><span class="pre">memcmd_intr_enable</span></span><a class="headerlink" href="#confval-memcmd_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-memcmd_timeout_usec">
+<span class="sig-name descname"><span class="pre">memcmd_timeout_usec</span></span><a class="headerlink" href="#confval-memcmd_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1000000</span></code></dd>
+</dl>
+<p>Command memory controls</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-miim_intr_enable">
+<span class="sig-name descname"><span class="pre">miim_intr_enable</span></span><a class="headerlink" href="#confval-miim_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>If miim_intr_enable variable is set to 1, the system will use interrupts for MII operations since they take a while (70 usec or so). If this variable is set to 0, polling will be used for all MII operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 36 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">miim_intr_enable=0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-miim_timeout_usec">
+<span class="sig-name descname"><span class="pre">miim_timeout_usec</span></span><a class="headerlink" href="#confval-miim_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>MIIM operation timeout in microseconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-msi_x_intr_clear_auto_mode_enable">
+<span class="sig-name descname"><span class="pre">msi_x_intr_clear_auto_mode_enable</span></span><a class="headerlink" href="#confval-msi_x_intr_clear_auto_mode_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable Auto mode to clear internal interrupt masks for MSI/MSIX interrupts. This feature is specific to cmicx based devices.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-msi_x_intr_delay_usec">
+<span class="sig-name descname"><span class="pre">msi_x_intr_delay_usec</span></span><a class="headerlink" href="#confval-msi_x_intr_delay_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Minimum delay between two MSI/MSI-X interrupts in micro seconds. This feature is specific to cmicx based devices.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multi_sbus_cmds_spacing">
+<span class="sig-name descname"><span class="pre">multi_sbus_cmds_spacing</span></span><a class="headerlink" href="#confval-multi_sbus_cmds_spacing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-num_pipe">
+<span class="sig-name descname"><span class="pre">num_pipe</span></span><a class="headerlink" href="#confval-num_pipe" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pci_cmc">
+<span class="sig-name descname"><span class="pre">pci_cmc</span></span><a class="headerlink" href="#confval-pci_cmc" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>CMC in CMICm used by the PCI Host</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pci_cmcs_num">
+<span class="sig-name descname"><span class="pre">pci_cmcs_num</span></span><a class="headerlink" href="#confval-pci_cmcs_num" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of CMC used by the PCI Host</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pcie_flash_mem_params">
+<span class="sig-name descname"><span class="pre">pcie_flash_mem_params</span></span><a class="headerlink" href="#confval-pcie_flash_mem_params" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Parameter of the QSPI flash memory used to hold the PCIe firmware If the value is not empty, should specify the parameters of the flash memory: &lt;ID&gt;,&lt;sector size&gt;,&lt;page size&gt; ID: The one byte manufacturer ID of the flash chip. The rest of the parameters will be applied only if the read ID is equal to this one. sector size in bytes: The smallest part of the chip that can be erased, should be a multiple of the page size. page size in bytes: smallest access unit.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pcie_host_intf_timeout_purge_enable">
+<span class="sig-name descname"><span class="pre">pcie_host_intf_timeout_purge_enable</span></span><a class="headerlink" href="#confval-pcie_host_intf_timeout_purge_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable Purge operation as soon as PCIE timeout is detected.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pcie_host_intf_timeout_usec">
+<span class="sig-name descname"><span class="pre">pcie_host_intf_timeout_usec</span></span><a class="headerlink" href="#confval-pcie_host_intf_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>PCIE host interface timeout in microseconds timeout value is based on 250 Mhz clock 1 usc = 0x100, Default is 50 msec</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pcie_hot_swap_timeout_usec">
+<span class="sig-name descname"><span class="pre">pcie_hot_swap_timeout_usec</span></span><a class="headerlink" href="#confval-pcie_hot_swap_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>PCIE hot swap timeout in microseconds for IDLE/READY condition</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pdma_continuous_mode_enable">
+<span class="sig-name descname"><span class="pre">pdma_continuous_mode_enable</span></span><a class="headerlink" href="#confval-pdma_continuous_mode_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable support for packet I/O continuous DMA mode</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pdma_descriptor_prefetch_enable">
+<span class="sig-name descname"><span class="pre">pdma_descriptor_prefetch_enable</span></span><a class="headerlink" href="#confval-pdma_descriptor_prefetch_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable support for packet DMA descriptor prefetch mode. This feature enables descriptors contiguous in memory to be prefetched and thus increase packet dma throughput. This feature is specific to cmicx based devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pdma_dv_free_count">
+<span class="sig-name descname"><span class="pre">pdma_dv_free_count</span></span><a class="headerlink" href="#confval-pdma_dv_free_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property defines the number of free DMA Vectors the SOC DMA driver will cache to avoid calling alloc/free routines The value can vary between 32 to 512.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pdma_dv_free_size">
+<span class="sig-name descname"><span class="pre">pdma_dv_free_size</span></span><a class="headerlink" href="#confval-pdma_dv_free_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property defines the number of DCBs(dma control blocks) in the DMA vector. the value can vary between 160 to 640. This value has to be greater than pdma_dv_free_count property User has to make sure that enough memory is available to allocate these DCBs.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pdma_max_err_count">
+<span class="sig-name descname"><span class="pre">pdma_max_err_count</span></span><a class="headerlink" href="#confval-pdma_max_err_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of consecutive PKTDMA errors.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pdma_timeout_usec">
+<span class="sig-name descname"><span class="pre">pdma_timeout_usec</span></span><a class="headerlink" href="#confval-pdma_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Packet DMA abort timeout</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pktdma_poll_mode_channel_bitmap">
+<span class="sig-name descname"><span class="pre">pktdma_poll_mode_channel_bitmap</span></span><a class="headerlink" href="#confval-pktdma_poll_mode_channel_bitmap" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property indicates a channel bitmap which uses packet dma poll mode. Bit n is for channel n. The bit value 1 means poll mode, 0 means interrupt mode. Default value is 0x0. Example: pktdma_poll_mode_channel_bitmap=0x02 means channel 1 uses poll mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 8 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pktio_driver_type">
+<span class="sig-name descname"><span class="pre">pktio_driver_type</span></span><a class="headerlink" href="#confval-pktio_driver_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Select packet I/O driver by specifying driver type. Value: 0: classic (default type). Use bcm_tx/bcm_rx API set. 1: streamlined. Use bcm_pktio API set. Valid only for devices that support streamlined packet I/O driver.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-polled_irq_delay">
+<span class="sig-name descname"><span class="pre">polled_irq_delay</span></span><a class="headerlink" href="#confval-polled_irq_delay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>The priority of the IRQ poll thread as well as the minimum delay between IRQ polls can be configured if needed.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-polled_irq_mode">
+<span class="sig-name descname"><span class="pre">polled_irq_mode</span></span><a class="headerlink" href="#confval-polled_irq_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable polled IRQ mode (useful for board bringup and debugging). IRQs will be polled from a dedicated thread and hardware interrupts will remain disabled.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-polled_irq_priority">
+<span class="sig-name descname"><span class="pre">polled_irq_priority</span></span><a class="headerlink" href="#confval-polled_irq_priority" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>The priority of the IRQ poll thread as well as the minimum delay between IRQ polls can be configured if needed.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-rate_-bus-_-dividend-divisor">
+<span class="sig-name descname"><span class="pre">rate_&lt;bus&gt;_&lt;dividend|divisor&gt;</span></span><a class="headerlink" href="#confval-rate_-bus-_-dividend-divisor" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Clock divider for the internal or external MDIO bus, the I2C bus or the stats DMA, as a dividend/divisor pair applied to the core clock. Board-specific; leave at the default unless the board vendor says otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">rate_ext_mdio_dividend</span></code>, <code class="docutils literal notranslate"><span class="pre">rate_ext_mdio_divisor</span></code>, <code class="docutils literal notranslate"><span class="pre">rate_i2c_dividend</span></code>, <code class="docutils literal notranslate"><span class="pre">rate_i2c_divisor</span></code>, <code class="docutils literal notranslate"><span class="pre">rate_int_mdio_dividend</span></code>, <code class="docutils literal notranslate"><span class="pre">rate_int_mdio_divisor</span></code>, <code class="docutils literal notranslate"><span class="pre">rate_stdma_dividend</span></code>, <code class="docutils literal notranslate"><span class="pre">rate_stdma_divisor</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-0"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-reserved_rdbgc">
+<span class="sig-name descname"><span class="pre">reserved_rdbgc</span></span><a class="headerlink" href="#confval-reserved_rdbgc" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Indicate reserved RDBGC counters. reserved_rdbgc_x controls RDBGCx. By default RDBGC1-2 are reserved. 0 – Unreserve the RDBGC counter. 1 – Reserve the RDBGC counter.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-rx_pool_nof_pkts">
+<span class="sig-name descname"><span class="pre">rx_pool_nof_pkts</span></span><a class="headerlink" href="#confval-rx_pool_nof_pkts" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies number of packets for BCM RX buffer allocation. This is equal to number of channels x chains per channel x descriptors per chain. For multi unit systems, the resulting value needs to be multiplied by number of units.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sbus_dma_desc_thread_pri">
+<span class="sig-name descname"><span class="pre">sbus_dma_desc_thread_pri</span></span><a class="headerlink" href="#confval-sbus_dma_desc_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the socdmadesc thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sbusdma_flush_cache_enable">
+<span class="sig-name descname"><span class="pre">sbusdma_flush_cache_enable</span></span><a class="headerlink" href="#confval-sbusdma_flush_cache_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable cache flush for SBUSDMA.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-schan_error_block_usec">
+<span class="sig-name descname"><span class="pre">schan_error_block_usec</span></span><a class="headerlink" href="#confval-schan_error_block_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">250000</span></code></dd>
+</dl>
+<p>Length of time to block the S-Channel error interrupt after one occurs. Prevents monopolizing the CPU (use 0 to disable any blocking).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-schan_intr_enable">
+<span class="sig-name descname"><span class="pre">schan_intr_enable</span></span><a class="headerlink" href="#confval-schan_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Normally, the system will use polling for register/memory S-Channel operations and interrupts for time-consuming operations such as ARL insert/delete. If this schan_intr_enable is set to 0, polling will be used for ALL operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 33 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">schan_intr_enable=0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-schan_timeout_retry_enable">
+<span class="sig-name descname"><span class="pre">schan_timeout_retry_enable</span></span><a class="headerlink" href="#confval-schan_timeout_retry_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Retry S-Channel operations in timeout. By default, value 0 disables the retry.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-schan_timeout_usec">
+<span class="sig-name descname"><span class="pre">schan_timeout_usec</span></span><a class="headerlink" href="#confval-schan_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>S-Channel operation timeout in microseconds. Note that ARL insert/delete messages can take a while if the ARL is highly active.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-schanfifo_intr_enable">
+<span class="sig-name descname"><span class="pre">schanfifo_intr_enable</span></span><a class="headerlink" href="#confval-schanfifo_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>SCHAN FIFO operation should use interrupt rather than poll for completion</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-schanfifo_timeout_usec">
+<span class="sig-name descname"><span class="pre">schanfifo_timeout_usec</span></span><a class="headerlink" href="#confval-schanfifo_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">30000000</span></code></dd>
+</dl>
+<p>SCHAN FIFO operation timeout in microseconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-soc_counter_control_level">
+<span class="sig-name descname"><span class="pre">soc_counter_control_level</span></span><a class="headerlink" href="#confval-soc_counter_control_level" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>stat info will include the specific priotity and higher priorities possible values: LOW_LEVEL, MEDIUM_LEVEL, HIGH_LEVEL.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-soc_counter_max_dma_err_count">
+<span class="sig-name descname"><span class="pre">soc_counter_max_dma_err_count</span></span><a class="headerlink" href="#confval-soc_counter_max_dma_err_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of consecutive DMA errors during counter collection.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-soc_dma_monitor_thread_pri">
+<span class="sig-name descname"><span class="pre">soc_dma_monitor_thread_pri</span></span><a class="headerlink" href="#confval-soc_dma_monitor_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the dma monitor thread thread(bcmDmaIntrM)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-soc_knet_rx_thread_pri">
+<span class="sig-name descname"><span class="pre">soc_knet_rx_thread_pri</span></span><a class="headerlink" href="#confval-soc_knet_rx_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the SOC KNET RX thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-stat_custom_receive0_management_mode">
+<span class="sig-name descname"><span class="pre">stat_custom_receive0_management_mode</span></span><a class="headerlink" href="#confval-stat_custom_receive0_management_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tdma_intr_enable">
+<span class="sig-name descname"><span class="pre">tdma_intr_enable</span></span><a class="headerlink" href="#confval-tdma_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Use an interrupt rather than polling to wait for table DMA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 8 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tdma_timeout_usec">
+<span class="sig-name descname"><span class="pre">tdma_timeout_usec</span></span><a class="headerlink" href="#confval-tdma_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Table DMA operation timeout in microseconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 42 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">3000000</span></code>, <code class="docutils literal notranslate"><span class="pre">5000000</span></code>, <code class="docutils literal notranslate"><span class="pre">15000000</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">tdma_timeout_usec=3000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tslam_dma_enable">
+<span class="sig-name descname"><span class="pre">tslam_dma_enable</span></span><a class="headerlink" href="#confval-tslam_dma_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Enable/Disable SLAM DMA</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tslam_intr_enable">
+<span class="sig-name descname"><span class="pre">tslam_intr_enable</span></span><a class="headerlink" href="#confval-tslam_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Use an interrupt rather than polling to wait for table-write DMA (SLAM).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tslam_timeout_usec">
+<span class="sig-name descname"><span class="pre">tslam_timeout_usec</span></span><a class="headerlink" href="#confval-tslam_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Table SLAM DMA operation timeout in microseconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">15000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="telemetry.html" class="btn btn-neutral float-left" title="Telemetry, timing and OAM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="chip.html" class="btn btn-neutral float-right" title="Chip, boot, warm boot and diagnostics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

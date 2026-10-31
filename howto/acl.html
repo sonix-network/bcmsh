@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debugging ACL rules &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Debugging a link" href="link-debug.html" />
+    <link rel="prev" title="Troubleshooting queues and buffers" href="queues.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Debugging ACL rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#an-example-acl">An example ACL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finding-the-table-in-the-shell">Finding the table in the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-the-rule-matching">Is the rule matching?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-drop-rule-that-still-lets-packets-reach-the-cpu">A DROP rule that still lets packets reach the CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#copy-or-mirror-matching-packets-to-the-cpu">Copy or mirror matching packets to the CPU</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mirror-instead-of-copy">Mirror instead of copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rate-limit-the-copies">Rate-limit the copies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cleaning-up">Cleaning up</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Debugging ACL rules</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debugging-acl-rules">
+<h1>Debugging ACL rules<a class="headerlink" href="#debugging-acl-rules" title="Link to this heading"></a></h1>
+<p>SONiC ACLs (<code class="docutils literal notranslate"><span class="pre">ACL_TABLE</span></code> and <code class="docutils literal notranslate"><span class="pre">ACL_RULE</span></code> in <code class="docutils literal notranslate"><span class="pre">config_db</span></code>) end up in the
+same <a class="reference internal" href="../glossary.html#term-FP"><span class="xref std std-term">Field Processor</span></a> as CoPP (see <a class="reference internal" href="copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>). This page shows
+how a SONiC ACL looks in the shell, how to check that a rule matches and
+what it does to the packet, and how to build a rule of your own that copies,
+mirrors or rate-limits matching packets to the CPU.</p>
+<p>The mapping is:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>SONiC</p></th>
+<th class="head"><p>Field Processor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ACL table (<code class="docutils literal notranslate"><span class="pre">ACL_TABLE</span></code>)</p></td>
+<td><p>An FP <em>group</em>, with a qualifier set for the table type and its own
+TCAM slices</p></td>
+</tr>
+<tr class="row-odd"><td><p>Table binding (<code class="docutils literal notranslate"><span class="pre">ports</span></code>)</p></td>
+<td><p>An <code class="docutils literal notranslate"><span class="pre">InPorts</span></code> qualifier on every entry</p></td>
+</tr>
+<tr class="row-even"><td><p>Rule (<code class="docutils literal notranslate"><span class="pre">ACL_RULE</span></code>)</p></td>
+<td><p>An FP <em>entry</em>; the rule’s <code class="docutils literal notranslate"><span class="pre">PRIORITY</span></code> is the entry priority</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rule counter (<code class="docutils literal notranslate"><span class="pre">aclshow</span></code>)</p></td>
+<td><p>An FP counter (<code class="docutils literal notranslate"><span class="pre">stat</span></code>) attached to the entry</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PACKET_ACTION</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FORWARD</span></code>: no action (the rule only counts); <code class="docutils literal notranslate"><span class="pre">DROP</span></code>: <code class="docutils literal notranslate"><span class="pre">Drop</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<section id="an-example-acl">
+<h2>An example ACL<a class="headerlink" href="#an-example-acl" title="Link to this heading"></a></h2>
+<p>A table bound to <code class="docutils literal notranslate"><span class="pre">Ethernet11</span></code> with one rule that only counts ICMP from a
+test host and one that drops UDP to port 5000:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"ACL_TABLE"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"TESTACL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L3"</span><span class="p">,</span><span class="w"> </span><span class="nt">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ingress"</span><span class="p">,</span><span class="w"> </span><span class="nt">"ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Ethernet11"</span><span class="p">],</span>
+<span class="w">                </span><span class="nt">"policy_desc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bcmsh how-to test table"</span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"ACL_RULE"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"TESTACL|COUNT_ICMP"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"PRIORITY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="p">,</span><span class="w"> </span><span class="nt">"SRC_IP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"198.51.100.10/32"</span><span class="p">,</span>
+<span class="w">                           </span><span class="nt">"IP_PROTOCOL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"PACKET_ACTION"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FORWARD"</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"TESTACL|DROP_UDP5000"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"PRIORITY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="p">,</span><span class="w"> </span><span class="nt">"IP_PROTOCOL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17"</span><span class="p">,</span>
+<span class="w">                             </span><span class="nt">"L4_DST_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5000"</span><span class="p">,</span><span class="w"> </span><span class="nt">"PACKET_ACTION"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DROP"</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>sudo<span class="w"> </span>config<span class="w"> </span>load<span class="w"> </span>-y<span class="w"> </span>testacl.json
+<span class="gp">admin@sonic:~$ </span>show<span class="w"> </span>acl<span class="w"> </span>rule
+<span class="go">Table    Rule          Priority    Action    Match                     Status</span>
+<span class="go">-------  ------------  ----------  --------  ------------------------  --------</span>
+<span class="go">TESTACL  COUNT_ICMP    30          FORWARD   IP_PROTOCOL: 1            Active</span>
+<span class="go">                                             SRC_IP: 198.51.100.10/32</span>
+<span class="go">TESTACL  DROP_UDP5000  20          DROP      IP_PROTOCOL: 17           Active</span>
+<span class="go">                                             L4_DST_PORT: 5000</span>
+</pre></div>
+</div>
+</section>
+<section id="finding-the-table-in-the-shell">
+<h2>Finding the table in the shell<a class="headerlink" href="#finding-the-table-in-the-shell" title="Link to this heading"></a></h2>
+<p>A new table is a new FP group. <a class="reference internal" href="../reference/fieldprocessor.html#clicmd-fieldprocessor-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fp</span> <span class="pre">show</span></code></a>
+lists the groups; compare it with the list before the table was created.
+Here group 4 is new (groups 1–3 belong to SONiC’s CoPP and internal
+entries):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp show group 4 brief</span>
+<span class="go">GID          4: gid=0x4, mode=Double, stage=Ingress lookup=Enabled, ActionResId={-1}, pbmp={0x…}</span>
+<span class="go">         qset={SrcIp, DstIp, InPorts, RangeCheck, L4SrcPort, L4DstPort, EtherType, IpProtocol, TcpControl, IpType, Stage, StageIngress, IcmpTypeCode, Vpn, _InPorts_1, _InPorts_2},</span>
+<span class="go">         selcodes[0]=</span>
+<span class="go">{ {SrcIp-&gt;InPorts-&gt;RangeCheck-&gt;L4SrcPort-&gt;EtherType-&gt;TcpControl-&gt;IpType-&gt;IcmpTypeCode-&gt;_InPorts_2},</span>
+<span class="go">         selcodes[1]=</span>
+<span class="go">{ {DstIp-&gt;RangeCheck-&gt;L4DstPort-&gt;IpProtocol-&gt;IpType-&gt;Vpn-&gt;_InPorts_1},</span>
+
+<span class="go">         slice_pri= 100    {slice_number=3, Entry count=768(0x300), Entry free=766(0x2fe)},</span>
+<span class="go">         slice_sec = {slice_number=4}</span>
+<span class="go">         group_status={prio_min=20, prio_max=30, entries_total=2304, entries_free=2302,</span>
+<span class="go">                       counters_total=83968, counters_free=57854, meters_total=6144, meters_free=5376}</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">qset</span></code> is what the table type can match on (an <code class="docutils literal notranslate"><span class="pre">L3</span></code> table: addresses,
+ports, protocol, TCP flags, ICMP type). The group is double-wide and has
+TCAM slices 3 and 4 to itself; <code class="docutils literal notranslate"><span class="pre">prio_min</span></code>/<code class="docutils literal notranslate"><span class="pre">prio_max</span></code> are the lowest
+and highest rule priorities in it.</p>
+<p>Each rule is one entry, in priority order. The ICMP rule:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp show entry 0x24</span>
+<span class="go">EID 0x00000024: gid=0x4,</span>
+<span class="go"> slice=3, slice_idx=0, part=0, prio=0x1e, flags=0x10602, Installed, Enabled, color_indep=1</span>
+<span class="go"> slice=4, slice_idx=0, part=1, prio=0x1e, flags=0x10604, Installed, Enabled, color_indep=1</span>
+
+<span class="go"> SrcIp</span>
+<span class="go">    Part:0 Offset0: 48 Width0:  16</span>
+<span class="go">    Part:0 Offset1: 64 Width1:  16</span>
+<span class="go">    DATA=0xc633640a</span>
+<span class="go">    MASK=0xffffffff</span>
+<span class="go"> InPorts</span>
+<span class="go">     DATA=0x…0000000000001000</span>
+<span class="go">     MASK=0x…000222222223e23</span>
+<span class="go"> …</span>
+<span class="go"> IpProtocol</span>
+<span class="go">    Part:1 Offset0: 80 Width0:   4</span>
+<span class="go">    Part:1 Offset1: 84 Width1:   4</span>
+<span class="go">    DATA=0x00000001</span>
+<span class="go">    MASK=0x000000ff</span>
+<span class="go">         policer=</span>
+<span class="go">         statistics={stat id 15  slice = 9 idx=3 entries=1}{Packets}{Bytes}</span>
+</pre></div>
+</div>
+</div>
+<p>Check:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Installed,</span> <span class="pre">Enabled</span></code>: the entry is in hardware.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prio=0x1e</span></code>: priority 30, the rule’s <code class="docutils literal notranslate"><span class="pre">PRIORITY</span></code>.</p></li>
+<li><p>The qualifiers: <code class="docutils literal notranslate"><span class="pre">SrcIp</span></code> <code class="docutils literal notranslate"><span class="pre">0xc633640a</span></code> is 198.51.100.10 with a /32 mask,
+<code class="docutils literal notranslate"><span class="pre">IpProtocol</span></code> 1 is ICMP. Values are in hex.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InPorts</span></code>: a bitmap of port numbers. Bit 12 is set in <code class="docutils literal notranslate"><span class="pre">DATA</span></code>: port 12,
+<code class="docutils literal notranslate"><span class="pre">xe3</span></code> (<code class="docutils literal notranslate"><span class="pre">ps</span></code> prints the number in brackets), which is <code class="docutils literal notranslate"><span class="pre">Ethernet11</span></code>. The
+mask covers every front-panel port, so the entry matches only on
+<code class="docutils literal notranslate"><span class="pre">xe3</span></code>.</p></li>
+<li><p>No <code class="docutils literal notranslate"><span class="pre">action=</span></code> line: <code class="docutils literal notranslate"><span class="pre">FORWARD</span></code> only counts. The <code class="docutils literal notranslate"><span class="pre">DROP</span></code> rule’s entry
+has <code class="docutils literal notranslate"><span class="pre">action={act=Drop,</span> <span class="pre">…}</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stat</span> <span class="pre">id</span> <span class="pre">15</span></code>: the counter.</p></li>
+</ul>
+</section>
+<section id="is-the-rule-matching">
+<h2>Is the rule matching?<a class="headerlink" href="#is-the-rule-matching" title="Link to this heading"></a></h2>
+<p>Read the entry’s counter with <a class="reference internal" href="../reference/fieldprocessor.html#clicmd-fieldprocessor-stat-get"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fp</span> <span class="pre">stat</span> <span class="pre">get</span></code></a>
+before and after sending traffic. SONiC’s <code class="docutils literal notranslate"><span class="pre">aclshow</span></code> reads the same counter:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp stat get StatId=15 type=Packets</span>
+<span class="go">The value is: 0x000000000</span>
+<span class="go">drivshell&gt; fp stat get StatId=16 type=Packets</span>
+<span class="go">The value is: 0x000000000</span>
+<span class="go">drivshell&gt; fp stat get StatId=15 type=Packets</span>
+<span class="go">The value is: 0x00000000a</span>
+<span class="go">drivshell&gt; fp stat get StatId=16 type=Packets</span>
+<span class="go">The value is: 0x000000064</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>aclshow<span class="w"> </span>-a
+<span class="go">RULE NAME     TABLE NAME      PRIO    PACKETS COUNT    BYTES COUNT</span>
+<span class="go">------------  ------------  ------  ---------------  -------------</span>
+<span class="go">COUNT_ICMP    TESTACL           30               10           1020</span>
+<span class="go">DROP_UDP5000  TESTACL           20              100           6400</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">aclshow</span></code> is only updated every 10 seconds (<code class="docutils literal notranslate"><span class="pre">counterpoll</span> <span class="pre">show</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ACL</span></code>); <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">stat</span> <span class="pre">get</span></code> reads the hardware directly. Byte counts include
+the 4-byte CRC.</p>
+<p>If the counter does not move:</p>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">acl</span> <span class="pre">table</span></code>: is the table <code class="docutils literal notranslate"><span class="pre">Active</span></code> and bound to the port the
+packets arrive on? Check the <code class="docutils literal notranslate"><span class="pre">InPorts</span></code> bitmap of the entry.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">show</span> <span class="pre">entry</span></code>: does every qualifier match the packet? A missing mask
+bit or a wrong byte order in <code class="docutils literal notranslate"><span class="pre">DATA</span></code> is easiest to see here.</p></li>
+<li><p>Within one group only the highest-priority matching entry acts. A
+broader rule with a higher <code class="docutils literal notranslate"><span class="pre">PRIORITY</span></code> in the same table hides a
+narrower one below it; its counter rises instead.</p></li>
+<li><p>Is there room? <code class="docutils literal notranslate"><span class="pre">crm</span> <span class="pre">show</span> <span class="pre">resources</span> <span class="pre">acl</span> <span class="pre">group</span></code> and
+<code class="docutils literal notranslate"><span class="pre">crm</span> <span class="pre">show</span> <span class="pre">resources</span> <span class="pre">acl</span> <span class="pre">table</span></code> show how many tables and entries are
+used and left. On a Trident 3 the ingress stage has 12 TCAM slices
+(<code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">show</span></code> prints <code class="docutils literal notranslate"><span class="pre">tcam_slices=12</span></code>)
+shared by CoPP, SONiC’s own groups and every ACL table, and a
+double-wide table takes two:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>crm<span class="w"> </span>show<span class="w"> </span>resources<span class="w"> </span>acl<span class="w"> </span>group
+<span class="go">Stage    Bind Point    Resource Name      Used Count    Available Count</span>
+<span class="go">-------  ------------  ---------------  ------------  -----------------</span>
+<span class="go">INGRESS  PORT          acl_group                   1               1023</span>
+<span class="go">INGRESS  PORT          acl_table                   1                  3</span>
+<span class="go">…</span>
+<span class="gp">admin@sonic:~$ </span>crm<span class="w"> </span>show<span class="w"> </span>resources<span class="w"> </span>acl<span class="w"> </span>table
+<span class="go">Table ID         Resource Name      Used Count    Available Count</span>
+<span class="go">---------------  ---------------  ------------  -----------------</span>
+<span class="go">0x70000000006c8  acl_entry                   2               1534</span>
+<span class="go">0x70000000006c8  acl_counter                 2              56318</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">show</span> <span class="pre">group</span> <span class="pre">&lt;gid&gt;</span> <span class="pre">brief</span></code> shows the same per group as
+<code class="docutils literal notranslate"><span class="pre">entries_free</span></code>.</p>
+</li>
+</ol>
+</section>
+<section id="a-drop-rule-that-still-lets-packets-reach-the-cpu">
+<span id="howto-acl-drop-cpu"></span><h2>A DROP rule that still lets packets reach the CPU<a class="headerlink" href="#a-drop-rule-that-still-lets-packets-reach-the-cpu" title="Link to this heading"></a></h2>
+<p>The UDP packets above were sent to the switch’s own address. The rule
+counted all 100, yet the packets still arrived in Linux:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-lni<span class="w"> </span>Ethernet11<span class="w"> </span><span class="s1">'udp and (port 5000 or port 5001)'</span>
+<span class="go">09:04:18.896090 IP 198.51.100.10.40000 &gt; 198.51.100.1.5000: UDP, length 11</span>
+<span class="go">09:04:18.948666 IP 198.51.100.10.40000 &gt; 198.51.100.1.5000: UDP, length 11</span>
+<span class="go">09:04:19.011570 IP 198.51.100.10.40000 &gt; 198.51.100.1.5001: UDP, length 11</span>
+<span class="go">09:04:19.063223 IP 198.51.100.10.40000 &gt; 198.51.100.1.5001: UDP, length 11</span>
+</pre></div>
+</div>
+<p>Every group in the FP matches each packet in parallel and the actions of all
+matching entries are applied. The ACL entry’s <code class="docutils literal notranslate"><span class="pre">Drop</span></code> stops the packet from
+being <em>forwarded</em>, but the CoPP <code class="docutils literal notranslate"><span class="pre">ip2me</span></code> entry in group 1 still <em>copies</em> it
+to the CPU (its counter rose by the 100 dropped packets too). <code class="docutils literal notranslate"><span class="pre">Drop</span></code> does
+not cancel a copy to the CPU; <code class="docutils literal notranslate"><span class="pre">CopyToCpuCancel</span></code> does. Added to the ACL
+entry from the shell, only the packets to port 5001 still arrive:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Stop the copy to the CPU as well (changes a SONiC entry)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp action add 0x25 CopyToCpuCancel</span>
+<span class="go">drivshell&gt; fp entry reinstall 0x25</span>
+<span class="go">drivshell&gt; fp show entry 0x25</span>
+<span class="go">…</span>
+<span class="go">         action={act=CopyToCpuCancel, param0=0(0), param1=0(0), param2=0(0), param3=0(0)}</span>
+<span class="go">         action={act=Drop, param0=0(0), param1=0(0), param2=0(0), param3=0(0)}</span>
+<span class="go">         statistics={stat id 16  slice = 9 idx=2 entries=1}{Packets}{Bytes}</span>
+<span class="go">drivshell&gt; fp action remove 0x25 CopyToCpuCancel</span>
+<span class="go">drivshell&gt; fp entry reinstall 0x25</span>
+</pre></div>
+</div>
+</div>
+<p>Changes to an entry take effect only after <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">entry</span> <span class="pre">reinstall</span></code>. This is
+the same pair of actions that CoPP’s VXLAN exception uses (see
+<a class="reference internal" href="copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>). Remove the action again as shown: SONiC does not know about
+it.</p>
+<p>To keep traffic away from the switch’s own services in SONiC, use a
+control-plane ACL (<code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;CTRLPLANE&quot;</span></code>), which SONiC implements in the
+Linux firewall, not in the FP.</p>
+</section>
+<section id="copy-or-mirror-matching-packets-to-the-cpu">
+<span id="howto-acl-copy-to-cpu"></span><h2>Copy or mirror matching packets to the CPU<a class="headerlink" href="#copy-or-mirror-matching-packets-to-the-cpu" title="Link to this heading"></a></h2>
+<p>The chip sends a packet to the CPU only if CoPP or an ACL tells it to, so
+<code class="docutils literal notranslate"><span class="pre">tcpdump</span></code> on an <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> normally sees only control traffic.
+<a class="reference internal" href="mirror-to-cpu.html"><span class="doc">Capturing port traffic with tcpdump</span></a> mirrors everything on a port; an FP entry of your own
+copies only the packets you want and leaves SONiC’s entries alone. The
+packets keep being switched or routed as before.</p>
+<p>The steps build group 100 with entry 1000, matching UDP to port 6000 from
+198.51.100.10. All of them change the ASIC behind SONiC’s back; remove
+everything again at the end (<a class="reference internal" href="#cleaning-up">Cleaning up</a>). Choose group and entry IDs
+well away from SONiC’s.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: A copy-to-CPU entry with a counter, on CPU queue 2</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp qset clear</span>
+<span class="go">drivshell&gt; fp qset add SrcIp</span>
+<span class="go">BCM_FIELD_QSET_ADD(SrcIp) okay</span>
+<span class="go">drivshell&gt; fp qset add IpProtocol</span>
+<span class="go">BCM_FIELD_QSET_ADD(IpProtocol) okay</span>
+<span class="go">drivshell&gt; fp qset add L4DstPort</span>
+<span class="go">BCM_FIELD_QSET_ADD(L4DstPort) okay</span>
+<span class="go">drivshell&gt; fp group create 10 100</span>
+<span class="go">drivshell&gt; fp entry create 100 1000</span>
+<span class="go">drivshell&gt; fp qual 1000 SrcIp 198.51.100.10 255.255.255.255</span>
+<span class="go">drivshell&gt; fp qual 1000 IpProtocol 17 0xff</span>
+<span class="go">drivshell&gt; fp qual 1000 L4DstPort 6000 0xffff</span>
+<span class="go">drivshell&gt; fp action add 1000 CosQCpuNew 2</span>
+<span class="go">drivshell&gt; fp stat create group=100 type0=Packets type1=Bytes</span>
+<span class="go">Stat created with id: 17</span>
+<span class="go">drivshell&gt; fp stat attach entry=1000</span>
+<span class="go">drivshell&gt; fp entry install 1000</span>
+<span class="go">drivshell&gt; fp action add 1000 CopyToCpu 0 0</span>
+<span class="go">drivshell&gt; fp entry reinstall 1000</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CopyToCpu</span></code> needs both parameters; <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">action</span> <span class="pre">add</span> <span class="pre">1000</span> <span class="pre">CopyToCpu</span></code> alone
+prints the usage. <code class="docutils literal notranslate"><span class="pre">CosQCpuNew</span> <span class="pre">2</span></code> puts the copies on CPU queue 2, away from
+the queues CoPP uses here (0, 1 and 4), so they are easy to count and do not
+crowd out control traffic. (SONiC puts sFlow samples on queue 2 when sFlow is
+enabled; pick another queue then.) <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">stat</span> <span class="pre">create</span></code> prints the new counter’s ID;
+<code class="docutils literal notranslate"><span class="pre">stat</span> <span class="pre">attach</span></code> without <code class="docutils literal notranslate"><span class="pre">StatId</span></code> uses it.</p>
+<p>Packets to an unknown MAC address on the VLAN are now copied to the CPU and
+appear on the netdev of the port they arrived on, with their VLAN tag:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-lnei<span class="w"> </span>Ethernet11<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">6000</span>
+<span class="go">09:07:33.233801 52:54:00:d5:ca:e0 &gt; 02:00:00:00:99:99, ethertype 802.1Q (0x8100), length 64: vlan 902, p 0, ethertype IPv4 (0x0800), 198.51.100.10.40000 &gt; 198.51.100.1.6000: UDP, length 11</span>
+<span class="go">…</span>
+<span class="go">5 packets captured</span>
+</pre></div>
+</div>
+<p>Without the entry the same five packets were not captured. The entry’s
+counter and CPU queue 2 count them:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp stat get StatId=17 type=Packets</span>
+<span class="go">The value is: 0x000000005</span>
+<span class="go">drivshell&gt; show counters nz cpu0</span>
+<span class="go">MC_PERQ_PKT(2).cpu0      :                     5                  +5</span>
+<span class="go">MC_PERQ_PKT(4).cpu0      :               797,219                 +60               3/s</span>
+</pre></div>
+</div>
+</div>
+<section id="mirror-instead-of-copy">
+<h3>Mirror instead of copy<a class="headerlink" href="#mirror-instead-of-copy" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MirrorIngress</span></code> sends a mirror copy to a port instead. The CPU port works
+as the mirror-to port; give it by name:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Mirror matching packets to the CPU (entry 1000 with its other actions removed)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp action add 1000 MirrorIngress 0 0</span>
+<span class="go">FP(unit 0) Error: invalid port string: "0"</span>
+<span class="go">Failed to execute the diagnostic command. Error: Operation failed.</span>
+<span class="go">drivshell&gt; fp action add 1000 MirrorIngress 0 cpu0</span>
+<span class="go">drivshell&gt; fp entry reinstall 1000</span>
+<span class="go">drivshell&gt; fp show entry 1000</span>
+<span class="go">…</span>
+<span class="go">         action={act=MirrorIngress, param0=0(0), param1=134217728(0x8000000), param2=0(0), param3=0(0)}</span>
+<span class="go">drivshell&gt; show counters nz cpu0</span>
+<span class="go">MC_PERQ_PKT(0).cpu0      :                    23                  +5</span>
+<span class="go">MC_PERQ_PKT(4).cpu0      :               797,732                +108               3/s</span>
+</pre></div>
+</div>
+</div>
+<p>The first parameter is the module (0), the second the port. Mirrored copies
+arrive on CPU queue 0 and on the ingress port’s netdev, like copies.
+<a class="reference internal" href="../reference/mirror.html#clicmd-mirror-dest-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mirror</span> <span class="pre">dest</span> <span class="pre">show</span></code></a> already lists a mirror destination on <code class="docutils literal notranslate"><span class="pre">cpu0</span></code>
+on a SONiC switch; <code class="docutils literal notranslate"><span class="pre">MirrorIngress</span></code> to <code class="docutils literal notranslate"><span class="pre">cpu0</span></code> does not add another.</p>
+</section>
+<section id="rate-limit-the-copies">
+<h3>Rate-limit the copies<a class="headerlink" href="#rate-limit-the-copies" title="Link to this heading"></a></h3>
+<p>Copying a heavy flow to the CPU can starve control traffic. Do what CoPP
+does: attach a packet-based policer and copy only green packets with
+<code class="docutils literal notranslate"><span class="pre">GpCopyToCpu</span></code>. A counter with colour types shows what the policer did:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: 100 copies per second, burst 100</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp policer create PolId=100 Mode=SrTcm cir=100 cbs=100 PacketBased=1</span>
+<span class="go">drivshell&gt; fp action remove 1000 CopyToCpu</span>
+<span class="go">drivshell&gt; fp action add 1000 GpCopyToCpu 0 0</span>
+<span class="go">drivshell&gt; fp policer attach entry=1000 level=0 PolId=100</span>
+<span class="go">drivshell&gt; fp stat detach entry=1000 StatId=17</span>
+<span class="go">drivshell&gt; fp stat destroy StatId=17</span>
+<span class="go">drivshell&gt; fp stat create group=100 type0=Packets type1=GreenPackets type2=RedPackets</span>
+<span class="go">Stat created with id: 18</span>
+<span class="go">drivshell&gt; fp stat attach entry=1000</span>
+<span class="go">drivshell&gt; fp entry reinstall 1000</span>
+</pre></div>
+</div>
+</div>
+<p>Then send 3000 matching packets as fast as possible (here about 6100 per
+second) and read the counter:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp stat get StatId=18 type=Packets</span>
+<span class="go">The value is: 0x000000bb8</span>
+<span class="go">drivshell&gt; fp stat get StatId=18 type=GreenPackets</span>
+<span class="go">The value is: 0x000000096</span>
+<span class="go">drivshell&gt; fp stat get StatId=18 type=RedPackets</span>
+<span class="go">The value is: 0x000000b21</span>
+<span class="go">drivshell&gt; show counters nz cpu0</span>
+<span class="go">MC_PERQ_PKT(2).cpu0      :                   155                +150</span>
+</pre></div>
+</div>
+</div>
+<p>Of 3000 packets sent in half a second, 150 were green (the burst of 100 plus
+100 per second) and copied; <code class="docutils literal notranslate"><span class="pre">tcpdump</span></code> on <code class="docutils literal notranslate"><span class="pre">Ethernet11</span></code> captured exactly
+those 150. The
+counter types must be chosen when the counter is created, so the old
+counter is detached and replaced.</p>
+</section>
+<section id="cleaning-up">
+<h3>Cleaning up<a class="headerlink" href="#cleaning-up" title="Link to this heading"></a></h3>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; fp stat detach entry=1000 StatId=18</span>
+<span class="go">drivshell&gt; fp entry destroy 1000</span>
+<span class="go">drivshell&gt; fp stat destroy StatId=18</span>
+<span class="go">drivshell&gt; fp policer destroy PolId=100</span>
+<span class="go">drivshell&gt; fp group destroy 100</span>
+<span class="go">drivshell&gt; fp qset clear</span>
+</pre></div>
+</div>
+</div>
+<p>Always give the IDs: <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">entry</span> <span class="pre">destroy</span></code> and <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">policer</span> <span class="pre">destroy</span> <span class="pre">all</span></code>
+without them also remove SONiC’s ACL and CoPP entries. <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">qset</span> <span class="pre">clear</span></code>
+resets the shell’s qualifier set, which the next <code class="docutils literal notranslate"><span class="pre">fp</span> <span class="pre">group</span> <span class="pre">create</span></code> would
+otherwise reuse.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="queues.html" class="btn btn-neutral float-left" title="Troubleshooting queues and buffers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="link-debug.html" class="btn btn-neutral float-right" title="Debugging a link" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

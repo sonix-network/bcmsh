@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buffers and queues &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Variable reference" href="variables/index.html" />
+    <link rel="prev" title="Forwarding table sizes" href="tables.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Buffers and queues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-up-profile">Start-up profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-buffer-configuration">Custom buffer configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="variables/index.html">Variable reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../config.html">Configuration variables</a></li>
+      <li class="breadcrumb-item active">Buffers and queues</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="buffers-and-queues">
+<h1>Buffers and queues<a class="headerlink" href="#buffers-and-queues" title="Link to this heading"></a></h1>
+<p>The MMU (memory management unit) holds packets between ingress and egress.
+On SONiC most buffer settings come from the <code class="docutils literal notranslate"><span class="pre">BUFFER_POOL</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BUFFER_PROFILE</span></code> and <code class="docutils literal notranslate"><span class="pre">BUFFER_PG</span></code> tables (rendered from the HWSKU’s
+<code class="docutils literal notranslate"><span class="pre">buffers*.j2</span></code> templates) and are programmed through the SAI while the switch
+runs. <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> sets the starting point the SAI works from, and the SDK
+can also take a complete buffer configuration from <code class="docutils literal notranslate"><span class="pre">buf.*</span></code> variables.</p>
+<section id="start-up-profile">
+<h2>Start-up profile<a class="headerlink" href="#start-up-profile" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><a class="reference internal" href="variables/mmu.html#confval-mmu_lossless"><code class="xref std std-confval docutils literal notranslate"><span class="pre">mmu_lossless</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (default) starts with a lossy buffer layout, <code class="docutils literal notranslate"><span class="pre">1</span></code> with a lossless
+one that reserves PFC headroom. SONiC Trident 3 files leave it at 0 and
+let SONiC configure lossless priority groups.</p>
+</dd>
+<dt><a class="reference internal" href="variables/mmu.html#confval-bcm_num_cos"><code class="xref std std-confval docutils literal notranslate"><span class="pre">bcm_num_cos</span></code></a></dt><dd><p>Number of class-of-service queues per port at start-up (default 8).</p>
+</dd>
+<dt><a class="reference internal" href="variables/mmu.html#confval-asf_mem_profile"><code class="xref std std-confval docutils literal notranslate"><span class="pre">asf_mem_profile</span></code></a></dt><dd><p>Cut-through (ASF) buffer profile: <code class="docutils literal notranslate"><span class="pre">0</span></code> store-and-forward, <code class="docutils literal notranslate"><span class="pre">1</span></code> cut-through
+between ports of similar speed, <code class="docutils literal notranslate"><span class="pre">2</span></code> cut-through between all speeds.</p>
+</dd>
+<dt><a class="reference internal" href="variables/sai.html#confval-sai_mmu_custom_config"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_mmu_custom_config</span></code></a>, <a class="reference internal" href="variables/sai.html#confval-sai_optimized_mmu"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_optimized_mmu</span></code></a></dt><dd><p>SAI variables that select how the SAI sets up the MMU defaults it
+reports to SONiC; several SONiC Trident 3 files set
+<code class="docutils literal notranslate"><span class="pre">sai_optimized_mmu=1</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="custom-buffer-configuration">
+<h2>Custom buffer configuration<a class="headerlink" href="#custom-buffer-configuration" title="Link to this heading"></a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">mmu_config_override=0</span></code> the SDK reads a full MMU configuration from
+<code class="docutils literal notranslate"><span class="pre">buf.*</span></code> variables instead of its built-in one. It checks and calculates the
+result; if that fails it keeps the built-in configuration. The names follow
+the pattern</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>buf.&lt;object&gt;&lt;N&gt;.&lt;attribute&gt;=&lt;value&gt;     one instance
+buf.&lt;object&gt;.&lt;attribute&gt;=&lt;value&gt;        all instances
+</pre></div>
+</div>
+<p>and the per-port objects also accept the per-port suffixes, for example
+<code class="docutils literal notranslate"><span class="pre">buf.prigroup7.headroom_xe0</span></code>.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">buf.device.headroom</span></code></dt><dd><p>Global headroom.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buf.pool&lt;N&gt;.size</span></code>, <code class="docutils literal notranslate"><span class="pre">.yellow_size</span></code>, <code class="docutils literal notranslate"><span class="pre">.red_size</span></code></dt><dd><p>Service pool sizes. A <code class="docutils literal notranslate"><span class="pre">%</span></code> value is a share of the usable buffer.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buf.prigroup&lt;N&gt;.&lt;attribute&gt;</span></code></dt><dd><p>Per-port priority group: <code class="docutils literal notranslate"><span class="pre">guarantee</span></code>, <code class="docutils literal notranslate"><span class="pre">headroom</span></code>, <code class="docutils literal notranslate"><span class="pre">user_delay</span></code>,
+<code class="docutils literal notranslate"><span class="pre">switch_delay</span></code>, <code class="docutils literal notranslate"><span class="pre">device_headroom_enable</span></code>, <code class="docutils literal notranslate"><span class="pre">pool_scale</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pool_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">pool_resume</span></code>, <code class="docutils literal notranslate"><span class="pre">pool_floor</span></code>, <code class="docutils literal notranslate"><span class="pre">flow_control_enable</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buf.queue&lt;N&gt;.&lt;attribute&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">buf.mqueue&lt;N&gt;.&lt;attribute&gt;</span></code></dt><dd><p>Per-port unicast and multicast queues: <code class="docutils literal notranslate"><span class="pre">guarantee</span></code>, <code class="docutils literal notranslate"><span class="pre">discard_enable</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pool_scale</span></code>, <code class="docutils literal notranslate"><span class="pre">pool_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">pool_resume</span></code>, <code class="docutils literal notranslate"><span class="pre">color_discard_enable</span></code>,
+<code class="docutils literal notranslate"><span class="pre">yellow_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">red_limit</span></code> and the resume thresholds.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buf.qgroup&lt;N&gt;.&lt;attribute&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">buf.ingportpool&lt;N&gt;.&lt;attribute&gt;</span></code></dt><dd><p>Queue groups and per-port ingress pool limits.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buf.map.pri.prigroup</span></code>, <code class="docutils literal notranslate"><span class="pre">buf.map.prigroup.pool</span></code>, <code class="docutils literal notranslate"><span class="pre">buf.map.queue.pool</span></code>, <code class="docutils literal notranslate"><span class="pre">buf.map.mqueue.pool</span></code></dt><dd><p>Comma-separated maps from internal priority to priority group, priority
+group to pool, and queue to pool.</p>
+</dd>
+</dl>
+<p>Units: a plain decimal number is a count of 256-byte cells; <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>
+(1024 bytes) and <code class="docutils literal notranslate"><span class="pre">m</span></code> (1048576 bytes) suffixes give bytes. <code class="docutils literal notranslate"><span class="pre">pool_scale</span></code>
+is a dynamic-threshold factor, not a size. If both <code class="docutils literal notranslate"><span class="pre">user_delay</span></code> and
+<code class="docutils literal notranslate"><span class="pre">switch_delay</span></code> are set, the SDK calculates <code class="docutils literal notranslate"><span class="pre">headroom</span></code> from them and the
+port speed and ignores a configured <code class="docutils literal notranslate"><span class="pre">headroom</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">buf.*</span></code> configuration replaces the SDK’s defaults for the whole chip.
+SONiC’s buffer manager still programs its own profiles on top through the
+SAI. Only use it with a buffer design that has been validated for the
+switch.</p>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">buf.map.egress_pool&lt;N&gt;.ingress_pool</span></code></dt><dd><p>Maps egress service pool <code class="docutils literal notranslate"><span class="pre">N</span></code> to an ingress pool. The Broadcom reference
+Trident 3 configuration in the SONiC tree is the only Trident 3 file that
+uses a <code class="docutils literal notranslate"><span class="pre">buf.*</span></code> variable, and only this one.</p>
+</dd>
+</dl>
+<p>All buffer and queue variables are in the <a class="reference internal" href="variables/mmu.html"><span class="doc">reference</span></a>.</p>
+<p>To read the resulting limits, drops and high-water marks on a running
+switch, see <a class="reference internal" href="../../howto/queues.html"><span class="doc">Troubleshooting queues and buffers</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tables.html" class="btn btn-neutral float-left" title="Forwarding table sizes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="variables/index.html" class="btn btn-neutral float-right" title="Variable reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

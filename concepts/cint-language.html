@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Cint language &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scripting" href="scripting.html" />
+    <link rel="prev" title="Cint: the C interpreter" href="cint.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Cint language</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#program-structure">Program structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#types-and-declarations">Types and declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unsupported-features">Unsupported features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#callbacks">Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterators">Iterators</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#control-flow">Control flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#self-check">Self-check</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#enums-and-constants">Enums and constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#printing">Printing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bit-counters">64-bit counters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#return-codes">Return codes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The Cint language</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-cint-language">
+<h1>The Cint language<a class="headerlink" href="#the-cint-language" title="Link to this heading"></a></h1>
+<p>Cint accepts most of C’s expression and statement syntax, but it is an
+interpreter with its own rules, not a C compiler. Programs that compile with
+<code class="docutils literal notranslate"><span class="pre">gcc</span></code> often need small changes. This page lists what Cint accepts on this
+build, what it does not, and how to print values. How to run programs is in
+<a class="reference internal" href="cint.html"><span class="doc">Cint: the C interpreter</span></a>.</p>
+<section id="program-structure">
+<h2>Program structure<a class="headerlink" href="#program-structure" title="Link to this heading"></a></h2>
+<p>A Cint file is a sequence of top-level statements: declarations, function
+definitions and ordinary statements such as calls. They run in order as the
+file is read, so a function must be defined before the statement that calls
+it. There is no <code class="docutils literal notranslate"><span class="pre">main</span></code>; call your function explicitly at the end:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">show_unit</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_info_t</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_info_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_info_get: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">print</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">show_unit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Comments are <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">…</span> <span class="pre">*/</span></code> (which may nest) and <code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">…</span></code>.</p>
+</section>
+<section id="types-and-declarations">
+<h2>Types and declarations<a class="headerlink" href="#types-and-declarations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>C types: <code class="docutils literal notranslate"><span class="pre">char</span></code>, <code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">long</span></code>, <code class="docutils literal notranslate"><span class="pre">long</span> <span class="pre">long</span></code>, their
+<code class="docutils literal notranslate"><span class="pre">unsigned</span></code> forms, and <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p></li>
+<li><p>SDK integer types: <code class="docutils literal notranslate"><span class="pre">uint8</span></code>, <code class="docutils literal notranslate"><span class="pre">uint16</span></code>, <code class="docutils literal notranslate"><span class="pre">uint32</span></code>, <code class="docutils literal notranslate"><span class="pre">int8</span></code>, <code class="docutils literal notranslate"><span class="pre">int16</span></code>,
+<code class="docutils literal notranslate"><span class="pre">int32</span></code> and their <code class="docutils literal notranslate"><span class="pre">_t</span></code> forms, and every SDK typedef such as
+<code class="docutils literal notranslate"><span class="pre">bcm_port_t</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_vlan_t</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_if_t</span></code> or <code class="docutils literal notranslate"><span class="pre">bcm_gport_t</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uint64</span></code>, the SDK’s 64-bit counter type. It is not an ordinary integer:
+use the <code class="docutils literal notranslate"><span class="pre">COMPILER_64_*</span></code> helpers or <code class="docutils literal notranslate"><span class="pre">$name</span></code> printing (below).</p></li>
+<li><p>SDK value types with their own printed form: <code class="docutils literal notranslate"><span class="pre">bcm_mac_t</span></code> (MAC address),
+<code class="docutils literal notranslate"><span class="pre">bcm_ip_t</span></code> (IPv4 address), <code class="docutils literal notranslate"><span class="pre">bcm_ip6_t</span></code> (IPv6 address), <code class="docutils literal notranslate"><span class="pre">bcm_pbmp_t</span></code>
+(port bitmap).</p></li>
+<li><p>Every SDK structure (<code class="docutils literal notranslate"><span class="pre">bcm_port_info_t</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_l3_route_t</span></code> …) and your
+own <code class="docutils literal notranslate"><span class="pre">struct</span></code> definitions. After <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pair</span> <span class="pre">{</span> <span class="pre">int</span> <span class="pre">key;</span> <span class="pre">int</span> <span class="pre">value;</span> <span class="pre">};</span></code>
+the tag <code class="docutils literal notranslate"><span class="pre">pair</span></code> is itself a type name: declare variables as <code class="docutils literal notranslate"><span class="pre">pair</span> <span class="pre">p;</span></code>.
+Writing <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pair</span> <span class="pre">p;</span></code> is a syntax error (<code class="docutils literal notranslate"><span class="pre">unexpected</span> <span class="pre">TYPE_NAME,</span>
+<span class="pre">expecting</span> <span class="pre">IDENTIFIER</span> <span class="pre">or</span> <span class="pre">'{'</span></code>).</p></li>
+<li><p>Arrays (with initialisers such as <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">a[4]</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4</span> <span class="pre">};</span></code>),
+pointers, and strings (<code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*s</span> <span class="pre">=</span> <span class="pre">&quot;text&quot;;</span></code>).</p></li>
+</ul>
+<p>A declaration is a statement and may appear anywhere in a block, but not
+inside the parentheses of a <code class="docutils literal notranslate"><span class="pre">for</span></code>. Declare the loop variable first:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Initialise SDK structures with their <code class="docutils literal notranslate"><span class="pre">_init</span></code> function
+(<code class="docutils literal notranslate"><span class="pre">bcm_l3_egress_t_init(&amp;egr)</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_port_config_t_init(&amp;cfg)</span></code>) before
+use, as in C.</p>
+</section>
+<section id="unsupported-features">
+<h2>Unsupported features<a class="headerlink" href="#unsupported-features" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>C feature</p></th>
+<th class="head"><p>In Cint</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Casts such as <code class="docutils literal notranslate"><span class="pre">(int)</span> <span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">(uint32)</span> <span class="pre">v</span></code></p></td>
+<td><p>Syntax error. Assign to a variable of the wanted type instead
+(<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">v;</span></code>). Only <code class="docutils literal notranslate"><span class="pre">(void</span> <span class="pre">*)</span></code> is accepted.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#define</span></code>, <code class="docutils literal notranslate"><span class="pre">#if</span></code>, <code class="docutils literal notranslate"><span class="pre">#ifdef</span></code></p></td>
+<td><p>Not supported; <code class="docutils literal notranslate"><span class="pre">#include</span></code> is the only directive. The SDK’s
+<code class="docutils literal notranslate"><span class="pre">BCM_*</span></code> constants are already defined; use variables or
+<code class="docutils literal notranslate"><span class="pre">enum</span></code> for your own.</p></td>
+</tr>
+<tr class="row-even"><td><p>Declarations in <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">(</span> <span class="pre">…</span> <span class="pre">)</span></code></p></td>
+<td><p>Syntax error; declare the variable before the loop.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">tag</span> <span class="pre">var;</span></code> for a structure defined in Cint</p></td>
+<td><p>Syntax error; write <code class="docutils literal notranslate"><span class="pre">tag</span> <span class="pre">var;</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">goto</span></code> and labels, bit-fields, K&amp;R function definitions</p></td>
+<td><p>Not supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">extern</span></code> variables</p></td>
+<td><p>Rejected with <code class="docutils literal notranslate"><span class="pre">'extern'</span> <span class="pre">variables</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">supported</span></code>. An <code class="docutils literal notranslate"><span class="pre">extern</span></code>
+function prototype is accepted but cannot make an unregistered
+function callable.</p></td>
+</tr>
+<tr class="row-even"><td><p>The C library (<code class="docutils literal notranslate"><span class="pre">atoi</span></code>, <code class="docutils literal notranslate"><span class="pre">strcpy</span></code>, <code class="docutils literal notranslate"><span class="pre">malloc</span></code> …)</p></td>
+<td><p>Not available. Use the <code class="docutils literal notranslate"><span class="pre">sal_*</span></code> functions (<code class="docutils literal notranslate"><span class="pre">sal_strcmp</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sal_strlen</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_memset</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_alloc</span></code> …) or write the code in
+Cint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">printf(&quot;%d&quot;,</span> <span class="pre">&lt;enum</span> <span class="pre">value&gt;)</span></code></p></td>
+<td><p>Rejected; see <a class="reference internal" href="#printing">Printing</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>A cast is reported at the cast, and the rest of the file does not run; the
+line <code class="docutils literal notranslate"><span class="pre">NEG_CAST</span> <span class="pre">after</span></code> in this program is never printed:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/negative_cast.c</span>
+<span class="go">NEG_CAST before</span>
+<span class="go">nc_y = (int) nc_x;</span>
+<span class="go">        ^^^ syntax error, unexpected INT [/root/negative_cast.c:12]</span>
+<span class="go">nc_y = (int) nc_x;</span>
+<span class="go">           ^ syntax error, unexpected ')' [/root/negative_cast.c:12]</span>
+<span class="go">** warning: statement with no effect</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<p>Define functions as in C, with a return type and typed parameters. A
+function may take at most 16 parameters. Parameters behave as in C: pass
+<code class="docutils literal notranslate"><span class="pre">&amp;var</span></code> where the SDK expects a pointer for an output value.</p>
+<p>Calls are checked against the registered prototype: the number of arguments
+and each argument’s type must match, or the call fails with <code class="docutils literal notranslate"><span class="pre">wrong</span> <span class="pre">number</span>
+<span class="pre">of</span> <span class="pre">parameters</span></code> or <code class="docutils literal notranslate"><span class="pre">arg</span> <span class="pre">&lt;n&gt;</span> <span class="pre">…</span> <span class="pre">was</span> <span class="pre">wrong</span> <span class="pre">type</span></code>. Use <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">list</span> <span class="pre">function</span>
+<span class="pre">&lt;name&gt;;</span></code> to see a prototype.</p>
+<p>Some SDK macros are available as functions: <code class="docutils literal notranslate"><span class="pre">BCM_FAILURE(rv)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BCM_SUCCESS(rv)</span></code>, <code class="docutils literal notranslate"><span class="pre">BCM_PBMP_MEMBER(&amp;pbm,</span> <span class="pre">port)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BCM_PBMP_PORT_ADD(pbm,</span> <span class="pre">port)</span></code>, <code class="docutils literal notranslate"><span class="pre">BCM_PBMP_COUNT(pbm,</span> <span class="pre">count)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BCM_GPORT_IS_TRUNK(gport)</span></code>, <code class="docutils literal notranslate"><span class="pre">BCM_GPORT_LOCAL_GET(gport)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BCM_L3_ITF_VAL_GET(intf)</span></code> and others. <code class="docutils literal notranslate"><span class="pre">BCM_IF_ERROR_RETURN(expr)</span></code> returns
+from the current function when <code class="docutils literal notranslate"><span class="pre">expr</span></code> is negative.</p>
+<section id="callbacks">
+<h3>Callbacks<a class="headerlink" href="#callbacks" title="Link to this heading"></a></h3>
+<p>SDK functions that take a callback, such as the <code class="docutils literal notranslate"><span class="pre">*_traverse</span></code> functions,
+accept the name of a Cint function. The Cint function must have exactly the
+callback’s prototype; <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">list</span> <span class="pre">fp</span> <span class="pre">&lt;name&gt;;</span></code> shows it. For example, the
+route-table walk:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">route_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_l3_route_t</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_ip_t</span><span class="w"> </span><span class="n">net</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_subnet</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d: ${net} intf %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_intf</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">bcm_l3_route_traverse</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="n">route_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Since Cint has no casts, <code class="docutils literal notranslate"><span class="pre">user_data</span></code> cannot be turned back into a typed
+pointer. Pass <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and keep counters or results in global variables.
+While the callback runs, the SDK holds the lock of the table being walked,
+so <code class="docutils literal notranslate"><span class="pre">syncd</span></code> cannot update that table until the walk finishes. Keep
+callbacks short and limit how much they print.</p>
+</section>
+<section id="iterators">
+<h3>Iterators<a class="headerlink" href="#iterators" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">BCM_PBMP_ITER(pbm,</span> <span class="pre">port)</span> <span class="pre">{</span> <span class="pre">…</span> <span class="pre">}</span></code> runs the block once for every port in a
+port bitmap, as in C:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">bcm_port_config_t</span><span class="w"> </span><span class="n">cfg</span><span class="p">;</span>
+<span class="n">bcm_pbmp_t</span><span class="w"> </span><span class="n">pbm</span><span class="p">;</span>
+<span class="n">bcm_port_t</span><span class="w"> </span><span class="n">port</span><span class="p">;</span>
+
+<span class="n">bcm_port_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cfg</span><span class="p">);</span>
+<span class="n">bcm_port_config_get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cfg</span><span class="p">);</span>
+<span class="n">pbm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">port</span><span class="p">;</span>
+<span class="n">BCM_PBMP_ITER</span><span class="p">(</span><span class="n">pbm</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"port %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">BCM_RX_REASON_ITER</span></code> and <code class="docutils literal notranslate"><span class="pre">BCM_PKT_DROP_REASON_ITER</span></code> work the same way
+for reason sets.</p>
+</section>
+</section>
+<section id="control-flow">
+<h2>Control flow<a class="headerlink" href="#control-flow" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">if</span></code>/<code class="docutils literal notranslate"><span class="pre">else</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>, <code class="docutils literal notranslate"><span class="pre">do</span> <span class="pre">…</span> <span class="pre">while</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">switch</span></code>/<code class="docutils literal notranslate"><span class="pre">case</span></code>/
+<code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code>, <code class="docutils literal notranslate"><span class="pre">return</span></code> and the <code class="docutils literal notranslate"><span class="pre">?:</span></code> operator work
+as in C. Arithmetic, comparison, logical, bitwise and assignment operators
+(<code class="docutils literal notranslate"><span class="pre">+=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;=</span></code> …) are supported, as are <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> and
+array subscripts. <code class="docutils literal notranslate"><span class="pre">sizeof</span></code> takes a variable or expression, such as
+<code class="docutils literal notranslate"><span class="pre">sizeof(info)</span></code>; <code class="docutils literal notranslate"><span class="pre">sizeof</span></code> of a type name, such as <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code>, fails
+at run time with <code class="docutils literal notranslate"><span class="pre">invalid</span> <span class="pre">operand(s)</span> <span class="pre">to</span> <span class="pre">'sizeof'</span></code>. Cint checks pointers and array bounds when they
+are used and reports <code class="docutils literal notranslate"><span class="pre">attempt</span> <span class="pre">to</span> <span class="pre">dereference</span> <span class="pre">NULL</span> <span class="pre">pointer</span></code> or <code class="docutils literal notranslate"><span class="pre">array</span>
+<span class="pre">subscript</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">range</span></code> instead of crashing. Pointers returned by the SDK
+are not checked beyond NULL.</p>
+<section id="self-check">
+<h3>Self-check<a class="headerlink" href="#self-check" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">language_tour.c</span></code> tries the features on this page one by one and prints
+<code class="docutils literal notranslate"><span class="pre">LANG</span> <span class="pre">&lt;name&gt;</span> <span class="pre">ok</span></code> or <code class="docutils literal notranslate"><span class="pre">LANG</span> <span class="pre">&lt;name&gt;</span> <span class="pre">FAIL</span></code> for each, followed by <code class="docutils literal notranslate"><span class="pre">DONE</span>
+<span class="pre">language_tour</span></code>. On Trident 3 its <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span></code> check fails, and the run
+also shows what a run-time error does: the rest of <code class="docutils literal notranslate"><span class="pre">lt_main()</span></code> is skipped
+(no further <code class="docutils literal notranslate"><span class="pre">LANG</span></code> lines), while the top-level statements after the call
+still run:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">language_tour.c</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * language_tour.c - exercise the parts of the C subset described in the</span>
+<span class="cm"> * Cint language page.  Read-only: calls no SDK function that changes state.</span>
+<span class="cm"> * Run:  cint /root/language_tour.c</span>
+<span class="cm"> * Every check prints "LANG &lt;name&gt; ok" or "LANG &lt;name&gt; FAIL".</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">lt_pair</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">key</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lt_check</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ok</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"LANG %s ok</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"LANG %s FAIL</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ok</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lt_square</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lt_sum</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">lt_set</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lt_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">kind</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"text"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">lt_pair</span><span class="w"> </span><span class="n">pair</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">big</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x80000000</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint64</span><span class="w"> </span><span class="n">wide</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_switch_control_t</span><span class="w"> </span><span class="n">ctl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"function-call"</span><span class="p">,</span><span class="w"> </span><span class="n">lt_square</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">49</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"array-arg"</span><span class="p">,</span><span class="w"> </span><span class="n">lt_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"pointer-out"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">pair</span><span class="p">.</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pair</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"struct"</span><span class="p">,</span><span class="w"> </span><span class="n">pair</span><span class="p">.</span><span class="n">key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pair</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print</span><span class="w"> </span><span class="n">pair</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">n</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"while-do"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">        </span><span class="n">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">        </span><span class="n">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"switch"</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"ternary"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"sizeof"</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"hex-uint32"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">big</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">"%s-%d"</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"sprintf"</span><span class="p">,</span><span class="w"> </span><span class="n">sal_strcmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="s">"text-7"</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">ctl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcmSwitchL3EgressMode</span><span class="p">;</span>
+<span class="w">    </span><span class="n">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"enum via int: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"enum via $: ${ctl}</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">COMPILER_64_SET</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wide</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"uint64 via $: ${wide}</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"uint64 halves: hi %u lo %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">COMPILER_64_HI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wide</span><span class="p">),</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wide</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">lt_check</span><span class="p">(</span><span class="s">"defined-bcm_port_info_get"</span><span class="p">,</span><span class="w"> </span><span class="n">cint_defined</span><span class="p">(</span><span class="s">"bcm_port_info_get"</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"cint_defined(soc_mem_search) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">cint_defined</span><span class="p">(</span><span class="s">"soc_mem_search"</span><span class="p">));</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"cint_defined(soc_reg_t) = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">cint_defined</span><span class="p">(</span><span class="s">"soc_reg_t"</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">lt_main</span><span class="p">();</span>
+<span class="n">print</span><span class="w"> </span><span class="n">bcm_info_t</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE language_tour</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/language_tour.c</span>
+<span class="go">LANG function-call ok</span>
+<span class="go">LANG array-arg ok</span>
+<span class="go">LANG pointer-out ok</span>
+<span class="go">LANG struct ok</span>
+<span class="go">lt_pair pair = {</span>
+<span class="go">    int key = 1 (0x1)</span>
+<span class="go">    int value = 2 (0x2)</span>
+<span class="go">}</span>
+<span class="go">LANG while-do ok</span>
+<span class="go">LANG switch ok</span>
+<span class="go">LANG ternary ok</span>
+<span class="go">** error: invalid operand(s) to 'sizeof'</span>
+<span class="go">** error: invalid operand(s) to '=='</span>
+<span class="go">** error: error evaluating argument 2 to function 'lt_check'</span>
+<span class="go">struct bcm_info_t {</span>
+<span class="go">    uint32 vendor;</span>
+<span class="go">    uint32 device;</span>
+<span class="go">    uint32 revision;</span>
+<span class="go">    uint32 capability;</span>
+<span class="go">    int num_pipes;</span>
+<span class="go">    int num_pp_pipes;</span>
+<span class="go">    int num_buffers;</span>
+<span class="go">    int num_instances_per_pp_pipe;</span>
+<span class="go">    uint32 package_rev_id;</span>
+<span class="go">    uint32 interposer_rev_id;</span>
+<span class="go">    int dies_num;</span>
+<span class="go">    uint32[16] die_dev_id;</span>
+<span class="go">    uint32[16] die_rev_id;</span>
+<span class="go">}</span>
+<span class="go">size is 172 bytes</span>
+<span class="go">DONE language_tour</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="enums-and-constants">
+<h2>Enums and constants<a class="headerlink" href="#enums-and-constants" title="Link to this heading"></a></h2>
+<p>SDK enum values (<code class="docutils literal notranslate"><span class="pre">bcmSwitchL3EgressMode</span></code>, <code class="docutils literal notranslate"><span class="pre">snmpIfHCInOctets</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BCM_E_NOT_FOUND</span></code>) and constants (<code class="docutils literal notranslate"><span class="pre">BCM_L3_IP6</span></code>, <code class="docutils literal notranslate"><span class="pre">BCM_L2_STATIC</span></code>) are
+known by name and can be used in expressions, comparisons and as
+arguments. Enum <em>numbers</em> differ between SDK releases; always use the name.</p>
+<p>An enum value is not an <code class="docutils literal notranslate"><span class="pre">int</span></code> for <code class="docutils literal notranslate"><span class="pre">printf</span></code>. To print its number, assign
+it to an <code class="docutils literal notranslate"><span class="pre">int</span></code> first:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcmSwitchL3EgressMode</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"bcmSwitchL3EgressMode = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">bcm_switch_control_t;</span></code> lists every name and number of an enum.</p>
+<p>Passing the enum directly is a run-time error; the statement prints nothing
+more, and the program continues:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/negative_enum_printf.c</span>
+<span class="go">NEG_ENUM before</span>
+<span class="go">NEG_ENUM direct ** error: printf expected integer type but received bcm_switch_control_t</span>
+
+<span class="go">NEG_ENUM via int 230</span>
+<span class="go">DONE negative_enum_printf</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="printing">
+<h2>Printing<a class="headerlink" href="#printing" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&lt;expression&gt;;</span></code></dt><dd><p>Prints the type, a name and the value. A variable prints under its own
+name, an expression as <code class="docutils literal notranslate"><span class="pre">$$</span></code>. Structures print every member, nested,
+with integers in decimal and hexadecimal. <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&quot;text&quot;;</span></code> prints the
+text and a newline. <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">&lt;type&gt;;</span></code> prints a structure’s layout or an
+enum’s values.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">printf(&quot;format&quot;,</span> <span class="pre">…)</span></code></dt><dd><p>C-style formatting. The format must be a string literal. <code class="docutils literal notranslate"><span class="pre">%d</span> <span class="pre">%i</span> <span class="pre">%u</span> <span class="pre">%x</span>
+<span class="pre">%X</span> <span class="pre">%o</span> <span class="pre">%c</span></code> need an integer argument, <code class="docutils literal notranslate"><span class="pre">%s</span></code> a string or <code class="docutils literal notranslate"><span class="pre">char</span></code> array,
+<code class="docutils literal notranslate"><span class="pre">%f</span> <span class="pre">%e</span> <span class="pre">%g</span></code> a <code class="docutils literal notranslate"><span class="pre">double</span></code>, <code class="docutils literal notranslate"><span class="pre">%p</span></code> a pointer. Width, precision, <code class="docutils literal notranslate"><span class="pre">-</span></code> and
+<code class="docutils literal notranslate"><span class="pre">l</span></code>/<code class="docutils literal notranslate"><span class="pre">ll</span></code> work as in C.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">$name</span></code> or <code class="docutils literal notranslate"><span class="pre">${name}</span></code> inside a <code class="docutils literal notranslate"><span class="pre">printf</span></code> format</dt><dd><p>Prints the variable <code class="docutils literal notranslate"><span class="pre">name</span></code> in its natural form: an enum as its name, a
+<code class="docutils literal notranslate"><span class="pre">bcm_ip_t</span></code> as <code class="docutils literal notranslate"><span class="pre">10.0.0.1</span></code>, a <code class="docutils literal notranslate"><span class="pre">bcm_mac_t</span></code> as <code class="docutils literal notranslate"><span class="pre">00:1A:2B:3C:4D:5E</span></code>
+(upper-case hexadecimal), a
+<code class="docutils literal notranslate"><span class="pre">bcm_pbmp_t</span></code> as a list of ports, a <code class="docutils literal notranslate"><span class="pre">uint64</span></code> as
+<code class="docutils literal notranslate"><span class="pre">{0x&lt;high&gt;</span> <span class="pre">0x&lt;low&gt;}</span></code>. A plain <code class="docutils literal notranslate"><span class="pre">$name</span></code> ends at a space, <code class="docutils literal notranslate"><span class="pre">:</span></code>, <code class="docutils literal notranslate"><span class="pre">.</span></code>,
+<code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code>, <code class="docutils literal notranslate"><span class="pre">'</span></code> or end of line; use <code class="docutils literal notranslate"><span class="pre">${name}</span></code> otherwise. Because of
+this, a <code class="docutils literal notranslate"><span class="pre">printf</span></code> format cannot contain a literal <code class="docutils literal notranslate"><span class="pre">$</span></code> followed by text.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sprintf(buf,</span> <span class="pre">&quot;format&quot;,</span> <span class="pre">…)</span></code>, <code class="docutils literal notranslate"><span class="pre">snprintf(buf,</span> <span class="pre">size,</span> <span class="pre">&quot;format&quot;,</span> <span class="pre">…)</span></code></dt><dd><p>Format into a <code class="docutils literal notranslate"><span class="pre">char</span></code> array.</p>
+</dd>
+</dl>
+<p>The <a class="reference internal" href="../reference/cint.html#clicmd-cint"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cint</span></code></a> reference shows <code class="docutils literal notranslate"><span class="pre">print</span></code> of a <code class="docutils literal notranslate"><span class="pre">bcm_info_t</span></code> captured on
+an older SONiC build; <a class="reference internal" href="../howto/cint-recipes.html"><span class="doc">Cint recipes</span></a> shows the same structure on
+this build, which has more members, including arrays: an array member prints
+as <code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">int[16]</span> <span class="pre">die_dev_id</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">…</span> <span class="pre">}</span></code> with one line per element.</p>
+<p>Broadcom’s Trident 3 examples (<a class="reference internal" href="../sources.html#bcmsh-src-openbcm-cint"><span class="std std-ref">OpenBCM sdk-6.5.27 CINT interpreter sources (src/appl/cint, src/appl/diag/cint) and Trident 3 CINT examples with logs (src/examples/xgs/TD3)</span></a>) print the
+result of a function call with <code class="docutils literal notranslate"><span class="pre">print</span></code>; a function declared to return
+<code class="docutils literal notranslate"><span class="pre">bcm_error_t</span></code> shows its value by name. The last lines of one such run:</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">BCM.0&gt; init all;cint lsr_php.c</span>
+<span class="go">...</span>
+<span class="go">execute(): Start</span>
+<span class="go">...</span>
+<span class="go">bcm_error_t $$ = BCM_E_NONE (0)</span>
+<span class="go">execute(): End</span>
+</pre></div>
+</div>
+</div>
+<section id="bit-counters">
+<h3>64-bit counters<a class="headerlink" href="#bit-counters" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">bcm_stat_get</span></code> and similar functions return <code class="docutils literal notranslate"><span class="pre">uint64</span></code> values. Print them
+with <code class="docutils literal notranslate"><span class="pre">$name</span></code> (hexadecimal high and low words) or split them:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint64</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="n">bcm_stat_get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfHCInOctets</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"in octets ${v}  low word %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v</span><span class="p">));</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">COMPILER_64_HI(&amp;v)</span></code> and <code class="docutils literal notranslate"><span class="pre">COMPILER_64_LO(&amp;v)</span></code> return the two 32-bit
+halves; <code class="docutils literal notranslate"><span class="pre">COMPILER_64_SET</span></code>, <code class="docutils literal notranslate"><span class="pre">COMPILER_64_ADD_64</span></code>, <code class="docutils literal notranslate"><span class="pre">COMPILER_64_SUB_64</span></code>
+and <code class="docutils literal notranslate"><span class="pre">COMPILER_64_IS_ZERO</span></code> do arithmetic.</p>
+</section>
+</section>
+<section id="return-codes">
+<h2>Return codes<a class="headerlink" href="#return-codes" title="Link to this heading"></a></h2>
+<p>SDK functions return an <code class="docutils literal notranslate"><span class="pre">int</span></code>: <code class="docutils literal notranslate"><span class="pre">BCM_E_NONE</span></code> (0) for success, a negative
+<code class="docutils literal notranslate"><span class="pre">BCM_E_…</span></code> code for failure. <code class="docutils literal notranslate"><span class="pre">bcm_errmsg(rv)</span></code> returns the text. Compare
+against the names, not the numbers.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">bcm_errmsg</span></code> text</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_NONE</span></code></p></td>
+<td><p>0</p></td>
+<td><p>Ok</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_INTERNAL</span></code></p></td>
+<td><p>−1</p></td>
+<td><p>Internal error</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_MEMORY</span></code></p></td>
+<td><p>−2</p></td>
+<td><p>Out of memory</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_UNIT</span></code></p></td>
+<td><p>−3</p></td>
+<td><p>Invalid unit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_PARAM</span></code></p></td>
+<td><p>−4</p></td>
+<td><p>Invalid parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_EMPTY</span></code></p></td>
+<td><p>−5</p></td>
+<td><p>Table empty</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_FULL</span></code></p></td>
+<td><p>−6</p></td>
+<td><p>Table full</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_NOT_FOUND</span></code></p></td>
+<td><p>−7</p></td>
+<td><p>Entry not found</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_EXISTS</span></code></p></td>
+<td><p>−8</p></td>
+<td><p>Entry exists</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_TIMEOUT</span></code></p></td>
+<td><p>−9</p></td>
+<td><p>Operation timed out</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_BUSY</span></code></p></td>
+<td><p>−10</p></td>
+<td><p>Operation still running</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_FAIL</span></code></p></td>
+<td><p>−11</p></td>
+<td><p>Operation failed</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_DISABLED</span></code></p></td>
+<td><p>−12</p></td>
+<td><p>Operation disabled</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_BADID</span></code></p></td>
+<td><p>−13</p></td>
+<td><p>Invalid identifier</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_RESOURCE</span></code></p></td>
+<td><p>−14</p></td>
+<td><p>No resources for operation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_CONFIG</span></code></p></td>
+<td><p>−15</p></td>
+<td><p>Invalid configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_UNAVAIL</span></code></p></td>
+<td><p>−16</p></td>
+<td><p>Feature unavailable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_INIT</span></code></p></td>
+<td><p>−17</p></td>
+<td><p>Feature not initialized</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BCM_E_PORT</span></code></p></td>
+<td><p>−18</p></td>
+<td><p>Invalid port</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">BCM_E_UNAVAIL</span></code> usually means the API is not supported on Trident 3, not
+that something is broken.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cint.html" class="btn btn-neutral float-left" title="Cint: the C interpreter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scripting.html" class="btn btn-neutral float-right" title="Scripting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

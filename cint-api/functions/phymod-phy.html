@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>phymod_phy_* (257) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="portmod_port_* (297)" href="portmod-port.html" />
+    <link rel="prev" title="bcm_vxlan_* (60)" href="bcm-vxlan.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">phymod_phy_*</span></code> (257)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="phymod-phy-257">
+<h1><code class="docutils literal notranslate"><span class="pre">phymod_phy_*</span></code> (257)<a class="headerlink" href="#phymod-phy-257" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int phymod_phy_50g_nofec_20k_am_spacing_enable_get(phymod_phy_access_t *phy, int *enable);
+int phymod_phy_50g_nofec_20k_am_spacing_enable_set(phymod_phy_access_t *phy, int enable);
+int phymod_phy_PAM4_tx_pattern_enable_get(phymod_phy_access_t *phy, phymod_PAM4_tx_pattern_t pattern_type, uint32 *enable);
+int phymod_phy_PAM4_tx_pattern_enable_set(phymod_phy_access_t *phy, phymod_PAM4_tx_pattern_t pattern_type, uint32 enable);
+int phymod_phy_am_loss_align_multi_state_get(phymod_phy_access_t *phy, uint32 *am_loss_align_multi_state);
+int phymod_phy_am_loss_get(phymod_phy_access_t *phy, uint32 *am_loss);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_an_timer_get(phymod_phy_access_t *phy, phymod_an_timer_t timer_type, uint32 *period);
+int phymod_phy_an_timer_set(phymod_phy_access_t *phy, phymod_an_timer_t timer_type, uint32 period);
+int phymod_phy_autoneg_ability_get(phymod_phy_access_t *phy, phymod_autoneg_ability_t *an_ability_get_type);
+int phymod_phy_autoneg_ability_set(phymod_phy_access_t *phy, phymod_autoneg_ability_t *an_ability_set_type);
+int phymod_phy_autoneg_advert_ability_get(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities);
+int phymod_phy_autoneg_advert_ability_set(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities, phymod_phy_pll_state_t *old_pll_adv_state, phymod_phy_pll_state_t *new_pll_adv_state);
+int phymod_phy_autoneg_get(phymod_phy_access_t *phy, phymod_autoneg_control_t *an, uint32 *an_done);
+int phymod_phy_autoneg_line_side_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_autoneg_line_side_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_autoneg_oui_get(phymod_phy_access_t *phy, phymod_autoneg_oui_t *an_oui);
+int phymod_phy_autoneg_oui_set(phymod_phy_access_t *phy, phymod_autoneg_oui_t an_oui);
+int phymod_phy_autoneg_remote_ability_get(phymod_phy_access_t *phy, phymod_autoneg_ability_t *an_ability_get_type);
+int phymod_phy_autoneg_remote_advert_ability_get(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities);
+int phymod_phy_autoneg_restart_set(phymod_phy_access_t *phy, phymod_autoneg_control_t *an);
+int phymod_phy_autoneg_set(phymod_phy_access_t *phy, phymod_autoneg_control_t *an);
+int phymod_phy_autoneg_speed_id_table_reload(phymod_phy_access_t *phy, uint32 gsh_header_enable);
+int phymod_phy_autoneg_status_get(phymod_phy_access_t *phy, phymod_autoneg_status_t *status);
+int phymod_phy_autoneg_try_enable(phymod_phy_access_t *phy, phymod_an_try_enable_control_t *an, phymod_phy_an_status_t *an_status);
+int phymod_phy_ber_proj(phymod_phy_access_t *phy, phymod_ber_proj_mode_t mode, phymod_phy_ber_proj_options_t *options);
+int phymod_phy_bond_in_pwrdn_override(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_channel_loss_hint_get(phymod_phy_access_t *phy, uint32 *channel_loss);
+int phymod_phy_channel_loss_hint_set(phymod_phy_access_t *phy, uint32 channel_loss);
+int phymod_phy_cl72_get(phymod_phy_access_t *phy, uint32 *cl72_en);
+int phymod_phy_cl72_set(phymod_phy_access_t *phy, uint32 cl72_en);
+int phymod_phy_cl72_status_get(phymod_phy_access_t *phy, phymod_cl72_status_t *status);
+int phymod_phy_codec_mode_get(phymod_phy_access_t *phy, phymod_phy_codec_mode_t *codec_type);
+int phymod_phy_codec_mode_set(phymod_phy_access_t *phy, phymod_phy_codec_mode_t codec_type);
+int phymod_phy_consecutive_bad_cw_get(phymod_phy_access_t *phy, uint32 *consecutive_bad_cw);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_consecutive_bad_cw_set(phymod_phy_access_t *phy, uint32 consecutive_bad_cw);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_core_mode_get(phymod_phy_access_t *phy, phymod_core_mode_t *core_mode);
+int phymod_phy_core_mode_set(phymod_phy_access_t *phy, phymod_core_mode_t core_mode);
+int phymod_phy_cpo_rx_set(phymod_phy_access_t *phy, uint32 is_rev_a0);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_ctlos_ocode_get(phymod_phy_access_t *phy, uint32 *ctlos_ocode);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_ctlos_ocode_set(phymod_phy_access_t *phy, uint32 ctlos_ocode);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_diagnostics_get(phymod_phy_access_t *phy, phymod_phy_diagnostics_t *diag);
+int phymod_phy_die_temperature_get(phymod_phy_access_t *phy, int16 *temp_val);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_duplex_get(phymod_phy_access_t *phy, phymod_duplex_mode_t *duplex);
+int phymod_phy_duplex_set(phymod_phy_access_t *phy, phymod_duplex_mode_t duplex);
+int phymod_phy_eee_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_eee_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_external_los_enable_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_external_los_enable_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_eye_margin_est_array_get(phymod_phy_access_t *phy, uint32 is_pam4, phymod_eye_margin_value_t *eye_margin);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_eye_margin_est_get(phymod_phy_access_t *phy, phymod_eye_margin_mode_t eye_margin_mode, uint32 *value);
+int phymod_phy_eyescan_run(phymod_phy_access_t *phy, uint32 flags, phymod_eyescan_mode_t mode, phymod_phy_eyescan_options_t *eyescan_options);
+int phymod_phy_fast_ber_proj_get(phymod_phy_access_t *phy, uint32 *ber_proj_data);
+int phymod_phy_fec_bypass_indication_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_fec_bypass_indication_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_fec_cl91_correctable_counter_get(phymod_phy_access_t *phy, uint32 *count);
+int phymod_phy_fec_cl91_uncorrectable_counter_get(phymod_phy_access_t *phy, uint32 *count);
+int phymod_phy_fec_correctable_counter_get(phymod_phy_access_t *phy, uint32 *count);
+int phymod_phy_fec_corruption_period_get(phymod_phy_access_t *phy, uint32 *period);
+int phymod_phy_fec_corruption_period_set(phymod_phy_access_t *phy, uint32 period);
+int phymod_phy_fec_degraded_ser_get(phymod_phy_access_t *phy, phymod_fec_degraded_ser_config_t *config);
+int phymod_phy_fec_degraded_ser_set(phymod_phy_access_t *phy, phymod_fec_degraded_ser_config_t config);
+int phymod_phy_fec_degraded_ser_status_get(phymod_phy_access_t *phy, phymod_fec_degraded_ser_status_t *status);
+int phymod_phy_fec_enable_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_fec_enable_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_fec_error_bits_counter_get(phymod_phy_access_t *phy, uint32 *count);
+int phymod_phy_fec_error_inject_config_get(phymod_phy_access_t *phy, phymod_fec_error_injection_config_t *error_injection_config);
+int phymod_phy_fec_error_inject_config_set(phymod_phy_access_t *phy, phymod_fec_error_injection_config_t *error_injection_config);
+int phymod_phy_fec_error_inject_enable_get(phymod_phy_access_t *phy, phymod_fec_error_injection_enable_t *error_injection_enable);
+int phymod_phy_fec_error_inject_enable_set(phymod_phy_access_t *phy, phymod_fec_error_injection_enable_t *error_injection_enable);
+int phymod_phy_fec_error_inject_get(phymod_phy_access_t *phy, uint16 *error_control_map, phymod_fec_error_mask_t *bit_error_mask);
+int phymod_phy_fec_error_inject_set(phymod_phy_access_t *phy, uint16 error_control_map, phymod_fec_error_mask_t bit_error_mask);
+int phymod_phy_fec_override_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_fec_override_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_fec_three_cw_bad_state_get(phymod_phy_access_t *phy, uint32 *state);
+int phymod_phy_fec_uncorrectable_counter_get(phymod_phy_access_t *phy, uint32 *count);
+int phymod_phy_firmware_core_config_get(phymod_phy_access_t *phy, phymod_firmware_core_config_t *fw_core_config);
+int phymod_phy_firmware_core_config_set(phymod_phy_access_t *phy, phymod_firmware_core_config_t fw_core_config);
+int phymod_phy_firmware_lane_config_get(phymod_phy_access_t *phy, phymod_firmware_lane_config_t *fw_lane_config);
+int phymod_phy_firmware_lane_config_set(phymod_phy_access_t *phy, phymod_firmware_lane_config_t fw_lane_config);
+int phymod_phy_firmware_load_info_get(phymod_phy_access_t *phy, phymod_firmware_load_info_t *info);
+int phymod_phy_flow_control_mode_get(phymod_phy_access_t *phy, uint32 ingress, uint32 *mode);
+int phymod_phy_flow_control_mode_set(phymod_phy_access_t *phy, uint32 mode, uint32 ingress);
+int phymod_phy_flr_config_get(phymod_phy_access_t *phy, uint32 *enable, phymod_phy_flr_timeout_t *timeout_time);
+int phymod_phy_flr_config_set(phymod_phy_access_t *phy, uint32 enable, phymod_phy_flr_timeout_t timeout_time);
+int phymod_phy_flt_diagnostic_get(phymod_phy_access_t *phy, phymod_flt_diagnostic_t *rxffe);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_forced_speed_line_side_get(phymod_phy_access_t *phy, uint32 *speed);
+int phymod_phy_forced_speed_line_side_set(phymod_phy_access_t *phy, uint32 speed);
+int phymod_phy_fw_is_flr_supported(phymod_phy_access_t *phy, uint32 *flr_support);
+int phymod_phy_gpio_config_get(phymod_phy_access_t *phy, int pin_no, phymod_gpio_mode_t *gpio_mode);
+int phymod_phy_gpio_config_set(phymod_phy_access_t *phy, int pin_no, phymod_gpio_mode_t gpio_mode);
+int phymod_phy_gpio_pin_value_get(phymod_phy_access_t *phy, int pin_no, int *value);
+int phymod_phy_gpio_pin_value_set(phymod_phy_access_t *phy, int pin_no, int value);
+int phymod_phy_hg2_codec_control_get(phymod_phy_access_t *phy, phymod_phy_hg2_codec_t *hg2_codec);
+int phymod_phy_hg2_codec_control_set(phymod_phy_access_t *phy, phymod_phy_hg2_codec_t hg2_codec);
+int phymod_phy_hi_ber_get(phymod_phy_access_t *phy, uint32 *hi_ber);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_i2c_read(phymod_phy_access_t *phy, uint32 flags, uint32 addr, uint32 offset, uint32 size, uint8 *data);
+int phymod_phy_i2c_write(phymod_phy_access_t *phy, uint32 flags, uint32 addr, uint32 offset, uint32 size, uint8 *data);
+int phymod_phy_init(phymod_phy_access_t *phy, phymod_phy_init_config_t *init_config);
+int phymod_phy_interface_config_get(phymod_phy_access_t *phy, uint32 flags, phymod_ref_clk_t ref_clock, phymod_phy_inf_config_t *config);
+int phymod_phy_interface_config_set(phymod_phy_access_t *phy, uint32 flags, phymod_phy_inf_config_t *config);
+int phymod_phy_interrupt_enable_get(phymod_phy_access_t *phy, phymod_interrupt_type_t intr_type, uint32 *enable);
+int phymod_phy_interrupt_enable_set(phymod_phy_access_t *phy, phymod_interrupt_type_t intr_type, uint32 enable);
+int phymod_phy_intr_enable_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_intr_enable_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_intr_status_clear(phymod_phy_access_t *phy, uint32 intr_clr);
+int phymod_phy_intr_status_get(phymod_phy_access_t *phy, uint32 *intr_status);
+int phymod_phy_lane_config_default_get(phymod_phy_access_t *phy, phymod_phy_signalling_method_t mode, phymod_firmware_lane_config_t *lane_config);
+int phymod_phy_lane_cross_switch_map_get(phymod_phy_access_t *phy, uint32 *tx_array);
+int phymod_phy_lane_cross_switch_map_set(phymod_phy_access_t *phy, uint32 *tx_array);
+int phymod_phy_link_mon_enable_get(phymod_phy_access_t *phy, phymod_link_monitor_mode_t link_mon_mode, uint32 *enable);
+int phymod_phy_link_mon_enable_set(phymod_phy_access_t *phy, phymod_link_monitor_mode_t link_mon_mode, uint32 enable);
+int phymod_phy_link_mon_status_get(phymod_phy_access_t *phy, uint32 *lock_status, uint32 *lock_lost_lh, uint32 *error_count);
+int phymod_phy_link_status_get(phymod_phy_access_t *phy, uint32 *link_status);
+int phymod_phy_link_time_diagnostic_get(phymod_phy_access_t *phy, uint32 *link_time);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_linkcat(phymod_phy_access_t *phy, phymod_linkcat_config_t linkcat_config);
+int phymod_phy_linkcat_parallel(phymod_phy_access_t *phy, phymod_linkcat_config_t linkcat_config);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_linkdown_transmit_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_linkdown_transmit_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_load_speed_id_entry(phymod_phy_access_t *phy, uint32 speed, uint32 num_lane, phymod_fec_type_t fec_type);
+int phymod_phy_local_fault_info_get(phymod_phy_access_t *phy, phymod_phy_local_fault_info_t *local_fault_info);
+int phymod_phy_local_pattern_get(phymod_phy_access_t *phy, uint32 *local_pattern);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_local_pattern_set(phymod_phy_access_t *phy, uint32 local_pattern);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_loopback_get(phymod_phy_access_t *phy, phymod_loopback_mode_t loopback, uint32 *enable);
+int phymod_phy_loopback_set(phymod_phy_access_t *phy, phymod_loopback_mode_t loopback, uint32 enable);
+int phymod_phy_master_get(phymod_phy_access_t *phy, phymod_master_mode_t *master_mode);
+int phymod_phy_master_set(phymod_phy_access_t *phy, phymod_master_mode_t master_mode);
+int phymod_phy_media_type_tx_get(phymod_phy_access_t *phy, phymod_media_typed_t media, phymod_tx_t *tx);
+int phymod_phy_medium_type_get(phymod_phy_access_t *phy, phymod_firmware_media_type_t *medium_type);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_medium_type_set(phymod_phy_access_t *phy, phymod_firmware_media_type_t medium_type);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_mpi_diagnostic_get(phymod_phy_access_t *phy, phymod_mpi_diagnostic_t *mpi_diag);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_multi_get(phymod_phy_access_t *phy, phymod_multi_data_t *multi_data);
+int phymod_phy_nr_error_correction_decoder_enable_get(phymod_phy_access_t *phy, uint32 *enable);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_nr_error_correction_decoder_enable_set(phymod_phy_access_t *phy, uint32 enable);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_op_mode_get(phymod_phy_access_t *phy, phymod_operation_mode_t *op_mode);
+int phymod_phy_osr_mode_get(phymod_phy_access_t *phy, phymod_osr_mode_t *osr_mode);
+int phymod_phy_pass_through_config_get(phymod_phy_access_t *phy, uint32 *enable);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pattern_config_get(phymod_phy_access_t *phy, phymod_pattern_t *pattern);
+int phymod_phy_pattern_config_set(phymod_phy_access_t *phy, phymod_pattern_t *pattern);
+int phymod_phy_pattern_enable_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_pattern_enable_set(phymod_phy_access_t *phy, uint32 enable, phymod_pattern_t *pattern);
+int phymod_phy_pch_config_get(phymod_phy_access_t *phy, phymod_pch_config_t *pch_config);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pch_config_set(phymod_phy_access_t *phy, phymod_pch_config_t *pch_config);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pcs_enable_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_pcs_info_dump(phymod_phy_access_t *phy, char *type);
+int phymod_phy_pcs_lane_map_set(phymod_phy_access_t *phy, phymod_lane_map_t *lane_map);
+int phymod_phy_pcs_lane_swap_adjust(phymod_phy_access_t *phy, uint32 active_lane_map, uint32 original_tx_lane_map, uint32 original_rx_lane_map);
+int phymod_phy_pcs_reset(phymod_phy_access_t *phy);
+int phymod_phy_pcs_tx_fsm_check(phymod_phy_access_t *phy, uint32 *tx_e_status);
+int phymod_phy_pcs_userspeed_get(phymod_phy_access_t *phy, phymod_pcs_userspeed_config_t *config);
+int phymod_phy_pcs_userspeed_set(phymod_phy_access_t *phy, phymod_pcs_userspeed_config_t *config);
+int phymod_phy_pfc_use_ip_cos_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_pfc_use_ip_cos_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_pll_clock_buffer_pwrdn(phymod_phy_access_t *phy, uint32 pll_index, uint32 tx_pwrdn, uint32 rx_pwrdn);
+int phymod_phy_pll_multiplier_get(phymod_phy_access_t *phy, uint32 *core_vco_pll_multiplier);
+int phymod_phy_pll_powerdown_get(phymod_phy_access_t *phy, uint32 pll_index, uint32 *powerdown);
+int phymod_phy_pll_pwrdn(phymod_phy_access_t *phy, uint32 pll_index, uint32 pwrdn);
+int phymod_phy_pll_reconfig(phymod_phy_access_t *phy, uint8 pll_index, uint32 pll_div, phymod_ref_clk_t ref_clk);
+int phymod_phy_pll_rx_clock_buffer_bw_update(phymod_phy_access_t *phy, uint32 pll_index, uint32 pll_div, phymod_ref_clk_t ref_clk);
+int phymod_phy_pmd_info_dump(phymod_phy_access_t *phy, char *type);
+int phymod_phy_pmd_info_init(phymod_phy_access_t *phy);
+int phymod_phy_pmd_info_size_get(phymod_phy_access_t *phy, uint32 *size);
+int phymod_phy_pmd_lane_diag_debug_level_get(phymod_phy_access_t *phy, uint32 *level);
+int phymod_phy_pmd_lane_diag_debug_level_set(phymod_phy_access_t *phy, uint32 level);
+int phymod_phy_pmd_lane_map_set(phymod_phy_access_t *phy, phymod_lane_map_t *lane_map);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pmd_override_enable_set(phymod_phy_access_t *phy, phymod_override_type_t pmd_override_type, uint32 override_enable, uint32 override_val);
+int phymod_phy_pmd_uc_ram_variable_get(phymod_phy_access_t *phy, phymod_uc_ram_var_t *uc_ram_var, int32 *value);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pmd_uc_ram_variable_set(phymod_phy_access_t *phy, phymod_uc_ram_var_t *uc_ram_var, int32 value);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pmd_usr_event_log_group_mask_get(phymod_phy_access_t *phy, uint32 *event_group_mask);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pmd_usr_event_log_group_mask_set(phymod_phy_access_t *phy, uint32 event_group_mask);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_pmd_usr_misc_ctrl_get(phymod_phy_access_t *phy, phymod_phy_pmd_usr_misc_ctrl_t mode, uint32 *value);
+int phymod_phy_pmd_usr_misc_ctrl_set(phymod_phy_access_t *phy, phymod_phy_pmd_usr_misc_ctrl_t mode, uint32 value);
+int phymod_phy_polarity_get(phymod_phy_access_t *phy, phymod_polarity_t *polarity);
+int phymod_phy_polarity_set(phymod_phy_access_t *phy, phymod_polarity_t *polarity);
+int phymod_phy_post_aeq_bias_with_hysteresis_set(phymod_phy_access_t *phy, int16 previous_temp, int16 set_temp, uint8 *table_index);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_power_get(phymod_phy_access_t *phy, phymod_phy_power_t *power);
+int phymod_phy_power_set(phymod_phy_access_t *phy, phymod_phy_power_t *power);
+int phymod_phy_prbs_config_get(phymod_phy_access_t *phy, uint32 flags, phymod_prbs_t *prbs);
+int phymod_phy_prbs_config_set(phymod_phy_access_t *phy, uint32 flags, phymod_prbs_t *prbs);
+int phymod_phy_prbs_enable_get(phymod_phy_access_t *phy, uint32 flags, uint32 *enable);
+int phymod_phy_prbs_enable_set(phymod_phy_access_t *phy, uint32 flags, uint32 enable);
+int phymod_phy_prbs_status_get(phymod_phy_access_t *phy, uint32 flags, phymod_prbs_status_t *prbs_status);
+int phymod_phy_private_read(phymod_phy_access_t *phy, uint32 addr, uint32 *val);
+int phymod_phy_private_write(phymod_phy_access_t *phy, uint32 addr, uint32 val);
+int phymod_phy_psm_cos_bmp_get(phymod_phy_access_t *phy, uint32 *cos_bmp);
+int phymod_phy_psm_cos_bmp_set(phymod_phy_access_t *phy, uint32 cos_bmp);
+int phymod_phy_ref_clk_get(phymod_phy_access_t *phy, phymod_ref_clk_t *ref_clk);
+int phymod_phy_reg_read(phymod_phy_access_t *phy, uint32 reg_addr, uint32 *val);
+int phymod_phy_reg_write(phymod_phy_access_t *phy, uint32 reg_addr, uint32 val);
+int phymod_phy_rescal_get(phymod_phy_access_t *phy, uint32 *value);
+int phymod_phy_rescal_set(phymod_phy_access_t *phy, uint32 enable, uint32 value);
+int phymod_phy_reset_get(phymod_phy_access_t *phy, phymod_phy_reset_t *reset);
+int phymod_phy_reset_set(phymod_phy_access_t *phy, phymod_phy_reset_t *reset);
+int phymod_phy_rev_id(phymod_phy_access_t *phy, uint32 *rev_id);
+int phymod_phy_rs_fec_rxp_get(phymod_phy_access_t *phy, uint32 *hi_ser_lh, uint32 *hi_ser_live);
+int phymod_phy_rsfec_sym_err_mem_info_get(phymod_phy_access_t *phy, phymod_rsfec_symbol_err_mem_info_t *rsfec_sym_err_mem_info);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_rsfec_symb_err_count_get(phymod_phy_access_t *phy, phymod_rs_fec_lane_map_per_logical_lane_t *fec_lane_map, uint64 *error_count);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_rsfec_symbol_error_counter_get(phymod_phy_access_t *phy, int max_count, int *actual_count, uint32 *error_count);
+int phymod_phy_rx_adaptation_resume(phymod_phy_access_t *phy);
+int phymod_phy_rx_dc_offset_get(phymod_phy_access_t *phy, uint32 *rx_dc_offset);
+int phymod_phy_rx_get(phymod_phy_access_t *phy, phymod_rx_t *rx);
+int phymod_phy_rx_lane_control_get(phymod_phy_access_t *phy, phymod_phy_rx_lane_control_t *rx_control);
+int phymod_phy_rx_lane_control_set(phymod_phy_access_t *phy, phymod_phy_rx_lane_control_t rx_control);
+int phymod_phy_rx_pmd_lock_counter_get(phymod_phy_access_t *phy, uint32 *counter);
+int phymod_phy_rx_pmd_lock_status_get(phymod_phy_access_t *phy, uint32 *rx_pmd_locked, uint32 *rx_pmd_lock_change);
+int phymod_phy_rx_pmd_locked_get(phymod_phy_access_t *phy, uint32 *rx_pmd_locked);
+int phymod_phy_rx_ppm_get(phymod_phy_access_t *phy, int16 *rx_ppm);
+int phymod_phy_rx_restart(phymod_phy_access_t *phy);
+int phymod_phy_rx_set(phymod_phy_access_t *phy, phymod_rx_t *rx);
+int phymod_phy_rx_signal_detect_get(phymod_phy_access_t *phy, uint32 *rx_signal_detect);
+int phymod_phy_rx_slicer_position_get(phymod_phy_access_t *phy, uint32 flags, phymod_slicer_position_t *position);
+int phymod_phy_rx_slicer_position_max_get(phymod_phy_access_t *phy, uint32 flags, phymod_slicer_position_t *position_min, phymod_slicer_position_t *position_max);
+int phymod_phy_rx_slicer_position_set(phymod_phy_access_t *phy, uint32 flags, phymod_slicer_position_t *position);
+int phymod_phy_rx_snr_get(phymod_phy_access_t *phy, uint32 *rx_snr);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_rxffe_diagnostic_get(phymod_phy_access_t *phy, uint32 *rxffe, uint32 *rxffe_cnt);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_serdes_power_set(phymod_phy_access_t *phy, phymod_power_option_t power_option, phymod_power_mode_t power_mode);
+int phymod_phy_short_chn_mode_enable_get(phymod_phy_access_t *phy, uint32 *enable, uint32 *status);
+int phymod_phy_short_chn_mode_enable_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_signal_detect_status_get(phymod_phy_access_t *phy, phymod_signal_detect_status_t *sd_status);
+int phymod_phy_speed_config_get(phymod_phy_access_t *phy, phymod_phy_speed_config_t *speed_config);
+int phymod_phy_speed_config_set(phymod_phy_access_t *phy, phymod_phy_speed_config_t *speed_config, phymod_phy_pll_state_t *old_pll_state, phymod_phy_pll_state_t *new_pll_state);
+int phymod_phy_stat_get(phymod_phy_access_t *phy, phymod_phy_stat_t *stat);
+int phymod_phy_status_dump(phymod_phy_access_t *phy);
+int phymod_phy_sw_an_advert_set(phymod_phy_access_t *phy, phymod_autoneg_ability_t *an_ability_set_type, phymod_sw_an_ctxt_t *an_ctxt);
+int phymod_phy_sw_an_base_page_exchange_handler(phymod_phy_access_t *phy, phymod_sw_an_ctxt_t *an_ctxt);
+int phymod_phy_sw_an_control_status_get(phymod_phy_access_t *phy, phymod_sw_an_ctrl_status_t *an_ctrl_status);
+int phymod_phy_sw_an_lp_page_rdy_handler(phymod_phy_access_t *phy, phymod_sw_an_ctxt_t *an_ctxt);
+int phymod_phy_sw_autoneg_advert_ability_get(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities, phymod_sw_an_ctxt_t *an_ctxt);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_sw_autoneg_advert_ability_set(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities, phymod_phy_pll_state_t *old_pll_adv_state, phymod_phy_pll_state_t *new_pll_adv_state, phymod_sw_an_ctxt_t *an_ctxt);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_sw_autoneg_enable(phymod_phy_access_t *phy, int enable);
+int phymod_phy_sw_autoneg_remote_advert_ability_get(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities, phymod_sw_an_ctxt_t *an_ctxt);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_sw_table_reload(phymod_phy_access_t *phy, phymod_sw_table_load_t *table_load);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_synce_clk_ctrl_get(phymod_phy_access_t *phy, phymod_synce_clk_ctrl_t *cfg);
+int phymod_phy_synce_clk_ctrl_set(phymod_phy_access_t *phy, phymod_synce_clk_ctrl_t cfg);
+int phymod_phy_tdm_mode_update(phymod_phy_access_t *phy, uint32 tdm_enable, uint32 tdm_mode);
+int phymod_phy_temp_offset_get(phymod_phy_access_t *phy, int *temp_offset);
+int phymod_phy_temp_offset_set(phymod_phy_access_t *phy, int temp_offset);
+int phymod_phy_timesync_rx_deskew_info_dump(phymod_phy_access_t *phy, char *type);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_tp_diagnostic_get(phymod_phy_access_t *phy, uint32 *tp, uint32 *tp_cnt);  /* not in OpenBCM 6.5.27 */
+int phymod_phy_training_tx_fir_post_get(phymod_phy_access_t *phy, uint8 *tx_post);
+int phymod_phy_training_tx_fir_post_set(phymod_phy_access_t *phy, uint8 tx_post);
+int phymod_phy_tx_get(phymod_phy_access_t *phy, phymod_tx_t *tx);
+int phymod_phy_tx_lane_control_get(phymod_phy_access_t *phy, phymod_phy_tx_lane_control_t *tx_control);
+int phymod_phy_tx_lane_control_set(phymod_phy_access_t *phy, phymod_phy_tx_lane_control_t tx_control);
+int phymod_phy_tx_override_get(phymod_phy_access_t *phy, phymod_tx_override_t *tx_override);
+int phymod_phy_tx_override_set(phymod_phy_access_t *phy, phymod_tx_override_t *tx_override);
+int phymod_phy_tx_pam4_precoder_enable_get(phymod_phy_access_t *phy, int *enable);
+int phymod_phy_tx_pam4_precoder_enable_set(phymod_phy_access_t *phy, int enable);
+int phymod_phy_tx_pattern_get(phymod_phy_access_t *phy, phymod_phy_tx_pattern_t *tx_pattern);
+int phymod_phy_tx_pattern_set(phymod_phy_access_t *phy, phymod_phy_tx_pattern_t tx_pattern);
+int phymod_phy_tx_phase_lock_rx_set(phymod_phy_access_t *phy, uint8 enable);
+int phymod_phy_tx_phase_lock_tx_set(phymod_phy_access_t *phy, uint8 enable);
+int phymod_phy_tx_set(phymod_phy_access_t *phy, phymod_tx_t *tx);
+int phymod_phy_tx_taps_default_get(phymod_phy_access_t *phy, phymod_phy_signalling_method_t mode, phymod_tx_t *tx);
+int phymod_phy_txpi_config_get(phymod_phy_access_t *phy, phymod_txpi_config_t *config);
+int phymod_phy_txpi_config_set(phymod_phy_access_t *phy, phymod_txpi_config_t *config);
+int phymod_phy_uc_ram_var_get(phymod_phy_access_t *phy, phymod_uc_ram_variable_t ram_var, int16 *value);
+int phymod_phy_uc_ram_var_set(phymod_phy_access_t *phy, phymod_uc_ram_variable_t ram_var, int16 value);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-vxlan.html" class="btn btn-neutral float-left" title="bcm_vxlan_* (60)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="portmod-port.html" class="btn btn-neutral float-right" title="portmod_port_* (297)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

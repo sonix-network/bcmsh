@@ -1,0 +1,2023 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forwarding tables and routing &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ACL, field processor and UDF" href="acl.html" />
+    <link rel="prev" title="Ports, lanes and SerDes" href="ports.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Variable reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ports.html">Ports, lanes and SerDes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Forwarding tables and routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acl.html">ACL, field processor and UDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmu.html">Buffers, queues and QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry, timing and OAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu.html">CPU, DMA, interrupts and counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chip.html">Chip, boot, warm boot and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sai.html">SAI-specific variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../config.html">Configuration variables</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Variable reference</a></li>
+      <li class="breadcrumb-item active">Forwarding tables and routing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="forwarding-tables-and-routing">
+<h1>Forwarding tables and routing<a class="headerlink" href="#forwarding-tables-and-routing" title="Link to this heading"></a></h1>
+<p>Sizes of the shared hash and TCAM tables (L2, host, exact match, ALPM/LPM), ECMP, VXLAN/RIOT overlay resources, hashing and learning. See <a class="reference internal" href="../tables.html"><span class="doc">Forwarding table sizes</span></a>.</p>
+<p>Set in several SONiC Trident 3 HWSKU files: <a class="reference internal" href="#confval-arl_clean_timeout_usec"><code class="xref std std-confval docutils literal notranslate"><span class="pre">arl_clean_timeout_usec</span></code></a>, <a class="reference internal" href="#confval-bcm_tunnel_term_compatible_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">bcm_tunnel_term_compatible_mode</span></code></a>, <a class="reference internal" href="#confval-flow_init_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">flow_init_mode</span></code></a>, <a class="reference internal" href="#confval-fpem_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">fpem_mem_entries</span></code></a>, <a class="reference internal" href="#confval-host_as_route_disable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">host_as_route_disable</span></code></a>, <a class="reference internal" href="#confval-ipv6_lpm_128b_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ipv6_lpm_128b_enable</span></code></a>, <a class="reference internal" href="#confval-l2_entry_used_as_my_station"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2_entry_used_as_my_station</span></code></a>, <a class="reference internal" href="#confval-l2_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2_mem_entries</span></code></a>, <a class="reference internal" href="#confval-l2xmsg_hostbuf_size"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2xmsg_hostbuf_size</span></code></a>, <a class="reference internal" href="#confval-l2xmsg_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2xmsg_mode</span></code></a>, <a class="reference internal" href="#confval-l3_alpm_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_alpm_enable</span></code></a>, <a class="reference internal" href="#confval-l3_alpm_ipv6_128b_bkt_rsvd"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_alpm_ipv6_128b_bkt_rsvd</span></code></a>, <a class="reference internal" href="#confval-l3_ecmp_levels"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_ecmp_levels</span></code></a>, <a class="reference internal" href="#confval-l3_max_ecmp_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_max_ecmp_mode</span></code></a>, <a class="reference internal" href="#confval-l3_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_mem_entries</span></code></a>, <a class="reference internal" href="#confval-lpm_scaling_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">lpm_scaling_enable</span></code></a>, <a class="reference internal" href="#confval-max_vp_lags"><code class="xref std std-confval docutils literal notranslate"><span class="pre">max_vp_lags</span></code></a>, <a class="reference internal" href="#confval-mpls_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">mpls_mem_entries</span></code></a>, <a class="reference internal" href="#confval-multicast_l2_range"><code class="xref std std-confval docutils literal notranslate"><span class="pre">multicast_l2_range</span></code></a>, <a class="reference internal" href="#confval-multicast_l3_range"><code class="xref std std-confval docutils literal notranslate"><span class="pre">multicast_l3_range</span></code></a>, <a class="reference internal" href="#confval-riot_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_enable</span></code></a>, <a class="reference internal" href="#confval-riot_overlay_ecmp_resilient_hash_size"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_overlay_ecmp_resilient_hash_size</span></code></a>, <a class="reference internal" href="#confval-riot_overlay_l3_egress_mem_size"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_overlay_l3_egress_mem_size</span></code></a>, <a class="reference internal" href="#confval-riot_overlay_l3_intf_mem_size"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_overlay_l3_intf_mem_size</span></code></a>, <a class="reference internal" href="#confval-use_all_splithorizon_groups"><code class="xref std std-confval docutils literal notranslate"><span class="pre">use_all_splithorizon_groups</span></code></a>, <a class="reference internal" href="#confval-vlan_xlate_1_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">vlan_xlate_1_mem_entries</span></code></a>, <a class="reference internal" href="#confval-vlan_xlate_2_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">vlan_xlate_2_mem_entries</span></code></a>.</p>
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_data_autosave">
+<span class="sig-name descname"><span class="pre">alpm_data_autosave</span></span><a class="headerlink" href="#confval-alpm_data_autosave" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable ALPM data autosave after first ALPM error ocurrs. The default file to save is: alpm_data.bin User can use shell command &lt;alpm data restore&gt; to restore ALPM HW data &amp; SW trie.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_dist_hit_interval_us">
+<span class="sig-name descname"><span class="pre">alpm_dist_hit_interval_us</span></span><a class="headerlink" href="#confval-alpm_dist_hit_interval_us" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_dist_hit_priority">
+<span class="sig-name descname"><span class="pre">alpm_dist_hit_priority</span></span><a class="headerlink" href="#confval-alpm_dist_hit_priority" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_flex_stat_support">
+<span class="sig-name descname"><span class="pre">alpm_flex_stat_support</span></span><a class="headerlink" href="#confval-alpm_flex_stat_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable flex counter support for ALPM.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_pre_filter">
+<span class="sig-name descname"><span class="pre">alpm_pre_filter</span></span><a class="headerlink" href="#confval-alpm_pre_filter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable ALPM pre-filter feature.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_resource_log_enable">
+<span class="sig-name descname"><span class="pre">alpm_resource_log_enable</span></span><a class="headerlink" href="#confval-alpm_resource_log_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_trace_enable">
+<span class="sig-name descname"><span class="pre">alpm_trace_enable</span></span><a class="headerlink" href="#confval-alpm_trace_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_trace_sanity">
+<span class="sig-name descname"><span class="pre">alpm_trace_sanity</span></span><a class="headerlink" href="#confval-alpm_trace_sanity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-alpm_trace_wrap">
+<span class="sig-name descname"><span class="pre">alpm_trace_wrap</span></span><a class="headerlink" href="#confval-alpm_trace_wrap" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-arl_clean_timeout_usec">
+<span class="sig-name descname"><span class="pre">arl_clean_timeout_usec</span></span><a class="headerlink" href="#confval-arl_clean_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">15000000</span></code></dd>
+</dl>
+<p>Timeout for hardware-accelerated ARL delete operations including: delete by port, delete by port+modid, delete by VLAN, delete by trunk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">15000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-arl_rate_limit">
+<span class="sig-name descname"><span class="pre">arl_rate_limit</span></span><a class="headerlink" href="#confval-arl_rate_limit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">3000</span></code></dd>
+</dl>
+<p>Limit the number of ARL messages/sec the software will process, to keep it from hogging the CPU. Set to 0 to disable. Does not apply to L2X shadow table (see l2xmsg_thread_usec instead).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-arl_resync_delay">
+<span class="sig-name descname"><span class="pre">arl_resync_delay</span></span><a class="headerlink" href="#confval-arl_resync_delay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">3000000</span></code></dd>
+</dl>
+<p>Delay this long after an ARL message overrun before a lengthy ARL- resync process. Setting to 0 to disables resync, in peril of getting an inconsistent ARL message stream and/or corrupt L2 shadow table.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_tunnel_term_compatible_mode">
+<span class="sig-name descname"><span class="pre">bcm_tunnel_term_compatible_mode</span></span><a class="headerlink" href="#confval-bcm_tunnel_term_compatible_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Terminate tunnels without matching the inner protocol (protocol mask 0), in the way all devices support. The SAI sets it to 1 if the file does not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 33 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bcm_tunnel_term_compatible_mode=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_use_gport">
+<span class="sig-name descname"><span class="pre">bcm_use_gport</span></span><a class="headerlink" href="#confval-bcm_use_gport" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>All API will return port numbers in GPORT encodings</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-defip_wide_key_for_ipmc_disable">
+<span class="sig-name descname"><span class="pre">defip_wide_key_for_ipmc_disable</span></span><a class="headerlink" href="#confval-defip_wide_key_for_ipmc_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Disable using single wide key for IPMC in DEFIP table. 0 – Enable using single wide key for IPMC in DEFIP table (default). 1 – Disable using single wide key for IPMC in DEFIP table.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dlb_enable">
+<span class="sig-name descname"><span class="pre">dlb_enable</span></span><a class="headerlink" href="#confval-dlb_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Enable/Disable the DLB feature. By default, we enable DLB. For disable, dlb_en = 0 For enable, dlb_en = 1</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dlb_flow_monitor_en">
+<span class="sig-name descname"><span class="pre">dlb_flow_monitor_en</span></span><a class="headerlink" href="#confval-dlb_flow_monitor_en" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Turn on/off DLB flow monitoring. When set to a non-zero value, DLB flow monitoring feature is enabled. DLB id of 0 is not available when DLB monitoring is enabled. Currently supported on BCM5698x only. Valid values are: 0 (disabled) or non-zero (enabled). Default value is 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dlb_hgt_lag_selection">
+<span class="sig-name descname"><span class="pre">dlb_hgt_lag_selection</span></span><a class="headerlink" href="#confval-dlb_hgt_lag_selection" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Select either trunk or higig trunk that supports DLB 0: higig trunk 1: trunk</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dlb_quality_adjustment_default_value_select">
+<span class="sig-name descname"><span class="pre">dlb_quality_adjustment_default_value_select</span></span><a class="headerlink" href="#confval-dlb_quality_adjustment_default_value_select" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dual_hash_recurse_depth_-table">
+<span class="sig-name descname"><span class="pre">dual_hash_recurse_depth_&lt;table&gt;</span></span><a class="headerlink" href="#confval-dual_hash_recurse_depth_-table" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum recursion depth when moving entries to make room in a dual-hash table. The multi-bank tables of Trident 3 use <a class="reference internal" href="#confval-multi_hash_recurse_depth"><code class="xref std std-confval docutils literal notranslate"><span class="pre">multi_hash_recurse_depth</span></code></a> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_dnat_pool</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_egr_vp_vlan_member</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_egress_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_ing_vp_vlan_member</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_l2x</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_l3x</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_mpls</span></code>, <code class="docutils literal notranslate"><span class="pre">dual_hash_recurse_depth_vlan</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-0"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ecmp_dlb_port_speeds">
+<span class="sig-name descname"><span class="pre">ecmp_dlb_port_speeds</span></span><a class="headerlink" href="#confval-ecmp_dlb_port_speeds" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ecmp_resilient_hash_size">
+<span class="sig-name descname"><span class="pre">ecmp_resilient_hash_size</span></span><a class="headerlink" href="#confval-ecmp_resilient_hash_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>The number of entries in the resilient hash table used by ECMP. The remaining entries are used by LAG resilient hashing. By default, the table is split evenly between ECMP and LAG resilient hashing. Valid values are 0, 32768, and 65536.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-egr_vlan_xlate_1_mem_entries">
+<span class="sig-name descname"><span class="pre">egr_vlan_xlate_1_mem_entries</span></span><a class="headerlink" href="#confval-egr_vlan_xlate_1_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">16384</span></code></dd>
+</dl>
+<p>Number of EGR_VLAN_XLATE_1 mem entries.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-egr_vlan_xlate_2_mem_entries">
+<span class="sig-name descname"><span class="pre">egr_vlan_xlate_2_mem_entries</span></span><a class="headerlink" href="#confval-egr_vlan_xlate_2_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">16384</span></code></dd>
+</dl>
+<p>Number of EGR_VLAN_XLATE_2 mem entries.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-egr_vlan_xlate_mem_banks">
+<span class="sig-name descname"><span class="pre">egr_vlan_xlate_mem_banks</span></span><a class="headerlink" href="#confval-egr_vlan_xlate_mem_banks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of minimum egress VLAN xlate mem banks. Applicable for devices supporting ISM.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-egr_vlan_xlate_mem_entries">
+<span class="sig-name descname"><span class="pre">egr_vlan_xlate_mem_entries</span></span><a class="headerlink" href="#confval-egr_vlan_xlate_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of widest egress VLAN xlate mem entries.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-epc_sobmh_block">
+<span class="sig-name descname"><span class="pre">epc_sobmh_block</span></span><a class="headerlink" href="#confval-epc_sobmh_block" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flow_init_mode">
+<span class="sig-name descname"><span class="pre">flow_init_mode</span></span><a class="headerlink" href="#confval-flow_init_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Which VXLAN implementation the SDK starts: 0 the legacy VXLAN module, 1 the flex-flow module. SONiC VXLAN files set 1, together with <a class="reference internal" href="#confval-riot_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_enable</span></code></a> and <a class="reference internal" href="sai.html#confval-sai_tunnel_support"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_tunnel_support</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 27 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">flow_init_mode=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fpem_mem_entries">
+<span class="sig-name descname"><span class="pre">fpem_mem_entries</span></span><a class="headerlink" href="#confval-fpem_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of exact-match (FPEM) entries, used by the flow tracker and exact-match ACL. Allocated in shared UFT banks of 16384; one bank is always rounded up to two.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 23 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">16384</span></code>, <code class="docutils literal notranslate"><span class="pre">32768</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-gport_rsv_mask">
+<span class="sig-name descname"><span class="pre">gport_rsv_mask</span></span><a class="headerlink" href="#confval-gport_rsv_mask" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Set the Receive Status Vector (RSV) mask for the Unimac</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">gport_rsv_mask_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">gport_rsv_mask_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">gport_rsv_mask</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-host_as_route_disable">
+<span class="sig-name descname"><span class="pre">host_as_route_disable</span></span><a class="headerlink" href="#confval-host_as_route_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>1 stops host entries from going into the route table when the host table is full or a hash bucket collides; 0 (the default) allows it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 21 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ip6_vxlan_mshg_enable">
+<span class="sig-name descname"><span class="pre">ip6_vxlan_mshg_enable</span></span><a class="headerlink" href="#confval-ip6_vxlan_mshg_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable/Disable egress multiple split horizon group check enhancement for IPv6 VxLAN. ip6_vxlan_mshg_enable = 0 disable ipv6 vxlan egress MSHG check enhancement. ip6_vxlan_mshg_enable = 1 enable ipv6 vxlan egress MSHG check enhancement.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipmc_age_mode">
+<span class="sig-name descname"><span class="pre">ipmc_age_mode</span></span><a class="headerlink" href="#confval-ipmc_age_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>IPMC aging mode. 0: (default): Application management mode. IPMC aging process triggered by applications and bcm_ipmc_age can be used to clear hit or delete entries. 1: SDK management mode. IPMC aging triggered by SDK and bcm_ipmc_age_timer_set can be used to set the interval of aging thread.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipmc_do_vlan">
+<span class="sig-name descname"><span class="pre">ipmc_do_vlan</span></span><a class="headerlink" href="#confval-ipmc_do_vlan" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Include the VLAN as part of the hash key for L3 IPMC</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipmc_independent_mode">
+<span class="sig-name descname"><span class="pre">ipmc_independent_mode</span></span><a class="headerlink" href="#confval-ipmc_independent_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable IPMC independent mode.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipmc_l2_use_vlan_vpn">
+<span class="sig-name descname"><span class="pre">ipmc_l2_use_vlan_vpn</span></span><a class="headerlink" href="#confval-ipmc_l2_use_vlan_vpn" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable broadcast domain (VLAN/VPN) hash keys lookup for L2 IPMC In absence of this config the device loopkup IPMC multicast table based on L3 ingress interface.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipv6_lpm_128b_enable">
+<span class="sig-name descname"><span class="pre">ipv6_lpm_128b_enable</span></span><a class="headerlink" href="#confval-ipv6_lpm_128b_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Enable IPv6 routes longer than /64 in the LPM table. Every SONiC Trident 3 file sets it to 1; the number of entries reserved is set with <a class="reference internal" href="#confval-num_ipv6_lpm_128b_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">num_ipv6_lpm_128b_entries</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 45 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x1</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">ipv6_lpm_128b_enable=0x1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2_age_mode">
+<span class="sig-name descname"><span class="pre">l2_age_mode</span></span><a class="headerlink" href="#confval-l2_age_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2_entry_used_as_my_station">
+<span class="sig-name descname"><span class="pre">l2_entry_used_as_my_station</span></span><a class="headerlink" href="#confval-l2_entry_used_as_my_station" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>If set, enable L2_ENTRY and L2_USER_ENTRY my station hit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 6 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2_hitbit_enable">
+<span class="sig-name descname"><span class="pre">l2_hitbit_enable</span></span><a class="headerlink" href="#confval-l2_hitbit_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2_mem_banks">
+<span class="sig-name descname"><span class="pre">l2_mem_banks</span></span><a class="headerlink" href="#confval-l2_mem_banks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of minimum l2 mem banks. Applicable for devices supporting ISM.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2_mem_entries">
+<span class="sig-name descname"><span class="pre">l2_mem_entries</span></span><a class="headerlink" href="#confval-l2_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">32768</span></code></dd>
+</dl>
+<p>Number of L2 (MAC) table entries. Trident 3 has 32768 dedicated entries; each further 32768 takes one shared UFT bank (at most 8 shared banks for L2, host and exact match together, 4 with ALPM). See <a class="reference internal" href="../tables.html"><span class="doc">Forwarding table sizes</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 46 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">32768</span></code>, <code class="docutils literal notranslate"><span class="pre">40960</span></code>, <code class="docutils literal notranslate"><span class="pre">65536</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">l2_mem_entries=32768</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2_overflow_event">
+<span class="sig-name descname"><span class="pre">l2_overflow_event</span></span><a class="headerlink" href="#confval-l2_overflow_event" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable L2 overflow event processing by default</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2_sw_aging_interval">
+<span class="sig-name descname"><span class="pre">l2_sw_aging_interval</span></span><a class="headerlink" href="#confval-l2_sw_aging_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>L2 s/w aging cycle recurrence interval in seconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2age_thread_pri">
+<span class="sig-name descname"><span class="pre">l2age_thread_pri</span></span><a class="headerlink" href="#confval-l2age_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Priority of the s/w based L2 aging thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2delete_chunks">
+<span class="sig-name descname"><span class="pre">l2delete_chunks</span></span><a class="headerlink" href="#confval-l2delete_chunks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>L2 table is DMAed into memory to search for entries to delete when no hardware assists are available. DMA is done in smaller parts to minimize memory use. Must be port of 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">4096</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2fifo_dma_max_error_count">
+<span class="sig-name descname"><span class="pre">l2fifo_dma_max_error_count</span></span><a class="headerlink" href="#confval-l2fifo_dma_max_error_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>L2FIFO DMA max error count</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2mod_dma_intr_enable">
+<span class="sig-name descname"><span class="pre">l2mod_dma_intr_enable</span></span><a class="headerlink" href="#confval-l2mod_dma_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2x_bulk_delete_min_poll_num">
+<span class="sig-name descname"><span class="pre">l2x_bulk_delete_min_poll_num</span></span><a class="headerlink" href="#confval-l2x_bulk_delete_min_poll_num" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This soc property is used to provide the minimum polling number for which the SOC timeout routine should iterate before which l2 bulk delete operation is expected to be completed. This can be used in tandem with timeout duration in microseconds for L2 bulk operations. The default timeout duration for l2 bulk operations is 15 sec and a custom value in usec can also be specified using the existing config property “arl_clean_timeout_usec”.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2x_bulk_op_learn_pause">
+<span class="sig-name descname"><span class="pre">l2x_bulk_op_learn_pause</span></span><a class="headerlink" href="#confval-l2x_bulk_op_learn_pause" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This soc property is applicable in L2 FIFO mode (l2xmsg_mode = 1), it is used to pause L2 learning during L2 bulk operations having record to L2 FIFO enabled. This soc property can be used in cases where there is very high L2 churn, which may cause contention for L2 FIFO table during L2 bulk operation, causing L2 bulk operation to timeout.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xlrn_clear_on_read">
+<span class="sig-name descname"><span class="pre">l2xlrn_clear_on_read</span></span><a class="headerlink" href="#confval-l2xlrn_clear_on_read" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>When enabled, entries are removed from learn cache immediately following a read operation. Valid values: 0 (disable) or 1 (enable)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xmsg_avl">
+<span class="sig-name descname"><span class="pre">l2xmsg_avl</span></span><a class="headerlink" href="#confval-l2xmsg_avl" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable L2X shadowing into AVL tree.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xmsg_chunks">
+<span class="sig-name descname"><span class="pre">l2xmsg_chunks</span></span><a class="headerlink" href="#confval-l2xmsg_chunks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Synchronize the L2X table in chunks to spread out the work over time and save memory on size of DMA buffer. Must be power of 2.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xmsg_hostbuf_size">
+<span class="sig-name descname"><span class="pre">l2xmsg_hostbuf_size</span></span><a class="headerlink" href="#confval-l2xmsg_hostbuf_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Size of the host buffer used to drain the L2 modification FIFO when <a class="reference internal" href="#confval-l2xmsg_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2xmsg_mode</span></code></a> is 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 14 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">8192</span></code>, <code class="docutils literal notranslate"><span class="pre">16384</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xmsg_mode">
+<span class="sig-name descname"><span class="pre">l2xmsg_mode</span></span><a class="headerlink" href="#confval-l2xmsg_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>How the SDK learns about L2 table changes (learning, aging): 0 polls the L2 table by DMA and compares it with a software copy, 1 reads the hardware L2 modification FIFO. SONiC files use 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 46 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">l2xmsg_mode=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xmsg_shadow_hit_-bits-src-dst">
+<span class="sig-name descname"><span class="pre">l2xmsg_shadow_hit_&lt;bits|src|dst&gt;</span></span><a class="headerlink" href="#confval-l2xmsg_shadow_hit_-bits-src-dst" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Whether the software L2 shadow table tracks hardware hit bits (source, destination) when <a class="reference internal" href="#confval-l2xmsg_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2xmsg_mode</span></code></a> is 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">l2xmsg_shadow_hit_bits</span></code>, <code class="docutils literal notranslate"><span class="pre">l2xmsg_shadow_hit_dst</span></code>, <code class="docutils literal notranslate"><span class="pre">l2xmsg_shadow_hit_src</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-1"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xmsg_thread_pri">
+<span class="sig-name descname"><span class="pre">l2xmsg_thread_pri</span></span><a class="headerlink" href="#confval-l2xmsg_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">50</span></code></dd>
+</dl>
+<p>Priority of the _soc_l2x_thread, that is used to synchronize shadow copy of the L2 entry with the HW table</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l2xmsg_thread_usec">
+<span class="sig-name descname"><span class="pre">l2xmsg_thread_usec</span></span><a class="headerlink" href="#confval-l2xmsg_thread_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Period between synchronizations of the software L2X shadow table with the hardware (5690 only). The thread actually runs every l2xmsg_thread_usec/l2xmsg_chunks microseconds.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2">
+<span class="sig-name descname"><span class="pre">l3_alpm2</span></span><a class="headerlink" href="#confval-l3_alpm2" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_bnk_threshold">
+<span class="sig-name descname"><span class="pre">l3_alpm2_bnk_threshold</span></span><a class="headerlink" href="#confval-l3_alpm2_bnk_threshold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>ALPM Level3 bank usage threshold when bucket defragmentation or expansion is required during insert. Return FULL if exceeds this threshold. Default value is 95 percent.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_bulk_wr_threshold">
+<span class="sig-name descname"><span class="pre">l3_alpm2_bulk_wr_threshold</span></span><a class="headerlink" href="#confval-l3_alpm2_bulk_wr_threshold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_dbg_bmp">
+<span class="sig-name descname"><span class="pre">l3_alpm2_dbg_bmp</span></span><a class="headerlink" href="#confval-l3_alpm2_dbg_bmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_dbg_info_bmp">
+<span class="sig-name descname"><span class="pre">l3_alpm2_dbg_info_bmp</span></span><a class="headerlink" href="#confval-l3_alpm2_dbg_info_bmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_default_route_data_mode">
+<span class="sig-name descname"><span class="pre">l3_alpm2_default_route_data_mode</span></span><a class="headerlink" href="#confval-l3_alpm2_default_route_data_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>How ALPM stores the default route’s data; read by the SAI to decide default-route handling.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_defrag_max_l2cnt">
+<span class="sig-name descname"><span class="pre">l3_alpm2_defrag_max_l2cnt</span></span><a class="headerlink" href="#confval-l3_alpm2_defrag_max_l2cnt" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_defrag_max_l3cnt">
+<span class="sig-name descname"><span class="pre">l3_alpm2_defrag_max_l3cnt</span></span><a class="headerlink" href="#confval-l3_alpm2_defrag_max_l3cnt" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_defrag_max_time_ms">
+<span class="sig-name descname"><span class="pre">l3_alpm2_defrag_max_time_ms</span></span><a class="headerlink" href="#confval-l3_alpm2_defrag_max_time_ms" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_defrag_on_full">
+<span class="sig-name descname"><span class="pre">l3_alpm2_defrag_on_full</span></span><a class="headerlink" href="#confval-l3_alpm2_defrag_on_full" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_level">
+<span class="sig-name descname"><span class="pre">l3_alpm2_level</span></span><a class="headerlink" href="#confval-l3_alpm2_level" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">3</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_spl_dw">
+<span class="sig-name descname"><span class="pre">l3_alpm2_spl_dw</span></span><a class="headerlink" href="#confval-l3_alpm2_spl_dw" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_spl_hw">
+<span class="sig-name descname"><span class="pre">l3_alpm2_spl_hw</span></span><a class="headerlink" href="#confval-l3_alpm2_spl_hw" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm2_spl_sw">
+<span class="sig-name descname"><span class="pre">l3_alpm2_spl_sw</span></span><a class="headerlink" href="#confval-l3_alpm2_spl_sw" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm_cache_enable">
+<span class="sig-name descname"><span class="pre">l3_alpm_cache_enable</span></span><a class="headerlink" href="#confval-l3_alpm_cache_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm_enable">
+<span class="sig-name descname"><span class="pre">l3_alpm_enable</span></span><a class="headerlink" href="#confval-l3_alpm_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Route prefixes in ALPM (algorithmic LPM) instead of the TCAM alone: 0 off, 1 parallel mode, 2 combined mode. ALPM takes four shared UFT banks, leaving four for <a class="reference internal" href="#confval-l2_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2_mem_entries</span></code></a>, <a class="reference internal" href="#confval-l3_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_mem_entries</span></code></a> and <a class="reference internal" href="#confval-fpem_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">fpem_mem_entries</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 37 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm_hit_skip">
+<span class="sig-name descname"><span class="pre">l3_alpm_hit_skip</span></span><a class="headerlink" href="#confval-l3_alpm_hit_skip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property is used to skip hit bits maintenance in ALPM mode. 1: Do not maintain the HIT bits to achieve performance gain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 2 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm_ipv6_128b_bkt_rsvd">
+<span class="sig-name descname"><span class="pre">l3_alpm_ipv6_128b_bkt_rsvd</span></span><a class="headerlink" href="#confval-l3_alpm_ipv6_128b_bkt_rsvd" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>If ipv6_lpm_128b_enable is enabled, set to 1 to reserve equal percentage(TCAM[v4]:TCAM[v6]) of ALPM buckets for IPv6.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 18 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm_ipv6_bkt_rsvd_percent">
+<span class="sig-name descname"><span class="pre">l3_alpm_ipv6_bkt_rsvd_percent</span></span><a class="headerlink" href="#confval-l3_alpm_ipv6_bkt_rsvd_percent" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm_sw_prefix_lookup">
+<span class="sig-name descname"><span class="pre">l3_alpm_sw_prefix_lookup</span></span><a class="headerlink" href="#confval-l3_alpm_sw_prefix_lookup" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_alpm_template">
+<span class="sig-name descname"><span class="pre">l3_alpm_template</span></span><a class="headerlink" href="#confval-l3_alpm_template" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_defip_sizing">
+<span class="sig-name descname"><span class="pre">l3_defip_sizing</span></span><a class="headerlink" href="#confval-l3_defip_sizing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_disable_add_to_arl">
+<span class="sig-name descname"><span class="pre">l3_disable_add_to_arl</span></span><a class="headerlink" href="#confval-l3_disable_add_to_arl" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Disable and restrict user to create l2 entry as part of l3 interface create</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_ecmp_group_first_lkup_mem_size">
+<span class="sig-name descname"><span class="pre">l3_ecmp_group_first_lkup_mem_size</span></span><a class="headerlink" href="#confval-l3_ecmp_group_first_lkup_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Configures size of L3 ECMP_GROUP memory in fist lookup. It is used to decide the size of L3_ECMP_GROUP memories that are available for first ECMP lookup. Internally, the size rounds up to multiple of 512.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_ecmp_levels">
+<span class="sig-name descname"><span class="pre">l3_ecmp_levels</span></span><a class="headerlink" href="#confval-l3_ecmp_levels" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Number of ECMP levels: 1 or 2. Two-level (hierarchical) ECMP is needed for VXLAN overlay ECMP over underlay ECMP and splits the ECMP tables between the levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 23 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">l3_ecmp_levels=2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_ecmp_max_group_size">
+<span class="sig-name descname"><span class="pre">l3_ecmp_max_group_size</span></span><a class="headerlink" href="#confval-l3_ecmp_max_group_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_ecmp_member_first_lkup_mem_size">
+<span class="sig-name descname"><span class="pre">l3_ecmp_member_first_lkup_mem_size</span></span><a class="headerlink" href="#confval-l3_ecmp_member_first_lkup_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Configures size of L3 ECMP memory in first lookup. It is used to decide the size of L3_ECMP memories that are available for first ECMP lookup. Internally, the size rounds up to multiple of 4096 in BCM5687x class of devices and 1024 in BCM5637x/BCM5657x. On BCM5687x this value defaults to half the ECMP member table size. On BCM5637x/BCM5657x, since only 3 out of 4 banks can be used when ECMP works in 2 levels, this defaults to size of one bank (1024).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_ecmp_member_secondary_mem_size">
+<span class="sig-name descname"><span class="pre">l3_ecmp_member_secondary_mem_size</span></span><a class="headerlink" href="#confval-l3_ecmp_member_secondary_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_enable">
+<span class="sig-name descname"><span class="pre">l3_enable</span></span><a class="headerlink" href="#confval-l3_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>L3 switching enable</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_intf_vlan_split_egress">
+<span class="sig-name descname"><span class="pre">l3_intf_vlan_split_egress</span></span><a class="headerlink" href="#confval-l3_intf_vlan_split_egress" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Allow L3 interfaces on the same VLAN to have different egress properties (MTU, MAC). The SAI always sets it to 1 after reading the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">l3_intf_vlan_split_egress=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_max_ecmp_mode">
+<span class="sig-name descname"><span class="pre">l3_max_ecmp_mode</span></span><a class="headerlink" href="#confval-l3_max_ecmp_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select the ECMP scaling mode, which trades the number of ECMP groups against their size. Set to 1 in most SONiC Trident 3 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 41 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">l3_max_ecmp_mode=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_mem_banks">
+<span class="sig-name descname"><span class="pre">l3_mem_banks</span></span><a class="headerlink" href="#confval-l3_mem_banks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of minimum l3 mem banks. Applicable for devices supporting ISM.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_mem_entries">
+<span class="sig-name descname"><span class="pre">l3_mem_entries</span></span><a class="headerlink" href="#confval-l3_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">16384</span></code></dd>
+</dl>
+<p>Number of L3 host (exact /32 and /128) table entries. 16384 are dedicated; each further 32768 takes one shared UFT bank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 46 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">16384</span></code>, <code class="docutils literal notranslate"><span class="pre">40960</span></code>, <code class="docutils literal notranslate"><span class="pre">32768</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">l3_mem_entries=16384</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_reduced_route_max_ecmp_group_index">
+<span class="sig-name descname"><span class="pre">l3_reduced_route_max_ecmp_group_index</span></span><a class="headerlink" href="#confval-l3_reduced_route_max_ecmp_group_index" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_srv6_enable">
+<span class="sig-name descname"><span class="pre">l3_srv6_enable</span></span><a class="headerlink" href="#confval-l3_srv6_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable SRv6 function</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-l3_traverse_use_special_intf">
+<span class="sig-name descname"><span class="pre">l3_traverse_use_special_intf</span></span><a class="headerlink" href="#confval-l3_traverse_use_special_intf" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lls_num_l2uc">
+<span class="sig-name descname"><span class="pre">lls_num_l2uc</span></span><a class="headerlink" href="#confval-lls_num_l2uc" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>The default number of unicast queues at L2 for LLS setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">lls_num_l2uc_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">lls_num_l2uc_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">lls_num_l2uc</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lpm_ipv6_128b_reserved">
+<span class="sig-name descname"><span class="pre">lpm_ipv6_128b_reserved</span></span><a class="headerlink" href="#confval-lpm_ipv6_128b_reserved" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>1: num_ipv6_lpm_128b_entries number of entries are reserved exclusively for 128B V6 LPM entries 0: Do not reserve any entries for 128B V6 entries and use the whole of paired TCAMs for either 128B V6, 64B V6, V4 entries. Ignored if lpm_scaling_enable is 0.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lpm_layout">
+<span class="sig-name descname"><span class="pre">lpm_layout</span></span><a class="headerlink" href="#confval-lpm_layout" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>LPM could support LPM free space layout for different prefixes. Specifies the IP version, VRF type, prefix length and prefix count. via string lpm_layout_prefix&lt;# of idx 0-64&gt;=&lt;IP ver&gt;:&lt;VRF type&gt;:&lt;prefix length&gt;:&lt;prefix count&gt;. i.e. lpm_layout_prefix&lt;1-64&gt; = &lt;4/6&gt;:&lt;0/1/2&gt;:&lt;0~32/0~64/&gt;:&lt;number&gt; IP version: IPv4 or IPv6 VRF type: 0 for specific VRF, 1 for BCM_L3_VRF_OVERRIDE, 2 for BCM_L3_VRF_GLOBAL Prefix length: for IPv4, its range is 0~32, for IPv6, its range is 0~64 Prefix count: total route number should not greater than L3_DEFIP memory capacity This property does not support for Warmboot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">lpm_layout_prefix&lt;N&gt;</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lpm_layout_prefix_enable">
+<span class="sig-name descname"><span class="pre">lpm_layout_prefix_enable</span></span><a class="headerlink" href="#confval-lpm_layout_prefix_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>1: Allow defining LPM prefix layout in unpaired TCAM during initialization stage. 0: Do not defining LPM prefix layout in unpaired TCAM during initialization stage.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lpm_mem_size">
+<span class="sig-name descname"><span class="pre">lpm_mem_size</span></span><a class="headerlink" href="#confval-lpm_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Configures size of lpm memory for UTT devices Default size is chip specific.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lpm_scaling_enable">
+<span class="sig-name descname"><span class="pre">lpm_scaling_enable</span></span><a class="headerlink" href="#confval-lpm_scaling_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>1 allows 64-bit IPv6 LPM entries in the unreserved paired TCAM, 0 does not. The Celestica Seastone2 files set 1; the Dell S5232F files set 0 and use ALPM instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 29 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">lpm_scaling_enable=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-macro_flow_hash_shuffle_random_seed">
+<span class="sig-name descname"><span class="pre">macro_flow_hash_shuffle_random_seed</span></span><a class="headerlink" href="#confval-macro_flow_hash_shuffle_random_seed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Random seed for flow based RTAG7 hash shuffling. 0 :(default) Use the random seed generated from timestamp. Non Zero: Configure the given non zero value as random seed.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-max_vp_lags">
+<span class="sig-name descname"><span class="pre">max_vp_lags</span></span><a class="headerlink" href="#confval-max_vp_lags" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of virtual-port LAGs to reserve; the default is the device maximum. SONiC files set 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 39 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">256</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">max_vp_lags=0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mim_decoupled_mode">
+<span class="sig-name descname"><span class="pre">mim_decoupled_mode</span></span><a class="headerlink" href="#confval-mim_decoupled_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>In the decoupled mode, VFI and Source VP(SVP) can be derived seperately and VLAN can be assigned per VFI. mim_decoupled_mode = 0 Disable the MIM(Mac-In-Mac) decoupled mode. Default MIM operation mode applies. mim_decoupled_mode = 1 Enable the MIM(Mac-In-Mac) decoupled mode on applicable devices.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-module_num_modids">
+<span class="sig-name descname"><span class="pre">module_num_modids</span></span><a class="headerlink" href="#confval-module_num_modids" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Configure the number of module id used by the device</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mpls_label_per_port_delete_all_enable">
+<span class="sig-name descname"><span class="pre">mpls_label_per_port_delete_all_enable</span></span><a class="headerlink" href="#confval-mpls_label_per_port_delete_all_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable removing all MPLS labels on a per port basis for BCM5687x, BCM5677x, BCM5637x and BCM5647x series of devices. With this enabled, traditional adaptation lookup will not happen on individual ports that opt to use this feature by using port control API. This is applicable for both L3MPLS and L2MPLS packets based on values selected Valid values: 0,1 and 3. 0 -&gt; This is the default value and device behaves in the existing way where MPLS tunnel termination is based on results from adaption lookup. 1 -&gt; This enables per port MPLS termination for ONLY L2MPLS applications like VPLS/VPWS. 2 -&gt; Reserved. 3 -&gt; Enables per port MPLS termination for BOTH L2MPLS and L3MPLS applications.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mpls_mem_banks">
+<span class="sig-name descname"><span class="pre">mpls_mem_banks</span></span><a class="headerlink" href="#confval-mpls_mem_banks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of minimum MPLS mem banks. Applicable for devices supporting ISM.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mpls_mem_entries">
+<span class="sig-name descname"><span class="pre">mpls_mem_entries</span></span><a class="headerlink" href="#confval-mpls_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">32768</span></code></dd>
+</dl>
+<p>Number of widest MPLS mem entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 6 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">16384</span></code>, <code class="docutils literal notranslate"><span class="pre">2048</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mpls_port_qos_mapping_copy_skip">
+<span class="sig-name descname"><span class="pre">mpls_port_qos_mapping_copy_skip</span></span><a class="headerlink" href="#confval-mpls_port_qos_mapping_copy_skip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mpls_switch_ipv4_ipv6_independent_control">
+<span class="sig-name descname"><span class="pre">mpls_switch_ipv4_ipv6_independent_control</span></span><a class="headerlink" href="#confval-mpls_switch_ipv4_ipv6_independent_control" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>0=disable 1=enable. By default, IPv4 and IPv6 packets are enabled for MPLS tunnels. This config variable provides option to override the default values.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mps_label_stack_sharing">
+<span class="sig-name descname"><span class="pre">mps_label_stack_sharing</span></span><a class="headerlink" href="#confval-mps_label_stack_sharing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multi_hash_move_algorithm">
+<span class="sig-name descname"><span class="pre">multi_hash_move_algorithm</span></span><a class="headerlink" href="#confval-multi_hash_move_algorithm" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multi_hash_recurse_depth">
+<span class="sig-name descname"><span class="pre">multi_hash_recurse_depth</span></span><a class="headerlink" href="#confval-multi_hash_recurse_depth" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Default maximum number of entry moves when inserting into a full multi-bank hash table, for all tables without a table-specific <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_&lt;table&gt;</span></code>.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multi_hash_recurse_depth_-table">
+<span class="sig-name descname"><span class="pre">multi_hash_recurse_depth_&lt;table&gt;</span></span><a class="headerlink" href="#confval-multi_hash_recurse_depth_-table" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of entry moves (cuckoo-style re-insertion) the SDK tries when a multi-bank hash table bucket is full, for one table. Higher values fill the table more densely at the cost of insert time. Overrides <a class="reference internal" href="#confval-multi_hash_recurse_depth"><code class="xref std std-confval docutils literal notranslate"><span class="pre">multi_hash_recurse_depth</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_egress_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_egress_vlan_1</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_egress_vlan_2</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_exact_match</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_l2</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_l3</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_mpls</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_vlan_1</span></code>, <code class="docutils literal notranslate"><span class="pre">multi_hash_recurse_depth_vlan_2</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 6 Trident 3 HWSKU files</p>
+</dd>
+</dl>
+<span class="target" id="index-2"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multi_network_groups">
+<span class="sig-name descname"><span class="pre">multi_network_groups</span></span><a class="headerlink" href="#confval-multi_network_groups" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multicast_l2_range">
+<span class="sig-name descname"><span class="pre">multicast_l2_range</span></span><a class="headerlink" href="#confval-multicast_l2_range" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>In BCM568xx and BCM567xx devices, some L2 and L3 multicast information is stored in a shared resource. This value describes the number of resource entries devoted to L2 multicast.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">16383</span></code>, <code class="docutils literal notranslate"><span class="pre">4095</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multicast_l3_range">
+<span class="sig-name descname"><span class="pre">multicast_l3_range</span></span><a class="headerlink" href="#confval-multicast_l3_range" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>In BCM568xx and BCM567xx devices, some L2 and L3 multicast information is stored in a shared resource. This value describes the number of resource entries devoted to IP multicast.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-multicast_per_trunk_replication">
+<span class="sig-name descname"><span class="pre">multicast_per_trunk_replication</span></span><a class="headerlink" href="#confval-multicast_per_trunk_replication" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Per trunk multicast replication mode</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-my_station_forward_domain_type_decoupled">
+<span class="sig-name descname"><span class="pre">my_station_forward_domain_type_decoupled</span></span><a class="headerlink" href="#confval-my_station_forward_domain_type_decoupled" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Whether bcm_l2_station_t.forward_domain_type is explicitly managed by users or not. 0: forward_domain_type setting is coupled with forward domain (VFI or VLAN) and thus managed implicitly. 1: forward_domain_type setting is decoupled from forward domain (VFI or VLAN) and needs to set explicitly. By default 0 is selected, thus providing backward compatibility. However value of 1 is suggested.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-num_ipv6_lpm_128b_entries">
+<span class="sig-name descname"><span class="pre">num_ipv6_lpm_128b_entries</span></span><a class="headerlink" href="#confval-num_ipv6_lpm_128b_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of LPM entries reserved for IPv6 prefixes longer than /64 when <a class="reference internal" href="#confval-ipv6_lpm_128b_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ipv6_lpm_128b_enable</span></code></a> is 1. They are taken from the IPv4 and short IPv6 space.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-preserve_otag_after_routing">
+<span class="sig-name descname"><span class="pre">preserve_otag_after_routing</span></span><a class="headerlink" href="#confval-preserve_otag_after_routing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-protocol_vlan_coupled_mode">
+<span class="sig-name descname"><span class="pre">protocol_vlan_coupled_mode</span></span><a class="headerlink" href="#confval-protocol_vlan_coupled_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>To set the couple mode in bcm_port_untagged_vlan_set. mode = 0 is legacy couple mode. Port-based VLAN and protocol-based VLAN can be used at the same time and work right. But port-based vlan supports at max 127 ports with different default vlan. mode = 1 is decouple mode, it supports all ports(&gt;128) based default vlan. But protocol-based vlan is suggested to abandon or use VFP instead.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-remote_mod_map_mode">
+<span class="sig-name descname"><span class="pre">remote_mod_map_mode</span></span><a class="headerlink" href="#confval-remote_mod_map_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Select MOD map mode of remote unit from global MODID to local MODID or vice versa. 0 - Convert remote (MODID, port) based on dual MOD config of local unit; 1 - Do not convert remote (MODID, port) based on dual MOD config of local unit. Instead, applications need to register a callback to convert remote (MODID, port).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-replication_eligible_pbmp">
+<span class="sig-name descname"><span class="pre">replication_eligible_pbmp</span></span><a class="headerlink" href="#confval-replication_eligible_pbmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>A bitmap of ports eligible for packet replication. The default value is a bitmap of valid ports. This configuration property is applicable to devices on which the hardware resource for packet replication needs to be statically allocated to replication groups during initialization. On such devices, decreasing the number of ports eligible for replication would increase the number of replication groups supported.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-reserve_multicast_resources">
+<span class="sig-name descname"><span class="pre">reserve_multicast_resources</span></span><a class="headerlink" href="#confval-reserve_multicast_resources" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>1: Some of last entries of MMU_REPL_HEAD_TBL are reserved. The number of reserved entries equals to the number of ports in the valid PBMP. When there are not enough entries during deleting a port from a replication group, the reserved entries will be used as a swap space to configure the replication info of the group. After the port is deleted, there will be enough entries to configure the replication info of the group. Then, the reserved entires will be in free status again. 0: The entires are not reserved.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-reserve_nh_for_ecmp">
+<span class="sig-name descname"><span class="pre">reserve_nh_for_ecmp</span></span><a class="headerlink" href="#confval-reserve_nh_for_ecmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This soc property is used to enable/disable the reservation of NextHop tables. The number of entries it reserves is equal to the number of ECMP Groups. NOTES: 1. It is a WAR for H/W limitation. 2. When it is enabled, Black Hole(0) and L2CPU(1) entries will also be moved after reserved entries. 3. Interaction with spn_RIOT_OVERLAY_L3_EGRESS_MEM_ALLOC_MODE and spn_RIOT_OVERLAY_L3_EGRESS_MEM_SIZE: No matter spn_RIOT_OVERLAY_L3_EGRESS_MEM_ALLOC_MODE is enabled or disabled, spn_RIOT_OVERLAY_L3_EGRESS_MEM_SIZE which define the size of overlay can be ensured. Only underlay entries (equal the number of ECMP Groups) will be wasted. spn_RIOT_OVERLAY_L3_EGRESS_MEM_SIZE should be less than the actual size after reservation. 4. On BCM56960, when it is enabled, no need to call bcm_l3_egress_create with BCM_L3_FLAGS2_NO_ECMP_OVERLAP flag.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-riot_enable">
+<span class="sig-name descname"><span class="pre">riot_enable</span></span><a class="headerlink" href="#confval-riot_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable routing in and out of tunnels (RIOT), needed for routed VXLAN (EVPN symmetric IRB).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 31 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">riot_enable=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-riot_overlay_ecmp_resilient_hash_size">
+<span class="sig-name descname"><span class="pre">riot_overlay_ecmp_resilient_hash_size</span></span><a class="headerlink" href="#confval-riot_overlay_ecmp_resilient_hash_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Resilient-hash flow-set entries reserved for overlay ECMP when <a class="reference internal" href="#confval-riot_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_enable</span></code></a> is 1. SONiC VXLAN files use 16384.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 30 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">16384</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">riot_overlay_ecmp_resilient_hash_size=16384</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-riot_overlay_l3_egress_mem_alloc_mode">
+<span class="sig-name descname"><span class="pre">riot_overlay_l3_egress_mem_alloc_mode</span></span><a class="headerlink" href="#confval-riot_overlay_l3_egress_mem_alloc_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Configure allocation mode of overlay egress object. Valid values: 0 = allocate from low portion, hard partition for overlay/underlay memory spaces(default, bit0 = 0, bit1 = 0) 1, 3 = allocate from high portion (bit0 = 1) 2, 3 = soft partition, adjust overlay/underlay partition on demand(bit1 = 1)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-riot_overlay_l3_egress_mem_size">
+<span class="sig-name descname"><span class="pre">riot_overlay_l3_egress_mem_size</span></span><a class="headerlink" href="#confval-riot_overlay_l3_egress_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of next hops (egress objects) reserved for the overlay when <a class="reference internal" href="#confval-riot_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_enable</span></code></a> is 1. SONiC VXLAN files use 32768.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 30 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">32768</span></code>, <code class="docutils literal notranslate"><span class="pre">8192</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">riot_overlay_l3_egress_mem_size=32768</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-riot_overlay_l3_intf_mem_alloc_mode">
+<span class="sig-name descname"><span class="pre">riot_overlay_l3_intf_mem_alloc_mode</span></span><a class="headerlink" href="#confval-riot_overlay_l3_intf_mem_alloc_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Configure allocation mode of overlay egress L3 interface. Valid values: 0 = allocate from low portion, hard partition for overlay/underlay memory spaces(default, bit0 = 0, bit1 = 0) 1, 3 = allocate from high portion (bit0 = 1) 2, 3 = soft partition, adjust overlay/underlay partition on demand(bit1 = 1)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-riot_overlay_l3_intf_mem_size">
+<span class="sig-name descname"><span class="pre">riot_overlay_l3_intf_mem_size</span></span><a class="headerlink" href="#confval-riot_overlay_l3_intf_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of L3 interfaces reserved for the overlay (VXLAN) when <a class="reference internal" href="#confval-riot_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">riot_enable</span></code></a> is 1. SONiC VXLAN files use 8192.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 30 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">8192</span></code>, <code class="docutils literal notranslate"><span class="pre">4096</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">riot_overlay_l3_intf_mem_size=8192</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-robust_hash_disable_-table">
+<span class="sig-name descname"><span class="pre">robust_hash_disable_&lt;table&gt;</span></span><a class="headerlink" href="#confval-robust_hash_disable_-table" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Disable robust hashing (the per-table random remapping of hash keys that spreads entries evenly) for one hash table. Default 0: robust hashing on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">robust_hash_disable_egr_vp_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_egress_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_egress_vlan1</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_egress_vlan2</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_exact_match</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_ing_dnat_address</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_ing_vp_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_l2</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_l3</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_mpls</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_subport_id_sgpp_map</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_vlan1</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_disable_vlan2</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 27 Trident 3 HWSKU files</p>
+</dd>
+</dl>
+<span class="target" id="index-3"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-robust_hash_seed_-table">
+<span class="sig-name descname"><span class="pre">robust_hash_seed_&lt;table&gt;</span></span><a class="headerlink" href="#confval-robust_hash_seed_-table" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Seed of the robust-hash remapping for one hash table. Changing it changes where entries land, not the table size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">robust_hash_seed_egress_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_egress_vlan_1</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_egress_vlan_2</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_egress_vp_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_exact_match</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_ing_dnat_address</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_ingress_vp_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_l2</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_l3</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_mpls</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_subport_id_to_sgpp_map</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_vlan</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_vlan_1</span></code>, <code class="docutils literal notranslate"><span class="pre">robust_hash_seed_vlan_2</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-4"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-run_l2_sw_aging">
+<span class="sig-name descname"><span class="pre">run_l2_sw_aging</span></span><a class="headerlink" href="#confval-run_l2_sw_aging" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Run s/w based L2 aging thread by default</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-station_mac_address">
+<span class="sig-name descname"><span class="pre">station_mac_address</span></span><a class="headerlink" href="#confval-station_mac_address" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Station MAC address used for management through the switch ports itself. If using the CPU network interface, the NVRAM setting is used for MAC address assignment.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-switch_bypass_mode">
+<span class="sig-name descname"><span class="pre">switch_bypass_mode</span></span><a class="headerlink" href="#confval-switch_bypass_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>On BCM5682x, BCM5672x and BCM56960 devices, some of the switching logic may be skipped to decrease traffic latency. On BCM5682x and BCM5672x, the three modes available are: 0 - normal operation 1 - Skip L3 switch logic 2 - Skip L3 and FP switch logic On BCM56960, the switch latency bypass modes availabe are: 0 - normal operation 1 - balanced latency L2 + L3 2 - low latency L2 3 - EFP Bypass</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tr144_long_sleep_time_us">
+<span class="sig-name descname"><span class="pre">tr144_long_sleep_time_us</span></span><a class="headerlink" href="#confval-tr144_long_sleep_time_us" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-trunk_extend">
+<span class="sig-name descname"><span class="pre">trunk_extend</span></span><a class="headerlink" href="#confval-trunk_extend" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>EXTEND maximum number of front panel trunk groups from 32 to 128</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-trunk_resilient_hash_table_size">
+<span class="sig-name descname"><span class="pre">trunk_resilient_hash_table_size</span></span><a class="headerlink" href="#confval-trunk_resilient_hash_table_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">32768</span></code></dd>
+</dl>
+<p>Specifices the number of entries to be reserved in flowset table for resilient hashing load balancing mode front panel trunk groups. The remaining entries in this table are used by resilient hashing load balancing mode HiGig trunk groups.If this property is not configured, then the table entries are split evenly between resilient hashing load balancing mode front panel trunk groups and HiGig trunk groups. Valid values for this property are: 0, 32K, 64K. Default: 32K.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-use_all_splithorizon_groups">
+<span class="sig-name descname"><span class="pre">use_all_splithorizon_groups</span></span><a class="headerlink" href="#confval-use_all_splithorizon_groups" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Make all split-horizon groups available instead of reserving groups 0 and 1 for access and network ports of L2 tunnels. Set in SONiC VXLAN files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 29 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">use_all_splithorizon_groups=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_action_dummy_vp_reserved">
+<span class="sig-name descname"><span class="pre">vlan_action_dummy_vp_reserved</span></span><a class="headerlink" href="#confval-vlan_action_dummy_vp_reserved" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property indicates if the dummy VP for VLAN_XLATE action feature is enabled. Value 1 means enable mode, 0 means disable mode. Default value is 0</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_auto_stack">
+<span class="sig-name descname"><span class="pre">vlan_auto_stack</span></span><a class="headerlink" href="#confval-vlan_auto_stack" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This soc property is used to turn on/off vlan auto stack. Note: It will override the preprocessor macro BCM_VLAN_NO_AUTO_STACK. vlan_auto_stack = 1: turn on vlan auto stack. vlan_auto_stack = 2: turn off vlan atuo stack. vlan_auto_stack = 0: the soc property does not take effect.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_mac_add_xlate_table_select">
+<span class="sig-name descname"><span class="pre">vlan_mac_add_xlate_table_select</span></span><a class="headerlink" href="#confval-vlan_mac_add_xlate_table_select" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select VLAN_XLATE table to use for VLAN assignment based on incoming MAC address. Valid values are 0 and 1. The default value is 0. 0: Use VLAN_XLATE_2_DOUBLE to program MAC based VLAN translations (Default behavior) 1: Use VLAN_XLATE_1_DOUBLE to program MAC based VLAN translations. The APIs impacted are: bcm_vlan_mac_add, bcm_esw_vlan_mac_delete, bcm_esw_vlan_mac_delete_all, bcm_esw_vlan_mac_get and bcm_esw_vlan_mac_action_traverse.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_tag_ctrl_on_egress">
+<span class="sig-name descname"><span class="pre">vlan_tag_ctrl_on_egress</span></span><a class="headerlink" href="#confval-vlan_tag_ctrl_on_egress" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>The config property is used to select packet,s egress tag behavior on the device. User can select “egress vlan translate based tag action” or “hash based egress VP vlan membership” on the devices that support both methods. The valid values are 0 and 1. 0: hash based egress VP vlan membership is used for egress tag 1: egress vlan translate based tag action is used for egress tag default: 0</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_xlate_1_mem_entries">
+<span class="sig-name descname"><span class="pre">vlan_xlate_1_mem_entries</span></span><a class="headerlink" href="#confval-vlan_xlate_1_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">32768</span></code></dd>
+</dl>
+<p>Number of VLAN_XLATE_1 mem entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 6 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">65536</span></code>, <code class="docutils literal notranslate"><span class="pre">16384</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_xlate_2_mem_entries">
+<span class="sig-name descname"><span class="pre">vlan_xlate_2_mem_entries</span></span><a class="headerlink" href="#confval-vlan_xlate_2_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">32768</span></code></dd>
+</dl>
+<p>Number of VLAN_XLATE_2 mem entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 6 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">16384</span></code>, <code class="docutils literal notranslate"><span class="pre">2048</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_xlate_mem_banks">
+<span class="sig-name descname"><span class="pre">vlan_xlate_mem_banks</span></span><a class="headerlink" href="#confval-vlan_xlate_mem_banks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of minimum VLAN xlate mem banks. Applicable for devices supporting ISM.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlan_xlate_mem_entries">
+<span class="sig-name descname"><span class="pre">vlan_xlate_mem_entries</span></span><a class="headerlink" href="#confval-vlan_xlate_mem_entries" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of widest VLAN xlate mem entries.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vlandelete_chunks">
+<span class="sig-name descname"><span class="pre">vlandelete_chunks</span></span><a class="headerlink" href="#confval-vlandelete_chunks" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Size of chunks to read at once while iterating over VLAN XLATE memory</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vplag_vp_alloc_mode">
+<span class="sig-name descname"><span class="pre">vplag_vp_alloc_mode</span></span><a class="headerlink" href="#confval-vplag_vp_alloc_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property is used to control vplag vp allocation Set to 0(default) to control vplag vp allocation from low end Set to 1 to control vplag vp allocation from high end.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-vxlan_tunnel_init_ext_fields_update">
+<span class="sig-name descname"><span class="pre">vxlan_tunnel_init_ext_fields_update</span></span><a class="headerlink" href="#confval-vxlan_tunnel_init_ext_fields_update" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specify if tunnel related extended fields such as src_port, dscp and ttl can be updated per tunnel, in vxlan tunnel initiator create 0 – Disable updating the extended fields per tunnel. 1 – Enable updating the extended fields per tunnel.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ports.html" class="btn btn-neutral float-left" title="Ports, lanes and SerDes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="acl.html" class="btn btn-neutral float-right" title="ACL, field processor and UDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Other portmod_* modules (52) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Other soc_* modules (85)" href="soc-other.html" />
+    <link rel="prev" title="Other phymod_* modules (52)" href="phymod-other.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active">Other <code class="docutils literal notranslate"><span class="pre">portmod_*</span></code> modules (52)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="other-portmod-modules-52">
+<h1>Other <code class="docutils literal notranslate"><span class="pre">portmod_*</span></code> modules (52)<a class="headerlink" href="#other-portmod-modules-52" title="Link to this heading"></a></h1>
+<section id="portmod-core-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_core_*</span></code> (1)<a class="headerlink" href="#portmod-core-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_core_add(int unit, int pm_id, int flags, portmod_port_add_info_t *add_info);
+</pre></div>
+</div>
+</section>
+<section id="portmod-create-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_create_*</span></code> (1)<a class="headerlink" href="#portmod-create-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_create(int unit, int flags, int max_ports, int max_phys, int nof_pm_instances, portmod_pm_instances_t *pm_instances);
+</pre></div>
+</div>
+</section>
+<section id="portmod-destroy-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_destroy_*</span></code> (1)<a class="headerlink" href="#portmod-destroy-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_destroy(int unit);
+</pre></div>
+</div>
+</section>
+<section id="portmod-egr-2">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_egr_*</span></code> (2)<a class="headerlink" href="#portmod-egr-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_egr_1588_timestamp_config_get(int unit, int port, portmod_egr_1588_timestamp_config_t *timestamp_config);
+int portmod_egr_1588_timestamp_config_set(int unit, int port, portmod_egr_1588_timestamp_config_t timestamp_config);
+</pre></div>
+</div>
+</section>
+<section id="portmod-ext-2">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_ext_*</span></code> (2)<a class="headerlink" href="#portmod-ext-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_ext_phy_lane_attach(int unit, int iphy, int phyn, portmod_lane_connection_t *lane_connection);
+int portmod_ext_phy_lane_detach(int unit, int iphy, int phyn);
+</pre></div>
+</div>
+</section>
+<section id="portmod-fec-5">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_fec_*</span></code> (5)<a class="headerlink" href="#portmod-fec-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_fec_degraded_ser_get(int unit, int port, portmod_fec_degraded_ser_config_t *config);
+int portmod_fec_degraded_ser_set(int unit, int port, portmod_fec_degraded_ser_config_t config);
+int portmod_fec_degraded_ser_status_get(int unit, int port, portmod_fec_degraded_ser_status_t *status);
+int portmod_fec_stat_auto_collect_wb_data_get(int unit, portmod_fec_stat_auto_collect_wb_data_t *wb_data);  /* not in OpenBCM 6.5.27 */
+int portmod_fec_stat_auto_collect_wb_data_set(int unit, portmod_fec_stat_auto_collect_wb_data_t *wb_data);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="portmod-ilkn-3">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_ilkn_*</span></code> (3)<a class="headerlink" href="#portmod-ilkn-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_ilkn_port_lane_enable(int unit, int port, int flags, int enable);
+int portmod_ilkn_retranstmit_config_get(int unit, int port, ilkn_retransmit_config_t *retransmit_config);
+int portmod_ilkn_retranstmit_config_set(int unit, int port, ilkn_retransmit_config_t *retransmit_config);
+</pre></div>
+</div>
+</section>
+<section id="portmod-phy-2">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_phy_*</span></code> (2)<a class="headerlink" href="#portmod-phy-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_phy_pm_id_get(int unit, int pport, int *pm_id);
+int portmod_phy_pms_ids_get(int unit, int phy, int max_pms, int *nof_pms, portmod_dispatch_type_t *pms_types, int *pms_ids);
+</pre></div>
+</div>
+</section>
+<section id="portmod-pm-14">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_pm_*</span></code> (14)<a class="headerlink" href="#portmod-pm-14" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_pm_diag_info_get(int unit, int pm_id, portmod_pm_diag_info_t *diag_info);
+int portmod_pm_enable(int unit, int pm_id, int flags, int enable);
+int portmod_pm_interrupt_process(int unit, int pm_id, int is_2nd_level);
+int portmod_pm_is_initialized(int unit, int pm_id, int *is_initialized);
+int portmod_pm_logical_pbmp_get(int unit, int pm_id, portmod_pbmp_t *logical_pbmp);
+int portmod_pm_phy_lane_access_get(int unit, int pm_id, portmod_access_get_params_t *params, int max_phys, phymod_phy_access_t *access, int *nof_phys, int *is_most_ext);
+int portmod_pm_port_pll_div_get(int unit, int port, int phy_port, portmod_port_resources_t *port_resource, uint32 *pll_div);
+int portmod_pm_serdes_core_init(int unit, int pm_id, portmod_port_add_info_t *add_info);
+int portmod_pm_speed_config_validate(int unit, int pm_id, portmod_pbmp_t *ports, int flag, portmod_pm_vco_setting_t *vco_setting);
+int portmod_pm_supported_vcos_get(int unit, int port, portmod_dispatch_type_t pm_type, portmod_vcos_speed_config_t *speed_config_list, int size, portmod_dual_vcos_t *dual_vco);
+int portmod_pm_tsc_refclock_get(int unit, int pm_id, int *ref_in, int *ref_out);
+int portmod_pm_tsc_refclock_set(int unit, int pm_id, int ref_in, int ref_out);
+int portmod_pm_vco_reconfig(int unit, int pm_id, portmod_vco_type_t *vco);
+int portmod_pm_vcos_get(int unit, portmod_dispatch_type_t pm_type, uint32 flags, portmod_pm_vco_setting_t *vco_select);
+</pre></div>
+</div>
+</section>
+<section id="portmod-pms-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_pms_*</span></code> (1)<a class="headerlink" href="#portmod-pms-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_pms_num_get(int unit, int *pms_num);
+</pre></div>
+</div>
+</section>
+<section id="portmod-preemption-8">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_preemption_*</span></code> (8)<a class="headerlink" href="#portmod-preemption-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_preemption_control_get(int unit, int port, portmod_preemption_control_t type, uint32 *value);
+int portmod_preemption_control_set(int unit, int port, portmod_preemption_control_t type, uint32 value);
+int portmod_preemption_force_rx_eop_mode_get(int unit, int port, portmod_preemption_force_rx_eop_mode_t type, uint32 *value);
+int portmod_preemption_force_rx_eop_mode_set(int unit, int port, portmod_preemption_force_rx_eop_mode_t type, uint32 value);
+int portmod_preemption_rx_timeout_get(int unit, int port, uint32 *enable, uint32 *timeout_cnt);
+int portmod_preemption_rx_timeout_set(int unit, int port, uint32 enable, uint32 timeout_cnt);
+int portmod_preemption_tx_status_get(int unit, int port, uint32 *value);
+int portmod_preemption_verify_status_get(int unit, int port, portmod_preemption_verify_status_type_t type, uint32 *value);
+</pre></div>
+</div>
+</section>
+<section id="portmod-rx-4">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_rx_*</span></code> (4)<a class="headerlink" href="#portmod-rx-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_rx_tag_config_get(int unit, int port, uint32 *default_tag, uint32 *no_match_tag);
+int portmod_rx_tag_config_set(int unit, int port, uint32 default_tag, uint32 no_match_tag);
+int portmod_rx_tag_gen_entry_add(int unit, int port, portmod_tag_gen_entry_t *entry);
+int portmod_rx_tag_gen_entry_delete(int unit, int port, portmod_tag_gen_entry_t *entry);
+</pre></div>
+</div>
+</section>
+<section id="portmod-thread-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_thread_*</span></code> (1)<a class="headerlink" href="#portmod-thread-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_thread_stop(int unit);
+</pre></div>
+</div>
+</section>
+<section id="portmod-was-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_was_*</span></code> (1)<a class="headerlink" href="#portmod-was-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_was_created(int unit);
+</pre></div>
+</div>
+</section>
+<section id="portmod-wb-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_wb_*</span></code> (1)<a class="headerlink" href="#portmod-wb-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_wb_debug_log(int unit);
+</pre></div>
+</div>
+</section>
+<section id="portmod-xphy-5">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_xphy_*</span></code> (5)<a class="headerlink" href="#portmod-xphy-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_xphy_add(int unit, int xphy_addr, phymod_core_access_t *core_access, int *xphy_idx);
+int portmod_xphy_delete(int unit, int xphy_addr);
+int portmod_xphy_lane_attach(int unit, int iphy, int phyn, portmod_xphy_lane_connection_t *lane_conn);
+int portmod_xphy_lane_detach(int unit, int iphy, int phyn);
+int portmod_xphy_wb_db_restore(int unit, int xphy_idx, int xphy_addr, phymod_core_access_t *core_access);
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phymod-other.html" class="btn btn-neutral float-left" title="Other phymod_* modules (52)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="soc-other.html" class="btn btn-neutral float-right" title="Other soc_* modules (85)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

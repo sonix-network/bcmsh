@@ -1,0 +1,1502 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Other bcm_* modules (932) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Other bcmlt_* modules (57)" href="bcmlt-other.html" />
+    <link rel="prev" title="portmod_port_* (297)" href="portmod-port.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active">Other <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> modules (932)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="other-bcm-modules-932">
+<h1>Other <code class="docutils literal notranslate"><span class="pre">bcm_*</span></code> modules (932)<a class="headerlink" href="#other-bcm-modules-932" title="Link to this heading"></a></h1>
+<section id="bcm-attach-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_attach_*</span></code> (7)<a class="headerlink" href="#bcm-attach-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_attach(int unit, char *type, char *subtype, int remunit);
+int bcm_attach_check(int unit);
+int bcm_attach_early_txrx(int unit, char *type, char *subtype, int remunit);
+void bcm_attach_info_t_init(bcm_attach_info_t *info);
+int bcm_attach_max(int *max_units);
+int bcm_attach_register(int unit, bcm_attach_cb_t cb, void *user_data);
+int bcm_attach_unregister(int unit, bcm_attach_cb_t cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-auth-12">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_auth_*</span></code> (12)<a class="headerlink" href="#bcm-auth-12" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_auth_detach(int unit);
+int bcm_auth_egress_get(int unit, int port, int *enable);
+int bcm_auth_egress_set(int unit, int port, int enable);
+int bcm_auth_init(int unit);
+int bcm_auth_mac_add(int unit, int port, bcm_mac_t mac);
+int bcm_auth_mac_control_get(int unit, bcm_auth_mac_control_t type, uint32 *value);
+int bcm_auth_mac_control_set(int unit, bcm_auth_mac_control_t type, uint32 value);
+int bcm_auth_mac_delete(int unit, int port, bcm_mac_t mac);
+int bcm_auth_mac_delete_all(int unit, int port);
+int bcm_auth_mode_get(int unit, int port, uint32 *modep);
+int bcm_auth_mode_set(int unit, int port, uint32 mode);
+int bcm_auth_unauth_callback(int unit, bcm_auth_cb_t func, void *cookie);
+</pre></div>
+</div>
+</section>
+<section id="bcm-bfd-27">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_bfd_*</span></code> (27)<a class="headerlink" href="#bcm-bfd-27" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_BFD_EVENT_TYPE_CLEAR(bcm_bfd_event_types_t *_event_types, int *_event_type);
+void BCM_BFD_EVENT_TYPE_CLEAR_ALL(bcm_bfd_event_types_t *_event_types);
+int BCM_BFD_EVENT_TYPE_GET(bcm_bfd_event_types_t *_event_types, int *_event_type);
+void BCM_BFD_EVENT_TYPE_SET(bcm_bfd_event_types_t *_event_types, int *_event_type);
+void BCM_BFD_EVENT_TYPE_SET_ALL(bcm_bfd_event_types_t *_event_types);
+int bcm_bfd_ach_channel_get(int unit, bcm_bfd_ach_channel_type_t ach_channel_type, uint32 *value);
+int bcm_bfd_ach_channel_set(int unit, bcm_bfd_ach_channel_type_t ach_channel_type, uint32 value);
+int bcm_bfd_auth_sha1_get(int unit, int index, bcm_bfd_auth_sha1_t *sha1);
+int bcm_bfd_auth_sha1_set(int unit, int index, bcm_bfd_auth_sha1_t *sha1);
+int bcm_bfd_auth_simple_password_get(int unit, int index, bcm_bfd_auth_simple_password_t *sp);
+int bcm_bfd_auth_simple_password_set(int unit, int index, bcm_bfd_auth_simple_password_t *sp);
+int bcm_bfd_detach(int unit);
+int bcm_bfd_discard_stat_get(int unit, bcm_bfd_discard_stat_t *discarded_info);
+int bcm_bfd_discard_stat_set(int unit, bcm_bfd_discard_stat_t *discarded_info);
+int bcm_bfd_endpoint_create(int unit, bcm_bfd_endpoint_info_t *endpoint_info);
+int bcm_bfd_endpoint_destroy(int unit, bcm_bfd_endpoint_t endpoint);
+int bcm_bfd_endpoint_destroy_all(int unit);
+int bcm_bfd_endpoint_get(int unit, bcm_bfd_endpoint_t endpoint, bcm_bfd_endpoint_info_t *endpoint_info);
+void bcm_bfd_endpoint_info_t_init(bcm_bfd_endpoint_info_t *endpoint_info);
+int bcm_bfd_endpoint_poll(int unit, bcm_bfd_endpoint_t endpoint);
+int bcm_bfd_endpoint_stat_get(int unit, bcm_bfd_endpoint_t endpoint, bcm_bfd_endpoint_stat_t *ctr_info, uint32 options);
+int bcm_bfd_event_register(int unit, bcm_bfd_event_types_t event_types, bcm_bfd_event_cb cb, void *user_data);
+int bcm_bfd_event_unregister(int unit, bcm_bfd_event_types_t event_types, bcm_bfd_event_cb cb);
+int bcm_bfd_init(int unit);
+int bcm_bfd_status_multi_get(int unit, int max_endpoints, bcm_bfd_status_t *status_arr, int *count);
+int bcm_bfd_tx_start(int unit);
+int bcm_bfd_tx_stop(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-capability-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_capability_*</span></code> (4)<a class="headerlink" href="#bcm-capability-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_capability_array_get(int unit, bcm_capability_array_t caid, int *size, int *array);  /* not in OpenBCM 6.5.27 */
+int bcm_capability_supported_get(int unit, bcm_capability_t cid, int *supported);  /* not in OpenBCM 6.5.27 */
+int bcm_capability_supported_multi_get(int unit, bcm_capability_t first_cid, int size, int *supported);  /* not in OpenBCM 6.5.27 */
+int bcm_capability_value_get(int unit, bcm_capability_value_t cvid, int *val);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-clear-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_clear_*</span></code> (1)<a class="headerlink" href="#bcm-clear-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_clear(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-collector-16">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_collector_*</span></code> (16)<a class="headerlink" href="#bcm-collector-16" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void bcm_collector_callback_options_t_init(bcm_collector_callback_options_t *callback_options);
+int bcm_collector_create(int unit, uint32 options, bcm_collector_t *collector_id, bcm_collector_info_t *collector_info);
+int bcm_collector_destroy(int unit, bcm_collector_t id);
+int bcm_collector_detach(int unit);
+int bcm_collector_export_profile_create(int unit, uint32 options, int *export_profile_id, bcm_collector_export_profile_t *export_profile_info);
+int bcm_collector_export_profile_destroy(int unit, int export_profile_id);
+int bcm_collector_export_profile_get(int unit, int export_profile_id, bcm_collector_export_profile_t *export_profile_info);
+int bcm_collector_export_profile_ids_get_all(int unit, int max_size, int *export_profile_ids_list, int *list_size);
+void bcm_collector_export_profile_t_init(bcm_collector_export_profile_t *export_profile_info);
+int bcm_collector_export_record_register(int unit, bcm_collector_t collector_id, bcm_collector_callback_options_t callback_options, bcm_collector_export_record_cb_f callback_fn, void *userdata);
+void bcm_collector_export_record_t_init(bcm_collector_export_record_t *record);
+int bcm_collector_export_record_unregister(int unit, bcm_collector_t collector_id, bcm_collector_callback_options_t callback_options, bcm_collector_export_record_cb_f callback_fn);
+int bcm_collector_get(int unit, bcm_collector_t id, bcm_collector_info_t *collector_info);
+int bcm_collector_get_all(int unit, int max_size, bcm_collector_t *collector_list, int *list_size);
+void bcm_collector_info_t_init(bcm_collector_info_t *collector_info);
+int bcm_collector_init(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-custom-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_custom_*</span></code> (4)<a class="headerlink" href="#bcm-custom-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_custom_port_get(int unit, bcm_port_t port, int type, int max_len, uint32 *args, int *actual_len);
+int bcm_custom_port_set(int unit, bcm_port_t port, int type, int len, uint32 *args);
+int bcm_custom_register(int unit, bcm_custom_cb_t func, void *user_data);
+int bcm_custom_unregister(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-detach-5">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_detach_*</span></code> (5)<a class="headerlink" href="#bcm-detach-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_detach(int unit);
+int bcm_detach_late_txrx(int unit);
+int bcm_detach_retry_get(int unit, bcm_detach_retry_t *retry);
+int bcm_detach_retry_set(int unit, bcm_detach_retry_t *retry);
+void bcm_detach_retry_t_init(bcm_detach_retry_t *retry);
+</pre></div>
+</div>
+</section>
+<section id="bcm-device-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_device_*</span></code> (1)<a class="headerlink" href="#bcm-device-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_device_member_get(int unit, uint32 flags, bcm_device_member_t member_type, int *is_member);
+</pre></div>
+</div>
+</section>
+<section id="bcm-eav-16">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_eav_*</span></code> (16)<a class="headerlink" href="#bcm-eav-16" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_eav_bandwidth_get(int unit, bcm_port_t port, bcm_eav_stream_class_t type, uint32 *bytes_sec, uint32 *bytes_burst);
+int bcm_eav_bandwidth_set(int unit, bcm_port_t port, bcm_eav_stream_class_t type, uint32 bytes_sec, uint32 bytes_burst);
+int bcm_eav_control_get(int unit, bcm_eav_control_t type, uint32 *arg, uint32 *arg2);
+int bcm_eav_control_set(int unit, bcm_eav_control_t type, uint32 arg, uint32 arg2);
+int bcm_eav_init(int unit);
+int bcm_eav_link_status_get(int unit, bcm_port_t port, int *link);
+int bcm_eav_link_status_set(int unit, bcm_port_t port, int link);
+int bcm_eav_pcp_mapping_get(int unit, bcm_eav_stream_class_t type, int *pcp, int *remapped_pcp);
+int bcm_eav_pcp_mapping_set(int unit, bcm_eav_stream_class_t type, int pcp, int remapped_pcp);
+int bcm_eav_port_enable_get(int unit, bcm_port_t port, int *enable);
+int bcm_eav_port_enable_set(int unit, bcm_port_t port, int enable);
+int bcm_eav_srp_mac_ethertype_get(int unit, bcm_mac_t mac, bcm_port_ethertype_t *ethertype);
+int bcm_eav_srp_mac_ethertype_set(int unit, bcm_mac_t mac, bcm_port_ethertype_t ethertype);
+int bcm_eav_timestamp_get(int unit, bcm_port_t port, uint32 *timestamp);
+int bcm_eav_timesync_mac_get(int unit, bcm_mac_t eav_mac);
+int bcm_eav_timesync_mac_set(int unit, bcm_mac_t eav_mac);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ecn-22">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ecn_*</span></code> (22)<a class="headerlink" href="#bcm-ecn-22" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ecn_map_create(int unit, uint32 flags, int *ecn_map_id);
+int bcm_ecn_map_destroy(int unit, int ecn_map_id);
+int bcm_ecn_map_get(int unit, int ecn_map_id, bcm_ecn_map_t *ecn_map);
+int bcm_ecn_map_mode_get(int unit, bcm_ecn_map_mode_t *ecn_map_mode);
+int bcm_ecn_map_mode_set(int unit, bcm_ecn_map_mode_t *ecn_map_mode);
+void bcm_ecn_map_mode_t_init(bcm_ecn_map_mode_t *ecn_map_mode);
+int bcm_ecn_map_profile_get(int unit, bcm_ecn_map_profile_t *profile);
+int bcm_ecn_map_profile_set(int unit, bcm_ecn_map_profile_t *profile);
+void bcm_ecn_map_profile_t_init(bcm_ecn_map_profile_t *profile);
+int bcm_ecn_map_set(int unit, uint32 options, int ecn_map_id, bcm_ecn_map_t *ecn_map);
+void bcm_ecn_map_t_init(bcm_ecn_map_t *ecn_map);
+int bcm_ecn_port_map_get(int unit, bcm_gport_t port, bcm_ecn_port_map_t *ecn_map);
+int bcm_ecn_port_map_set(int unit, bcm_gport_t port, bcm_ecn_port_map_t *ecn_map);
+void bcm_ecn_port_map_t_init(bcm_ecn_port_map_t *ecn_map);
+int bcm_ecn_responsive_protocol_get(int unit, uint8 ip_proto, int *responsive);
+int bcm_ecn_responsive_protocol_set(int unit, uint8 ip_proto, int responsive);
+int bcm_ecn_traffic_action_config_get(int unit, bcm_ecn_traffic_action_config_t *ecn_config);
+int bcm_ecn_traffic_action_config_set(int unit, bcm_ecn_traffic_action_config_t *ecn_config);
+void bcm_ecn_traffic_action_config_t_init(bcm_ecn_traffic_action_config_t *ecn_action);
+int bcm_ecn_traffic_map_get(int unit, bcm_ecn_traffic_map_info_t *map);
+void bcm_ecn_traffic_map_info_t_init(bcm_ecn_traffic_map_info_t *ecn_map);
+int bcm_ecn_traffic_map_set(int unit, bcm_ecn_traffic_map_info_t *map);
+</pre></div>
+</div>
+</section>
+<section id="bcm-edk-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_edk_*</span></code> (2)<a class="headerlink" href="#bcm-edk-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_edk_flexctr_register(int unit, bcm_core_t core_id, int is_ingress, uint32 pool_id, int *edk_map_id);  /* not in OpenBCM 6.5.27 */
+int bcm_edk_table_register(int unit, bcm_core_t core_id, bcm_edk_table_type_t tbl_type, bcm_edk_table_arg_t *arg, int *edk_map_id);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-encap-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_encap_*</span></code> (4)<a class="headerlink" href="#bcm-encap-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_ENCAP_ID_GET(int *_encap_id);
+int BCM_ENCAP_ID_SET(int *_encap_id, int *_id);
+int BCM_ENCAP_REMOTE_GET(int *_encap_id);
+int BCM_ENCAP_REMOTE_SET(int *_encap_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-errmsg-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_errmsg_*</span></code> (1)<a class="headerlink" href="#bcm-errmsg-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>char *bcm_errmsg(int rc);
+</pre></div>
+</div>
+</section>
+<section id="bcm-esmc-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_esmc_*</span></code> (9)<a class="headerlink" href="#bcm-esmc-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_esmc_QL_SSM_map(int unit, bcm_esmc_network_option_t opt, bcm_esmc_quality_level_t ql, uint8 *ssm_code);
+int bcm_esmc_SSM_QL_map(int unit, bcm_esmc_network_option_t opt, uint8 ssm_code, bcm_esmc_quality_level_t *ql);
+int bcm_esmc_g781_option_get(int unit, int stack_id, bcm_esmc_network_option_t *g781_option);
+int bcm_esmc_g781_option_set(int unit, int stack_id, bcm_esmc_network_option_t g781_option);
+int bcm_esmc_rx_callback_register(int unit, int stack_id, bcm_esmc_rx_cb rx_cb);
+int bcm_esmc_rx_callback_unregister(int unit, int stack_id);
+int bcm_esmc_tunnel_get(int unit, int stack_id, int *enable);
+int bcm_esmc_tunnel_set(int unit, int stack_id, int enable);
+int bcm_esmc_tx(int unit, int stack_id, bcm_pbmp_t pbmp, bcm_esmc_pdu_data_t *esmc_pdu_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-evnt-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_evnt_*</span></code> (3)<a class="headerlink" href="#bcm-evnt-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_EVNT_CORES_GROUP_ID_DECODE(int *_cores_group);  /* not in OpenBCM 6.5.27 */
+int BCM_EVNT_EVENTOR_ID_DECODE(int *_id);  /* not in OpenBCM 6.5.27 */
+int BCM_EVNT_EVENTOR_ID_ENCODE(int *_cores_group, int *_id);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-exit-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_exit_*</span></code> (1)<a class="headerlink" href="#bcm-exit-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_exit(int unit, uint32 flags);
+</pre></div>
+</div>
+</section>
+<section id="bcm-extender-36">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_extender_*</span></code> (36)<a class="headerlink" href="#bcm-extender-36" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_EXTENDER_GPORT_ENCAP_SET(int *_gport, int *_id);
+void BCM_EXTENDER_GPORT_FORWARD_SET(int *_gport, int *_id);
+int BCM_EXTENDER_GPORT_IS_ENCAP(int *_gport);
+int BCM_EXTENDER_GPORT_IS_FORWARD(int *_gport);
+int BCM_EXTENDER_GPORT_IS_PORT(int *_gport);
+void BCM_EXTENDER_GPORT_PORT_SET(int *_gport, int *_id);
+int bcm_extender_cleanup(int unit);
+int bcm_extender_egress_add(int unit, bcm_gport_t extender_port, bcm_extender_egress_t *extender_egress);
+int bcm_extender_egress_delete(int unit, bcm_gport_t extender_port, bcm_extender_egress_t *extender_egress);
+int bcm_extender_egress_delete_all(int unit, bcm_gport_t extender_port);
+int bcm_extender_egress_get(int unit, bcm_gport_t extender_port, bcm_extender_egress_t *extender_egress);
+int bcm_extender_egress_get_all(int unit, bcm_gport_t extender_port, int array_size, bcm_extender_egress_t *extender_egress_array, int *count);
+int bcm_extender_egress_set(int unit, bcm_gport_t extender_port, int array_size, bcm_extender_egress_t *extender_egress_array);
+void bcm_extender_egress_t_init(bcm_extender_egress_t *extender_egress);
+int bcm_extender_encap_create(int unit, bcm_extender_encap_t *extender_encap);
+int bcm_extender_encap_destroy(int unit, bcm_gport_t *extender_encap_id);
+int bcm_extender_encap_destroy_all(int unit);
+int bcm_extender_encap_get(int unit, bcm_extender_encap_t *extender_encap);
+void bcm_extender_encap_t_init(bcm_extender_encap_t *extender_encap);
+int bcm_extender_encap_traverse(int unit, bcm_extender_encap_traverse_cb cb, void *user_data);
+int bcm_extender_forward_add(int unit, bcm_extender_forward_t *extender_forward_entry);
+int bcm_extender_forward_delete(int unit, bcm_extender_forward_t *extender_forward_entry);
+int bcm_extender_forward_delete_all(int unit);
+int bcm_extender_forward_get(int unit, bcm_extender_forward_t *extender_forward_entry);
+int bcm_extender_forward_stat_attach(int unit, bcm_extender_forward_t *extender_forward_entry, uint32 stat_counter_id);
+int bcm_extender_forward_stat_detach(int unit, bcm_extender_forward_t *extender_forward_entry);
+int bcm_extender_forward_stat_id_get(int unit, bcm_extender_forward_t *extender_forward_entry, uint32 *stat_counter_id);
+void bcm_extender_forward_t_init(bcm_extender_forward_t *extender_forward_entry);
+int bcm_extender_forward_traverse(int unit, bcm_extender_forward_traverse_cb cb, void *user_data);
+int bcm_extender_init(int unit);
+int bcm_extender_port_add(int unit, bcm_extender_port_t *extender_port);
+int bcm_extender_port_delete(int unit, bcm_gport_t extender_port_id);
+int bcm_extender_port_delete_all(int unit);
+int bcm_extender_port_get(int unit, bcm_extender_port_t *extender_port);
+void bcm_extender_port_t_init(bcm_extender_port_t *extender_port);
+int bcm_extender_port_traverse(int unit, bcm_extender_port_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-failover-25">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_failover_*</span></code> (25)<a class="headerlink" href="#bcm-failover-25" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_FAILOVER_FEC_HIERARCHY_GET(int *failover_fec_hierarchy, bcm_failover_t *failover_id);  /* not in OpenBCM 6.5.27 */
+void BCM_FAILOVER_FEC_HIERARCHY_SET(bcm_failover_t *failover_id, int *failover_id_val, int *failover_fec_hierarchy);  /* not in OpenBCM 6.5.27 */
+void BCM_FAILOVER_ID_GET(int *failover_id_val, bcm_failover_t *failover_id);
+void BCM_FAILOVER_SET(bcm_failover_t *failover_id, int *failover_id_val, int *failover_type);
+void BCM_FAILOVER_TYPE_GET(int *failover_type, bcm_failover_t *failover_id);
+int bcm_failover_cleanup(int unit);
+int bcm_failover_create(int unit, uint32 flags, bcm_failover_t *failover_id);
+int bcm_failover_destroy(int unit, bcm_failover_t failover_id);
+int bcm_failover_egress_clear(int unit, bcm_if_t intf);
+int bcm_failover_egress_get(int unit, bcm_if_t intf, bcm_l3_egress_t *failover_egr);
+int bcm_failover_egress_protection_get(int unit, bcm_if_t intf, bcm_if_t *prot_intf);
+int bcm_failover_egress_set(int unit, bcm_if_t intf, bcm_l3_egress_t *failover_egr);
+int bcm_failover_egress_status_get(int unit, bcm_if_t intf, int *enable);
+int bcm_failover_egress_status_set(int unit, bcm_if_t intf, int enable);
+void bcm_failover_element_t_init(bcm_failover_element_t *failover);
+int bcm_failover_get(int unit, bcm_failover_t failover_id, int *enable);
+int bcm_failover_init(int unit);
+int bcm_failover_multi_level_attach(int unit, bcm_failover_multi_level_t multi_level_failover);
+void bcm_failover_multi_level_t_init(bcm_failover_multi_level_t *multi_level_failover);
+int bcm_failover_ring_config_get(int unit, bcm_failover_ring_t *failover_ring);
+int bcm_failover_ring_config_set(int unit, bcm_failover_ring_t *failover_ring);
+void bcm_failover_ring_t_init(bcm_failover_ring_t *failover);
+int bcm_failover_set(int unit, bcm_failover_t failover_id, int enable);
+int bcm_failover_status_get(int unit, bcm_failover_element_t *failover, int *enable);
+int bcm_failover_status_set(int unit, bcm_failover_element_t *failover, int enable);
+</pre></div>
+</div>
+</section>
+<section id="bcm-failure-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_failure_*</span></code> (1)<a class="headerlink" href="#bcm-failure-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_FAILURE(int *rv);
+</pre></div>
+</div>
+</section>
+<section id="bcm-find-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_find_*</span></code> (1)<a class="headerlink" href="#bcm-find-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_find(char *type, char *subtype, int remunit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexe-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexe_*</span></code> (2)<a class="headerlink" href="#bcm-flexe-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_FLEXE_GROUP_GPORT_GROUP_INDEX_GET(int *_gport);
+void BCM_FLEXE_GROUP_GPORT_SET(int *_gport, int *_port);
+</pre></div>
+</div>
+</section>
+<section id="bcm-forward-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_forward_*</span></code> (9)<a class="headerlink" href="#bcm-forward-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_FORWARD_ENCAP_ID_EEI_USAGE_GET(int *_forward_encap_id);
+int BCM_FORWARD_ENCAP_ID_EEI_USAGE_MPLS_PORT_PUSH_PROFILE_GET(int *_forward_encap_id);
+void BCM_FORWARD_ENCAP_ID_EEI_USAGE_MPLS_PORT_SET(int *_forward_encap_id, int *_label, int *_push_profile);
+int BCM_FORWARD_ENCAP_ID_EEI_USAGE_MPLS_PORT_VC_GET(int *_forward_encap_id);
+int BCM_FORWARD_ENCAP_ID_IS_EEI(int *_forward_encap_id);
+int BCM_FORWARD_ENCAP_ID_IS_OUTLIF(int *_forward_encap_id);
+int BCM_FORWARD_ENCAP_ID_OUTLIF_USAGE_GET(int *_forward_encap_id);
+int BCM_FORWARD_ENCAP_ID_VAL_GET(int *_forward_encap_id);
+void BCM_FORWARD_ENCAP_ID_VAL_SET(int *_forward_encap_id, int *_type, int *_usage, int *_val);
+</pre></div>
+</div>
+</section>
+<section id="bcm-glb-17">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_glb_*</span></code> (17)<a class="headerlink" href="#bcm-glb-17" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_glb_config_get(int unit, bcm_glb_config_t *glb_config);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_config_set(int unit, bcm_glb_config_t *glb_config);  /* not in OpenBCM 6.5.27 */
+void bcm_glb_config_t_init(bcm_glb_config_t *glb_config);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_detach(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_init(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_msg_encap_create(int unit, uint32 options, bcm_glb_msg_encap_t *encap_id, bcm_glb_msg_encap_info_t *glb_msg_encap_info);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_msg_encap_destroy(int unit, bcm_glb_msg_encap_t encap_id);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_msg_encap_get(int unit, bcm_glb_msg_encap_t encap_id, bcm_glb_msg_encap_info_t *glb_msg_encap_info);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_msg_encap_get_all(int unit, int max_size, bcm_glb_msg_encap_t *encap_id_list, int *list_size);  /* not in OpenBCM 6.5.27 */
+void bcm_glb_msg_encap_info_t_init(bcm_glb_msg_encap_info_t *glb_msg_encap_info);  /* not in OpenBCM 6.5.27 */
+void bcm_glb_path_info_t_init(bcm_glb_path_info_t *glb_path_info);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_port_quality_monitor_port_get(int unit, bcm_port_t port, bcm_glb_path_info_t *glb_path_info);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_port_quality_monitor_port_set(int unit, bcm_port_t port, bcm_glb_path_info_t *glb_path_info);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_switch_dlb_group_get(int unit, uint32 glb_switch_id, bcm_if_t *dlb_ecmp_intf);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_switch_dlb_group_set(int unit, uint32 glb_switch_id, bcm_if_t dlb_ecmp_intf);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_switch_quality_profile_map_get(int unit, uint32 glb_switch_id, int *path_quality_profile);  /* not in OpenBCM 6.5.27 */
+int bcm_glb_switch_quality_profile_map_set(int unit, uint32 glb_switch_id, int path_quality_profile);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-hash-17">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_hash_*</span></code> (17)<a class="headerlink" href="#bcm-hash-17" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_HASH_CONTROL_MULTIPATH_USERDEF(int *_val);
+int BCM_HASH_CONTROL_MULTIPATH_USERDEF_VAL(int *c);
+void BCM_HASH_PKT_STATUS_SET_ADD(bcm_hash_pkt_status_set_t *_set, int *_q);
+void BCM_HASH_PKT_STATUS_SET_REMOVE(bcm_hash_pkt_status_set_t *_set, int *_q);
+int BCM_HASH_PKT_STATUS_SET_TEST(bcm_hash_pkt_status_set_t *_set, int *_q);
+void BCM_HASH_PKT_TYPE_SET_ADD(bcm_hash_pkt_type_set_t *_set, int *_q);
+void BCM_HASH_PKT_TYPE_SET_REMOVE(bcm_hash_pkt_type_set_t *_set, int *_q);
+int BCM_HASH_PKT_TYPE_SET_TEST(bcm_hash_pkt_type_set_t *_set, int *_q);
+int bcm_hash_flex_bin_add(int unit, bcm_hash_flex_bin_config_t *cfg, int num_bins, bcm_hash_flex_bin_cmd_t *bin_cmd, int num_fields, bcm_hash_flex_field_t *flex_field);
+void bcm_hash_flex_bin_config_t_init(bcm_hash_flex_bin_config_t *cfg);
+int bcm_hash_flex_bin_delete(int unit, int entry_id);
+int bcm_hash_flex_bin_delete_all(int unit);
+int bcm_hash_flex_bin_get(int unit, bcm_hash_flex_bin_config_t *cfg, int num_bins, bcm_hash_flex_bin_cmd_t *bin_cmd, int num_fields, bcm_hash_flex_field_t *flex_field);
+int bcm_hash_flex_bin_traverse(int unit, uint32 option, bcm_hash_flex_bin_traverse_cb cb, void *user_data);
+int bcm_hash_flex_field_id_get(int unit, bcm_hash_flex_object_t object, char *field_name, uint32 *field_id);
+int bcm_hash_flex_field_name_get(int unit, uint32 field_id, bcm_hash_flex_object_t *object, int size, char *field_name);
+int bcm_hash_init(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-i2c-6">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_i2c_*</span></code> (6)<a class="headerlink" href="#bcm-i2c-6" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_i2c_ioctl(int unit, int fd, int opcode, void *data, int len);
+int bcm_i2c_open(int unit, char *devname, uint32 flags, int speed);
+int bcm_i2c_read(int unit, int fd, uint32 addr, uint8 *data, uint32 *nbytes);
+int bcm_i2c_readw(int unit, int fd, uint32 addr, uint16 *data);  /* not in OpenBCM 6.5.27 */
+int bcm_i2c_write(int unit, int fd, uint32 addr, uint8 *data, uint32 nbytes);
+int bcm_i2c_writew(int unit, int fd, uint32 addr, uint16 *data);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-info-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_info_*</span></code> (2)<a class="headerlink" href="#bcm-info-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_info_get(int unit, bcm_info_t *info);
+void bcm_info_t_init(bcm_info_t *info);
+</pre></div>
+</div>
+</section>
+<section id="bcm-init-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_init_*</span></code> (4)<a class="headerlink" href="#bcm-init-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_init(int unit);
+int bcm_init_advanced(int unit, bcm_init_advanced_info_t *init_advanced_info);
+int bcm_init_check(int unit);
+int bcm_init_selective(int unit, uint32 flags);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ip-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ip_*</span></code> (2)<a class="headerlink" href="#bcm-ip-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bcm_ip_t bcm_ip_mask_create(int len);
+int bcm_ip_mask_length(bcm_ip_t ip);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ip4-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ip4_*</span></code> (1)<a class="headerlink" href="#bcm-ip4-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_IP4_MASKLEN_TO_ADDR(int *_ml_);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ip6-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ip6_*</span></code> (2)<a class="headerlink" href="#bcm-ip6-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ip6_mask_create(bcm_ip6_t ip6, int len);
+int bcm_ip6_mask_length(bcm_ip6_t mask);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ipfix-22">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ipfix_*</span></code> (22)<a class="headerlink" href="#bcm-ipfix-22" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ipfix_config_get(int unit, bcm_ipfix_stage_t stage, bcm_port_t port, bcm_ipfix_config_t *config);
+int bcm_ipfix_config_set(int unit, bcm_ipfix_stage_t stage, bcm_port_t port, bcm_ipfix_config_t *config);
+void bcm_ipfix_config_t_init(bcm_ipfix_config_t *config);
+int bcm_ipfix_mirror_config_get(int unit, bcm_ipfix_stage_t stage, bcm_gport_t port, bcm_ipfix_mirror_config_t *config);
+int bcm_ipfix_mirror_config_set(int unit, bcm_ipfix_stage_t stage, bcm_gport_t port, bcm_ipfix_mirror_config_t *config);
+void bcm_ipfix_mirror_config_t_init(bcm_ipfix_mirror_config_t *config);
+int bcm_ipfix_mirror_port_dest_add(int unit, bcm_ipfix_stage_t stage, bcm_gport_t port, bcm_gport_t mirror_dest_id);
+int bcm_ipfix_mirror_port_dest_delete(int unit, bcm_ipfix_stage_t stage, bcm_gport_t port, bcm_gport_t mirror_dest_id);
+int bcm_ipfix_mirror_port_dest_delete_all(int unit, bcm_ipfix_stage_t stage, bcm_gport_t port);
+int bcm_ipfix_mirror_port_dest_get(int unit, bcm_ipfix_stage_t stage, bcm_gport_t port, int mirror_dest_size, bcm_gport_t *mirror_dest_id, int *mirror_dest_count);
+int bcm_ipfix_rate_create(int unit, bcm_ipfix_rate_t *rate_info);
+int bcm_ipfix_rate_destroy(int unit, bcm_ipfix_rate_id_t rate_id);
+int bcm_ipfix_rate_destroy_all(int unit);
+int bcm_ipfix_rate_get(int unit, bcm_ipfix_rate_t *rate_info);
+int bcm_ipfix_rate_mirror_add(int unit, bcm_ipfix_rate_id_t rate_id, bcm_gport_t mirror_dest_id);
+int bcm_ipfix_rate_mirror_delete(int unit, bcm_ipfix_rate_id_t rate_id, bcm_gport_t mirror_dest_id);
+int bcm_ipfix_rate_mirror_delete_all(int unit, bcm_ipfix_rate_id_t rate_id);
+int bcm_ipfix_rate_mirror_get(int unit, bcm_ipfix_rate_id_t rate_id, int mirror_dest_size, bcm_gport_t *mirror_dest_id, int *mirror_dest_count);
+void bcm_ipfix_rate_t_init(bcm_ipfix_rate_t *rate);
+int bcm_ipfix_rate_traverse(int unit, bcm_ipfix_rate_traverse_cb cb, void *userdata);
+int bcm_ipfix_register(int unit, bcm_ipfix_callback_t callback, void *userdata);
+int bcm_ipfix_unregister(int unit, bcm_ipfix_callback_t callback, void *userdata);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ipsec-8">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ipsec_*</span></code> (8)<a class="headerlink" href="#bcm-ipsec-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ipsec_config_set(int unit, bcm_ipsec_config_t *config);
+int bcm_ipsec_sa_create(int unit, uint32 flags, uint32 *sa_id, bcm_ipsec_sa_info_t *sa);
+int bcm_ipsec_sa_delete(int unit, uint32 flags, uint32 sa_id);
+int bcm_ipsec_sa_key_update(int unit, uint32 flags, uint32 sa_id, bcm_ipsec_sa_keys_t *sa_keys);
+int bcm_ipsec_sa_to_tunnel_map_get(int unit, uint32 sa_id, uint32 *tunnel_id);
+int bcm_ipsec_sa_to_tunnel_map_set(int unit, uint32 tunnel_id, uint32 sa_id);
+int bcm_ipsec_tunnel_create(int unit, uint32 flags, uint32 *tunnel_id, bcm_ipsec_tunnel_info_t *tunnel_info);
+int bcm_ipsec_tunnel_delete(int unit, uint32 flags, uint32 tunnel_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-keepalive-14">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_keepalive_*</span></code> (14)<a class="headerlink" href="#bcm-keepalive-14" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_keepalive_cleanup(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_init(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_add(int unit, bcm_keepalive_session_t *s, bcm_keepalive_session_handle_t *h);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_del(int unit, bcm_keepalive_session_handle_t h);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_get(int unit, bcm_keepalive_session_handle_t h, bcm_keepalive_session_t *s);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_start(int unit, bcm_keepalive_session_handle_t h);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_status_get(int unit, bcm_keepalive_session_handle_t h, bcm_keepalive_session_status_t *st);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_stop(int unit, bcm_keepalive_session_handle_t h);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_t_init(int unit, bcm_keepalive_session_t *s);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_traverse(int unit, bcm_keepalive_session_traverse_cb trav_cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_session_update(int unit, bcm_keepalive_session_handle_t h, bcm_keepalive_session_t *s);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_start(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_status_get(int unit, bcm_keepalive_status_t *kst);  /* not in OpenBCM 6.5.27 */
+int bcm_keepalive_stop(int unit);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-knet-12">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_knet_*</span></code> (12)<a class="headerlink" href="#bcm-knet-12" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_knet_cleanup(int unit);
+int bcm_knet_filter_create(int unit, bcm_knet_filter_t *filter);
+int bcm_knet_filter_destroy(int unit, int filter_id);
+int bcm_knet_filter_get(int unit, int filter_id, bcm_knet_filter_t *filter);
+void bcm_knet_filter_t_init(bcm_knet_filter_t *filter);
+int bcm_knet_filter_traverse(int unit, bcm_knet_filter_traverse_cb trav_fn, void *user_data);
+int bcm_knet_init(int unit);
+int bcm_knet_netif_create(int unit, bcm_knet_netif_t *netif);
+int bcm_knet_netif_destroy(int unit, int netif_id);
+int bcm_knet_netif_get(int unit, int netif_id, bcm_knet_netif_t *netif);
+void bcm_knet_netif_t_init(bcm_knet_netif_t *netif);
+int bcm_knet_netif_traverse(int unit, bcm_knet_netif_traverse_cb trav_fn, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-knetsync-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_knetsync_*</span></code> (9)<a class="headerlink" href="#bcm-knetsync-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_knetsync_deinit(int unit);
+int bcm_knetsync_init(int unit);
+int bcm_knetsync_p2p_action_encap_header_set(int unit, bcm_knetsync_p2p_ts_fwd_action_t action, uint8 *encap_hdr, uint16 encap_hdr_len);  /* not in OpenBCM 6.5.27 */
+int bcm_knetsync_p2p_instance_deinit(int unit, bcm_knetsync_p2p_instance_t *p2p_instance);  /* not in OpenBCM 6.5.27 */
+int bcm_knetsync_p2p_instance_get(int unit, bcm_knetsync_p2p_instance_t *p2p_instance);  /* not in OpenBCM 6.5.27 */
+int bcm_knetsync_p2p_instance_init(int unit, bcm_knetsync_p2p_instance_t *p2p_instance);  /* not in OpenBCM 6.5.27 */
+int bcm_knetsync_p2p_port_config_get(int unit, bcm_port_t port, bcm_knetsync_p2p_port_config_t *p2p_intf);  /* not in OpenBCM 6.5.27 */
+int bcm_knetsync_p2p_port_config_set(int unit, bcm_port_t port, bcm_knetsync_p2p_port_config_t *p2p_intf);  /* not in OpenBCM 6.5.27 */
+int bcm_knetsync_p2p_port_stats_get(int unit, bcm_port_t port, bcm_knetsync_p2p_port_stats_t *p2p_port_stats);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-l2gre-35">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_l2gre_*</span></code> (35)<a class="headerlink" href="#bcm-l2gre-35" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_l2gre_cleanup(int unit);
+int bcm_l2gre_init(int unit);
+int bcm_l2gre_port_add(int unit, bcm_vpn_t l2vpn, bcm_l2gre_port_t *l2gre_port);
+int bcm_l2gre_port_delete(int unit, bcm_vpn_t l2vpn, bcm_gport_t l2gre_port_id);
+int bcm_l2gre_port_delete_all(int unit, bcm_vpn_t l2vpn);
+int bcm_l2gre_port_get(int unit, bcm_vpn_t l2vpn, bcm_l2gre_port_t *l2gre_port);
+int bcm_l2gre_port_get_all(int unit, bcm_vpn_t l2vpn, int port_max, bcm_l2gre_port_t *port_array, int *port_count);
+void bcm_l2gre_port_t_init(bcm_l2gre_port_t *l2gre_port);
+int bcm_l2gre_stat_attach(int unit, bcm_gport_t port, bcm_vpn_t vpn, uint32 stat_counter_id);
+int bcm_l2gre_stat_counter_get(int unit, bcm_gport_t port, bcm_vpn_t vpn, bcm_l2gre_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l2gre_stat_counter_set(int unit, bcm_gport_t port, bcm_vpn_t vpn, bcm_l2gre_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l2gre_stat_counter_sync_get(int unit, bcm_gport_t port, bcm_vpn_t vpn, bcm_l2gre_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l2gre_stat_detach(int unit, bcm_gport_t port, bcm_vpn_t vpn);
+int bcm_l2gre_stat_id_get(int unit, bcm_gport_t port, bcm_vpn_t vpn, bcm_l2gre_stat_t stat, uint32 *stat_counter_id);
+int bcm_l2gre_stat_multi_get(int unit, bcm_gport_t port, bcm_vpn_t vpn, int nstat, bcm_l2gre_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l2gre_stat_multi_get32(int unit, bcm_gport_t port, bcm_vpn_t vpn, int nstat, bcm_l2gre_stat_t *stat_arr, uint32 *value_arr);
+int bcm_l2gre_stat_multi_set(int unit, bcm_gport_t port, bcm_vpn_t vpn, int nstat, bcm_l2gre_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l2gre_stat_multi_set32(int unit, bcm_gport_t port, bcm_vpn_t vpn, int nstat, bcm_l2gre_stat_t *stat_arr, uint32 *value_arr);
+int bcm_l2gre_tunnel_initiator_create(int unit, bcm_tunnel_initiator_t *info);
+int bcm_l2gre_tunnel_initiator_destroy(int unit, bcm_gport_t l2gre_tunnel_id);
+int bcm_l2gre_tunnel_initiator_destroy_all(int unit);
+int bcm_l2gre_tunnel_initiator_get(int unit, bcm_tunnel_initiator_t *info);
+int bcm_l2gre_tunnel_initiator_traverse(int unit, bcm_tunnel_initiator_traverse_cb cb, void *user_data);
+int bcm_l2gre_tunnel_terminator_create(int unit, bcm_tunnel_terminator_t *info);
+int bcm_l2gre_tunnel_terminator_destroy(int unit, bcm_gport_t l2gre_tunnel_id);
+int bcm_l2gre_tunnel_terminator_destroy_all(int unit);
+int bcm_l2gre_tunnel_terminator_get(int unit, bcm_tunnel_terminator_t *info);
+int bcm_l2gre_tunnel_terminator_traverse(int unit, bcm_tunnel_terminator_traverse_cb cb, void *user_data);
+int bcm_l2gre_tunnel_terminator_update(int unit, bcm_tunnel_terminator_t *info);
+void bcm_l2gre_vpn_config_t_init(bcm_l2gre_vpn_config_t *info);
+int bcm_l2gre_vpn_create(int unit, bcm_l2gre_vpn_config_t *info);
+int bcm_l2gre_vpn_destroy(int unit, bcm_vpn_t l2vpn);
+int bcm_l2gre_vpn_destroy_all(int unit);
+int bcm_l2gre_vpn_get(int unit, bcm_vpn_t l2vpn, bcm_l2gre_vpn_config_t *info);
+int bcm_l2gre_vpn_traverse(int unit, bcm_l2gre_vpn_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-latency-21">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_latency_*</span></code> (21)<a class="headerlink" href="#bcm-latency-21" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_latency_monitor_config_get(int unit, uint8 monitor_id, bcm_latency_monitor_config_t *config);
+int bcm_latency_monitor_config_set(int unit, uint8 monitor_id, bcm_latency_monitor_config_t *config);
+void bcm_latency_monitor_config_t_init(bcm_latency_monitor_config_t *config);
+int bcm_latency_monitor_cosq_config_get(int unit, uint8 monitor_id, uint8 cosq, bcm_latency_monitor_cosq_info_t *cosq_info);
+int bcm_latency_monitor_cosq_config_set(int unit, uint8 monitor_id, uint8 cosq, bcm_latency_monitor_cosq_info_t cosq_info);
+void bcm_latency_monitor_cosq_info_t_init(bcm_latency_monitor_cosq_info_t *config);
+int bcm_latency_monitor_destroy(int unit, uint8 monitor_id);
+int bcm_latency_monitor_detach(int unit);
+int bcm_latency_monitor_enable(int unit, uint8 monitor_id, uint8 enable);
+int bcm_latency_monitor_histogram_get(int unit, uint8 monitor_id, uint8 cosq, uint8 byte_counter_flag, bcm_latency_monitor_histogram_t *histogram);
+void bcm_latency_monitor_histogram_t_init(bcm_latency_monitor_histogram_t *histogram);
+int bcm_latency_monitor_info_get(int unit, uint8 monitor_id, bcm_latency_monitor_info_t *monitor_info);
+void bcm_latency_monitor_info_t_init(bcm_latency_monitor_info_t *monitor_info);
+int bcm_latency_monitor_init(int unit);
+int bcm_latency_monitor_latency_limit_table_get(int unit, uint8 table_size, uint32 *latency_limit_table);
+int bcm_latency_monitor_latency_limit_table_set(int unit, uint8 table_size, uint32 *latency_limit_table);
+int bcm_latency_monitor_register(int unit, int monitor_id, bcm_latency_monitor_callback_fn fn, void *user_data);
+int bcm_latency_monitor_stat_attach(int unit, uint8 monitor_id, uint32 stat_counter_id);
+int bcm_latency_monitor_stat_detach(int unit, uint8 monitor_id);
+int bcm_latency_monitor_stat_id_get(int unit, uint8 monitor_id, uint32 *stat_counter_id);
+int bcm_latency_monitor_unregister(int unit, int monitor_id, bcm_latency_monitor_callback_fn fn);
+</pre></div>
+</div>
+</section>
+<section id="bcm-lb-38">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_lb_*</span></code> (38)<a class="headerlink" href="#bcm-lb-38" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_lb_control_get(int unit, bcm_lbg_t lbg_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_control_t lb_control, int *arg);
+int bcm_lb_control_set(int unit, bcm_lbg_t lbg_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_control_t lb_control, int arg);
+int bcm_lb_enable_get(int unit, bcm_lbg_t lbg_id, uint32 flags, uint32 *enable);
+int bcm_lb_enable_set(int unit, bcm_lbg_t lbg_id, uint32 flags, uint32 enable);
+int bcm_lb_flush_configure_get(int unit, bcm_lbg_t lbg_id, uint32 flags, bcm_lb_flush_type_t type, int *arg);
+int bcm_lb_flush_configure_set(int unit, bcm_lbg_t lbg_id, uint32 flags, bcm_lb_flush_type_t type, int arg);
+void bcm_lb_lbg_weight_t_init(bcm_lb_lbg_weight_t *lbg_weights);
+int bcm_lb_modem_control_get(int unit, bcm_modem_t modem_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_modem_control_t modem_control, int *arg);
+int bcm_lb_modem_control_set(int unit, bcm_modem_t modem_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_modem_control_t modem_control, int arg);
+int bcm_lb_modem_packet_config_get(int unit, bcm_modem_t modem_id, uint32 flags, bcm_lb_modem_packet_config_t *packet_config);
+int bcm_lb_modem_packet_config_set(int unit, bcm_modem_t modem_id, uint32 flags, bcm_lb_modem_packet_config_t *packet_config);
+void bcm_lb_modem_packet_config_t_init(bcm_lb_modem_packet_config_t *packet_config);
+void bcm_lb_modem_shaper_config_t_init(bcm_lb_modem_shaper_config_t *shaper);
+int bcm_lb_modem_shaper_get(int unit, bcm_modem_t modem_id, uint32 flags, bcm_lb_modem_shaper_config_t *shaper);
+int bcm_lb_modem_shaper_set(int unit, bcm_modem_t modem_id, uint32 flags, bcm_lb_modem_shaper_config_t *shaper);
+int bcm_lb_modem_stat_get(int unit, bcm_modem_t modem_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_modem_stat_val_t type, uint64 *value);
+int bcm_lb_modem_status_get(int unit, bcm_modem_t modem_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_modem_status_type_t status_type, int *value);
+int bcm_lb_modem_to_lbg_map_get(int unit, bcm_modem_t modem_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lbg_t *lbg_id);
+int bcm_lb_modem_to_lbg_map_set(int unit, bcm_modem_t modem_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lbg_t lbg_id);
+int bcm_lb_modem_to_port_map_get(int unit, bcm_modem_t modem_id, uint32 flags, bcm_gport_t *port);
+int bcm_lb_modem_to_port_map_set(int unit, bcm_modem_t modem_id, uint32 flags, bcm_gport_t port);
+int bcm_lb_packet_config_get(int unit, uint32 flags, bcm_lb_packet_config_t *packet_config);
+int bcm_lb_packet_config_set(int unit, uint32 flags, bcm_lb_packet_config_t *packet_config);
+void bcm_lb_packet_config_t_init(bcm_lb_packet_config_t *packet_config);
+void bcm_lb_pkt_pri_t_init(bcm_lb_pkt_pri_t *pkt_pri);
+void bcm_lb_rx_modem_map_config_t_init(bcm_lb_rx_modem_map_config_t *map_config);
+int bcm_lb_rx_modem_map_get(int unit, bcm_lb_rx_modem_map_index_t *map_index, uint32 flags, bcm_lb_rx_modem_map_config_t *map_config);
+void bcm_lb_rx_modem_map_index_t_init(bcm_lb_rx_modem_map_index_t *map_index);
+int bcm_lb_rx_modem_map_set(int unit, bcm_lb_rx_modem_map_index_t *map_index, uint32 flags, bcm_lb_rx_modem_map_config_t *map_config);
+int bcm_lb_sequence_number_width_get(int unit, bcm_lbg_t lbg_id, bcm_lb_direction_type_t direction, uint32 flags, int *number_width);
+int bcm_lb_sequence_number_width_set(int unit, bcm_lbg_t lbg_id, bcm_lb_direction_type_t direction, uint32 flags, int number_width);
+int bcm_lb_stat_get(int unit, bcm_lbg_t lbg_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_stat_val_t type, uint64 *value);
+int bcm_lb_status_get(int unit, bcm_lbg_t lbg_id, bcm_lb_direction_type_t direction, uint32 flags, bcm_lb_status_type_t status_type, int *value);
+void bcm_lb_tc_dp_t_init(bcm_lb_tc_dp_t *tc_dp);
+int bcm_lb_tc_dp_to_priority_config_get(int unit, uint32 flags, bcm_lb_tc_dp_t *tc_dp, bcm_lb_pkt_pri_t *pkt_pri);
+int bcm_lb_tc_dp_to_priority_config_set(int unit, uint32 flags, bcm_lb_tc_dp_t *tc_dp, bcm_lb_pkt_pri_t *pkt_pri);
+int bcm_lb_tx_sched_get(int unit, uint32 flags, int max_lbg_count, bcm_lb_lbg_weight_t *lbg_weights, int *lbg_count);
+int bcm_lb_tx_sched_set(int unit, uint32 flags, int lbg_count, bcm_lb_lbg_weight_t *lbg_weights);
+</pre></div>
+</div>
+</section>
+<section id="bcm-link-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_link_*</span></code> (2)<a class="headerlink" href="#bcm-link-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_link_change(int unit, bcm_pbmp_t pbmp);
+int bcm_link_wait(int unit, bcm_pbmp_t *pbm, int us);
+</pre></div>
+</div>
+</section>
+<section id="bcm-linkscan-18">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_linkscan_*</span></code> (18)<a class="headerlink" href="#bcm-linkscan-18" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_linkscan_detach(int unit);
+int bcm_linkscan_dump(int unit);
+int bcm_linkscan_enable_get(int unit, int *us);
+int bcm_linkscan_enable_port_get(int unit, bcm_port_t port);
+int bcm_linkscan_enable_set(int unit, int us);
+int bcm_linkscan_init(int unit);
+int bcm_linkscan_mode_get(int unit, bcm_port_t port, int *mode);
+int bcm_linkscan_mode_set(int unit, bcm_port_t port, int mode);
+int bcm_linkscan_mode_set_pbm(int unit, bcm_pbmp_t pbm, int mode);
+int bcm_linkscan_override_link_state_get(int unit, bcm_port_t port, int *link);
+int bcm_linkscan_override_link_state_set(int unit, bcm_port_t port, int link);
+int bcm_linkscan_port_register(int unit, bcm_port_t port, bcm_linkscan_port_handler_t f);
+int bcm_linkscan_port_unregister(int unit, bcm_port_t port, bcm_linkscan_port_handler_t f);
+int bcm_linkscan_register(int unit, bcm_linkscan_handler_t f);
+int bcm_linkscan_trigger_event_get(int unit, bcm_port_t port, uint32 flags, bcm_linkscan_trigger_event_t trigger_event, int *enable);
+int bcm_linkscan_trigger_event_set(int unit, bcm_port_t port, uint32 flags, bcm_linkscan_trigger_event_t trigger_event, int enable);
+int bcm_linkscan_unregister(int unit, bcm_linkscan_handler_t f);
+int bcm_linkscan_update(int unit, bcm_pbmp_t pbm);
+</pre></div>
+</div>
+</section>
+<section id="bcm-mac-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_mac_*</span></code> (2)<a class="headerlink" href="#bcm-mac-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_MAC_IS_MCAST(bcm_mac_t *_mac_);
+int BCM_MAC_IS_ZERO(bcm_mac_t *_mac_);
+</pre></div>
+</div>
+</section>
+<section id="bcm-mcast-25">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_mcast_*</span></code> (25)<a class="headerlink" href="#bcm-mcast-25" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_MCAST_GPORT_BITMAP_ID_GET(int *gport);
+void BCM_MCAST_GPORT_BITMAP_ID_SET(int *gport, int *bmp_id);
+int BCM_MCAST_GPORT_ELEMENT_ID_GET(int *gport);
+int BCM_MCAST_GPORT_ELEMENT_ID_SET(int *gport, int *mcast_id, uint8 *is_static);
+int BCM_MCAST_GPORT_GROUP_ID_GET(int *gport);
+void BCM_MCAST_GPORT_GROUP_ID_SET(int *gport, int *mcast_id);
+int BCM_MCAST_GPORT_IS_BITMAP_ID(int *gport);
+int BCM_MCAST_GPORT_IS_ELEMENT_ID(int *gport);
+int BCM_MCAST_GPORT_IS_ELEMENT_STATIC(int *gport);
+int BCM_MCAST_GPORT_IS_GROUP_ID(int *gport);
+int bcm_mcast_addr_add(int unit, bcm_mcast_addr_t *mcaddr);
+int bcm_mcast_addr_add_w_l2mcindex(int unit, bcm_mcast_addr_t *mcaddr);
+int bcm_mcast_addr_remove(int unit, bcm_mac_t mac, bcm_vlan_t vid);
+int bcm_mcast_addr_remove_w_l2mcindex(int unit, bcm_mcast_addr_t *mcaddr);
+void bcm_mcast_addr_t_init(bcm_mcast_addr_t *mcaddr, bcm_mac_t mac, bcm_vlan_t vid);
+int bcm_mcast_bitmap_del(int unit, int mc_idx, bcm_port_t in_port, bcm_pbmp_t pbmp);
+int bcm_mcast_bitmap_get(int unit, int mc_idx, bcm_port_t in_port, bcm_pbmp_t *pbmp);
+int bcm_mcast_bitmap_max_get(int unit, int *max_index);
+int bcm_mcast_bitmap_set(int unit, int mc_idx, bcm_port_t in_port, bcm_pbmp_t pbmp);
+int bcm_mcast_init(int unit);
+int bcm_mcast_join(int unit, bcm_mac_t mcMacAddr, bcm_vlan_t vlanId, int srcPort, bcm_mcast_addr_t *mcaddr, bcm_pbmp_t *allRouterBmp);
+int bcm_mcast_leave(int unit, bcm_mac_t mcMacAddr, bcm_vlan_t vlanId, int srcPort);
+int bcm_mcast_port_add(int unit, bcm_mcast_addr_t *mcaddr);
+int bcm_mcast_port_get(int unit, bcm_mac_t mac, bcm_vlan_t vid, bcm_mcast_addr_t *mcaddr);
+int bcm_mcast_port_remove(int unit, bcm_mcast_addr_t *mcaddr);
+</pre></div>
+</div>
+</section>
+<section id="bcm-mim-26">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_mim_*</span></code> (26)<a class="headerlink" href="#bcm-mim-26" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_mim_detach(int unit);
+int bcm_mim_init(int unit);
+int bcm_mim_lookup_id_stat_attach(int unit, int lookup_id, uint32 stat_counter_id);
+int bcm_mim_lookup_id_stat_counter_get(int unit, int lookup_id, bcm_mim_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mim_lookup_id_stat_counter_set(int unit, int lookup_id, bcm_mim_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mim_lookup_id_stat_counter_sync_get(int unit, int lookup_id, bcm_mim_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mim_lookup_id_stat_detach(int unit, int lookup_id);
+int bcm_mim_lookup_id_stat_id_get(int unit, int lookup_id, bcm_mim_stat_t stat, uint32 *stat_counter_id);
+int bcm_mim_port_add(int unit, bcm_mim_vpn_t vpn, bcm_mim_port_t *mim_port);
+int bcm_mim_port_delete(int unit, bcm_mim_vpn_t vpn, bcm_gport_t mim_port_id);
+int bcm_mim_port_delete_all(int unit, bcm_mim_vpn_t vpn);
+int bcm_mim_port_get(int unit, bcm_mim_vpn_t vpn, bcm_mim_port_t *mim_port);
+int bcm_mim_port_get_all(int unit, bcm_mim_vpn_t vpn, int port_max, bcm_mim_port_t *port_array, int *port_count);
+void bcm_mim_port_t_init(bcm_mim_port_t *mim_port);
+void bcm_mim_vpn_config_t_init(bcm_mim_vpn_config_t *mim_vpn_config);
+int bcm_mim_vpn_create(int unit, bcm_mim_vpn_config_t *info);
+int bcm_mim_vpn_destroy(int unit, bcm_mim_vpn_t vpn);
+int bcm_mim_vpn_destroy_all(int unit);
+int bcm_mim_vpn_get(int unit, bcm_mim_vpn_t vpn, bcm_mim_vpn_config_t *info);
+int bcm_mim_vpn_stat_attach(int unit, bcm_mim_vpn_t vpn, uint32 stat_counter_id);
+int bcm_mim_vpn_stat_counter_get(int unit, bcm_mim_vpn_t vpn, bcm_mim_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mim_vpn_stat_counter_set(int unit, bcm_mim_vpn_t vpn, bcm_mim_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mim_vpn_stat_counter_sync_get(int unit, bcm_mim_vpn_t vpn, bcm_mim_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mim_vpn_stat_detach(int unit, bcm_mim_vpn_t vpn);
+int bcm_mim_vpn_stat_id_get(int unit, bcm_mim_vpn_t vpn, bcm_mim_stat_t stat, uint32 *stat_counter_id);
+int bcm_mim_vpn_traverse(int unit, bcm_mim_vpn_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-module-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_module_*</span></code> (1)<a class="headerlink" href="#bcm-module-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>char *bcm_module_name(int unit, int bcm_module);
+</pre></div>
+</div>
+</section>
+<section id="bcm-mon-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_mon_*</span></code> (3)<a class="headerlink" href="#bcm-mon-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_MON_DROP_REASON_CLEAR_ALL(bcm_switch_stat_event_mon_drop_reasons_t *_drop_reasons);
+int BCM_MON_DROP_REASON_GET(bcm_switch_stat_event_mon_drop_reasons_t *_drop_reasons, int *_drop_reason);
+void BCM_MON_DROP_REASON_SET(bcm_switch_stat_event_mon_drop_reasons_t *_drop_reasons, int *_drop_reason);
+</pre></div>
+</div>
+</section>
+<section id="bcm-multi-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_multi_*</span></code> (1)<a class="headerlink" href="#bcm-multi-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void bcm_multi_word_value_t_init(bcm_multi_word_value_t *sample);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-niv-20">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_niv_*</span></code> (20)<a class="headerlink" href="#bcm-niv-20" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_niv_cleanup(int unit);
+int bcm_niv_egress_add(int unit, bcm_gport_t niv_port, bcm_niv_egress_t *niv_egress);
+int bcm_niv_egress_delete(int unit, bcm_gport_t niv_port, bcm_niv_egress_t *niv_egress);
+int bcm_niv_egress_delete_all(int unit, bcm_gport_t niv_port);
+int bcm_niv_egress_get(int unit, bcm_gport_t niv_port, int array_size, bcm_niv_egress_t *niv_egress_array, int *count);
+int bcm_niv_egress_set(int unit, bcm_gport_t niv_port, int array_size, bcm_niv_egress_t *niv_egress_array);
+void bcm_niv_egress_t_init(bcm_niv_egress_t *niv_egress);
+int bcm_niv_forward_add(int unit, bcm_niv_forward_t *iv_fwd_entry);
+int bcm_niv_forward_delete(int unit, bcm_niv_forward_t *iv_fwd_entry);
+int bcm_niv_forward_delete_all(int unit);
+int bcm_niv_forward_get(int unit, bcm_niv_forward_t *iv_fwd_entry);
+void bcm_niv_forward_t_init(bcm_niv_forward_t *iv_fwd_entry);
+int bcm_niv_forward_traverse(int unit, bcm_niv_forward_traverse_cb cb, void *user_data);
+int bcm_niv_init(int unit);
+int bcm_niv_port_add(int unit, bcm_niv_port_t *niv_port);
+int bcm_niv_port_delete(int unit, bcm_gport_t niv_port_id);
+int bcm_niv_port_delete_all(int unit);
+int bcm_niv_port_get(int unit, bcm_niv_port_t *niv_port);
+void bcm_niv_port_t_init(bcm_niv_port_t *niv_port);
+int bcm_niv_port_traverse(int unit, bcm_niv_port_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-obm-11">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_obm_*</span></code> (11)<a class="headerlink" href="#bcm-obm-11" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_obm_cb_register(int unit, bcm_obm_callback_fn fn, void *user_data);
+int bcm_obm_cb_unregister(int unit, bcm_obm_callback_fn fn, void *user_data);
+int bcm_obm_control_get(int unit, bcm_port_t port, bcm_obm_control_t type, int *arg);  /* not in OpenBCM 6.5.27 */
+int bcm_obm_control_set(int unit, bcm_port_t port, bcm_obm_control_t type, int arg);  /* not in OpenBCM 6.5.27 */
+int bcm_obm_port_max_usage_mode_get(int unit, bcm_port_t port, bcm_obm_max_watermark_mode_t *obm_wm_mode);
+int bcm_obm_port_max_usage_mode_set(int unit, bcm_port_t port, bcm_obm_max_watermark_mode_t obm_wm_mode);
+int bcm_obm_port_pri_traffic_class_mapping_get(int unit, bcm_port_t port, bcm_obm_lookup_priority_type_t piority_type, int priority, bcm_obm_traffic_class_t *obm_tc);
+int bcm_obm_port_pri_traffic_class_mapping_set(int unit, bcm_port_t port, bcm_obm_lookup_priority_type_t piority_type, int priority, bcm_obm_traffic_class_t obm_tc);
+int bcm_obm_traffic_class_pfc_priority_mapping_clear(int unit, bcm_port_t port, bcm_obm_traffic_class_t obm_traffic_class, int max_pri_count, int *priority_list);  /* not in OpenBCM 6.5.27 */
+int bcm_obm_traffic_class_pfc_priority_mapping_get(int unit, bcm_port_t port, bcm_obm_traffic_class_t obm_traffic_class, int max_pri_count, int *priority_list, int *pri_count);
+int bcm_obm_traffic_class_pfc_priority_mapping_set(int unit, bcm_port_t port, bcm_obm_traffic_class_t obm_traffic_class, int max_pri_count, int *priority_list);
+</pre></div>
+</div>
+</section>
+<section id="bcm-onesync-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_onesync_*</span></code> (9)<a class="headerlink" href="#bcm-onesync-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_onesync_deinit(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_init(int unit, bcm_onesync_info_t onesync_info);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_p2p_instance_deinit(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_p2p_instance_get(int unit, bcm_onesync_p2p_instance_t *p2p_instance);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_p2p_instance_init(int unit, bcm_onesync_p2p_instance_t *p2p_instance);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_p2p_port_config_get(int unit, bcm_port_t port, bcm_onesync_p2p_port_config_t *p2p_intf);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_p2p_port_config_set(int unit, bcm_port_t port, bcm_onesync_p2p_port_config_t *p2p_intf);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_p2p_port_stats_get(int unit, bcm_port_t port, bcm_onesync_p2p_port_stats_t *p2p_port_stats);  /* not in OpenBCM 6.5.27 */
+int bcm_onesync_p2p_tsfwd_action_set(int unit, bcm_onesync_p2p_ts_fwd_action_t action);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-oob-29">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_oob_*</span></code> (29)<a class="headerlink" href="#bcm-oob-29" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_oob_fc_rx_config_get(int unit, bcm_oob_fc_rx_intf_id_t intf_id, bcm_oob_fc_rx_config_t *config, int array_max, bcm_gport_t *gport_array, int *array_count);
+int bcm_oob_fc_rx_config_set(int unit, bcm_oob_fc_rx_intf_id_t intf_id, bcm_oob_fc_rx_config_t *config, int array_count, bcm_gport_t *gport_array);
+void bcm_oob_fc_rx_config_t_init(bcm_oob_fc_rx_config_t *config);
+int bcm_oob_fc_rx_port_offset_get(int unit, bcm_oob_fc_rx_intf_id_t intf_id, bcm_gport_t gport, uint32 *offset);
+int bcm_oob_fc_rx_port_tc_mapping_get(int unit, bcm_oob_fc_rx_intf_id_t intf_id, bcm_gport_t gport, uint32 tc, uint32 *pri_bmp);
+int bcm_oob_fc_rx_port_tc_mapping_multi_get(int unit, bcm_oob_fc_rx_intf_id_t intf_id, bcm_gport_t gport, int array_max, uint32 *tc, uint32 *pri_bmp, int *array_count);
+int bcm_oob_fc_rx_port_tc_mapping_multi_set(int unit, bcm_oob_fc_rx_intf_id_t intf_id, bcm_gport_t gport, int array_count, uint32 *tc, uint32 *pri_bmp);
+int bcm_oob_fc_rx_port_tc_mapping_set(int unit, bcm_oob_fc_rx_intf_id_t intf_id, bcm_gport_t gport, uint32 tc, uint32 pri_bmp);
+int bcm_oob_fc_tx_config_get(int unit, bcm_oob_fc_tx_config_t *config);
+int bcm_oob_fc_tx_config_set(int unit, bcm_oob_fc_tx_config_t *config);
+void bcm_oob_fc_tx_config_t_init(bcm_oob_fc_tx_config_t *config);
+int bcm_oob_fc_tx_info_get(int unit, bcm_oob_fc_tx_info_t *info);
+void bcm_oob_fc_tx_info_t_init(bcm_oob_fc_tx_info_t *info);
+int bcm_oob_fc_tx_port_mapping_get(int unit, int max_count, int *port_array, int *oob_port_array, int *count);
+int bcm_oob_fc_tx_port_mapping_set(int unit, int count, int *port_array, int *oob_port_array);
+void bcm_oob_fc_tx_queue_config_t_init(bcm_oob_fc_tx_queue_config_t *config);
+int bcm_oob_fc_tx_queue_profile_get(int unit, int profile_id, int max_count, bcm_oob_fc_tx_queue_config_t *config, int *count);
+int bcm_oob_fc_tx_queue_profile_set(int unit, int profile_id, int count, bcm_oob_fc_tx_queue_config_t *config);
+int bcm_oob_stats_config_get(int unit, bcm_oob_stats_config_t *config);
+int bcm_oob_stats_config_set(int unit, bcm_oob_stats_config_t *config);
+void bcm_oob_stats_config_t_init(bcm_oob_stats_config_t *config);
+int bcm_oob_stats_pool_mapping_get(int unit, int offset, uint8 *dir, bcm_service_pool_id_t *pool);
+int bcm_oob_stats_pool_mapping_multi_get(int unit, int array_max, int *offset_array, uint8 *dir_array, bcm_service_pool_id_t *pool_array, int *array_count);
+int bcm_oob_stats_pool_mapping_multi_set(int unit, int array_count, int *offset_array, uint8 *dir_array, bcm_service_pool_id_t *pool_array);
+int bcm_oob_stats_pool_mapping_set(int unit, int offset, uint8 dir, bcm_service_pool_id_t pool);
+int bcm_oob_stats_queue_mapping_get(int unit, int offset, bcm_gport_t *gport);
+int bcm_oob_stats_queue_mapping_multi_get(int unit, int array_max, int *offset_array, bcm_gport_t *gport_array, int *array_count);
+int bcm_oob_stats_queue_mapping_multi_set(int unit, int array_count, int *offset_array, bcm_gport_t *gport_array);
+int bcm_oob_stats_queue_mapping_set(int unit, int offset, bcm_gport_t gport);
+</pre></div>
+</div>
+</section>
+<section id="bcm-pbmp-17">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_pbmp_*</span></code> (17)<a class="headerlink" href="#bcm-pbmp-17" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_PBMP_AND(bcm_pbmp_t *pbm_a, bcm_pbmp_t *pbm_b);
+void BCM_PBMP_ASSIGN(bcm_pbmp_t *dst, bcm_pbmp_t *src);
+void BCM_PBMP_CLEAR(bcm_pbmp_t *pbm);
+void BCM_PBMP_COUNT(bcm_pbmp_t *pbm, int *count);
+int BCM_PBMP_EQ(bcm_pbmp_t *pbm_a, bcm_pbmp_t *pbm_b);
+int BCM_PBMP_IS_NULL(bcm_pbmp_t *pbm);
+int BCM_PBMP_MEMBER(bcm_pbmp_t *bmp, int *port);
+void BCM_PBMP_NEGATE(bcm_pbmp_t *pbm_a, bcm_pbmp_t *pbm_b);
+int BCM_PBMP_NEQ(bcm_pbmp_t *pbm_a, bcm_pbmp_t *pbm_b);
+int BCM_PBMP_NOT_NULL(bcm_pbmp_t *pbm);
+void BCM_PBMP_OR(bcm_pbmp_t *pbm_a, bcm_pbmp_t *pbm_b);
+void BCM_PBMP_PORT_ADD(bcm_pbmp_t *pbm, int *port);
+void BCM_PBMP_PORT_FLIP(bcm_pbmp_t *pbm, int *port);
+void BCM_PBMP_PORT_REMOVE(bcm_pbmp_t *pbm, int *port);
+void BCM_PBMP_PORT_SET(bcm_pbmp_t *pbm, int *port);
+void BCM_PBMP_REMOVE(bcm_pbmp_t *pbm_a, bcm_pbmp_t *pbm_b);
+void BCM_PBMP_XOR(bcm_pbmp_t *pbm_a, bcm_pbmp_t *pbm_b);
+</pre></div>
+</div>
+</section>
+<section id="bcm-phy-23">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_phy_*</span></code> (23)<a class="headerlink" href="#bcm-phy-23" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_PHY_GPORT_IS_LANE(int *_gport);
+int BCM_PHY_GPORT_IS_PHYN(int *_gport);
+int BCM_PHY_GPORT_IS_PHYN_LANE(int *_gport);
+int BCM_PHY_GPORT_IS_PHYN_SYS_SIDE(int *_gport);
+int BCM_PHY_GPORT_IS_PHYN_SYS_SIDE_LANE(int *_gport);
+int BCM_PHY_GPORT_LANE_PORT_LANE_GET(int *_gport);
+int BCM_PHY_GPORT_LANE_PORT_PORT_GET(int *_gport);
+void BCM_PHY_GPORT_LANE_PORT_SET(int *_gport, int *_phy_lane, int *_port);
+int BCM_PHY_GPORT_PHYN_LANE_PORT_LANE_GET(int *_gport);
+int BCM_PHY_GPORT_PHYN_LANE_PORT_PHYN_GET(int *_gport);
+int BCM_PHY_GPORT_PHYN_LANE_PORT_PORT_GET(int *_gport);
+void BCM_PHY_GPORT_PHYN_LANE_PORT_SET(int *_gport, int *_phyn, int *_lane, int *_port);
+int BCM_PHY_GPORT_PHYN_PORT_PHYN_GET(int *_gport);
+int BCM_PHY_GPORT_PHYN_PORT_PORT_GET(int *_gport);
+void BCM_PHY_GPORT_PHYN_PORT_SET(int *_gport, int *_phyn, int *_port);
+int BCM_PHY_GPORT_PHYN_SYS_SIDE_LANE_PORT_LANE_GET(int *_gport);
+int BCM_PHY_GPORT_PHYN_SYS_SIDE_LANE_PORT_PHYN_GET(int *_gport);
+int BCM_PHY_GPORT_PHYN_SYS_SIDE_LANE_PORT_PORT_GET(int *_gport);
+void BCM_PHY_GPORT_PHYN_SYS_SIDE_LANE_PORT_SET(int *_gport, int *_phyn, int *_lane, int *_port);
+int BCM_PHY_GPORT_PHYN_SYS_SIDE_PORT_PHYN_GET(int *_gport);
+int BCM_PHY_GPORT_PHYN_SYS_SIDE_PORT_PORT_GET(int *_gport);
+void BCM_PHY_GPORT_PHYN_SYS_SIDE_PORT_SET(int *_gport, int *_phyn, int *_port);
+void bcm_phy_config_t_init(bcm_phy_config_t *config);
+</pre></div>
+</div>
+</section>
+<section id="bcm-postcard-5">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_postcard_*</span></code> (5)<a class="headerlink" href="#bcm-postcard-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_postcard_control_get(int unit, bcm_postcard_control_t type, bcm_postcard_control_info_t *info);  /* not in OpenBCM 6.5.27 */
+void bcm_postcard_control_info_t_init(bcm_postcard_control_info_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_postcard_control_set(int unit, bcm_postcard_control_t type, bcm_postcard_control_info_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_postcard_detach(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_postcard_init(int unit);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+<section id="bcm-ppp-13">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ppp_*</span></code> (13)<a class="headerlink" href="#bcm-ppp-13" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ppp_initiator_create(int unit, bcm_ppp_initiator_t *info);
+int bcm_ppp_initiator_delete(int unit, bcm_ppp_initiator_t *info);
+int bcm_ppp_initiator_get(int unit, bcm_ppp_initiator_t *info);
+void bcm_ppp_initiator_t_init(bcm_ppp_initiator_t *info);
+int bcm_ppp_initiator_traverse(int unit, bcm_ppp_initiator_additional_info_t *additional_info, bcm_ppp_initiator_traverse_cb cb, void *user_data);
+int bcm_ppp_term_spoofing_check_add(int unit, bcm_ppp_term_spoofing_check_t *info);
+int bcm_ppp_term_spoofing_check_delete(int unit, bcm_ppp_term_spoofing_check_t *info);
+int bcm_ppp_term_spoofing_check_traverse(int unit, bcm_ppp_term_spoofing_check_additional_info_t *additional_info, bcm_ppp_term_spoofing_check_traverse_cb cb, void *user_data);
+int bcm_ppp_terminator_create(int unit, bcm_ppp_terminator_t *info);
+int bcm_ppp_terminator_delete(int unit, bcm_ppp_terminator_t *info);
+int bcm_ppp_terminator_get(int unit, bcm_ppp_terminator_t *info);
+void bcm_ppp_terminator_t_init(bcm_ppp_terminator_t *info);
+int bcm_ppp_terminator_traverse(int unit, bcm_ppp_terminator_additional_info_t *additional_info, bcm_ppp_terminator_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-priority-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_priority_*</span></code> (2)<a class="headerlink" href="#bcm-priority-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_PRIORITY_VALID(int *_pri_);
+void bcm_priority_mapping_t_init(bcm_priority_mapping_t *pri_map);
+</pre></div>
+</div>
+</section>
+<section id="bcm-proxy-13">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_proxy_*</span></code> (13)<a class="headerlink" href="#bcm-proxy-13" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_proxy_cleanup(int unit);
+int bcm_proxy_client_set(int unit, bcm_port_t client_port, bcm_proxy_proto_type_t proto_type, bcm_module_t server_modid, bcm_port_t server_port, int enable);
+int bcm_proxy_egress_create(int unit, uint32 flags, bcm_proxy_egress_t *proxy_egress, bcm_if_t *proxy_if_id);
+int bcm_proxy_egress_destroy(int unit, bcm_if_t proxy_if_id);
+int bcm_proxy_egress_get(int unit, bcm_if_t proxy_if_id, bcm_proxy_egress_t *proxy_egress);
+void bcm_proxy_egress_t_init(bcm_proxy_egress_t *proxy_egress);
+int bcm_proxy_egress_traverse(int unit, bcm_proxy_egress_traverse_cb trav_fn, void *user_data);
+int bcm_proxy_init(int unit);
+int bcm_proxy_server_get(int unit, bcm_port_t server_port, bcm_proxy_mode_t mode, int *enable);
+int bcm_proxy_server_port_get(int unit, bcm_gport_t local_ingress_port, bcm_proxy_server_t *proxy_server, int *enable);
+int bcm_proxy_server_port_set(int unit, bcm_gport_t local_ingress_port, bcm_proxy_server_t *proxy_server, int enable);
+int bcm_proxy_server_set(int unit, bcm_port_t server_port, bcm_proxy_mode_t mode, int enable);
+void bcm_proxy_server_t_init(bcm_proxy_server_t *proxy_server);
+</pre></div>
+</div>
+</section>
+<section id="bcm-pstats-11">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_pstats_*</span></code> (11)<a class="headerlink" href="#bcm-pstats-11" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_pstats_data_sync(int unit);
+void bcm_pstats_data_t_init(bcm_pstats_data_t *data);
+int bcm_pstats_session_create(int unit, int options, int array_count, bcm_pstats_session_element_t *element_array, bcm_pstats_session_id_t *session_id);
+int bcm_pstats_session_data_clear(int unit, bcm_pstats_session_id_t session_id);
+int bcm_pstats_session_data_get(int unit, bcm_pstats_session_id_t session_id, bcm_pstats_timestamp_t *timestamp, int array_max, bcm_pstats_data_t *data_array, int *array_count);
+int bcm_pstats_session_data_sync_get(int unit, bcm_pstats_session_id_t session_id, bcm_pstats_timestamp_t *timestamp, int array_max, bcm_pstats_data_t *data_array, int *array_count);
+int bcm_pstats_session_destroy(int unit, bcm_pstats_session_id_t session_id);
+void bcm_pstats_session_element_t_init(bcm_pstats_session_element_t *element);
+int bcm_pstats_session_get(int unit, bcm_pstats_session_id_t session_id, int array_max, bcm_pstats_session_element_t *element_array, int *array_count);
+int bcm_pstats_session_traverse(int unit, bcm_pstats_session_traverse_cb cb, void *user_data);
+void bcm_pstats_timestamp_t_init(bcm_pstats_timestamp_t *timestamp);
+</pre></div>
+</div>
+</section>
+<section id="bcm-qos-31">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_qos_*</span></code> (31)<a class="headerlink" href="#bcm-qos-31" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_QOS_MAP_EGR_DSCP_TABLE_MAP_ID_CONSTRUCT(int *idx);
+int BCM_QOS_MAP_EGR_DSCP_TBL_IDX_GET(int *map_id);
+int bcm_qos_control_get(int unit, uint32 flags, bcm_qos_control_type_t type, int *arg);
+int bcm_qos_control_set(int unit, uint32 flags, bcm_qos_control_type_t type, int arg);
+int bcm_qos_dcn_int_pri_override_get(int unit, bcm_qos_dcn_int_pri_override_t *int_pri_override);
+int bcm_qos_dcn_int_pri_override_set(int unit, bcm_qos_dcn_int_pri_override_t *int_pri_override);
+void bcm_qos_dcn_int_pri_override_t_init(bcm_qos_dcn_int_pri_override_t *int_pri_override);
+int bcm_qos_detach(int unit);
+void bcm_qos_egress_model_t_init(bcm_qos_egress_model_t *qos_egress_model);
+void bcm_qos_ingress_model_t_init(bcm_qos_ingress_model_t *qos_ingress_model);
+int bcm_qos_init(int unit);
+int bcm_qos_map_add(int unit, uint32 flags, bcm_qos_map_t *map, int map_id);
+int bcm_qos_map_control_get(int unit, uint32 map_id, uint32 flags, bcm_qos_map_control_type_t type, int *arg);
+int bcm_qos_map_control_set(int unit, uint32 map_id, uint32 flags, bcm_qos_map_control_type_t type, int arg);
+int bcm_qos_map_create(int unit, uint32 flags, int *map_id);
+int bcm_qos_map_delete(int unit, uint32 flags, bcm_qos_map_t *map, int map_id);
+int bcm_qos_map_destroy(int unit, int map_id);
+int bcm_qos_map_id_get_by_profile(int unit, uint32 flags, int profile, int *map_id);
+int bcm_qos_map_multi_get(int unit, uint32 flags, int map_id, int array_size, bcm_qos_map_t *array, int *array_count);
+void bcm_qos_map_t_init(bcm_qos_map_t *qos_map);
+int bcm_qos_multi_get(int unit, int array_size, int *map_ids_array, int *flags_array, int *array_count);
+int bcm_qos_port_map_get(int unit, bcm_gport_t port, int *ing_map, int *egr_map);
+int bcm_qos_port_map_set(int unit, bcm_gport_t port, int ing_map, int egr_map);
+int bcm_qos_port_map_type_get(int unit, bcm_gport_t port, uint32 flags, int *map_id);
+int bcm_qos_port_vlan_map_get(int unit, bcm_port_t port, bcm_vlan_t vid, int *ing_map, int *egr_map);
+int bcm_qos_port_vlan_map_set(int unit, bcm_port_t port, bcm_vlan_t vid, int ing_map, int egr_map);
+int bcm_qos_stat_clear(int unit, bcm_port_t port, bcm_qos_stat_type_t type, bcm_qos_stat_object_t *object);  /* not in OpenBCM 6.5.27 */
+int bcm_qos_stat_get(int unit, bcm_port_t port, bcm_qos_stat_type_t type, bcm_qos_stat_object_t *object, uint64 *val);  /* not in OpenBCM 6.5.27 */
+int bcm_qos_stat_sync_get(int unit, bcm_port_t port, bcm_qos_stat_type_t type, bcm_qos_stat_object_t *object, uint64 *val);  /* not in OpenBCM 6.5.27 */
+int bcm_qos_vpn_map_set(int unit, bcm_vpn_t vpn, int ing_map, int egr_map);
+int bcm_qos_vpn_map_type_get(int unit, bcm_vpn_t vpn, uint32 flags, int *map_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-range-16">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_range_*</span></code> (16)<a class="headerlink" href="#bcm-range-16" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_RANGE_ID_BMP_ADD(bcm_range_id_bmp_t *range_bmp, bcm_range_t *range_id);
+void BCM_RANGE_ID_BMP_REMOVE(bcm_range_id_bmp_t *range_bmp, bcm_range_t *range_id);
+int BCM_RANGE_ID_BMP_TEST(bcm_range_id_bmp_t *range_bmp, bcm_range_t *range_id);
+void bcm_range_config_t_init(bcm_range_config_t *range_cfg);
+int bcm_range_create(int unit, int flags, bcm_range_config_t *range_cfg);
+int bcm_range_destroy(int unit, bcm_range_t rid);
+int bcm_range_get(int unit, bcm_range_config_t *range_cfg);
+void bcm_range_group_config_t_init(bcm_range_group_config_t *range_group_config);
+int bcm_range_group_create(int unit, bcm_range_group_config_t *range_group_config);
+int bcm_range_group_delete(int unit, bcm_range_group_config_t *range_group_config);
+int bcm_range_group_get(int unit, bcm_range_group_config_t *range_group_config);
+int bcm_range_group_update(int unit, bcm_range_group_config_t *range_group_config);
+int bcm_range_oper_mode_get(int unit, bcm_range_oper_mode_t *oper_mode);
+int bcm_range_oper_mode_set(int unit, bcm_range_oper_mode_t oper_mode);
+int bcm_range_stage_oper_mode_get(int unit, bcm_range_stage_t stage, bcm_range_oper_mode_t *oper_mode);
+int bcm_range_traverse(int unit, bcm_range_traverse_cb callback, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-rate-16">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_rate_*</span></code> (16)<a class="headerlink" href="#bcm-rate-16" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_rate_bandwidth_get(int unit, bcm_port_t port, int flags, uint32 *kbits_sec, uint32 *kbits_burst);
+int bcm_rate_bandwidth_set(int unit, bcm_port_t port, int flags, uint32 kbits_sec, uint32 kbits_burst);
+int bcm_rate_bcast_get(int unit, int *pps, int *flags, int port);
+int bcm_rate_bcast_set(int unit, int pps, int flags, int port);
+int bcm_rate_dlfbc_get(int unit, int *pps, int *flags, int port);
+int bcm_rate_dlfbc_set(int unit, int pps, int flags, int port);
+int bcm_rate_get(int unit, int *pps, int *flags);
+void bcm_rate_limit_t_init(bcm_rate_limit_t *rate_limit);
+int bcm_rate_mcast_get(int unit, int *pps, int *flags, int port);
+int bcm_rate_mcast_set(int unit, int pps, int flags, int port);
+int bcm_rate_packet_get(int unit, bcm_port_t port, bcm_rate_packet_t *pkt_rate);
+int bcm_rate_packet_set(int unit, bcm_port_t port, bcm_rate_packet_t *pkt_rate);
+void bcm_rate_packet_t_init(bcm_rate_packet_t *pkt_rate);
+int bcm_rate_set(int unit, int pps, int flags);
+int bcm_rate_type_get(int unit, bcm_rate_limit_t *rl);
+int bcm_rate_type_set(int unit, bcm_rate_limit_t *rl);
+</pre></div>
+</div>
+</section>
+<section id="bcm-rco-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_rco_*</span></code> (1)<a class="headerlink" href="#bcm-rco-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32 BCM_RCO_F_COS_ACCEPT(int *cos);
+</pre></div>
+</div>
+</section>
+<section id="bcm-rpe-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_rpe_*</span></code> (1)<a class="headerlink" href="#bcm-rpe-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_RPE_PRIORITY_VALID(int *_pri_);
+</pre></div>
+</div>
+</section>
+<section id="bcm-srv6-15">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_srv6_*</span></code> (15)<a class="headerlink" href="#bcm-srv6-15" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_srv6_extension_terminator_add(int unit, bcm_srv6_extension_terminator_mapping_t *info);
+int bcm_srv6_extension_terminator_delete(int unit, bcm_srv6_extension_terminator_mapping_t *info);
+int bcm_srv6_extension_terminator_get(int unit, bcm_srv6_extension_terminator_mapping_t *info);
+void bcm_srv6_extension_terminator_mapping_t_init(bcm_srv6_extension_terminator_mapping_t *info);
+int bcm_srv6_extension_terminator_traverse(int unit, bcm_srv6_extension_terminator_traverse_info_t additional_info, bcm_srv6_extension_terminator_traverse_cb cb, void *user_data);
+int bcm_srv6_sid_initiator_create(int unit, bcm_srv6_sid_initiator_info_t *info);
+int bcm_srv6_sid_initiator_delete(int unit, bcm_srv6_sid_initiator_info_t *info);
+int bcm_srv6_sid_initiator_get(int unit, bcm_srv6_sid_initiator_info_t *info);
+void bcm_srv6_sid_initiator_info_t_init(bcm_srv6_sid_initiator_info_t *info);
+int bcm_srv6_sid_initiator_traverse(int unit, bcm_srv6_sid_initiator_traverse_info_t additional_info, bcm_srv6_sid_initiator_traverse_cb cb, void *user_data);
+int bcm_srv6_srh_base_initiator_create(int unit, bcm_srv6_srh_base_initiator_info_t *info);
+int bcm_srv6_srh_base_initiator_delete(int unit, bcm_srv6_srh_base_initiator_info_t *info);
+int bcm_srv6_srh_base_initiator_get(int unit, bcm_srv6_srh_base_initiator_info_t *info);
+void bcm_srv6_srh_base_initiator_info_t_init(bcm_srv6_srh_base_initiator_info_t *info);
+int bcm_srv6_srh_base_initiator_traverse(int unit, bcm_srv6_srh_base_initiator_traverse_info_t additional_info, bcm_srv6_srh_base_initiator_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-stg-17">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_stg_*</span></code> (17)<a class="headerlink" href="#bcm-stg-17" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_stg_clear(int unit);
+int bcm_stg_count_get(int unit, int *max_stg);
+int bcm_stg_create(int unit, bcm_stg_t *stg_ptr);
+int bcm_stg_create_id(int unit, bcm_stg_t stg);
+int bcm_stg_default_get(int unit, bcm_stg_t *stg_ptr);
+int bcm_stg_default_set(int unit, bcm_stg_t stg);
+int bcm_stg_destroy(int unit, bcm_stg_t stg);
+int bcm_stg_init(int unit);
+int bcm_stg_list(int unit, bcm_stg_t **list, int *count);
+int bcm_stg_list_destroy(int unit, bcm_stg_t *list, int count);
+int bcm_stg_stp_get(int unit, bcm_stg_t stg, bcm_port_t port, int *stp_state);
+int bcm_stg_stp_set(int unit, bcm_stg_t stg, bcm_port_t port, int stp_state);
+int bcm_stg_vlan_add(int unit, bcm_stg_t stg, bcm_vlan_t vid);
+int bcm_stg_vlan_list(int unit, bcm_stg_t stg, bcm_vlan_t **list, int *count);
+int bcm_stg_vlan_list_destroy(int unit, bcm_vlan_t *list, int count);
+int bcm_stg_vlan_remove(int unit, bcm_stg_t stg, bcm_vlan_t vid);
+int bcm_stg_vlan_remove_all(int unit, bcm_stg_t stg);
+</pre></div>
+</div>
+</section>
+<section id="bcm-success-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_success_*</span></code> (1)<a class="headerlink" href="#bcm-success-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_SUCCESS(int *rv);
+</pre></div>
+</div>
+</section>
+<section id="bcm-sum-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_sum_*</span></code> (7)<a class="headerlink" href="#bcm-sum-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_sum_config_get(int unit, bcm_sum_config_t *config_data, bcm_pbmp_t *pbmp);
+int bcm_sum_config_set(int unit, bcm_sum_config_t *config_data, bcm_pbmp_t pbmp);
+void bcm_sum_config_t_init(bcm_sum_config_t *config_data);
+int bcm_sum_detach(int unit);
+int bcm_sum_init(int unit);
+int bcm_sum_stat_get(int unit, uint32 max_samples, bcm_sum_stat_info_t *stats_data, uint32 *num_samples, bcm_sum_stat_type_t stat_type, uint32 usec_sample_period);
+void bcm_sum_stat_info_t_init(bcm_sum_stat_info_t *stat_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-swith-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_swith_*</span></code> (1)<a class="headerlink" href="#bcm-swith-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_swith_lt_info_get(int unit, bcm_switch_pt_info_t *pt_info, int array_size, bcm_switch_lt_info_t *lt_info_array, int *count);
+</pre></div>
+</div>
+</section>
+<section id="bcm-tdm-14">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_tdm_*</span></code> (14)<a class="headerlink" href="#bcm-tdm-14" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_tdm_control_get(int unit, bcm_tdm_control_t type, int *arg);
+int bcm_tdm_control_set(int unit, bcm_tdm_control_t type, int arg);
+int bcm_tdm_egress_editing_get(int unit, uint32 flags, bcm_gport_t gport, bcm_tdm_egress_editing_t *editing);
+int bcm_tdm_egress_editing_set(int unit, uint32 flags, bcm_gport_t gport, bcm_tdm_egress_editing_t *editing);
+int bcm_tdm_ingress_context_create(int unit, uint32 flags, int *ingress_context_id, bcm_tdm_ingress_context_t *editing);
+int bcm_tdm_ingress_context_destroy(int unit, uint32 flags, int ingress_context_id);
+int bcm_tdm_ingress_context_failover_get(int unit, uint32 flags, int nof_contexts, int *context_ids, int *context_en);
+int bcm_tdm_ingress_context_failover_set(int unit, uint32 flags, int nof_contexts, int *context_ids, int *context_en);
+int bcm_tdm_ingress_context_get(int unit, uint32 flags, int ingress_context_id, bcm_tdm_ingress_context_t *editing);
+void bcm_tdm_ingress_editing_context_t_init(bcm_tdm_ingress_context_t *editing);
+int bcm_tdm_interface_config_get(int unit, uint32 flags, bcm_gport_t gport, bcm_tdm_interface_config_t *interface_config);
+int bcm_tdm_interface_config_set(int unit, uint32 flags, bcm_gport_t gport, bcm_tdm_interface_config_t *interface_config);
+int bcm_tdm_stream_ingress_context_get(int unit, uint32 flags, int stream_id, int *ingress_context_id);
+int bcm_tdm_stream_ingress_context_set(int unit, uint32 flags, bcm_gport_t gport, int ingress_context_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-telemetry-22">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_telemetry_*</span></code> (22)<a class="headerlink" href="#bcm-telemetry-22" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_TELEMETRY_ELEMENT_ADD(bcm_telemetry_element_bmp_t *bmp, int *bit);  /* not in OpenBCM 6.5.27 */
+void BCM_TELEMETRY_ELEMENT_REMOVE(bcm_telemetry_element_bmp_t *bmp, int *bit);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_buffer_config_get(int unit, bcm_telemetry_buffer_config_t *buffer_config);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_buffer_config_set(int unit, bcm_telemetry_buffer_config_t *buffer_config);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_config_get(int unit, int telemetry_instance, int core, int max_count, bcm_telemetry_config_t *telemetry_config_list, int *config_count);
+int bcm_telemetry_config_set(int unit, int telemetry_instance, int core, int config_count, bcm_telemetry_config_t *telemetry_config_list);
+void bcm_telemetry_config_t_init(bcm_telemetry_config_t *telemetry_config);
+int bcm_telemetry_detach(int unit);
+int bcm_telemetry_export_config_delete(int unit, int telemetry_instance, bcm_collector_t collector_id, int export_profile_id);
+int bcm_telemetry_export_config_get(int unit, int telemetry_instance, bcm_collector_t *collector_id, int *export_profile_id);
+int bcm_telemetry_export_config_set(int unit, int telemetry_instance, bcm_collector_t collector_id, int export_profile_id);
+int bcm_telemetry_export_template_get(int unit, int telemetry_instance, int max_size, uint8 *template_buffer, int *size);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_init(int unit);
+int bcm_telemetry_instance_export_stats_get(int unit, int telemetry_instance, bcm_collector_t collector_id, bcm_telemetry_instance_export_stats_t *stats);
+int bcm_telemetry_instance_export_stats_set(int unit, int telemetry_instance, bcm_collector_t collector_id, bcm_telemetry_instance_export_stats_t *stats);
+int bcm_telemetry_instance_report_enable_get(int unit, int telemetry_instance, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_instance_report_enable_set(int unit, int telemetry_instance, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_object_capability_get(int unit, bcm_telemetry_object_type_t object_type, uint32 *flags, uint32 *min_poll_interval);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_report_enable_get(int unit, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_report_enable_set(int unit, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_telemetry_system_id_get(int unit, int max_system_id_len, int *system_id_len, uint8 *system_id);
+int bcm_telemetry_system_id_set(int unit, int system_id_len, uint8 *system_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-topo-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_topo_*</span></code> (3)<a class="headerlink" href="#bcm-topo-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_topo_map_get(bcm_topo_map_f *_map);
+int bcm_topo_map_set(bcm_topo_map_f _map);
+int bcm_topo_port_get(int unit, int dest_modid, bcm_port_t *exit_port);
+</pre></div>
+</div>
+</section>
+<section id="bcm-trill-34">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_trill_*</span></code> (34)<a class="headerlink" href="#bcm-trill-34" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_trill_cleanup(int unit);
+int bcm_trill_init(int unit);
+int bcm_trill_multicast_adjacency_add(int unit, bcm_trill_multicast_adjacency_t *trill_multicast_adjacency);
+int bcm_trill_multicast_adjacency_delete(int unit, bcm_trill_multicast_adjacency_t *trill_multicast_adjacency);
+int bcm_trill_multicast_adjacency_delete_all(int unit);
+int bcm_trill_multicast_adjacency_traverse(int unit, bcm_trill_multicast_adjacency_traverse_cb cb, void *user_data);
+int bcm_trill_multicast_delete_all(int unit, bcm_trill_name_t root_name);
+int bcm_trill_multicast_entry_add(int unit, bcm_trill_multicast_entry_t *trill_mc_entry);
+int bcm_trill_multicast_entry_delete(int unit, bcm_trill_multicast_entry_t *trill_mc_entry);
+int bcm_trill_multicast_entry_get(int unit, bcm_trill_multicast_entry_t *trill_mc_entry);
+void bcm_trill_multicast_entry_t_init(bcm_trill_multicast_entry_t *trill_multicast_entry);
+int bcm_trill_multicast_entry_traverse(int unit, bcm_trill_multicast_entry_traverse_cb cb, void *user_data);
+int bcm_trill_multicast_source_add(int unit, bcm_trill_name_t root_name, bcm_trill_name_t source_rbridge_name, bcm_gport_t port, bcm_if_t encap_intf);
+int bcm_trill_multicast_source_delete(int unit, bcm_trill_name_t root_name, bcm_trill_name_t source_rbridge_name, bcm_gport_t port, bcm_if_t encap_intf);
+int bcm_trill_multicast_source_get(int unit, bcm_trill_name_t root_name, bcm_trill_name_t source_rbridge_name, bcm_gport_t *port);
+int bcm_trill_multicast_source_traverse(int unit, bcm_trill_multicast_source_traverse_cb cb, void *user_data);
+int bcm_trill_port_add(int unit, bcm_trill_port_t *trill_port);
+int bcm_trill_port_delete(int unit, bcm_gport_t trill_port_id);
+int bcm_trill_port_delete_all(int unit);
+int bcm_trill_port_get(int unit, bcm_trill_port_t *trill_port);
+int bcm_trill_port_get_all(int unit, int port_max, bcm_trill_port_t *port_array, int *port_count);
+void bcm_trill_port_t_init(bcm_trill_port_t *trill_port);
+int bcm_trill_rbridge_entry_add(int unit, bcm_trill_rbridge_t *trill_entry);
+int bcm_trill_rbridge_entry_delete(int unit, bcm_trill_rbridge_t *trill_entry);
+int bcm_trill_rbridge_entry_get(int unit, bcm_trill_rbridge_t *trill_entry);
+int bcm_trill_stat_clear(int unit, bcm_port_t port, bcm_trill_stat_t stat);
+int bcm_trill_stat_get(int unit, bcm_port_t port, bcm_trill_stat_t stat, uint64 *val);
+int bcm_trill_stat_get32(int unit, bcm_port_t port, bcm_trill_stat_t stat, uint32 *val);
+void bcm_trill_vpn_config_t_init(bcm_trill_vpn_config_t *trill_vpn_config);
+int bcm_trill_vpn_create(int unit, bcm_trill_vpn_config_t *info);
+int bcm_trill_vpn_destroy(int unit, bcm_vpn_t vpn);
+int bcm_trill_vpn_destroy_all(int unit);
+int bcm_trill_vpn_get(int unit, bcm_vpn_t vpn, bcm_trill_vpn_config_t *info);
+int bcm_trill_vpn_traverse(int unit, bcm_trill_vpn_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ttl-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ttl_*</span></code> (1)<a class="headerlink" href="#bcm-ttl-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_TTL_VALID(int *_ttl_);
+</pre></div>
+</div>
+</section>
+<section id="bcm-twamp-16">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_twamp_*</span></code> (16)<a class="headerlink" href="#bcm-twamp-16" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_TWAMP_EVENT_TYPE_CLEAR(bcm_twamp_event_types_t *_event_types, int *_event_type);  /* not in OpenBCM 6.5.27 */
+void BCM_TWAMP_EVENT_TYPE_CLEAR_ALL(bcm_twamp_event_types_t *_event_types);  /* not in OpenBCM 6.5.27 */
+int BCM_TWAMP_EVENT_TYPE_GET(bcm_twamp_event_types_t *_event_types, int *_event_type);  /* not in OpenBCM 6.5.27 */
+void BCM_TWAMP_EVENT_TYPE_SET(bcm_twamp_event_types_t *_event_types, int *_event_type);  /* not in OpenBCM 6.5.27 */
+void BCM_TWAMP_EVENT_TYPE_SET_ALL(bcm_twamp_event_types_t *_event_types);  /* not in OpenBCM 6.5.27 */
+int bcm_twamp_event_register(int unit, bcm_twamp_event_types_t event_types, bcm_twamp_event_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_twamp_event_unregister(int unit, bcm_twamp_event_types_t event_types, bcm_twamp_event_cb cb);  /* not in OpenBCM 6.5.27 */
+int bcm_twamp_sender_create(int unit, bcm_twamp_sender_info_t *twamp_sender_info);
+int bcm_twamp_sender_delay_get(int unit, bcm_twamp_sender_t twamp_id, bcm_twamp_sender_dm_statistics_t *twamp_sender_dm_statistics_info);
+int bcm_twamp_sender_destroy(int unit, bcm_twamp_sender_t twamp_id);
+void bcm_twamp_sender_dm_statistics_t_init(bcm_twamp_sender_dm_statistics_t *twamp_sender_dm_statistics_info);
+int bcm_twamp_sender_get(int unit, bcm_twamp_sender_t twamp_id, bcm_twamp_sender_info_t *twamp_sender_info);
+void bcm_twamp_sender_info_t_init(bcm_twamp_sender_info_t *twamp_sender_info);
+void bcm_twamp_sender_lm_statistics_t_init(bcm_twamp_sender_lm_statistics_t *twamp_sender_lm_statistics_info);
+int bcm_twamp_sender_loss_get(int unit, bcm_twamp_sender_t twamp_id, bcm_twamp_sender_lm_statistics_t *twamp_sender_lm_statistics_info);
+int bcm_twamp_sender_traverse(int unit, uint32 flags, bcm_twamp_sender_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-tx-10">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_tx_*</span></code> (10)<a class="headerlink" href="#bcm-tx-10" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_TX_PKT_PROP_ANY_TST(bcm_pkt_t **pkt);
+int bcm_tx(int unit, bcm_pkt_t *tx_pkt, void *cookie);
+int bcm_tx_array(int unit, bcm_pkt_t **pkt, int count, bcm_pkt_cb_f all_done_cb, void *cookie);
+int bcm_tx_cleanup(int unit);
+int bcm_tx_dv_dump(int unit, void *dv_p);
+int bcm_tx_init(int unit);
+int bcm_tx_list(int unit, bcm_pkt_t *pkt, bcm_pkt_cb_f all_done_cb, void *cookie);
+int bcm_tx_pkt_l2_map(int unit, bcm_pkt_t *pkt, bcm_mac_t dest_mac, int vid);
+int bcm_tx_pkt_setup(int unit, bcm_pkt_t *tx_pkt);
+int bcm_tx_show(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-txbeacon-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_txbeacon_*</span></code> (7)<a class="headerlink" href="#bcm-txbeacon-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_txbeacon_destroy(int unit, bcm_txbeacon_pkt_id_t pkt_id);
+int bcm_txbeacon_init(int unit, int uC);
+int bcm_txbeacon_pkt_get(int unit, bcm_txbeacon_t *txbeacon);
+int bcm_txbeacon_pkt_setup(int unit, bcm_txbeacon_t *txbeacon);
+int bcm_txbeacon_start(int unit, bcm_txbeacon_pkt_id_t pkt_id);
+int bcm_txbeacon_stop(int unit, bcm_txbeacon_pkt_id_t pkt_id);
+int bcm_txbeacon_traverse(int unit, bcm_txbeacon_traverse_cb_t trav_fn, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-unit-10">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_unit_*</span></code> (10)<a class="headerlink" href="#bcm-unit-10" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_UNIT_BMP_ADD(bcm_unit_bmp_t *_bmp, int *_u);
+void BCM_UNIT_BMP_CLEAR(bcm_unit_bmp_t *_bmp);
+void BCM_UNIT_BMP_REMOVE(bcm_unit_bmp_t *_bmp, int *_u);
+int BCM_UNIT_BMP_TEST(bcm_unit_bmp_t *_bmp, int *_u);
+int bcm_unit_local(int unit);
+int bcm_unit_max(void);
+int bcm_unit_remote(int unit);
+int bcm_unit_remote_unit_get(int unit, int *remunit);
+int bcm_unit_subtype_get(int unit, char *subtype, int maxlen);
+int bcm_unit_valid(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-vpn-18">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_vpn_*</span></code> (18)<a class="headerlink" href="#bcm-vpn-18" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_VPN_FLOW_VPN_ID_GET(bcm_vpn_t *_vpn, int *_id);
+bcm_vpn_t BCM_VPN_FLOW_VPN_ID_SET(bcm_vpn_t *_vpn, int *_id);
+int BCM_VPN_L2GRE_VPN_ID_GET(bcm_vpn_t *_vpn, int *_id);
+bcm_vpn_t BCM_VPN_L2GRE_VPN_ID_SET(bcm_vpn_t *_vpn, int *_id);
+int BCM_VPN_MIM_VPN_ID_GET(bcm_vpn_t *_vpn, int *_id);
+bcm_vpn_t BCM_VPN_MIM_VPN_ID_SET(bcm_vpn_t *_vpn, int *_id);
+int BCM_VPN_MPLS_L3_VPN_ID_GET(bcm_vpn_t *_vpn, int *_id);
+bcm_vpn_t BCM_VPN_MPLS_L3_VPN_ID_SET(bcm_vpn_t *_vpn, int *_id);
+int BCM_VPN_MPLS_VPLS_VPN_ID_GET(bcm_vpn_t *_vpn, int *_id);
+bcm_vpn_t BCM_VPN_MPLS_VPLS_VPN_ID_SET(bcm_vpn_t *_vpn, int *_id);
+int BCM_VPN_MPLS_VPWS_VPN_ID_GET(bcm_vpn_t *_vpn, int *_id);
+bcm_vpn_t BCM_VPN_MPLS_VPWS_VPN_ID_SET(bcm_vpn_t *_vpn, int *_id);
+void BCM_VPN_VEC_CLR(bcm_vpn_vector_t *vec, int *n);
+int BCM_VPN_VEC_GET(bcm_vpn_vector_t *vec, int *n);
+void BCM_VPN_VEC_SET(bcm_vpn_vector_t *vec, int *n);
+void BCM_VPN_VEC_ZERO(bcm_vpn_vector_t *vec);
+int BCM_VPN_VXLAN_VPN_ID_GET(bcm_vpn_t *_vpn, int *_id);
+bcm_vpn_t BCM_VPN_VXLAN_VPN_ID_SET(bcm_vpn_t *_vpn, int *_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-vswitch-22">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_vswitch_*</span></code> (22)<a class="headerlink" href="#bcm-vswitch-22" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_vswitch_create(int unit, bcm_vlan_t *vsi);
+int bcm_vswitch_create_with_id(int unit, bcm_vlan_t vsi);
+int bcm_vswitch_cross_connect_add(int unit, bcm_vswitch_cross_connect_t *gports);
+int bcm_vswitch_cross_connect_delete(int unit, bcm_vswitch_cross_connect_t *gports);
+int bcm_vswitch_cross_connect_delete_all(int unit);
+int bcm_vswitch_cross_connect_get(int unit, bcm_vswitch_cross_connect_t *gports);
+void bcm_vswitch_cross_connect_t_init(bcm_vswitch_cross_connect_t *cross_connect);
+int bcm_vswitch_cross_connect_traverse(int unit, bcm_vswitch_cross_connect_traverse_cb cb, void *user_data);
+int bcm_vswitch_destroy(int unit, bcm_vlan_t vsi);
+int bcm_vswitch_destroy_all(int unit);
+int bcm_vswitch_detach(int unit);
+int bcm_vswitch_flexible_connect_add(int unit, uint32 flags, bcm_vswitch_flexible_connect_match_t *port_match, bcm_vswitch_flexible_connect_fwd_t *port_fwd);
+int bcm_vswitch_flexible_connect_delete(int unit, bcm_vswitch_flexible_connect_match_t *port_match);
+void bcm_vswitch_flexible_connect_fwd_t_init(bcm_vswitch_flexible_connect_fwd_t *vswitch_flexible_connect_fwd);
+int bcm_vswitch_flexible_connect_get(int unit, uint32 flags, bcm_vswitch_flexible_connect_match_t *port_match, bcm_vswitch_flexible_connect_fwd_t *port_fwd);
+void bcm_vswitch_flexible_connect_match_t_init(bcm_vswitch_flexible_connect_match_t *flexible_connect_match);
+int bcm_vswitch_init(int unit);
+int bcm_vswitch_port_add(int unit, bcm_vlan_t vsi, bcm_gport_t port);
+int bcm_vswitch_port_delete(int unit, bcm_vlan_t vsi, bcm_gport_t port);
+int bcm_vswitch_port_delete_all(int unit, bcm_vlan_t vsi);
+int bcm_vswitch_port_get(int unit, bcm_gport_t port, bcm_vlan_t *vsi);
+int bcm_vswitch_port_traverse(int unit, bcm_vlan_t vsi, bcm_vswitch_port_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-warmboot-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_warmboot_*</span></code> (2)<a class="headerlink" href="#bcm-warmboot-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_warmboot_get(int unit, int *warmboot);
+int bcm_warmboot_set(int unit, int warmboot);
+</pre></div>
+</div>
+</section>
+<section id="bcm-wlan-17">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_wlan_*</span></code> (17)<a class="headerlink" href="#bcm-wlan-17" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_wlan_client_add(int unit, bcm_wlan_client_t *info);
+int bcm_wlan_client_delete(int unit, bcm_mac_t mac);
+int bcm_wlan_client_delete_all(int unit);
+int bcm_wlan_client_get(int unit, bcm_mac_t mac, bcm_wlan_client_t *info);
+void bcm_wlan_client_t_init(bcm_wlan_client_t *wlan_client);
+int bcm_wlan_client_traverse(int unit, bcm_wlan_client_traverse_cb cb, void *user_data);
+int bcm_wlan_detach(int unit);
+int bcm_wlan_init(int unit);
+int bcm_wlan_port_add(int unit, bcm_wlan_port_t *info);
+int bcm_wlan_port_delete(int unit, bcm_gport_t wlan_port_id);
+int bcm_wlan_port_delete_all(int unit);
+int bcm_wlan_port_get(int unit, bcm_gport_t wlan_port_id, bcm_wlan_port_t *info);
+void bcm_wlan_port_t_init(bcm_wlan_port_t *wlan_port);
+int bcm_wlan_port_traverse(int unit, bcm_wlan_port_traverse_cb cb, void *user_data);
+int bcm_wlan_tunnel_initiator_create(int unit, bcm_tunnel_initiator_t *info);
+int bcm_wlan_tunnel_initiator_destroy(int unit, bcm_gport_t wlan_tunnel_id);
+int bcm_wlan_tunnel_initiator_get(int unit, bcm_tunnel_initiator_t *info);
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="portmod-port.html" class="btn btn-neutral float-left" title="portmod_port_* (297)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcmlt-other.html" class="btn btn-neutral float-right" title="Other bcmlt_* modules (57)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

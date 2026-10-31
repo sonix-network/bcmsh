@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cint API on this build &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Functions not in OpenBCM" href="extra-functions.html" />
+    <link rel="prev" title="version" href="../reference/bcma/version.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cint API on this build</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#registered-names">Registered names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions/index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cint API on this build</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cint-api-on-this-build">
+<span id="bcmsh-cint-api"></span><h1>Cint API on this build<a class="headerlink" href="#cint-api-on-this-build" title="Link to this heading"></a></h1>
+<p>These pages list what the Cint interpreter on this build knows: every
+function, structure, enum, callback type and constant you can use from a
+Cint program. Names that are not part of the public OpenBCM
+6.5.27 release are listed separately; for them there is no public
+header or example, so the prototype, structure layout or enum values shown
+here are the only reference. A few of them are declared in the OpenBCM
+headers but OpenBCM’s own Cint does not register them; those are marked
+<code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">declared</span> <span class="pre">in</span> <span class="pre">OpenBCM</span> <span class="pre">headers</span> <span class="pre">*/</span></code>.</p>
+<p>See <a class="reference internal" href="../concepts/cint.html#bcmsh-cint-reference"><span class="std std-ref">Looking up a function</span></a> for other places to look up a function.</p>
+<section id="registered-names">
+<h2>Registered names<a class="headerlink" href="#registered-names" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head stub"><p>Part</p></th>
+<th class="head"><p>Functions</p></th>
+<th class="head"><p>Structures</p></th>
+<th class="head"><p>Typedefs</p></th>
+<th class="head"><p>Enums</p></th>
+<th class="head"><p>Callback types</p></th>
+<th class="head"><p>Constants</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>SDK API (<code class="docutils literal notranslate"><span class="pre">bcm_*</span></code>)</p></th>
+<td><p>10,521</p></td>
+<td><p>1,385</p></td>
+<td><p>212</p></td>
+<td><p>1,180</p></td>
+<td><p>304</p></td>
+<td><p>11,916</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Interpreter helpers (<code class="docutils literal notranslate"><span class="pre">bcm_errmsg</span></code>, iterators, basic types)</p></th>
+<td><p>2</p></td>
+<td><p>7</p></td>
+<td><p>44</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Interpreter built-ins</p></th>
+<td><p>23</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p><code class="docutils literal notranslate"><span class="pre">soc_*</span></code>, <code class="docutils literal notranslate"><span class="pre">sal_*</span></code> and <code class="docutils literal notranslate"><span class="pre">diag_*</span></code> helpers</p></th>
+<td><p>175</p></td>
+<td><p>5</p></td>
+<td><p>7</p></td>
+<td><p>0</p></td>
+<td><p>4</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>PHY API (<code class="docutils literal notranslate"><span class="pre">phymod_*</span></code>)</p></th>
+<td><p>311</p></td>
+<td><p>86</p></td>
+<td><p>1</p></td>
+<td><p>78</p></td>
+<td><p>9</p></td>
+<td><p>266</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Port-macro API (<code class="docutils literal notranslate"><span class="pre">portmod_*</span></code>)</p></th>
+<td><p>349</p></td>
+<td><p>87</p></td>
+<td><p>37</p></td>
+<td><p>26</p></td>
+<td><p>8</p></td>
+<td><p>254</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Logical-table API (<code class="docutils literal notranslate"><span class="pre">bcmlt_*</span></code>)</p></th>
+<td><p>61</p></td>
+<td><p>10</p></td>
+<td><p>5</p></td>
+<td><p>10</p></td>
+<td><p>1</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Embedded-core API (<code class="docutils literal notranslate"><span class="pre">edki_*</span></code>)</p></th>
+<td><p>16</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Total</p></th>
+<td><p>11,457</p></td>
+<td><p>1,585</p></td>
+<td><p>298</p></td>
+<td><p>1,294</p></td>
+<td><p>331</p></td>
+<td><p>12,482</p></td>
+</tr>
+</tbody>
+</table>
+<p>A name registered by more than one part (for example the basic integer
+types) is counted once in the total.
+In addition the interpreter knows 7 iterators such as <code class="docutils literal notranslate"><span class="pre">BCM_PBMP_ITER</span></code>
+and 1 macro (<code class="docutils literal notranslate"><span class="pre">BCM_IF_ERROR_RETURN</span></code>); see <a class="reference internal" href="../concepts/cint-language.html"><span class="doc">The Cint language</span></a>.</p>
+</section>
+<section id="compared-with-openbcm-6-5-27">
+<h2>Compared with OpenBCM 6.5.27<a class="headerlink" href="#compared-with-openbcm-6-5-27" title="Link to this heading"></a></h2>
+<p>“Not in OpenBCM” counts names this build registers that OpenBCM 6.5.27’s
+Cint does not; “Only in OpenBCM” counts names OpenBCM’s Cint can register
+that this build does not have (many of them belong to other chip families or
+optional features).</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head stub"><p>Kind</p></th>
+<th class="head"><p>Registered here</p></th>
+<th class="head"><p>Not in OpenBCM 6.5.27</p></th>
+<th class="head"><p>Only in OpenBCM</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>Functions</p></th>
+<td><p>11,457</p></td>
+<td><p><a class="reference internal" href="extra-functions.html"><span class="doc">1,450</span></a></p></td>
+<td><p>503</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Structures</p></th>
+<td><p>1,585</p></td>
+<td><p><a class="reference internal" href="extra-types.html"><span class="doc">271</span></a></p></td>
+<td><p>60</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Typedefs</p></th>
+<td><p>298</p></td>
+<td><p><a class="reference internal" href="extra-types.html"><span class="doc">11</span></a></p></td>
+<td><p>214</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Enums</p></th>
+<td><p>1,294</p></td>
+<td><p><a class="reference internal" href="extra-enums.html"><span class="doc">266</span></a></p></td>
+<td><p>69</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Callback types</p></th>
+<td><p>331</p></td>
+<td><p><a class="reference internal" href="extra-callbacks.html"><span class="doc">40</span></a></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Constants</p></th>
+<td><p>12,482</p></td>
+<td><p><a class="reference internal" href="extra-constants.html"><span class="doc">1,672</span></a></p></td>
+<td><p>424</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Enum values</p></th>
+<td></td>
+<td><p><a class="reference internal" href="extra-enums.html"><span class="doc">2,773</span></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>New values of enums that already exist in OpenBCM 6.5.27 are counted in
+the last row (167 enums gained values).</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions/index.html">All registered functions</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../reference/bcma/version.html" class="btn btn-neutral float-left" title="version" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="extra-functions.html" class="btn btn-neutral float-right" title="Functions not in OpenBCM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

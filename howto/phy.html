@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHYs and RJ-45 SFPs &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building an L2 switch with VLANs and SVIs" href="l2-switch.html" />
+    <link rel="prev" title="Debugging a link" href="link-debug.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PHYs and RJ-45 SFPs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#which-phy-does-a-port-have">Which PHY does a port have?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phy-settings">PHY settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rj-45-sfps">RJ-45 SFPs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PHYs and RJ-45 SFPs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="phys-and-rj-45-sfps">
+<h1>PHYs and RJ-45 SFPs<a class="headerlink" href="#phys-and-rj-45-sfps" title="Link to this heading"></a></h1>
+<p>On a Trident 3 switch every front-panel port is driven by a SerDes inside the
+switch chip: Falcon cores (<code class="docutils literal notranslate"><span class="pre">TSC-F16</span></code>) for the QSFP28 ports and their
+breakouts, and a Merlin core (<code class="docutils literal notranslate"><span class="pre">TSC-E16</span></code>) for the SFP+ ports. That SerDes is
+the port’s <em>PHY</em> as far as the shell is concerned. Boards with external PHY
+chips exist, but the Trident 3 switches in these examples have none. An RJ-45 SFP module
+brings its own copper PHY inside the module.</p>
+<p>This page shows how to find out what PHY a port has, how to read its
+settings, and how to set up an SFP cage for a 1000BASE-T (RJ-45) SFP.
+For link problems see <a class="reference internal" href="link-debug.html"><span class="doc">Debugging a link</span></a>.</p>
+<section id="which-phy-does-a-port-have">
+<h2>Which PHY does a port have?<a class="headerlink" href="#which-phy-does-a-port-have" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/phy.html#clicmd-phy-info"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">info</span></code></a> lists the PHY driver of every port, and
+<a class="reference internal" href="../reference/portmod.html#clicmd-portmod-info-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">info</span> <span class="pre">port</span></code></a> shows one port in more detail, including whether
+an external PHY is attached:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; portmod info port=12</span>
+<span class="go">Port: 012</span>
+<span class="go">Parent PM: 003</span>
+<span class="go">Phys: 012</span>
+<span class="go">Mac: CLMAC</span>
+<span class="go">Polarity: TX:1, RX:1</span>
+<span class="go">Internal PHY Address: 137</span>
+<span class="go">External PHY Address: Not Attached</span>
+<span class="go">Core Mode: Quad</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Phys</span></code> is the physical lane, <code class="docutils literal notranslate"><span class="pre">Core</span> <span class="pre">Mode:</span> <span class="pre">Quad</span></code> means the core runs four
+independent lanes (a 4x10G breakout here), and <code class="docutils literal notranslate"><span class="pre">Polarity</span></code> is the lane’s TX and RX
+polarity setting from the board configuration. <code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">PHY</span> <span class="pre">Address:</span> <span class="pre">Not</span>
+<span class="pre">Attached</span></code> means the SerDes is the only PHY.</p>
+<p>The classic MII register view of a SerDes port is mostly empty; only the ID
+registers 2 and 3 are set (<code class="docutils literal notranslate"><span class="pre">600d</span></code>/<code class="docutils literal notranslate"><span class="pre">8770</span></code>, the same on every port):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy xe3</span>
+<span class="go">Port xe3 (PHY addr 0x89): TSCF-16/02/3 (Tscf)</span>
+<span class="go">     0x00: 0x0000    0x01: 0x0000    0x02: 0x600d    0x03: 0x8770</span>
+<span class="go">     0x04: 0x0000    0x05: 0x0000    0x06: 0x0000    0x07: 0x0000</span>
+<span class="go">     0x08: 0x0000    0x09: 0x0000    0x0a: 0x0000    0x0b: 0x0000</span>
+<span class="go">     0x0c: 0x0000    0x0d: 0x0000    0x0e: 0x0000    0x0f: 0x0000</span>
+<span class="go">     0x10: 0x0000    0x11: 0x0000    0x12: 0x0000    0x13: 0x0000</span>
+<span class="go">     0x14: 0x0000    0x15: 0x0000    0x16: 0x0000    0x17: 0x0000</span>
+<span class="go">     0x18: 0x0000    0x19: 0x0000    0x1a: 0x0000    0x1b: 0x0000</span>
+<span class="go">     0x1c: 0x0000    0x1d: 0x0000    0x1e: 0x0000    0x1f: 0x0000</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">int</span> <span class="pre">&lt;port&gt;</span></code> shows the same for the intermediate PHY, which on these
+ports is the same SerDes. For the SerDes’ real state use <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">&lt;port&gt;</span>
+<span class="pre">dsc</span></code> (see <a class="reference internal" href="link-debug.html"><span class="doc">Debugging a link</span></a>). <code class="docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">phy</span> <span class="pre">port=&lt;n&gt;</span></code> prints a list of
+receiver values, but on these switches all of them read <code class="docutils literal notranslate"><span class="pre">0</span></code>, even on ports
+with link.</p>
+</section>
+<section id="phy-settings">
+<h2>PHY settings<a class="headerlink" href="#phy-settings" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/phy.html#clicmd-phy-control"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">control</span></code></a>
+shows the settings of the port’s PHY:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: An SFP+ port</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy control xe4</span>
+<span class="go">Current PHY control settings of xe4 -&gt;</span>
+<span class="go">Preemphasis              = 0xa3200</span>
+<span class="go">DriverCurrent            = 0xffffffff</span>
+<span class="go">DFE ENable               = False</span>
+<span class="go">LP DFE ENable            = False</span>
+<span class="go">BR DFE ENable            = False</span>
+<span class="go">LinkTraining Enable      = False</span>
+<span class="go">Interface                = 0xa</span>
+<span class="go">CL74                     = False</span>
+<span class="go">CL91                     = False</span>
+<span class="go">CL108                    = False</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Preemphasis</span></code> holds the transmit FIR taps (see
+<a class="reference internal" href="link-debug.html#howto-link-taps"><span class="std std-ref">Transmit FIR taps</span></a>), <code class="docutils literal notranslate"><span class="pre">DFE</span></code>, <code class="docutils literal notranslate"><span class="pre">LP</span> <span class="pre">DFE</span></code> and <code class="docutils literal notranslate"><span class="pre">BR</span> <span class="pre">DFE</span></code> the receive
+equalizer modes, <code class="docutils literal notranslate"><span class="pre">LinkTraining</span></code> the clause 72/92 link training, and
+<code class="docutils literal notranslate"><span class="pre">CL74</span></code>, <code class="docutils literal notranslate"><span class="pre">CL91</span></code> and <code class="docutils literal notranslate"><span class="pre">CL108</span></code> the FEC (see <a class="reference internal" href="link-debug.html#howto-link-fec"><span class="std std-ref">FEC</span></a>).</p>
+<p><a class="reference internal" href="../reference/portmod.html#clicmd-portmod-autoneg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">autoneg</span></code></a> shows what the port can do, what it
+advertises and what the partner advertised:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: A 10G breakout lane without auto-negotiation</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; portmod autoneg port=12</span>
+<span class="go">**********************************************************</span>
+<span class="go">****Auto-negociation local port supported ability*********</span>
+<span class="go">**********************************************************</span>
+<span class="go">Half Duplex Speed: |</span>
+<span class="go">Full Duplex Speed: |1000MB|2500MB|5000MB|10GB|</span>
+<span class="go">Pause:             |PAUSE_TX|PAUSE_RX|PAUSE_ASYMM|</span>
+<span class="go">Interface:         |GMII|SGMII|XGMII|</span>
+<span class="go">Medium:            |COPPER|FIBER|BACKPLANE|</span>
+<span class="go">Loopback:          |LB_MAC|LB_PHY|</span>
+<span class="go">Flags:             |AUTONEG|</span>
+<span class="go">EEE:               |</span>
+<span class="go">ENCAP:             |IEEE|HIGIG|HIGIG2|</span>
+<span class="go">**********************************************************</span>
+<span class="go">****Auto-negociation local port advertised ability********</span>
+<span class="go">**********************************************************</span>
+<span class="go">Half Duplex Speed: |</span>
+<span class="go">Full Duplex Speed: |1000MB|10GB|</span>
+<span class="go">Pause:             |PAUSE_TX|PAUSE_RX|</span>
+<span class="go">Interface:         |</span>
+<span class="go">Medium:            |BACKPLANE|</span>
+<span class="go">Loopback:          |</span>
+<span class="go">Flags:             |</span>
+<span class="go">EEE:               |</span>
+<span class="go">ENCAP:             |</span>
+<span class="go">**********************************************************</span>
+<span class="go">****Auto-negociation received ability from partner********</span>
+<span class="go">**********************************************************</span>
+<span class="go">Half Duplex Speed: |</span>
+<span class="go">Full Duplex Speed: |</span>
+<span class="go">Pause:             |</span>
+<span class="go">Interface:         |</span>
+<span class="go">Medium:            |BACKPLANE|</span>
+<span class="go">Loopback:          |</span>
+<span class="go">Flags:             |</span>
+<span class="go">EEE:               |</span>
+<span class="go">ENCAP:             |</span>
+</pre></div>
+</div>
+</div>
+<p>Media type and MDI crossover are part of the <a class="reference internal" href="../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a> status:
+<code class="docutils literal notranslate"><span class="pre">MDIX(ForcedNormal,</span> <span class="pre">Normal)</span> <span class="pre">Medium(None)</span></code>.</p>
+</section>
+<section id="rj-45-sfps">
+<h2>RJ-45 SFPs<a class="headerlink" href="#rj-45-sfps" title="Link to this heading"></a></h2>
+<p>A 1000BASE-T SFP has a copper PHY inside the module. Towards the switch it
+uses SGMII, so the cage has to run at 1G with the <code class="docutils literal notranslate"><span class="pre">SGMII</span></code> interface and
+auto-negotiation; the module’s own PHY negotiates with the link partner on
+the copper side. On these switches only the SFP+ cages, on the Merlin core, take SFP
+modules (port 66, <code class="docutils literal notranslate"><span class="pre">xe4</span></code>, in the examples).</p>
+<p>Set speed and interface first, then turn on auto-negotiation with a
+separate command. Given in one command, <code class="docutils literal notranslate"><span class="pre">an=on</span></code> wins and the port keeps its
+old speed and interface. Use the port <em>number</em>: at 1G the port is renamed
+from <code class="docutils literal notranslate"><span class="pre">xe</span></code> to <code class="docutils literal notranslate"><span class="pre">ge</span></code>.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Port 66 set up for a 1000BASE-T SFP</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; port 66 speed=1000 if=SGMII</span>
+<span class="go">drivshell&gt; ps 66</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ge0( 66)  !ena   1    1G  FD   SW  No   Forward         Untag    F  SGMII  9122    No          IEEE</span>
+<span class="go">drivshell&gt; port 66 an=on</span>
+<span class="go">drivshell&gt; ps 66</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ge0( 66)  !ena   1     -       SW  Yes  Forward         Untag    F  SGMII  9122    No          IEEE</span>
+<span class="go">drivshell&gt; port 66</span>
+<span class="go">PORT: Status (* indicates PHY link up)</span>
+<span class="go">  ge0     (Disabled LS(SW Auto(no link) Ability (fd = 10MB,100MB,1000MB,2500MB,10GB hd =  intf = gmii,sgmii,xgmii medium = copper,fiber pause = pause_tx,pause_rx,pause_asymm lb = none,MAC,PHY flags = autoneg )Local (fd = 1000MB,2500MB,10GB hd =  intf = gmiimedium =  pause = pause_tx,pause_rx lb =  flags =  )Stad(e0:39:d7:88:3b:00) STP(Forward) Disc(untagged) Lrn(FWD) UtPri(0) Pfm(FloodNone) IF(SGMII) PH(Slave) Max_frame(9122) MDIX(ForcedNormal, Normal) Medium(None) VLANFILTER(3)</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ps</span></code> now shows the port as <code class="docutils literal notranslate"><span class="pre">ge0</span></code> with <code class="docutils literal notranslate"><span class="pre">SGMII</span></code> and auto-negotiation on;
+the speed column shows <code class="docutils literal notranslate"><span class="pre">-</span></code> until a link is negotiated. To advertise only
+1G full duplex:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; port 66 adv=1000full</span>
+<span class="go">drivshell&gt; port 66 adv=1000FD</span>
+<span class="go">Invalid port mode string.</span>
+<span class="go">Examples: 21g,1000full,100,10,pause 100,pause_tx,pause_rx,cl74|cl91|fec_none,short|long</span>
+
+<span class="go">Failed to execute the diagnostic command. Error: Operation failed.</span>
+</pre></div>
+</div>
+</div>
+<p>The port-mode strings are those in the error message: <code class="docutils literal notranslate"><span class="pre">1000full</span></code>,
+<code class="docutils literal notranslate"><span class="pre">100</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">pause</span></code> and so on. <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">&lt;port&gt;</span> <span class="pre">adv</span></code> prints nothing
+useful on these switches; read the advertisement from the full <code class="docutils literal notranslate"><span class="pre">port</span>
+<span class="pre">&lt;port&gt;</span></code> status (<code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">(fd</span> <span class="pre">=</span> <span class="pre">…)</span></code>) or from <code class="docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">autoneg</span></code>.</p>
+<p>To return the cage to 10G SFP+ operation:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; port 66 an=off</span>
+<span class="go">drivshell&gt; port 66 speed=10000 if=XFI</span>
+<span class="go">drivshell&gt; port 66</span>
+<span class="go">PORT: Status (* indicates PHY link up)</span>
+<span class="go">  xe4     (Disabled LS(SW Forced((10GFD) Stad(e0:39:d7:88:3b:00) STP(Forward) Disc(untagged) Lrn(FWD) UtPri(0) Pfm(FloodNone) IF(XFI) PH(Slave) Max_frame(9122) MDIX(ForcedNormal, Normal) Medium(None) Fault(Local) VLANFILTER(3)</span>
+</pre></div>
+</div>
+</div>
+<p>Changes made here are lost when <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts. To keep them, configure
+the port in SONiC instead (speed 1000 and auto-negotiation on the
+<code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> interface); the shell is the place to try settings out and to
+check what SONiC programmed.</p>
+<p>The module’s copper PHY is normally not managed by the switch SDK: it does
+not appear in <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">info</span></code>, and copper diagnostics such as <a class="reference internal" href="../reference/cablediag.html#clicmd-cablediag"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">CableDiag</span></code></a>
+work only on PHYs the SDK drives. Module details (vendor, type) come from
+SONiC: <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">interfaces</span> <span class="pre">transceiver</span> <span class="pre">eeprom</span> <span class="pre">EthernetN</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="link-debug.html" class="btn btn-neutral float-left" title="Debugging a link" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="l2-switch.html" class="btn btn-neutral float-right" title="Building an L2 switch with VLANs and SVIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

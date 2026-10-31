@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHY &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PHYDiag" href="phydiag.html" />
+    <link rel="prev" title="PCIEphy" href="pciephy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Command reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#shell-commands">Shell commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#commands-for-other-chip-families">Commands for other chip families</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#logical-table-switch-mode">Logical-table switch mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#bcma-command-line"><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Command reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">PHY</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="phy">
+<h1><code class="docutils literal notranslate"><span class="pre">PHY</span></code><a class="headerlink" href="#phy" title="Link to this heading"></a></h1>
+<p>A command of the separate <code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line; see <a class="reference internal" href="../index.html#bcmsh-other-interpreters"><span class="std std-ref">Commands for other chip families</span></a>.</p>
+<p>PHY based commands.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PHY info [&lt;port&gt;|&lt;port-range&gt;]
+&lt;port&gt; list [raw] &lt;reg-name&gt;
+&lt;port&gt;|&lt;port-range&gt; [raw] &lt;reg-expr&gt; [&lt;val&gt;|&lt;field&gt;=&lt;val&gt; ...]
+&lt;port&gt;|&lt;port-range&gt; &lt;addr-expr&gt; [&lt;val&gt;]
+raw [pm]&lt;pm-id&gt; &lt;addr-expr&gt; [&lt;val&gt;]
+event_log_mask &lt;port&gt; [&lt;val&gt;]
+diag ...
+diag &lt;port&gt; deskew
+debug set acc_rd [serdes_addr]
+debug set acc_wr [serdes_addr]
+debug clear
+diag &lt;port&gt; cdr set cdr_mode=br lane=1
+diag &lt;port&gt; cdr clear
+diag &lt;port&gt; cdr get lane=0
+ucram &lt;port&gt; list
+ucram &lt;port&gt; &lt;ucram_id-expr&gt; [&lt;val&gt;]
+diag &lt;port&gt; tx_taps get lane=1
+diag &lt;port&gt; tx_taps set nlc_%=3 nlc_low_%=-4 pre3=0 pre2=0 pre1=-1 main=120 post1=0 post2=1 post3=0 lane=&lt;val&gt;
+</pre></div>
+</div>
+<p class="rubric">Built-in help</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;reg-expr&gt; := &lt;reg&gt;[.&lt;lane-index&gt;][.&lt;pll-index&gt;]
+&lt;addr-expr&gt; := &lt;addr&gt;[.&lt;lane-index&gt;][.&lt;pll-index&gt;]
+&lt;ucram_id_expr&gt; := &lt;ucram_id[.&lt;lane-index&gt;]
+
+List or read/write internal PHY registers.
+This command takes the logical port as the port number domain.
+If &lt;lane-index&gt; is specified, it will override the default lane index
+of the associate port. If value 1 is prefix before register address,
+it will access the register of specified devad device. If &lt;pll-index&gt;
+is specified, it will override the default register pll index.
+Raw register command takes the port macro (PM) ID (starting with 1)
+and register address as input to access registers of the PM in
+an early stage before the underlying driver is attached.
+event_log_mask set/get uC RAM variable usr_event_log_group_mask.
+
+The syntax for "phy diag" is identical to the "phydiag" command.
+Use "help phydiag" to see the detailed help text.
+ucram command accesses PMD uC RAM user's variables. ucram takes logical
+port and the ID of ucram list.
+"tx_taps" is to set TXFIR tap values and adjust them based on
+upper and lower eye non linear compensation(nlc).
+nlc_% (upper_eye nlc) and nlc_low_% (lower_eye nlc) are independent.
+"tx_taps" includes the following arguments:
+pre3, pre2, pre1, main, post1 post2, post3, nlc_%, and nlc_low_%
+</pre></div>
+</div>
+<p class="rubric">Built-in examples</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>info 1
+info 1-10
+1 list PHYID
+1 PHYID2r
+1 0x1d147.0.1
+1 0x9000.0
+1,2,3 0xc050
+1-5 sc_x4_control_control
+raw pm1 0x9000
+event_log_mask 1
+event_log_mask 1 0xE0FFFF
+debug set acc_wr 0x401
+debug set acc_rd
+debug clear
+ucram 1 list
+ucram 1 1
+diag 1 tx_taps get lane=2
+diag 1 tx_taps set nlc_%=3 nlc_low_%=-4 pre3=0 pre2=0 pre1=-1 main=120 post1=0 post2=1 post3=0 lane=0
+diag 1 deskew
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pciephy.html" class="btn btn-neutral float-left" title="PCIEphy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phydiag.html" class="btn btn-neutral float-right" title="PHYDiag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

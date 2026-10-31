@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_rx_* (146) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_sat_* (61)" href="bcm-sat.html" />
+    <link rel="prev" title="bcm_ptp_* (190)" href="bcm-ptp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_rx_*</span></code> (146)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-rx-146">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_rx_*</span></code> (146)<a class="headerlink" href="#bcm-rx-146" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_RX_F_COS_ADD(uint32 *flags, int *cos);
+void BCM_RX_F_INTERRUPT_SET(uint32 *flags);
+int BCM_RX_INIT_DONE(int *unit);
+void BCM_RX_PKT_TRACE_REASON_AND(bcm_rx_pkt_trace_reasons_t *_trace_reasons1, bcm_rx_pkt_trace_reasons_t *_trace_reasons2);
+void BCM_RX_PKT_TRACE_REASON_CLEAR(bcm_rx_pkt_trace_reasons_t *_trace_reasons, bcm_pkt_trace_event_t *_trace_reason);
+void BCM_RX_PKT_TRACE_REASON_CLEAR_ALL(bcm_rx_pkt_trace_reasons_t *_trace_reasons);
+void BCM_RX_PKT_TRACE_REASON_COUNT(bcm_rx_pkt_trace_reasons_t *_trace_reasons, int *count);
+int BCM_RX_PKT_TRACE_REASON_EQ(bcm_rx_pkt_trace_reasons_t *_trace_reasons1, bcm_rx_pkt_trace_reasons_t *_trace_reasons2);
+int BCM_RX_PKT_TRACE_REASON_GET(bcm_rx_pkt_trace_reasons_t *_trace_reasons, bcm_pkt_trace_event_t *_trace_reason);
+int BCM_RX_PKT_TRACE_REASON_IS_NULL(bcm_rx_pkt_trace_reasons_t *_trace_reasons);
+void BCM_RX_PKT_TRACE_REASON_NEGATE(bcm_rx_pkt_trace_reasons_t *_trace_reasons1, bcm_rx_pkt_trace_reasons_t *_trace_reasons2);
+int BCM_RX_PKT_TRACE_REASON_NEQ(bcm_rx_pkt_trace_reasons_t *_trace_reasons1, bcm_rx_pkt_trace_reasons_t *_trace_reasons2);
+void BCM_RX_PKT_TRACE_REASON_OR(bcm_rx_pkt_trace_reasons_t *_trace_reasons1, bcm_rx_pkt_trace_reasons_t *_trace_reasons2);
+void BCM_RX_PKT_TRACE_REASON_REMOVE(bcm_rx_pkt_trace_reasons_t *_trace_reasons1, bcm_rx_pkt_trace_reasons_t *_trace_reasons2);
+void BCM_RX_PKT_TRACE_REASON_SET(bcm_rx_pkt_trace_reasons_t *_trace_reasons, bcm_pkt_trace_event_t *_trace_reason);
+void BCM_RX_PKT_TRACE_REASON_SET_ALL(bcm_rx_pkt_trace_reasons_t *_trace_reasons);
+void BCM_RX_REASON_AND(bcm_rx_reasons_t *_reasons1, bcm_rx_reasons_t *_reasons2);
+void BCM_RX_REASON_CLEAR(bcm_rx_reasons_t *_reasons, bcm_rx_reason_t *_reason);
+void BCM_RX_REASON_CLEAR_ALL(bcm_rx_reasons_t *_reasons);
+void BCM_RX_REASON_COUNT(bcm_rx_reasons_t *_reasons, int *count);
+int BCM_RX_REASON_EQ(bcm_rx_reasons_t *_reasons1, bcm_rx_reasons_t *_reasons2);
+int BCM_RX_REASON_GET(bcm_rx_reasons_t *_reasons, bcm_rx_reason_t *_reason);
+int BCM_RX_REASON_IS_NULL(bcm_rx_reasons_t *_reasons);
+void BCM_RX_REASON_NEGATE(bcm_rx_reasons_t *_reasons1, bcm_rx_reasons_t *_reasons2);
+int BCM_RX_REASON_NEQ(bcm_rx_reasons_t *_reasons1, bcm_rx_reasons_t *_reasons2);
+void BCM_RX_REASON_OR(bcm_rx_reasons_t *_reasons1, bcm_rx_reasons_t *_reasons2);
+void BCM_RX_REASON_REMOVE(bcm_rx_reasons_t *_reasons1, bcm_rx_reasons_t *_reasons2);
+void BCM_RX_REASON_SET(bcm_rx_reasons_t *_reasons, bcm_rx_reason_t *_reason);
+void BCM_RX_REASON_SET_ALL(bcm_rx_reasons_t *_reasons);
+void BCM_RX_REASON_XOR(bcm_rx_reasons_t *_reasons1, bcm_rx_reasons_t *_reasons2);
+void BCM_RX_TRAP_VIRTUAL_HW_TRAP_ID_MC_RESERVED(int *_id, int *_trap_id);
+void BCM_RX_TRAP_VIRTUAL_HW_TRAP_ID_PROG(int *_id, int *_trap_id);
+int bcm_rx_CopyToCpu_config_add(int unit, uint32 options, bcm_rx_CopyToCpu_config_t *copyToCpu_config);
+int bcm_rx_CopyToCpu_config_delete(int unit, int index);
+int bcm_rx_CopyToCpu_config_delete_all(int unit);
+int bcm_rx_CopyToCpu_config_get(int unit, int index, bcm_rx_CopyToCpu_config_t *copyToCpu_config);
+int bcm_rx_CopyToCpu_config_get_all(int unit, int entries_max, bcm_rx_CopyToCpu_config_t *copyToCpu_config, int *entries_count);
+void bcm_rx_CopyToCpu_config_t_init(bcm_rx_CopyToCpu_config_t *copyToCpu_config);
+int bcm_rx_active(int unit);
+int bcm_rx_alloc(int unit, int pkt_size, uint32 flags, void **buf);
+int bcm_rx_burst_get(int unit, int *burst);
+int bcm_rx_burst_set(int unit, int burst);
+int bcm_rx_cfg_get(int unit, bcm_rx_cfg_t *cfg);
+int bcm_rx_cfg_init(int unit);
+void bcm_rx_cfg_t_init(bcm_rx_cfg_t *rx_cfg);
+int bcm_rx_channels_running(int unit, uint32 *channels);
+int bcm_rx_clear(int unit);
+int bcm_rx_control_get(int unit, bcm_rx_control_t type, int *arg);
+int bcm_rx_control_set(int unit, bcm_rx_control_t type, int arg);
+int bcm_rx_cos_burst_get(int unit, int cos, int *burst);
+int bcm_rx_cos_burst_set(int unit, int cos, int burst);
+int bcm_rx_cos_max_len_get(int unit, int cos, int *max_q_len);
+int bcm_rx_cos_max_len_set(int unit, int cos, int max_q_len);
+int bcm_rx_cos_rate_get(int unit, int cos, int *pps);
+int bcm_rx_cos_rate_set(int unit, int cos, int pps);
+int bcm_rx_cosq_mapping_delete(int unit, int index);
+int bcm_rx_cosq_mapping_extended_add(int unit, uint32 options, bcm_rx_cosq_mapping_t *rx_cosq_mapping);
+int bcm_rx_cosq_mapping_extended_delete(int unit, bcm_rx_cosq_mapping_t *rx_cosq_mapping);
+int bcm_rx_cosq_mapping_extended_delete_all(int unit);
+int bcm_rx_cosq_mapping_extended_get(int unit, bcm_rx_cosq_mapping_t *rx_cosq_mapping);
+int bcm_rx_cosq_mapping_extended_set(int unit, uint32 options, bcm_rx_cosq_mapping_t *rx_cosq_mapping);
+int bcm_rx_cosq_mapping_get(int unit, int index, bcm_rx_reasons_t *reasons, bcm_rx_reasons_t *reasons_mask, uint8 *int_prio, uint8 *int_prio_mask, uint32 *packet_type, uint32 *packet_type_mask, bcm_cos_queue_t *cosq);
+int bcm_rx_cosq_mapping_reasons_get(int unit, bcm_rx_reasons_t *reasons);
+int bcm_rx_cosq_mapping_set(int unit, int index, bcm_rx_reasons_t reasons, bcm_rx_reasons_t reasons_mask, uint8 int_prio, uint8 int_prio_mask, uint32 packet_type, uint32 packet_type_mask, bcm_cos_queue_t cosq);
+int bcm_rx_cosq_mapping_size_get(int unit, int *size);
+void bcm_rx_cosq_mapping_t_init(bcm_rx_cosq_mapping_t *rx_cosq_mapping);
+int bcm_rx_cpu_rate_get(int unit, int *pps);
+int bcm_rx_cpu_rate_set(int unit, int pps);
+int bcm_rx_free(int unit, void *pkt_data);
+int bcm_rx_free_enqueue(int unit, void *pkt_data);
+int bcm_rx_init(int unit);
+void bcm_rx_mtu_config_t_init(bcm_rx_mtu_config_t *mtu_config);
+int bcm_rx_mtu_get(int unit, bcm_rx_mtu_config_t *config);
+int bcm_rx_mtu_profile_get(int unit, uint32 flags, bcm_rx_mtu_profile_key_t *mtu_key, bcm_rx_mtu_profile_value_t *mtu_value);
+void bcm_rx_mtu_profile_key_t_init(bcm_rx_mtu_profile_key_t *mtu_key);
+int bcm_rx_mtu_profile_set(int unit, uint32 flags, bcm_rx_mtu_profile_key_t *mtu_key, bcm_rx_mtu_profile_value_t *mtu_value);
+void bcm_rx_mtu_profile_value_t_init(bcm_rx_mtu_profile_value_t *mtu_value);
+int bcm_rx_mtu_set(int unit, bcm_rx_mtu_config_t *config);
+int bcm_rx_pool_alloc(int unit, int size, uint32 flags, void **pool);
+int bcm_rx_pool_cleanup(void);
+int bcm_rx_pool_free(int unit, void *buf);
+int bcm_rx_pool_per_unit_cleanup(int unit);
+int bcm_rx_pool_per_unit_setup(int unit, int pkt_count, int bytes_per_pkt);
+int bcm_rx_pool_per_unit_setup_done(int unit);
+int bcm_rx_pool_setup(int pkt_count, int bytes_per_pkt);
+int bcm_rx_pool_setup_done(void);
+int bcm_rx_queue_channel_get(int unit, bcm_cos_queue_t queue_id, bcm_rx_chan_t *chan_id);
+int bcm_rx_queue_channel_set(int unit, bcm_cos_queue_t queue_id, bcm_rx_chan_t chan_id);
+int bcm_rx_queue_max_get(int unit, bcm_cos_queue_t *cosq);
+int bcm_rx_queue_packet_count_get(int unit, bcm_cos_queue_t cosq, int *packet_count);
+int bcm_rx_queue_rate_limit_status_get(int unit, bcm_cos_queue_t cosq, int *packet_tokens);
+int bcm_rx_queue_register(int unit, char *name, bcm_cos_queue_t cosq, bcm_rx_cb_f callback, uint8 priority, void *cookie, uint32 flags);
+int bcm_rx_queue_unregister(int unit, bcm_cos_queue_t cosq, bcm_rx_cb_f callback, uint8 priority);
+int bcm_rx_rate_get(int unit, int *pps);
+int bcm_rx_rate_set(int unit, int pps);
+int bcm_rx_reasons_get(int unit, bcm_rx_reasons_t *reasons);
+int bcm_rx_reasons_policer_set(int unit, bcm_rx_reasons_t rx_reasons, bcm_policer_t polid);
+void bcm_rx_reasons_t_init(bcm_rx_reasons_t *reasons);
+int bcm_rx_redirect_reasons_get(int unit, bcm_rx_redirect_t mode, bcm_rx_reasons_t *reasons);
+int bcm_rx_redirect_reasons_set(int unit, bcm_rx_redirect_t mode, bcm_rx_reasons_t reasons);
+int bcm_rx_register(int unit, char *name, bcm_rx_cb_f callback, uint8 priority, void *cookie, uint32 flags);
+int bcm_rx_remote_pkt_enqueue(int unit, bcm_pkt_t *pkt);
+int bcm_rx_sched_register(int unit, bcm_rx_sched_cb sched_cb);
+int bcm_rx_sched_unregister(int unit);
+int bcm_rx_show(int unit);
+void bcm_rx_snoop_config_t_init(bcm_rx_snoop_config_t *snoop_config);
+int bcm_rx_snoop_create(int unit, int flags, int *snoop_cmnd);
+int bcm_rx_snoop_destroy(int unit, int flags, int snoop_cmnd);
+int bcm_rx_snoop_get(int unit, int snoop_cmnd, bcm_rx_snoop_config_t *config);
+int bcm_rx_snoop_set(int unit, int snoop_cmnd, bcm_rx_snoop_config_t *config);
+int bcm_rx_start(int unit, bcm_rx_cfg_t *cfg);
+int bcm_rx_stop(int unit, bcm_rx_cfg_t *cfg);
+int bcm_rx_sync(int unit, int sn, bcm_pkt_t **pkt, int usec);
+int bcm_rx_sync_start(int unit, uint32 flags, int *sn);
+int bcm_rx_sync_stop(int unit, int sn);
+int bcm_rx_trap_action_profile_clear(int unit, bcm_rx_trap_t trap_type);
+int bcm_rx_trap_action_profile_get(int unit, bcm_rx_trap_t trap_type, bcm_gport_t *gport);
+int bcm_rx_trap_action_profile_set(int unit, uint32 flags, bcm_rx_trap_t trap_type, bcm_gport_t gport);
+void bcm_rx_trap_config_t_init(bcm_rx_trap_config_t *trap_config);
+int bcm_rx_trap_get(int unit, int trap_id, bcm_rx_trap_config_t *config);
+void bcm_rx_trap_lif_config_t_init(bcm_rx_trap_lif_config_t *lif_config_p);
+int bcm_rx_trap_lif_get(int unit, bcm_rx_trap_lif_config_t *lif_config_p);
+int bcm_rx_trap_lif_set(int unit, uint32 flags, bcm_rx_trap_lif_config_t *lif_config_p);
+void bcm_rx_trap_prog_config_t_init(bcm_rx_trap_prog_config_t *prog_config_p);
+int bcm_rx_trap_prog_get(int unit, uint8 prog_index, bcm_rx_trap_prog_config_t *prog_config_p);
+int bcm_rx_trap_prog_set(int unit, uint32 flags, uint8 prog_index, bcm_rx_trap_prog_config_t *prog_config_p);
+int bcm_rx_trap_protocol_clear(int unit, bcm_rx_trap_protocol_key_t *key_p);
+int bcm_rx_trap_protocol_get(int unit, bcm_rx_trap_protocol_key_t *key_p, bcm_gport_t *trap_gport_p);
+int bcm_rx_trap_protocol_interface_profiles_get(int unit, bcm_if_t intf, bcm_rx_trap_protocol_profiles_t *protocol_profiles_p);
+int bcm_rx_trap_protocol_interface_profiles_set(int unit, bcm_if_t intf, bcm_rx_trap_protocol_profiles_t *protocol_profiles_p);
+void bcm_rx_trap_protocol_key_t_init(bcm_rx_trap_protocol_key_t *key_p);
+int bcm_rx_trap_protocol_profiles_get(int unit, bcm_gport_t port, bcm_rx_trap_protocol_profiles_t *protocol_profiles_p);
+int bcm_rx_trap_protocol_profiles_set(int unit, bcm_gport_t port, bcm_rx_trap_protocol_profiles_t *protocol_profiles_p);
+void bcm_rx_trap_protocol_profiles_t_init(bcm_rx_trap_protocol_profiles_t *protocol_profiles_p);
+int bcm_rx_trap_protocol_set(int unit, bcm_rx_trap_protocol_key_t *key_p, bcm_gport_t trap_gport);
+int bcm_rx_trap_set(int unit, int trap_id, bcm_rx_trap_config_t *config);
+int bcm_rx_trap_svtag_get(int unit, bcm_rx_trap_svtag_key_t *svtag_trap_key, bcm_gport_t *action_gport);
+void bcm_rx_trap_svtag_key_t_init(bcm_rx_trap_svtag_key_t *svtag_trap_key);
+int bcm_rx_trap_svtag_set(int unit, bcm_rx_trap_svtag_key_t *svtag_trap_key, bcm_gport_t action_gport);
+int bcm_rx_trap_sw_to_hw_id_map_get(int unit, uint32 flags, int sw_trap_id, int *hw_trap_id);
+int bcm_rx_trap_type_create(int unit, int flags, bcm_rx_trap_t type, int *trap_id);
+int bcm_rx_trap_type_destroy(int unit, int trap_id);
+int bcm_rx_trap_type_from_id_get(int unit, int flags, int trap_id, bcm_rx_trap_t *trap_type);
+int bcm_rx_trap_type_get(int unit, int flags, bcm_rx_trap_t type, int *trap_id);
+int bcm_rx_unit_next_get(int unit, int *next_unit);
+int bcm_rx_unregister(int unit, bcm_rx_cb_f callback, uint8 priority);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-ptp.html" class="btn btn-neutral float-left" title="bcm_ptp_* (190)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-sat.html" class="btn btn-neutral float-right" title="bcm_sat_* (61)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

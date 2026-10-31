@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ports and port bitmaps &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Memories and registers" href="memories-registers.html" />
+    <link rel="prev" title="Units" href="units.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ports and port bitmaps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#port-names">Port names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-bitmap-grammar">Port bitmap grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-status">Port status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Ports and port bitmaps</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ports-and-port-bitmaps">
+<h1>Ports and port bitmaps<a class="headerlink" href="#ports-and-port-bitmaps" title="Link to this heading"></a></h1>
+<p>Most port commands take a single port or a <em>port bitmap</em> (<code class="docutils literal notranslate"><span class="pre">&lt;pbmp&gt;</span></code> in the
+grammar, sometimes written <code class="docutils literal notranslate"><span class="pre">PBMP</span></code>): a set of ports written as a list,
+ranges or port types. This chapter describes how the shell names ports and
+how it reads a port bitmap.</p>
+<section id="port-names">
+<h2>Port names<a class="headerlink" href="#port-names" title="Link to this heading"></a></h2>
+<p>The shell names a port by a type prefix and a zero-based index within that
+type: <code class="docutils literal notranslate"><span class="pre">ge</span></code>, <code class="docutils literal notranslate"><span class="pre">xe</span></code>, <code class="docutils literal notranslate"><span class="pre">ce</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code> and so on, <code class="docutils literal notranslate"><span class="pre">cpu0</span></code> for the CPU port and
+<code class="docutils literal notranslate"><span class="pre">lb0</span></code> for a loopback port. The prefix comes from the port’s <em>current</em> type,
+which on Trident 3 follows its configured speed (<code class="docutils literal notranslate"><span class="pre">xe</span></code> for 10G/25G, <code class="docutils literal notranslate"><span class="pre">ce</span></code>
+for 100G). A port’s name can therefore change when it is reconfigured, for
+example through <a class="reference internal" href="../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a> lane and speed changes or <a class="reference internal" href="../reference/flexport.html#clicmd-flexport"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FLEXport</span></code></a>.</p>
+<p>Shell port names are not SONiC <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> names. The mapping from logical
+port to physical lane is set by the <code class="docutils literal notranslate"><span class="pre">portmap_*</span></code> configuration variables (see
+<a class="reference internal" href="config.html"><span class="doc">Configuration variables</span></a>), and SONiC’s <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code> maps <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> to lanes.
+<a class="reference internal" href="../reference/show.html#clicmd-show-pmap"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">pmap</span></code></a> and <a class="reference internal" href="../reference/portmod.html#clicmd-portmod-info-pm"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">info</span> <span class="pre">pm</span></code></a> show the mapping from logical
+ports to physical lanes, and <a class="reference internal" href="../reference/pbmp.html#clicmd-pbmp-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pbmp</span> <span class="pre">port</span></code></a> resolves one name to its
+logical port number.</p>
+<p>Port numbers that the shell prints (in <a class="reference internal" href="../reference/pbmp.html#clicmd-pbmp"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pbmp</span></code></a> output, register
+suffixes and so on) are SDK <em>logical</em> port numbers, not front-panel numbers.</p>
+<p>On a 32-port 100G Trident 3 switch running SONiC, here a Celestica
+Seastone2 with one front-panel port broken out into four 10G ports, the
+shell shows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ce0</span></code>–<code class="docutils literal notranslate"><span class="pre">ce30</span></code>: the 100G ports, logical ports 1, 5, 13, 17, … 127 (every
+fourth number, with gaps);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xe0</span></code>–<code class="docutils literal notranslate"><span class="pre">xe3</span></code>: the four 10G ports of the split port, logical ports 9–12;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xe4</span></code>: the management port, logical port 66 (also in the <code class="docutils literal notranslate"><span class="pre">mgmt</span></code>
+bitmap);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cpu0</span></code>: logical port 0; two loopback ports, logical 65 and 131.</p></li>
+</ul>
+<p>There are no <code class="docutils literal notranslate"><span class="pre">ge</span></code> ports, so examples written for older switches
+(<code class="docutils literal notranslate"><span class="pre">ge0</span></code>, <code class="docutils literal notranslate"><span class="pre">ge0-ge3</span></code>) fail with <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">pbmp</span> <span class="pre">string</span></code> or <code class="docutils literal notranslate"><span class="pre">unrecognized</span>
+<span class="pre">port</span> <span class="pre">bitmap</span></code>.</p>
+</section>
+<section id="port-bitmap-grammar">
+<span id="bcmsh-pbmp-grammar"></span><h2>Port bitmap grammar<a class="headerlink" href="#port-bitmap-grammar" title="Link to this heading"></a></h2>
+<p>A port bitmap is either a hexadecimal number or a comma-separated list of
+terms:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PBMP   : '0x' HEXDIGITS          raw logical-port bitmap (also '0X')
+       | LIST
+LIST   : TERM { ',' TERM }
+TERM   : [ '~' | '!' ] RANGE [ ':' STEP ]
+RANGE  : PORT '-' PORT           ports PORT..PORT of that type
+       | PORT                    one port
+       | NAME                    every port of a type or block
+PORT   : INTEGER                 bare number (see below)
+       | NAME INTEGER            n-th port of a type, or block number
+STEP   : INTEGER                 every STEP-th port number, STEP &gt; 0
+</pre></div>
+</div>
+<p>The parts of the grammar behave as follows:</p>
+<dl class="simple">
+<dt>Hex</dt><dd><p>A string that starts with <code class="docutils literal notranslate"><span class="pre">0x</span></code> or <code class="docutils literal notranslate"><span class="pre">0X</span></code> is read as a raw bitmap of
+logical port numbers; nothing else in the string is parsed.</p>
+</dd>
+<dt>Exclusion</dt><dd><p><code class="docutils literal notranslate"><span class="pre">~</span></code> or <code class="docutils literal notranslate"><span class="pre">!</span></code> in front of a term removes its ports from the bitmap built
+so far, so order matters: <code class="docutils literal notranslate"><span class="pre">e,~xe3</span></code> is all Ethernet ports except
+<code class="docutils literal notranslate"><span class="pre">xe3</span></code>, while <code class="docutils literal notranslate"><span class="pre">~xe3,e</span></code> contains <code class="docutils literal notranslate"><span class="pre">xe3</span></code>.</p>
+</dd>
+<dt>Ranges</dt><dd><p>Written <code class="docutils literal notranslate"><span class="pre">xe0-xe5</span></code>, or with bare numbers <code class="docutils literal notranslate"><span class="pre">1-8</span></code>. Ports between the two
+ends that are not of the given type are skipped. <code class="docutils literal notranslate"><span class="pre">a-b-c</span></code> is an error.</p>
+</dd>
+<dt>Step</dt><dd><p><code class="docutils literal notranslate"><span class="pre">:N</span></code> after a range keeps every N-th <em>logical</em> port number of it,
+starting from the first. It must be followed by <code class="docutils literal notranslate"><span class="pre">,</span></code> or the end of the
+string. Because logical numbers are not consecutive within a type, the
+result is often not “every N-th port”: on the switch described above the
+<code class="docutils literal notranslate"><span class="pre">ce</span></code> ports are all odd logical numbers, so <code class="docutils literal notranslate"><span class="pre">ce0-ce7:2</span></code> selects all of
+<code class="docutils literal notranslate"><span class="pre">ce0</span></code>–<code class="docutils literal notranslate"><span class="pre">ce7</span></code>.</p>
+</dd>
+<dt>Bare numbers</dt><dd><p>Looked up in the unit’s port-number map. If the configuration variable
+<code class="docutils literal notranslate"><span class="pre">dport_map_direct</span></code> is set, they are logical port numbers. A number that
+is not a valid port is an error.</p>
+</dd>
+<dt>Names</dt><dd><p>Matched in full, ignoring case; abbreviations are not accepted. A name
+ends at the first digit, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">,</span></code> or <code class="docutils literal notranslate"><span class="pre">:</span></code>. The block names
+<code class="docutils literal notranslate"><span class="pre">XLB0PORT</span></code>, <code class="docutils literal notranslate"><span class="pre">CLG2PORT</span></code> and <code class="docutils literal notranslate"><span class="pre">CLG3PORT</span></code> and the type <code class="docutils literal notranslate"><span class="pre">d3c</span></code> contain a
+digit and are recognised as whole words.</p>
+</dd>
+</dl>
+<p>Any other character, a trailing <code class="docutils literal notranslate"><span class="pre">,</span></code> or an unknown name makes the whole
+bitmap invalid. Commands then usually print
+<code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">pbmp</span> <span class="pre">string</span> <span class="pre">(…);</span> <span class="pre">use</span> <span class="pre">'pbmp</span> <span class="pre">?'</span> <span class="pre">for</span> <span class="pre">more</span> <span class="pre">info.</span></code></p>
+<p>Type and group names, in the order the shell tries them:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Ports</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fe</span></code>, <code class="docutils literal notranslate"><span class="pre">ge</span></code>, <code class="docutils literal notranslate"><span class="pre">xe</span></code></p></td>
+<td><p>Fast Ethernet, Gigabit and 10G-class (<code class="docutils literal notranslate"><span class="pre">xe</span></code>) ports</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d3c</span></code>, <code class="docutils literal notranslate"><span class="pre">mdc</span></code>, <code class="docutils literal notranslate"><span class="pre">le</span></code>, <code class="docutils literal notranslate"><span class="pre">ce</span></code>, <code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">cc</span></code></p></td>
+<td><p>Other speed classes. On Trident 3 normally only <code class="docutils literal notranslate"><span class="pre">xe</span></code> and <code class="docutils literal notranslate"><span class="pre">ce</span></code>
+ports exist.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hg</span></code>, <code class="docutils literal notranslate"><span class="pre">hl</span></code>, <code class="docutils literal notranslate"><span class="pre">hg_s</span></code>, <code class="docutils literal notranslate"><span class="pre">st</span></code>, <code class="docutils literal notranslate"><span class="pre">il</span></code>, <code class="docutils literal notranslate"><span class="pre">axp</span></code>, <code class="docutils literal notranslate"><span class="pre">sch</span></code>, <code class="docutils literal notranslate"><span class="pre">sci</span></code>,
+<code class="docutils literal notranslate"><span class="pre">qsgmii</span></code>, <code class="docutils literal notranslate"><span class="pre">sfi</span></code>/<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">fabric</span></code>, <code class="docutils literal notranslate"><span class="pre">sci_sfi</span></code>, <code class="docutils literal notranslate"><span class="pre">spi</span></code>,
+<code class="docutils literal notranslate"><span class="pre">spi_s</span></code>, <code class="docutils literal notranslate"><span class="pre">rcy</span></code>, <code class="docutils literal notranslate"><span class="pre">rdb</span></code>, <code class="docutils literal notranslate"><span class="pre">fae</span></code>, <code class="docutils literal notranslate"><span class="pre">msec</span></code>, <code class="docutils literal notranslate"><span class="pre">roe</span></code>, <code class="docutils literal notranslate"><span class="pre">otn</span></code></p></td>
+<td><p>Port classes of other chip families (HiGig, Interlaken, fabric, …).
+They are accepted on Trident 3 but select no ports.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">e</span></code></p></td>
+<td><p>All Ethernet ports</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cpu</span></code></p></td>
+<td><p>The CPU port, <code class="docutils literal notranslate"><span class="pre">cpu0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lb</span></code></p></td>
+<td><p>Loopback ports</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mmu</span></code>, <code class="docutils literal notranslate"><span class="pre">mgmt</span></code></p></td>
+<td><p>MMU ports; management ports</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">all</span></code></p></td>
+<td><p>All ports, without MACsec, loopback, RDB and FAE ports</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>All front-panel ports</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">none</span></code></p></td>
+<td><p>No ports</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phy</span></code></p></td>
+<td><p>Numbers that follow are <em>physical</em> port numbers (<code class="docutils literal notranslate"><span class="pre">phy1</span></code>…)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ci</span></code></p></td>
+<td><p>Ports of a <code class="docutils literal notranslate"><span class="pre">ci</span></code> block</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hyper</span></code></p></td>
+<td><p>HyperPort ports</p></td>
+</tr>
+<tr class="row-odd"><td><p>any block name</p></td>
+<td><p>All ports of that block type, or with a number, of block <em>n</em> (for
+example the port-macro blocks <code class="docutils literal notranslate"><span class="pre">CLPORT</span></code> and <code class="docutils literal notranslate"><span class="pre">XLPORT</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="port-status">
+<h2>Port status<a class="headerlink" href="#port-status" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/portstat.html#clicmd-portstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ps</span></code></a> shows link, speed and autonegotiation state; <a class="reference internal" href="../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a> reads
+and changes port attributes.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="units.html" class="btn btn-neutral float-left" title="Units" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="memories-registers.html" class="btn btn-neutral float-right" title="Memories and registers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

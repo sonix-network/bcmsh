@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KNET and the CPU port &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Capturing port traffic with tcpdump" href="mirror-to-cpu.html" />
+    <link rel="prev" title="Embedded applications" href="../concepts/eapps.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">KNET and the CPU port</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#router-macs-and-the-cpu">Router MACs and the CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inspecting-knet-from-the-diag-shell">Inspecting KNET from the diag shell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">KNET and the CPU port</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="knet-and-the-cpu-port">
+<h1>KNET and the CPU port<a class="headerlink" href="#knet-and-the-cpu-port" title="Link to this heading"></a></h1>
+<p>SONiC’s <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> interfaces are <em>KNET</em> netdevs created by the
+<code class="docutils literal notranslate"><span class="pre">linux-bcm-knet</span></code> kernel module. The ports live on the switch ASIC, not on the
+host CPU; KNET forwards packets between the CPU’s packet DMA and these
+netdevs. Only packets the ASIC sends to the CPU (<code class="docutils literal notranslate"><span class="pre">cpu0</span></code>) are seen, so tools
+like <code class="docutils literal notranslate"><span class="pre">tcpdump</span></code> do not see transit traffic (see <a class="reference internal" href="mirror-to-cpu.html"><span class="doc">Capturing port traffic with tcpdump</span></a> and
+<a class="reference internal" href="acl.html#howto-acl-copy-to-cpu"><span class="std std-ref">Copy or mirror matching packets to the CPU</span></a>). Which packets the ASIC sends to the CPU, on
+which queue and how fast, is decided by CoPP (<a class="reference internal" href="copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ethtool<span class="w"> </span>--driver<span class="w"> </span>Ethernet92
+<span class="go">driver: bcm-knet</span>
+</pre></div>
+</div>
+<p>KNET state and debug controls are under <code class="docutils literal notranslate"><span class="pre">/proc/bcm/knet</span></code>. Writing a debug
+mask enables logging, including full packet dumps of all TX/RX traffic:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>cat<span class="w"> </span>/proc/bcm/knet/debug
+<span class="gp"># </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'debug=0x10304'</span><span class="w"> </span>&gt;<span class="w"> </span>/proc/bcm/knet/debug
+</pre></div>
+</div>
+<section id="router-macs-and-the-cpu">
+<h2>Router MACs and the CPU<a class="headerlink" href="#router-macs-and-the-cpu" title="Link to this heading"></a></h2>
+<p>Changing an interface’s MAC address in Linux does not make the ASIC send that
+MAC to the CPU. The ASIC traps routed traffic to the CPU by matching the L3
+interface MAC (<a class="reference internal" href="../reference/l3.html#clicmd-l3-intf-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">intf</span> <span class="pre">show</span></code></a>), and needs an L2 entry pointing the MAC
+at <code class="docutils literal notranslate"><span class="pre">cpu0</span></code> (<a class="reference internal" href="../reference/l2.html#clicmd-l2-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">add</span></code></a>). On SONiC,
+<code class="docutils literal notranslate"><span class="pre">config_db.json</span></code> can set the interface MAC (<code class="docutils literal notranslate"><span class="pre">INTERFACE|EthernetN|mac_addr</span></code>),
+but older builds do not add the L2 entry for it.</p>
+<p>On recent SONiC builds the switch MAC is already there: <a class="reference internal" href="../reference/l2.html#clicmd-l2-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">show</span></code></a>
+lists it on VLAN 1 as a static <code class="docutils literal notranslate"><span class="pre">cpu0</span></code> entry, and <a class="reference internal" href="../reference/l2.html#clicmd-l2-station-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">station</span> <span class="pre">show</span></code></a>
+<code class="docutils literal notranslate"><span class="pre">ID=1</span></code> shows it as the router MAC. For MACs set per interface, check for
+the L2 entry and add it yourself if it is missing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<span class="k">for</span><span class="w"> </span>mac<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>bcmcmd<span class="w"> </span><span class="s1">'l3 intf show'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/:[0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]:/ {print $6}'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="k">)</span>
+<span class="k">do</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>bcmcmd<span class="w"> </span><span class="s1">'l2 show'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>CPU<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">mac</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Adding missing MAC: </span><span class="si">${</span><span class="nv">mac</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span>bcmcmd<span class="w"> </span><span class="s2">"l2 add mac=</span><span class="si">${</span><span class="nv">mac</span><span class="si">}</span><span class="s2"> port=cpu0 Static=true ReplacePriority=false"</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>Related: sonic-swss <a class="reference external" href="https://github.com/Azure/sonic-swss/pull/814">#814</a>,
+<a class="reference external" href="https://github.com/Azure/sonic-swss/issues/1833">#1833</a>,
+<a class="reference external" href="https://github.com/Azure/sonic-swss/issues/1847">#1847</a>.</p>
+</section>
+<section id="inspecting-knet-from-the-diag-shell">
+<h2>Inspecting KNET from the diag shell<a class="headerlink" href="#inspecting-knet-from-the-diag-shell" title="Link to this heading"></a></h2>
+<p>The netifs and filters that <code class="docutils literal notranslate"><span class="pre">syncd</span></code> created can be listed without changing
+anything:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; knetctrl netif show</span>
+<span class="go">drivshell&gt; knetctrl filter show</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/knetctrl.html#clicmd-knetctrl-netif-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">netif</span> <span class="pre">show</span></code></a> lists one <code class="docutils literal notranslate"><span class="pre">Interface</span> <span class="pre">ID</span> <span class="pre">…:</span> <span class="pre">name=…</span></code> line per
+netdev, with its type, VLAN and port. <a class="reference internal" href="../reference/knetctrl.html#clicmd-knetctrl-filter-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">filter</span> <span class="pre">show</span></code></a> lists
+the filters in match order, with their destination (a netif, the user-space
+receive layer, or <code class="docutils literal notranslate"><span class="pre">Null</span></code> to drop) and their match fields. In both, the keywords
+must be written in full (<code class="docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">netif</span> <span class="pre">sh</span></code> is rejected).</p>
+<p>On a SONiC switch there is one <code class="docutils literal notranslate"><span class="pre">Port</span></code> netif per front-panel port, named
+after the SONiC interface, and one filter per port that sends everything
+received for the CPU on that port to its netif:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Interface ID 1: name=Ethernet0 type=Port vlan=0 port=ce0 keeprxtag
+Filter ID 1: prio=100 dest=NetIF(1) desc='Ethernet0' ingport=ce0
+</pre></div>
+</div>
+<p>This is also the quickest way to map diag-shell port names (<code class="docutils literal notranslate"><span class="pre">ce0</span></code>,
+<code class="docutils literal notranslate"><span class="pre">xe0</span></code>) to SONiC interface names.</p>
+<p>Most other commands in this area change state that belongs to <code class="docutils literal notranslate"><span class="pre">syncd</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">syncd</span></code> is not told about the change:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/knetctrl.html#clicmd-knetctrl-netif-destroy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">netif</span> <span class="pre">destroy</span></code></a> and <a class="reference internal" href="../reference/knetctrl.html#clicmd-knetctrl-filter-destroy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">filter</span> <span class="pre">destroy</span></code></a>
+remove a netdev or filter that SONiC created. The port’s or trap’s packets
+then stop reaching Linux.</p></li>
+<li><p><a class="reference internal" href="../reference/rxmon.html#clicmd-rxmon-stop"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">RXMon</span> <span class="pre">stop</span></code></a> and <a class="reference internal" href="../reference/packetwatcher.html#clicmd-packetwatcher-stop"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">PacketWatcher</span> <span class="pre">stop</span></code></a> stop packet reception
+for the whole switch, including SONiC’s own. Avoid <a class="reference internal" href="../reference/rxinit.html#clicmd-rxinit"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">RXInit</span></code></a> as
+well.</p></li>
+<li><p><a class="reference internal" href="../reference/rxcfg.html#clicmd-rxcfg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">RXCfg</span></code></a> with any option other than <code class="docutils literal notranslate"><span class="pre">SPPS</span></code> sets the receive rate
+limit of every CPU queue. Queues without an explicit value get 100 packets
+per second.</p></li>
+<li><p><a class="reference internal" href="../reference/knetctrl.html#clicmd-knetctrl-debugpkt"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">debugpkt</span></code></a> and <a class="reference internal" href="../reference/packetwatcher.html#clicmd-packetwatcher-debugpkt"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">PacketWatcher</span> <span class="pre">debugpkt</span></code></a> copy
+every packet that KNET handles to user space as well.</p></li>
+</ul>
+<p>To see packets on a port, prefer <code class="docutils literal notranslate"><span class="pre">tcpdump</span></code> on the <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> netdev,
+together with a mirror to the CPU if needed (<a class="reference internal" href="mirror-to-cpu.html"><span class="doc">Capturing port traffic with tcpdump</span></a>), over
+<a class="reference internal" href="../reference/packetwatcher.html#clicmd-packetwatcher"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">PacketWatcher</span></code></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../concepts/eapps.html" class="btn btn-neutral float-left" title="Embedded applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mirror-to-cpu.html" class="btn btn-neutral float-right" title="Capturing port traffic with tcpdump" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

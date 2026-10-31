@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_vlan_* (269) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_vxlan_* (60)" href="bcm-vxlan.html" />
+    <link rel="prev" title="bcm_udf_* (58)" href="bcm-udf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_vlan_*</span></code> (269)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-vlan-269">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_vlan_*</span></code> (269)<a class="headerlink" href="#bcm-vlan-269" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_VLAN_CTRL(int *prio, int *cfi, int *id);
+int BCM_VLAN_CTRL_CFI(int *c);
+int BCM_VLAN_CTRL_ID(int *c);
+int BCM_VLAN_CTRL_PRIO(int *c);
+int BCM_VLAN_TRANSLATE_PORTMOD(int *port, int *mod_id);
+int BCM_VLAN_VALID(int *id);
+void BCM_VLAN_VEC_CLR(bcm_vlan_vector_t *vec, int *n);
+int BCM_VLAN_VEC_GET(bcm_vlan_vector_t *vec, int *n);
+void BCM_VLAN_VEC_SET(bcm_vlan_vector_t *vec, int *n);
+void BCM_VLAN_VEC_ZERO(bcm_vlan_vector_t *vec);
+void bcm_vlan_action_set_t_init(bcm_vlan_action_set_t *action);
+int bcm_vlan_block_get(int unit, bcm_vlan_t vlan, bcm_vlan_block_t *vlan_block);
+int bcm_vlan_block_set(int unit, bcm_vlan_t vlan, bcm_vlan_block_t *vlan_block);
+void bcm_vlan_block_t_init(bcm_vlan_block_t *data);
+int bcm_vlan_control_get(int unit, bcm_vlan_control_t type, int *arg);
+int bcm_vlan_control_port_get(int unit, int port, bcm_vlan_control_port_t type, int *arg);
+int bcm_vlan_control_port_set(int unit, int port, bcm_vlan_control_port_t type, int arg);
+int bcm_vlan_control_set(int unit, bcm_vlan_control_t type, int arg);
+int bcm_vlan_control_vlan_get(int unit, bcm_vlan_t vlan, bcm_vlan_control_vlan_t *control);
+int bcm_vlan_control_vlan_selective_get(int unit, bcm_vlan_t vlan, uint32 valid_fields, bcm_vlan_control_vlan_t *control);
+int bcm_vlan_control_vlan_selective_set(int unit, bcm_vlan_t vlan, uint32 valid_fields, bcm_vlan_control_vlan_t *control);
+int bcm_vlan_control_vlan_set(int unit, bcm_vlan_t vlan, bcm_vlan_control_vlan_t control);
+void bcm_vlan_control_vlan_t_init(bcm_vlan_control_vlan_t *data);
+int bcm_vlan_create(int unit, bcm_vlan_t vid);
+int bcm_vlan_cross_connect_add(int unit, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_gport_t port_1, bcm_gport_t port_2);
+int bcm_vlan_cross_connect_control_get(int unit, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_cross_connect_control_t type, int *arg);
+int bcm_vlan_cross_connect_control_set(int unit, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_cross_connect_control_t type, int arg);
+int bcm_vlan_cross_connect_delete(int unit, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_cross_connect_delete_all(int unit);
+int bcm_vlan_cross_connect_entry_add(int unit, bcm_vlan_cross_connect_entry_t *vlan_cc_entry);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_cross_connect_entry_delete(int unit, bcm_vlan_cross_connect_entry_t *vlan_cc_entry);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_cross_connect_entry_delete_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_cross_connect_entry_get(int unit, bcm_vlan_cross_connect_entry_t *vlan_cc_entry);  /* not in OpenBCM 6.5.27 */
+void bcm_vlan_cross_connect_entry_t_init(bcm_vlan_cross_connect_entry_t *vlan_cc_entry);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_cross_connect_entry_traverse(int unit, bcm_vlan_cross_connect_entry_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+void bcm_vlan_cross_connect_info_t_init(bcm_vlan_cross_connect_info_t *info);
+int bcm_vlan_cross_connect_replace(int unit, uint32 options, bcm_vlan_cross_connect_info_t *match_info, bcm_vlan_cross_connect_info_t *match_info_mask, bcm_vlan_cross_connect_info_t *replace_info, bcm_vlan_cross_connect_info_t *replace_info_mask);
+int bcm_vlan_cross_connect_traverse(int unit, bcm_vlan_cross_connect_traverse_cb cb, void *user_data);
+void bcm_vlan_data_t_init(bcm_vlan_data_t *vlan_data);
+int bcm_vlan_default_get(int unit, bcm_vlan_t *vid_ptr);
+int bcm_vlan_default_set(int unit, bcm_vlan_t vid);
+int bcm_vlan_destroy(int unit, bcm_vlan_t vid);
+int bcm_vlan_destroy_all(int unit);
+int bcm_vlan_dtag_add(int unit, int port, bcm_vlan_t old_vid, bcm_vlan_t new_vid, int prio);
+int bcm_vlan_dtag_delete(int unit, int port, bcm_vlan_t old_vid);
+int bcm_vlan_dtag_delete_all(int unit);
+int bcm_vlan_dtag_get(int unit, int port, bcm_vlan_t old_vid, bcm_vlan_t *new_vid, int *prio);
+int bcm_vlan_dtag_range_add(int unit, int port, bcm_vlan_t old_vid_low, bcm_vlan_t old_vid_high, bcm_vlan_t new_vid, int int_prio);
+int bcm_vlan_dtag_range_delete(int unit, int port, bcm_vlan_t old_vid_low, bcm_vlan_t old_vid_high);
+int bcm_vlan_dtag_range_delete_all(int unit);
+int bcm_vlan_dtag_range_get(int unit, int port, bcm_vlan_t old_vid_low, bcm_vlan_t old_vid_high, bcm_vlan_t *new_vid, int *prio);
+int bcm_vlan_dtag_range_traverse(int unit, bcm_vlan_dtag_range_traverse_cb cb, void *user_data);
+int bcm_vlan_dtag_traverse(int unit, bcm_vlan_dtag_traverse_cb cb, void *user_data);
+void bcm_vlan_flexctr_config_t_init(bcm_vlan_flexctr_config_t *config);
+int bcm_vlan_gport_add(int unit, bcm_vlan_t vlan, bcm_gport_t port, int flags);
+int bcm_vlan_gport_delete(int unit, bcm_vlan_t vlan, bcm_gport_t port);
+int bcm_vlan_gport_delete_all(int unit, bcm_vlan_t vlan);
+int bcm_vlan_gport_extended_delete(int unit, bcm_vlan_t vlan, bcm_gport_t port, int flags);
+int bcm_vlan_gport_get(int unit, bcm_vlan_t vlan, bcm_gport_t port, int *flags);
+int bcm_vlan_gport_get_all(int unit, bcm_vlan_t vlan, int array_max, bcm_gport_t *gport_array, int *flags_array, int *array_size);
+int bcm_vlan_gport_info_get(int unit, bcm_vlan_gport_info_t *vlan_gport_info);
+void bcm_vlan_gport_info_t_init(bcm_vlan_gport_info_t *info);
+int bcm_vlan_init(int unit);
+int bcm_vlan_ip_action_add(int unit, bcm_vlan_ip_t *vlan_ip, bcm_vlan_action_set_t *action);
+int bcm_vlan_ip_action_delete(int unit, bcm_vlan_ip_t *vlan_ip);
+int bcm_vlan_ip_action_delete_all(int unit);
+int bcm_vlan_ip_action_get(int unit, bcm_vlan_ip_t *vlan_ip, bcm_vlan_action_set_t *action);
+int bcm_vlan_ip_action_traverse(int unit, bcm_vlan_ip_action_traverse_cb cb, void *user_data);
+int bcm_vlan_ip_add(int unit, bcm_vlan_ip_t *vlan_ip);
+int bcm_vlan_ip_delete(int unit, bcm_vlan_ip_t *vlan_ip);
+int bcm_vlan_ip_delete_all(int unit);
+void bcm_vlan_ip_t_init(bcm_vlan_ip_t *vlan_ip);
+int bcm_vlan_list(int unit, bcm_vlan_data_t **listp, int *countp);
+int bcm_vlan_list_by_pbmp(int unit, bcm_pbmp_t ports, bcm_vlan_data_t **listp, int *countp);
+int bcm_vlan_list_destroy(int unit, bcm_vlan_data_t *list, int count);
+int bcm_vlan_mac_action_add(int unit, bcm_mac_t mac, bcm_vlan_action_set_t *action);
+int bcm_vlan_mac_action_delete(int unit, bcm_mac_t mac);
+int bcm_vlan_mac_action_delete_all(int unit);
+int bcm_vlan_mac_action_get(int unit, bcm_mac_t mac, bcm_vlan_action_set_t *action);
+int bcm_vlan_mac_action_traverse(int unit, bcm_vlan_mac_action_traverse_cb cb, void *user_data);
+int bcm_vlan_mac_add(int unit, bcm_mac_t mac, bcm_vlan_t vid, int prio);
+int bcm_vlan_mac_delete(int unit, bcm_mac_t mac);
+int bcm_vlan_mac_delete_all(int unit);
+int bcm_vlan_match_action_add(int unit, uint32 options, bcm_vlan_match_info_t *match_info, bcm_vlan_action_set_t *action_set);
+int bcm_vlan_match_action_delete(int unit, bcm_vlan_match_info_t *match_info);
+int bcm_vlan_match_action_delete_all(int unit, bcm_vlan_match_t match);
+int bcm_vlan_match_action_get(int unit, bcm_vlan_match_info_t *match_info, bcm_vlan_action_set_t *action_set);
+int bcm_vlan_match_action_multi_get(int unit, bcm_vlan_match_t match, int size, bcm_vlan_match_info_t *match_info_array, bcm_vlan_action_set_t *action_set_array, int *count);
+void bcm_vlan_match_info_t_init(bcm_vlan_match_info_t *vlan_match_info);
+int bcm_vlan_mcast_flood_get(int unit, bcm_vlan_t vlan, bcm_vlan_mcast_flood_t *mode);
+int bcm_vlan_mcast_flood_set(int unit, bcm_vlan_t vlan, bcm_vlan_mcast_flood_t mode);
+int bcm_vlan_mcast_override_get(int unit, bcm_vlan_t vlan, bcm_vlan_mcast_override_t *override);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_mcast_override_set(int unit, bcm_vlan_t vlan, bcm_vlan_mcast_override_t *override);  /* not in OpenBCM 6.5.27 */
+void bcm_vlan_mcast_override_t_init(bcm_vlan_mcast_override_t *override);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_ovid_profile_create(int unit, bcm_vlan_ovid_profile_t *info, uint32 *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_ovid_profile_destroy(int unit, uint32 profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_ovid_profile_get(int unit, uint32 profile_id, bcm_vlan_ovid_profile_t *info);  /* not in OpenBCM 6.5.27 */
+void bcm_vlan_ovid_profile_t_init(bcm_vlan_ovid_profile_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_param_add(int unit, uint32 options, bcm_vlan_param_key_t *param_key, bcm_vlan_param_data_t *param_data, uint32 priority);  /* not in OpenBCM 6.5.27 */
+void bcm_vlan_param_data_t_init(bcm_vlan_param_data_t *data);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_param_delete(int unit, bcm_vlan_param_key_t *param_key);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_param_delete_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_param_get(int unit, bcm_vlan_param_key_t *param_key, bcm_vlan_param_data_t *param_data, uint32 *priority);  /* not in OpenBCM 6.5.27 */
+void bcm_vlan_param_key_t_init(bcm_vlan_param_key_t *data);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_param_traverse(int unit, bcm_vlan_param_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_policer_get(int unit, bcm_vlan_t vlan, bcm_policer_t *policer_id);
+int bcm_vlan_policer_set(int unit, bcm_vlan_t vlan, bcm_policer_t policer_id);
+int bcm_vlan_port_add(int unit, bcm_vlan_t vid, bcm_pbmp_t pbmp, bcm_pbmp_t ubmp);
+int bcm_vlan_port_create(int unit, bcm_vlan_port_t *vlan_port);
+int bcm_vlan_port_default_action_delete(int unit, bcm_port_t port);
+int bcm_vlan_port_default_action_get(int unit, bcm_port_t port, bcm_vlan_action_set_t *action);
+int bcm_vlan_port_default_action_set(int unit, bcm_port_t port, bcm_vlan_action_set_t *action);
+int bcm_vlan_port_destroy(int unit, bcm_gport_t gport);
+int bcm_vlan_port_egress_default_action_delete(int unit, bcm_port_t port);
+int bcm_vlan_port_egress_default_action_get(int unit, bcm_port_t port, bcm_vlan_action_set_t *action);
+int bcm_vlan_port_egress_default_action_set(int unit, bcm_port_t port, bcm_vlan_action_set_t *action);
+int bcm_vlan_port_find(int unit, bcm_vlan_port_t *vlan_port);
+int bcm_vlan_port_get(int unit, bcm_vlan_t vid, bcm_pbmp_t *pbmp, bcm_pbmp_t *ubmp);
+int bcm_vlan_port_protocol_action_add(int unit, bcm_port_t port, bcm_port_frametype_t frame, bcm_port_ethertype_t ether, bcm_vlan_action_set_t *action);
+int bcm_vlan_port_protocol_action_delete(int unit, bcm_port_t port, bcm_port_frametype_t frame, bcm_port_ethertype_t ether);
+int bcm_vlan_port_protocol_action_delete_all(int unit, bcm_port_t port);
+int bcm_vlan_port_protocol_action_get(int unit, bcm_port_t port, bcm_port_frametype_t frame, bcm_port_ethertype_t ether, bcm_vlan_action_set_t *action);
+int bcm_vlan_port_protocol_action_traverse(int unit, bcm_vlan_port_protocol_action_traverse_cb cb, void *user_data);
+int bcm_vlan_port_remove(int unit, bcm_vlan_t vid, bcm_pbmp_t pbmp);
+int bcm_vlan_port_stat_multi_get(int unit, bcm_vlan_t vlan, bcm_port_t port, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_port_stat_multi_get32(int unit, bcm_vlan_t vlan, bcm_port_t port, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+int bcm_vlan_port_stat_multi_set(int unit, bcm_vlan_t vlan, bcm_port_t port, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_port_stat_multi_set32(int unit, bcm_vlan_t vlan, bcm_port_t port, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+void bcm_vlan_port_t_init(bcm_vlan_port_t *vlan_port);
+int bcm_vlan_port_translation_get(int unit, bcm_vlan_port_translation_t *vlan_port_translation);
+int bcm_vlan_port_translation_set(int unit, bcm_vlan_port_translation_t *vlan_port_translation);
+void bcm_vlan_port_translation_t_init(bcm_vlan_port_translation_t *vlan_port_translation);
+int bcm_vlan_port_traverse(int unit, bcm_vlan_port_traverse_info_t *additional_info, bcm_vlan_port_traverse_cb trav_fn, void *user_data);
+int bcm_vlan_queue_map_attach(int unit, bcm_vlan_t vlan, int qmid);
+int bcm_vlan_queue_map_attach_get(int unit, bcm_vlan_t vlan, int *qmid);
+int bcm_vlan_queue_map_create(int unit, uint32 flags, int *qmid);
+int bcm_vlan_queue_map_destroy(int unit, int qmid);
+int bcm_vlan_queue_map_destroy_all(int unit);
+int bcm_vlan_queue_map_detach(int unit, bcm_vlan_t vlan);
+int bcm_vlan_queue_map_detach_all(int unit);
+int bcm_vlan_queue_map_get(int unit, int qmid, int pkt_pri, int cfi, int *queue, int *color);
+int bcm_vlan_queue_map_set(int unit, int qmid, int pkt_pri, int cfi, int queue, int color);
+int bcm_vlan_stat_attach(int unit, bcm_vlan_t vlan, uint32 stat_counter_id);
+int bcm_vlan_stat_counter_get(int unit, bcm_vlan_t vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_stat_counter_set(int unit, bcm_vlan_t vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_stat_counter_sync_get(int unit, bcm_vlan_t vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_stat_detach(int unit, bcm_vlan_t vlan);
+int bcm_vlan_stat_detach_with_id(int unit, bcm_vlan_t vlan, uint32 stat_counter_id);
+int bcm_vlan_stat_enable_set(int unit, bcm_vlan_t vlan, int enable);
+int bcm_vlan_stat_get(int unit, bcm_vlan_t vlan, bcm_cos_t cos, bcm_vlan_stat_t stat, uint64 *val);
+int bcm_vlan_stat_get32(int unit, bcm_vlan_t vlan, bcm_cos_t cos, bcm_vlan_stat_t stat, uint32 *val);
+int bcm_vlan_stat_id_get(int unit, bcm_vlan_t vlan, bcm_vlan_stat_t stat, uint32 *stat_counter_id);
+int bcm_vlan_stat_multi_get(int unit, bcm_vlan_t vlan, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_stat_multi_get32(int unit, bcm_vlan_t vlan, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+int bcm_vlan_stat_multi_set(int unit, bcm_vlan_t vlan, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_stat_multi_set32(int unit, bcm_vlan_t vlan, bcm_cos_t cos, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+int bcm_vlan_stat_set(int unit, bcm_vlan_t vlan, bcm_cos_t cos, bcm_vlan_stat_t stat, uint64 val);
+int bcm_vlan_stat_set32(int unit, bcm_vlan_t vlan, bcm_cos_t cos, bcm_vlan_stat_t stat, uint32 val);
+int bcm_vlan_stat_sync_get(int unit, bcm_vlan_t vlan, bcm_cos_t cos, bcm_vlan_stat_t stat, uint64 *val);
+int bcm_vlan_stat_sync_get32(int unit, bcm_vlan_t vlan, bcm_cos_t cos, bcm_vlan_stat_t stat, uint32 *val);
+int bcm_vlan_stg_get(int unit, bcm_vlan_t vid, bcm_stg_t *stg_ptr);
+int bcm_vlan_stg_set(int unit, bcm_vlan_t vid, bcm_stg_t stg);
+int bcm_vlan_stp_get(int unit, bcm_vlan_t vid, bcm_port_t port, int *stp_state);
+int bcm_vlan_stp_set(int unit, bcm_vlan_t vid, bcm_port_t port, int stp_state);
+void bcm_vlan_svtag_config_t_init(bcm_vlan_svtag_config_t *svtag);
+int bcm_vlan_tenant_add(int unit, bcm_vlan_t vid, bcm_vlan_tenant_t *tenant);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_tenant_get(int unit, bcm_vlan_t vid, bcm_vlan_tenant_t *tenant);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_tenant_remove(int unit, bcm_vlan_t vid, bcm_vlan_tenant_t *tenant);  /* not in OpenBCM 6.5.27 */
+void bcm_vlan_tenant_t_init(bcm_vlan_tenant_t *tenant);  /* not in OpenBCM 6.5.27 */
+int bcm_vlan_translate_action_add(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_action_class_get(int unit, bcm_vlan_translate_action_class_t *action_class);
+int bcm_vlan_translate_action_class_set(int unit, bcm_vlan_translate_action_class_t *action_class);
+void bcm_vlan_translate_action_class_t_init(bcm_vlan_translate_action_class_t *action_class);
+int bcm_vlan_translate_action_create(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_action_delete(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_translate_action_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_action_id_create(int unit, uint32 flags, int *action_id);
+int bcm_vlan_translate_action_id_destroy(int unit, uint32 flags, int action_id);
+int bcm_vlan_translate_action_id_destroy_all(int unit, uint32 flags);
+int bcm_vlan_translate_action_id_get(int unit, uint32 flags, int action_id, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_action_id_set(int unit, uint32 flags, int action_id, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_action_range_add(int unit, bcm_gport_t port, bcm_vlan_t outer_vlan_low, bcm_vlan_t outer_vlan_high, bcm_vlan_t inner_vlan_low, bcm_vlan_t inner_vlan_high, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_action_range_delete(int unit, bcm_gport_t port, bcm_vlan_t outer_vlan_low, bcm_vlan_t outer_vlan_high, bcm_vlan_t inner_vlan_low, bcm_vlan_t inner_vlan_high);
+int bcm_vlan_translate_action_range_delete_all(int unit);
+int bcm_vlan_translate_action_range_get(int unit, bcm_gport_t port, bcm_vlan_t outer_vlan_low, bcm_vlan_t outer_vlan_high, bcm_vlan_t inner_vlan_low, bcm_vlan_t inner_vlan_high, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_action_range_traverse(int unit, bcm_vlan_translate_action_range_traverse_cb cb, void *user_data);
+int bcm_vlan_translate_action_traverse(int unit, bcm_vlan_translate_action_traverse_cb cb, void *user_data);
+int bcm_vlan_translate_add(int unit, int port, bcm_vlan_t old_vid, bcm_vlan_t new_vid, int prio);
+int bcm_vlan_translate_delete(int unit, int port, bcm_vlan_t old_vid);
+int bcm_vlan_translate_delete_all(int unit);
+int bcm_vlan_translate_egress_action_add(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_egress_action_delete(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_translate_egress_action_extended_add(int unit, bcm_vlan_translate_egress_key_config_t *key_config, bcm_vlan_translate_egress_action_set_t *action);
+int bcm_vlan_translate_egress_action_extended_delete(int unit, bcm_vlan_translate_egress_key_config_t *key_config);
+int bcm_vlan_translate_egress_action_extended_get(int unit, bcm_vlan_translate_egress_key_config_t *key_config, bcm_vlan_translate_egress_action_set_t *action);
+int bcm_vlan_translate_egress_action_extended_traverse(int unit, bcm_vlan_translate_egress_action_extended_traverse_cb cb, void *user_data);
+int bcm_vlan_translate_egress_action_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_action_set_t *action);
+void bcm_vlan_translate_egress_action_set_t_init(bcm_vlan_translate_egress_action_set_t *action);
+int bcm_vlan_translate_egress_action_traverse(int unit, bcm_vlan_translate_egress_action_traverse_cb cb, void *user_data);
+int bcm_vlan_translate_egress_add(int unit, int port, bcm_vlan_t old_vid, bcm_vlan_t new_vid, int prio);
+int bcm_vlan_translate_egress_delete(int unit, int port, bcm_vlan_t old_vid);
+int bcm_vlan_translate_egress_delete_all(int unit);
+int bcm_vlan_translate_egress_flexctr_attach(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_flexctr_config_t *config);
+int bcm_vlan_translate_egress_flexctr_detach(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_flexctr_config_t *config);
+int bcm_vlan_translate_egress_flexctr_detach_all(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_translate_egress_flexctr_extended_attach(int unit, bcm_vlan_translate_egress_key_config_t *key_config, bcm_vlan_flexctr_config_t *config);
+int bcm_vlan_translate_egress_flexctr_extended_detach(int unit, bcm_vlan_translate_egress_key_config_t *key_config, bcm_vlan_flexctr_config_t *config);
+int bcm_vlan_translate_egress_flexctr_extended_detach_all(int unit, bcm_vlan_translate_egress_key_config_t *key_config);
+int bcm_vlan_translate_egress_flexctr_extended_get(int unit, bcm_vlan_translate_egress_key_config_t *key_config, int array_size, bcm_vlan_flexctr_config_t *config_array, int *count);
+int bcm_vlan_translate_egress_flexctr_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int array_size, bcm_vlan_flexctr_config_t *config_array, int *count);
+int bcm_vlan_translate_egress_get(int unit, int port, bcm_vlan_t old_vid, bcm_vlan_t *new_vid, int *prio);
+int bcm_vlan_translate_egress_gport_action_add(int unit, bcm_gport_t port, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_action_set_t *action);
+int bcm_vlan_translate_egress_gport_action_delete(int unit, bcm_gport_t port, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_translate_egress_gport_action_get(int unit, bcm_gport_t port, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_action_set_t *action);
+void bcm_vlan_translate_egress_key_config_t_init(bcm_vlan_translate_egress_key_config_t *key_config);
+int bcm_vlan_translate_egress_stat_attach(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, uint32 stat_counter_id);
+int bcm_vlan_translate_egress_stat_counter_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_translate_egress_stat_counter_set(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_translate_egress_stat_counter_sync_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_translate_egress_stat_detach(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_translate_egress_stat_enable_set(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int enable);
+int bcm_vlan_translate_egress_stat_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint64 *val);
+int bcm_vlan_translate_egress_stat_get32(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 *val);
+int bcm_vlan_translate_egress_stat_id_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 *stat_counter_id);
+int bcm_vlan_translate_egress_stat_multi_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_translate_egress_stat_multi_get32(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+int bcm_vlan_translate_egress_stat_multi_set(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_translate_egress_stat_multi_set32(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+int bcm_vlan_translate_egress_stat_set(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint64 val);
+int bcm_vlan_translate_egress_stat_set32(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 val);
+int bcm_vlan_translate_egress_stat_sync_get(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint64 *val);
+int bcm_vlan_translate_egress_stat_sync_get32(int unit, int port_class, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 *val);
+int bcm_vlan_translate_egress_traverse(int unit, bcm_vlan_translate_egress_traverse_cb cb, void *user_data);
+int bcm_vlan_translate_flexctr_attach(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_flexctr_config_t *config);
+int bcm_vlan_translate_flexctr_detach(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_flexctr_config_t *config);
+int bcm_vlan_translate_flexctr_detach_all(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_translate_flexctr_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int array_size, bcm_vlan_flexctr_config_t *config_array, int *count);
+int bcm_vlan_translate_get(int unit, int port, bcm_vlan_t old_vid, bcm_vlan_t *new_vid, int *prio);
+int bcm_vlan_translate_range_add(int unit, int port, bcm_vlan_t old_vid_low, bcm_vlan_t old_vid_high, bcm_vlan_t new_vid, int int_prio);
+int bcm_vlan_translate_range_delete(int unit, int port, bcm_vlan_t old_vid_low, bcm_vlan_t old_vid_high);
+int bcm_vlan_translate_range_delete_all(int unit);
+int bcm_vlan_translate_range_get(int unit, int port, bcm_vlan_t old_vid_low, bcm_vlan_t old_vid_high, bcm_vlan_t *new_vid, int *int_prio);
+int bcm_vlan_translate_range_traverse(int unit, bcm_vlan_translate_range_traverse_cb cb, void *user_data);
+int bcm_vlan_translate_stat_attach(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, uint32 stat_counter_id);
+int bcm_vlan_translate_stat_counter_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_translate_stat_counter_set(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_translate_stat_counter_sync_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_vlan_translate_stat_detach(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan);
+int bcm_vlan_translate_stat_enable_set(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int enable);
+int bcm_vlan_translate_stat_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint64 *val);
+int bcm_vlan_translate_stat_get32(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 *val);
+int bcm_vlan_translate_stat_id_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 *stat_counter_id);
+int bcm_vlan_translate_stat_multi_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_translate_stat_multi_get32(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+int bcm_vlan_translate_stat_multi_set(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint64 *value_arr);
+int bcm_vlan_translate_stat_multi_set32(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, int nstat, bcm_vlan_stat_t *stat_arr, uint32 *value_arr);
+int bcm_vlan_translate_stat_set(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint64 val);
+int bcm_vlan_translate_stat_set32(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 val);
+int bcm_vlan_translate_stat_sync_get(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint64 *val);
+int bcm_vlan_translate_stat_sync_get32(int unit, bcm_gport_t port, bcm_vlan_translate_key_t key_type, bcm_vlan_t outer_vlan, bcm_vlan_t inner_vlan, bcm_vlan_stat_t stat, uint32 *val);
+int bcm_vlan_translate_traverse(int unit, bcm_vlan_translate_traverse_cb cb, void *user_data);
+int bcm_vlan_vector_flags_set(int unit, bcm_vlan_vector_t vlan_vector, uint32 flags_mask, uint32 flags_value);
+int bcm_vlan_vector_stp_set(int unit, bcm_vlan_vector_t vlan_vector, bcm_port_t port, int stp_state);
+void bcm_vlan_vpn_config_t_init(bcm_vlan_vpn_config_t *info);
+int bcm_vlan_vpn_create(int unit, bcm_vlan_vpn_config_t *info);
+int bcm_vlan_vpn_destroy(int unit, bcm_vpn_t vpn);
+int bcm_vlan_vpn_destroy_all(int unit);
+int bcm_vlan_vpn_get(int unit, bcm_vpn_t vpn, bcm_vlan_vpn_config_t *info);
+int bcm_vlan_vpn_traverse(int unit, bcm_vlan_vpn_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-udf.html" class="btn btn-neutral float-left" title="bcm_udf_* (58)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-vxlan.html" class="btn btn-neutral float-right" title="bcm_vxlan_* (60)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

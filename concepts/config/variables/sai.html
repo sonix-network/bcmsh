@@ -1,0 +1,2315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAI-specific variables &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Cint: the C interpreter" href="../../cint.html" />
+    <link rel="prev" title="Chip, boot, warm boot and diagnostics" href="chip.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Variable reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ports.html">Ports, lanes and SerDes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tables.html">Forwarding tables and routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acl.html">ACL, field processor and UDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmu.html">Buffers, queues and QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry, timing and OAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu.html">CPU, DMA, interrupts and counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chip.html">Chip, boot, warm boot and diagnostics</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SAI-specific variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../config.html">Configuration variables</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Variable reference</a></li>
+      <li class="breadcrumb-item active">SAI-specific variables</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sai-specific-variables">
+<h1>SAI-specific variables<a class="headerlink" href="#sai-specific-variables" title="Link to this heading"></a></h1>
+<p>Variables read by the Broadcom SAI itself rather than the SDK. They live in the same <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> file. Most select a SAI policy or a resource budget that the SAI reports to SONiC; they do not change the size of a hardware table.</p>
+<p>Set in several SONiC Trident 3 HWSKU files: <a class="reference internal" href="#confval-sai_brcm_sonic_acl_enhancements"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_brcm_sonic_acl_enhancements</span></code></a>, <a class="reference internal" href="#confval-sai_brcm_sonic_trap_group"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_brcm_sonic_trap_group</span></code></a>, <a class="reference internal" href="#confval-sai_eapp_config_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_eapp_config_file</span></code></a>, <a class="reference internal" href="#confval-sai_fast_convergence_support"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_fast_convergence_support</span></code></a>, <a class="reference internal" href="#confval-sai_fdb_entry_l2_discard_src_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_fdb_entry_l2_discard_src_enable</span></code></a>, <a class="reference internal" href="#confval-sai_interface_type_auto_detect"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_interface_type_auto_detect</span></code></a>, <a class="reference internal" href="#confval-sai_load_hw_config"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_load_hw_config</span></code></a>, <a class="reference internal" href="#confval-sai_mdio_access_clause22"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_mdio_access_clause22</span></code></a>, <a class="reference internal" href="#confval-sai_nbr_bcast_ifp_optimized"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_nbr_bcast_ifp_optimized</span></code></a>, <a class="reference internal" href="#confval-sai_optimized_mmu"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_optimized_mmu</span></code></a>, <a class="reference internal" href="#confval-sai_pfc_defaults_disable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_pfc_defaults_disable</span></code></a>, <a class="reference internal" href="#confval-sai_postinit_cmd_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_postinit_cmd_file</span></code></a>, <a class="reference internal" href="#confval-sai_preinit_cmd_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_preinit_cmd_file</span></code></a>, <a class="reference internal" href="#confval-sai_stats_support_mask"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_stats_support_mask</span></code></a>, <a class="reference internal" href="#confval-sai_tunnel_support"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_tunnel_support</span></code></a>, <a class="reference internal" href="#confval-sai_tunnel_underlay_route_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_tunnel_underlay_route_mode</span></code></a>, <a class="reference internal" href="#confval-sai_verify_incoming_chksum"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_verify_incoming_chksum</span></code></a>.</p>
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_200g_4_rsfec_mode_def_544">
+<span class="sig-name descname"><span class="pre">sai_200g_4_rsfec_mode_def_544</span></span><a class="headerlink" href="#confval-sai_200g_4_rsfec_mode_def_544" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use RS-544 by default for 200G 4-lane ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_acl_qset_optimization">
+<span class="sig-name descname"><span class="pre">sai_acl_qset_optimization</span></span><a class="headerlink" href="#confval-sai_acl_qset_optimization" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Build smaller field-processor qualifier sets for ACL tables, so more tables fit.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_acl_redir_nexthop_use_l3_switch">
+<span class="sig-name descname"><span class="pre">sai_acl_redir_nexthop_use_l3_switch</span></span><a class="headerlink" href="#confval-sai_acl_redir_nexthop_use_l3_switch" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Implement ACL redirect-to-next-hop with an L3 switch action.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_adj_mirror_drops_if_port_and_queue">
+<span class="sig-name descname"><span class="pre">sai_adj_mirror_drops_if_port_and_queue</span></span><a class="headerlink" href="#confval-sai_adj_mirror_drops_if_port_and_queue" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Account mirror drops in the port and queue drop counters.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_adjust_acl_drop_in_rx_drop">
+<span class="sig-name descname"><span class="pre">sai_adjust_acl_drop_in_rx_drop</span></span><a class="headerlink" href="#confval-sai_adjust_acl_drop_in_rx_drop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Count packets dropped by an ingress ACL in the port’s receive-drop counter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 2 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_adjust_acl_drop_out_tx_drop">
+<span class="sig-name descname"><span class="pre">sai_adjust_acl_drop_out_tx_drop</span></span><a class="headerlink" href="#confval-sai_adjust_acl_drop_out_tx_drop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Count packets dropped by an egress ACL in the port’s transmit-drop counter.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_adjust_port_if_in_discards">
+<span class="sig-name descname"><span class="pre">sai_adjust_port_if_in_discards</span></span><a class="headerlink" href="#confval-sai_adjust_port_if_in_discards" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Adjust the port <code class="docutils literal notranslate"><span class="pre">IF_IN_DISCARDS</span></code> counter to include further drop reasons.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_api_log_enable">
+<span class="sig-name descname"><span class="pre">sai_api_log_enable</span></span><a class="headerlink" href="#confval-sai_api_log_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Log SAI API calls to an in-memory buffer.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_api_log_mem_size">
+<span class="sig-name descname"><span class="pre">sai_api_log_mem_size</span></span><a class="headerlink" href="#confval-sai_api_log_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">4194304</span></code></dd>
+</dl>
+<p>Size in bytes of the SAI API log buffer.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_async_fdb_nbr_enable">
+<span class="sig-name descname"><span class="pre">sai_async_fdb_nbr_enable</span></span><a class="headerlink" href="#confval-sai_async_fdb_nbr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Process FDB and neighbour changes asynchronously.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_brcm_sonic_acl_enhancements">
+<span class="sig-name descname"><span class="pre">sai_brcm_sonic_acl_enhancements</span></span><a class="headerlink" href="#confval-sai_brcm_sonic_acl_enhancements" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable ACL behaviour tailored to SONiC (for example how ACL tables share field-processor groups).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 5 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_brcm_sonic_trap_group">
+<span class="sig-name descname"><span class="pre">sai_brcm_sonic_trap_group</span></span><a class="headerlink" href="#confval-sai_brcm_sonic_trap_group" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Create host-interface traps in the way SONiC’s trap groups expect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 6 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_bypass_nh_fwd_count_check">
+<span class="sig-name descname"><span class="pre">sai_bypass_nh_fwd_count_check</span></span><a class="headerlink" href="#confval-sai_bypass_nh_fwd_count_check" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Skip the next-hop reference-count check.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_common_hash_crc">
+<span class="sig-name descname"><span class="pre">sai_common_hash_crc</span></span><a class="headerlink" href="#confval-sai_common_hash_crc" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use one CRC hash configuration for ECMP and LAG.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_cos_tc_to_q_map_invert">
+<span class="sig-name descname"><span class="pre">sai_cos_tc_to_q_map_invert</span></span><a class="headerlink" href="#confval-sai_cos_tc_to_q_map_invert" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Invert the default traffic-class to queue map.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_cpu_drop_mirror_queue">
+<span class="sig-name descname"><span class="pre">sai_cpu_drop_mirror_queue</span></span><a class="headerlink" href="#confval-sai_cpu_drop_mirror_queue" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>CPU queue that receives drop-mirrored packets.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_cpu_mirror_queue">
+<span class="sig-name descname"><span class="pre">sai_cpu_mirror_queue</span></span><a class="headerlink" href="#confval-sai_cpu_mirror_queue" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>CPU queue that receives mirrored packets.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_cpu_port_static_move_drop">
+<span class="sig-name descname"><span class="pre">sai_cpu_port_static_move_drop</span></span><a class="headerlink" href="#confval-sai_cpu_port_static_move_drop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Drop packets whose source MAC is statically bound to the CPU port when they arrive on another port.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_cpu_queue_stats_mode">
+<span class="sig-name descname"><span class="pre">sai_cpu_queue_stats_mode</span></span><a class="headerlink" href="#confval-sai_cpu_queue_stats_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>How CPU queue statistics are collected.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_create_dflt_trap">
+<span class="sig-name descname"><span class="pre">sai_create_dflt_trap</span></span><a class="headerlink" href="#confval-sai_create_dflt_trap" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Create the SAI’s default trap at start-up.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_crm_hw_nh_group_cnt">
+<span class="sig-name descname"><span class="pre">sai_crm_hw_nh_group_cnt</span></span><a class="headerlink" href="#confval-sai_crm_hw_nh_group_cnt" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Next-hop group count reported to SONiC’s resource monitor.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_crm_hw_nh_group_member_cnt">
+<span class="sig-name descname"><span class="pre">sai_crm_hw_nh_group_member_cnt</span></span><a class="headerlink" href="#confval-sai_crm_hw_nh_group_member_cnt" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Next-hop group member count reported to SONiC’s resource monitor.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_custom_init_profile">
+<span class="sig-name descname"><span class="pre">sai_custom_init_profile</span></span><a class="headerlink" href="#confval-sai_custom_init_profile" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Select a custom SAI initialisation profile.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_default_cpu_tx_tc">
+<span class="sig-name descname"><span class="pre">sai_default_cpu_tx_tc</span></span><a class="headerlink" href="#confval-sai_default_cpu_tx_tc" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Traffic class of packets sent by the CPU without one.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_default_tc_to_pg_map">
+<span class="sig-name descname"><span class="pre">sai_default_tc_to_pg_map</span></span><a class="headerlink" href="#confval-sai_default_tc_to_pg_map" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Install a default traffic-class to priority-group map on every port.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_dis_ctr_incr_on_port_ln_dn">
+<span class="sig-name descname"><span class="pre">sai_dis_ctr_incr_on_port_ln_dn</span></span><a class="headerlink" href="#confval-sai_dis_ctr_incr_on_port_ln_dn" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not count packets on a port while its link is down.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_disable_internal_port_serdes">
+<span class="sig-name descname"><span class="pre">sai_disable_internal_port_serdes</span></span><a class="headerlink" href="#confval-sai_disable_internal_port_serdes" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Power down the SerDes of internal (loopback, recycle) ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_disable_ports_when_sw_shutdown">
+<span class="sig-name descname"><span class="pre">sai_disable_ports_when_sw_shutdown</span></span><a class="headerlink" href="#confval-sai_disable_ports_when_sw_shutdown" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Disable all ports when the switch is shut down.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_disable_srcmacqedstmac_ctrl">
+<span class="sig-name descname"><span class="pre">sai_disable_srcmacqedstmac_ctrl</span></span><a class="headerlink" href="#confval-sai_disable_srcmacqedstmac_ctrl" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not drop packets whose source MAC equals the destination MAC.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_dpb_port_map_static">
+<span class="sig-name descname"><span class="pre">sai_dpb_port_map_static</span></span><a class="headerlink" href="#confval-sai_dpb_port_map_static" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Keep the port map static across dynamic port breakout.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_eapol_trap_use_bcast_mac">
+<span class="sig-name descname"><span class="pre">sai_eapol_trap_use_bcast_mac</span></span><a class="headerlink" href="#confval-sai_eapol_trap_use_bcast_mac" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Match EAPOL traps on the broadcast MAC as well as the PAE group address.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_eapp_config_file">
+<span class="sig-name descname"><span class="pre">sai_eapp_config_file</span></span><a class="headerlink" href="#confval-sai_eapp_config_file" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>JSON file describing the embedded applications (flow tracker, IFA, BFD firmware) the SAI loads. SONiC files point to <code class="docutils literal notranslate"><span class="pre">/etc/broadcom/eapps_cfg.json</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 14 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">/etc/broadcom/eapps_cfg.json</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ecmp_default_crc_hash">
+<span class="sig-name descname"><span class="pre">sai_ecmp_default_crc_hash</span></span><a class="headerlink" href="#confval-sai_ecmp_default_crc_hash" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use the CRC hash for ECMP by default.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ecmp_group_members_increment">
+<span class="sig-name descname"><span class="pre">sai_ecmp_group_members_increment</span></span><a class="headerlink" href="#confval-sai_ecmp_group_members_increment" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">4</span></code></dd>
+</dl>
+<p>Step by which ECMP group member space grows.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_egr_mod_reserved_vlan">
+<span class="sig-name descname"><span class="pre">sai_egr_mod_reserved_vlan</span></span><a class="headerlink" href="#confval-sai_egr_mod_reserved_vlan" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>VLAN reserved for egress packet modification.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_egress_queue_stats_sampling_interval">
+<span class="sig-name descname"><span class="pre">sai_egress_queue_stats_sampling_interval</span></span><a class="headerlink" href="#confval-sai_egress_queue_stats_sampling_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">250</span></code></dd>
+</dl>
+<p>Sampling interval of egress queue statistics.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_encrypted_pfc_enable">
+<span class="sig-name descname"><span class="pre">sai_encrypted_pfc_enable</span></span><a class="headerlink" href="#confval-sai_encrypted_pfc_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable PFC frames over MACsec-encrypted links.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_eventor_port_lane_base">
+<span class="sig-name descname"><span class="pre">sai_eventor_port_lane_base</span></span><a class="headerlink" href="#confval-sai_eventor_port_lane_base" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>First lane of the eventor port.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_exclude_inports_qual">
+<span class="sig-name descname"><span class="pre">sai_exclude_inports_qual</span></span><a class="headerlink" href="#confval-sai_exclude_inports_qual" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Leave the <code class="docutils literal notranslate"><span class="pre">InPorts</span></code> qualifier out of ACL tables.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_fadtmin_offset">
+<span class="sig-name descname"><span class="pre">sai_fadtmin_offset</span></span><a class="headerlink" href="#confval-sai_fadtmin_offset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">256</span></code></dd>
+</dl>
+<p>Offset added to the minimum dynamic threshold (FADT) of queues.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_fast_convergence_support">
+<span class="sig-name descname"><span class="pre">sai_fast_convergence_support</span></span><a class="headerlink" href="#confval-sai_fast_convergence_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable faster route convergence on link down (pre-programmed next-hop failover).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 17 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_fdb_entry_l2_discard_src_enable">
+<span class="sig-name descname"><span class="pre">sai_fdb_entry_l2_discard_src_enable</span></span><a class="headerlink" href="#confval-sai_fdb_entry_l2_discard_src_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Drop packets whose source MAC matches a discard FDB entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 3 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_feat_tail_timestamp">
+<span class="sig-name descname"><span class="pre">sai_feat_tail_timestamp</span></span><a class="headerlink" href="#confval-sai_feat_tail_timestamp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable tail timestamping for telemetry.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_fec_acc_collect_interval">
+<span class="sig-name descname"><span class="pre">sai_fec_acc_collect_interval</span></span><a class="headerlink" href="#confval-sai_fec_acc_collect_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Collection interval of the accumulated FEC counters.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_fec_stats_cumulative">
+<span class="sig-name descname"><span class="pre">sai_fec_stats_cumulative</span></span><a class="headerlink" href="#confval-sai_fec_stats_cumulative" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Report FEC counters cumulatively instead of since the last read.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_field_group_auto_prioritize">
+<span class="sig-name descname"><span class="pre">sai_field_group_auto_prioritize</span></span><a class="headerlink" href="#confval-sai_field_group_auto_prioritize" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Let the SAI order field-processor groups by priority itself.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_fld_stats_use_flexctr">
+<span class="sig-name descname"><span class="pre">sai_fld_stats_use_flexctr</span></span><a class="headerlink" href="#confval-sai_fld_stats_use_flexctr" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Collect field (ACL) statistics with flex counters.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_fpem_flexctr_stats_size">
+<span class="sig-name descname"><span class="pre">sai_fpem_flexctr_stats_size</span></span><a class="headerlink" href="#confval-sai_fpem_flexctr_stats_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">8192</span></code></dd>
+</dl>
+<p>Number of flex counters reserved for exact-match statistics.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_global_scoped_rcy_port">
+<span class="sig-name descname"><span class="pre">sai_global_scoped_rcy_port</span></span><a class="headerlink" href="#confval-sai_global_scoped_rcy_port" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Recycle port shared by all pipes.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_host_if_unit_vpp">
+<span class="sig-name descname"><span class="pre">sai_host_if_unit_vpp</span></span><a class="headerlink" href="#confval-sai_host_if_unit_vpp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Host-interface unit for virtual-port packets.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_hostif_netif_iff_up_set">
+<span class="sig-name descname"><span class="pre">sai_hostif_netif_iff_up_set</span></span><a class="headerlink" href="#confval-sai_hostif_netif_iff_up_set" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Bring host network interfaces administratively up when they are created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_hostif_trap_types_arp_needed">
+<span class="sig-name descname"><span class="pre">sai_hostif_trap_types_arp_needed</span></span><a class="headerlink" href="#confval-sai_hostif_trap_types_arp_needed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Install the ARP traps the host interface needs by default.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_hw_encrypted_pfc_enable">
+<span class="sig-name descname"><span class="pre">sai_hw_encrypted_pfc_enable</span></span><a class="headerlink" href="#confval-sai_hw_encrypted_pfc_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable hardware PFC over MACsec-encrypted links.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ifa2_cosq_stats_invalid_value">
+<span class="sig-name descname"><span class="pre">sai_ifa2_cosq_stats_invalid_value</span></span><a class="headerlink" href="#confval-sai_ifa2_cosq_stats_invalid_value" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">524287</span></code></dd>
+</dl>
+<p>Value reported for an unavailable queue statistic in IFA 2.0 metadata.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ifa_config">
+<span class="sig-name descname"><span class="pre">sai_ifa_config</span></span><a class="headerlink" href="#confval-sai_ifa_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>IFA configuration string (loopback ports and parameters).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ifacc_config">
+<span class="sig-name descname"><span class="pre">sai_ifacc_config</span></span><a class="headerlink" href="#confval-sai_ifacc_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>IFA collector configuration string.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ifp_enable_on_cpu_tx">
+<span class="sig-name descname"><span class="pre">sai_ifp_enable_on_cpu_tx</span></span><a class="headerlink" href="#confval-sai_ifp_enable_on_cpu_tx" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Apply ingress field-processor rules to packets sent by the CPU.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_instru_stat_accum_enable">
+<span class="sig-name descname"><span class="pre">sai_instru_stat_accum_enable</span></span><a class="headerlink" href="#confval-sai_instru_stat_accum_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Accumulate instrumentation statistics in software.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_interface_type_auto_detect">
+<span class="sig-name descname"><span class="pre">sai_interface_type_auto_detect</span></span><a class="headerlink" href="#confval-sai_interface_type_auto_detect" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Set a port’s interface type from the detected transceiver. Several SONiC Trident 3 files set 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ip_counter_cstats">
+<span class="sig-name descname"><span class="pre">sai_ip_counter_cstats</span></span><a class="headerlink" href="#confval-sai_ip_counter_cstats" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Collect IP counters with the CSTATS engine.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ipv6_flow_label_support">
+<span class="sig-name descname"><span class="pre">sai_ipv6_flow_label_support</span></span><a class="headerlink" href="#confval-sai_ipv6_flow_label_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Include the IPv6 flow label in hashing.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l2_cpu_fdb_event_suppress">
+<span class="sig-name descname"><span class="pre">sai_l2_cpu_fdb_event_suppress</span></span><a class="headerlink" href="#confval-sai_l2_cpu_fdb_event_suppress" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not send FDB events for entries pointing to the CPU.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l2pt_feature_support">
+<span class="sig-name descname"><span class="pre">sai_l2pt_feature_support</span></span><a class="headerlink" href="#confval-sai_l2pt_feature_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable L2 protocol tunnelling.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_byte1_udf_disable">
+<span class="sig-name descname"><span class="pre">sai_l3_byte1_udf_disable</span></span><a class="headerlink" href="#confval-sai_l3_byte1_udf_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not reserve the UDF used for the second byte of the L3 header.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_ecmp_groups">
+<span class="sig-name descname"><span class="pre">sai_l3_max_ecmp_groups</span></span><a class="headerlink" href="#confval-sai_l3_max_ecmp_groups" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of ECMP groups the SAI reports and allows.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_ecmp_paths">
+<span class="sig-name descname"><span class="pre">sai_l3_max_ecmp_paths</span></span><a class="headerlink" href="#confval-sai_l3_max_ecmp_paths" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">64</span></code></dd>
+</dl>
+<p>Maximum number of members per ECMP group the SAI allows.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_ipv4_neighbors">
+<span class="sig-name descname"><span class="pre">sai_l3_max_ipv4_neighbors</span></span><a class="headerlink" href="#confval-sai_l3_max_ipv4_neighbors" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">6144</span></code></dd>
+</dl>
+<p>IPv4 neighbour count the SAI reports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_ipv4_routes">
+<span class="sig-name descname"><span class="pre">sai_l3_max_ipv4_routes</span></span><a class="headerlink" href="#confval-sai_l3_max_ipv4_routes" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1048576</span></code></dd>
+</dl>
+<p>IPv4 route count the SAI reports to SONiC’s resource monitor.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_ipv6_neighbors">
+<span class="sig-name descname"><span class="pre">sai_l3_max_ipv6_neighbors</span></span><a class="headerlink" href="#confval-sai_l3_max_ipv6_neighbors" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">2560</span></code></dd>
+</dl>
+<p>IPv6 neighbour count the SAI reports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_ipv6_routes">
+<span class="sig-name descname"><span class="pre">sai_l3_max_ipv6_routes</span></span><a class="headerlink" href="#confval-sai_l3_max_ipv6_routes" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1048576</span></code></dd>
+</dl>
+<p>IPv6 route count the SAI reports to SONiC’s resource monitor.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_nexthops">
+<span class="sig-name descname"><span class="pre">sai_l3_max_nexthops</span></span><a class="headerlink" href="#confval-sai_l3_max_nexthops" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">16384</span></code></dd>
+</dl>
+<p>Next-hop count the SAI reports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_max_vrfs">
+<span class="sig-name descname"><span class="pre">sai_l3_max_vrfs</span></span><a class="headerlink" href="#confval-sai_l3_max_vrfs" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">32</span></code></dd>
+</dl>
+<p>Number of VRFs the SAI allows.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_neighbor_discard_flag_capable">
+<span class="sig-name descname"><span class="pre">sai_l3_neighbor_discard_flag_capable</span></span><a class="headerlink" href="#confval-sai_l3_neighbor_discard_flag_capable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Program neighbour drops with the hardware discard flag.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_route_discard_flag_capable">
+<span class="sig-name descname"><span class="pre">sai_l3_route_discard_flag_capable</span></span><a class="headerlink" href="#confval-sai_l3_route_discard_flag_capable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Program route drops with the hardware discard flag.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_l3_route_table_db_type">
+<span class="sig-name descname"><span class="pre">sai_l3_route_table_db_type</span></span><a class="headerlink" href="#confval-sai_l3_route_table_db_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Data structure the SAI uses for its route database.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_lag_default_crc_hash">
+<span class="sig-name descname"><span class="pre">sai_lag_default_crc_hash</span></span><a class="headerlink" href="#confval-sai_lag_default_crc_hash" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use the CRC hash for LAG by default.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_led_ploc_mode">
+<span class="sig-name descname"><span class="pre">sai_led_ploc_mode</span></span><a class="headerlink" href="#confval-sai_led_ploc_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Port-locator LED mode.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_legacy_ledproc_linkscan_cb">
+<span class="sig-name descname"><span class="pre">sai_legacy_ledproc_linkscan_cb</span></span><a class="headerlink" href="#confval-sai_legacy_ledproc_linkscan_cb" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Update the LED processor from the link-scan callback (legacy LED firmware).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_load_hw_config">
+<span class="sig-name descname"><span class="pre">sai_load_hw_config</span></span><a class="headerlink" href="#confval-sai_load_hw_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Directory with the Cancun (flex pipeline) package the SAI loads at start-up, for example <code class="docutils literal notranslate"><span class="pre">/usr/lib/cancun/</span></code> or a versioned <code class="docutils literal notranslate"><span class="pre">/etc/bcm/flex/bcm56870_a0_premium_issu/…/</span></code> directory. Without it the SAI uses its built-in default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 27 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">/etc/bcm/flex/bcm56870_a0_premium_issu/b870.6.4.1/</span></code>, <code class="docutils literal notranslate"><span class="pre">/usr/lib/cancun/</span></code>, <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/platform/cancun/sdk6.5.24/</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mac_policy_vfp_group">
+<span class="sig-name descname"><span class="pre">sai_mac_policy_vfp_group</span></span><a class="headerlink" href="#confval-sai_mac_policy_vfp_group" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Create the VLAN field-processor group used for MAC-based policies.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_macro_flow_based_hash">
+<span class="sig-name descname"><span class="pre">sai_macro_flow_based_hash</span></span><a class="headerlink" href="#confval-sai_macro_flow_based_hash" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use macro-flow based hashing for ECMP.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_macsec_egr_btr_hw_config">
+<span class="sig-name descname"><span class="pre">sai_macsec_egr_btr_hw_config</span></span><a class="headerlink" href="#confval-sai_macsec_egr_btr_hw_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>MACsec egress hardware configuration.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_max_counters">
+<span class="sig-name descname"><span class="pre">sai_max_counters</span></span><a class="headerlink" href="#confval-sai_max_counters" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Maximum number of flex counters the SAI allocates.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mdio_access_clause22">
+<span class="sig-name descname"><span class="pre">sai_mdio_access_clause22</span></span><a class="headerlink" href="#confval-sai_mdio_access_clause22" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use clause 22 for SAI MDIO accesses. Set to 1 in some SONiC Trident 3 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">sai_mdio_access_clause22_&lt;N&gt;</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 3 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mdio_access_clause45">
+<span class="sig-name descname"><span class="pre">sai_mdio_access_clause45</span></span><a class="headerlink" href="#confval-sai_mdio_access_clause45" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use clause 45 for SAI MDIO accesses.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_misc_group_priority">
+<span class="sig-name descname"><span class="pre">sai_misc_group_priority</span></span><a class="headerlink" href="#confval-sai_misc_group_priority" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Priority of the SAI’s miscellaneous field-processor group.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_custom_config">
+<span class="sig-name descname"><span class="pre">sai_mmu_custom_config</span></span><a class="headerlink" href="#confval-sai_mmu_custom_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use a custom MMU configuration instead of the SAI’s default buffer set-up.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_lossless_pool_qe_shared_limit">
+<span class="sig-name descname"><span class="pre">sai_mmu_lossless_pool_qe_shared_limit</span></span><a class="headerlink" href="#confval-sai_mmu_lossless_pool_qe_shared_limit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">3126</span></code></dd>
+</dl>
+<p>Shared limit of the lossless pool’s queue-entry resources.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_lossy_pool_qe_shared_limit">
+<span class="sig-name descname"><span class="pre">sai_mmu_lossy_pool_qe_shared_limit</span></span><a class="headerlink" href="#confval-sai_mmu_lossy_pool_qe_shared_limit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">12500</span></code></dd>
+</dl>
+<p>Shared limit of the lossy pool’s queue-entry resources.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_max_buffer_profiles">
+<span class="sig-name descname"><span class="pre">sai_mmu_max_buffer_profiles</span></span><a class="headerlink" href="#confval-sai_mmu_max_buffer_profiles" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">32</span></code></dd>
+</dl>
+<p>Maximum number of buffer profiles the SAI accepts.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_mod_queue_number">
+<span class="sig-name descname"><span class="pre">sai_mmu_mod_queue_number</span></span><a class="headerlink" href="#confval-sai_mmu_mod_queue_number" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Queue used for mirror-on-drop packets.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_mod_queue_number_ipep">
+<span class="sig-name descname"><span class="pre">sai_mmu_mod_queue_number_ipep</span></span><a class="headerlink" href="#confval-sai_mmu_mod_queue_number_ipep" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Queue used for mirror-on-drop packets dropped in the pipeline.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_mod_queue_number_mmu">
+<span class="sig-name descname"><span class="pre">sai_mmu_mod_queue_number_mmu</span></span><a class="headerlink" href="#confval-sai_mmu_mod_queue_number_mmu" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Queue used for mirror-on-drop packets dropped in the MMU.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_qgroups_default">
+<span class="sig-name descname"><span class="pre">sai_mmu_qgroups_default</span></span><a class="headerlink" href="#confval-sai_mmu_qgroups_default" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Create default queue groups.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_reset_hdrm_on_create">
+<span class="sig-name descname"><span class="pre">sai_mmu_reset_hdrm_on_create</span></span><a class="headerlink" href="#confval-sai_mmu_reset_hdrm_on_create" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Reset priority-group headroom when a buffer profile is created.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mmu_tc_to_pg_config">
+<span class="sig-name descname"><span class="pre">sai_mmu_tc_to_pg_config</span></span><a class="headerlink" href="#confval-sai_mmu_tc_to_pg_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Program the traffic-class to priority-group map from the SAI’s MMU configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mod_pkt_eventor_header_enable">
+<span class="sig-name descname"><span class="pre">sai_mod_pkt_eventor_header_enable</span></span><a class="headerlink" href="#confval-sai_mod_pkt_eventor_header_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Add the eventor header to mirror-on-drop packets.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_mptnl_use_tunnel_underlay_port_rif">
+<span class="sig-name descname"><span class="pre">sai_mptnl_use_tunnel_underlay_port_rif</span></span><a class="headerlink" href="#confval-sai_mptnl_use_tunnel_underlay_port_rif" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use the underlay port’s router interface for tunnel next hops.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_multi_rif_supported">
+<span class="sig-name descname"><span class="pre">sai_multi_rif_supported</span></span><a class="headerlink" href="#confval-sai_multi_rif_supported" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow several router interfaces on one port.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_nbr_bcast_ifp_optimized">
+<span class="sig-name descname"><span class="pre">sai_nbr_bcast_ifp_optimized</span></span><a class="headerlink" href="#confval-sai_nbr_bcast_ifp_optimized" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use fewer ingress field-processor entries for neighbour (ARP/ND) broadcast traps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_nos_reserved_l3_encap_range_begin">
+<span class="sig-name descname"><span class="pre">sai_nos_reserved_l3_encap_range_begin</span></span><a class="headerlink" href="#confval-sai_nos_reserved_l3_encap_range_begin" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>First L3 encapsulation index reserved for the network operating system.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_nos_reserved_l3_encap_range_end">
+<span class="sig-name descname"><span class="pre">sai_nos_reserved_l3_encap_range_end</span></span><a class="headerlink" href="#confval-sai_nos_reserved_l3_encap_range_end" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Last L3 encapsulation index reserved for the network operating system.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ocb_fc_config">
+<span class="sig-name descname"><span class="pre">sai_ocb_fc_config</span></span><a class="headerlink" href="#confval-sai_ocb_fc_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>On-chip buffer flow-control configuration.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_optimize_acl_ipv6_addr_qual">
+<span class="sig-name descname"><span class="pre">sai_optimize_acl_ipv6_addr_qual</span></span><a class="headerlink" href="#confval-sai_optimize_acl_ipv6_addr_qual" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Use a compressed IPv6 address qualifier in ACL tables.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_optimized_mmu">
+<span class="sig-name descname"><span class="pre">sai_optimized_mmu</span></span><a class="headerlink" href="#confval-sai_optimized_mmu" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use the SAI’s optimised MMU defaults. Set to 1 in several SONiC Trident 3 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 7 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ospfv3_ipsec_trap">
+<span class="sig-name descname"><span class="pre">sai_ospfv3_ipsec_trap</span></span><a class="headerlink" href="#confval-sai_ospfv3_ipsec_trap" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Trap OSPFv3 packets carried in IPsec to the CPU.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_parent_subport_rif_intf_support">
+<span class="sig-name descname"><span class="pre">sai_parent_subport_rif_intf_support</span></span><a class="headerlink" href="#confval-sai_parent_subport_rif_intf_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow a router interface on a parent port that also has sub-port interfaces.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_pfc_defaults_disable">
+<span class="sig-name descname"><span class="pre">sai_pfc_defaults_disable</span></span><a class="headerlink" href="#confval-sai_pfc_defaults_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not program the SAI’s default PFC settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_pfc_dlr_init_capability">
+<span class="sig-name descname"><span class="pre">sai_pfc_dlr_init_capability</span></span><a class="headerlink" href="#confval-sai_pfc_dlr_init_capability" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Advertise PFC deadlock-recovery capability at start-up.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 2 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1'</span> <span class="pre">-%}</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_phy_an_mode_c73">
+<span class="sig-name descname"><span class="pre">sai_phy_an_mode_c73</span></span><a class="headerlink" href="#confval-sai_phy_an_mode_c73" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Auto-negotiation mode the SAI uses for clause 73.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_pkt_dscp_modification_disable">
+<span class="sig-name descname"><span class="pre">sai_pkt_dscp_modification_disable</span></span><a class="headerlink" href="#confval-sai_pkt_dscp_modification_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not rewrite DSCP on egress.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_attr_pvid_config">
+<span class="sig-name descname"><span class="pre">sai_port_attr_pvid_config</span></span><a class="headerlink" href="#confval-sai_port_attr_pvid_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Allow the port VLAN ID to be set through the port attribute.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_default_burst_size">
+<span class="sig-name descname"><span class="pre">sai_port_default_burst_size</span></span><a class="headerlink" href="#confval-sai_port_default_burst_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1024</span></code></dd>
+</dl>
+<p>Default burst size of port shapers and policers.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_gearbox">
+<span class="sig-name descname"><span class="pre">sai_port_gearbox</span></span><a class="headerlink" href="#confval-sai_port_gearbox" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Ports are connected through an external gearbox.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">sai_port_gearbox_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">sai_port_gearbox_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">sai_port_gearbox</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_ip_byte_stat">
+<span class="sig-name descname"><span class="pre">sai_port_ip_byte_stat</span></span><a class="headerlink" href="#confval-sai_port_ip_byte_stat" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Collect per-port IP byte counters.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_pg_lossless_config">
+<span class="sig-name descname"><span class="pre">sai_port_pg_lossless_config</span></span><a class="headerlink" href="#confval-sai_port_pg_lossless_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Configure default lossless priority groups on ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_phy_time_sync_en">
+<span class="sig-name descname"><span class="pre">sai_port_phy_time_sync_en</span></span><a class="headerlink" href="#confval-sai_port_phy_time_sync_en" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable PHY-based time synchronisation on ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_pmap_phy_lanes">
+<span class="sig-name descname"><span class="pre">sai_port_pmap_phy_lanes</span></span><a class="headerlink" href="#confval-sai_port_pmap_phy_lanes" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Take a port’s PHY lanes from the port map.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_port_queue_ecn_counter">
+<span class="sig-name descname"><span class="pre">sai_port_queue_ecn_counter</span></span><a class="headerlink" href="#confval-sai_port_queue_ecn_counter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Collect per-queue ECN-marked counters.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_postinit_cmd_file">
+<span class="sig-name descname"><span class="pre">sai_postinit_cmd_file</span></span><a class="headerlink" href="#confval-sai_postinit_cmd_file" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Diag-shell script the SAI runs after the SDK is initialised on a cold start.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/hwsku/sai_postinit_cmd.soc</span></code>, <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/platform/postinit_cmd_file.soc</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_postinit_warmboot_cmd_file">
+<span class="sig-name descname"><span class="pre">sai_postinit_warmboot_cmd_file</span></span><a class="headerlink" href="#confval-sai_postinit_warmboot_cmd_file" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>As <a class="reference internal" href="#confval-sai_postinit_cmd_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_postinit_cmd_file</span></code></a>, for a warm start.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_preinit_cmd_file">
+<span class="sig-name descname"><span class="pre">sai_preinit_cmd_file</span></span><a class="headerlink" href="#confval-sai_preinit_cmd_file" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Diag-shell script the SAI runs during a cold start, just before <code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">misc</span></code>. Dell S5232F files use it to load the LED firmware with <a class="reference internal" href="../../../reference/m0.html#clicmd-m0"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">m0</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 11 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/hwsku/sai_preinit_cmd.soc</span></code>, <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/platform/preinit_cmd_file.soc</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_preinit_warmboot_cmd_file">
+<span class="sig-name descname"><span class="pre">sai_preinit_warmboot_cmd_file</span></span><a class="headerlink" href="#confval-sai_preinit_warmboot_cmd_file" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>As <a class="reference internal" href="#confval-sai_preinit_cmd_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_preinit_cmd_file</span></code></a>, for a warm start.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_ptp_firmware_type">
+<span class="sig-name descname"><span class="pre">sai_ptp_firmware_type</span></span><a class="headerlink" href="#confval-sai_ptp_firmware_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Which PTP firmware the SAI loads.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_rcy_enable_on_cpu_tx">
+<span class="sig-name descname"><span class="pre">sai_rcy_enable_on_cpu_tx</span></span><a class="headerlink" href="#confval-sai_rcy_enable_on_cpu_tx" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow packets sent by the CPU to be recirculated.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_rdma_udf_disable">
+<span class="sig-name descname"><span class="pre">sai_rdma_udf_disable</span></span><a class="headerlink" href="#confval-sai_rdma_udf_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not reserve the UDF used for RDMA (RoCE) fields.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_recycle_port_lane_base">
+<span class="sig-name descname"><span class="pre">sai_recycle_port_lane_base</span></span><a class="headerlink" href="#confval-sai_recycle_port_lane_base" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>First lane of the recycle port.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_remap_prio_on_tnl_egress">
+<span class="sig-name descname"><span class="pre">sai_remap_prio_on_tnl_egress</span></span><a class="headerlink" href="#confval-sai_remap_prio_on_tnl_egress" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Remap packet priority when a packet leaves a tunnel.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_retain_mmu_settings_on_speed_change">
+<span class="sig-name descname"><span class="pre">sai_retain_mmu_settings_on_speed_change</span></span><a class="headerlink" href="#confval-sai_retain_mmu_settings_on_speed_change" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Keep a port’s buffer settings when its speed changes.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_retry_fdb_delete">
+<span class="sig-name descname"><span class="pre">sai_retry_fdb_delete</span></span><a class="headerlink" href="#confval-sai_retry_fdb_delete" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Retry FDB deletes that fail.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_skip_create_sys_efp_grp">
+<span class="sig-name descname"><span class="pre">sai_skip_create_sys_efp_grp</span></span><a class="headerlink" href="#confval-sai_skip_create_sys_efp_grp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not create the SAI’s system egress field-processor group.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_sonic_use_route_max">
+<span class="sig-name descname"><span class="pre">sai_sonic_use_route_max</span></span><a class="headerlink" href="#confval-sai_sonic_use_route_max" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Report the maximum route count to SONiC’s resource monitor instead of the currently available count.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_stats_disable_mask">
+<span class="sig-name descname"><span class="pre">sai_stats_disable_mask</span></span><a class="headerlink" href="#confval-sai_stats_disable_mask" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Bit mask of statistics the SAI does not collect.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_stats_support_mask">
+<span class="sig-name descname"><span class="pre">sai_stats_support_mask</span></span><a class="headerlink" href="#confval-sai_stats_support_mask" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Bit mask of optional statistics the SAI supports. Set to <code class="docutils literal notranslate"><span class="pre">0x1</span></code> in several SONiC Trident 3 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 6 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_suspend_on_error">
+<span class="sig-name descname"><span class="pre">sai_suspend_on_error</span></span><a class="headerlink" href="#confval-sai_suspend_on_error" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Stop the SAI on an internal error, for debugging.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_svi_my_station_optimization">
+<span class="sig-name descname"><span class="pre">sai_svi_my_station_optimization</span></span><a class="headerlink" href="#confval-sai_svi_my_station_optimization" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Share station (router MAC) entries between VLAN interfaces.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_swap_transport_tag_support">
+<span class="sig-name descname"><span class="pre">sai_swap_transport_tag_support</span></span><a class="headerlink" href="#confval-sai_swap_transport_tag_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow swapping the transport VLAN tag.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_switch_ecc_event_throttle">
+<span class="sig-name descname"><span class="pre">sai_switch_ecc_event_throttle</span></span><a class="headerlink" href="#confval-sai_switch_ecc_event_throttle" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Throttle ECC (soft-error) events reported to SONiC.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_switch_mac_tnl_term_enable">
+<span class="sig-name descname"><span class="pre">sai_switch_mac_tnl_term_enable</span></span><a class="headerlink" href="#confval-sai_switch_mac_tnl_term_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Terminate tunnels addressed to the switch MAC.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_switch_pcie_hotswap_disable">
+<span class="sig-name descname"><span class="pre">sai_switch_pcie_hotswap_disable</span></span><a class="headerlink" href="#confval-sai_switch_pcie_hotswap_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">255</span></code></dd>
+</dl>
+<p>Disable PCIe hot-swap handling.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tc_based_queue_stats_enable">
+<span class="sig-name descname"><span class="pre">sai_tc_based_queue_stats_enable</span></span><a class="headerlink" href="#confval-sai_tc_based_queue_stats_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Report queue statistics per traffic class.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tc_mirror_buffer_shared">
+<span class="sig-name descname"><span class="pre">sai_tc_mirror_buffer_shared</span></span><a class="headerlink" href="#confval-sai_tc_mirror_buffer_shared" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Let mirrored traffic use the shared buffer.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tc_mirror_buffer_size_bytes">
+<span class="sig-name descname"><span class="pre">sai_tc_mirror_buffer_size_bytes</span></span><a class="headerlink" href="#confval-sai_tc_mirror_buffer_size_bytes" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Buffer reserved for mirrored traffic, in bytes.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tcam_opt_support_all_rifs_disable">
+<span class="sig-name descname"><span class="pre">sai_tcam_opt_support_all_rifs_disable</span></span><a class="headerlink" href="#confval-sai_tcam_opt_support_all_rifs_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Disable the TCAM optimisation that matches all router interfaces with one rule.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_track_objects">
+<span class="sig-name descname"><span class="pre">sai_track_objects</span></span><a class="headerlink" href="#confval-sai_track_objects" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Track created SAI objects for debugging.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_trap_fp_action_drop_copy_to_cpu">
+<span class="sig-name descname"><span class="pre">sai_trap_fp_action_drop_copy_to_cpu</span></span><a class="headerlink" href="#confval-sai_trap_fp_action_drop_copy_to_cpu" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Implement trap actions as drop plus copy-to-CPU.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_trap_group_priority">
+<span class="sig-name descname"><span class="pre">sai_trap_group_priority</span></span><a class="headerlink" href="#confval-sai_trap_group_priority" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Priority of the field-processor group used for traps.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_traps_use_global_efp_group">
+<span class="sig-name descname"><span class="pre">sai_traps_use_global_efp_group</span></span><a class="headerlink" href="#confval-sai_traps_use_global_efp_group" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Put trap-related egress rules in one global egress field-processor group.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_trigger_linkscan_remote_local_faults">
+<span class="sig-name descname"><span class="pre">sai_trigger_linkscan_remote_local_faults</span></span><a class="headerlink" href="#confval-sai_trigger_linkscan_remote_local_faults" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Let link scan react to remote and local fault states.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_ecmp_sharing_mode">
+<span class="sig-name descname"><span class="pre">sai_tunnel_ecmp_sharing_mode</span></span><a class="headerlink" href="#confval-sai_tunnel_ecmp_sharing_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Whether tunnels share ECMP groups.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_global_sip_mask_enable">
+<span class="sig-name descname"><span class="pre">sai_tunnel_global_sip_mask_enable</span></span><a class="headerlink" href="#confval-sai_tunnel_global_sip_mask_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow masked source-IP tunnel termination.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_ipinip_multi_vrf_support">
+<span class="sig-name descname"><span class="pre">sai_tunnel_ipinip_multi_vrf_support</span></span><a class="headerlink" href="#confval-sai_tunnel_ipinip_multi_vrf_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow IP-in-IP tunnels in several VRFs.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_iptnl_scale">
+<span class="sig-name descname"><span class="pre">sai_tunnel_iptnl_scale</span></span><a class="headerlink" href="#confval-sai_tunnel_iptnl_scale" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Number of IP-in-IP tunnels the SAI sizes for.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_support">
+<span class="sig-name descname"><span class="pre">sai_tunnel_support</span></span><a class="headerlink" href="#confval-sai_tunnel_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable tunnel (VXLAN, IP-in-IP) support in the SAI. Needed for VXLAN in SONiC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 26 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">sai_tunnel_support=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_underlay_max_path">
+<span class="sig-name descname"><span class="pre">sai_tunnel_underlay_max_path</span></span><a class="headerlink" href="#confval-sai_tunnel_underlay_max_path" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Maximum ECMP paths for a tunnel’s underlay.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_underlay_route_mode">
+<span class="sig-name descname"><span class="pre">sai_tunnel_underlay_route_mode</span></span><a class="headerlink" href="#confval-sai_tunnel_underlay_route_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>How the SAI resolves tunnel underlay routes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 3 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_vxlan_scale">
+<span class="sig-name descname"><span class="pre">sai_tunnel_vxlan_scale</span></span><a class="headerlink" href="#confval-sai_tunnel_vxlan_scale" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Select the SAI’s VXLAN scale profile.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_tunnel_vxlan_scale_number">
+<span class="sig-name descname"><span class="pre">sai_tunnel_vxlan_scale_number</span></span><a class="headerlink" href="#confval-sai_tunnel_vxlan_scale_number" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of VXLAN tunnels the SAI sizes for.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_uncached_port_stats">
+<span class="sig-name descname"><span class="pre">sai_uncached_port_stats</span></span><a class="headerlink" href="#confval-sai_uncached_port_stats" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Read port statistics directly from hardware.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_uncached_queue_stats">
+<span class="sig-name descname"><span class="pre">sai_uncached_queue_stats</span></span><a class="headerlink" href="#confval-sai_uncached_queue_stats" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Read queue statistics directly from hardware.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_uncached_stats">
+<span class="sig-name descname"><span class="pre">sai_uncached_stats</span></span><a class="headerlink" href="#confval-sai_uncached_stats" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Read statistics directly from hardware instead of the counter cache.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_use_dest_host_hit_variant">
+<span class="sig-name descname"><span class="pre">sai_use_dest_host_hit_variant</span></span><a class="headerlink" href="#confval-sai_use_dest_host_hit_variant" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Use the destination hit bit of host entries for neighbour aging.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_verify_incoming_chksum">
+<span class="sig-name descname"><span class="pre">sai_verify_incoming_chksum</span></span><a class="headerlink" href="#confval-sai_verify_incoming_chksum" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Check the IPv4 header checksum of received packets. Some SONiC Trident 3 files set 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 5 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_vfp_enable_on_cpu_tx">
+<span class="sig-name descname"><span class="pre">sai_vfp_enable_on_cpu_tx</span></span><a class="headerlink" href="#confval-sai_vfp_enable_on_cpu_tx" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Apply VLAN field-processor rules to packets sent by the CPU.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_vfp_fragment_l4_hash_disable">
+<span class="sig-name descname"><span class="pre">sai_vfp_fragment_l4_hash_disable</span></span><a class="headerlink" href="#confval-sai_vfp_fragment_l4_hash_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not hash on L4 ports for IP fragments.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_vfp_learn_policy_disable">
+<span class="sig-name descname"><span class="pre">sai_vfp_learn_policy_disable</span></span><a class="headerlink" href="#confval-sai_vfp_learn_policy_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not use the VLAN field processor for MAC-learning policy.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_vfp_smac_drop_filter_disable">
+<span class="sig-name descname"><span class="pre">sai_vfp_smac_drop_filter_disable</span></span><a class="headerlink" href="#confval-sai_vfp_smac_drop_filter_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not install the source-MAC drop filter in the VLAN field processor.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_vfp_smac_drop_filter_drop_enable">
+<span class="sig-name descname"><span class="pre">sai_vfp_smac_drop_filter_drop_enable</span></span><a class="headerlink" href="#confval-sai_vfp_smac_drop_filter_drop_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Make the source-MAC filter drop (rather than only mark) matching packets.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_vfp_subport_rif_vfp_action_override_disable">
+<span class="sig-name descname"><span class="pre">sai_vfp_subport_rif_vfp_action_override_disable</span></span><a class="headerlink" href="#confval-sai_vfp_subport_rif_vfp_action_override_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not override VLAN field-processor actions for sub-port router interfaces.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_vlan_counter_alloc_disable">
+<span class="sig-name descname"><span class="pre">sai_vlan_counter_alloc_disable</span></span><a class="headerlink" href="#confval-sai_vlan_counter_alloc_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Do not allocate VLAN counters.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sai_voq_wm_latency_enable">
+<span class="sig-name descname"><span class="pre">sai_voq_wm_latency_enable</span></span><a class="headerlink" href="#confval-sai_voq_wm_latency_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Report latency watermarks for virtual output queues.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="chip.html" class="btn btn-neutral float-left" title="Chip, boot, warm boot and diagnostics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../cint.html" class="btn btn-neutral float-right" title="Cint: the C interpreter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

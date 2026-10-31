@@ -1,0 +1,2061 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command reference &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="?" href="q.html" />
+    <link rel="prev" title="Cint recipes" href="../howto/cint-recipes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#shell-commands">Shell commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="q.html"><code class="docutils literal notranslate"><span class="pre">?</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qq.html"><code class="docutils literal notranslate"><span class="pre">??</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="adc.html"><code class="docutils literal notranslate"><span class="pre">ADC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="age.html"><code class="docutils literal notranslate"><span class="pre">AGE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="alpm.html"><code class="docutils literal notranslate"><span class="pre">ALPM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="asf.html"><code class="docutils literal notranslate"><span class="pre">ASF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html"><code class="docutils literal notranslate"><span class="pre">ASSert</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="attach.html"><code class="docutils literal notranslate"><span class="pre">Attach</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="auth.html"><code class="docutils literal notranslate"><span class="pre">Auth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html"><code class="docutils literal notranslate"><span class="pre">BackGround</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="baseboard.html"><code class="docutils literal notranslate"><span class="pre">BaseBoard</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bcmsai.html"><code class="docutils literal notranslate"><span class="pre">BCMSAI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bfd.html"><code class="docutils literal notranslate"><span class="pre">BFD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bist.html"><code class="docutils literal notranslate"><span class="pre">BIST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bkpmon.html"><code class="docutils literal notranslate"><span class="pre">BKPmon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bpdu.html"><code class="docutils literal notranslate"><span class="pre">BPDU</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="break.html"><code class="docutils literal notranslate"><span class="pre">break</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="broadsync.html"><code class="docutils literal notranslate"><span class="pre">BroadSync</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bsv.html"><code class="docutils literal notranslate"><span class="pre">bsv</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="btimeout.html"><code class="docutils literal notranslate"><span class="pre">BTiMeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="buffer.html"><code class="docutils literal notranslate"><span class="pre">BUFfer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablediag.html"><code class="docutils literal notranslate"><span class="pre">CABLEdiag</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cache.html"><code class="docutils literal notranslate"><span class="pre">CACHE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cancun.html"><code class="docutils literal notranslate"><span class="pre">CanCun</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="case.html"><code class="docutils literal notranslate"><span class="pre">CASE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cd.html"><code class="docutils literal notranslate"><span class="pre">CD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cfapinit.html"><code class="docutils literal notranslate"><span class="pre">CFAPINIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="check.html"><code class="docutils literal notranslate"><span class="pre">CHecK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cint.html"><code class="docutils literal notranslate"><span class="pre">cint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clear.html"><code class="docutils literal notranslate"><span class="pre">CLEAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clearscreen.html"><code class="docutils literal notranslate"><span class="pre">ClearScreen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clocks.html"><code class="docutils literal notranslate"><span class="pre">CLOCKS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.html"><code class="docutils literal notranslate"><span class="pre">COLOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="combo.html"><code class="docutils literal notranslate"><span class="pre">COMBO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html"><code class="docutils literal notranslate"><span class="pre">CONFig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="console.html"><code class="docutils literal notranslate"><span class="pre">CONSole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy.html"><code class="docutils literal notranslate"><span class="pre">CoPy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cos.html"><code class="docutils literal notranslate"><span class="pre">COS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="counter.html"><code class="docutils literal notranslate"><span class="pre">CounTeR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="customstat.html"><code class="docutils literal notranslate"><span class="pre">CustomSTAT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dac.html"><code class="docutils literal notranslate"><span class="pre">DAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="date.html"><code class="docutils literal notranslate"><span class="pre">DATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrmemread.html"><code class="docutils literal notranslate"><span class="pre">DDRMemRead</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrmemwrite.html"><code class="docutils literal notranslate"><span class="pre">DDRMemWrite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrphyread.html"><code class="docutils literal notranslate"><span class="pre">DDRPhyRead</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrphytune.html"><code class="docutils literal notranslate"><span class="pre">DDRPhyTune</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrphywrite.html"><code class="docutils literal notranslate"><span class="pre">DDRPhyWrite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html"><code class="docutils literal notranslate"><span class="pre">DeBug</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="delay.html"><code class="docutils literal notranslate"><span class="pre">DELAY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="delete.html"><code class="docutils literal notranslate"><span class="pre">DELete</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="detach.html"><code class="docutils literal notranslate"><span class="pre">DETach</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device.html"><code class="docutils literal notranslate"><span class="pre">DEVice</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dir.html"><code class="docutils literal notranslate"><span class="pre">DIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dispatch.html"><code class="docutils literal notranslate"><span class="pre">DISPatch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dma.html"><code class="docutils literal notranslate"><span class="pre">DMA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dmaromtest.html"><code class="docutils literal notranslate"><span class="pre">DmaRomTest</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dmirror.html"><code class="docutils literal notranslate"><span class="pre">DMIRror</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dpll.html"><code class="docutils literal notranslate"><span class="pre">DPLL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dscp.html"><code class="docutils literal notranslate"><span class="pre">DSCP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtag.html"><code class="docutils literal notranslate"><span class="pre">DTAG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dump.html"><code class="docutils literal notranslate"><span class="pre">Dump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="echo.html"><code class="docutils literal notranslate"><span class="pre">Echo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="editreg.html"><code class="docutils literal notranslate"><span class="pre">EditReg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="edk.html"><code class="docutils literal notranslate"><span class="pre">EDK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="egress.html"><code class="docutils literal notranslate"><span class="pre">EGRess</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ethernetav.html"><code class="docutils literal notranslate"><span class="pre">EthernetAV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="exit.html"><code class="docutils literal notranslate"><span class="pre">EXIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="expr.html"><code class="docutils literal notranslate"><span class="pre">EXPR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="externaltuning.html"><code class="docutils literal notranslate"><span class="pre">EXTernalTuning</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="externaltuning2.html"><code class="docutils literal notranslate"><span class="pre">EXTernalTuning2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="externaltuningsum.html"><code class="docutils literal notranslate"><span class="pre">EXTernalTuningSum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fieldprocessor.html"><code class="docutils literal notranslate"><span class="pre">FieldProcessor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flashinit.html"><code class="docutils literal notranslate"><span class="pre">FLASHINIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flashsync.html"><code class="docutils literal notranslate"><span class="pre">FLASHSYNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flexport.html"><code class="docutils literal notranslate"><span class="pre">FLEXport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowdb.html"><code class="docutils literal notranslate"><span class="pre">FlowDb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowtracker.html"><code class="docutils literal notranslate"><span class="pre">FlowTracker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowtrackermon.html"><code class="docutils literal notranslate"><span class="pre">FlowTrackerMON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowtrackerremotemon.html"><code class="docutils literal notranslate"><span class="pre">FlowTrackerRemoteMON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="for.html"><code class="docutils literal notranslate"><span class="pre">FOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="getreg.html"><code class="docutils literal notranslate"><span class="pre">Getreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gport.html"><code class="docutils literal notranslate"><span class="pre">GPORT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="h2higig.html"><code class="docutils literal notranslate"><span class="pre">H2HIGIG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="h2higig2.html"><code class="docutils literal notranslate"><span class="pre">H2HIGIG2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hal.html"><code class="docutils literal notranslate"><span class="pre">HAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hash.html"><code class="docutils literal notranslate"><span class="pre">HASH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hashdestination.html"><code class="docutils literal notranslate"><span class="pre">HashDestination</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hclksel.html"><code class="docutils literal notranslate"><span class="pre">HClksel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="headermode.html"><code class="docutils literal notranslate"><span class="pre">HeaderMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">Help</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html"><code class="docutils literal notranslate"><span class="pre">HISTory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hsp.html"><code class="docutils literal notranslate"><span class="pre">HSP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html"><code class="docutils literal notranslate"><span class="pre">I2C</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ibodsync.html"><code class="docutils literal notranslate"><span class="pre">IbodSync</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="if.html"><code class="docutils literal notranslate"><span class="pre">IF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="init.html"><code class="docutils literal notranslate"><span class="pre">INIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="insert.html"><code class="docutils literal notranslate"><span class="pre">Insert</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="intr.html"><code class="docutils literal notranslate"><span class="pre">INTR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfix.html"><code class="docutils literal notranslate"><span class="pre">IPFIX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipg.html"><code class="docutils literal notranslate"><span class="pre">IPG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipmc.html"><code class="docutils literal notranslate"><span class="pre">IPMC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="iprocread.html"><code class="docutils literal notranslate"><span class="pre">IPROCRead</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="iprocwrite.html"><code class="docutils literal notranslate"><span class="pre">IPROCWrite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="jobs.html"><code class="docutils literal notranslate"><span class="pre">JOBS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kill.html"><code class="docutils literal notranslate"><span class="pre">KILL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="knetctrl.html"><code class="docutils literal notranslate"><span class="pre">KNETctrl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="knetsync.html"><code class="docutils literal notranslate"><span class="pre">KNETSYNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2.html"><code class="docutils literal notranslate"><span class="pre">L2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2learn.html"><code class="docutils literal notranslate"><span class="pre">L2LEARN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2mode.html"><code class="docutils literal notranslate"><span class="pre">L2MODE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l3.html"><code class="docutils literal notranslate"><span class="pre">L3</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html"><code class="docutils literal notranslate"><span class="pre">LATency</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcdmsg.html"><code class="docutils literal notranslate"><span class="pre">LCDMSG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html"><code class="docutils literal notranslate"><span class="pre">LED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkscan.html"><code class="docutils literal notranslate"><span class="pre">LINKscan</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="listmem.html"><code class="docutils literal notranslate"><span class="pre">LISTmem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="listreg.html"><code class="docutils literal notranslate"><span class="pre">Listreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lls.html"><code class="docutils literal notranslate"><span class="pre">LLS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="local.html"><code class="docutils literal notranslate"><span class="pre">LOCal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html"><code class="docutils literal notranslate"><span class="pre">LOG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lookup.html"><code class="docutils literal notranslate"><span class="pre">LOOKup</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop.html"><code class="docutils literal notranslate"><span class="pre">LOOP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ls.html"><code class="docutils literal notranslate"><span class="pre">LS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="m0.html"><code class="docutils literal notranslate"><span class="pre">M0</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcast.html"><code class="docutils literal notranslate"><span class="pre">MCAST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcscmd.html"><code class="docutils literal notranslate"><span class="pre">MCSCmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsdump.html"><code class="docutils literal notranslate"><span class="pre">MCSDump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsload.html"><code class="docutils literal notranslate"><span class="pre">MCSLoad</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsmsg.html"><code class="docutils literal notranslate"><span class="pre">MCSMsg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsstatus.html"><code class="docutils literal notranslate"><span class="pre">MCSStatus</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcstimestamp.html"><code class="docutils literal notranslate"><span class="pre">MCSTimeStamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memfirst.html"><code class="docutils literal notranslate"><span class="pre">MemFirst</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memnext.html"><code class="docutils literal notranslate"><span class="pre">MemNext</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memscan.html"><code class="docutils literal notranslate"><span class="pre">MemSCAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memwatch.html"><code class="docutils literal notranslate"><span class="pre">MemWatch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mim.html"><code class="docutils literal notranslate"><span class="pre">MIM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mirror.html"><code class="docutils literal notranslate"><span class="pre">MIRror</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mkdir.html"><code class="docutils literal notranslate"><span class="pre">MKDIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmudebug.html"><code class="docutils literal notranslate"><span class="pre">MmuDeBuG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mode.html"><code class="docutils literal notranslate"><span class="pre">MODE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modify.html"><code class="docutils literal notranslate"><span class="pre">MODify</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modmap.html"><code class="docutils literal notranslate"><span class="pre">ModMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modreg.html"><code class="docutils literal notranslate"><span class="pre">Modreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="more.html"><code class="docutils literal notranslate"><span class="pre">MORe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="move.html"><code class="docutils literal notranslate"><span class="pre">MoVe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpls.html"><code class="docutils literal notranslate"><span class="pre">MPLS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mspi.html"><code class="docutils literal notranslate"><span class="pre">MSPI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mtimeout.html"><code class="docutils literal notranslate"><span class="pre">MTiMeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="multicast.html"><code class="docutils literal notranslate"><span class="pre">MultiCast</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="muxsel.html"><code class="docutils literal notranslate"><span class="pre">MUXsel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="noecho.html"><code class="docutils literal notranslate"><span class="pre">NOEcho</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvram.html"><code class="docutils literal notranslate"><span class="pre">NVram</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="oam.html"><code class="docutils literal notranslate"><span class="pre">OAM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="onesync.html"><code class="docutils literal notranslate"><span class="pre">ONESYNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packetwatcher.html"><code class="docutils literal notranslate"><span class="pre">PacketWatcher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pause.html"><code class="docutils literal notranslate"><span class="pre">Pause</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pbmp.html"><code class="docutils literal notranslate"><span class="pre">PBMP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcie.html"><code class="docutils literal notranslate"><span class="pre">PCIE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pciephy.html"><code class="docutils literal notranslate"><span class="pre">PCIEPHY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="phy.html"><code class="docutils literal notranslate"><span class="pre">PHY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pktio.html"><code class="docutils literal notranslate"><span class="pre">PKTIO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="poe.html"><code class="docutils literal notranslate"><span class="pre">POE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="poesel.html"><code class="docutils literal notranslate"><span class="pre">POESel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pop.html"><code class="docutils literal notranslate"><span class="pre">POP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="port.html"><code class="docutils literal notranslate"><span class="pre">PORT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portmod.html"><code class="docutils literal notranslate"><span class="pre">PortMod</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portrate.html"><code class="docutils literal notranslate"><span class="pre">PortRate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portsamp.html"><code class="docutils literal notranslate"><span class="pre">PortSAMp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portsamprate.html"><code class="docutils literal notranslate"><span class="pre">PortSampRate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portstat.html"><code class="docutils literal notranslate"><span class="pre">PortStat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppdclk.html"><code class="docutils literal notranslate"><span class="pre">PPDclk</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="printenv.html"><code class="docutils literal notranslate"><span class="pre">PRINTENV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="probe.html"><code class="docutils literal notranslate"><span class="pre">PROBE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pscan.html"><code class="docutils literal notranslate"><span class="pre">PSCAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ptp.html"><code class="docutils literal notranslate"><span class="pre">PTP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="push.html"><code class="docutils literal notranslate"><span class="pre">PUSH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="putreg.html"><code class="docutils literal notranslate"><span class="pre">PUTREG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvlan.html"><code class="docutils literal notranslate"><span class="pre">PVlan</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pwd.html"><code class="docutils literal notranslate"><span class="pre">PWD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qcm.html"><code class="docutils literal notranslate"><span class="pre">Qcm</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="quit.html"><code class="docutils literal notranslate"><span class="pre">QUIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rate.html"><code class="docutils literal notranslate"><span class="pre">RATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ratebw.html"><code class="docutils literal notranslate"><span class="pre">RateBw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rccache.html"><code class="docutils literal notranslate"><span class="pre">RCCache</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcload.html"><code class="docutils literal notranslate"><span class="pre">RCLoad</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reboot.html"><code class="docutils literal notranslate"><span class="pre">REBOOT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="regcmp.html"><code class="docutils literal notranslate"><span class="pre">RegCMp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="regwatch.html"><code class="docutils literal notranslate"><span class="pre">RegWatch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="remove.html"><code class="docutils literal notranslate"><span class="pre">REMove</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rename.html"><code class="docutils literal notranslate"><span class="pre">REName</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reset.html"><code class="docutils literal notranslate"><span class="pre">RESET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="restest.html"><code class="docutils literal notranslate"><span class="pre">ResTest</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rm.html"><code class="docutils literal notranslate"><span class="pre">RM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmdir.html"><code class="docutils literal notranslate"><span class="pre">RMDIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rx.html"><code class="docutils literal notranslate"><span class="pre">RX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rxcfg.html"><code class="docutils literal notranslate"><span class="pre">RXCfg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rxinit.html"><code class="docutils literal notranslate"><span class="pre">RXInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rxmon.html"><code class="docutils literal notranslate"><span class="pre">RXMon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="salprofile.html"><code class="docutils literal notranslate"><span class="pre">SalProfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="save.html"><code class="docutils literal notranslate"><span class="pre">SAVE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="schan.html"><code class="docutils literal notranslate"><span class="pre">SCHan</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="search.html"><code class="docutils literal notranslate"><span class="pre">SEArch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ser.html"><code class="docutils literal notranslate"><span class="pre">SER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="set.html"><code class="docutils literal notranslate"><span class="pre">SET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="setenv.html"><code class="docutils literal notranslate"><span class="pre">SETENV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="setreg.html"><code class="docutils literal notranslate"><span class="pre">Setreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html"><code class="docutils literal notranslate"><span class="pre">SHell</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="show.html"><code class="docutils literal notranslate"><span class="pre">SHOW</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="shutdown.html"><code class="docutils literal notranslate"><span class="pre">SHUTDOWN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html"><code class="docutils literal notranslate"><span class="pre">SLeep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="soc.html"><code class="docutils literal notranslate"><span class="pre">SOC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="socres.html"><code class="docutils literal notranslate"><span class="pre">SOCRES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi.html"><code class="docutils literal notranslate"><span class="pre">SPI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sram.html"><code class="docutils literal notranslate"><span class="pre">SRAM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sramscan.html"><code class="docutils literal notranslate"><span class="pre">SramSCAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stackmode.html"><code class="docutils literal notranslate"><span class="pre">STACKMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stackportget.html"><code class="docutils literal notranslate"><span class="pre">StackPortGet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stackportset.html"><code class="docutils literal notranslate"><span class="pre">StackPortSet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="startsim.html"><code class="docutils literal notranslate"><span class="pre">StartSim</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stg.html"><code class="docutils literal notranslate"><span class="pre">STG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stimeout.html"><code class="docutils literal notranslate"><span class="pre">STiMeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stkmode.html"><code class="docutils literal notranslate"><span class="pre">STKMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw-an.html"><code class="docutils literal notranslate"><span class="pre">SW_AN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="switchcontrol.html"><code class="docutils literal notranslate"><span class="pre">SwitchControl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="synth.html"><code class="docutils literal notranslate"><span class="pre">SYnth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="systemsnake.html"><code class="docutils literal notranslate"><span class="pre">SystemSnake</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tcam.html"><code class="docutils literal notranslate"><span class="pre">TCAM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tdpll.html"><code class="docutils literal notranslate"><span class="pre">TDPLL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="techsupport.html"><code class="docutils literal notranslate"><span class="pre">TeCHSupport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="temperature.html"><code class="docutils literal notranslate"><span class="pre">TEMPerature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testclear.html"><code class="docutils literal notranslate"><span class="pre">TestClear</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testlist.html"><code class="docutils literal notranslate"><span class="pre">TestList</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testmode.html"><code class="docutils literal notranslate"><span class="pre">TestMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testparameters.html"><code class="docutils literal notranslate"><span class="pre">TestParameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testrun.html"><code class="docutils literal notranslate"><span class="pre">TestRun</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testselect.html"><code class="docutils literal notranslate"><span class="pre">TestSelect</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html"><code class="docutils literal notranslate"><span class="pre">TIME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tmcheck.html"><code class="docutils literal notranslate"><span class="pre">TMCheck</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tmdumpmem.html"><code class="docutils literal notranslate"><span class="pre">TMDumpMem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tmshow.html"><code class="docutils literal notranslate"><span class="pre">TMShow</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trunk.html"><code class="docutils literal notranslate"><span class="pre">TRUNK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tx.html"><code class="docutils literal notranslate"><span class="pre">TX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txbeacon.html"><code class="docutils literal notranslate"><span class="pre">TXBeacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txcount.html"><code class="docutils literal notranslate"><span class="pre">TXCount</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txen.html"><code class="docutils literal notranslate"><span class="pre">TXEN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txstart.html"><code class="docutils literal notranslate"><span class="pre">TXSTArt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txstop.html"><code class="docutils literal notranslate"><span class="pre">TXSTOp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="version.html"><code class="docutils literal notranslate"><span class="pre">Version</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="vlan.html"><code class="docutils literal notranslate"><span class="pre">VLAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="warmboot.html"><code class="docutils literal notranslate"><span class="pre">WARMBOOT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan.html"><code class="docutils literal notranslate"><span class="pre">WLAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="write.html"><code class="docutils literal notranslate"><span class="pre">Write</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xaui.html"><code class="docutils literal notranslate"><span class="pre">XAUI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xclocks.html"><code class="docutils literal notranslate"><span class="pre">XClocks</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xmem.html"><code class="docutils literal notranslate"><span class="pre">xmem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xpoe.html"><code class="docutils literal notranslate"><span class="pre">XPoe</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#commands-for-other-chip-families">Commands for other chip families</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logical-table-switch-mode">Logical-table switch mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bcma-command-line"><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Command reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="command-reference">
+<h1>Command reference<a class="headerlink" href="#command-reference" title="Link to this heading"></a></h1>
+<p>Every command available at the <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt on Trident 3. Each page also shows the command’s built-in help, as printed by <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;command&gt;</span></code>.</p>
+<section id="shell-commands">
+<h2>Shell commands<a class="headerlink" href="#shell-commands" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 55.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Summary</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="q.html"><span class="doc">?</span></a></p></td>
+<td><p>Display list of commands</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="qq.html"><span class="doc">??</span></a></p></td>
+<td><p>Print this list OR usage for a specific command</p></td>
+<td><p>alias of <code class="docutils literal notranslate"><span class="pre">help</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="adc.html"><span class="doc">ADC</span></a></p></td>
+<td><p>Show MAX127 A/D Conversions</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="age.html"><span class="doc">AGE</span></a></p></td>
+<td><p>Set ESW hardware age timer</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="alpm.html"><span class="doc">ALPM</span></a></p></td>
+<td><p>ALPM trouble shooting</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="asf.html"><span class="doc">ASF</span></a></p></td>
+<td><p>ASF (cut-through) Mode</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="assert.html"><span class="doc">ASSert</span></a></p></td>
+<td><p>Assert</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="attach.html"><span class="doc">Attach</span></a></p></td>
+<td><p>Attach SOC device(s)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="auth.html"><span class="doc">Auth</span></a></p></td>
+<td><p>Port-based network access control</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="background.html"><span class="doc">BackGround</span></a></p></td>
+<td><p>Execute a command in the background.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="baseboard.html"><span class="doc">BaseBoard</span></a></p></td>
+<td><p>Configure baseboard system parameters.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcmsai.html"><span class="doc">BCMSAI</span></a></p></td>
+<td><p>SAI BCM shell commands</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bfd.html"><span class="doc">BFD</span></a></p></td>
+<td><p>Manage BFD endpoints</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bist.html"><span class="doc">BIST</span></a></p></td>
+<td><p>Run on-chip memory built-in self tests</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bkpmon.html"><span class="doc">BKPmon</span></a></p></td>
+<td><p>Monitor incoming BKP Discard Messages</p></td>
+<td><p>hidden</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bpdu.html"><span class="doc">BPDU</span></a></p></td>
+<td><p>Manage BPDU addresses</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="break.html"><span class="doc">break</span></a></p></td>
+<td><p>place to hang a breakpoint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="broadsync.html"><span class="doc">BroadSync</span></a></p></td>
+<td><p>Manage Time API BroadSync endpoints</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bsv.html"><span class="doc">bsv</span></a></p></td>
+<td><p>Broadcom SAI Version: show the SAI, OCP SAI, SDK and Cancun versions</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="btimeout.html"><span class="doc">BTiMeout</span></a></p></td>
+<td><p>Set BIST operation timeout in microseconds</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="buffer.html"><span class="doc">BUFfer</span></a></p></td>
+<td><p>MMU config</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cablediag.html"><span class="doc">CABLEdiag</span></a></p></td>
+<td><p>Run Cable Diagnotics</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cache.html"><span class="doc">CACHE</span></a></p></td>
+<td><p>Turn on/off software caching of tables</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cancun.html"><span class="doc">CanCun</span></a></p></td>
+<td><p>Cancun file and status operations</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="case.html"><span class="doc">CASE</span></a></p></td>
+<td><p>Execute command based on string match</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cd.html"><span class="doc">CD</span></a></p></td>
+<td><p>Change current working directory</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cfapinit.html"><span class="doc">CFAPINIT</span></a></p></td>
+<td><p>Init MMU cell free address table</p></td>
+<td><p>hidden</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="check.html"><span class="doc">CHecK</span></a></p></td>
+<td><p>Check a sorted memory table</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cint.html"><span class="doc">cint</span></a></p></td>
+<td><p>Enter the C interpreter</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="clear.html"><span class="doc">CLEAR</span></a></p></td>
+<td><p>Clear a memory table or counters</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="clearscreen.html"><span class="doc">ClearScreen</span></a></p></td>
+<td><p>Clear terminal output</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="clocks.html"><span class="doc">CLOCKS</span></a></p></td>
+<td><p>Set core clock frequency.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="color.html"><span class="doc">COLOR</span></a></p></td>
+<td><p>Manage packet color</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="combo.html"><span class="doc">COMBO</span></a></p></td>
+<td><p>Control combination copper/fiber ports</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="config.html"><span class="doc">CONFig</span></a></p></td>
+<td><p>Configure Management interface</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="console.html"><span class="doc">CONSole</span></a></p></td>
+<td><p>Control console options</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="copy.html"><span class="doc">CoPy</span></a></p></td>
+<td><p>Copy a file</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="cos.html"><span class="doc">COS</span></a></p></td>
+<td><p>Manage classes of service</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="counter.html"><span class="doc">CounTeR</span></a></p></td>
+<td><p>Enable/disable counter collection</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="customstat.html"><span class="doc">CustomSTAT</span></a></p></td>
+<td><p>Enable/disable counter collection</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dac.html"><span class="doc">DAC</span></a></p></td>
+<td><p>Set DAC register</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="date.html"><span class="doc">DATE</span></a></p></td>
+<td><p>Set or display current date</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ddrmemread.html"><span class="doc">DDRMemRead</span></a></p></td>
+<td><p>Indirect reads to DDR</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ddrmemwrite.html"><span class="doc">DDRMemWrite</span></a></p></td>
+<td><p>Indirect writes to DDR</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ddrphyread.html"><span class="doc">DDRPhyRead</span></a></p></td>
+<td><p>Read DDR40 phy registers</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ddrphytune.html"><span class="doc">DDRPhyTune</span></a></p></td>
+<td><p>Tune DDR40 phy registers</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ddrphywrite.html"><span class="doc">DDRPhyWrite</span></a></p></td>
+<td><p>Write DDR40 phy registers</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="debug.html"><span class="doc">DeBug</span></a></p></td>
+<td><p>Enable/Disable debug output</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="delay.html"><span class="doc">DELAY</span></a></p></td>
+<td><p>Put CLI task in a busy-wait loop for some amount of time</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="delete.html"><span class="doc">DELete</span></a></p></td>
+<td><p>Delete entry by key from a sorted table</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="detach.html"><span class="doc">DETach</span></a></p></td>
+<td><p>Detach SOC device(s)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="device.html"><span class="doc">DEVice</span></a></p></td>
+<td><p>Device add/remove</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dir.html"><span class="doc">DIR</span></a></p></td>
+<td><p>List current directory</p></td>
+<td><p>alias of <code class="docutils literal notranslate"><span class="pre">ls</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="dispatch.html"><span class="doc">DISPatch</span></a></p></td>
+<td><p>BCM Dispatch control.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dma.html"><span class="doc">DMA</span></a></p></td>
+<td><p>DMA Facilities Interface</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="dmaromtest.html"><span class="doc">DmaRomTest</span></a></p></td>
+<td><p>Simple test of the SOC DMA ROM API</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dmirror.html"><span class="doc">DMIRror</span></a></p></td>
+<td><p>Manage directed port mirroring</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="dpll.html"><span class="doc">DPLL</span></a></p></td>
+<td><p>DPLL operations on SPI bus</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dscp.html"><span class="doc">DSCP</span></a></p></td>
+<td><p>Map Diffserv Code Points</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="dtag.html"><span class="doc">DTAG</span></a></p></td>
+<td><p>Double Tagging</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dump.html"><span class="doc">Dump</span></a></p></td>
+<td><p>Dump an address space or registers</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="echo.html"><span class="doc">Echo</span></a></p></td>
+<td><p>Echo command line</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="editreg.html"><span class="doc">EditReg</span></a></p></td>
+<td><p>Edit each field of SOC internal register</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="edk.html"><span class="doc">EDK</span></a></p></td>
+<td><p>Start EDK-Host console</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="egress.html"><span class="doc">EGRess</span></a></p></td>
+<td><p>Manage source-based egress enabling</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ethernetav.html"><span class="doc">EthernetAV</span></a></p></td>
+<td><p>Set/Display the Ethernet AV characteristics</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="exit.html"><span class="doc">EXIT</span></a></p></td>
+<td><p>Exit the current shell (and possibly reset)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="expr.html"><span class="doc">EXPR</span></a></p></td>
+<td><p>Evaluate infix expression</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="externaltuning.html"><span class="doc">EXTernalTuning</span></a></p></td>
+<td><p>External memory automatic tuning</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="externaltuning2.html"><span class="doc">EXTernalTuning2</span></a></p></td>
+<td><p>External memory automatic tuning 2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="externaltuningsum.html"><span class="doc">EXTernalTuningSum</span></a></p></td>
+<td><p>External memory automatic tuning (summary)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="fieldprocessor.html"><span class="doc">FieldProcessor</span></a></p></td>
+<td><p>Manage Field Processor</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="flashinit.html"><span class="doc">FLASHINIT</span></a></p></td>
+<td><p>Initialize on board flash as a file system</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="flashsync.html"><span class="doc">FLASHSYNC</span></a></p></td>
+<td><p>Sync up on board flash with file system</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="flexport.html"><span class="doc">FLEXport</span></a></p></td>
+<td><p>Flexport</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="flowdb.html"><span class="doc">FlowDb</span></a></p></td>
+<td><p>Flow Database for flexible tables</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="flowtracker.html"><span class="doc">FlowTracker</span></a></p></td>
+<td><p>Flowtracker commands</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="flowtrackermon.html"><span class="doc">FlowTrackerMON</span></a></p></td>
+<td><p>FlowtracketMon</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="flowtrackerremotemon.html"><span class="doc">FlowTrackerRemoteMON</span></a></p></td>
+<td><p>Monitor ports for packets</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="for.html"><span class="doc">FOR</span></a></p></td>
+<td><p>Execute a series of commands in a loop</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="getreg.html"><span class="doc">Getreg</span></a></p></td>
+<td><p>Get register</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="gport.html"><span class="doc">GPORT</span></a></p></td>
+<td><p>Get a GPORT id</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="h2higig.html"><span class="doc">H2HIGIG</span></a></p></td>
+<td><p>Convert hex words to higig info</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="h2higig2.html"><span class="doc">H2HIGIG2</span></a></p></td>
+<td><p>Convert hex words to higig2 info</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="hal.html"><span class="doc">HAL</span></a></p></td>
+<td><p>Display current HAL resource usage</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="hash.html"><span class="doc">HASH</span></a></p></td>
+<td><p>Get or set hardware hash modes</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="hashdestination.html"><span class="doc">HashDestination</span></a></p></td>
+<td><p>Display Hash Destination</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="hclksel.html"><span class="doc">HClksel</span></a></p></td>
+<td><p>Set I2C HClk (MUX for clock-chip-selects)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="headermode.html"><span class="doc">HeaderMode</span></a></p></td>
+<td><p>Get or set packet tx header mode</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="help.html"><span class="doc">Help</span></a></p></td>
+<td><p>Print this list OR usage for a specific command</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="history.html"><span class="doc">HISTory</span></a></p></td>
+<td><p>List command history</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="hsp.html"><span class="doc">HSP</span></a></p></td>
+<td><p>MMU HSP hierarchy</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="i2c.html"><span class="doc">I2C</span></a></p></td>
+<td><p>Inter-Integrated Circuit (I2C) Bus commands</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ibodsync.html"><span class="doc">IbodSync</span></a></p></td>
+<td><p>Enable/Disable IBOD sync process</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="if.html"><span class="doc">IF</span></a></p></td>
+<td><p>Conditionally execute commands</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="init.html"><span class="doc">INIT</span></a></p></td>
+<td><p>Initialize SOC and S/W</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="insert.html"><span class="doc">Insert</span></a></p></td>
+<td><p>Insert into a sorted table</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="intr.html"><span class="doc">INTR</span></a></p></td>
+<td><p>Enable, disable, show interrupts</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ipfix.html"><span class="doc">IPFIX</span></a></p></td>
+<td><p>IPFIX</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ipg.html"><span class="doc">IPG</span></a></p></td>
+<td><p>Set default IPG values for ports</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ipmc.html"><span class="doc">IPMC</span></a></p></td>
+<td><p>Manage IPMC (IP Multicast) addresses</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="iprocread.html"><span class="doc">IPROCRead</span></a></p></td>
+<td><p>Read from IPROC Area</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="iprocwrite.html"><span class="doc">IPROCWrite</span></a></p></td>
+<td><p>Write to IPROC Area</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="jobs.html"><span class="doc">JOBS</span></a></p></td>
+<td><p>List current background jobs</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="kill.html"><span class="doc">KILL</span></a></p></td>
+<td><p>Terminate a background job</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="knetctrl.html"><span class="doc">KNETctrl</span></a></p></td>
+<td><p>Manage kernel network functions</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="knetsync.html"><span class="doc">KNETSYNC</span></a></p></td>
+<td><p>KnetSync Diag commands</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="l2.html"><span class="doc">L2</span></a></p></td>
+<td><p>Manage L2 (MAC) addresses</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="l2learn.html"><span class="doc">L2LEARN</span></a></p></td>
+<td><p>Control Learn Thread Execution</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="l2mode.html"><span class="doc">L2MODE</span></a></p></td>
+<td><p>Change ARL handling mode</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="l3.html"><span class="doc">L3</span></a></p></td>
+<td><p>Manage L3 (IP) addresses</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="latency.html"><span class="doc">LATency</span></a></p></td>
+<td><p>Switch Latency Bypass Diagnostics</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="lcdmsg.html"><span class="doc">LCDMSG</span></a></p></td>
+<td><p>Print message on Matrix Orbital LCD display (via I2C)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="led.html"><span class="doc">LED</span></a></p></td>
+<td><p>Control/Load LED processor</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="linkscan.html"><span class="doc">LINKscan</span></a></p></td>
+<td><p>Configure/Display link scanning</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="listmem.html"><span class="doc">LISTmem</span></a></p></td>
+<td><p>List the entry format for a given table</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="listreg.html"><span class="doc">Listreg</span></a></p></td>
+<td><p>List register fields</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="lls.html"><span class="doc">LLS</span></a></p></td>
+<td><p>MMU LLS hierarchy</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="local.html"><span class="doc">LOCal</span></a></p></td>
+<td><p>Create/Delete a variable in the local scope</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="log.html"><span class="doc">LOG</span></a></p></td>
+<td><p>Enable/Disable logging and set log file</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="lookup.html"><span class="doc">LOOKup</span></a></p></td>
+<td><p>Look up a table entry</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loop.html"><span class="doc">LOOP</span></a></p></td>
+<td><p>Execute a series of commands in a loop</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ls.html"><span class="doc">LS</span></a></p></td>
+<td><p>List current directory</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="m0.html"><span class="doc">M0</span></a></p></td>
+<td><p>M0 commands for led/linkscan fw</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mcast.html"><span class="doc">MCAST</span></a></p></td>
+<td><p>Manage multicast table</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mcscmd.html"><span class="doc">MCSCmd</span></a></p></td>
+<td><p>Execute cmd on uC</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mcsdump.html"><span class="doc">MCSDump</span></a></p></td>
+<td><p>Create MCS dumpfile</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mcsload.html"><span class="doc">MCSLoad</span></a></p></td>
+<td><p>Load hexfile to MCS memory</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mcsmsg.html"><span class="doc">MCSMsg</span></a></p></td>
+<td><p>Start/stop messaging with MCs</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mcsstatus.html"><span class="doc">MCSStatus</span></a></p></td>
+<td><p>Show MCS fault status</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mcstimestamp.html"><span class="doc">MCSTimeStamp</span></a></p></td>
+<td><p>Print MCS timestamp data</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="memfirst.html"><span class="doc">MemFirst</span></a></p></td>
+<td><p>Displays first valid memory</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="memnext.html"><span class="doc">MemNext</span></a></p></td>
+<td><p>Displays next valid memory</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="memscan.html"><span class="doc">MemSCAN</span></a></p></td>
+<td><p>Turn on/off software memory error scanning</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="memwatch.html"><span class="doc">MemWatch</span></a></p></td>
+<td><p>Turn on/off memory snooping</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mim.html"><span class="doc">MIM</span></a></p></td>
+<td><p>Manage XGS4 Mac-in-MAC</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mirror.html"><span class="doc">MIRror</span></a></p></td>
+<td><p>Manage port mirroring</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mkdir.html"><span class="doc">MKDIR</span></a></p></td>
+<td><p>Make a directory</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mmudebug.html"><span class="doc">MmuDeBuG</span></a></p></td>
+<td><p>Place SOC MMU in debug mode</p></td>
+<td><p>hidden</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mode.html"><span class="doc">MODE</span></a></p></td>
+<td><p>Set shell mode</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="modify.html"><span class="doc">MODify</span></a></p></td>
+<td><p>Modify table entry by field names</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="modmap.html"><span class="doc">ModMap</span></a></p></td>
+<td><p>MODID Remapping</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="modreg.html"><span class="doc">Modreg</span></a></p></td>
+<td><p>Read/modify/write register</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="more.html"><span class="doc">MORe</span></a></p></td>
+<td><p>Copy a file to the console</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="move.html"><span class="doc">MoVe</span></a></p></td>
+<td><p>Rename a file on a file system</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mpls.html"><span class="doc">MPLS</span></a></p></td>
+<td><p>Manage XGS4 MPLS</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="mspi.html"><span class="doc">MSPI</span></a></p></td>
+<td><p>MasterSPI Read / Write</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="mtimeout.html"><span class="doc">MTiMeout</span></a></p></td>
+<td><p>Set MIIM operation timeout in usec</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="multicast.html"><span class="doc">MultiCast</span></a></p></td>
+<td><p>Manage multicast operation</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="muxsel.html"><span class="doc">MUXsel</span></a></p></td>
+<td><p>Set I2C LPT state (MUX for clock-chip-selects)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="noecho.html"><span class="doc">NOEcho</span></a></p></td>
+<td><p>Ignore command line</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nvram.html"><span class="doc">NVram</span></a></p></td>
+<td><p>Manipulate Nonvolatile memory</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="oam.html"><span class="doc">OAM</span></a></p></td>
+<td><p>Manage OAM groups and endpoints</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="onesync.html"><span class="doc">ONESYNC</span></a></p></td>
+<td><p>OneSync Diag commands</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="packetwatcher.html"><span class="doc">PacketWatcher</span></a></p></td>
+<td><p>Monitor ports for packets</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pause.html"><span class="doc">Pause</span></a></p></td>
+<td><p>Pause command processing and wait for input</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pbmp.html"><span class="doc">PBMP</span></a></p></td>
+<td><p>Convert port bitmap string to hex</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pcie.html"><span class="doc">PCIE</span></a></p></td>
+<td><p>R/W PCIE core registers</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pciephy.html"><span class="doc">PCIEPHY</span></a></p></td>
+<td><p>PCIe PHY speicific utilities</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="phy.html"><span class="doc">PHY</span></a></p></td>
+<td><p>Set/Display phy characteristics</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pktio.html"><span class="doc">PKTIO</span></a></p></td>
+<td><p>Set/Display TX/PacketWatcher with streamlined pktio driver type</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="poe.html"><span class="doc">POE</span></a></p></td>
+<td><p>Configure PowerOverEthernet controllers.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="poesel.html"><span class="doc">POESel</span></a></p></td>
+<td><p>Set I2C POE (MUX for poe-chip-selects)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pop.html"><span class="doc">POP</span></a></p></td>
+<td><p>Pop an entry from a FIFO</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="port.html"><span class="doc">PORT</span></a></p></td>
+<td><p>Set/Display port characteristics</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="portmod.html"><span class="doc">PortMod</span></a></p></td>
+<td><p>Portmod Diagnostics</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="portrate.html"><span class="doc">PortRate</span></a></p></td>
+<td><p>Set/Display port rate metering characteristics</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="portsamp.html"><span class="doc">PortSAMp</span></a></p></td>
+<td><p>Set/Display sflow port sampling characteristics</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="portsamprate.html"><span class="doc">PortSampRate</span></a></p></td>
+<td><p>Set/Display sflow port sampling rate</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="portstat.html"><span class="doc">PortStat</span></a></p></td>
+<td><p>Display port status in table</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ppdclk.html"><span class="doc">PPDclk</span></a></p></td>
+<td><p>Show PPD clock delay</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="printenv.html"><span class="doc">PRINTENV</span></a></p></td>
+<td><p>Display current variable list</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="probe.html"><span class="doc">PROBE</span></a></p></td>
+<td><p>Probe for available SOC units</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pscan.html"><span class="doc">PSCAN</span></a></p></td>
+<td><p>Control uKernel port scanning.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ptp.html"><span class="doc">PTP</span></a></p></td>
+<td><p>PTP stack configuration</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="push.html"><span class="doc">PUSH</span></a></p></td>
+<td><p>Push an entry onto a FIFO</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="putreg.html"><span class="doc">PUTREG</span></a></p></td>
+<td><p>Set register</p></td>
+<td><p>alias of <code class="docutils literal notranslate"><span class="pre">setreg</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pvlan.html"><span class="doc">PVlan</span></a></p></td>
+<td><p>Port VLAN settings</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pwd.html"><span class="doc">PWD</span></a></p></td>
+<td><p>Print platform dependent working directory</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="qcm.html"><span class="doc">Qcm</span></a></p></td>
+<td><p>QCM commands</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="quit.html"><span class="doc">QUIT</span></a></p></td>
+<td><p>Exit the current shell (and possibly reset)</p></td>
+<td><p>alias of <code class="docutils literal notranslate"><span class="pre">exit</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rate.html"><span class="doc">RATE</span></a></p></td>
+<td><p>Manage packet rate controls</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ratebw.html"><span class="doc">RateBw</span></a></p></td>
+<td><p>Set/Display port bandwidth rate metering characteristics</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rccache.html"><span class="doc">RCCache</span></a></p></td>
+<td><p>Save contents of an rc file in memory</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rcload.html"><span class="doc">RCLoad</span></a></p></td>
+<td><p>Load commands from a file</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="reboot.html"><span class="doc">REBOOT</span></a></p></td>
+<td><p>Reboot the processor</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="regcmp.html"><span class="doc">RegCMp</span></a></p></td>
+<td><p>Test a register value</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="regwatch.html"><span class="doc">RegWatch</span></a></p></td>
+<td><p>Turn on/off register snooping</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="remove.html"><span class="doc">REMove</span></a></p></td>
+<td><p>Delete entry by index from a sorted table</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rename.html"><span class="doc">REName</span></a></p></td>
+<td><p>Rename a file on a file system</p></td>
+<td><p>alias of <code class="docutils literal notranslate"><span class="pre">move</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="reset.html"><span class="doc">RESET</span></a></p></td>
+<td><p>Reboot the processor</p></td>
+<td><p>alias of <code class="docutils literal notranslate"><span class="pre">reboot</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="restest.html"><span class="doc">ResTest</span></a></p></td>
+<td><p>Tests for resource manager</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rm.html"><span class="doc">RM</span></a></p></td>
+<td><p>Remove a file from a file system</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rmdir.html"><span class="doc">RMDIR</span></a></p></td>
+<td><p>Remove a directory</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rx.html"><span class="doc">RX</span></a></p></td>
+<td><p>Receive some number of packets</p></td>
+<td><p>hidden</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rxcfg.html"><span class="doc">RXCfg</span></a></p></td>
+<td><p>Configure RX settings</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rxinit.html"><span class="doc">RXInit</span></a></p></td>
+<td><p>Call bcm_rx_init</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rxmon.html"><span class="doc">RXMon</span></a></p></td>
+<td><p>Register an RX handler to dump received packets</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="salprofile.html"><span class="doc">SalProfile</span></a></p></td>
+<td><p>Displays current SAL resource usage</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="save.html"><span class="doc">SAVE</span></a></p></td>
+<td><p>Write data to a file</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="schan.html"><span class="doc">SCHan</span></a></p></td>
+<td><p>Send raw S-Channel message, get response</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="search.html"><span class="doc">SEArch</span></a></p></td>
+<td><p>Search a table for a byte pattern</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ser.html"><span class="doc">SER</span></a></p></td>
+<td><p>Performs operations related to Soft Error Recovery</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="set.html"><span class="doc">SET</span></a></p></td>
+<td><p>Set various configuration options</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="setenv.html"><span class="doc">SETENV</span></a></p></td>
+<td><p>Create/Delete a variable in the global scope</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="setreg.html"><span class="doc">Setreg</span></a></p></td>
+<td><p>Set register</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="shell.html"><span class="doc">SHell</span></a></p></td>
+<td><p>Invoke a system dependent shell</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="show.html"><span class="doc">SHOW</span></a></p></td>
+<td><p>Show information on a subsystem</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="shutdown.html"><span class="doc">SHUTDOWN</span></a></p></td>
+<td><p>Tell plisim to shutdown</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="sleep.html"><span class="doc">SLeep</span></a></p></td>
+<td><p>Suspend the CLI task for specified amount of time</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="soc.html"><span class="doc">SOC</span></a></p></td>
+<td><p>Print internal Driver control information</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="socres.html"><span class="doc">SOCRES</span></a></p></td>
+<td><p>SOC reset (SCP channel)</p></td>
+<td><p>hidden</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="spi.html"><span class="doc">SPI</span></a></p></td>
+<td><p>SPI speicific utilities</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="sram.html"><span class="doc">SRAM</span></a></p></td>
+<td><p>External DDR2_SRAM test control</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="sramscan.html"><span class="doc">SramSCAN</span></a></p></td>
+<td><p>Turn on/off software SRAM error scanning</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stackmode.html"><span class="doc">STACKMode</span></a></p></td>
+<td><p>Set/get the stack mode</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stackportget.html"><span class="doc">StackPortGet</span></a></p></td>
+<td><p>Get stacking characteristics of a port</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stackportset.html"><span class="doc">StackPortSet</span></a></p></td>
+<td><p>Set stacking characteristics of a port</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="startsim.html"><span class="doc">StartSim</span></a></p></td>
+<td><p>Tell plisim to activate</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stg.html"><span class="doc">STG</span></a></p></td>
+<td><p>Manage spanning tree groups</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="stimeout.html"><span class="doc">STiMeout</span></a></p></td>
+<td><p>Set S-Channel timeout in microseconds</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="stkmode.html"><span class="doc">STKMode</span></a></p></td>
+<td><p>Hardware Stacking Mode Control</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="sw-an.html"><span class="doc">SW_AN</span></a></p></td>
+<td><p>Enable/Disable SW AN Thread</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="switchcontrol.html"><span class="doc">SwitchControl</span></a></p></td>
+<td><p>General switch control</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="synth.html"><span class="doc">SYnth</span></a></p></td>
+<td><p>Show synthesizer frequency</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="systemsnake.html"><span class="doc">SystemSnake</span></a></p></td>
+<td><p>Cycle packets through selected system</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tcam.html"><span class="doc">TCAM</span></a></p></td>
+<td><p>TCAM control</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tdpll.html"><span class="doc">TDPLL</span></a></p></td>
+<td><p>T-DPLL configuration and management</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="techsupport.html"><span class="doc">TeCHSupport</span></a></p></td>
+<td><p>Collects information required to debug a given feature or subfeature</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="temperature.html"><span class="doc">TEMPerature</span></a></p></td>
+<td><p>Show environmental conditions</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="testclear.html"><span class="doc">TestClear</span></a></p></td>
+<td><p>Clear run statisistics for a test</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="testlist.html"><span class="doc">TestList</span></a></p></td>
+<td><p>List loaded tests and status</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="testmode.html"><span class="doc">TestMode</span></a></p></td>
+<td><p>Set global test run modes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="testparameters.html"><span class="doc">TestParameters</span></a></p></td>
+<td><p>Set test Parameters</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="testrun.html"><span class="doc">TestRun</span></a></p></td>
+<td><p>Run a specific or selected tests</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="testselect.html"><span class="doc">TestSelect</span></a></p></td>
+<td><p>Select tests for running</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="time.html"><span class="doc">TIME</span></a></p></td>
+<td><p>Time the execution of one or more commands</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tmcheck.html"><span class="doc">TMCheck</span></a></p></td>
+<td><p>TM config check</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="tmdumpmem.html"><span class="doc">TMDumpMem</span></a></p></td>
+<td><p>TM dump memories</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tmshow.html"><span class="doc">TMShow</span></a></p></td>
+<td><p>TM config show</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="trunk.html"><span class="doc">TRUNK</span></a></p></td>
+<td><p>Manage port aggregation</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="tx.html"><span class="doc">TX</span></a></p></td>
+<td><p>Transmit one or more packets</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="txbeacon.html"><span class="doc">TXBeacon</span></a></p></td>
+<td><p>txbeacon tests</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="txcount.html"><span class="doc">TXCount</span></a></p></td>
+<td><p>Print current TX statistics</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="txen.html"><span class="doc">TXEN</span></a></p></td>
+<td><p>Enable packet transmission</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="txstart.html"><span class="doc">TXSTArt</span></a></p></td>
+<td><p>Transmit one or more packets in background</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="txstop.html"><span class="doc">TXSTOp</span></a></p></td>
+<td><p>Terminate a previous “txstart” command</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="version.html"><span class="doc">Version</span></a></p></td>
+<td><p>Print version and build information</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="vlan.html"><span class="doc">VLAN</span></a></p></td>
+<td><p>Manage virtual LANs</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="warmboot.html"><span class="doc">WARMBOOT</span></a></p></td>
+<td><p>Optionally boot warm</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="wlan.html"><span class="doc">WLAN</span></a></p></td>
+<td><p>Manage XGS4 WLAN</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="write.html"><span class="doc">Write</span></a></p></td>
+<td><p>Write entry(s) into a table</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="xaui.html"><span class="doc">XAUI</span></a></p></td>
+<td><p>Run XAUI BERT on specified port pair</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="xclocks.html"><span class="doc">XClocks</span></a></p></td>
+<td><p>Configure clocks for PCI, SDRAM, Core clock</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="xmem.html"><span class="doc">xmem</span></a></p></td>
+<td><p>xmem r addr: read 4 bytes from address xmem w addr data: write 4 bytes data to address</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="xpoe.html"><span class="doc">XPoe</span></a></p></td>
+<td><p>Communication with PD63000 PowerOverEthernet MCU.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="commands-for-other-chip-families">
+<span id="bcmsh-other-interpreters"></span><h2>Commands for other chip families<a class="headerlink" href="#commands-for-other-chip-families" title="Link to this heading"></a></h2>
+<p>The same library also contains the shell commands for newer switch chips that use logical tables instead of registers. They cannot be used on Trident 3 and are listed only for completeness.</p>
+<section id="logical-table-switch-mode">
+<h3>Logical-table switch mode<a class="headerlink" href="#logical-table-switch-mode" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/alpm.html"><span class="doc">ALPM</span></a></p></td>
+<td><p>ALPM info</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/asf.html"><span class="doc">ASF</span></a></p></td>
+<td><p>ASF (cut-through) Mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/bcmltshell.html"><span class="doc">BcmltSHell</span></a></p></td>
+<td><p>Run bcm LT shell</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/bfd.html"><span class="doc">BFD</span></a></p></td>
+<td><p>BFD endpoint info</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/clear.html"><span class="doc">CLEAR</span></a></p></td>
+<td><p>Clear a memory table or counters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/clm.html"><span class="doc">CLM</span></a></p></td>
+<td><p>Cable length measurement</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/cos.html"><span class="doc">COS</span></a></p></td>
+<td><p>Manage classes of service</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/counter.html"><span class="doc">CounTeR</span></a></p></td>
+<td><p>Enable/disable counter collection</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/customstat.html"><span class="doc">CustomSTAT</span></a></p></td>
+<td><p>Enable/disable debug counter collection</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/debugshell.html"><span class="doc">DebugSHell</span></a></p></td>
+<td><p>Run SDKLT debug shell</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/detach.html"><span class="doc">DETach</span></a></p></td>
+<td><p>Detach SOC device(s)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/dump.html"><span class="doc">Dump</span></a></p></td>
+<td><p>Dump information</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/eventstat.html"><span class="doc">EventSTAT</span></a></p></td>
+<td><p>Display drop/trace event counters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/ffb.html"><span class="doc">FFB</span></a></p></td>
+<td><p>Fast fast boot</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/fieldprocessor.html"><span class="doc">FieldProcessor</span></a></p></td>
+<td><p>Display Field Processor information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/flexctr.html"><span class="doc">FlexCTR</span></a></p></td>
+<td><p>Manage flex counter</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/flexdigest.html"><span class="doc">FlexDigest</span></a></p></td>
+<td><p>Manage Flex Digest</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/flexport.html"><span class="doc">FLEXport</span></a></p></td>
+<td><p>Flexport</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/flowdb.html"><span class="doc">FlowDb</span></a></p></td>
+<td><p>FlowDB info</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/flowtracker.html"><span class="doc">FlowTracker</span></a></p></td>
+<td><p>Flowtracker sw state</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/ha.html"><span class="doc">HA</span></a></p></td>
+<td><p>HA memory usage and associate information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/headermode.html"><span class="doc">HeaderMode</span></a></p></td>
+<td><p>Get or set packet tx header mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/init.html"><span class="doc">INIT</span></a></p></td>
+<td><p>Initialize SOC and S/W</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/ipmc.html"><span class="doc">IPMC</span></a></p></td>
+<td><p>Manage IPMC (IP Multicast) addresses</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/l2.html"><span class="doc">L2</span></a></p></td>
+<td><p>Manage L2 (MAC) addresses</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/l3.html"><span class="doc">L3</span></a></p></td>
+<td><p>Manage L3 (IP) addresses</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/linkscan.html"><span class="doc">LINKscan</span></a></p></td>
+<td><p>Configure/Display link scanning</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/memscan.html"><span class="doc">MemSCAN</span></a></p></td>
+<td><p>Turn on/off software memory error scanning</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/mirror.html"><span class="doc">MIRror</span></a></p></td>
+<td><p>Manage port mirroring</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/mod.html"><span class="doc">MOD</span></a></p></td>
+<td><p>Display mirror on drop information</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/monevent.html"><span class="doc">MonEvent</span></a></p></td>
+<td><p>Display monitor event</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/mpls.html"><span class="doc">MPLS</span></a></p></td>
+<td><p>Manage MPLS</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/multicast.html"><span class="doc">MultiCast</span></a></p></td>
+<td><p>Manage multicast operation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/packetwatcher.html"><span class="doc">PacketWatcher</span></a></p></td>
+<td><p>Monitor ports for packets</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/pbmp.html"><span class="doc">PBMP</span></a></p></td>
+<td><p>Convert port bitmap string to hex</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/perq.html"><span class="doc">PERQ</span></a></p></td>
+<td><p>Per Port/Per Queue counter utility</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/policer.html"><span class="doc">Policer</span></a></p></td>
+<td><p>Display Policer information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/port.html"><span class="doc">PORT</span></a></p></td>
+<td><p>Set/Display port characteristics</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/portcontrol.html"><span class="doc">PortControl</span></a></p></td>
+<td><p>Set/Display port control</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/portstat.html"><span class="doc">PortStat</span></a></p></td>
+<td><p>Display port status in table</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/pvlan.html"><span class="doc">PVlan</span></a></p></td>
+<td><p>Port VLAN settings</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/range.html"><span class="doc">RANGE</span></a></p></td>
+<td><p>Display range module information.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/rate.html"><span class="doc">RATE</span></a></p></td>
+<td><p>Manage packet rate controls</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/ratebw.html"><span class="doc">RATEBW</span></a></p></td>
+<td><p>Set/Display port bandwidth rate metering characteristics</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/ser.html"><span class="doc">SER</span></a></p></td>
+<td><p>Performs operations related to Soft Error Recovery</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/show.html"><span class="doc">SHOW</span></a></p></td>
+<td><p>Show information on a subsystem</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/sramscan.html"><span class="doc">SramSCAN</span></a></p></td>
+<td><p>Turn on/off software SRAM error scanning</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/stackportget.html"><span class="doc">StackPortGet</span></a></p></td>
+<td><p>Get stacking characteristics of a port</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/stackportset.html"><span class="doc">StackPortSet</span></a></p></td>
+<td><p>Set stacking characteristics of a port</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/stg.html"><span class="doc">STG</span></a></p></td>
+<td><p>Manage spanning tree groups</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/stkmode.html"><span class="doc">STKMode</span></a></p></td>
+<td><p>Hardware Stacking Mode Control</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/switchcontrol.html"><span class="doc">SwitchControl</span></a></p></td>
+<td><p>General switch control</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/table.html"><span class="doc">TaBLe</span></a></p></td>
+<td><p>Get table information</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/tod.html"><span class="doc">TOD</span></a></p></td>
+<td><p>Set/Get TOD</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/trunk.html"><span class="doc">TRUNK</span></a></p></td>
+<td><p>Manage port aggregation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/tx.html"><span class="doc">TX</span></a></p></td>
+<td><p>Transmit one or more packets</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/udf.html"><span class="doc">UDF</span></a></p></td>
+<td><p>Display UDF information</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="ltsw/vlan.html"><span class="doc">VLAN</span></a></p></td>
+<td><p>Manage VLAN usage</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="ltsw/warmboot.html"><span class="doc">WARMBOOT</span></a></p></td>
+<td><p>Optionally boot warm</p></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="bcma-command-line">
+<h3><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line<a class="headerlink" href="#bcma-command-line" title="Link to this heading"></a></h3>
+<p>A separate interpreter, entered with <code class="docutils literal notranslate"><span class="pre">BcmltSHell</span></code> or <code class="docutils literal notranslate"><span class="pre">DebugSHell</span></code> on logical-table devices only.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/q.html"><span class="doc">?</span></a></p></td>
+<td><p>Show available commands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/alpm.html"><span class="doc">ALPM</span></a></p></td>
+<td><p>Debug command for ALPM. Use this tool only when PTRM-ALPM is idle, meaning there is no commits to ALPM LTs in parallel.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/bb.html"><span class="doc">bb</span></a></p></td>
+<td><p>Base board control user interface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/bcmdrd.html"><span class="doc">bcmdrd</span></a></p></td>
+<td><p>Show build configuration for BCMDRD component.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/bdctl.html"><span class="doc">bdctl</span></a></p></td>
+<td><p>Base driver control.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/case.html"><span class="doc">case</span></a></p></td>
+<td><p>Execute command based on string match.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/cd.html"><span class="doc">cd</span></a></p></td>
+<td><p>Change current working directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/cmis.html"><span class="doc">cmis</span></a></p></td>
+<td><p>CMIS management user interface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/config.html"><span class="doc">ConFiG</span></a></p></td>
+<td><p>List device configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/counter.html"><span class="doc">CounTeR</span></a></p></td>
+<td><p>Show/Clear the counter logical table entries.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/debugshell.html"><span class="doc">DebugSHell</span></a></p></td>
+<td><p>Debug shell.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/delay.html"><span class="doc">delay</span></a></p></td>
+<td><p>Put CLI task in a busy-wait loop for some amount of time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/delete.html"><span class="doc">delete</span></a></p></td>
+<td><p>Delete chip hash table entry.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/delete-2.html"><span class="doc">delete</span></a></p></td>
+<td><p>Delete chip hash table entry.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/di.html"><span class="doc">di</span></a></p></td>
+<td><p>Device Init (DI) information and control operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/dma.html"><span class="doc">DMA</span></a></p></td>
+<td><p>DMA facilities interface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/dop.html"><span class="doc">DOP</span></a></p></td>
+<td><p>Command for Debug Observation Point (DOP) logical tables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/each.html"><span class="doc">each</span></a></p></td>
+<td><p>Execute a series of commands in a loop.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/echo.html"><span class="doc">echo</span></a></p></td>
+<td><p>Echo command line.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/edk.html"><span class="doc">edk</span></a></p></td>
+<td><p>EDK subsystem management.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/eventdebug.html"><span class="doc">EVentDeBuG</span></a></p></td>
+<td><p>Event debug manager.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/exit.html"><span class="doc">Exit</span></a></p></td>
+<td><p>Quit shell.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/expr.html"><span class="doc">expr</span></a></p></td>
+<td><p>Evaluate infix expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/ffb.html"><span class="doc">FFB</span></a></p></td>
+<td><p>FFB apply and information</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/fifodma.html"><span class="doc">fifodma</span></a></p></td>
+<td><p>FIFODMA operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/file.html"><span class="doc">file</span></a></p></td>
+<td><p>Redirect the CLI command output to the specified file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/flowtracker.html"><span class="doc">FlowTracker</span></a></p></td>
+<td><p>FlowTracker debug command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/for.html"><span class="doc">for</span></a></p></td>
+<td><p>Execute a series of commands in a loop.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/fwm.html"><span class="doc">fwm</span></a></p></td>
+<td><p>Firmware Management command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/gdpll.html"><span class="doc">gdpll</span></a></p></td>
+<td><p>Generic DPLL commands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/get.html"><span class="doc">Get</span></a></p></td>
+<td><p>Get chip register/memory contents.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/get-2.html"><span class="doc">Get</span></a></p></td>
+<td><p>Get chip register/memory contents.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/geti.html"><span class="doc">geti</span></a></p></td>
+<td><p>Get chip register/memory contents (raw).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/geti-2.html"><span class="doc">geti</span></a></p></td>
+<td><p>Get chip register/memory contents (raw).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/glb.html"><span class="doc">GLB</span></a></p></td>
+<td><p>GLB debug command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/grep.html"><span class="doc">grep</span></a></p></td>
+<td><p>Execute system-provided grep command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/ha.html"><span class="doc">HA</span></a></p></td>
+<td><p>HA memory usage and associate information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/hal.html"><span class="doc">hal</span></a></p></td>
+<td><p>HAL debug access.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/hal-2.html"><span class="doc">hal</span></a></p></td>
+<td><p>HAL debug access.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/healthcheck.html"><span class="doc">HealthCHecK</span></a></p></td>
+<td><p>Check health of device.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/healthmonitor.html"><span class="doc">HealthMONitor</span></a></p></td>
+<td><p>Show system health.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/help.html"><span class="doc">Help</span></a></p></td>
+<td><p>Show help.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/history.html"><span class="doc">history</span></a></p></td>
+<td><p>Display command history.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/hla.html"><span class="doc">hla</span></a></p></td>
+<td><p>Hardware License Authentication control.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/hlax.html"><span class="doc">hlax</span></a></p></td>
+<td><p>Hardware License Authentication control.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/i2c.html"><span class="doc">i2c</span></a></p></td>
+<td><p>I2C control user interface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/idi.html"><span class="doc">IDI</span></a></p></td>
+<td><p>IDI debug command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/if.html"><span class="doc">if</span></a></p></td>
+<td><p>Conditionally execute commands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/imctrl.html"><span class="doc">imctrl</span></a></p></td>
+<td><p>Interface module management user interface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/insert.html"><span class="doc">insert</span></a></p></td>
+<td><p>Insert chip hash table entry.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/insert-2.html"><span class="doc">insert</span></a></p></td>
+<td><p>Insert chip hash table entry.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/intr.html"><span class="doc">INTR</span></a></p></td>
+<td><p>interrupt debug command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/issu.html"><span class="doc">ISSU</span></a></p></td>
+<td><p>ISSU structure registration analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/knet.html"><span class="doc">knet</span></a></p></td>
+<td><p>KNET access.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/libpm.html"><span class="doc">LibPm</span></a></p></td>
+<td><p>FlowTracker debug command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/list.html"><span class="doc">List</span></a></p></td>
+<td><p>List symbols for a chip.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/list-2.html"><span class="doc">List</span></a></p></td>
+<td><p>List symbols for a chip.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/lmm.html"><span class="doc">LMM</span></a></p></td>
+<td><p>Memory usage statistics from Local Memory Manager.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/local.html"><span class="doc">local</span></a></p></td>
+<td><p>Show/clear/set local environment variables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/lookup.html"><span class="doc">lookup</span></a></p></td>
+<td><p>Lookup chip hash/tcam table entry.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/lookup-2.html"><span class="doc">lookup</span></a></p></td>
+<td><p>Lookup chip hash/TCAM table entry.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/loop.html"><span class="doc">loop</span></a></p></td>
+<td><p>Execute a series of commands in a loop.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/ls.html"><span class="doc">ls</span></a></p></td>
+<td><p>List current directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/lt.html"><span class="doc">lt</span></a></p></td>
+<td><p>Logical table access.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/ltcapture.html"><span class="doc">LtCAPture</span></a></p></td>
+<td><p>Capture of logical table operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/ltm.html"><span class="doc">LTM</span></a></p></td>
+<td><p>Debug command for LTM.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/mcs.html"><span class="doc">mcs</span></a></p></td>
+<td><p>Microcontroller subsystem management.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/mkdir.html"><span class="doc">mkdir</span></a></p></td>
+<td><p>Create a directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/onesync.html"><span class="doc">onesync</span></a></p></td>
+<td><p>ONESYNC access.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/pbmp.html"><span class="doc">pbmp</span></a></p></td>
+<td><p>Convert a port list string into a port bitmap.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/pciephy.html"><span class="doc">PCIEphy</span></a></p></td>
+<td><p>PCIe diagnostics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/phy.html"><span class="doc">PHY</span></a></p></td>
+<td><p>PHY based commands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/phydiag.html"><span class="doc">PHYDiag</span></a></p></td>
+<td><p>PHY based diagnostics commands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/pid.html"><span class="doc">pid</span></a></p></td>
+<td><p>Show how input identifier is parsed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/pid-2.html"><span class="doc">pid</span></a></p></td>
+<td><p>Show how input identifier is parsed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/pipe.html"><span class="doc">pipe</span></a></p></td>
+<td><p>Display switch pipe information.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/pktdev.html"><span class="doc">pktdev</span></a></p></td>
+<td><p>Manage packet device.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/pkttest.html"><span class="doc">pkttest</span></a></p></td>
+<td><p>Packet IO performance test.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/pkttrace.html"><span class="doc">pkttrace</span></a></p></td>
+<td><p>Inject a trace packet and get trace data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/pmddecode.html"><span class="doc">pmddecode</span></a></p></td>
+<td><p>Metadata decode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/pmdencode.html"><span class="doc">pmdencode</span></a></p></td>
+<td><p>Metadata encode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/pop.html"><span class="doc">pop</span></a></p></td>
+<td><p>POP an entry from a FIFO.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/pop-2.html"><span class="doc">pop</span></a></p></td>
+<td><p>Pop an entry from a FIFO.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/portcontrol.html"><span class="doc">PortControl</span></a></p></td>
+<td><p>PC HA state recover.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/portstatus.html"><span class="doc">PortStatus</span></a></p></td>
+<td><p>Display port status.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/printenv.html"><span class="doc">printenv</span></a></p></td>
+<td><p>Show all environment variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/pt.html"><span class="doc">pt</span></a></p></td>
+<td><p>Physical table access.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/ptm.html"><span class="doc">PTM</span></a></p></td>
+<td><p>Debug command for PTM.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/push.html"><span class="doc">push</span></a></p></td>
+<td><p>Push an entry into a FIFO.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/pwd.html"><span class="doc">pwd</span></a></p></td>
+<td><p>Display current working directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/qspi.html"><span class="doc">QSPI</span></a></p></td>
+<td><p>QSPI debug command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/quit.html"><span class="doc">Quit</span></a></p></td>
+<td><p>Quit shell.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/rand.html"><span class="doc">rand</span></a></p></td>
+<td><p>Pseudo-random number generator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/rccache.html"><span class="doc">RCCache</span></a></p></td>
+<td><p>Save contents of an rc file in memory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/rcload.html"><span class="doc">RCLoad</span></a></p></td>
+<td><p>Load commands from a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/resourrce.html"><span class="doc">ReSourRCe</span></a></p></td>
+<td><p>Device resource manager interface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/rmdir.html"><span class="doc">rmdir</span></a></p></td>
+<td><p>Delete a directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/rx.html"><span class="doc">rx</span></a></p></td>
+<td><p>Packet RX debug operations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/sbr.html"><span class="doc">SBR</span></a></p></td>
+<td><p>Debug command for SBR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/sbusdma.html"><span class="doc">sbusdma</span></a></p></td>
+<td><p>SBUSDMA operations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/schan.html"><span class="doc">schan</span></a></p></td>
+<td><p>Perform raw S-channel operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/schan-2.html"><span class="doc">schan</span></a></p></td>
+<td><p>Perform raw S-channel operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/ser.html"><span class="doc">SER</span></a></p></td>
+<td><p>Debug command for SER.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/set.html"><span class="doc">Set</span></a></p></td>
+<td><p>Modify chip register/memory contents.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/set-2.html"><span class="doc">Set</span></a></p></td>
+<td><p>Modify chip register/memory contents.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/setenv.html"><span class="doc">setenv</span></a></p></td>
+<td><p>Show/clear/set global environment variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/seti.html"><span class="doc">seti</span></a></p></td>
+<td><p>Modify chip register/memory contents (raw).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/seti-2.html"><span class="doc">seti</span></a></p></td>
+<td><p>Modify chip register/memory contents (raw).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/shell.html"><span class="doc">shell</span></a></p></td>
+<td><p>Launch system shell.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/sleep.html"><span class="doc">sleep</span></a></p></td>
+<td><p>Suspend the CLI task for specified amount of time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/socket.html"><span class="doc">socket</span></a></p></td>
+<td><p>Manage SOCKET.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/sort.html"><span class="doc">sort</span></a></p></td>
+<td><p>Execute system-provided sort command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/spi.html"><span class="doc">SPI</span></a></p></td>
+<td><p>SPI debug command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/symtbl.html"><span class="doc">symtbl</span></a></p></td>
+<td><p>Transform data based on symbol table information.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/tdmfw.html"><span class="doc">tdmfw</span></a></p></td>
+<td><p>Diag utility for tdmfw.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/techsupport.html"><span class="doc">TEChSUPport</span></a></p></td>
+<td><p>Collect diagnostics and debug information.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/test.html"><span class="doc">test</span></a></p></td>
+<td><p>Test operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/testlist.html"><span class="doc">TestList</span></a></p></td>
+<td><p>List or Display loaded tests and status.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/testrun.html"><span class="doc">TestRun</span></a></p></td>
+<td><p>Run a specific or selected tests.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/time.html"><span class="doc">time</span></a></p></td>
+<td><p>Measure the execution time for one or more CLI commands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/timesyncfifo.html"><span class="doc">TimeSyncFIFO</span></a></p></td>
+<td><p>TSFIFO command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/timesyncgpio.html"><span class="doc">TimeSyncGPIO</span></a></p></td>
+<td><p>TimeSyncGPIO command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/trm.html"><span class="doc">TRM</span></a></p></td>
+<td><p>Display TRM statistics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/ts.html"><span class="doc">TS</span></a></p></td>
+<td><p>TimeSync driver control.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/tx.html"><span class="doc">tx</span></a></p></td>
+<td><p>Transmit packets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="bcma/unit.html"><span class="doc">unit</span></a></p></td>
+<td><p>List device-specific information.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="bcma/version.html"><span class="doc">version</span></a></p></td>
+<td><p>Show version information.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../howto/cint-recipes.html" class="btn btn-neutral float-left" title="Cint recipes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="q.html" class="btn btn-neutral float-right" title="?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

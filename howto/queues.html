@@ -1,0 +1,1204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting queues and buffers &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Debugging ACL rules" href="acl.html" />
+    <link rel="prev" title="Protecting the CPU with CoPP" href="copp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting queues and buffers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-buffer-in-brief">The buffer in brief</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#priority-groups-and-service-pools">Priority groups and service pools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#egress-queue-limits">Egress queue limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-queue-as-the-sdk-sees-it">The queue as the SDK sees it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sonic-qos-and-the-hardware">SONiC QoS and the hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#queue-drops">Queue drops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#watching-counters">Watching counters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#watermarks">Watermarks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sonic-and-the-watermarks">SONiC and the watermarks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-queues-from-the-shell">Changing queues from the shell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#per-queue-settings-through-the-api">Per-queue settings through the API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-a-table-entry-directly">Changing a table entry directly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-cos-command">The <code class="docutils literal notranslate"><span class="pre">cos</span></code> command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pfc">PFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting-checklist">Troubleshooting checklist</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Troubleshooting queues and buffers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting-queues-and-buffers">
+<h1>Troubleshooting queues and buffers<a class="headerlink" href="#troubleshooting-queues-and-buffers" title="Link to this heading"></a></h1>
+<p>This page covers the packet buffer of a Trident 3 switch from the shell:
+how the buffer is divided between ports, priority groups and queues, where
+packets are dropped and which counter counts each drop, how to read the
+buffer high-water marks, and what can be changed. SONiC’s own commands
+(<code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">counters</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">watermark</span></code>, <code class="docutils literal notranslate"><span class="pre">mmuconfig</span></code>) are the
+normal way to look at queues; the shell adds the raw counters behind them,
+the hardware limits, and the drops that SONiC does not show.</p>
+<p>Everything on this page is read-only unless a section says otherwise. The
+examples use <code class="docutils literal notranslate"><span class="pre">xe3</span></code>, a 10G port that carries traffic, and <code class="docutils literal notranslate"><span class="pre">ce30</span></code>, a
+100G port that is down, for the changes.</p>
+<section id="the-buffer-in-brief">
+<h2>The buffer in brief<a class="headerlink" href="#the-buffer-in-brief" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../glossary.html#term-MMU"><span class="xref std std-term">MMU</span></a> stores every packet between the ingress and the egress
+pipeline, in 256-byte <a class="reference internal" href="../glossary.html#term-cell"><span class="xref std std-term">cells</span></a>. The shell, the SDK registers
+and the BST counters all count in cells; SONiC shows bytes.</p>
+<p>A packet passes two admission checks:</p>
+<dl class="simple">
+<dt>Ingress admission (<a class="reference internal" href="../glossary.html#term-THDI"><span class="xref std std-term">THDI</span></a>)</dt><dd><p>The packet’s internal priority (0–15) selects one of the ingress port’s
+eight <a class="reference internal" href="../glossary.html#term-PG"><span class="xref std std-term">priority groups</span></a>, and the PG selects an ingress
+<a class="reference internal" href="../glossary.html#term-service-pool"><span class="xref std std-term">service pool</span></a>. A PG has a <em>minimum</em> (cells reserved for it), a
+<em>shared</em> limit (how much of the service pool it may take beyond its
+minimum, static or dynamic), and a <a class="reference internal" href="../glossary.html#term-headroom"><span class="xref std std-term">headroom</span></a> (cells that absorb
+the packets still arriving after a PFC pause is sent). A packet that
+does not fit is dropped and counted on the <em>ingress</em> port.</p>
+</dd>
+<dt>Egress admission (<a class="reference internal" href="../glossary.html#term-THDU"><span class="xref std std-term">THDU</span></a> for unicast, <a class="reference internal" href="../glossary.html#term-THDM"><span class="xref std std-term">THDM</span></a> for multicast)</dt><dd><p>Every egress queue has its own minimum and shared limit against an
+egress service pool. The shared limit is usually <em>dynamic</em>: the queue
+may use <a class="reference internal" href="../glossary.html#term-alpha"><span class="xref std std-term">alpha</span></a> times the free cells of the pool, so a single
+congested queue can take a large share of an idle buffer but less of a
+busy one. A packet that does not fit is dropped and counted on the
+<em>egress</em> queue. <a class="reference internal" href="../glossary.html#term-WRED"><span class="xref std std-term">WRED</span></a> drops packets earlier, at random, as a
+queue grows.</p>
+</dd>
+</dl>
+<p>Before either check, ports on oversubscribed port macros pass the
+<a class="reference internal" href="../glossary.html#term-OBM"><span class="xref std std-term">OBM</span></a>, a small per-port-macro buffer in front of the ingress
+pipeline. When it overflows, packets are dropped before they reach the
+MMU, and no MMU counter sees them.</p>
+<p>Each front-panel port has ten unicast and ten multicast queues; SONiC
+calls them <code class="docutils literal notranslate"><span class="pre">UC0</span></code>–<code class="docutils literal notranslate"><span class="pre">UC9</span></code> and <code class="docutils literal notranslate"><span class="pre">MC10</span></code>–<code class="docutils literal notranslate"><span class="pre">MC19</span></code>. The CPU port has 48
+multicast queues, the CPU queues used by <a class="reference internal" href="copp.html"><span class="doc">CoPP</span></a>.
+<a class="reference internal" href="../reference/show.html#clicmd-show-pmap"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">pmap</span></code></a> lists, for each port, its pipe, its MMU port and the
+first queue number (<code class="docutils literal notranslate"><span class="pre">ucast_Qbase</span></code>, <code class="docutils literal notranslate"><span class="pre">mcast_Qbase</span></code>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>       pipe   logical  physical    idb mmu   ucast_Qbase/Numq  mcast_Qbase/Numq  half-pipe
+ xe3      0    12        12        11  11       110/10               110/10          0
+ce30      1   127       125        60 188       600/10               600/10          0
+</pre></div>
+</div>
+<p>Those numbers are the indices into the MMU tables. The tables exist once
+per pipe, with <code class="docutils literal notranslate"><span class="pre">_PIPE0</span></code> or <code class="docutils literal notranslate"><span class="pre">_PIPE1</span></code> in their name (<code class="docutils literal notranslate"><span class="pre">_XPE0_PIPE0</span></code>
+for counters). For a port:</p>
+<ul class="simple">
+<li><p>its unicast queue <em>q</em> is entry <code class="docutils literal notranslate"><span class="pre">ucast_Qbase</span></code> + <em>q</em> of the queue
+tables of its pipe (<code class="docutils literal notranslate"><span class="pre">xe3</span></code> queue 0 is entry 110 of a <code class="docutils literal notranslate"><span class="pre">_PIPE0</span></code>
+table, <code class="docutils literal notranslate"><span class="pre">ce30</span></code> queue 3 is entry 603 of a <code class="docutils literal notranslate"><span class="pre">_PIPE1</span></code> table);</p></li>
+<li><p>its priority group <em>p</em> is entry <em>m</em> × 8 + <em>p</em> of the PG tables, where
+<em>m</em> is the <code class="docutils literal notranslate"><span class="pre">mmu</span></code> number within the pipe: the <code class="docutils literal notranslate"><span class="pre">mmu</span></code> column for pipe
+0, minus 128 for pipe 1 (<code class="docutils literal notranslate"><span class="pre">xe3</span></code> PG 7 is entry 95, <code class="docutils literal notranslate"><span class="pre">ce30</span></code> PG 7 is
+entry 487).</p></li>
+</ul>
+<p>See <a class="reference internal" href="../concepts/memories-registers.html"><span class="doc">Memories and registers</span></a> for table names and pipe copies.</p>
+</section>
+<section id="priority-groups-and-service-pools">
+<h2>Priority groups and service pools<a class="headerlink" href="#priority-groups-and-service-pools" title="Link to this heading"></a></h2>
+<p>Two registers per ingress port map priorities to PGs
+(<code class="docutils literal notranslate"><span class="pre">THDI_PORT_PRI_GRP0</span></code> for priorities 0–7, <code class="docutils literal notranslate"><span class="pre">THDI_PORT_PRI_GRP1</span></code> for
+8–15), and <code class="docutils literal notranslate"><span class="pre">THDI_PORT_PG_SPID</span></code> maps PGs to service pools. Read them
+with <a class="reference internal" href="../reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span></code></a>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Priority to PG, and PG to service pool, on xe3</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; g THDI_PORT_PRI_GRP0.xe3</span>
+<span class="go">THDI_PORT_PRI_GRP0.xe3[3][0x800700b]=0xffffff: &lt;PRI7_GRP=7,PRI6_GRP=7,</span>
+<span class="go">   PRI5_GRP=7,PRI4_GRP=7,PRI3_GRP=7,PRI2_GRP=7,PRI1_GRP=7,PRI0_GRP=7&gt;</span>
+<span class="go">drivshell&gt; g THDI_PORT_PG_SPID.xe3</span>
+<span class="go">THDI_PORT_PG_SPID.xe3[3][0x800730b]=0: &lt;PG7_SPID=0,PG6_SPID=0,PG5_SPID=0,</span>
+<span class="go">   PG4_SPID=0,PG3_SPID=0,PG2_SPID=0,PG1_SPID=0,PG0_SPID=0&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>Without a <code class="docutils literal notranslate"><span class="pre">TC_TO_PRIORITY_GROUP_MAP</span></code> in SONiC, every priority uses PG 7,
+and every PG uses service pool 0. The PG limits are in
+<code class="docutils literal notranslate"><span class="pre">THDI_PORT_PG_CONFIG</span></code>, eight entries per port:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: The eight PGs of xe3</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; d THDI_PORT_PG_CONFIG_PIPE0 88 8</span>
+<span class="go">…</span>
+<span class="go">THDI_PORT_PG_CONFIG_PIPE0.mmu_xpe0[94]: &lt;PG_SHARED_LIMIT=0,PG_SHARED_DYNAMIC=0,PG_RESET_OFFSET=0,PG_RESET_FLOOR=0,PG_MIN_LIMIT=0,PG_HDRM_LIMIT=0,PG_GBL_HDRM_EN=0,…&gt;</span>
+<span class="go">THDI_PORT_PG_CONFIG_PIPE0.mmu_xpe0[95]: &lt;PG_SHARED_LIMIT=0x1f32a,PG_SHARED_DYNAMIC=0,PG_RESET_OFFSET=0,PG_RESET_FLOOR=0,PG_MIN_LIMIT=0,PG_HDRM_LIMIT=0,PG_GBL_HDRM_EN=1,…&gt;</span>
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">PG_MIN_LIMIT</span></code></dt><dd><p>Cells reserved for the PG.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PG_SHARED_LIMIT</span></code>, <code class="docutils literal notranslate"><span class="pre">PG_SHARED_DYNAMIC</span></code></dt><dd><p>With <code class="docutils literal notranslate"><span class="pre">PG_SHARED_DYNAMIC=0</span></code> the limit is a number of cells; with <code class="docutils literal notranslate"><span class="pre">1</span></code>
+the field holds an alpha code instead (see the next section).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PG_HDRM_LIMIT</span></code>, <code class="docutils literal notranslate"><span class="pre">PG_GBL_HDRM_EN</span></code></dt><dd><p>The PG’s own headroom, and whether it may also use the global headroom
+pool.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PG_RESET_OFFSET</span></code>, <code class="docutils literal notranslate"><span class="pre">PG_RESET_FLOOR</span></code></dt><dd><p>Where a paused PG resumes (sends PFC XON).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PG_BST_PROFILE_SHARED</span></code>, <code class="docutils literal notranslate"><span class="pre">PG_BST_PROFILE_HDRM</span></code></dt><dd><p>Which BST trigger threshold applies to the PG.</p>
+</dd>
+</dl>
+<p>Here PG 7 may take 0x1f32a (127,786) cells, practically all of service
+pool 0, with no reserved minimum and no headroom of its own: a lossy
+default. The pool sizes are per-pool registers:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Ingress and egress service pool limits</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; g THDI_BUFFER_CELL_LIMIT_SP</span>
+<span class="go">THDI_BUFFER_CELL_LIMIT_SP(0).mmu_xpe0[3][0xb810a00]=0x1f376: &lt;LIMIT=0x1f376&gt;</span>
+<span class="go">THDI_BUFFER_CELL_LIMIT_SP(1).mmu_xpe0[3][0xb810b00]=0: &lt;LIMIT=0&gt;</span>
+<span class="go">THDI_BUFFER_CELL_LIMIT_SP(2).mmu_xpe0[3][0xb810c00]=0: &lt;LIMIT=0&gt;</span>
+<span class="go">THDI_BUFFER_CELL_LIMIT_SP(3).mmu_xpe0[3][0xb810d00]=0: &lt;LIMIT=0&gt;</span>
+<span class="go">drivshell&gt; g MMU_THDM_DB_POOL_SHARED_LIMIT</span>
+<span class="go">MMU_THDM_DB_POOL_SHARED_LIMIT(0).mmu_xpe0[3][0x3e000400]=0x1ef0b</span>
+<span class="go">   : &lt;SHARED_LIMIT=0x1ef0b&gt;</span>
+<span class="go">MMU_THDM_DB_POOL_SHARED_LIMIT(1).mmu_xpe0[3][0x3e000500]=0: &lt;SHARED_LIMIT=0&gt;</span>
+<span class="go">MMU_THDM_DB_POOL_SHARED_LIMIT(2).mmu_xpe0[3][0x3e000600]=0: &lt;SHARED_LIMIT=0&gt;</span>
+<span class="go">MMU_THDM_DB_POOL_SHARED_LIMIT(3).mmu_xpe0[3][0x3e000700]=0: &lt;SHARED_LIMIT=0&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>Only pool 0 is in use: 0x1f376 (127,862) cells, about 32 MB, on ingress
+and 0x1ef0b (126,731) cells shared on egress. The headroom pools are
+<code class="docutils literal notranslate"><span class="pre">THDI_HDRM_BUFFER_CELL_LIMIT_HP</span></code>. With a lossless SONiC buffer
+configuration these registers change: lossless PGs get a minimum, a
+headroom and usually a separate pool.</p>
+</section>
+<section id="egress-queue-limits">
+<h2>Egress queue limits<a class="headerlink" href="#egress-queue-limits" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">MMU_THDU_CONFIG_QUEUE</span></code> holds the unicast queue limits, one entry per
+queue. The ten queues of <code class="docutils literal notranslate"><span class="pre">ce30</span></code>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Unicast queue limits of ce30</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; d MMU_THDU_CONFIG_QUEUE_PIPE1 600 10</span>
+<span class="go">MMU_THDU_CONFIG_QUEUE_PIPE1.mmu_xpe0[600]: &lt;RSVD=0,Q_WM_MAX_THRESHOLD=0,Q_SHARED_LIMIT_CELL=8,Q_SHARED_ALPHA_CELL=8,Q_MIN_LIMIT_CELL=0,Q_LIMIT_DYNAMIC_CELL=1,Q_COLOR_LIMIT_DYNAMIC_CELL=1,PARITY=0,LIMIT_YELLOW_CELL=0,LIMIT_RED_CELL=0,…&gt;</span>
+<span class="go">MMU_THDU_CONFIG_QUEUE_PIPE1.mmu_xpe0[601]: &lt;RSVD=0,Q_WM_MAX_THRESHOLD=0,Q_SHARED_LIMIT_CELL=8,Q_SHARED_ALPHA_CELL=8,Q_MIN_LIMIT_CELL=0,Q_LIMIT_DYNAMIC_CELL=1,Q_COLOR_LIMIT_DYNAMIC_CELL=1,PARITY=0,LIMIT_YELLOW_CELL=0,LIMIT_RED_CELL=0,…&gt;</span>
+<span class="go">…</span>
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Q_MIN_LIMIT_CELL</span></code></dt><dd><p>Cells reserved for the queue.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Q_LIMIT_DYNAMIC_CELL</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: the shared limit is dynamic. <code class="docutils literal notranslate"><span class="pre">Q_SHARED_LIMIT_CELL</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Q_SHARED_ALPHA_CELL</span></code> are then the same bits, read as an alpha code.
+<code class="docutils literal notranslate"><span class="pre">0</span></code>: <code class="docutils literal notranslate"><span class="pre">Q_SHARED_LIMIT_CELL</span></code> is a fixed number of cells.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LIMIT_YELLOW_CELL</span></code>, <code class="docutils literal notranslate"><span class="pre">LIMIT_RED_CELL</span></code>, <code class="docutils literal notranslate"><span class="pre">Q_COLOR_LIMIT_DYNAMIC_CELL</span></code></dt><dd><p>Lower limits for yellow and red packets.</p>
+</dd>
+</dl>
+<p>The alpha code counts in powers of two:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Alpha</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 … 6</p></td>
+<td><p>1/128, 1/64, 1/32, 1/16, 1/8, 1/4, 1/2</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>9, 10</p></td>
+<td><p>4, 8</p></td>
+</tr>
+</tbody>
+</table>
+<p>So every unicast queue here has no reserved cells and may grow to twice
+the free cells of the egress pool. Multicast queues have the same kind of
+entry in <code class="docutils literal notranslate"><span class="pre">MMU_THDM_DB_QUEUE_CONFIG_PIPE&lt;n&gt;</span></code>. Use <a class="reference internal" href="../reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a> on a
+table to see all its fields before reading it.</p>
+</section>
+<section id="the-queue-as-the-sdk-sees-it">
+<h2>The queue as the SDK sees it<a class="headerlink" href="#the-queue-as-the-sdk-sees-it" title="Link to this heading"></a></h2>
+<p>Reading tables shows one limit at a time. The <code class="docutils literal notranslate"><span class="pre">queue_info.c</span></code> CINT
+program below asks the SDK for everything about the unicast queues of one
+port: scheduling mode and weight, minimum and alpha, shaper, WRED and the
+current BST high-water mark. It calls only <code class="docutils literal notranslate"><span class="pre">*_get</span></code> functions. See
+<a class="reference internal" href="cint-recipes.html"><span class="doc">Cint recipes</span></a> for how to copy a program into the <code class="docutils literal notranslate"><span class="pre">syncd</span></code>
+container and run it.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">queue_info.c</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * queue_info.c - show the queues of one port: scheduler mode and weight,</span>
+<span class="cm"> * egress admission (min, shared, dynamic, alpha), shaping, WRED, and the</span>
+<span class="cm"> * BST high-water mark of each unicast queue.  Only calls *_get functions.</span>
+<span class="cm"> * Set qi_port to the logical port number (from "ps").</span>
+<span class="cm"> * Run:  cint /root/queue_info.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">qi_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">127</span><span class="p">;</span><span class="w">          </span><span class="cm">/* ce30 */</span>
+<span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+<span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">qi_mc</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">qi_nuc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">qi_nmc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">qi_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numq</span><span class="p">,</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span>
+<span class="w">          </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gport</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="o">*</span><span class="n">want</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">*</span><span class="n">want</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_COSQ_GPORT_UCAST_QUEUE_GROUP</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">qi_nuc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">qi_nuc</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gport</span><span class="p">;</span>
+<span class="w">        </span><span class="n">qi_nuc</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_COSQ_GPORT_MCAST_QUEUE_GROUP</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">qi_nmc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">qi_mc</span><span class="p">[</span><span class="n">qi_nmc</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gport</span><span class="p">;</span>
+<span class="w">        </span><span class="n">qi_nmc</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">qi_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">arg</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">,</span><span class="w"> </span><span class="n">dyn</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">qmin</span><span class="p">,</span><span class="w"> </span><span class="n">qshared</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">kmin</span><span class="p">,</span><span class="w"> </span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="n">bwflags</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint64</span><span class="w"> </span><span class="n">wm</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">pg</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_t</span><span class="w"> </span><span class="n">wred</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_switch_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchBstEnable</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">arg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"BST enable %d (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">arg</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_switch_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchBstTrackingMode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">arg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"BST tracking mode %d (0 current, 1 peak) (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">arg</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_port</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">qi_nuc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">qi_nmc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_gport_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_cb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"port %d gport 0x%x: %d UC, %d MC queues (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">qi_port</span><span class="p">,</span><span class="w"> </span><span class="n">pg</span><span class="p">,</span><span class="w"> </span><span class="n">qi_nuc</span><span class="p">,</span><span class="w"> </span><span class="n">qi_nmc</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">qi_nuc</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">dyn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">qmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">qshared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">kmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">kmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">bwflags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">bcm_cosq_gport_sched_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">weight</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">bcmCosqControlEgressUCSharedDynamicEnable</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dyn</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">bcmCosqControlDropLimitAlpha</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">alpha</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">bcmCosqControlEgressUCQueueMinLimitBytes</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">qmin</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">bcmCosqControlEgressUCQueueSharedLimitBytes</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">qshared</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_gport_bandwidth_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">kmin</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bwflags</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_gport_discard_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wred</span><span class="p">);</span>
+<span class="w">        </span><span class="n">wred</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_COLOR_GREEN</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_BYTES</span><span class="p">;</span>
+<span class="w">        </span><span class="n">bcm_cosq_gport_discard_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wred</span><span class="p">);</span>
+<span class="w">        </span><span class="n">COMPILER_64_ZERO</span><span class="p">(</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_bst_stat_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">bcmBstStatIdUcast</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"UC%d 0x%x: sched %d weight %d | min %d B, dynamic %d, alpha %d, shared %d | shape %u-%u kbps | wred 0x%x %d-%d B | bst %u (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">               </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">qi_uc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">,</span><span class="w"> </span><span class="n">qmin</span><span class="p">,</span><span class="w"> </span><span class="n">dyn</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">qshared</span><span class="p">,</span>
+<span class="w">               </span><span class="n">kmin</span><span class="p">,</span><span class="w"> </span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="n">wred</span><span class="p">.</span><span class="n">flags</span><span class="p">,</span><span class="w"> </span><span class="n">wred</span><span class="p">.</span><span class="n">min_thresh</span><span class="p">,</span><span class="w"> </span><span class="n">wred</span><span class="p">.</span><span class="n">max_thresh</span><span class="p">,</span>
+<span class="w">               </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="n">wm</span><span class="p">),</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">COMPILER_64_ZERO</span><span class="p">(</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_bst_stat_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">pg</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">bcmBstStatIdPriGroupShared</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"PG%d shared bst %u (rv %d)"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="n">wm</span><span class="p">),</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">        </span><span class="n">COMPILER_64_ZERO</span><span class="p">(</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_bst_stat_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">pg</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">bcmBstStatIdPriGroupHeadroom</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">", headroom bst %u (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="n">wm</span><span class="p">),</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">qi_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE queue_info</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: The unicast queues of ce30</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/queue_info.c</span>
+<span class="go">BST enable 1 (rv 0)</span>
+<span class="go">BST tracking mode 1 (0 current, 1 peak) (rv 0)</span>
+<span class="go">port 127 gport 0x800007f: 10 UC, 10 MC queues (rv 0)</span>
+<span class="go">UC0 0x241fc000: sched 3 weight 1 | min 0 B, dynamic 1, alpha 7, shared 2048 | shape 0-0 kbps | wred 0x2100 16776960-16776960 B | bst 0 (rv 0)</span>
+<span class="go">UC1 0x241fc001: sched 3 weight 1 | min 0 B, dynamic 1, alpha 7, shared 2048 | shape 0-0 kbps | wred 0x2100 16776960-16776960 B | bst 0 (rv 0)</span>
+<span class="go">…</span>
+<span class="go">UC9 0x241fc009: sched 3 weight 1 | min 0 B, dynamic 1, alpha 7, shared 2048 | shape 0-0 kbps | wred 0x2100 16776960-16776960 B | bst 0 (rv 0)</span>
+<span class="go">PG0 shared bst 0 (rv 0), headroom bst 0 (rv 0)</span>
+<span class="go">…</span>
+<span class="go">PG7 shared bst 0 (rv 0), headroom bst 0 (rv 0)</span>
+<span class="go">DONE queue_info</span>
+</pre></div>
+</div>
+</div>
+<p>How to read it:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">sched</span> <span class="pre">3</span> <span class="pre">weight</span> <span class="pre">1</span></code></dt><dd><p>Scheduling mode <code class="docutils literal notranslate"><span class="pre">BCM_COSQ_WEIGHTED_ROUND_ROBIN</span></code> (1 is strict
+priority, 5 deficit round robin), weight 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">7</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">bcmCosqControlDropLimitAlpha_2</span></code> in this build’s numbering: alpha 2.
+Look enum values up in <a class="reference internal" href="../cint-api/index.html"><span class="doc">Cint API on this build</span></a>; they differ between SDK
+releases.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">shared</span> <span class="pre">2048</span></code></dt><dd><p>In dynamic mode this is the alpha code (8) multiplied by the cell size,
+not a limit. Ignore it when <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> is 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">shape</span> <span class="pre">0-0</span></code></dt><dd><p>No minimum and no maximum rate.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">wred</span> <span class="pre">0x2100</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">BCM_COSQ_DISCARD_COLOR_GREEN</span> <span class="pre">|</span> <span class="pre">BCM_COSQ_DISCARD_BYTES</span></code> without
+<code class="docutils literal notranslate"><span class="pre">BCM_COSQ_DISCARD_ENABLE</span></code>: WRED is off.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">0x241fc000</span></code></dt><dd><p>The queue’s GPORT, needed by every <code class="docutils literal notranslate"><span class="pre">bcm_cosq_gport_*</span></code> call and by
+<a class="reference internal" href="../reference/cos.html#clicmd-cos-discard_show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">discard_show</span></code></a> <code class="docutils literal notranslate"><span class="pre">Gport=</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PG&lt;n&gt;</span></code></dt><dd><p>The loop index is passed as a <em>priority</em>; the SDK maps it to the PG.
+Here all eight lines therefore show PG 7.</p>
+</dd>
+</dl>
+<p>The global <a class="reference internal" href="../reference/cos.html#clicmd-cos-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">show</span></code></a> and <a class="reference internal" href="../reference/cos.html#clicmd-cos-port-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">port</span> <span class="pre">show</span></code></a> do not show
+these queue settings; they show the SDK’s port-level scheduler view (see
+<a class="reference internal" href="#changing-queues-from-the-shell">Changing queues from the shell</a>).</p>
+</section>
+<section id="sonic-qos-and-the-hardware">
+<h2>SONiC QoS and the hardware<a class="headerlink" href="#sonic-qos-and-the-hardware" title="Link to this heading"></a></h2>
+<p>SONiC configures queues and buffers through <code class="docutils literal notranslate"><span class="pre">config_db</span></code> tables, usually
+rendered from the HWSKU’s <code class="docutils literal notranslate"><span class="pre">qos.json.j2</span></code> and <code class="docutils literal notranslate"><span class="pre">buffers.json.j2</span></code> by
+<code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">qos</span> <span class="pre">reload</span></code>. orchagent turns them into SAI objects and the SAI
+programs the tables above. The mapping:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>SONiC table</p></th>
+<th class="head"><p>Sets</p></th>
+<th class="head"><p>Look in the shell</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DSCP_TO_TC_MAP</span></code>, <code class="docutils literal notranslate"><span class="pre">DOT1P_TO_TC_MAP</span></code> (bound in <code class="docutils literal notranslate"><span class="pre">PORT_QOS_MAP</span></code>)</p></td>
+<td><p>Packet priority → traffic class (internal priority)</p></td>
+<td><p>Ingress pipeline tables; not covered here</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TC_TO_QUEUE_MAP</span></code></p></td>
+<td><p>Traffic class → queue</p></td>
+<td><p>Per-port CoS map tables; <a class="reference internal" href="../reference/cos.html#clicmd-cos-port-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">port</span> <span class="pre">show</span></code></a> shows the SDK’s
+legacy view only</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TC_TO_PRIORITY_GROUP_MAP</span></code></p></td>
+<td><p>Traffic class → PG</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">THDI_PORT_PRI_GRP0</span></code>/<code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BUFFER_POOL</span></code></p></td>
+<td><p>Service pool sizes and mode (<code class="docutils literal notranslate"><span class="pre">dynamic</span></code>/<code class="docutils literal notranslate"><span class="pre">static</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">THDI_BUFFER_CELL_LIMIT_SP</span></code>, <code class="docutils literal notranslate"><span class="pre">MMU_THDM_DB_POOL_SHARED_LIMIT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">THDI_HDRM_BUFFER_CELL_LIMIT_HP</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BUFFER_PROFILE</span></code> + <code class="docutils literal notranslate"><span class="pre">BUFFER_PG</span></code></p></td>
+<td><p>PG minimum (<code class="docutils literal notranslate"><span class="pre">size</span></code>), shared limit (<code class="docutils literal notranslate"><span class="pre">dynamic_th</span></code> or
+<code class="docutils literal notranslate"><span class="pre">static_th</span></code>), headroom (<code class="docutils literal notranslate"><span class="pre">xoff</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">THDI_PORT_PG_CONFIG_PIPE&lt;n&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BUFFER_PROFILE</span></code> + <code class="docutils literal notranslate"><span class="pre">BUFFER_QUEUE</span></code></p></td>
+<td><p>Queue minimum and shared limit</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MMU_THDU_CONFIG_QUEUE_PIPE&lt;n&gt;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MMU_THDM_DB_QUEUE_CONFIG_PIPE&lt;n&gt;</span></code>; <code class="docutils literal notranslate"><span class="pre">queue_info.c</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SCHEDULER</span></code> (in <code class="docutils literal notranslate"><span class="pre">QUEUE</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">STRICT</span></code>, <code class="docutils literal notranslate"><span class="pre">WRR</span></code> or <code class="docutils literal notranslate"><span class="pre">DWRR</span></code>, <code class="docutils literal notranslate"><span class="pre">weight</span></code>, shaper <code class="docutils literal notranslate"><span class="pre">pir</span></code>/<code class="docutils literal notranslate"><span class="pre">cir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">queue_info.c</span></code>; <a class="reference internal" href="../reference/lls.html#clicmd-lls"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">lls</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WRED_PROFILE</span></code> (in <code class="docutils literal notranslate"><span class="pre">QUEUE</span></code>)</p></td>
+<td><p>WRED and ECN thresholds per colour</p></td>
+<td><p><a class="reference internal" href="../reference/cos.html#clicmd-cos-discard_show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">discard_show</span></code></a> <code class="docutils literal notranslate"><span class="pre">Gport=&lt;queue</span> <span class="pre">gport&gt;</span> <span class="pre">Queue=0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PORT_QOS_MAP</span></code> <code class="docutils literal notranslate"><span class="pre">pfc_enable</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PFC_PRIORITY_TO_PRIORITY_GROUP_MAP</span></code></p></td>
+<td><p>PFC on a priority, priority → PG for pause</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CLMIB_RPFC&lt;n&gt;</span></code>/<code class="docutils literal notranslate"><span class="pre">CLMIB_TPFC&lt;n&gt;</span></code> counters; <a class="reference internal" href="../reference/portmod.html#clicmd-portmod-fc"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">fc</span></code></a></p></td>
+</tr>
+</tbody>
+</table>
+<p>In SONiC a <code class="docutils literal notranslate"><span class="pre">dynamic_th</span></code> of <em>n</em> means alpha 2<sup>n</sup>, the same scale
+as the alpha code above (<code class="docutils literal notranslate"><span class="pre">dynamic_th</span></code> 1 is code 8).</p>
+<p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">counters</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">watermark</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span>
+<span class="pre">priority-group</span> <span class="pre">watermark</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">buffer_pool</span> <span class="pre">watermark</span></code> and <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">pfc</span>
+<span class="pre">counters</span></code> read these values through the SAI; <code class="docutils literal notranslate"><span class="pre">mmuconfig</span> <span class="pre">-l</span></code> lists the
+pools and profiles SONiC has configured. On a switch without buffer
+configuration in <code class="docutils literal notranslate"><span class="pre">config_db</span></code> it prints only:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>mmuconfig<span class="w"> </span>-l
+<span class="go">No buffer pool information available</span>
+<span class="go">No buffer profile information available</span>
+</pre></div>
+</div>
+<p>and the queues run with the SAI’s defaults shown above: all priorities in
+PG 7, lossy, every queue weighted round robin with weight 1, alpha 2, no
+shaper and no WRED.</p>
+</section>
+<section id="queue-drops">
+<h2>Queue drops<a class="headerlink" href="#queue-drops" title="Link to this heading"></a></h2>
+<p>Start with SONiC. <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">counters</span> <span class="pre">&lt;port&gt;</span></code> has a <code class="docutils literal notranslate"><span class="pre">Drop/pkts</span></code>
+column per queue, <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">interfaces</span> <span class="pre">counters</span></code> has <code class="docutils literal notranslate"><span class="pre">RX_DRP</span></code> and
+<code class="docutils literal notranslate"><span class="pre">TX_DRP</span></code> per port, and <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">priority-group</span> <span class="pre">drop</span> <span class="pre">counters</span></code> shows
+ingress drops per PG:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>show<span class="w"> </span>queue<span class="w"> </span>counters<span class="w"> </span>Ethernet8
+<span class="go">     Port    TxQ    Counter/pkts    Counter/bytes    Drop/pkts    Drop/bytes</span>
+<span class="go">---------  -----  --------------  ---------------  -----------  ------------</span>
+<span class="go">Ethernet8    UC0          258996         34503014            0             0</span>
+<span class="go">Ethernet8    UC1               0                0            0             0</span>
+<span class="go">…</span>
+<span class="go">Ethernet8   MC10              46             3284            0             0</span>
+</pre></div>
+</div>
+<p>In the shell, <a class="reference internal" href="../reference/show.html#clicmd-show-counters"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span></code></a> shows the hardware counters behind
+these, and some that SONiC does not report. <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span> <span class="pre">all</span> <span class="pre">&lt;port&gt;</span></code>
+lists every counter of a port, zero or not. The ones that matter for
+queues:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Queue and drop counters of xe3</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show c all xe3</span>
+<span class="go">…</span>
+<span class="go">UC_PERQ_PKT(0).xe3          :                 9,597              +2,004</span>
+<span class="go">UC_PERQ_PKT(1).xe3          :                     0                  +0</span>
+<span class="go">…</span>
+<span class="go">UC_PERQ_PKT(9).xe3          :                     0                  +0</span>
+<span class="go">…</span>
+<span class="go">PERQ_DROP_PKT(0).xe3        :                     0                  +0</span>
+<span class="go">PERQ_DROP_PKT(1).xe3        :                     0                  +0</span>
+<span class="go">…</span>
+<span class="go">PERQ_DROP_PKT_UC(0).xe3     :                     0                  +0</span>
+<span class="go">PERQ_DROP_PKT_UC(1).xe3     :                     0                  +0</span>
+<span class="go">…</span>
+<span class="go">PERQ_WRED_DROP_PKT_U(0).xe3 :                     0                  +0</span>
+<span class="go">PERQ_WRED_DROP_PKT_U(1).xe3 :                     0                  +0</span>
+<span class="go">…</span>
+<span class="go">DROP_PKT_ING.xe3            :                     0                  +0</span>
+<span class="go">DROP_PKT_YEL.xe3            :                     0                  +0</span>
+<span class="go">DROP_PKT_RED.xe3            :                     0                  +0</span>
+<span class="go">WRED_PKT_GRE.xe3            :                     0                  +0</span>
+<span class="go">WRED_PKT_YEL.xe3            :                     0                  +0</span>
+<span class="go">WRED_PKT_RED.xe3            :                     0                  +0</span>
+<span class="go">OBM_LOSSY_LO_DRP_PKT(0).xe3 :                     0                  +0</span>
+<span class="go">OBM_LOSSY_HI_DRP_PKT(0).xe3 :                     0                  +0</span>
+<span class="go">OBM_LOSSLESS0_DRP_PK(0).xe3 :                     0                  +0</span>
+<span class="go">OBM_LOSSLESS1_DRP_PK(0).xe3 :                     0                  +0</span>
+<span class="go">OBM_FC_EVENTS(0).xe3        :                     0                  +0</span>
+</pre></div>
+</div>
+</div>
+<p>Long names are cut to 20 characters (<code class="docutils literal notranslate"><span class="pre">PERQ_WRED_DROP_PKT_U</span></code> is
+<code class="docutils literal notranslate"><span class="pre">PERQ_WRED_DROP_PKT_UC</span></code>). Each <code class="docutils literal notranslate"><span class="pre">_PKT</span></code> counter has a <code class="docutils literal notranslate"><span class="pre">_BYTE</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">_BY</span></code>/<code class="docutils literal notranslate"><span class="pre">_BYT</span></code>) twin. The number in brackets is the queue.</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Where a packet was dropped</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 32.0%" />
+<col style="width: 18.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Counter</p></th>
+<th class="head"><p>Counted on</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OBM_LOSSY_LO_DRP_PKT</span></code>, <code class="docutils literal notranslate"><span class="pre">OBM_LOSSY_HI_DRP_PKT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">OBM_LOSSLESS0_DRP_PK</span></code>, <code class="docutils literal notranslate"><span class="pre">OBM_LOSSLESS1_DRP_PK</span></code></p></td>
+<td><p>Ingress port</p></td>
+<td><p>Dropped in the oversubscription buffer, before the MMU, by OBM
+traffic class. <code class="docutils literal notranslate"><span class="pre">OBM_FC_EVENTS</span></code> counts the flow-control events the
+OBM raised.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DROP_PKT_ING</span></code></p></td>
+<td><p>Ingress port</p></td>
+<td><p>Refused by ingress admission: PG, port or service pool full.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PERQ_DROP_PKT_UC(q)</span></code></p></td>
+<td><p>Egress port</p></td>
+<td><p>Refused by unicast queue <em>q</em>’s egress admission.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PERQ_DROP_PKT(q)</span></code></p></td>
+<td><p>Egress port</p></td>
+<td><p>Refused by multicast queue <em>q</em>. On <code class="docutils literal notranslate"><span class="pre">cpu0</span></code> these are the 48 CPU
+queues: a CPU queue that the CPU does not drain fast enough.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PERQ_WRED_DROP_PKT_UC(q)</span></code></p></td>
+<td><p>Egress port</p></td>
+<td><p>Dropped by WRED on unicast queue <em>q</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WRED_PKT_GRE</span></code>, <code class="docutils literal notranslate"><span class="pre">WRED_PKT_YEL</span></code>, <code class="docutils literal notranslate"><span class="pre">WRED_PKT_RED</span></code></p></td>
+<td><p>Egress port</p></td>
+<td><p>WRED drops of the port, by colour.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DROP_PKT_YEL</span></code>, <code class="docutils literal notranslate"><span class="pre">DROP_PKT_RED</span></code></p></td>
+<td><p>Egress port</p></td>
+<td><p>Yellow or red packets refused by their lower colour limit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RDBGC&lt;n&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">TDBGC&lt;n&gt;</span></code></p></td>
+<td><p>Either</p></td>
+<td><p>Pipeline drops by reason (VLAN, L3, ACL, …), not buffer drops. See
+<a class="reference internal" href="../reference/customstat.html#clicmd-customstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">customstat</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UC_PERQ_PKT(q)</span></code>, <code class="docutils literal notranslate"><span class="pre">MC_PERQ_PKT(q)</span></code></p></td>
+<td><p>Egress port</p></td>
+<td><p>Packets sent from the queue (not drops).</p></td>
+</tr>
+</tbody>
+</table>
+<p>So: drops on the <em>ingress</em> port in <code class="docutils literal notranslate"><span class="pre">DROP_PKT_ING</span></code> mean the input side is
+full (often many ports sending to one congested output, or a PG without
+enough shared space); drops in <code class="docutils literal notranslate"><span class="pre">PERQ_DROP_PKT_UC</span></code> of one queue on the
+<em>egress</em> port mean that queue reached its limit; <code class="docutils literal notranslate"><span class="pre">PERQ_WRED_DROP_PKT_UC</span></code>
+means WRED dropped before the limit; <code class="docutils literal notranslate"><span class="pre">OBM_*</span></code> means the port macro could
+not keep up with line rate, and neither the queues nor SONiC’s queue
+counters see it.</p>
+</section>
+<section id="watching-counters">
+<h2>Watching counters<a class="headerlink" href="#watching-counters" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span></code> with no options prints only counters that changed
+since the last <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span></code> and are not zero. The second number on
+each line is that change. The diag shell has one memory of the last
+values for everybody, so if another session or a script also runs <code class="docutils literal notranslate"><span class="pre">show</span>
+<span class="pre">counters</span></code>, the change column is relative to <em>their</em> last call. For a
+clean measurement, take <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span> <span class="pre">all</span> <span class="pre">&lt;port&gt;</span></code> twice and compare
+the first numbers.</p>
+<p>Two things do not work as one might expect:</p>
+<ul>
+<li><p>A per-queue counter cannot be selected by name:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show c all PERQ_DROP_PKT.xe3</span>
+<span class="go">Syntax error parsing "PERQ_DROP_PKT.xe3"</span>
+</pre></div>
+</div>
+</div>
+<p>Use the port bitmap and filter on the host instead, for example
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">bcmcmd</span> <span class="pre">&quot;show</span> <span class="pre">c</span> <span class="pre">all</span> <span class="pre">xe3&quot;</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">DROP</span></code>.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ErDisc</span></code> (“error and discard counters”) does not include the MMU
+drop counters above, only MAC and pipeline error counters:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: The complete list has 25 counters, none of them an MMU drop counter</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show c erdisc all xe3</span>
+<span class="go">RIPHE6_64.xe3               :                     0                  +0</span>
+<span class="go">RTUN.xe3                    :                     0                  +0</span>
+<span class="go">TPCE_64.xe3                 :                     0                  +0</span>
+<span class="go">CLMIB_RFLR.xe3              :                     0                  +0</span>
+<span class="go">CLMIB_RERPKT.xe3            :                     0                  +0</span>
+<span class="go">…</span>
+<span class="go">CLMIB_TUFL.xe3              :                     0                  +0</span>
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">clear</span> <span class="pre">counters</span></code> (<a class="reference internal" href="../reference/clear.html#clicmd-clear"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">clear</span></code></a>) sets the
+hardware counters to zero, and SONiC’s counters (which read the same
+registers) jump with them. Prefer differences. If you must clear, clear
+only the port you are testing (<code class="docutils literal notranslate"><span class="pre">clear</span> <span class="pre">c</span> <span class="pre">ce30</span></code>).</p>
+</section>
+<section id="watermarks">
+<h2>Watermarks<a class="headerlink" href="#watermarks" title="Link to this heading"></a></h2>
+<p>The hardware tracks the highest buffer use it has seen with <a class="reference internal" href="../glossary.html#term-BST"><span class="xref std std-term">BST</span></a>
+(Buffer Statistics Tracking). BST is on for ingress (THDI), egress (THDO)
+and the free-cell pool (CFAP):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; g MMU_GCFG_BST_TRACKING_ENABLE</span>
+<span class="go">MMU_GCFG_BST_TRACKING_ENABLE.mmu_glb0[5][0xa000e00]=7: &lt;BST_TRACK_EN_THDO=1,</span>
+<span class="go">   BST_TRACK_EN_THDI=1,BST_TRACK_EN_CFAP=1&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>The SDK runs it in peak mode (<code class="docutils literal notranslate"><span class="pre">bcmSwitchBstTrackingMode</span></code> 1), so each
+counter holds a maximum, in cells, until it is cleared. <code class="docutils literal notranslate"><span class="pre">listmem</span> <span class="pre">BST</span></code>
+and <code class="docutils literal notranslate"><span class="pre">listreg</span> <span class="pre">-s</span> <span class="pre">BST</span></code> list them all; the useful ones:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Table or register</p></th>
+<th class="head"><p>High-water mark of</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">THDI_PORT_PG_BST_XPE0_PIPE&lt;n&gt;</span></code></p></td>
+<td><p>Per port and PG: <code class="docutils literal notranslate"><span class="pre">PG_BST_STAT_SHARED</span></code> (shared cells) and
+<code class="docutils literal notranslate"><span class="pre">PG_BST_STAT_HDRM</span></code> (headroom cells). Index <em>m</em> × 8 + <em>p</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">THDI_PORT_SP_BST_XPE0_PIPE&lt;n&gt;</span></code></p></td>
+<td><p>Per ingress port and service pool.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">THDI_BST_SP_GLOBAL_SHARED_CNT</span></code></p></td>
+<td><p>Per ingress service pool.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">THDI_HDRM_POOL_PEAK_COUNT_HP</span></code></p></td>
+<td><p>Per headroom pool.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MMU_THDU_BST_QUEUE_XPE0_PIPE&lt;n&gt;</span></code></p></td>
+<td><p>Per unicast queue (<code class="docutils literal notranslate"><span class="pre">Q_COUNT</span></code>). Index <code class="docutils literal notranslate"><span class="pre">ucast_Qbase</span></code> + <em>q</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MMU_THDM_DB_QUEUE_BST_XPE0_PIPE&lt;n&gt;</span></code></p></td>
+<td><p>Per multicast queue.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MMU_THDU_BST_PORT_XPE0_PIPE&lt;n&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">MMU_THDM_DB_PORTSP_BST_XPE0_PIPE&lt;n&gt;</span></code></p></td>
+<td><p>Per egress port and service pool, unicast and multicast.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MMU_THDM_DB_POOL_MCUC_BST_STAT</span></code></p></td>
+<td><p>Per egress service pool.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Read them with <a class="reference internal" href="../reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a> and <a class="reference internal" href="../reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span></code></a>; reading does not
+clear them:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Peak of xe3 unicast queue 0 and PG 7</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; d MMU_THDU_BST_QUEUE_XPE0_PIPE0 110 1</span>
+<span class="go">MMU_THDU_BST_QUEUE_XPE0_PIPE0.mmu_xpe0[110]: &lt;Q_COUNT=2,PARITY=0,ECCP=0,ECC=0,DATA=2&gt;</span>
+<span class="go">drivshell&gt; d THDI_PORT_PG_BST_XPE0_PIPE0 95 1</span>
+<span class="go">THDI_PORT_PG_BST_XPE0_PIPE0.mmu_xpe0[95]: &lt;RSVD=0,PG_BST_STAT_SHARED=2,PG_BST_STAT_HDRM=0,PARITY=0,ECCP=0,ECC=0,DATAWIDTH=0&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>Queue 0 of <code class="docutils literal notranslate"><span class="pre">xe3</span></code> peaked at 2 cells (512 bytes), and so did its PG 7.
+At the same time SONiC showed the same queue at 512 bytes:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>show<span class="w"> </span>queue<span class="w"> </span>watermark<span class="w"> </span>unicast
+<span class="go">Egress shared pool occupancy per unicast queue:</span>
+<span class="go">       Port    UC0    UC1    UC2    UC3    UC4    UC5    UC6    UC7    UC8    UC9</span>
+<span class="go"> Ethernet11    512      0      0      0      0      0      0      0      0      0</span>
+</pre></div>
+</div>
+<section id="sonic-and-the-watermarks">
+<h3>SONiC and the watermarks<a class="headerlink" href="#sonic-and-the-watermarks" title="Link to this heading"></a></h3>
+<p>SONiC reads the watermarks through the SAI every 60 seconds and <em>clears
+them as it reads</em> (flex counter groups <code class="docutils literal notranslate"><span class="pre">QUEUE_WATERMARK_STAT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PG_WATERMARK_STAT</span></code> and <code class="docutils literal notranslate"><span class="pre">BUFFER_POOL_WATERMARK_STAT</span></code>, stats mode
+<code class="docutils literal notranslate"><span class="pre">READ_AND_CLEAR</span></code>). It keeps the maxima itself:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">watermark</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">priority-group</span> <span class="pre">watermark</span></code>, <code class="docutils literal notranslate"><span class="pre">show</span>
+<span class="pre">buffer_pool</span> <span class="pre">watermark</span></code>: the highest value since the last telemetry
+period (<code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">watermark</span> <span class="pre">telemetry</span> <span class="pre">interval</span></code>, 120 s by default) or
+<code class="docutils literal notranslate"><span class="pre">sonic-clear</span> <span class="pre">…</span> <span class="pre">watermark</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">…</span> <span class="pre">persistent-watermark</span></code>: the highest value since the last
+<code class="docutils literal notranslate"><span class="pre">sonic-clear</span> <span class="pre">…</span> <span class="pre">persistent-watermark</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">counterpoll</span> <span class="pre">show</span></code> lists the polling intervals, and <code class="docutils literal notranslate"><span class="pre">counterpoll</span>
+<span class="pre">watermark</span> <span class="pre">interval</span> <span class="pre">&lt;ms&gt;</span></code> changes them.</p>
+<p>For the shell this means that a watermark can drop back to zero under you
+up to once a minute. Read the hardware table, not the SDK, if you want the
+value since SONiC’s last read, and use SONiC’s <code class="docutils literal notranslate"><span class="pre">persistent-watermark</span></code> for
+long-term maxima.</p>
+<p>The SDK’s BST API (<code class="docutils literal notranslate"><span class="pre">bcm_cosq_bst_stat_get</span></code>) returns the SDK’s own copy,
+which is updated only when someone calls <code class="docutils literal notranslate"><span class="pre">bcm_cosq_bst_stat_sync</span></code> and
+which SONiC’s read-and-clear empties. Called on its own it usually returns
+0, as in the <code class="docutils literal notranslate"><span class="pre">queue_info.c</span></code> output above. Sync first:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">bst_sync.c</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * bst_sync.c - pull the hardware BST high-water marks into the SDK's copy,</span>
+<span class="cm"> * then read the unicast-queue and priority-group marks of one port.</span>
+<span class="cm"> * Set bs_port to the logical port number (from "ps").</span>
+<span class="cm"> * Run:  cint /root/bst_sync.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">bs_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w">           </span><span class="cm">/* xe3 */</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">bs_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numq</span><span class="p">,</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span>
+<span class="w">          </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gport</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="o">*</span><span class="n">want</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint64</span><span class="w"> </span><span class="n">wm</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">*</span><span class="n">want</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_COSQ_GPORT_UCAST_QUEUE_GROUP</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">COMPILER_64_ZERO</span><span class="p">(</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_bst_stat_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">gport</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">bcmBstStatIdUcast</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="n">wm</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"UC queue 0x%x: %u cells (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">gport</span><span class="p">,</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="n">wm</span><span class="p">),</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">bs_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint64</span><span class="w"> </span><span class="n">wm</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">pg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_bst_stat_sync</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmBstStatIdUcast</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"sync Ucast: rv %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_bst_stat_sync</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmBstStatIdPriGroupShared</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"sync PriGroupShared: rv %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bs_port</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bs_cb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pg</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">COMPILER_64_ZERO</span><span class="p">(</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_bst_stat_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">pg</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">bcmBstStatIdPriGroupShared</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">wm</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"PG%d shared: %u cells (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="n">wm</span><span class="p">),</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">bs_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE bst_sync</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: BST of xe3 after a sync</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/bst_sync.c</span>
+<span class="go">sync Ucast: rv 0</span>
+<span class="go">sync PriGroupShared: rv 0</span>
+<span class="go">UC queue 0x24030000: 2 cells (rv 0)</span>
+<span class="go">PG0 shared: 0 cells (rv 0)</span>
+<span class="go">PG1 shared: 0 cells (rv 0)</span>
+<span class="go">PG2 shared: 0 cells (rv 0)</span>
+<span class="go">PG3 shared: 0 cells (rv 0)</span>
+<span class="go">PG4 shared: 0 cells (rv 0)</span>
+<span class="go">PG5 shared: 0 cells (rv 0)</span>
+<span class="go">PG6 shared: 0 cells (rv 0)</span>
+<span class="go">PG7 shared: 0 cells (rv 0)</span>
+<span class="go">DONE bst_sync</span>
+</pre></div>
+</div>
+</div>
+<p>The values are in cells. The sync is shared with SONiC: it moves the
+hardware peaks into the copy SONiC reads next, so it does not lose data,
+but <code class="docutils literal notranslate"><span class="pre">bcm_cosq_bst_stat_clear</span></code> would erase what SONiC has not read yet.
+Do not call it on a running switch.</p>
+<p>With the default mapping of every priority to PG 7, all eight
+priority-group readings of a port may come from the same hardware PG:
+SONiC’s per-PG watermarks then show PG 7’s peak in whichever PG was read
+first after it, as on <code class="docutils literal notranslate"><span class="pre">Ethernet8</span></code> here:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>show<span class="w"> </span>priority-group<span class="w"> </span>watermark<span class="w"> </span>shared
+<span class="go">Ingress shared pool occupancy per PG:</span>
+<span class="go">       Port    PG0    PG1    PG2    PG3    PG4    PG5    PG6    PG7</span>
+<span class="go">-----------  -----  -----  -----  -----  -----  -----  -----  -----</span>
+<span class="go">  Ethernet8    512      0      0      0    256      0    256      0</span>
+</pre></div>
+</div>
+<p>Read <code class="docutils literal notranslate"><span class="pre">THDI_PORT_PG_BST</span></code> in the shell to see the real PG.</p>
+</section>
+</section>
+<section id="changing-queues-from-the-shell">
+<h2>Changing queues from the shell<a class="headerlink" href="#changing-queues-from-the-shell" title="Link to this heading"></a></h2>
+<p>The persistent way to change queues and buffers is SONiC’s
+configuration: edit <code class="docutils literal notranslate"><span class="pre">SCHEDULER</span></code>, <code class="docutils literal notranslate"><span class="pre">WRED_PROFILE</span></code>, <code class="docutils literal notranslate"><span class="pre">QUEUE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BUFFER_PROFILE</span></code>, <code class="docutils literal notranslate"><span class="pre">BUFFER_PG</span></code>, <code class="docutils literal notranslate"><span class="pre">BUFFER_QUEUE</span></code> and the maps in
+<code class="docutils literal notranslate"><span class="pre">config_db</span></code> (or the HWSKU templates and <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">qos</span> <span class="pre">reload</span></code>), or use
+<code class="docutils literal notranslate"><span class="pre">mmuconfig</span> <span class="pre">-p</span> <span class="pre">&lt;profile&gt;</span> <span class="pre">-a</span> <span class="pre">&lt;dynamic_th&gt;</span></code> to change a buffer profile’s
+alpha. orchagent then reprograms the queues. The start-up MMU layout
+comes from <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>; see <a class="reference internal" href="../concepts/config/mmu.html"><span class="doc">Buffers and queues</span></a>.</p>
+<p>The shell can change the same hardware, which is useful to try a value
+before writing it into SONiC’s configuration.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A queue or buffer change made in the shell is invisible to SONiC.
+SONiC writes its own value back whenever it reprograms that object:
+when the matching <code class="docutils literal notranslate"><span class="pre">config_db</span></code> entry changes, on <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">qos</span>
+<span class="pre">reload</span></code> or <code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">reload</span></code>, and when <code class="docutils literal notranslate"><span class="pre">swss</span></code> or <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts
+or the switch reboots. Until then the shell value stays. On a port
+that SONiC has no QoS configuration for, that means until <code class="docutils literal notranslate"><span class="pre">syncd</span></code>
+restarts. Write down the old value before every change and put it back
+when you are done. To return to SONiC’s configuration, run <code class="docutils literal notranslate"><span class="pre">sudo</span>
+<span class="pre">config</span> <span class="pre">qos</span> <span class="pre">reload</span></code> if the switch uses SONiC QoS tables, or <code class="docutils literal notranslate"><span class="pre">sudo</span>
+<span class="pre">config</span> <span class="pre">reload</span></code> (this restarts <code class="docutils literal notranslate"><span class="pre">swss</span></code> and <code class="docutils literal notranslate"><span class="pre">syncd</span></code> and interrupts
+traffic). Do not change service pool sizes or global registers on a
+switch that forwards traffic.</p>
+</div>
+<section id="per-queue-settings-through-the-api">
+<h3>Per-queue settings through the API<a class="headerlink" href="#per-queue-settings-through-the-api" title="Link to this heading"></a></h3>
+<p>The SDK functions that SONiC’s SAI itself uses are the safe way to change
+a queue, because they keep the SDK’s software state consistent with the
+hardware. <code class="docutils literal notranslate"><span class="pre">queue_tune.c</span></code> saves the settings of one unicast queue,
+changes four of them, shows the result and puts the old values back:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bcm_cosq_gport_sched_set</span></code>: scheduling mode and weight;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bcm_cosq_control_set</span></code> with <code class="docutils literal notranslate"><span class="pre">bcmCosqControlDropLimitAlpha</span></code>: the
+dynamic shared limit;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bcm_cosq_gport_bandwidth_set</span></code>: minimum and maximum rate in kbit/s;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bcm_cosq_gport_discard_set</span></code>: WRED per colour (add
+<code class="docutils literal notranslate"><span class="pre">BCM_COSQ_DISCARD_MARK_CONGESTION</span></code> to ECN-mark instead of drop).</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">queue_tune.c</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * queue_tune.c - change one unicast queue of one port: WRR weight, shared</span>
+<span class="cm"> * limit alpha, maximum rate and green WRED thresholds; print the result;</span>
+<span class="cm"> * then, with qt_restore = 1, put the old values back.</span>
+<span class="cm"> * Changes the ASIC behind SONiC's back.  Set qt_port (logical port number</span>
+<span class="cm"> * from "ps") and qt_queue.</span>
+<span class="cm"> * Run:  cint /root/queue_tune.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">qt_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">127</span><span class="p">;</span><span class="w">          </span><span class="cm">/* ce30 */</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">qt_queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">qt_restore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">qt_gp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">qt_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numq</span><span class="p">,</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span>
+<span class="w">          </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">gport</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="o">*</span><span class="n">want</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_data</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">*</span><span class="n">want</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_COSQ_GPORT_UCAST_QUEUE_GROUP</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">qt_queue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">qt_gp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gport</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">qt_queue</span><span class="o">--</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">qt_show</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">when</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">kmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">kmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">fl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_t</span><span class="w"> </span><span class="n">w</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">bcm_cosq_gport_sched_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">weight</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">bcmCosqControlDropLimitAlpha</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">alpha</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_bandwidth_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">kmin</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fl</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">w</span><span class="p">);</span>
+<span class="w">    </span><span class="n">w</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_COLOR_GREEN</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_BYTES</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">w</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%-8s sched %d weight %d | alpha %d | max %u kbps | wred flags 0x%x min %d max %d prob %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">when</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">flags</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">min_thresh</span><span class="p">,</span>
+<span class="w">           </span><span class="n">w</span><span class="p">.</span><span class="n">max_thresh</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">drop_probability</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">qt_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">kmin</span><span class="p">,</span><span class="w"> </span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="n">fl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_gport_t</span><span class="w"> </span><span class="n">pg</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_t</span><span class="w"> </span><span class="n">old_w</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_t</span><span class="w"> </span><span class="n">new_w</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">bcm_port_gport_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_port</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_cb</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pg</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"queue gport 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">qt_gp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NOT_FOUND</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Save the current values. */</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_sched_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">weight</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">bcmCosqControlDropLimitAlpha</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">alpha</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_bandwidth_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">kmin</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fl</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">old_w</span><span class="p">);</span>
+<span class="w">    </span><span class="n">old_w</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_COLOR_GREEN</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_BYTES</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">old_w</span><span class="p">);</span>
+<span class="w">    </span><span class="n">qt_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="s">"before"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* Change them. */</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_gport_sched_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_COSQ_WEIGHTED_ROUND_ROBIN</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"sched_set WRR 10: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">bcmCosqControlDropLimitAlpha</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">bcmCosqControlDropLimitAlpha_1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"alpha 1: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_gport_bandwidth_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10000000</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"max 10 Gb/s: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bcm_cosq_gport_discard_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_w</span><span class="p">);</span>
+<span class="w">    </span><span class="n">new_w</span><span class="p">.</span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_ENABLE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BCM_COSQ_DISCARD_COLOR_GREEN</span><span class="w"> </span><span class="o">|</span>
+<span class="w">                  </span><span class="n">BCM_COSQ_DISCARD_BYTES</span><span class="p">;</span>
+<span class="w">    </span><span class="n">new_w</span><span class="p">.</span><span class="n">min_thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000</span><span class="p">;</span>
+<span class="w">    </span><span class="n">new_w</span><span class="p">.</span><span class="n">max_thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400000</span><span class="p">;</span>
+<span class="w">    </span><span class="n">new_w</span><span class="p">.</span><span class="n">drop_probability</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_cosq_gport_discard_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">new_w</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"wred green 100000-400000 B, 10 percent: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">    </span><span class="n">qt_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="s">"after"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">qt_restore</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_cosq_gport_sched_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_control_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">bcmCosqControlDropLimitAlpha</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_gport_bandwidth_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">kmin</span><span class="p">,</span><span class="w"> </span><span class="n">kmax</span><span class="p">,</span><span class="w"> </span><span class="n">fl</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bcm_cosq_gport_discard_set</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">qt_gp</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">old_w</span><span class="p">);</span>
+<span class="w">        </span><span class="n">qt_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="s">"restored"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">qt_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE queue_tune</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Queue 3 of ce30 changed and restored</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/queue_tune.c</span>
+<span class="go">queue gport 0x241fc003</span>
+<span class="go">before   sched 3 weight 1 | alpha 7 | max 0 kbps | wred flags 0x2100 min 16776960 max 16776960 prob 0</span>
+<span class="go">sched_set WRR 10: Ok</span>
+<span class="go">alpha 1: Ok</span>
+<span class="go">max 10 Gb/s: Ok</span>
+<span class="go">wred green 100000-400000 B, 10 percent: Ok</span>
+<span class="go">after    sched 3 weight 10 | alpha 6 | max 10000000 kbps | wred flags 0x2101 min 100096 max 400128 prob 10</span>
+<span class="go">restored sched 3 weight 1 | alpha 7 | max 0 kbps | wred flags 0x2100 min 16776960 max 16776960 prob 0</span>
+<span class="go">DONE queue_tune</span>
+</pre></div>
+</div>
+</div>
+<p>The WRED thresholds are rounded up to whole cells (100000 → 100096
+bytes). While WRED was on, <a class="reference internal" href="../reference/cos.html#clicmd-cos-discard_show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">discard_show</span></code></a> <code class="docutils literal notranslate"><span class="pre">Gport=0x241fc003</span>
+<span class="pre">Queue=0</span></code> showed <code class="docutils literal notranslate"><span class="pre">Ena</span> <span class="pre">1</span></code> for all three colours, so enabling WRED for
+one colour enables the queue’s WRED; the yellow and red thresholds stay
+at their maximum.</p>
+<p>The same API covers the other limits: <code class="docutils literal notranslate"><span class="pre">bcm_cosq_control_set</span></code> with
+<code class="docutils literal notranslate"><span class="pre">bcmCosqControlEgressUCQueueMinLimitBytes</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bcmCosqControlEgressUCQueueSharedLimitBytes</span></code> and
+<code class="docutils literal notranslate"><span class="pre">bcmCosqControlEgressUCSharedDynamicEnable</span></code> on a queue GPORT, and with
+<code class="docutils literal notranslate"><span class="pre">bcmCosqControlIngressPortPGMinLimitBytes</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bcmCosqControlIngressPortPGSharedLimitBytes</span></code> and
+<code class="docutils literal notranslate"><span class="pre">bcmCosqControlIngressPortPGHeadroomLimitBytes</span></code> on a port GPORT and a
+priority. A queue or PG minimum is taken out of the shared pool, so the
+SDK may recompute shared limits of other ports when it changes. Leave
+minimums to SONiC on a switch that carries traffic.</p>
+</section>
+<section id="changing-a-table-entry-directly">
+<h3>Changing a table entry directly<a class="headerlink" href="#changing-a-table-entry-directly" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../reference/modify.html#clicmd-modify"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">modify</span></code></a> changes fields of a table entry in place. To set queue 3
+of <code class="docutils literal notranslate"><span class="pre">ce30</span></code> to alpha 1 (code 7) and back to alpha 2 (code 8):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Changes the ASIC behind SONiC’s back</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; modify MMU_THDU_CONFIG_QUEUE_PIPE1 603 1 Q_SHARED_LIMIT_CELL=7</span>
+<span class="go">drivshell&gt; d MMU_THDU_CONFIG_QUEUE_PIPE1 603 1</span>
+<span class="go">MMU_THDU_CONFIG_QUEUE_PIPE1.mmu_xpe0[603]: &lt;RSVD=0,Q_WM_MAX_THRESHOLD=0,Q_SHARED_LIMIT_CELL=7,Q_SHARED_ALPHA_CELL=7,Q_MIN_LIMIT_CELL=0,Q_LIMIT_DYNAMIC_CELL=1,…&gt;</span>
+<span class="go">drivshell&gt; modify MMU_THDU_CONFIG_QUEUE_PIPE1 603 1 Q_SHARED_LIMIT_CELL=8</span>
+<span class="go">drivshell&gt; d MMU_THDU_CONFIG_QUEUE_PIPE1 603 1</span>
+<span class="go">MMU_THDU_CONFIG_QUEUE_PIPE1.mmu_xpe0[603]: &lt;RSVD=0,Q_WM_MAX_THRESHOLD=0,Q_SHARED_LIMIT_CELL=8,Q_SHARED_ALPHA_CELL=8,Q_MIN_LIMIT_CELL=0,Q_LIMIT_DYNAMIC_CELL=1,…&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>This bypasses the SDK as well as SONiC: the SDK’s own idea of the queue
+does not change, and a later SDK call for the queue can overwrite the
+field. Get the entry index right (see <a class="reference internal" href="#the-buffer-in-brief">The buffer in brief</a>); a wrong
+index changes another port’s queue.</p>
+</section>
+<section id="the-cos-command">
+<h3>The <code class="docutils literal notranslate"><span class="pre">cos</span></code> command<a class="headerlink" href="#the-cos-command" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="../reference/cos.html#clicmd-cos-port-weight"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">port</span> <span class="pre">weight</span></code></a> and the other <code class="docutils literal notranslate"><span class="pre">cos</span> <span class="pre">port</span></code> forms change the
+SDK’s port-level scheduler view, not the queue GPORTs that SONiC
+programs:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Changes the ASIC behind SONiC’s back</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cos port weight pbm=ce30 queue=3 weight=10</span>
+<span class="go">drivshell&gt; cos port show pbm=ce30</span>
+
+<span class="go">  Port ce30 COS configuration:</span>
+<span class="go"> ------------------------------</span>
+<span class="go">  Config (max queues): 8</span>
+<span class="go">  Schedule mode: weighted round-robin</span>
+<span class="go">  Weighting (in packets):</span>
+<span class="go">    COSQ 0 = 1 packets</span>
+<span class="go">    COSQ 1 = 1 packets</span>
+<span class="go">    COSQ 2 = 1 packets</span>
+<span class="go">    COSQ 3 = 10 packets</span>
+<span class="go">…</span>
+<span class="go">  VLAN COSQ Schedule mode: weighted round-robin</span>
+<span class="go">  VLAN COSQ Weighting (in packets):</span>
+<span class="go">    VLAN COSQ 0 = 10 packets</span>
+<span class="go">    VLAN COSQ 1 = 10 packets</span>
+<span class="go">…</span>
+<span class="go">    VLAN COSQ 15 = 10 packets</span>
+<span class="go">…</span>
+<span class="go">drivshell&gt; cos port weight pbm=ce30 queue=3 weight=1</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">COSQ</span> <span class="pre">3</span></code> and one whole block of <code class="docutils literal notranslate"><span class="pre">VLAN</span> <span class="pre">COSQ</span></code> weights changed to 10,
+while <code class="docutils literal notranslate"><span class="pre">bcm_cosq_gport_sched_get</span></code> on the port’s unicast queues still
+reported weight 1. <code class="docutils literal notranslate"><span class="pre">cos</span> <span class="pre">port</span> <span class="pre">bandwidth</span></code> likewise left the queues’
+shapers unchanged. Use the queue GPORT API above to change what SONiC’s
+queues do, and use <code class="docutils literal notranslate"><span class="pre">cos</span> <span class="pre">port</span> <span class="pre">show</span></code> before and after a <code class="docutils literal notranslate"><span class="pre">cos</span></code> change
+to be able to put it back.</p>
+</section>
+</section>
+<section id="pfc">
+<h2>PFC<a class="headerlink" href="#pfc" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">pfc</span> <span class="pre">counters</span></code> (SONiC) shows received and sent pause frames per
+priority. In the shell they are the MAC counters <code class="docutils literal notranslate"><span class="pre">CLMIB_RPFC&lt;n&gt;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">CLMIB_TPFC&lt;n&gt;</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">CLMIB_RPFCOFF&lt;n&gt;</span></code>/<code class="docutils literal notranslate"><span class="pre">CLMIB_TPFCOFF&lt;n&gt;</span></code> for XON. A lossless priority
+needs, in order: its TC mapped to a PG with headroom
+(<code class="docutils literal notranslate"><span class="pre">PG_HDRM_LIMIT</span></code> non-zero in <code class="docutils literal notranslate"><span class="pre">THDI_PORT_PG_CONFIG</span></code>), PFC enabled on
+the port (<code class="docutils literal notranslate"><span class="pre">pfc_enable</span></code> in <code class="docutils literal notranslate"><span class="pre">PORT_QOS_MAP</span></code>) and, on the egress side, a
+queue that is not dropped by WRED. If a lossless PG still drops
+(<code class="docutils literal notranslate"><span class="pre">DROP_PKT_ING</span></code> rising), check <code class="docutils literal notranslate"><span class="pre">PG_BST_STAT_HDRM</span></code> against
+<code class="docutils literal notranslate"><span class="pre">PG_HDRM_LIMIT</span></code>: a headroom that fills up is too small for the cable
+length and speed.</p>
+</section>
+<section id="troubleshooting-checklist">
+<h2>Troubleshooting checklist<a class="headerlink" href="#troubleshooting-checklist" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">counters</span> <span class="pre">&lt;port&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">interfaces</span> <span class="pre">counters</span></code>: is
+anything dropped, and on which side?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">c</span> <span class="pre">all</span> <span class="pre">&lt;port&gt;</span></code> on the egress port: <code class="docutils literal notranslate"><span class="pre">PERQ_DROP_PKT_UC(q)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">PERQ_WRED_DROP_PKT_UC(q)</span></code> rising points at one queue; check its
+limit and WRED with <code class="docutils literal notranslate"><span class="pre">queue_info.c</span></code> and <a class="reference internal" href="../reference/cos.html#clicmd-cos-discard_show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">discard_show</span></code></a>.</p></li>
+<li><p>On the ingress ports: <code class="docutils literal notranslate"><span class="pre">DROP_PKT_ING</span></code> rising means ingress admission;
+look at the PG limits and <code class="docutils literal notranslate"><span class="pre">THDI_PORT_PG_BST</span></code>. <code class="docutils literal notranslate"><span class="pre">OBM_*</span></code> rising means
+the port macro is oversubscribed.</p></li>
+<li><p>On <code class="docutils literal notranslate"><span class="pre">cpu0</span></code>: <code class="docutils literal notranslate"><span class="pre">PERQ_DROP_PKT(q)</span></code> is a CPU queue overflowing; see
+<a class="reference internal" href="copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">queue</span> <span class="pre">watermark</span></code> / <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">priority-group</span> <span class="pre">watermark</span></code>: how close
+did the queue or PG get to its limit? Compare with the limit in cells.</p></li>
+<li><p>Nothing counted anywhere: the drop is in the pipeline, not the buffer;
+see <a class="reference internal" href="../reference/customstat.html#clicmd-customstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">customstat</span></code></a> and <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">dropcounters</span></code>.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="copp.html" class="btn btn-neutral float-left" title="Protecting the CPU with CoPP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="acl.html" class="btn btn-neutral float-right" title="Debugging ACL rules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

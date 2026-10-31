@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>knet &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LibPm" href="libpm.html" />
+    <link rel="prev" title="ISSU" href="issu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Command reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#shell-commands">Shell commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#commands-for-other-chip-families">Commands for other chip families</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#logical-table-switch-mode">Logical-table switch mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#bcma-command-line"><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Command reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">knet</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="knet">
+<h1><code class="docutils literal notranslate"><span class="pre">knet</span></code><a class="headerlink" href="#knet" title="Link to this heading"></a></h1>
+<p>A command of the separate <code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line; see <a class="reference internal" href="../index.html#bcmsh-other-interpreters"><span class="std std-ref">Commands for other chip families</span></a>.</p>
+<p>KNET access.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>knet &lt;object&gt; &lt;action&gt; [&lt;id&gt;] [options]
+</pre></div>
+</div>
+<p class="rubric">Built-in help</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This command is used to manage KNET objects such as virtual network
+interfaces and packet filters.
+    Netif - Network interface operations.
+        Create [options] - Create a new network interface.
+            ID=&lt;value&gt;          - Netif ID (0 to automatically assign a ID).
+            Name=&lt;value&gt;        - Netif name string.
+            RcpuEncap=[yes/no]  - Enable RCPU header encapsulation.
+            BindrxCHannel=[yes/no] - Bind RX Channel.
+            BindtxPort=[yes/no] - Bind TX port.
+            Vlan=&lt;value&gt;        - VLAN ID.
+            MACaddr=&lt;value&gt;     - MAC address.
+            Port=&lt;value&gt;        - Port number for TX binding.
+            PortEncap=&lt;value&gt;   - The binding port's encapsulation type
+                                  ("higig" | "higig2" | "ieee").
+            Queue=&lt;value&gt;       - Output queue ID of the binding port.
+            CHan=&lt;value&gt;        - Channel ID for RX Channel binding.
+            FrameSize=&lt;value&gt;   - Maximum frame size allowed.
+        Destroy &lt;id&gt;   - Destroy a network interface.
+        Info [&lt;id&gt;]    - Show a network interface's configuration.
+    Filter - Filter operations.
+        Create [options] - Create a filter.
+            DESC=&lt;value&gt;        - Filter's description.
+            Priority=&lt;value&gt;    - Filter's priority.
+            DestType=&lt;type&gt;     - Destination type to forward.
+            DestID=&lt;value&gt;      - Destination ID to forward.
+            DestProto=&lt;value&gt;   - Overwrite protocol.
+            MirrorType=&lt;value&gt;  - Mirroring destination type.
+            MirrorID=&lt;value&gt;    - Mirroring destination ID.
+            MirrorProto=&lt;value&gt; - Overwrite protocol for mirror copy.
+            StripTag=[yes/no]   - Enable to trip VLAN Tag.
+            Vlan=&lt;value&gt;        - 16 bit TCI to match.
+            IngressPort=&lt;value&gt; - Ingress port ID to match.
+            SrcModePort=&lt;value&gt; - Source module port to match.
+            SrcModeID=&lt;value&gt;   - Source module ID to match.
+            Queue=&lt;value&gt;       - Source CPU port queue to match.
+            CHan=&lt;value&gt;        - Source DMA Channel ID.
+            FPRule=&lt;value&gt;      - FP rule number to match.
+            Reason=&lt;reason&gt;     - Specific reason to match.
+            RawData=&lt;data&gt;      - Raw data string to match.
+            RawMask=&lt;mask&gt;      - Raw data mask string to match.
+            MetaData=&lt;mdata&gt;    - Raw metadata with 32-bit values in
+                                  words. See input format in the example.
+            MetaDataMask=&lt;mdata_mask&gt; - Raw metadata mask to match.
+        Destroy &lt;id&gt;   - Destroy a filter.
+        Info [&lt;id&gt;]    - Show a filter configuration.
+</pre></div>
+</div>
+<p class="rubric">Built-in examples</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>netif create name="bcm0_1" mac=00:11:22:33:44:55 framesize=1518
+n c n="bcm0_2" mac=00:01:02:03:04:05 fs=1518
+filter create chan=1 priority=10 desttype=netif destid=1\
+              ingressport=1
+f c dt=netif did=1 MetaData=0x00000000_00000000_00000000\
+    _00000000_00020000_00000000_00000000_00000000_00000000\
+    _00000000_00000000_00000000_00000000_00000000_00000000\
+    _00000000_00000000_00000000 MetaDataMask=0x00000000_00000000\
+    _00000000_00000000_ffff0000_00000000_00000000_00000000_00000000\
+    _00000000_00000000_00000000_00000000_00000000_00000000_00000000\
+    _00000000_00000000
+f c ch=1 p=20 dt=netif did=1 q=2
+f destroy 1
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="issu.html" class="btn btn-neutral float-left" title="ISSU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="libpm.html" class="btn btn-neutral float-right" title="LibPm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

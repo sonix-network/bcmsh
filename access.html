@@ -1,0 +1,1481 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessing the shell &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reading this guide" href="basics.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Accessing the shell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-server-start-up">Shell server start-up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#host-commands">Host commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-network-operating-systems">Other network operating systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arista-eos">Arista EOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cisco-nx-os">Cisco NX-OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#juniper-junos-qfx5100-qfx5110">Juniper Junos (QFX5100, QFX5110)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cumulus-linux">Cumulus Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extreme-exos">Extreme EXOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-drivshell-front-end">The <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> front-end</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#blocked-commands">Blocked commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leaving-the-shell">Leaving the shell</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-modes-and-prompts">Shell modes and prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-syntax">Command-line syntax</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#words-and-quoting">Words and quoting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chaining-with">Chaining with <code class="docutils literal notranslate"><span class="pre">;</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comments">Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-names-and-lookup">Command names and lookup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unit-prefixes">Unit prefixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#help">Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#errors-and-result-codes">Errors and result codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unknown-commands-and-rc-fall-back">Unknown commands and rc fall-back</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#control-commands">Control commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#shell-options-set">Shell options (<code class="docutils literal notranslate"><span class="pre">set</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rc-scripts">rc scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#line-editing-history-and-output">Line editing, history and output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#files-inside-the-syncd-container">Files inside the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupting-commands">Interrupting commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Accessing the shell</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="accessing-the-shell">
+<h1>Accessing the shell<a class="headerlink" href="#accessing-the-shell" title="Link to this heading"></a></h1>
+<p>On a SONiC switch the Broadcom diag shell runs inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code>. You reach it
+from the host with <a class="reference internal" href="#clicmd-bcmsh"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmsh</span></code></a> for an interactive session, or with
+<a class="reference internal" href="#clicmd-bcmcmd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmcmd</span></code></a> to run one command from a script. Both give you the
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt, a thin SAI front-end in front of the SDK command
+interpreter.</p>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
+<pre  class="mermaid">
+        flowchart TB
+  subgraph host[&quot;Host&quot;]
+    hbcmsh[&quot;bcmsh&quot;]
+    hbcmcmd[&quot;bcmcmd&quot;]
+  end
+  subgraph syncd[&quot;syncd container&quot;]
+    cbcmsh[&quot;bcmsh&lt;br/&gt;(socat, readline)&quot;]
+    cbcmcmd[&quot;bcmcmd&lt;br/&gt;(C++ client)&quot;]
+    sock[(&quot;/var/run/sswsyncd/&lt;br/&gt;sswsyncd.socket&quot;)]
+    dsserve[&quot;dsserve&lt;br/&gt;one client at a time,&lt;br/&gt;socket ⇄ pseudo-terminal&quot;]
+    subgraph proc[&quot;syncd --diag&quot;]
+      thread[&quot;diag-shell thread&lt;br/&gt;enables the shell, again every 1 s&quot;]
+      fe[&quot;SAI front-end&lt;br/&gt;prompt drivshell&amp;gt;&quot;]
+      sdk[&quot;SDK command interpreter&lt;br/&gt;unit 0&quot;]
+    end
+  end
+  hbcmsh -- &quot;docker exec -it&quot; --&gt; cbcmsh
+  hbcmcmd -- &quot;docker exec -i&quot; --&gt; cbcmcmd
+  cbcmsh --&gt; sock
+  cbcmcmd --&gt; sock
+  sock --&gt; dsserve
+  dsserve -- &quot;pty: stdin, stdout, stderr&quot; --&gt; proc
+  thread --&gt; fe --&gt; sdk
+    </pre><p>From the user inward:</p>
+<ol class="arabic simple">
+<li><p>The host commands <code class="docutils literal notranslate"><span class="pre">/usr/bin/bcmsh</span></code> and <code class="docutils literal notranslate"><span class="pre">/usr/bin/bcmcmd</span></code>. Each runs
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> into the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container and calls the container’s
+command of the same name.</p></li>
+<li><p>The container clients: <code class="docutils literal notranslate"><span class="pre">bcmsh</span></code> is a bash script that runs <code class="docutils literal notranslate"><span class="pre">socat</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> is a small C++ program.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dsserve</span></code>, a UNIX-socket-to-pseudo-terminal proxy. supervisord starts
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> through it, so <code class="docutils literal notranslate"><span class="pre">syncd</span></code>’s standard input, output and error all go
+through one pseudo-terminal, and that terminal is exposed on the socket
+<code class="docutils literal notranslate"><span class="pre">/var/run/sswsyncd/sswsyncd.socket</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">syncd</span></code>, started with <code class="docutils literal notranslate"><span class="pre">--diag</span></code>. Once the switch is created, a thread
+asks the SAI to enable the switch shell. That call blocks for as long as
+the shell runs.</p></li>
+<li><p>The SAI front-end, which prints the <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt. It handles a
+few keywords itself and passes every other line to the SDK command
+interpreter, always on unit 0.</p></li>
+</ol>
+</section>
+<section id="shell-server-start-up">
+<h2>Shell server start-up<a class="headerlink" href="#shell-server-start-up" title="Link to this heading"></a></h2>
+<p>The syncd start-up scripts run <code class="docutils literal notranslate"><span class="pre">syncd</span></code> under <code class="docutils literal notranslate"><span class="pre">dsserve</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">CMD_DSSERVE</span><span class="o">=</span>/usr/bin/dsserve
+<span class="nv">CMD_DSSERVE_ARGS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$CMD_SYNCD</span><span class="s2"> --diag"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-x<span class="w"> </span><span class="nv">$CMD_DSSERVE</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">CMD</span><span class="o">=</span><span class="nv">$CMD_DSSERVE</span><span class="p">;</span><span class="w"> </span><span class="nv">CMD_ARGS</span><span class="o">=</span><span class="nv">$CMD_DSSERVE_ARGS</span><span class="p">;</span><span class="w"> </span>…
+<span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">CMD</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">CMD_ARGS</span><span class="si">}</span><span class="w">            </span><span class="c1"># dsserve /usr/bin/syncd --diag -u -p … …</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsserve</span></code> runs in the foreground and listens on its default socket,
+<code class="docutils literal notranslate"><span class="pre">/var/run/sswsyncd/sswsyncd.socket</span></code>.</p></li>
+<li><p>It creates a pseudo-terminal, connects <code class="docutils literal notranslate"><span class="pre">syncd</span></code>’s standard input, output
+and error to it, and starts <code class="docutils literal notranslate"><span class="pre">syncd</span></code>. It accepts one client at a time.</p></li>
+<li><p>Inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code>, a thread enables the switch shell once a second. While a
+shell session is active the call blocks; when the shell exits, the thread
+enables it again a second later. The loop ends only if enabling the shell
+fails.</p></li>
+<li><p>Each time the shell is enabled it prints <code class="docutils literal notranslate"><span class="pre">Hit</span> <span class="pre">enter</span> <span class="pre">to</span> <span class="pre">get</span> <span class="pre">drivshell</span>
+<span class="pre">prompt..</span></code> and waits for a newline. Only one shell can be active at a time.</p></li>
+</ul>
+<p>When no client is connected, <code class="docutils literal notranslate"><span class="pre">syncd</span></code>’s console output, including the <code class="docutils literal notranslate"><span class="pre">Hit</span>
+<span class="pre">enter…</span></code> banner and any SDK messages, goes to <code class="docutils literal notranslate"><span class="pre">/var/log/syslog</span></code>. While a
+client is connected, all of it goes to that client instead, including SDK log
+lines unrelated to the command you ran.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The SAI also opens the shell during switch initialisation if an SDK init
+command fails and the <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> property <code class="docutils literal notranslate"><span class="pre">sai_suspend_on_error</span></code> is
+non-zero. It prints <code class="docutils literal notranslate"><span class="pre">SDK</span> <span class="pre">init</span> <span class="pre">failure.</span> <span class="pre">Use</span> <span class="pre">diag</span> <span class="pre">commands</span> <span class="pre">to</span>
+<span class="pre">troubleshoot.</span></code> and opens the same <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt before switch
+creation has finished. Connect with <code class="docutils literal notranslate"><span class="pre">bcmsh</span></code> to investigate, and type
+<code class="docutils literal notranslate"><span class="pre">quit</span></code> to let initialisation continue.</p>
+</div>
+</section>
+<section id="host-commands">
+<h2>Host commands<a class="headerlink" href="#host-commands" title="Link to this heading"></a></h2>
+<dl class="std clicmd">
+<dt class="sig sig-object std" id="clicmd-bcmsh">
+<span class="sig-name descname"><span class="pre">bcmsh</span> <span class="pre">[-n</span> <span class="pre">ASIC]</span> <span class="pre">[-h]</span> <span class="pre">[-q]</span> <span class="pre">[-t</span> <span class="pre">SECONDS]</span></span><a class="headerlink" href="#clicmd-bcmsh" title="Link to this definition"></a></dt>
+<dd><p>Open an interactive session with the diag shell.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">ASIC</span></code></dt><dd><p>Connect to <code class="docutils literal notranslate"><span class="pre">syncd&lt;ASIC&gt;</span></code>. Accepted only on multi-ASIC platforms;
+Trident 3 systems are single-ASIC.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-q</span></code></dt><dd><p>Do not print the banner.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">SECONDS</span></code></dt><dd><p>Close the session after this many seconds without traffic. The default
+is 300; <code class="docutils literal notranslate"><span class="pre">0</span></code> turns the timeout off.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-h</span></code></dt><dd><p>Print usage.</p>
+</dd>
+</dl>
+<p>Unless <code class="docutils literal notranslate"><span class="pre">-q</span></code> is given, <code class="docutils literal notranslate"><span class="pre">bcmsh</span></code> prints:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Press Enter to show prompt.
+Press Ctrl+C to exit.
+NOTICE: Only one bcmsh or bcmcmd can connect to the shell at same time.
+</pre></div>
+</div>
+<p>Line editing and up-arrow history work locally: the line is sent to the
+switch only when you press Enter. <kbd class="kbd docutils literal notranslate">Ctrl</kbd>-<kbd class="kbd docutils literal notranslate">C</kbd> closes the session but
+does not interrupt a command that is already running inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code> (see
+<a class="reference internal" href="#interrupting-commands">Interrupting commands</a>).</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bcmsh
+<span class="go">Press Enter to show prompt.</span>
+<span class="go">Press Ctrl+C to exit.</span>
+<span class="go">NOTICE: Only one bcmsh or bcmcmd can connect to the shell at same time.</span>
+
+<span class="go">Enter 'quit' to exit the application.</span>
+<span class="go">drivshell&gt;ps</span>
+<span class="go">...</span>
+<span class="go">drivshell&gt;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="std clicmd">
+<dt class="sig sig-object std" id="clicmd-bcmcmd">
+<span class="sig-name descname"><span class="pre">bcmcmd</span> <span class="pre">[-n</span> <span class="pre">ASIC]</span> <span class="pre">[-v]</span> <span class="pre">[-t</span> <span class="pre">SECONDS]</span> <span class="pre">[-f</span> <span class="pre">SOCKET]</span> <span class="pre">COMMAND</span></span><a class="headerlink" href="#clicmd-bcmcmd" title="Link to this definition"></a></dt>
+<dd><p>Run one diag-shell command line and print its output. <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> does not
+need a terminal, so it can be used in pipelines and scripts.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">COMMAND</span></code></dt><dd><p>One argument. Quote multi-word commands: <code class="docutils literal notranslate"><span class="pre">bcmcmd</span> <span class="pre">&quot;l2</span> <span class="pre">show&quot;</span></code>. If
+several bare words are given, only the last one is run.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">ASIC</span></code></dt><dd><p>Connect to <code class="docutils literal notranslate"><span class="pre">syncd&lt;ASIC&gt;</span></code> on multi-ASIC platforms.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">SECONDS</span></code></dt><dd><p>How long to wait for output before giving up. The default is 30.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">SOCKET</span></code></dt><dd><p>Socket path. The default is <code class="docutils literal notranslate"><span class="pre">/var/run/sswsyncd/sswsyncd.socket</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-v</span></code></dt><dd><p>Print <code class="docutils literal notranslate"><span class="pre">[INFO]</span> <span class="pre">cmd:</span> <span class="pre">…</span></code> and <code class="docutils literal notranslate"><span class="pre">[INFO]</span> <span class="pre">domain</span> <span class="pre">socket</span> <span class="pre">filename:</span> <span class="pre">…</span></code> for
+the options that follow it.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code></dt><dd><p>Print usage and exit with status 22.</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">-t</span></code> and <code class="docutils literal notranslate"><span class="pre">-f</span></code> must be followed by at least one more argument after
+their value: <code class="docutils literal notranslate"><span class="pre">bcmcmd</span> <span class="pre">-t</span> <span class="pre">5</span></code> alone is rejected with <code class="docutils literal notranslate"><span class="pre">[ERROR]</span> <span class="pre">bad</span>
+<span class="pre">timeout</span></code> (exit 22), but <code class="docutils literal notranslate"><span class="pre">bcmcmd</span> <span class="pre">-t</span> <span class="pre">5</span> <span class="pre">ps</span></code> works.</p>
+<p>Exit status:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>The shell returned to the <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt. This does not
+mean the diag command succeeded; see <a class="reference internal" href="#errors-and-result-codes">Errors and result codes</a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Could not connect to or write to the socket (for example
+<code class="docutils literal notranslate"><span class="pre">connecting</span> <span class="pre">stream</span> <span class="pre">socket</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Read error, or the server closed the connection (<code class="docutils literal notranslate"><span class="pre">ending</span>
+<span class="pre">connection</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>Usage error, or <code class="docutils literal notranslate"><span class="pre">-h</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>62</p></td>
+<td><p>No prompt arrived within the timeout (<code class="docutils literal notranslate"><span class="pre">polling</span> <span class="pre">socket</span> <span class="pre">timeout</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> connects, sends a newline and
+silently waits for either the <code class="docutils literal notranslate"><span class="pre">Hit</span> <span class="pre">enter</span> <span class="pre">to</span> <span class="pre">get</span> <span class="pre">drivshell</span> <span class="pre">prompt..</span></code>
+banner (answering it with another newline) or <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>. It then sends
+<code class="docutils literal notranslate"><span class="pre">COMMAND</span></code> followed by a newline and prints everything it receives until
+the output ends in <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> again. There is no framing or
+end-of-output marker; the prompt text is the only delimiter. This has some
+consequences:</p>
+<ul class="simple">
+<li><p>The output starts with the shell’s echo of <code class="docutils literal notranslate"><span class="pre">COMMAND</span></code> and ends with
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>. Parsers should drop the first and last lines. The text
+comes from a terminal, so lines end in <code class="docutils literal notranslate"><span class="pre">\r\n</span></code> (the echoed command
+line in <code class="docutils literal notranslate"><span class="pre">\r\r\n</span></code>).</p></li>
+<li><p>A command that does not return to <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> makes <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> wait
+until the timeout and exit with 62. The command keeps running in
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code>, and the shell may be left in another mode. Examples:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cint</span></code> with no arguments, which leaves the shell at <code class="docutils literal notranslate"><span class="pre">cint&gt;</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pause</span></code>, which waits for a key;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quit</span></code>, after which the shell shows the <code class="docutils literal notranslate"><span class="pre">Hit</span> <span class="pre">enter…</span></code> banner, not
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>;</p></li>
+<li><p>any command that runs longer than <code class="docutils literal notranslate"><span class="pre">-t</span></code> seconds without the output
+ending in the prompt.</p></li>
+</ul>
+</li>
+<li><p>If a command’s own output happens to end in the text <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> at
+the end of a read, <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> stops early.</p></li>
+<li><p>Only one client is served at a time. A second <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> connects but
+gets no data until the first one disconnects, so it usually times out
+with exit 62.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> gives up, the command does not stop. It keeps running
+inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code>, and until it finishes no other <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> or
+<code class="docutils literal notranslate"><span class="pre">bcmsh</span></code> gets the shell. <a class="reference internal" href="reference/techsupport.html#clicmd-techsupport-all"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">techsupport</span> <span class="pre">all</span></code></a>, for example, runs
+for more than ten minutes. Give long commands a generous <code class="docutils literal notranslate"><span class="pre">-t</span></code>.</p></li>
+</ul>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bcmcmd<span class="w"> </span><span class="s2">"echo hello world"</span>
+<span class="go">echo hello world</span>
+<span class="go">hello world</span>
+<span class="go">drivshell&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bcmcmd<span class="w"> </span>-t<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="s2">"echo one; echo two"</span>
+<span class="go">echo one; echo two</span>
+<span class="go">one</span>
+<span class="go">two</span>
+<span class="go">drivshell&gt;</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</section>
+<section id="other-network-operating-systems">
+<span id="access-other-nos"></span><h2>Other network operating systems<a class="headerlink" href="#other-network-operating-systems" title="Link to this heading"></a></h2>
+<p>Most switches built on Broadcom StrataXGS chips run the same SDK and the same
+diag shell, but each operating system hides it behind its own command. The
+shell commands are the same; the SDK release, and with it the available
+commands and output formats, can differ from SONiC’s. On every one of these
+systems the switch software does not know about changes you make in the
+shell, so stick to reading state unless the vendor’s support asks otherwise.</p>
+<section id="arista-eos">
+<h3>Arista EOS<a class="headerlink" href="#arista-eos" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">platform</span> <span class="pre">trident</span> <span class="pre">diag</span> <span class="pre">&lt;command&gt;</span></code> runs one diag-shell command and prints
+its output. It needs privileged mode (<code class="docutils literal notranslate"><span class="pre">enable</span></code>); otherwise EOS answers
+<code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">Invalid</span> <span class="pre">input</span> <span class="pre">(privileged</span> <span class="pre">mode</span> <span class="pre">required)</span></code>. Quoting the command is
+optional. There is no interactive prompt; run one command per line.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>switch&gt;enable
+switch#platform trident diag ps xe8
+                 ena/    speed/ link auto    STP                  lrn  inter   max  loop
+           port  link    duplex scan neg?   state   pause  discrd ops   face frame  back
+       xe8(  9)  up     10G  FD   HW  No   Forward          None    F    SFI  9232
+switch#platform trident diag ver
+Broadcom Command Monitor: Copyright (c) 1998-2010 Broadcom Corporation
+Release: sdk-6.4.12 built 20230526 (Fri May 26 03:40:50 2023)
+...
+</pre></div>
+</div>
+<p>EOS uses its own port names (<code class="docutils literal notranslate"><span class="pre">Ethernet7/1</span></code>); the shell uses the SDK’s
+(<code class="docutils literal notranslate"><span class="pre">xe8</span></code>). <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">platform</span> <span class="pre">trident</span> <span class="pre">interface</span> <span class="pre">map</span></code> lists both side by side.</p>
+</section>
+<section id="cisco-nx-os">
+<h3>Cisco NX-OS<a class="headerlink" href="#cisco-nx-os" title="Link to this heading"></a></h3>
+<p>On Nexus 3000 and 9000 switches with Broadcom chips (NX-OS 7.x and later),
+<code class="docutils literal notranslate"><span class="pre">bcm-shell</span> <span class="pre">module</span> <span class="pre">&lt;module&gt;</span></code> opens an interactive shell with the prompt
+<code class="docutils literal notranslate"><span class="pre">bcm-shell.&lt;unit&gt;&gt;</span></code>, after a warning that the shell should be used with
+caution. <code class="docutils literal notranslate"><span class="pre">exit</span></code> leaves it. Typing a unit number at the prompt switches to
+another chip of the same module.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>switch# bcm-shell module 1
+bcm-shell.0&gt; l2 show
+bcm-shell.0&gt; exit
+</pre></div>
+</div>
+<p>To run a single command, give it in quotes after the module, optionally with a
+unit prefix: <code class="docutils literal notranslate"><span class="pre">bcm-shell</span> <span class="pre">module</span> <span class="pre">1</span> <span class="pre">&quot;0:ps&quot;</span></code>. Single commands are recorded in
+the system accounting log and can be piped through NX-OS filters such as
+<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">include</span></code>; commands typed in the interactive shell are not logged.</p>
+<p>NX-OS 6.x and modular chassis use the older form, from the module’s own
+shell:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>switch# attach module 2
+module-2# test hardware internal bcm-usd bcm-diag-shell
+bcm-shell.0&gt; exit
+module-2# exit
+</pre></div>
+</div>
+<p>Cisco recommends against changing chip settings this way and expects these
+commands to be used under the guidance of Cisco support.</p>
+</section>
+<section id="juniper-junos-qfx5100-qfx5110">
+<h3>Juniper Junos (QFX5100, QFX5110)<a class="headerlink" href="#juniper-junos-qfx5100-qfx5110" title="Link to this heading"></a></h3>
+<p>From the Junos shell, <code class="docutils literal notranslate"><span class="pre">vty</span> <span class="pre">fpc0</span></code> opens the line-card console; there each
+diag-shell command is wrapped in <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">dcbcm</span> <span class="pre">bcmshell</span> <span class="pre">&quot;&lt;command&gt;&quot;</span></code>. As root,
+<code class="docutils literal notranslate"><span class="pre">cprod</span></code> runs one such command without the console:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FPC0(vty)# set dcbcm bcmshell "ps"
+root@switch:~ # cprod -A fpc0 -c 'set dcbcm bcmshell "listmem"'
+</pre></div>
+</div>
+</section>
+<section id="cumulus-linux">
+<h3>Cumulus Linux<a class="headerlink" href="#cumulus-linux" title="Link to this heading"></a></h3>
+<p>Older Cumulus Linux releases (2.x–3.x) ship <code class="docutils literal notranslate"><span class="pre">/usr/lib/cumulus/bcmcmd</span></code>,
+which runs one command at a time: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">/usr/lib/cumulus/bcmcmd</span> <span class="pre">ps</span></code>.
+Cumulus warns that opening the shell interactively can disrupt <code class="docutils literal notranslate"><span class="pre">switchd</span></code>
+and forwarding.</p>
+</section>
+<section id="extreme-exos">
+<h3>Extreme EXOS<a class="headerlink" href="#extreme-exos" title="Link to this heading"></a></h3>
+<p>After <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">debug-mode</span></code> (which asks for a debug password), the shell is
+<code class="docutils literal notranslate"><span class="pre">/extr/bin/bcm.shell</span></code>; pick a unit with <code class="docutils literal notranslate"><span class="pre">0:</span></code> and leave with <code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p>
+</section>
+</section>
+<section id="the-drivshell-front-end">
+<span id="access-frontend"></span><h2>The <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> front-end<a class="headerlink" href="#the-drivshell-front-end" title="Link to this heading"></a></h2>
+<p>When the shell starts it waits for a newline (the <code class="docutils literal notranslate"><span class="pre">Hit</span> <span class="pre">enter</span></code> banner),
+then prints <code class="docutils literal notranslate"><span class="pre">Enter</span> <span class="pre">'quit'</span> <span class="pre">to</span> <span class="pre">exit</span> <span class="pre">the</span> <span class="pre">application.</span></code> The prompt is
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>, with no trailing space and no unit number. Input lines are
+limited to 1024 characters; longer lines are truncated with
+<code class="docutils literal notranslate"><span class="pre">WARNING:</span> <span class="pre">input</span> <span class="pre">line</span> <span class="pre">truncated</span> <span class="pre">to</span> <span class="pre">%d</span> <span class="pre">chars</span></code>.</p>
+<p>A few lines are handled by the front-end itself before the SDK sees them. The
+check is made on the raw line:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Line</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">quit</span></code></p></td>
+<td><p>Prints <code class="docutils literal notranslate"><span class="pre">Exiting</span> <span class="pre">the</span> <span class="pre">application.</span></code> and leaves the
+shell. Must be exactly <code class="docutils literal notranslate"><span class="pre">quit</span></code>, lower case, with
+nothing else on the line; <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> or <code class="docutils literal notranslate"><span class="pre">quit</span></code>
+with trailing text goes to the SDK instead.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bsv</span></code></p></td>
+<td><p>Prints the SAI and SDK versions; see
+<a class="reference internal" href="reference/bsv.html#clicmd-bsv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bsv</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phydump</span></code></p></td>
+<td><p>SAI PHY dump; see <a class="reference internal" href="#clicmd-phydump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phydump</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xled</span> <span class="pre">ARGS…</span></code></p></td>
+<td><p>SAI LED helper; see <a class="reference internal" href="#clicmd-xled-args"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">xled</span> <span class="pre">ARGS</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sh</span></code> (any case)</p></td>
+<td><p>Refused with <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">sh</span> <span class="pre">is</span> <span class="pre">blocked</span></code>; see
+<a class="reference internal" href="#access-blocked"><span class="std std-ref">Blocked commands</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">she…</span></code> (any case)</p></td>
+<td><p>Refused: any line <em>starting</em> with <code class="docutils literal notranslate"><span class="pre">she</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reb…</span></code> (any case)</p></td>
+<td><p>Refused: any line <em>starting</em> with <code class="docutils literal notranslate"><span class="pre">reb</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Every other line goes to the SDK command interpreter, always on unit 0.
+Commands run one at a time. If the SAI has not enabled diag commands yet,
+every line fails with <em>Feature unavailable</em>.</p>
+<dl class="std clicmd">
+<dt class="sig sig-object std" id="clicmd-phydump">
+<span class="sig-name descname"><span class="pre">phydump</span></span><a class="headerlink" href="#clicmd-phydump" title="Link to this definition"></a></dt>
+<dd><p>Run the SAI PHY dump. This is a front-end keyword, not an SDK command, and
+must be the whole line. It does nothing unless the SAI’s PHY-dump feature
+is enabled. On a SONiC Trident 3 switch it is enabled and prints, for
+every front-panel port, a <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">&lt;port&gt;</span> <span class="pre">(logical=&lt;n&gt;,</span> <span class="pre">physical=&lt;n&gt;)</span></code>
+heading, the port’s PHY control settings (pre-emphasis, DFE, link
+training, interface, FEC clauses) and the SerDes core and per-lane
+configuration. With 36 ports that is over 5,000 lines. Read-only.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phydump</span>
+
+<span class="gp">#</span><span class="c1">####################################################</span>
+<span class="gp"># </span>ce0<span class="w"> </span><span class="o">(</span><span class="nv">logical</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">physical</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+<span class="gp">#</span><span class="c1">####################################################</span>
+
+<span class="go">Current PHY control settings of ce0 -&gt;</span>
+<span class="go">Preemphasis              = 0x164608</span>
+<span class="go">DriverCurrent            = 0xffffffff</span>
+<span class="go">DFE ENable               = True</span>
+<span class="go">LP DFE ENable            = False</span>
+<span class="go">BR DFE ENable            = False</span>
+<span class="go">LinkTraining Enable      = False</span>
+<span class="go">Interface                = 0xe</span>
+<span class="go">CL74                     = False</span>
+<span class="go">CL91                     = False</span>
+<span class="go">CL108                    = False</span>
+
+<span class="go"> tscf16_phy_pmd_info_dump:539 type = 4096 laneMask  = 0xF, Address = 0x81</span>
+<span class="go"> tscf16_phy_pmd_info_dump:608 type = CFG</span>
+
+
+<span class="go">***********************************</span>
+<span class="go">**** SERDES CORE CONFIGURATION ****</span>
+<span class="go">***********************************</span>
+
+<span class="go">uC Config VCO Rate   = 180 (~25.750GHz)</span>
+<span class="go">Core Config from PCS = 0</span>
+
+<span class="go">Tx Lane Addr 0       = 3</span>
+<span class="go">Rx Lane Addr 0       = 0</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="std clicmd">
+<dt class="sig sig-object std" id="clicmd-xled-args">
+<span class="sig-name descname"><span class="pre">xled</span> <span class="pre">ARGS</span></span><a class="headerlink" href="#clicmd-xled-args" title="Link to this definition"></a></dt>
+<dd><p>The SAI’s LED-processor helper. This is a front-end keyword, not an SDK
+command; it is recognised when <code class="docutils literal notranslate"><span class="pre">xled</span></code> is the first word of the line, and
+up to 128 words are passed to it.</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt;xled</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<section id="blocked-commands">
+<span id="access-blocked"></span><h3>Blocked commands<a class="headerlink" href="#blocked-commands" title="Link to this heading"></a></h3>
+<p>The front-end refuses a few lines to protect <code class="docutils literal notranslate"><span class="pre">syncd</span></code>: the bare <code class="docutils literal notranslate"><span class="pre">sh</span></code> and
+anything starting with <code class="docutils literal notranslate"><span class="pre">she</span></code> (the SDK’s <code class="docutils literal notranslate"><span class="pre">shell</span></code> command, which would run
+Linux commands inside the syncd container) and anything starting with <code class="docutils literal notranslate"><span class="pre">reb</span></code>
+(<code class="docutils literal notranslate"><span class="pre">reboot</span></code>, which would stop the SDK and with it <code class="docutils literal notranslate"><span class="pre">syncd</span></code>). The refused line
+never reaches the SDK.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This block list only checks the start of the raw line. The same dangerous
+SDK commands can still be reached in other ways:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">reset</span></code> is an alias of <code class="docutils literal notranslate"><span class="pre">reboot</span></code>. It makes <strong>syncd exit</strong>, which
+restarts the switch dataplane.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">clean</span></code> frees the SDK’s resources for all attached units; this is
+what the SAI itself does at shutdown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sh</span> <span class="pre">CMD</span></code> is not blocked; only the bare line <code class="docutils literal notranslate"><span class="pre">sh</span></code> is. It runs <code class="docutils literal notranslate"><span class="pre">CMD</span></code>
+as a shell command, as root, inside the syncd container.</p></li>
+<li><p>Text after <code class="docutils literal notranslate"><span class="pre">;</span></code>, after leading spaces, or after a unit prefix such as
+<code class="docutils literal notranslate"><span class="pre">0:</span></code> is never checked against the block list.</p></li>
+</ul>
+<p>Do not run these on a production switch.</p>
+</div>
+</section>
+<section id="leaving-the-shell">
+<h3>Leaving the shell<a class="headerlink" href="#leaving-the-shell" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">quit</span></code> (exactly) leaves the <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt but does not stop
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code>. About a second later the shell is enabled again: a connected
+client sees <code class="docutils literal notranslate"><span class="pre">Hit</span> <span class="pre">enter</span> <span class="pre">to</span> <span class="pre">get</span> <span class="pre">drivshell</span> <span class="pre">prompt..</span></code>, and pressing Enter
+brings <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> back.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exit</span></code> and <code class="docutils literal notranslate"><span class="pre">QUIT</span></code> do nothing. <code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">clean</span></code> is not harmless; see the
+warning above.</p></li>
+<li><p>Disconnecting (<kbd class="kbd docutils literal notranslate">Ctrl</kbd>-<kbd class="kbd docutils literal notranslate">C</kbd> in <code class="docutils literal notranslate"><span class="pre">bcmsh</span></code>, or <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> finishing) leaves
+the shell at <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>, ready for the next client.</p></li>
+</ul>
+</section>
+</section>
+<section id="shell-modes-and-prompts">
+<h2>Shell modes and prompts<a class="headerlink" href="#shell-modes-and-prompts" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 30.0%" />
+<col style="width: 48.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Prompt</p></th>
+<th class="head"><p>How you get there</p></th>
+<th class="head"><p>How you leave / notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Hit</span> <span class="pre">enter</span> <span class="pre">to</span> <span class="pre">get</span> <span class="pre">drivshell</span> <span class="pre">prompt..</span></code></p></td>
+<td><p>The shell has just been (re-)started by <code class="docutils literal notranslate"><span class="pre">syncd</span></code>.</p></td>
+<td><p>Press Enter. This is not a real prompt; the shell is only waiting for
+a newline.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code></p></td>
+<td><p>The default.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cint&gt;</span></code> (with a trailing space)</p></td>
+<td><p><a class="reference internal" href="reference/cint.html#clicmd-cint"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cint</span></code></a> with no arguments. Prints <code class="docutils literal notranslate"><span class="pre">Entering</span> <span class="pre">C</span> <span class="pre">Interpreter.</span>
+<span class="pre">Type</span> <span class="pre">'exit;'</span> <span class="pre">to</span> <span class="pre">quit.</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">exit;</span></code> returns to <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>. <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">FILE</span> <span class="pre">[ARGS…]</span></code> runs a file
+(at most 16 arguments) and returns without changing mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FAILED(TEST).0&gt;</span></code></p></td>
+<td><p>A diagnostic test failed under the test framework. Prints <code class="docutils literal notranslate"><span class="pre">Type</span>
+<span class="pre">&quot;exit&quot;</span> <span class="pre">to</span> <span class="pre">return</span> <span class="pre">from</span> <span class="pre">sh</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">exit</span></code>. This is a nested classic SDK shell, so the classic-shell
+features listed below work inside it.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">?</span></code> (with a trailing space)</p></td>
+<td><p>Continuation prompt after a line ending in <code class="docutils literal notranslate"><span class="pre">\</span></code>, in the classic SDK
+shell only (including <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> shells); not in <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>.</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+<p>The classic SDK prompt <code class="docutils literal notranslate"><span class="pre">BCM.0&gt;</span></code>, shown in Broadcom documentation, cannot be
+reached on SONiC. There are no other mode prompts. The <a class="reference internal" href="reference/mode.html#clicmd-mode"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mode</span></code></a> command
+switches the SDK’s command set between ESW, LTSW and CTSW; Trident 3 is ESW
+only, and the prompt does not change either way.</p>
+<p class="rubric">Differences from the classic <code class="docutils literal notranslate"><span class="pre">BCM.0&gt;</span></code> shell</p>
+<p>These classic-shell features are not available in <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">!!</span></code> and <code class="docutils literal notranslate"><span class="pre">!$</span></code> history substitution;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N:</span></code> or <code class="docutils literal notranslate"><span class="pre">N::</span></code> on its own to change the default unit. In <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>
+the unit is always 0, and <code class="docutils literal notranslate"><span class="pre">N:</span></code> alone does nothing;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\</span></code> line continuation, <code class="docutils literal notranslate"><span class="pre">~</span></code> to leave, and <code class="docutils literal notranslate"><span class="pre">Type</span> <span class="pre">&quot;EXIT&quot;</span> <span class="pre">to</span> <span class="pre">exit</span> <span class="pre">shell</span></code>
+on end of input;</p></li>
+<li><p>the user-defined <code class="docutils literal notranslate"><span class="pre">$prompt</span></code> variable and the <code class="docutils literal notranslate"><span class="pre">.debug</span></code> prompt suffix;</p></li>
+<li><p><kbd class="kbd docutils literal notranslate">Ctrl</kbd>-<kbd class="kbd docutils literal notranslate">C</kbd> to interrupt a command (see <a class="reference internal" href="#interrupting-commands">Interrupting commands</a>).</p></li>
+</ul>
+<p>Everything else works as usual: <code class="docutils literal notranslate"><span class="pre">;</span></code> chaining, quoting, variables, unit
+prefixes on individual commands, <code class="docutils literal notranslate"><span class="pre">?</span></code> usage, rc scripts and the control
+commands.</p>
+</section>
+<section id="command-line-syntax">
+<h2>Command-line syntax<a class="headerlink" href="#command-line-syntax" title="Link to this heading"></a></h2>
+<section id="words-and-quoting">
+<h3>Words and quoting<a class="headerlink" href="#words-and-quoting" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Words are separated by white space.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;…&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">'…'</span></code> group words; the quote characters are removed. Quotes
+can start in the middle of a word: <code class="docutils literal notranslate"><span class="pre">a&quot;b</span> <span class="pre">c&quot;d</span></code> is one word, <code class="docutils literal notranslate"><span class="pre">ab</span> <span class="pre">cd</span></code>. A
+line that ends inside a quote fails with <code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">Command</span> <span class="pre">line</span> <span class="pre">ended</span> <span class="pre">while</span>
+<span class="pre">in</span> <span class="pre">a</span> <span class="pre">quoted</span> <span class="pre">string</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\x</span></code> makes <code class="docutils literal notranslate"><span class="pre">x</span></code> literal everywhere, including inside quotes. A <code class="docutils literal notranslate"><span class="pre">\</span></code> at
+the end of a line fails with <code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">Can't</span> <span class="pre">escape</span> <span class="pre">EOL</span></code>.</p></li>
+<li><p>A statement can have at most 1024 words and 8192 bytes.</p></li>
+</ul>
+</section>
+<section id="chaining-with">
+<h3>Chaining with <code class="docutils literal notranslate"><span class="pre">;</span></code><a class="headerlink" href="#chaining-with" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">;</span></code> outside quotes ends a statement; the rest of the line runs next.</p></li>
+<li><p>Statements run left to right, even if an earlier one fails. The line
+stops early only on a usage error, an exit, or an interrupt.</p></li>
+<li><p>The result of the line, and the <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">execute…</span></code> message, reflect the
+last statement that ran. <code class="docutils literal notranslate"><span class="pre">$?</span></code> is updated after each statement.</p></li>
+</ul>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; echo "a  b" 'c;d' e\;f; echo second</span>
+<span class="go">a  b c;d e;f</span>
+<span class="go">second</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="comments">
+<h3>Comments<a class="headerlink" href="#comments" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The interactive command line has no comment character. A line
+starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> is looked up as a command called <code class="docutils literal notranslate"><span class="pre">#</span></code> (see
+<a class="reference internal" href="#unknown-commands-and-rc-fall-back">Unknown commands and rc fall-back</a>).</p></li>
+<li><p>Use <a class="reference internal" href="reference/noecho.html#clicmd-noecho"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">noecho</span></code></a> (<code class="docutils literal notranslate"><span class="pre">Parameters:</span> <span class="pre">&lt;Any</span> <span class="pre">text&gt;</span>&#160; <span class="pre">Ignore</span> <span class="pre">whatever</span> <span class="pre">follows</span> <span class="pre">on</span>
+<span class="pre">command</span> <span class="pre">line</span></code>) as a comment that is safe interactively.</p></li>
+<li><p>In rc scripts loaded with <a class="reference internal" href="reference/rcload.html#clicmd-rcload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rcload</span></code></a>, everything from the first <code class="docutils literal notranslate"><span class="pre">#</span></code>
+to the end of the line is removed, even inside quotes.</p></li>
+</ul>
+</section>
+<section id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$name</span></code> and <code class="docutils literal notranslate"><span class="pre">${name}</span></code> are replaced with the variable’s
+value; <code class="docutils literal notranslate"><span class="pre">&#64;name</span></code> is a deprecated synonym. Names consist of letters, digits,
+<code class="docutils literal notranslate"><span class="pre">_</span></code> and <code class="docutils literal notranslate"><span class="pre">?</span></code>. Variables are expanded inside double quotes but not inside
+single quotes. An undefined variable expands to nothing. <code class="docutils literal notranslate"><span class="pre">$?name</span></code>
+expands to <code class="docutils literal notranslate"><span class="pre">1</span></code> if <code class="docutils literal notranslate"><span class="pre">name</span></code> is defined and <code class="docutils literal notranslate"><span class="pre">0</span></code> if not.</p></li>
+<li><p>If a name is not a shell variable, the SDK may also resolve it:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">$feature_NAME</span></code> gives <code class="docutils literal notranslate"><span class="pre">1</span></code> if the chip has SOC feature <code class="docutils literal notranslate"><span class="pre">NAME</span></code>;</p></li>
+<li><p>any other name gives the value of the <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> property of that
+name, e.g. <code class="docutils literal notranslate"><span class="pre">$portmap_1</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Variables have a scope:</p>
+<ul>
+<li><p><a class="reference internal" href="reference/local.html#clicmd-local"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">local</span></code></a> <code class="docutils literal notranslate"><span class="pre">NAME</span> <span class="pre">[VALUE]</span></code> sets a variable in the current scope.
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> itself has no local scope, so at the prompt <code class="docutils literal notranslate"><span class="pre">local</span></code>
+sets a global variable.</p></li>
+<li><p><a class="reference internal" href="reference/setenv.html#clicmd-setenv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">setenv</span></code></a> <code class="docutils literal notranslate"><span class="pre">NAME</span> <span class="pre">[VALUE]</span></code> sets a global (exported) variable. With
+no value it removes the variable.</p></li>
+<li><p><a class="reference internal" href="reference/printenv.html#clicmd-printenv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">printenv</span></code></a> <code class="docutils literal notranslate"><span class="pre">[local|global|all]</span></code> lists variables.</p></li>
+<li><p>Names beginning with <code class="docutils literal notranslate"><span class="pre">_</span></code> are system variables. They can be read but not
+set.</p></li>
+<li><p>Each <a class="reference internal" href="reference/rcload.html#clicmd-rcload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rcload</span></code></a> runs in its own scope, with <code class="docutils literal notranslate"><span class="pre">$1</span></code>, <code class="docutils literal notranslate"><span class="pre">$2</span></code>, … set
+from its arguments.</p></li>
+<li><p>Variables set at the prompt stay set across <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> calls and
+<code class="docutils literal notranslate"><span class="pre">bcmsh</span></code> sessions until they are removed or <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts. Each
+<code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> call sees what earlier calls left behind.</p></li>
+</ul>
+</li>
+<li><p>The shell sets some variables itself:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">$?</span></code> holds the numeric result of the last statement: 0 OK, −1 fail,
+−2 usage, −3 not found, −4 exit, −5 interrupted. It does not survive
+from one <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> call to the next (it reads 0 there), so use it on the
+same line: <code class="docutils literal notranslate"><span class="pre">expr</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">2;</span> <span class="pre">echo</span> <span class="pre">$?</span></code>.</p></li>
+<li><p>For each unit the shell sets <code class="docutils literal notranslate"><span class="pre">devname</span></code>, <code class="docutils literal notranslate"><span class="pre">ldevname</span></code>, <code class="docutils literal notranslate"><span class="pre">pcidev</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pcirev</span></code>, <code class="docutils literal notranslate"><span class="pre">fw_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">unit&lt;N&gt;</span></code> (=1), and the chip and device
+names as flags (=1).</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="reference/expr.html#clicmd-expr"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">expr</span></code></a> <code class="docutils literal notranslate"><span class="pre">EXPRESSION</span></code> evaluates a C-style integer
+expression and returns the value as the command result, usable in
+<a class="reference internal" href="reference/if.html#clicmd-if"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">if</span></code></a>.</p></li>
+</ul>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; local port 5</span>
+<span class="go">drivshell&gt; echo port is $port, quoted '$port', defined $?port</span>
+<span class="go">port is 5, quoted $port, defined 1</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="command-names-and-lookup">
+<h3>Command names and lookup<a class="headerlink" href="#command-names-and-lookup" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Command names are matched case-insensitively. In a command name such as
+<code class="docutils literal notranslate"><span class="pre">PortStat</span></code>, the upper-case letters are required and the
+lower-case ones optional: <code class="docutils literal notranslate"><span class="pre">portstat</span></code>, <code class="docutils literal notranslate"><span class="pre">ps</span></code> and <code class="docutils literal notranslate"><span class="pre">PS</span></code> all work, and
+<code class="docutils literal notranslate"><span class="pre">RCLoad</span></code> accepts <code class="docutils literal notranslate"><span class="pre">rcl</span></code> or <code class="docutils literal notranslate"><span class="pre">rcload</span></code>. If more than one command matches,
+the first wins, unless a later command’s full name is a prefix of what was
+typed.</p></li>
+<li><p>Commands are looked up in this order:</p>
+<ol class="arabic simple">
+<li><p>commands added at runtime for the unit (such as <a class="reference internal" href="reference/bcmsai.html#clicmd-bcmsai"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span></code></a>);</p></li>
+<li><p>the shell built-ins (80 commands);</p></li>
+<li><p>the chip’s own commands (ESW on Trident 3).</p></li>
+</ol>
+<p>Because the built-ins come first, <code class="docutils literal notranslate"><span class="pre">sh</span></code> runs <code class="docutils literal notranslate"><span class="pre">SHell</span></code>, not a
+<code class="docutils literal notranslate"><span class="pre">SHOW</span></code>-family command.</p>
+</li>
+<li><p>A statement that is just an integer succeeds
+if it is non-zero and fails if it is zero. <a class="reference internal" href="reference/if.html#clicmd-if"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">if</span></code></a> relies on this.</p></li>
+<li><p>If a command succeeds but did not use all its
+arguments, the shell prints <code class="docutils literal notranslate"><span class="pre">CMD:</span> <span class="pre">WARNING:</span> <span class="pre">excess</span> <span class="pre">arguments</span> <span class="pre">ignored</span>
+<span class="pre">beginning</span> <span class="pre">with</span> <span class="pre">'X'</span></code>.</p></li>
+</ul>
+</section>
+<section id="unit-prefixes">
+<span id="access-unit-prefixes"></span><h3>Unit prefixes<a class="headerlink" href="#unit-prefixes" title="Link to this heading"></a></h3>
+<p>A statement can be prefixed with a unit specification. It then runs once per
+listed unit, with that unit’s variables in effect:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">N:CMD</span></code></dt><dd><p>Unit N (one or two digits).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">N-M:CMD</span></code></dt><dd><p>Units N to M.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">N,M,…:CMD</span></code></dt><dd><p>A list; ranges are allowed in it.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">*:CMD</span></code></dt><dd><p>All attached units.</p>
+</dd>
+</dl>
+<p>Errors are <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">Bad</span> <span class="pre">unit</span> <span class="pre">specification</span></code> and <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">Unit</span> <span class="pre">N</span> <span class="pre">is</span> <span class="pre">not</span>
+<span class="pre">attached</span></code>. White space after the <code class="docutils literal notranslate"><span class="pre">:</span></code> is allowed. On single-ASIC Trident 3
+only <code class="docutils literal notranslate"><span class="pre">0:</span></code> and <code class="docutils literal notranslate"><span class="pre">*:</span></code> are useful. In <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> a bare <code class="docutils literal notranslate"><span class="pre">N:</span></code> does
+not change the default unit.</p>
+</section>
+<section id="help">
+<h3>Help<a class="headerlink" href="#help" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CMD</span> <span class="pre">?</span></code> or <code class="docutils literal notranslate"><span class="pre">CMD</span> <span class="pre">help</span></code>, as the only argument, prints <code class="docutils literal notranslate"><span class="pre">Usage</span> <span class="pre">(CMD):</span>
+<span class="pre">…</span></code> with the command’s built-in usage text. The SoC property
+<code class="docutils literal notranslate"><span class="pre">help_cli_enable=0</span></code> turns this off.</p></li>
+<li><p><a class="reference internal" href="reference/q.html#clicmd-0"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">?</span></code></a> lists all commands in a compact format. <a class="reference internal" href="reference/help.html#clicmd-help"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">help</span></code></a> (also
+<code class="docutils literal notranslate"><span class="pre">??</span></code>) with no arguments lists commands with one-line descriptions;
+<code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">CMD</span> <span class="pre">…</span></code> prints usage for each command named.</p></li>
+<li><p>A usage error is not reported as a failure in <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>, so
+<code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> exits 0.</p></li>
+</ul>
+</section>
+<section id="errors-and-result-codes">
+<h3>Errors and result codes<a class="headerlink" href="#errors-and-result-codes" title="Link to this heading"></a></h3>
+<p>The SDK prints its own messages, e.g. <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command:</span> <span class="pre">foo</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> front-end then adds one line, depending on the result:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>SDK result</p></th>
+<th class="head"><p>Mapped to</p></th>
+<th class="head"><p>Extra line printed by <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OK, <code class="docutils literal notranslate"><span class="pre">&gt;0</span></code></p></td>
+<td><p>0</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>USAGE (−2)</p></td>
+<td><p>0</p></td>
+<td><p>— (usage text already printed)</p></td>
+</tr>
+<tr class="row-even"><td><p>EXIT (−4), INTR (−5)</p></td>
+<td><p>0</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>NFND (−3)</p></td>
+<td><p>−7</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">execute</span> <span class="pre">the</span> <span class="pre">diagnostic</span> <span class="pre">command.</span> <span class="pre">Error:</span> <span class="pre">Entry</span> <span class="pre">not</span> <span class="pre">found.</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>FAIL (−1) / other</p></td>
+<td><p>−11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">to</span> <span class="pre">execute</span> <span class="pre">the</span> <span class="pre">diagnostic</span> <span class="pre">command.</span> <span class="pre">Error:</span> <span class="pre">Operation</span> <span class="pre">failed.</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>NOTIMPL (−6)</p></td>
+<td><p>−16</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">&quot;LINE&quot;</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">supported.</span> <span class="pre">Error:</span> <span class="pre">Feature</span> <span class="pre">unavailable.</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>diag disabled / busy</p></td>
+<td><p>−16</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">&quot;LINE&quot;</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">supported.</span> <span class="pre">Error:</span> <span class="pre">Feature</span> <span class="pre">unavailable.</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>None of these change <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code>’s exit status. Scripts must look for these
+strings in the output. The extra line comes after the SDK’s own message,
+separated by a blank line, for example when <a class="reference internal" href="reference/log.html#clicmd-log"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">log</span></code></a> <code class="docutils literal notranslate"><span class="pre">off</span></code> finds
+nothing to stop:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>drivshell&gt; log off
+File logging is not active.
+
+Failed to execute the diagnostic command. Error: Operation failed.
+</pre></div>
+</div>
+<p>Throughout this reference, when a command is said to <em>fail</em>, this is the
+line you see.</p>
+</section>
+<section id="unknown-commands-and-rc-fall-back">
+<h3>Unknown commands and rc fall-back<a class="headerlink" href="#unknown-commands-and-rc-fall-back" title="Link to this heading"></a></h3>
+<p>When a word is not a known command, the shell tries to run a script called
+<code class="docutils literal notranslate"><span class="pre">WORD.soc</span></code>, as if you had typed <code class="docutils literal notranslate"><span class="pre">rcload</span> <span class="pre">WORD.soc</span></code>. It looks for the file
+in each directory of <code class="docutils literal notranslate"><span class="pre">$path</span></code>, or in <code class="docutils literal notranslate"><span class="pre">syncd</span></code>’s current directory if
+<code class="docutils literal notranslate"><span class="pre">path</span></code> is not set. On SONiC <code class="docutils literal notranslate"><span class="pre">path</span></code> is <code class="docutils literal notranslate"><span class="pre">.</span> <span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">syncd</span></code>’s working
+directory is <code class="docutils literal notranslate"><span class="pre">/</span></code>, so both entries mean the container’s root directory. The remaining words become <code class="docutils literal notranslate"><span class="pre">$1…</span></code>. Only if that also
+fails is <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command:</span> <span class="pre">WORD</span></code> printed. Turn this off with <code class="docutils literal notranslate"><span class="pre">set</span>
+<span class="pre">RCLoad=off</span></code>.</p>
+</section>
+</section>
+<section id="control-commands">
+<h2>Control commands<a class="headerlink" href="#control-commands" title="Link to this heading"></a></h2>
+<p>These are SDK shell built-ins; the usage text below is quoted from the
+built-in help. Each command argument is one <em>complete</em> command line, so quote
+any that contain spaces, and use single quotes to stop <code class="docutils literal notranslate"><span class="pre">$var</span></code> being
+expanded too early.</p>
+<dl class="simple">
+<dt><a class="reference internal" href="reference/loop.html#clicmd-loop"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">loop</span></code></a> <code class="docutils literal notranslate"><span class="pre">COUNT|*</span> <span class="pre">&quot;CMD&quot;</span> <span class="pre">…</span></code></dt><dd><p>Runs the commands <code class="docutils literal notranslate"><span class="pre">COUNT</span></code> times, or forever with <code class="docutils literal notranslate"><span class="pre">*</span></code>. It stops on the
+first failure while <code class="docutils literal notranslate"><span class="pre">LoopError</span></code> is on (the default).
+<code class="docutils literal notranslate"><span class="pre">loop</span> <span class="pre">10</span> <span class="pre">&quot;echo</span> <span class="pre">hello</span> <span class="pre">world&quot;</span></code>.</p>
+</dd>
+<dt><a class="reference internal" href="reference/for.html#clicmd-for"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">for</span></code></a> <code class="docutils literal notranslate"><span class="pre">VAR=START,STOP[,STEP[,FMT]]</span> <span class="pre">'CMD'</span> <span class="pre">…</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">port=0,23</span> <span class="pre">'echo</span> <span class="pre">port=$port'</span></code>. <code class="docutils literal notranslate"><span class="pre">FMT</span></code> is a printf format; the
+default is <code class="docutils literal notranslate"><span class="pre">%d</span></code>.</p>
+</dd>
+<dt><a class="reference internal" href="reference/if.html#clicmd-if"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">if</span></code></a> <code class="docutils literal notranslate"><span class="pre">COND</span> <span class="pre">[&quot;CMD&quot;</span> <span class="pre">…</span> <span class="pre">[else</span> <span class="pre">&quot;CMD&quot;</span> <span class="pre">…]]</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">COND</span></code> is an integer or a command line; <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">||</span></code> and <code class="docutils literal notranslate"><span class="pre">!</span></code> are
+evaluated left to right. <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">$?quickturn</span> <span class="pre">&amp;&amp;</span> <span class="pre">!&quot;bist</span> <span class="pre">arl&quot;</span> <span class="pre">&quot;echo</span> <span class="pre">BIST</span>
+<span class="pre">failed&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">IFError</span></code> (default on) stops after the first failing command.</p>
+</dd>
+<dt><a class="reference internal" href="reference/case.html#clicmd-case"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">case</span></code></a> <code class="docutils literal notranslate"><span class="pre">WHAT</span> <span class="pre">VALUE</span> <span class="pre">&quot;CMD&quot;</span> <span class="pre">[VALUE</span> <span class="pre">&quot;CMD&quot;]…</span></code></dt><dd><p>Runs the command whose <code class="docutils literal notranslate"><span class="pre">VALUE</span></code> matches <code class="docutils literal notranslate"><span class="pre">WHAT</span></code>.</p>
+</dd>
+<dt><a class="reference internal" href="reference/expr.html#clicmd-expr"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">expr</span></code></a> <code class="docutils literal notranslate"><span class="pre">EXPRESSION</span></code></dt><dd><p>C-style integer arithmetic; the value becomes the command result.</p>
+</dd>
+<dt><a class="reference internal" href="reference/echo.html#clicmd-echo"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">echo</span></code></a> <code class="docutils literal notranslate"><span class="pre">[-n]</span> <span class="pre">TEXT…</span></code> / <a class="reference internal" href="reference/noecho.html#clicmd-noecho"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">noecho</span></code></a> <code class="docutils literal notranslate"><span class="pre">TEXT…</span></code></dt><dd><p>Print the words joined by single spaces; <code class="docutils literal notranslate"><span class="pre">-n</span></code> leaves out the newline.
+<code class="docutils literal notranslate"><span class="pre">noecho</span></code> ignores its arguments.</p>
+</dd>
+<dt><a class="reference internal" href="reference/time.html#clicmd-time"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">time</span></code></a> <code class="docutils literal notranslate"><span class="pre">[&quot;CMD&quot;</span> <span class="pre">…]</span></code></dt><dd><p>Times the commands, e.g. <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">&quot;sleep</span> <span class="pre">1&quot;</span> <span class="pre">&quot;sleep</span> <span class="pre">2&quot;</span></code>. With no argument it
+prints the current time.</p>
+</dd>
+<dt><a class="reference internal" href="reference/sleep.html#clicmd-sleep"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">sleep</span></code></a> <code class="docutils literal notranslate"><span class="pre">[quiet]</span> <span class="pre">[SECONDS</span> <span class="pre">[USEC]]</span></code> / <a class="reference internal" href="reference/delay.html#clicmd-delay"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">delay</span></code></a> <code class="docutils literal notranslate"><span class="pre">USEC</span></code></dt><dd><p>Suspend the shell, or busy-wait for <code class="docutils literal notranslate"><span class="pre">USEC</span></code> microseconds.</p>
+</dd>
+<dt><a class="reference internal" href="reference/pause.html#clicmd-pause"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pause</span></code></a> <code class="docutils literal notranslate"><span class="pre">[-x]</span> <span class="pre">TEXT…</span></code></dt><dd><p>Waits for SPACE (or <code class="docutils literal notranslate"><span class="pre">x</span></code> with <code class="docutils literal notranslate"><span class="pre">-x</span></code>) or <code class="docutils literal notranslate"><span class="pre">Q</span></code>. Under <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> there is
+no way to answer, so it waits until the timeout.</p>
+</dd>
+<dt><a class="reference internal" href="reference/background.html#clicmd-background"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">background</span></code></a> <code class="docutils literal notranslate"><span class="pre">&quot;CMD&quot;</span></code>, <a class="reference internal" href="reference/jobs.html#clicmd-jobs"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">jobs</span></code></a>, <a class="reference internal" href="reference/kill.html#clicmd-kill"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">kill</span></code></a> <code class="docutils literal notranslate"><span class="pre">N</span></code></dt><dd><p>Run a command in the background, list background jobs, or kill one.</p>
+</dd>
+</dl>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; for p=1,3 'echo port $p'</span>
+<span class="go">port 1</span>
+<span class="go">port 2</span>
+<span class="go">port 3</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; loop 2 "echo hello world"</span>
+<span class="go">hello world</span>
+<span class="go">hello world</span>
+</pre></div>
+</div>
+</div>
+<section id="shell-options-set">
+<h3>Shell options (<code class="docutils literal notranslate"><span class="pre">set</span></code>)<a class="headerlink" href="#shell-options-set" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="reference/set.html#clicmd-set"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">set</span></code></a> with no arguments shows the options, and <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">OPTION=VALUE</span></code>
+changes one. <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">=</span></code> prompts for each option in turn, which makes
+<code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> wait until its timeout.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IFError</span></code></p></td>
+<td><p>on</p></td>
+<td><p>Errors terminate an <code class="docutils literal notranslate"><span class="pre">if</span></code> command list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LoopError</span></code></p></td>
+<td><p>on</p></td>
+<td><p>Errors stop <code class="docutils literal notranslate"><span class="pre">loop</span></code>/<code class="docutils literal notranslate"><span class="pre">for</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RCError</span></code></p></td>
+<td><p>on</p></td>
+<td><p>rcload scripts abort on a failing command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RCNoPrintError</span></code></p></td>
+<td><p>off</p></td>
+<td><p>If on, rcload does not print the per-line error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RCLoad</span></code></p></td>
+<td><p>on</p></td>
+<td><p>Unknown command → try <code class="docutils literal notranslate"><span class="pre">WORD.soc</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RCTest</span></code></p></td>
+<td><p>on</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">testrun</span></code> loads init scripts before some tests.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MoreLines</span></code></p></td>
+<td><p>20</p></td>
+<td><p>Lines per page for <a class="reference internal" href="reference/more.html#clicmd-more"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">more</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ReportTime</span></code></p></td>
+<td><p>5</p></td>
+<td><p>Seconds between progress reports of long tests.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="rc-scripts">
+<h2>rc scripts<a class="headerlink" href="#rc-scripts" title="Link to this heading"></a></h2>
+<dl>
+<dt><a class="reference internal" href="reference/rcload.html#clicmd-rcload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rcload</span></code></a> <code class="docutils literal notranslate"><span class="pre">FILE</span> <span class="pre">[ARGS…]</span></code></dt><dd><p>Runs commands from <code class="docutils literal notranslate"><span class="pre">FILE</span></code> line by line. <code class="docutils literal notranslate"><span class="pre">ARGS</span></code> become <code class="docutils literal notranslate"><span class="pre">$1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$2</span></code>, … in a new local scope. <code class="docutils literal notranslate"><span class="pre">FILE</span></code> must exist inside the syncd
+container.</p>
+<ul class="simple">
+<li><p>A trailing <code class="docutils literal notranslate"><span class="pre">\</span></code> joins the next line, <code class="docutils literal notranslate"><span class="pre">#</span></code> starts a comment, and
+<code class="docutils literal notranslate"><span class="pre">\r</span></code> is removed.</p></li>
+<li><p>A failing line prints <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">file</span> <span class="pre">F:</span> <span class="pre">line</span> <span class="pre">N</span> <span class="pre">(error</span> <span class="pre">code</span> <span class="pre">E):</span> <span class="pre">script</span>
+<span class="pre">terminated</span></code> or <code class="docutils literal notranslate"><span class="pre">…</span> <span class="pre">script</span> <span class="pre">continuing</span></code>, depending on <code class="docutils literal notranslate"><span class="pre">RCError</span></code>. Lines
+starting with <code class="docutils literal notranslate"><span class="pre">expr</span></code> never count as failures.</p></li>
+<li><p>A file with no lines prints <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">file</span> <span class="pre">F:</span> <span class="pre">empty</span> <span class="pre">script</span></code>.</p></li>
+<li><p>Nesting too deeply prints <code class="docutils literal notranslate"><span class="pre">rcload:</span> <span class="pre">recursion</span> <span class="pre">too</span> <span class="pre">deep</span></code>.</p></li>
+</ul>
+<p>A path containing <code class="docutils literal notranslate"><span class="pre">/</span></code> is opened directly. Otherwise the file is looked up
+in the <a class="reference internal" href="reference/rccache.html#clicmd-rccache"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rccache</span></code></a>, then in <code class="docutils literal notranslate"><span class="pre">$path</span></code>.</p>
+</dd>
+<dt><a class="reference internal" href="reference/rccache.html#clicmd-rccache"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rccache</span></code></a> <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">[NAME]</span> <span class="pre">|</span> <span class="pre">add</span> <span class="pre">NAME</span> <span class="pre">|</span> <span class="pre">addq</span> <span class="pre">NAME</span> <span class="pre">|</span> <span class="pre">update</span> <span class="pre">NAME</span> <span class="pre">|</span> <span class="pre">delete</span> <span class="pre">NAME</span> <span class="pre">|</span> <span class="pre">clear</span></code></dt><dd><p>Keeps rc files in memory so that later <code class="docutils literal notranslate"><span class="pre">rcload</span> <span class="pre">NAME</span></code> calls do not read
+the file system.</p>
+</dd>
+</dl>
+<p>The SAI can also run <code class="docutils literal notranslate"><span class="pre">reload.soc</span></code> and <code class="docutils literal notranslate"><span class="pre">rc.soc</span></code> scripts itself while it
+initialises the SDK.
+<code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> handling is covered in <a class="reference internal" href="concepts/config.html"><span class="doc">Configuration variables</span></a>.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; rcload /tmp/show-ports.soc ce0</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ce0(  1)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="line-editing-history-and-output">
+<h2>Line editing, history and output<a class="headerlink" href="#line-editing-history-and-output" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The shell echoes your input itself. That echo is why <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> output
+starts with the command line.</p></li>
+<li><p><a class="reference internal" href="reference/history.html#clicmd-history"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">history</span></code></a> <code class="docutils literal notranslate"><span class="pre">[COUNT]</span></code> lists the shell’s history, but
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> lines are not recorded in it, so it prints nothing. In
+<code class="docutils literal notranslate"><span class="pre">bcmsh</span></code>, up-arrow history works locally.</p></li>
+<li><p>Command output is not paged. Only <a class="reference internal" href="reference/more.html#clicmd-more"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">more</span></code></a> <code class="docutils literal notranslate"><span class="pre">FILE</span></code>
+pages, and <a class="reference internal" href="reference/pause.html#clicmd-pause"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pause</span></code></a> waits, using <code class="docutils literal notranslate"><span class="pre">MoreLines</span></code> lines per page.</p></li>
+<li><p><a class="reference internal" href="reference/console.html#clicmd-console"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">console</span></code></a> <code class="docutils literal notranslate"><span class="pre">on|off</span></code> turns console output on
+and off. <a class="reference internal" href="reference/log.html#clicmd-log"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">log</span></code></a> <code class="docutils literal notranslate"><span class="pre">file=F</span> <span class="pre">[append=yes|no]</span> <span class="pre">[quiet=yes|no]</span> <span class="pre">[on|off]</span></code>
+copies output to a file inside the container.</p></li>
+</ul>
+</section>
+<section id="files-inside-the-syncd-container">
+<span id="access-files"></span><h2>Files inside the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container<a class="headerlink" href="#files-inside-the-syncd-container" title="Link to this heading"></a></h2>
+<p>The shell’s file commands (<a class="reference internal" href="reference/ls.html#clicmd-ls"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ls</span></code></a>, <a class="reference internal" href="reference/copy.html#clicmd-copy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">copy</span></code></a>, <a class="reference internal" href="reference/save.html#clicmd-save"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">save</span></code></a>,
+<a class="reference internal" href="reference/log.html#clicmd-log"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">log</span></code></a>, <a class="reference internal" href="reference/rcload.html#clicmd-rcload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rcload</span></code></a>, <a class="reference internal" href="reference/rm.html#clicmd-rm"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rm</span></code></a> …) work on the file system of
+the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container, as root. <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> there is a tmpfs of its own,
+mounted <code class="docutils literal notranslate"><span class="pre">noexec</span></code>: the shell can write and read files in it, but nothing in
+it can be executed.</p>
+<p>To give the shell a file from the host, such as an rc script or a
+<a class="reference internal" href="concepts/cint.html"><span class="doc">Cint</span></a> program, copy it to <code class="docutils literal notranslate"><span class="pre">/root</span></code> in the container
+and use the absolute path:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>cp<span class="w"> </span>watch.soc<span class="w"> </span>syncd:/root/
+bcmcmd<span class="w"> </span><span class="s2">"rcload /root/watch.soc ce0"</span>
+</pre></div>
+</div>
+<p>Do not copy into <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> or <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code>: both are separate in-memory
+file systems inside the container, and <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span></code> into them reports
+success but the file never appears there. Files the shell itself writes to
+<code class="docutils literal notranslate"><span class="pre">/tmp</span></code> (for example with <a class="reference internal" href="reference/log.html#clicmd-log"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">log</span></code></a>) can be read back through the
+container:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>syncd<span class="w"> </span>cat<span class="w"> </span>/tmp/bcm-diag.log<span class="w"> </span>&gt;<span class="w"> </span>bcm-diag.log
+</pre></div>
+</div>
+</section>
+<section id="interrupting-commands">
+<h2>Interrupting commands<a class="headerlink" href="#interrupting-commands" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> has no way to interrupt a running command. <kbd class="kbd docutils literal notranslate">Ctrl</kbd>-<kbd class="kbd docutils literal notranslate">C</kbd> in
+<code class="docutils literal notranslate"><span class="pre">bcmsh</span></code> closes your session, but the command keeps running inside
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code>, and its output goes to syslog. Sending a raw Ctrl-C byte over the
+socket is not expected to stop it either.</p>
+<p><strong>Do not start</strong> <code class="docutils literal notranslate"><span class="pre">loop</span> <span class="pre">*</span></code> <strong>or other unbounded commands in</strong>
+<code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>. The only way to stop them is to restart <code class="docutils literal notranslate"><span class="pre">syncd</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basics.html" class="btn btn-neutral float-right" title="Reading this guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

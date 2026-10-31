@@ -1,0 +1,1129 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telemetry, timing and OAM &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="CPU, DMA, interrupts and counters" href="cpu.html" />
+    <link rel="prev" title="Buffers, queues and QoS" href="mmu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Variable reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ports.html">Ports, lanes and SerDes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tables.html">Forwarding tables and routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acl.html">ACL, field processor and UDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmu.html">Buffers, queues and QoS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Telemetry, timing and OAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu.html">CPU, DMA, interrupts and counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chip.html">Chip, boot, warm boot and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sai.html">SAI-specific variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../config.html">Configuration variables</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Variable reference</a></li>
+      <li class="breadcrumb-item active">Telemetry, timing and OAM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="telemetry-timing-and-oam">
+<h1>Telemetry, timing and OAM<a class="headerlink" href="#telemetry-timing-and-oam" title="Link to this heading"></a></h1>
+<p>Flow tracker, IFA, QCM, BFD and PTP/BroadSync. Most of these need matching embedded-application firmware; setting a variable alone does not enable a feature.</p>
+<p>Set in several SONiC Trident 3 HWSKU files: <a class="reference internal" href="#confval-ptp_bs_fref"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ptp_bs_fref</span></code></a>, <a class="reference internal" href="#confval-ptp_ts_pll_fref"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ptp_ts_pll_fref</span></code></a>.</p>
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-appl_param_e2e_scheme_cos">
+<span class="sig-name descname"><span class="pre">appl_param_e2e_scheme_cos</span></span><a class="headerlink" href="#confval-appl_param_e2e_scheme_cos" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">8</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_control_plane_independence">
+<span class="sig-name descname"><span class="pre">bfd_control_plane_independence</span></span><a class="headerlink" href="#confval-bfd_control_plane_independence" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>If the config property is enabled by default (set to 1), if bfd_control_plane_independence is 0, Fw transmit BFD packets with C bit 0, otherwise C bit 1. The default value of the config property is 1 (enabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_cosq">
+<span class="sig-name descname"><span class="pre">bfd_cosq</span></span><a class="headerlink" href="#confval-bfd_cosq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>BFD CoS queue</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_dip_lookup_enable">
+<span class="sig-name descname"><span class="pre">bfd_dip_lookup_enable</span></span><a class="headerlink" href="#confval-bfd_dip_lookup_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>When enabled, destination IP address(DIP) along with source IP address(SIP) is used to de-multiplex BFD session for zero Your-discriminator packets. 0 – Only SIP for de-multiplex BFD session. 1 – SIP and DIP both for de-multiplex BFD session. 2 – Only DIP for de-multiplex BFD session.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_enable">
+<span class="sig-name descname"><span class="pre">bfd_enable</span></span><a class="headerlink" href="#confval-bfd_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable BFD features</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_encap_memory_size">
+<span class="sig-name descname"><span class="pre">bfd_encap_memory_size</span></span><a class="headerlink" href="#confval-bfd_encap_memory_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Memory allocated for BFD encapsulation data (in bytes)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_feature_enable">
+<span class="sig-name descname"><span class="pre">bfd_feature_enable</span></span><a class="headerlink" href="#confval-bfd_feature_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable BFD Feature with bit map fields, lower bits will take precedence, 1st LSB bit is Multi Hop as default, 2nd LSB bit is Micro/Trunk and 3rd LSB bit is Echo mode Feature. Value 0 will disable all the features.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_ifp_lookup_enable">
+<span class="sig-name descname"><span class="pre">bfd_ifp_lookup_enable</span></span><a class="headerlink" href="#confval-bfd_ifp_lookup_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>When this property is configured, IFP will be used for bfd look up instead of HW tables look up. The default value of the config property is 0</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_ignore_l3_host_config">
+<span class="sig-name descname"><span class="pre">bfd_ignore_l3_host_config</span></span><a class="headerlink" href="#confval-bfd_ignore_l3_host_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_jitter_disable">
+<span class="sig-name descname"><span class="pre">bfd_jitter_disable</span></span><a class="headerlink" href="#confval-bfd_jitter_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_l3_iif_to_vrf_map_enable">
+<span class="sig-name descname"><span class="pre">bfd_l3_iif_to_vrf_map_enable</span></span><a class="headerlink" href="#confval-bfd_l3_iif_to_vrf_map_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable/Disable L3IIF to VRF lookup in the FW.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_num_sessions">
+<span class="sig-name descname"><span class="pre">bfd_num_sessions</span></span><a class="headerlink" href="#confval-bfd_num_sessions" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">256</span></code></dd>
+</dl>
+<p>Number of BFD sessions</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_over_vxlan_zero_discr_demux">
+<span class="sig-name descname"><span class="pre">bfd_over_vxlan_zero_discr_demux</span></span><a class="headerlink" href="#confval-bfd_over_vxlan_zero_discr_demux" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>De-multiplex BFDoVxLAN session for zero Your-discriminator packets. 0 – Only VNID for de-multiplex BFD session. 1 – VNID + VTEP SIP both for de-multiplex BFD session.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_pkt_tx_on_state_change">
+<span class="sig-name descname"><span class="pre">bfd_pkt_tx_on_state_change</span></span><a class="headerlink" href="#confval-bfd_pkt_tx_on_state_change" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_remote_discriminator">
+<span class="sig-name descname"><span class="pre">bfd_remote_discriminator</span></span><a class="headerlink" href="#confval-bfd_remote_discriminator" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>If the config property is enabled (set to 1), configuring remote discriminator value is always same, not overriding with the learned BFD My discriminator value. The default value of the config property is 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_remote_discriminator_reset">
+<span class="sig-name descname"><span class="pre">bfd_remote_discriminator_reset</span></span><a class="headerlink" href="#confval-bfd_remote_discriminator_reset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable/Disable the configuration of resetting remote discriminator variable under certain circumstances such as receiving admin_down or down messages when local session state is UP. The default value of the config property is 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_session_down_event_on_create">
+<span class="sig-name descname"><span class="pre">bfd_session_down_event_on_create</span></span><a class="headerlink" href="#confval-bfd_session_down_event_on_create" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>If this config property is enabled (set to 1), there would be a state change event (State would be down for the endpoint) received after the session is created if we do not receive any packets from the peer within detection_multiplier * 1 seconds. Default value is 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_sha1_keys">
+<span class="sig-name descname"><span class="pre">bfd_sha1_keys</span></span><a class="headerlink" href="#confval-bfd_sha1_keys" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of BFD SHA1 authentication keys</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_simple_password_keys">
+<span class="sig-name descname"><span class="pre">bfd_simple_password_keys</span></span><a class="headerlink" href="#confval-bfd_simple_password_keys" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of BFD simple password authentication keys</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_thread_pri">
+<span class="sig-name descname"><span class="pre">bfd_thread_pri</span></span><a class="headerlink" href="#confval-bfd_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the bcmBFD thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_trunk_auto_tx_port_update_disable">
+<span class="sig-name descname"><span class="pre">bfd_trunk_auto_tx_port_update_disable</span></span><a class="headerlink" href="#confval-bfd_trunk_auto_tx_port_update_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable/Disable of updating TX port with RX port behavior of BFD over Trunk endpoints.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_tx_raw_ingress_enable">
+<span class="sig-name descname"><span class="pre">bfd_tx_raw_ingress_enable</span></span><a class="headerlink" href="#confval-bfd_tx_raw_ingress_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable/Disable of raw ingress inject of BFD Tx packets from BTE for all sessions which includes support for BFD over LAG, ECMP and except micro, echo BFD</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bfd_use_endpoint_id_as_discriminator">
+<span class="sig-name descname"><span class="pre">bfd_use_endpoint_id_as_discriminator</span></span><a class="headerlink" href="#confval-bfd_use_endpoint_id_as_discriminator" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable/Disable the configuration of using endpoint index itself as local discriminator for BFD endpoints.If the config property is enabled (set to 1), any value passed in local_discriminator field in endpoint info will be ignored and endpoint index would be used instead. The default value of the config property is 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bs_poll_interval">
+<span class="sig-name descname"><span class="pre">bs_poll_interval</span></span><a class="headerlink" href="#confval-bs_poll_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Set the debug buffer polling interval in uSec for Broadsync. Default being 1000 uSec.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-clm_enable">
+<span class="sig-name descname"><span class="pre">clm_enable</span></span><a class="headerlink" href="#confval-clm_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dpll_params">
+<span class="sig-name descname"><span class="pre">dpll_params</span></span><a class="headerlink" href="#confval-dpll_params" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">list</dd>
+</dl>
+<p>Set default parameters for the DPLL command. Comma-Separated-Values. DevSel, CPOL, CPHA, AddrBitOrder, DataBitOrder, AddrWidth, UseBrstBit, UseRwBit</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flow_tracker_intr_enable">
+<span class="sig-name descname"><span class="pre">flow_tracker_intr_enable</span></span><a class="headerlink" href="#confval-flow_tracker_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_-point-_delay_-granularity-offset">
+<span class="sig-name descname"><span class="pre">flowtracker_&lt;point&gt;_delay_&lt;granularity|offset&gt;</span></span><a class="headerlink" href="#confval-flowtracker_-point-_delay_-granularity-offset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Granularity and offset of the delay values the flow tracker records at one measurement point (<code class="docutils literal notranslate"><span class="pre">chip</span></code>, <code class="docutils literal notranslate"><span class="pre">e2e</span></code>, <code class="docutils literal notranslate"><span class="pre">ipat</span></code>, <code class="docutils literal notranslate"><span class="pre">ipdt</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">flowtracker_chip_delay_granularity</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker_chip_delay_offset</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker_e2e_delay_granularity</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker_e2e_delay_offset</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker_ipat_delay_granularity</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker_ipat_delay_offset</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker_ipdt_delay_granularity</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker_ipdt_delay_offset</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-0"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_chip_debug_enable">
+<span class="sig-name descname"><span class="pre">flowtracker_chip_debug_enable</span></span><a class="headerlink" href="#confval-flowtracker_chip_debug_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>enable Chip debug functionality. The counters for multiple similar objects will be counted together across the chip. default value: 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_drop_monitor_enable">
+<span class="sig-name descname"><span class="pre">flowtracker_drop_monitor_enable</span></span><a class="headerlink" href="#confval-flowtracker_drop_monitor_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Drop monitoring, 0 - Disable, 1 - Enable</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_enable">
+<span class="sig-name descname"><span class="pre">flowtracker_enable</span></span><a class="headerlink" href="#confval-flowtracker_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable the flow tracker. Needs the flow tracker embedded-application firmware and exact-match space (<a class="reference internal" href="tables.html#confval-fpem_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">fpem_mem_entries</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_export_fifo_hostbuf_size">
+<span class="sig-name descname"><span class="pre">flowtracker_export_fifo_hostbuf_size</span></span><a class="headerlink" href="#confval-flowtracker_export_fifo_hostbuf_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of flowtracker export entries allocated for the FIFO DMA host buffer</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_export_fifo_intr_enable">
+<span class="sig-name descname"><span class="pre">flowtracker_export_fifo_intr_enable</span></span><a class="headerlink" href="#confval-flowtracker_export_fifo_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Interrupt vs polled mode for flowtracker fifo dma export</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_export_fifo_thread_pri">
+<span class="sig-name descname"><span class="pre">flowtracker_export_fifo_thread_pri</span></span><a class="headerlink" href="#confval-flowtracker_export_fifo_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">100</span></code></dd>
+</dl>
+<p>flowtracker export fifo thread priority; 0 is highest and 255 is lowest</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_export_interval_secs">
+<span class="sig-name descname"><span class="pre">flowtracker_export_interval_secs</span></span><a class="headerlink" href="#confval-flowtracker_export_interval_secs" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Export interval of the active flows in seconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_export_interval_usecs">
+<span class="sig-name descname"><span class="pre">flowtracker_export_interval_usecs</span></span><a class="headerlink" href="#confval-flowtracker_export_interval_usecs" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Export interval of the active flows in usecs</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_export_ipfix_enable">
+<span class="sig-name descname"><span class="pre">flowtracker_export_ipfix_enable</span></span><a class="headerlink" href="#confval-flowtracker_export_ipfix_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>1 - enable MoD periodic counter exports through IPFIX format default value: 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_flex_state_transition_mode">
+<span class="sig-name descname"><span class="pre">flowtracker_flex_state_transition_mode</span></span><a class="headerlink" href="#confval-flowtracker_flex_state_transition_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Specify mode for flexible state transition in flowtracker. 0 – State transition table is pre-defined at SDK initialization. It cannot be modified using APIs after SDK initialization (default). 1 – State transition table is pre-defined at SDK initialization. It can be modified using APIs after SDK initialization. 2 – State transition table is not pre-defined at SDK initialization.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_hostmem_enable">
+<span class="sig-name descname"><span class="pre">flowtracker_hostmem_enable</span></span><a class="headerlink" href="#confval-flowtracker_hostmem_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable host memory access 0 - Disable, 1 - Enable</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_indirect_mem_access_timeout_usec">
+<span class="sig-name descname"><span class="pre">flowtracker_indirect_mem_access_timeout_usec</span></span><a class="headerlink" href="#confval-flowtracker_indirect_mem_access_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">100000</span></code></dd>
+</dl>
+<p>Indirect flowtracker memory access operation timeout in microseconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_ipfix_observation_domain_id">
+<span class="sig-name descname"><span class="pre">flowtracker_ipfix_observation_domain_id</span></span><a class="headerlink" href="#confval-flowtracker_ipfix_observation_domain_id" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Ipfix observation domain Id for an observation domain (usually a switch). If IPFIX observation domain needs to be configured at runtime, this config property must not be configured.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_max_collectors">
+<span class="sig-name descname"><span class="pre">flowtracker_max_collectors</span></span><a class="headerlink" href="#confval-flowtracker_max_collectors" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of collectors that can be attached to flowtracker groups. Valid only if flowtracker_enable=2 default value: 1</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_max_counters_per_flow">
+<span class="sig-name descname"><span class="pre">flowtracker_max_counters_per_flow</span></span><a class="headerlink" href="#confval-flowtracker_max_counters_per_flow" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of counters that can be assigned to a single flow. Valid values currently supported are 1, 2 and 4. default value: 1</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_max_flows">
+<span class="sig-name descname"><span class="pre">flowtracker_max_flows</span></span><a class="headerlink" href="#confval-flowtracker_max_flows" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Maximum number of tracked flows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">48000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flowtracker_unmatched_tuples_size">
+<span class="sig-name descname"><span class="pre">flowtracker_unmatched_tuples_size</span></span><a class="headerlink" href="#confval-flowtracker_unmatched_tuples_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ibod_fifo_len">
+<span class="sig-name descname"><span class="pre">ibod_fifo_len</span></span><a class="headerlink" href="#confval-ibod_fifo_len" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ibod_sync_thread_pri">
+<span class="sig-name descname"><span class="pre">ibod_sync_thread_pri</span></span><a class="headerlink" href="#confval-ibod_sync_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">50</span></code></dd>
+</dl>
+<p>Specifies the priority of the bcmIbodSync thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ifa_cc_num_sbus_dma">
+<span class="sig-name descname"><span class="pre">ifa_cc_num_sbus_dma</span></span><a class="headerlink" href="#confval-ifa_cc_num_sbus_dma" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">2</span></code></dd>
+</dl>
+<p>Maximum number of SBUS DMA. In case of 2 SBUS DMA, 2 SBUS DMA of CMC-1 is used In case of 4 SBUS DMA, 2 SBUS DMA of CMC-0 and 2 SBUS DMA CMC-1 are used default value: 2</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ifa_enable">
+<span class="sig-name descname"><span class="pre">ifa_enable</span></span><a class="headerlink" href="#confval-ifa_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable in-band flow analyzer (IFA) support. Needs the IFA embedded-application firmware.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ifa_max_export_pkt_length">
+<span class="sig-name descname"><span class="pre">ifa_max_export_pkt_length</span></span><a class="headerlink" href="#confval-ifa_max_export_pkt_length" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum possible length of the export packet sent by IFA embedded app.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ifa_max_vxlan_term_flows">
+<span class="sig-name descname"><span class="pre">ifa_max_vxlan_term_flows</span></span><a class="headerlink" href="#confval-ifa_max_vxlan_term_flows" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of IFA VXLAN terminated flows supported by IFA embedded app.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ifa_rx_pkt_max_length">
+<span class="sig-name descname"><span class="pre">ifa_rx_pkt_max_length</span></span><a class="headerlink" href="#confval-ifa_rx_pkt_max_length" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum possible length of the incoming IFA packet.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ifa_tailstamp_metadata_lns_id">
+<span class="sig-name descname"><span class="pre">ifa_tailstamp_metadata_lns_id</span></span><a class="headerlink" href="#confval-ifa_tailstamp_metadata_lns_id" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>LNS format to which the tailstamped metadata is converted prior to insertion in the metadata stack.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipfix_hostbuf_size">
+<span class="sig-name descname"><span class="pre">ipfix_hostbuf_size</span></span><a class="headerlink" href="#confval-ipfix_hostbuf_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of IPFIX export entries allocated for the FIFO DMA host buffer</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipfix_intr_enable">
+<span class="sig-name descname"><span class="pre">ipfix_intr_enable</span></span><a class="headerlink" href="#confval-ipfix_intr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipfix_thread_pri">
+<span class="sig-name descname"><span class="pre">ipfix_thread_pri</span></span><a class="headerlink" href="#confval-ipfix_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">100</span></code></dd>
+</dl>
+<p>IPFIX export fifo thread priorities; 0 is highest and 255 is lowest</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-L1_backup_clk_recovery_port">
+<span class="sig-name descname"><span class="pre">L1_backup_clk_recovery_port</span></span><a class="headerlink" href="#confval-L1_backup_clk_recovery_port" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Selects the backup L1 clock recovery port. Choose a non-cpu port that does not have an external phy.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-L1_primary_clk_recovery_port">
+<span class="sig-name descname"><span class="pre">L1_primary_clk_recovery_port</span></span><a class="headerlink" href="#confval-L1_primary_clk_recovery_port" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Selects the primary L1 clock recovery port. Choose a non-cpu port that does not have an external phy.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-macsec_enable">
+<span class="sig-name descname"><span class="pre">macsec_enable</span></span><a class="headerlink" href="#confval-macsec_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Specifies to enable or disable MACSEC feature on the specified port. MACSEC feature might be provided by a PHY device attached to switch port. (Default is to disable MACSEC)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">macsec_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">macsec_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">macsec_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mcs_hostmem_size">
+<span class="sig-name descname"><span class="pre">mcs_hostmem_size</span></span><a class="headerlink" href="#confval-mcs_hostmem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>In supported devices, Part of Host Memory can be allocated and provided to the uC for its internal usage This variable specifies Size in KB. Suffix with _uc0 _uc1 etc.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mcs_uart_bmp">
+<span class="sig-name descname"><span class="pre">mcs_uart_bmp</span></span><a class="headerlink" href="#confval-mcs_uart_bmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Config to override the default UART number used by the uKernel console User needs to provide the new UART number as a bitmap. i.e bit-0 is UART0 etc. If the config property is set to 0, or if more than one bit is set, firmware will use the default UART. Suffix this config with _uc0 _uc1 etc.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ptp_-bs-ts-_-pll-parameter">
+<span class="sig-name descname"><span class="pre">ptp_&lt;bs|ts&gt;_&lt;pll</span> <span class="pre">parameter&gt;</span></span><a class="headerlink" href="#confval-ptp_-bs-ts-_-pll-parameter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Loop and divider parameters of the BroadSync (<code class="docutils literal notranslate"><span class="pre">ptp_bs_*</span></code>) and timestamp (<code class="docutils literal notranslate"><span class="pre">ptp_ts_*</span></code>) PLLs. Set only from the board vendor’s values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ptp_bs_ka</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_bs_ki</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_bs_kp</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_bs_mndiv</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_bs_ndiv_int</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_bs_pdiv</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_bs_vco_div2</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_ts_ka</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_ts_ki</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_ts_kp</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_ts_pll_mndiv</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_ts_pll_n</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_ts_pll_pdiv</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-1"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ptp_bs_fref">
+<span class="sig-name descname"><span class="pre">ptp_bs_fref</span></span><a class="headerlink" href="#confval-ptp_bs_fref" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Reference frequency in Hz of BroadSync PLL <code class="docutils literal notranslate"><span class="pre">N</span></code>: <code class="docutils literal notranslate"><span class="pre">ptp_bs_fref_&lt;N&gt;</span></code>. Seastone2 files set <code class="docutils literal notranslate"><span class="pre">ptp_bs_fref_0</span></code> and <code class="docutils literal notranslate"><span class="pre">ptp_bs_fref_1</span></code> to 50000000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ptp_bs_fref_&lt;N&gt;</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 14 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">50000000</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ptp_bs_fref_0=50000000</span></code>, <code class="docutils literal notranslate"><span class="pre">ptp_bs_fref_1=50000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ptp_cf_sw_update">
+<span class="sig-name descname"><span class="pre">ptp_cf_sw_update</span></span><a class="headerlink" href="#confval-ptp_cf_sw_update" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Control to enable CF update for 1588 packets in software Valid Values: 0x0: CF Update happens in Hardware (default) 0x1: CF Update happens in Software</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ptp_cosq">
+<span class="sig-name descname"><span class="pre">ptp_cosq</span></span><a class="headerlink" href="#confval-ptp_cosq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>PTP CoS queue</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ptp_ts_pll_fref">
+<span class="sig-name descname"><span class="pre">ptp_ts_pll_fref</span></span><a class="headerlink" href="#confval-ptp_ts_pll_fref" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Reference frequency in Hz of the timestamp PLL. Seastone2 files set 50000000.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 12 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">50000000</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">ptp_ts_pll_fref=50000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qcm_flow_enable">
+<span class="sig-name descname"><span class="pre">qcm_flow_enable</span></span><a class="headerlink" href="#confval-qcm_flow_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable QCMv2(Flow Tracking and Queue Congestion Monitoring) embedded app default value: 0 (disabled)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qcm_ipfix_ntp_timestamp_export_enable">
+<span class="sig-name descname"><span class="pre">qcm_ipfix_ntp_timestamp_export_enable</span></span><a class="headerlink" href="#confval-qcm_ipfix_ntp_timestamp_export_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qcm_max_flows">
+<span class="sig-name descname"><span class="pre">qcm_max_flows</span></span><a class="headerlink" href="#confval-qcm_max_flows" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of flows that can be learnt. default value: 1K</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sw_timestamp_fifo_enable">
+<span class="sig-name descname"><span class="pre">sw_timestamp_fifo_enable</span></span><a class="headerlink" href="#confval-sw_timestamp_fifo_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Get 1588 timestamps from HW register or SW FIFO. If 1(default), timestamps are controlled by soc_feature_timestamp_counter and timestamps are obtained from SW FIFO. If 0, get timestamps directly from HW register.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-telemetry_export_max_packet_size">
+<span class="sig-name descname"><span class="pre">telemetry_export_max_packet_size</span></span><a class="headerlink" href="#confval-telemetry_export_max_packet_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum size of the packet sent by telemetry application. default value: 1500 bytes</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-telemetry_max_ports_monitor">
+<span class="sig-name descname"><span class="pre">telemetry_max_ports_monitor</span></span><a class="headerlink" href="#confval-telemetry_max_ports_monitor" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of ports that can be monitored simultaneously by ST app</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-timestamp_adjust_-speed-_ns">
+<span class="sig-name descname"><span class="pre">timestamp_adjust_&lt;speed&gt;_ns</span></span><a class="headerlink" href="#confval-timestamp_adjust_-speed-_ns" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>PTP timestamp correction in nanoseconds for ports of one speed (<code class="docutils literal notranslate"><span class="pre">10gbe</span></code>, <code class="docutils literal notranslate"><span class="pre">25gbe</span></code>, <code class="docutils literal notranslate"><span class="pre">40gbe</span></code>, <code class="docutils literal notranslate"><span class="pre">50gbe</span></code>, <code class="docutils literal notranslate"><span class="pre">100gbe</span></code>, …); <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_ns</span></code> for all other speeds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">timestamp_adjust_100gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_100mbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_10gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_10mbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_1gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_20gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_25gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_2_5gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_40gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_50gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_adjust_ns</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-2"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-timestamp_tsts_adjust_-speed-_ns">
+<span class="sig-name descname"><span class="pre">timestamp_tsts_adjust_&lt;speed&gt;_ns</span></span><a class="headerlink" href="#confval-timestamp_tsts_adjust_-speed-_ns" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>One-step timestamp (TSTS) correction in nanoseconds for ports of one speed; <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_ns</span></code> for all other speeds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_100gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_100mbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_10gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_10mbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_1gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_20gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_25gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_2_5gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_40gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_50gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp_tsts_adjust_ns</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-3"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ts_counter_combined_mode">
+<span class="sig-name descname"><span class="pre">ts_counter_combined_mode</span></span><a class="headerlink" href="#confval-ts_counter_combined_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Option to program TS counters in common control mode Valid Values: 0x0: Will disable common control mode 0x1: Will enable common control mode (default)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tsfifo_available_flag">
+<span class="sig-name descname"><span class="pre">tsfifo_available_flag</span></span><a class="headerlink" href="#confval-tsfifo_available_flag" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Enable TS FIFO host control</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-tsfifo_open_loop">
+<span class="sig-name descname"><span class="pre">tsfifo_open_loop</span></span><a class="headerlink" href="#confval-tsfifo_open_loop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-uc_msg_-setting">
+<span class="sig-name descname"><span class="pre">uc_msg_&lt;setting&gt;</span></span><a class="headerlink" href="#confval-uc_msg_-setting" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Timeouts, retry delay and thread priority of the message channel between the SDK and the embedded ARM applications (BFD, flow tracker, IFA, BroadSync).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">uc_msg_ctl_timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">uc_msg_queue_timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">uc_msg_send_retry_delay</span></code>, <code class="docutils literal notranslate"><span class="pre">uc_msg_send_timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">uc_msg_thread_pri</span></code>, <code class="docutils literal notranslate"><span class="pre">uc_msg_tx_beacon_timeout</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-4"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-xflow_macsec_secure_chan_to_num_secure_assoc_decrypt">
+<span class="sig-name descname"><span class="pre">xflow_macsec_secure_chan_to_num_secure_assoc_decrypt</span></span><a class="headerlink" href="#confval-xflow_macsec_secure_chan_to_num_secure_assoc_decrypt" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-xflow_macsec_secure_chan_to_num_secure_assoc_encrypt">
+<span class="sig-name descname"><span class="pre">xflow_macsec_secure_chan_to_num_secure_assoc_encrypt</span></span><a class="headerlink" href="#confval-xflow_macsec_secure_chan_to_num_secure_assoc_encrypt" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mmu.html" class="btn btn-neutral float-left" title="Buffers, queues and QoS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cpu.html" class="btn btn-neutral float-right" title="CPU, DMA, interrupts and counters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

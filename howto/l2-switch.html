@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building an L2 switch with VLANs and SVIs &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Port channels and LACP" href="lacp.html" />
+    <link rel="prev" title="PHYs and RJ-45 SFPs" href="phy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building an L2 switch with VLANs and SVIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#check-that-the-ports-are-free">1. Check that the ports are free</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vlans">2. VLANs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-settings">3. Port settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-l2-forwarding">4. Check L2 forwarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#svis-in-the-switch-chip">5. SVIs in the switch chip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#svi-addresses-on-the-cpu">6. SVI addresses on the CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#removing-it-again">Removing it again</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building an L2 switch with VLANs and SVIs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-an-l2-switch-with-vlans-and-svis">
+<h1>Building an L2 switch with VLANs and SVIs<a class="headerlink" href="#building-an-l2-switch-with-vlans-and-svis" title="Link to this heading"></a></h1>
+<p>This page builds a small switch by hand, using only the diag shell for the
+switch chip: two untagged VLANs with two ports each, and a switched virtual
+interface (SVI, an IP address on the VLAN) in each VLAN that hosts can ping
+and use as their gateway. It is a good way to learn how the SDK’s VLAN, L2,
+L3 and KNET objects fit together, and a way to test the chip without SONiC’s
+configuration in between.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>VLAN</p></th>
+<th class="head"><p>Ports (untagged)</p></th>
+<th class="head"><p>SVI address</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>10</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xe0</span></code>, <code class="docutils literal notranslate"><span class="pre">xe1</span></code></p></td>
+<td><p>192.0.2.1/24</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xe2</span></code>, <code class="docutils literal notranslate"><span class="pre">xe3</span></code></p></td>
+<td><p>203.0.113.1/24</p></td>
+</tr>
+</tbody>
+</table>
+<p>Both SVIs use the router MAC <code class="docutils literal notranslate"><span class="pre">02:00:00:00:01:00</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Everything here is configured behind SONiC’s back. Use ports that SONiC
+does not use (no VLAN, port channel or IP address on them), VLAN IDs and
+addresses that SONiC does not use, and remove it all again when you are
+done (see <a class="reference internal" href="#removing-it-again">Removing it again</a>). A <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restart also removes it.</p>
+</div>
+<section id="check-that-the-ports-are-free">
+<h2>1. Check that the ports are free<a class="headerlink" href="#check-that-the-ports-are-free" title="Link to this heading"></a></h2>
+<p>The ports must not be in a trunk (port channel) or in another VLAN:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; trunk show</span>
+<span class="go">trunk 1: (front panel, 0 ports)</span>
+<span class="go">drivshell&gt; pvlan show xe0-xe3</span>
+<span class="go">Port xe0 default VLAN is 1</span>
+<span class="go">Port xe1 default VLAN is 1</span>
+<span class="go">Port xe2 default VLAN is 1</span>
+<span class="go">Port xe3 default VLAN is 1</span>
+</pre></div>
+</div>
+</div>
+<p>An empty trunk and PVID 1 (the default VLAN) mean the ports are free.</p>
+</section>
+<section id="vlans">
+<h2>2. VLANs<a class="headerlink" href="#vlans" title="Link to this heading"></a></h2>
+<p>Create each VLAN with its member ports, all untagged, with
+<a class="reference internal" href="../reference/vlan.html#clicmd-vlan-create"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">create</span></code></a>, and make
+it the ports’ default VLAN (PVID) with <a class="reference internal" href="../reference/pvlan.html#clicmd-pvlan"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pvlan</span></code></a> so that untagged
+frames are classified into it:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; vlan create 10 PortBitMap=xe0,xe1 UntagBitMap=xe0,xe1</span>
+<span class="go">drivshell&gt; vlan create 20 PortBitMap=xe2,xe3 UntagBitMap=xe2,xe3</span>
+<span class="go">drivshell&gt; pvlan set xe0,xe1 10</span>
+<span class="go">drivshell&gt; pvlan set xe2,xe3 20</span>
+<span class="go">drivshell&gt; pvlan show xe0-xe3</span>
+<span class="go">Port xe0 default VLAN is 10</span>
+<span class="go">Port xe1 default VLAN is 10</span>
+<span class="go">Port xe2 default VLAN is 20</span>
+<span class="go">Port xe3 default VLAN is 20</span>
+<span class="go">drivshell&gt; stg show</span>
+<span class="go">STG 0: contains 0 VLANs</span>
+<span class="go">  Disable: ce,xe</span>
+<span class="go">STG 1: contains 10 VLANs (1,10,20,902,3999,4095,28673,29574,32671,45055)</span>
+<span class="go">  Forward: ce,xe</span>
+</pre></div>
+</div>
+</div>
+<p>New VLANs join spanning-tree group 1, where every port is in <code class="docutils literal notranslate"><span class="pre">Forward</span></code>
+state, so nothing more is needed for spanning tree.</p>
+</section>
+<section id="port-settings">
+<h2>3. Port settings<a class="headerlink" href="#port-settings" title="Link to this heading"></a></h2>
+<p>On a SONiC switch, ports outside any VLAN discard untagged frames and do not
+learn MAC addresses. <code class="docutils literal notranslate"><span class="pre">ps</span></code> shows this as <code class="docutils literal notranslate"><span class="pre">Untag</span></code> in the <code class="docutils literal notranslate"><span class="pre">discrd</span></code> column
+and <code class="docutils literal notranslate"><span class="pre">F</span></code> (forward only) in the <code class="docutils literal notranslate"><span class="pre">lrn</span> <span class="pre">ops</span></code> column. Turn off the discard and
+turn on learning with <a class="reference internal" href="../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a>: <code class="docutils literal notranslate"><span class="pre">LeaRN=5</span></code> is hardware learning (1)
+plus forwarding (4).</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; port xe0-xe3 DISCard=None LeaRN=5</span>
+<span class="go">drivshell&gt; ps xe0-xe3</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       xe0(  9)  up     1   10G  FD   SW  No   Forward          None   FA    XFI  9122    No          IEEE</span>
+<span class="go">       xe1( 10)  up     1   10G  FD   SW  No   Forward          None   FA    XFI  9122    No          IEEE</span>
+<span class="go">       xe2( 11)  up     1   10G  FD   SW  No   Forward          None   FA    XFI  9122    No          IEEE</span>
+<span class="go">       xe3( 12)  up     1   10G  FD   SW  No   Forward          None   FA    XFI  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">A</span></code> in <code class="docutils literal notranslate"><span class="pre">FA</span></code> means the port learns. Until this step, the hosts’ frames
+were counted as receive drops (<code class="docutils literal notranslate"><span class="pre">RDBGC0</span></code>) and nothing was learned.</p>
+</section>
+<section id="check-l2-forwarding">
+<h2>4. Check L2 forwarding<a class="headerlink" href="#check-l2-forwarding" title="Link to this heading"></a></h2>
+<p>Hosts in the same VLAN can now reach each other, and <a class="reference internal" href="../reference/l2.html#clicmd-l2-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">show</span></code></a>
+lists the learned addresses:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l2 show</span>
+<span class="go">mac=74:83:ef:3f:2c:fd vlan=20 GPORT=0xb modid=0 port=11/xe2 Hit</span>
+<span class="go">mac=74:83:ef:3f:2c:fd vlan=10 GPORT=0x9 modid=0 port=9/xe0 Hit</span>
+<span class="go">mac=e0:39:d7:88:3b:00 vlan=1 GPORT=0x0 modid=0 port=0/cpu0 Static CPU</span>
+</pre></div>
+</div>
+</div>
+<p>The same MAC address can be learned in both VLANs; each VLAN has its own
+address table.</p>
+</section>
+<section id="svis-in-the-switch-chip">
+<h2>5. SVIs in the switch chip<a class="headerlink" href="#svis-in-the-switch-chip" title="Link to this heading"></a></h2>
+<p>An SVI needs four things in the chip:</p>
+<ul class="simple">
+<li><p>a <em>station</em> entry for the router MAC, so that packets addressed to it are
+routed instead of switched (<a class="reference internal" href="../reference/l2.html#clicmd-l2-station-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">station</span> <span class="pre">add</span></code></a>);</p></li>
+<li><p>an <em>L3 interface</em> per VLAN with that MAC (<a class="reference internal" href="../reference/l3.html#clicmd-l3-intf-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">intf</span> <span class="pre">add</span></code></a>);</p></li>
+<li><p>an <em>egress object</em> per neighbour: its MAC, L3 interface and port
+(<a class="reference internal" href="../reference/l3.html#clicmd-l3-egress-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">egress</span> <span class="pre">add</span></code></a>);</p></li>
+<li><p>a <em>host entry</em> per neighbour IP pointing at its egress object
+(<a class="reference internal" href="../reference/l3.html#clicmd-l3-l3table-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">l3table</span> <span class="pre">add</span></code></a>).</p></li>
+</ul>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l2 station add MACaddress=02:00:00:00:01:00 MACaddressMask=ff:ff:ff:ff:ff:ff IPv4=true</span>
+<span class="go">Created SID=0x02000003</span>
+<span class="go">drivshell&gt; l3 intf add VLAN=10 MAC=02:00:00:00:01:00</span>
+<span class="go">drivshell&gt; l3 intf add VLAN=20 MAC=02:00:00:00:01:00</span>
+<span class="go">drivshell&gt; l3 intf show</span>
+<span class="go">Free L3INTF entries: 16375</span>
+<span class="go">Unit  Intf  VRF Group VLAN    Source Mac     MTU TTL Tunnel InnerVlan  NATRealm</span>
+<span class="go">------------------------------------------------------------------</span>
+<span class="go">0     1     0     0     29574 e0:39:d7:88:3b:00  9100 0    0     0     0</span>
+<span class="go">0     8192  0     0     1    00:00:00:00:00:01  16383 0    0     0     0</span>
+<span class="go">0     8193  -3    0     1    00:00:01:00:00:01  16383 0    0     0     0</span>
+<span class="go">0     8194  -3    0     1    e0:39:d7:88:3b:00  9100 0    0     0     0</span>
+<span class="go">0     8195  -3    0     902  e0:39:d7:88:3b:00  9100 0    0     0     0</span>
+<span class="go">0     8196  -3    0     10   02:00:00:00:01:00  16383 0    0     0     0</span>
+<span class="go">0     8197  -3    0     20   02:00:00:00:01:00  16383 0    0     0     0</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">l3</span> <span class="pre">intf</span> <span class="pre">add</span></code> does not print the new interface’s ID; find it in <code class="docutils literal notranslate"><span class="pre">l3</span> <span class="pre">intf</span>
+<span class="pre">show</span></code> by VLAN and MAC (<code class="docutils literal notranslate"><span class="pre">8196</span></code> and <code class="docutils literal notranslate"><span class="pre">8197</span></code> here). It refused an explicit
+<code class="docutils literal notranslate"><span class="pre">INTF=10</span></code> with <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">parameter</span></code>, so let the SDK choose the ID.</p>
+<p>Next an egress object for each host. The shell prints the new object’s
+index and also stores it in the shell variable <code class="docutils literal notranslate"><span class="pre">egr_object_id</span></code>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l3 egress add Mac=74:83:ef:3f:2c:fd INtf=8196 Port=xe0</span>
+<span class="go">New egress object index: 132770</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+<span class="go">drivshell&gt; l3 egress add Mac=74:83:ef:3f:2c:fd INtf=8197 Port=xe2</span>
+<span class="go">New egress object index: 132771</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">l3</span> <span class="pre">egress</span> <span class="pre">add</span></code> does not check that the L3 interface exists; with a wrong
+<code class="docutils literal notranslate"><span class="pre">INtf</span></code> it creates an object that routes nowhere. Check <code class="docutils literal notranslate"><span class="pre">l3</span> <span class="pre">egress</span> <span class="pre">show</span></code>:
+the <code class="docutils literal notranslate"><span class="pre">Vlan</span></code> column must show the interface’s VLAN.</p>
+<p>Then the host entries. The chip does not resolve ARP by itself, so every
+neighbour is added by hand:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l3 l3table add VRF=0 IP=192.0.2.11 Mac=74:83:ef:3f:2c:fd INtf=132770 Port=xe0</span>
+<span class="go">drivshell&gt; l3 l3table add VRF=0 IP=203.0.113.11 Mac=74:83:ef:3f:2c:fd INtf=132771 Port=xe2</span>
+<span class="go">drivshell&gt; l3 l3table show</span>
+<span class="go">Unit 0, free L3 table entries: 16379</span>
+<span class="go">Entry VRF IP address       Mac Address           INTF MOD PORT    CLASS HIT    H/W Index</span>
+<span class="go">1     0    203.0.113.11     00:00:00:00:00:00  132771    0    0         0 n      2560</span>
+<span class="go">2     0    198.51.100.1     00:00:00:00:00:00  132807    0    0         1 n      7744       (LOCAL ROUTE)</span>
+<span class="go">3     0    192.0.2.11       00:00:00:00:00:00  132770    0    0         0 n      8108</span>
+</pre></div>
+</div>
+</div>
+<p>Hosts in VLAN 10 can now reach hosts in VLAN 20 through the chip, if they
+know the router MAC for their gateway (for example as a static ARP entry;
+the next step makes the SVIs answer ARP). The <code class="docutils literal notranslate"><span class="pre">HIT</span></code> column of <code class="docutils literal notranslate"><span class="pre">l3</span> <span class="pre">l3table</span>
+<span class="pre">show</span></code> turns <code class="docutils literal notranslate"><span class="pre">y</span></code> once an entry is used, and a ping crosses the switch with
+its TTL lowered by one:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>switch# ping vrf howto-a 203.0.113.11 repeat 5 timeout 1
+PING 203.0.113.11 (203.0.113.11) 72(100) bytes of data.
+80 bytes from 203.0.113.11: icmp_seq=1 ttl=63 time=0.184 ms
+...
+5 packets transmitted, 5 received, 0% packet loss, time 0ms
+</pre></div>
+</div>
+</section>
+<section id="svi-addresses-on-the-cpu">
+<h2>6. SVI addresses on the CPU<a class="headerlink" href="#svi-addresses-on-the-cpu" title="Link to this heading"></a></h2>
+<p>To answer ARP and ping, the SVI addresses must reach Linux on the switch
+CPU. That takes:</p>
+<ul class="simple">
+<li><p>an egress object and a host entry that send each SVI address to the CPU
+port, <code class="docutils literal notranslate"><span class="pre">cpu0</span></code>;</p></li>
+<li><p>the CPU port as a member of each VLAN, so that ARP broadcasts reach it;</p></li>
+<li><p>a KNET netif per VLAN, the Linux network interface, and a KNET filter that
+sends the VLAN’s packets to it (see <a class="reference internal" href="knet.html"><span class="doc">KNET and the CPU port</span></a>).</p></li>
+</ul>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l3 egress add Mac=02:00:00:00:01:00 INtf=8196 Port=cpu0</span>
+<span class="go">New egress object index: 132772</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+<span class="go">drivshell&gt; l3 egress add Mac=02:00:00:00:01:00 INtf=8197 Port=cpu0</span>
+<span class="go">New egress object index: 132773</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+<span class="go">drivshell&gt; l3 l3table add VRF=0 IP=192.0.2.1 Mac=02:00:00:00:01:00 INtf=132772 Port=cpu0</span>
+<span class="go">drivshell&gt; l3 l3table add VRF=0 IP=203.0.113.1 Mac=02:00:00:00:01:00 INtf=132773 Port=cpu0</span>
+<span class="go">drivshell&gt; vlan add 10 PortBitMap=cpu0</span>
+<span class="go">drivshell&gt; vlan add 20 PortBitMap=cpu0</span>
+<span class="go">drivshell&gt; knetctrl netif create Type=Vlan Vlan=10 IFName=svi10</span>
+<span class="go">Interface ID 37: name=svi10 type=Vlan vlan=10 port=n/a</span>
+<span class="go">drivshell&gt; knetctrl netif create Type=Vlan Vlan=20 IFName=svi20</span>
+<span class="go">Interface ID 38: name=svi20 type=Vlan vlan=20 port=n/a</span>
+<span class="go">drivshell&gt; knetctrl filter create DestType=NetIF DestID=37 Vlan=10 PRIOrity=50 StripTag=yes DESCription=svi10</span>
+<span class="go">Filter ID 37: prio=50 dest=NetIF(37) desc='svi10' striptag vlan=10</span>
+<span class="go">drivshell&gt; knetctrl filter create DestType=NetIF DestID=38 Vlan=20 PRIOrity=50 StripTag=yes DESCription=svi20</span>
+<span class="go">Filter ID 38: prio=50 dest=NetIF(38) desc='svi20' striptag vlan=20</span>
+</pre></div>
+</div>
+</div>
+<p>Filters are matched by priority, lowest first. SONiC’s own filters, one per
+port, use priority 100, so these VLAN filters at 50 are checked first.
+<code class="docutils literal notranslate"><span class="pre">StripTag=yes</span></code> delivers the packets to Linux untagged.</p>
+<p>The last step is the only one outside the diag shell: give the new Linux
+interfaces the router MAC and the SVI addresses, on the switch’s host:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>svi10<span class="w"> </span>address<span class="w"> </span><span class="m">02</span>:00:00:00:01:00
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>svi20<span class="w"> </span>address<span class="w"> </span><span class="m">02</span>:00:00:00:01:00
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>add<span class="w"> </span><span class="m">192</span>.0.2.1/24<span class="w"> </span>dev<span class="w"> </span>svi10
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>add<span class="w"> </span><span class="m">203</span>.0.113.1/24<span class="w"> </span>dev<span class="w"> </span>svi20
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>svi10<span class="w"> </span>up
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>svi20<span class="w"> </span>up
+</pre></div>
+</div>
+<p>Hosts now resolve the gateway with ARP and can ping it:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>switch# ping vrf howto-a 192.0.2.1 repeat 3 timeout 1
+80 bytes from 192.0.2.1: icmp_seq=1 ttl=64 time=0.351 ms
+...
+3 packets transmitted, 3 received, 0% packet loss, time 0ms
+switch# show ip arp vrf howto-a
+Address         Age (sec)  Hardware Addr   Interface
+192.0.2.1         0:00:08  0200.0000.0100  Ethernet7/1
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tcpdump</span> <span class="pre">-ni</span> <span class="pre">svi10</span></code> on the switch shows the requests arriving, with the
+router MAC as source because the chip routed them to the CPU. Linux answers
+through the same interface; the chip switches its replies in VLAN 10. The L2
+table now also holds the router MAC as a static CPU entry in both VLANs:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l2 show</span>
+<span class="go">mac=74:83:ef:3f:2c:fd vlan=20 GPORT=0xb modid=0 port=11/xe2 Hit</span>
+<span class="go">mac=74:83:ef:3f:2c:fd vlan=10 GPORT=0x9 modid=0 port=9/xe0 Hit</span>
+<span class="go">mac=e0:39:d7:88:3b:00 vlan=1 GPORT=0x0 modid=0 port=0/cpu0 Static CPU</span>
+<span class="go">mac=02:00:00:00:01:00 vlan=10 GPORT=0x0 modid=0 port=0/cpu0 Static Hit CPU</span>
+<span class="go">mac=02:00:00:00:01:00 vlan=20 GPORT=0x0 modid=0 port=0/cpu0 Static Hit CPU</span>
+</pre></div>
+</div>
+</div>
+<p>Hosts that are not in the host table are not reached: routed packets to
+unknown neighbours are dropped. A full router also adds a subnet route per
+VLAN that sends unresolved destinations to the CPU so that software can ARP
+for them (<a class="reference internal" href="../reference/l3.html#clicmd-l3-defip-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">defip</span> <span class="pre">add</span></code></a>); that is not shown here.</p>
+</section>
+<section id="removing-it-again">
+<span id="howto-l2-teardown"></span><h2>Removing it again<a class="headerlink" href="#removing-it-again" title="Link to this heading"></a></h2>
+<p>Undo the steps in reverse order: first Linux, then the KNET objects, the L3
+objects, the station, the L2 entries, the VLANs, and last the port settings.
+Look up the IDs you used with the <code class="docutils literal notranslate"><span class="pre">show</span></code> commands first.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>svi10<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>svi20
+<span class="gp">$ </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>svi10<span class="w"> </span>down<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>svi20<span class="w"> </span>down
+</pre></div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; knetctrl filter destroy 37</span>
+<span class="go">drivshell&gt; knetctrl filter destroy 38</span>
+<span class="go">drivshell&gt; knetctrl netif destroy 37</span>
+<span class="go">drivshell&gt; knetctrl netif destroy 38</span>
+<span class="go">drivshell&gt; l3 l3table destroy VRF=0 IP=192.0.2.1</span>
+<span class="go">drivshell&gt; l3 l3table destroy VRF=0 IP=203.0.113.1</span>
+<span class="go">drivshell&gt; l3 l3table destroy VRF=0 IP=192.0.2.11</span>
+<span class="go">drivshell&gt; l3 l3table destroy VRF=0 IP=203.0.113.11</span>
+<span class="go">drivshell&gt; l3 egress delete 132770</span>
+<span class="go">drivshell&gt; l3 egress delete 132771</span>
+<span class="go">drivshell&gt; l3 egress delete 132772</span>
+<span class="go">drivshell&gt; l3 egress delete 132773</span>
+<span class="go">drivshell&gt; l3 intf destroy INTF=8196</span>
+<span class="go">drivshell&gt; l3 intf destroy INTF=8197</span>
+<span class="go">drivshell&gt; l2 station delete ID=0x02000003</span>
+<span class="go">drivshell&gt; l2 clear Vlanid=10</span>
+<span class="go">L2: Deleting static and non-static addresses by VLAN</span>
+<span class="go">drivshell&gt; l2 clear Vlanid=20</span>
+<span class="go">L2: Deleting static and non-static addresses by VLAN</span>
+<span class="go">drivshell&gt; pvlan set xe0-xe3 1</span>
+<span class="go">drivshell&gt; vlan destroy 10</span>
+<span class="go">drivshell&gt; vlan destroy 20</span>
+<span class="go">drivshell&gt; port xe0-xe3 DISCard=Untag LeaRN=4</span>
+</pre></div>
+</div>
+</div>
+<p>The last command restores the SONiC defaults for ports outside a VLAN:
+untagged frames discarded, learning off. Compare <code class="docutils literal notranslate"><span class="pre">ps</span></code>, <code class="docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">show</span></code>, <code class="docutils literal notranslate"><span class="pre">l3</span>
+<span class="pre">intf</span> <span class="pre">show</span></code>, <code class="docutils literal notranslate"><span class="pre">l3</span> <span class="pre">egress</span> <span class="pre">show</span></code> and <code class="docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">filter</span> <span class="pre">show</span></code> with what they
+showed before you started.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phy.html" class="btn btn-neutral float-left" title="PHYs and RJ-45 SFPs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lacp.html" class="btn btn-neutral float-right" title="Port channels and LACP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

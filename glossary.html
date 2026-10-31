@@ -1,0 +1,913 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glossary &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Further reading" href="sources.html" />
+    <link rel="prev" title="Other functions (94)" href="cint-api/functions/other.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Glossary</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="glossary">
+<h1>Glossary<a class="headerlink" href="#glossary" title="Link to this heading"></a></h1>
+<p>Terms and abbreviations used in this reference and in the shell’s own output.
+Where a term means something specific on a Trident 3 switch running SONiC,
+the entry says so.</p>
+<dl class="simple glossary">
+<dt id="term-ACL">ACL<a class="headerlink" href="#term-ACL" title="Link to this term"></a></dt><dd><p><em>Access Control List</em>. SONiC ACL tables and rules are programmed as
+<a class="reference internal" href="#term-field-group"><span class="xref std std-term">field groups</span></a> and <a class="reference internal" href="#term-field-entry"><span class="xref std std-term">field entries</span></a> of the <a class="reference internal" href="#term-IFP"><span class="xref std std-term">IFP</span></a>. See <a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">show</span></code></a>
+and <a class="reference internal" href="reference/bcmsai.html#clicmd-bcmsai-acl"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmsai</span> <span class="pre">acl</span></code></a>.</p>
+</dd>
+<dt id="term-alpha">alpha<a class="headerlink" href="#term-alpha" title="Link to this term"></a></dt><dd><p>The factor of a dynamic buffer limit: a <a class="reference internal" href="#term-queue"><span class="xref std std-term">queue</span></a> or
+<a class="reference internal" href="#term-priority-group"><span class="xref std std-term">priority group</span></a> may use up to alpha times the free cells of its
+<a class="reference internal" href="#term-service-pool"><span class="xref std std-term">service pool</span></a>. Trident 3 supports powers of two from 1/128 to
+8. SONiC sets it with <code class="docutils literal notranslate"><span class="pre">dynamic_th</span></code> (alpha = 2<sup>dynamic_th</sup>).
+See <a class="reference internal" href="howto/queues.html"><span class="doc">Troubleshooting queues and buffers</span></a>.</p>
+</dd>
+<dt id="term-ALPM">ALPM<a class="headerlink" href="#term-ALPM" title="Link to this term"></a></dt><dd><p><em>Algorithmic Longest Prefix Match</em>: a way of storing large route tables
+in hash-table banks behind a small TCAM, enabled by the configuration
+variable <code class="docutils literal notranslate"><span class="pre">l3_alpm_enable</span></code>. On SONiC Trident 3 switches,
+ALPM is disabled and routes are held in the <a class="reference internal" href="#term-DEFIP"><span class="xref std std-term">DEFIP</span></a> TCAM, so
+<a class="reference internal" href="reference/alpm.html#clicmd-alpm"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ALPM</span></code></a> and <a class="reference internal" href="reference/l3.html#clicmd-l3-alpm-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">alpm</span> <span class="pre">show</span></code></a> print <code class="docutils literal notranslate"><span class="pre">ALPM</span> <span class="pre">is</span> <span class="pre">disabled!</span></code>
+or <code class="docutils literal notranslate"><span class="pre">ALPM</span> <span class="pre">is</span> <span class="pre">unsupported</span> <span class="pre">or</span> <span class="pre">disabled!</span></code>.</p>
+</dd>
+<dt id="term-API-commands">API commands<a class="headerlink" href="#term-API-commands" title="Link to this term"></a></dt><dd><p>Shell commands such as <a class="reference internal" href="reference/l2.html#clicmd-l2"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span></code></a>, <a class="reference internal" href="reference/l3.html#clicmd-l3"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span></code></a>, <a class="reference internal" href="reference/vlan.html#clicmd-vlan"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">vlan</span></code></a> and
+<a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FieldProcessor</span></code></a> that call the <a class="reference internal" href="#term-SDK"><span class="xref std std-term">SDK</span></a> API, the same API
+the <a class="reference internal" href="#term-SAI"><span class="xref std std-term">SAI</span></a> uses. Compare <a class="reference internal" href="#term-chip-access-commands"><span class="xref std std-term">chip access commands</span></a>.</p>
+</dd>
+<dt id="term-ARL">ARL<a class="headerlink" href="#term-ARL" title="Link to this term"></a></dt><dd><p><em>Address Resolution Logic</em>: Broadcom’s older name for the L2 address
+table and its lookup. The shell still uses it for the SDK’s software
+copy of the <a class="reference internal" href="#term-L2X"><span class="xref std std-term">L2X</span></a> table (“software ARL table”); see
+<a class="reference internal" href="reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a> and <a class="reference internal" href="reference/show.html#clicmd-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-aset">aset<a class="headerlink" href="#term-aset" title="Link to this term"></a></dt><dd><p><em>Action set</em>: the list of actions a <a class="reference internal" href="#term-field-group"><span class="xref std std-term">field group</span></a> may use. See
+<a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-aset-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">aset</span> <span class="pre">show</span></code></a>. Compare <a class="reference internal" href="#term-qset"><span class="xref std std-term">qset</span></a>.</p>
+</dd>
+<dt id="term-ASF">ASF<a class="headerlink" href="#term-ASF" title="Link to this term"></a></dt><dd><p><em>Alternate Store and Forward</em>: Broadcom’s name for cut-through
+switching. See <a class="reference internal" href="reference/asf.html#clicmd-asf"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">asf</span></code></a> and <a class="reference internal" href="reference/port.html#clicmd-port-pbmp-asf"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span> <span class="pre">pbmp</span> <span class="pre">asf</span></code></a>.</p>
+</dd>
+<dt id="term-ASIC">ASIC<a class="headerlink" href="#term-ASIC" title="Link to this term"></a></dt><dd><p><em>Application-Specific Integrated Circuit</em>: the switch chip itself. On
+the switches this reference covers it is a <a class="reference internal" href="#term-Trident-3"><span class="xref std std-term">Trident 3</span></a>; the shell
+numbers it as <a class="reference internal" href="#term-unit"><span class="xref std std-term">unit</span></a> 0.</p>
+</dd>
+<dt id="term-ASIC_DB">ASIC_DB<a class="headerlink" href="#term-ASIC_DB" title="Link to this term"></a></dt><dd><p>The SONiC Redis database that holds the SAI objects <code class="docutils literal notranslate"><span class="pre">orchagent</span></code> wants
+programmed. <a class="reference internal" href="#term-syncd"><span class="xref std std-term">syncd</span></a> reads it and calls the <a class="reference internal" href="#term-SAI"><span class="xref std std-term">SAI</span></a>. Changes
+made from the shell are not written back to <code class="docutils literal notranslate"><span class="pre">ASIC_DB</span></code>.</p>
+</dd>
+<dt id="term-BCM.0">BCM.0&gt;<a class="headerlink" href="#term-BCM.0" title="Link to this term"></a></dt><dd><p>The prompt of the classic SDK shell, for unit 0, shown in Broadcom
+documentation. SONiC’s front-end shows <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> instead; the
+commands are the same. See <a class="reference internal" href="access.html"><span class="doc">Accessing the shell</span></a>.</p>
+</dd>
+<dt id="term-BCM56870">BCM56870<a class="headerlink" href="#term-BCM56870" title="Link to this term"></a></dt><dd><p>The part number of the Trident 3-X7 switch chip, shown by the shell as
+<code class="docutils literal notranslate"><span class="pre">BCM56870_A0</span></code> (revision A0). See <a class="reference internal" href="reference/show.html#clicmd-show-unit"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">unit</span></code></a>.</p>
+</dd>
+<dt id="term-bcmcmd">bcmcmd<a class="headerlink" href="#term-bcmcmd" title="Link to this term"></a></dt><dd><p>The SONiC host command that runs one diag-shell command inside
+<a class="reference internal" href="#term-syncd"><span class="xref std std-term">syncd</span></a> and prints the result; useful in scripts. See
+<a class="reference internal" href="access.html#clicmd-bcmcmd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmcmd</span></code></a> and <a class="reference internal" href="access.html"><span class="doc">Accessing the shell</span></a>.</p>
+</dd>
+<dt id="term-BCMSAI">BCMSAI<a class="headerlink" href="#term-BCMSAI" title="Link to this term"></a></dt><dd><p>The diag-shell command added by the Broadcom <a class="reference internal" href="#term-SAI"><span class="xref std std-term">SAI</span></a> for its own
+debug views (route, ACL, object state, warm-boot data). See
+<a class="reference internal" href="reference/bcmsai.html#clicmd-bcmsai"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span></code></a>.</p>
+</dd>
+<dt id="term-bcmsh">bcmsh<a class="headerlink" href="#term-bcmsh" title="Link to this term"></a></dt><dd><p>The SONiC host command that opens an interactive diag-shell session
+inside <a class="reference internal" href="#term-syncd"><span class="xref std std-term">syncd</span></a>. See <a class="reference internal" href="access.html#clicmd-bcmsh"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmsh</span></code></a> and <a class="reference internal" href="access.html"><span class="doc">Accessing the shell</span></a>.</p>
+</dd>
+<dt id="term-BDE">BDE<a class="headerlink" href="#term-BDE" title="Link to this term"></a></dt><dd><p><em>Broadcom Device Enumerator</em>: the SDK layer, partly a Linux kernel
+module, that finds the switch chip on PCIe and maps its registers and
+DMA memory for the SDK.</p>
+</dd>
+<dt id="term-BER">BER<a class="headerlink" href="#term-BER" title="Link to this term"></a></dt><dd><p><em>Bit Error Rate</em>: the share of received bits that are wrong on a
+<a class="reference internal" href="#term-SerDes"><span class="xref std std-term">SerDes</span></a> lane, measured with <a class="reference internal" href="#term-PRBS"><span class="xref std std-term">PRBS</span></a> or from <a class="reference internal" href="#term-FEC"><span class="xref std std-term">FEC</span></a>
+counters. See <a class="reference internal" href="reference/phy.html#clicmd-phy-diag"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span></code></a>.</p>
+</dd>
+<dt id="term-BFD">BFD<a class="headerlink" href="#term-BFD" title="Link to this term"></a></dt><dd><p><em>Bidirectional Forwarding Detection</em>. The SDK can run BFD sessions on
+the chip’s embedded microcontroller, with a BFD <a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a>; see
+<a class="reference internal" href="reference/bfd.html#clicmd-bfd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bfd</span></code></a>.</p>
+</dd>
+<dt id="term-BIST">BIST<a class="headerlink" href="#term-BIST" title="Link to this term"></a></dt><dd><p><em>Built-In Self-Test</em>: hardware test of the chip’s internal memories. See
+<a class="reference internal" href="reference/bist.html#clicmd-bist"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bist</span></code></a>. It overwrites the memories it tests, so it is only for
+a switch out of service.</p>
+</dd>
+<dt id="term-BPDU">BPDU<a class="headerlink" href="#term-BPDU" title="Link to this term"></a></dt><dd><p><em>Bridge Protocol Data Unit</em>: a spanning-tree control frame. The switch
+recognises BPDUs by destination MAC; see <a class="reference internal" href="reference/bpdu.html#clicmd-bpdu"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bpdu</span></code></a>.</p>
+</dd>
+<dt id="term-BroadSync">BroadSync<a class="headerlink" href="#term-BroadSync" title="Link to this term"></a></dt><dd><p>Broadcom’s time-of-day and 1PPS interface, run as firmware on an
+embedded core (an <a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a>). The SONiC images in this guide load
+no such firmware, so <a class="reference internal" href="reference/broadsync.html#clicmd-broadsync"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">broadsync</span></code></a> prints <code class="docutils literal notranslate"><span class="pre">Failed:</span> <span class="pre">Broadsync</span>
+<span class="pre">firmware</span> <span class="pre">not</span> <span class="pre">loaded</span></code>.</p>
+</dd>
+<dt id="term-BST">BST<a class="headerlink" href="#term-BST" title="Link to this term"></a></dt><dd><p><em>Buffer Statistics Tracking</em>: MMU counters that keep the highest
+buffer use per priority group, queue, port and <a class="reference internal" href="#term-service-pool"><span class="xref std std-term">service pool</span></a>.
+SONiC’s queue, priority-group and buffer-pool watermarks are read
+from them. See <a class="reference internal" href="howto/queues.html"><span class="doc">Troubleshooting queues and buffers</span></a>.</p>
+</dd>
+<dt id="term-cache">cache<a class="headerlink" href="#term-cache" title="Link to this term"></a></dt><dd><p>The SDK’s software copy of selected hardware tables. Reads can come from
+the cache instead of the chip; <code class="docutils literal notranslate"><span class="pre">nocache</span></code> on <a class="reference internal" href="reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a> forces a
+hardware read. See <a class="reference internal" href="reference/cache.html#clicmd-cache"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cache</span></code></a>.</p>
+</dd>
+<dt id="term-CANCUN">CANCUN<a class="headerlink" href="#term-CANCUN" title="Link to this term"></a></dt><dd><p><em>Canned Configuration</em>: Broadcom’s set of loadable packages that program
+the Trident 3’s flexible parser and pipeline: the <a class="reference internal" href="#term-CIH"><span class="xref std std-term">CIH</span></a>,
+<a class="reference internal" href="#term-CMH"><span class="xref std std-term">CMH</span></a>, <a class="reference internal" href="#term-CCH"><span class="xref std std-term">CCH</span></a>, <a class="reference internal" href="#term-CEH"><span class="xref std std-term">CEH</span></a> and <a class="reference internal" href="#term-CFH"><span class="xref std std-term">CFH</span></a> files, plus
+<code class="docutils literal notranslate"><span class="pre">ISPF</span></code>. <code class="docutils literal notranslate"><span class="pre">syncd</span></code> loads them at start-up. See <a class="reference internal" href="reference/cancun.html#clicmd-cancun-stat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cancun</span> <span class="pre">stat</span></code></a>.</p>
+</dd>
+<dt id="term-cell">cell<a class="headerlink" href="#term-cell" title="Link to this term"></a></dt><dd><p>The unit of packet buffer in the <a class="reference internal" href="#term-MMU"><span class="xref std std-term">MMU</span></a>. A packet occupies one or
+more cells, and buffer thresholds (<a class="reference internal" href="#term-THDI"><span class="xref std std-term">THDI</span></a>, <a class="reference internal" href="#term-THDU"><span class="xref std std-term">THDU</span></a>) count
+cells rather than bytes. A Trident 3 cell is 256 bytes.</p>
+</dd>
+<dt id="term-CFAP">CFAP<a class="headerlink" href="#term-CFAP" title="Link to this term"></a></dt><dd><p><em>Cell Free Address Pool</em>: the MMU’s list of free buffer <a class="reference internal" href="#term-cell"><span class="xref std std-term">cells</span></a>. See <a class="reference internal" href="reference/cfapinit.html#clicmd-cfapinit"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cfapinit</span></code></a>, which re-initialises it.</p>
+</dd>
+<dt id="term-chg">chg<a class="headerlink" href="#term-chg" title="Link to this term"></a></dt><dd><p>A display option of <a class="reference internal" href="reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a> and <a class="reference internal" href="reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span></code></a> that prints
+only entries or fields whose value differs from the reset default; the
+quickest way to see what is programmed. See <a class="reference internal" href="reference/dump.html#clicmd-dump-chg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span> <span class="pre">chg</span></code></a>.</p>
+</dd>
+<dt id="term-chip-access-commands">chip access commands<a class="headerlink" href="#term-chip-access-commands" title="Link to this term"></a></dt><dd><p>Shell commands such as <a class="reference internal" href="reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span></code></a>, <a class="reference internal" href="reference/modreg.html#clicmd-modreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">modreg</span></code></a>,
+<a class="reference internal" href="reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a>, <a class="reference internal" href="reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a> and <a class="reference internal" href="reference/write.html#clicmd-write"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">Write</span></code></a> that read and
+write <a class="reference internal" href="#term-register"><span class="xref std std-term">registers</span></a> and <a class="reference internal" href="#term-memory"><span class="xref std std-term">memories</span></a>
+directly, below the SDK API. See <a class="reference internal" href="concepts/memories-registers.html"><span class="doc">Memories and registers</span></a>.</p>
+</dd>
+<dt id="term-CIH">CIH<a class="headerlink" href="#term-CIH" title="Link to this term"></a></dt><dt id="term-CMH">CMH<a class="headerlink" href="#term-CMH" title="Link to this term"></a></dt><dt id="term-CCH">CCH<a class="headerlink" href="#term-CCH" title="Link to this term"></a></dt><dt id="term-CEH">CEH<a class="headerlink" href="#term-CEH" title="Link to this term"></a></dt><dt id="term-CFH">CFH<a class="headerlink" href="#term-CFH" title="Link to this term"></a></dt><dd><p>The five <a class="reference internal" href="#term-CANCUN"><span class="xref std std-term">CANCUN</span></a> package types, named by their file suffix. CIH
+holds the chip initialisation writes; CMH and CCH hold mapping and
+configuration data; CFH describes the flexible flows and their table
+views (see <a class="reference internal" href="reference/flowdb.html#clicmd-flowdb"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">flowdb</span></code></a>); CEH holds named field encodings.
+<a class="reference internal" href="reference/cancun.html#clicmd-cancun-stat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cancun</span> <span class="pre">stat</span></code></a> shows the version of each.</p>
+</dd>
+<dt id="term-CINT">CINT<a class="headerlink" href="#term-CINT" title="Link to this term"></a></dt><dd><p><em>C Interpreter</em>: the SDK’s built-in interpreter. It runs C-like code
+that calls the SDK API directly. See <a class="reference internal" href="reference/cint.html#clicmd-cint"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cint</span></code></a> and
+<a class="reference internal" href="concepts/cint.html"><span class="doc">Cint: the C interpreter</span></a>.</p>
+</dd>
+<dt id="term-CLMAC">CLMAC<a class="headerlink" href="#term-CLMAC" title="Link to this term"></a></dt><dt id="term-XLMAC">XLMAC<a class="headerlink" href="#term-XLMAC" title="Link to this term"></a></dt><dd><p><em>CL</em> and <em>XL Media Access Controller</em>: Ethernet MAC blocks. Broadcom
+reads CL as C (100G) plus L (40G), and XL as 10G multi-port (X),
+low-latency (L). CLMAC is the 100G-class MAC of a <code class="docutils literal notranslate"><span class="pre">CLPORT</span></code>
+<a class="reference internal" href="#term-Port-Macro"><span class="xref std std-term">Port Macro</span></a>, XLMAC the 40G-class MAC of an <code class="docutils literal notranslate"><span class="pre">XLPORT</span></code>. On
+Trident 3 the front-panel ports use CLMAC; their registers have names
+such as <code class="docutils literal notranslate"><span class="pre">CLMAC_CTRL</span></code>. See <a class="reference internal" href="concepts/memories-registers.html"><span class="doc">Memories and registers</span></a>.</p>
+</dd>
+<dt id="term-CMIC">CMIC<a class="headerlink" href="#term-CMIC" title="Link to this term"></a></dt><dt id="term-CMICx">CMICx<a class="headerlink" href="#term-CMICx" title="Link to this term"></a></dt><dd><p><em>CPU Management Interface Controller</em>: the block that connects the host
+CPU to the switch over PCIe and carries register access
+(<a class="reference internal" href="#term-S-channel"><span class="xref std std-term">S-channel</span></a>), packet <a class="reference internal" href="#term-DMA"><span class="xref std std-term">DMA</span></a>, interrupts and
+<a class="reference internal" href="#term-linkscan"><span class="xref std std-term">linkscan</span></a>. Trident 3 has the CMICx version. See
+<a class="reference internal" href="reference/intr.html#clicmd-intr"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">intr</span></code></a> and <a class="reference internal" href="reference/getreg.html#clicmd-getreg-pcim"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span> <span class="pre">pcim</span></code></a>.</p>
+</dd>
+<dt id="term-config.bcm">config.bcm<a class="headerlink" href="#term-config.bcm" title="Link to this term"></a></dt><dd><p>The file of <a class="reference internal" href="#term-configuration-variable"><span class="xref std std-term">configuration variables</span></a>
+the SDK reads at start-up. On SONiC it is in the platform’s
+<a class="reference internal" href="#term-HWSKU"><span class="xref std std-term">HWSKU</span></a> directory, for example
+<code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/hwsku/td3-seastone_2-32x100G-vxlan.config.bcm</span></code> on a
+<a class="reference internal" href="#term-Seastone2"><span class="xref std std-term">Seastone2</span></a>. See
+<a class="reference internal" href="concepts/config.html"><span class="doc">Configuration variables</span></a>.</p>
+</dd>
+<dt id="term-configuration-variable">configuration variable<a class="headerlink" href="#term-configuration-variable" title="Link to this term"></a></dt><dt id="term-config-property">config property<a class="headerlink" href="#term-config-property" title="Link to this term"></a></dt><dt id="term-SOC-property">SOC property<a class="headerlink" href="#term-SOC-property" title="Link to this term"></a></dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">name=value</span></code> setting of the SDK, read from <a class="reference internal" href="#term-config.bcm"><span class="xref std std-term">config.bcm</span></a> at
+start-up, such as <code class="docutils literal notranslate"><span class="pre">portmap_&lt;n&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">l3_alpm_enable</span></code>. All three
+names are used for the same thing. See <a class="reference internal" href="reference/config.html#clicmd-config-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">show</span></code></a> and
+<a class="reference internal" href="concepts/config.html"><span class="doc">Configuration variables</span></a>.</p>
+</dd>
+<dt id="term-CoPP">CoPP<a class="headerlink" href="#term-CoPP" title="Link to this term"></a></dt><dd><p><em>Control Plane Policing</em>: limiting which packets reach the switch’s
+CPU and how fast. On a Trident 3 running SONiC it is built from
+<a class="reference internal" href="#term-IFP"><span class="xref std std-term">IFP</span></a> entries that copy or redirect packets to the
+<a class="reference internal" href="#term-CPU-port"><span class="xref std std-term">CPU port</span></a>, <a class="reference internal" href="#term-policer"><span class="xref std std-term">policer</span></a>s and CPU <a class="reference internal" href="#term-CoS"><span class="xref std std-term">CoS</span></a> queues. See
+<a class="reference internal" href="howto/copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>.</p>
+</dd>
+<dt id="term-CoS">CoS<a class="headerlink" href="#term-CoS" title="Link to this term"></a></dt><dd><p><em>Class of Service</em>: the internal priority that selects an egress
+<a class="reference internal" href="#term-queue"><span class="xref std std-term">queue</span></a>. See <a class="reference internal" href="reference/cos.html#clicmd-cos"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span></code></a>.</p>
+</dd>
+<dt id="term-counter-thread">counter thread<a class="headerlink" href="#term-counter-thread" title="Link to this term"></a></dt><dd><p>The SDK task that periodically reads the hardware MIB counters into
+64-bit software counters. All port counters SONiC shows come from it.
+See <a class="reference internal" href="reference/counter.html#clicmd-counter"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">counter</span></code></a> and <a class="reference internal" href="reference/show.html#clicmd-show-counters"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span></code></a>.</p>
+</dd>
+<dt id="term-CPU-port">CPU port<a class="headerlink" href="#term-CPU-port" title="Link to this term"></a></dt><dd><p>The internal port, <code class="docutils literal notranslate"><span class="pre">cpu0</span></code>, through which packets go between the
+switch and the host CPU by <a class="reference internal" href="#term-DMA"><span class="xref std std-term">DMA</span></a>. On SONiC, <a class="reference internal" href="#term-KNET"><span class="xref std std-term">KNET</span></a> hands
+these packets to Linux. See <a class="reference internal" href="howto/knet.html"><span class="doc">KNET and the CPU port</span></a>.</p>
+</dd>
+<dt id="term-CTSW">CTSW<a class="headerlink" href="#term-CTSW" title="Link to this term"></a></dt><dd><p>An SDK driver mode for another chip family. <a class="reference internal" href="reference/mode.html#clicmd-mode"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mode</span></code></a> accepts it,
+but Trident 3 supports only <a class="reference internal" href="#term-ESW"><span class="xref std std-term">ESW</span></a>.</p>
+</dd>
+<dt id="term-DCB">DCB<a class="headerlink" href="#term-DCB" title="Link to this term"></a></dt><dd><p><em>DMA Control Block</em>: a descriptor telling the packet <a class="reference internal" href="#term-DMA"><span class="xref std std-term">DMA</span></a> engine
+where a packet buffer is and how to send or receive it. See
+<a class="reference internal" href="reference/dma.html#clicmd-dma"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dma</span></code></a>.</p>
+</dd>
+<dt id="term-DEFIP">DEFIP<a class="headerlink" href="#term-DEFIP" title="Link to this term"></a></dt><dd><p>The SDK’s name for the IPv4/IPv6 longest-prefix-match routing table
+(memory <code class="docutils literal notranslate"><span class="pre">L3_DEFIP</span></code>, with <code class="docutils literal notranslate"><span class="pre">L3_DEFIP_PAIR_128</span></code> for long IPv6
+prefixes), stored in a TCAM. On Trident 3 SONiC switches with
+<a class="reference internal" href="#term-ALPM"><span class="xref std std-term">ALPM</span></a> off, it holds up to 16384 IPv4 routes. See
+<a class="reference internal" href="reference/l3.html#clicmd-l3-defip-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">defip</span> <span class="pre">show</span></code></a> and <a class="reference internal" href="howto/l3.html"><span class="doc">Inspecting L3 forwarding</span></a>.</p>
+</dd>
+<dt id="term-DFE">DFE<a class="headerlink" href="#term-DFE" title="Link to this term"></a></dt><dd><p><em>Decision-Feedback Equalization</em>: an adaptive receive equalizer of a
+<a class="reference internal" href="#term-SerDes"><span class="xref std std-term">SerDes</span></a> lane. Its taps appear in <a class="reference internal" href="reference/phy.html#clicmd-phy-diag"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span></code></a> and
+<a class="reference internal" href="reference/phy.html#clicmd-phy-control"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">control</span></code></a> output. In the SDK’s driver names DFE is also a
+fabric-element chip family that has nothing to do with Trident 3.</p>
+</dd>
+<dt id="term-diag-shell">diag shell<a class="headerlink" href="#term-diag-shell" title="Link to this term"></a></dt><dt id="term-drivshell">drivshell<a class="headerlink" href="#term-drivshell" title="Link to this term"></a></dt><dd><p>The Broadcom SDK’s command interpreter, documented here. On SONiC it
+runs inside <a class="reference internal" href="#term-syncd"><span class="xref std std-term">syncd</span></a> and shows the prompt <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>; Broadcom
+documentation shows the classic prompt <code class="docutils literal notranslate"><span class="pre">BCM.0&gt;</span></code>. See <a class="reference internal" href="access.html"><span class="doc">Accessing the shell</span></a>.</p>
+</dd>
+<dt id="term-DLF">DLF<a class="headerlink" href="#term-DLF" title="Link to this term"></a></dt><dd><p><em>Destination Lookup Failure</em>: a unicast packet whose destination MAC is
+not in the <a class="reference internal" href="#term-L2X"><span class="xref std std-term">L2X</span></a> table, so it is flooded. Storm control limits it
+with <a class="reference internal" href="reference/rate.html#clicmd-rate"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rate</span></code></a>.</p>
+</dd>
+<dt id="term-DMA">DMA<a class="headerlink" href="#term-DMA" title="Link to this term"></a></dt><dd><p><em>Direct Memory Access</em>: the chip copying data to or from host memory
+without the CPU. The switch uses DMA for packets to and from the
+<a class="reference internal" href="#term-CPU-port"><span class="xref std std-term">CPU port</span></a>, for table reads and for counter collection. See
+<a class="reference internal" href="reference/dma.html#clicmd-dma"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dma</span></code></a>.</p>
+</dd>
+<dt id="term-DSCP">DSCP<a class="headerlink" href="#term-DSCP" title="Link to this term"></a></dt><dd><p><em>Differentiated Services Code Point</em>: the 6-bit priority field of the IP
+header. See <a class="reference internal" href="reference/dscp.html#clicmd-dscp"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dscp</span></code></a>.</p>
+</dd>
+<dt id="term-dsserve">dsserve<a class="headerlink" href="#term-dsserve" title="Link to this term"></a></dt><dd><p>The small proxy in the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container that connects <code class="docutils literal notranslate"><span class="pre">syncd</span></code>’s
+console to a UNIX socket, so that <a class="reference internal" href="#term-bcmsh"><span class="xref std std-term">bcmsh</span></a> and <a class="reference internal" href="#term-bcmcmd"><span class="xref std std-term">bcmcmd</span></a> can
+reach the shell. It accepts one client at a time. See <a class="reference internal" href="access.html"><span class="doc">Accessing the shell</span></a>.</p>
+</dd>
+<dt id="term-eApp">eApp<a class="headerlink" href="#term-eApp" title="Link to this term"></a></dt><dt id="term-embedded-application">embedded application<a class="headerlink" href="#term-embedded-application" title="Link to this term"></a></dt><dd><p>A firmware image that runs on one of the chip’s embedded cores
+(<a class="reference internal" href="#term-uC"><span class="xref std std-term">uC</span></a>) and provides a feature such as <a class="reference internal" href="#term-IFA"><span class="xref std std-term">IFA</span></a>, <a class="reference internal" href="#term-MOD"><span class="xref std std-term">MOD</span></a>
+or <a class="reference internal" href="#term-PTP"><span class="xref std std-term">PTP</span></a>. The SAI loads eApps as listed in its eApp
+configuration file (<a class="reference internal" href="concepts/config/variables/sai.html#confval-sai_eapp_config_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_eapp_config_file</span></code></a>). See
+<a class="reference internal" href="concepts/eapps.html"><span class="doc">Embedded applications</span></a>.</p>
+</dd>
+<dt id="term-ECC">ECC<a class="headerlink" href="#term-ECC" title="Link to this term"></a></dt><dd><p><em>Error-Correcting Code</em>: check bits stored with a memory entry that
+let the chip detect and correct bit errors. See <a class="reference internal" href="#term-SER"><span class="xref std std-term">SER</span></a>.</p>
+</dd>
+<dt id="term-ECMP">ECMP<a class="headerlink" href="#term-ECMP" title="Link to this term"></a></dt><dd><p><em>Equal-Cost Multi-Path</em>: a route that spreads traffic over several
+<a class="reference internal" href="#term-next-hop"><span class="xref std std-term">next hops</span></a>. In the SDK an ECMP group is a list of
+<a class="reference internal" href="#term-egress-object"><span class="xref std std-term">egress objects</span></a>. See
+<a class="reference internal" href="reference/l3.html#clicmd-l3-ecmp-egress-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">ecmp</span> <span class="pre">egress</span> <span class="pre">show</span></code></a> and <a class="reference internal" href="reference/l3.html#clicmd-l3-multipath-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">multipath</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-EDK">EDK<a class="headerlink" href="#term-EDK" title="Link to this term"></a></dt><dd><p><em>Embedded Development Kit</em>: a firmware framework for the embedded
+cores used on some newer Broadcom chips, reached with <a class="reference internal" href="reference/edk.html#clicmd-edk"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">edk</span></code></a>.</p>
+</dd>
+<dt id="term-EEE">EEE<a class="headerlink" href="#term-EEE" title="Link to this term"></a></dt><dd><p><em>Energy-Efficient Ethernet</em> (IEEE 802.3az): low-power idle on a link
+while no traffic is sent. See <a class="reference internal" href="reference/phy.html#clicmd-phy-eee"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">eee</span></code></a>.</p>
+</dd>
+<dt id="term-EFP">EFP<a class="headerlink" href="#term-EFP" title="Link to this term"></a></dt><dd><p><em>Egress Field Processor</em>: the <a class="reference internal" href="#term-field-processor"><span class="xref std std-term">field processor</span></a> stage applied as
+packets leave, matching <code class="docutils literal notranslate"><span class="pre">EFP_TCAM</span></code>. See <a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FieldProcessor</span></code></a>.</p>
+</dd>
+<dt id="term-egress-object">egress object<a class="headerlink" href="#term-egress-object" title="Link to this term"></a></dt><dd><p>The SDK object for a <a class="reference internal" href="#term-next-hop"><span class="xref std std-term">next hop</span></a>: outgoing <a class="reference internal" href="#term-L3-interface"><span class="xref std std-term">L3 interface</span></a>,
+destination MAC and port or trunk. Routes and host entries point to an
+egress object ID. See <a class="reference internal" href="reference/l3.html#clicmd-l3-egress-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">egress</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-ESW">ESW<a class="headerlink" href="#term-ESW" title="Link to this term"></a></dt><dd><p><em>Enterprise SWitching</em>: the SDK driver family for StrataXGS chips such
+as Trident 3. <a class="reference internal" href="reference/mode.html#clicmd-mode"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mode</span></code></a> shows it; the other modes,
+<a class="reference internal" href="#term-LTSW"><span class="xref std std-term">LTSW</span></a> and <a class="reference internal" href="#term-CTSW"><span class="xref std std-term">CTSW</span></a>, are for other chips.</p>
+</dd>
+<dt id="term-EthernetN">EthernetN<a class="headerlink" href="#term-EthernetN" title="Link to this term"></a></dt><dd><p>SONiC’s name for a front-panel interface. The shell does not use these
+names; <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code> maps each to its <a class="reference internal" href="#term-lane"><span class="xref std std-term">lanes</span></a>, and
+<a class="reference internal" href="reference/show.html#clicmd-show-pmap"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">pmap</span></code></a> maps lanes to shell ports. See
+<a class="reference internal" href="concepts/ports.html"><span class="doc">Ports and port bitmaps</span></a>.</p>
+</dd>
+<dt id="term-FEC">FEC<a class="headerlink" href="#term-FEC" title="Link to this term"></a></dt><dt id="term-RS-FEC">RS-FEC<a class="headerlink" href="#term-RS-FEC" title="Link to this term"></a></dt><dd><p><em>Forward Error Correction</em> on a SerDes link. RS-FEC is <em>Reed-Solomon
+FEC</em>, used for example on 100G ports. See <a class="reference internal" href="reference/phy.html#clicmd-phy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span></code></a> and
+<a class="reference internal" href="reference/portmod.html#clicmd-portmod-status"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">status</span></code></a>.</p>
+</dd>
+<dt id="term-field-entry">field entry<a class="headerlink" href="#term-field-entry" title="Link to this term"></a></dt><dd><p>One rule of a <a class="reference internal" href="#term-field-group"><span class="xref std std-term">field group</span></a>: qualifiers to match, actions, a
+priority and optional <a class="reference internal" href="#term-policer"><span class="xref std std-term">policer</span></a> and <a class="reference internal" href="#term-stat"><span class="xref std std-term">stat</span></a>. See
+<a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-show-entry"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">show</span> <span class="pre">entry</span></code></a>.</p>
+</dd>
+<dt id="term-field-group">field group<a class="headerlink" href="#term-field-group" title="Link to this term"></a></dt><dd><p>A set of <a class="reference internal" href="#term-field-processor"><span class="xref std std-term">field processor</span></a> rules that share a <a class="reference internal" href="#term-qset"><span class="xref std std-term">qset</span></a> and a
+slice of the TCAM. SONiC ACL tables become field groups. See
+<a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-show-group"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">show</span> <span class="pre">group</span></code></a>.</p>
+</dd>
+<dt id="term-field-processor">field processor<a class="headerlink" href="#term-field-processor" title="Link to this term"></a></dt><dt id="term-FP">FP<a class="headerlink" href="#term-FP" title="Link to this term"></a></dt><dd><p>The chip’s TCAM-based packet classifier, used for ACLs, traps to the
+CPU and policing. Trident 3 has three stages: <a class="reference internal" href="#term-VFP"><span class="xref std std-term">VFP</span></a>,
+<a class="reference internal" href="#term-IFP"><span class="xref std std-term">IFP</span></a> and <a class="reference internal" href="#term-EFP"><span class="xref std std-term">EFP</span></a>. See <a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FieldProcessor</span></code></a>. Broadcom
+hardware documentation also calls it the <em>Filter Processor</em>, and names
+the stages VCAP, ICAP and ECAP (<em>VLAN</em>, <em>Ingress</em> and <em>Egress Content
+Aware Processor</em>).</p>
+</dd>
+<dt id="term-FlexFlow">FlexFlow<a class="headerlink" href="#term-FlexFlow" title="Link to this term"></a></dt><dd><p>Broadcom’s flexible-pipeline feature set on Trident 3 (VXLAN, NAT, IFA
+and other tunnels), programmed through the <a class="reference internal" href="#term-CANCUN"><span class="xref std std-term">CANCUN</span></a> flow
+definitions. See <a class="reference internal" href="reference/flowdb.html#clicmd-flowdb"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">flowdb</span></code></a>.</p>
+</dd>
+<dt id="term-flexport">flexport<a class="headerlink" href="#term-flexport" title="Link to this term"></a></dt><dd><p>Changing the port layout of a <a class="reference internal" href="#term-Port-Macro"><span class="xref std std-term">Port Macro</span></a> (number of ports,
+lanes and speed) while the switch runs. See <a class="reference internal" href="reference/flexport.html#clicmd-flexport"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FLEXport</span></code></a>.</p>
+</dd>
+<dt id="term-flow-tracker">flow tracker<a class="headerlink" href="#term-flow-tracker" title="Link to this term"></a></dt><dd><p>Hardware flow table with export by an application on the embedded
+microcontroller, used for flow monitoring. See <a class="reference internal" href="reference/flowtracker.html#clicmd-flowtracker"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">flowtracker</span></code></a>
+and <a class="reference internal" href="reference/ipfix.html#clicmd-ipfix"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ipfix</span></code></a>.</p>
+</dd>
+<dt id="term-front-panel-port">front-panel port<a class="headerlink" href="#term-front-panel-port" title="Link to this term"></a></dt><dd><p>A port with a physical connector on the switch, named <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> in
+SONiC and <code class="docutils literal notranslate"><span class="pre">xe</span></code>/<code class="docutils literal notranslate"><span class="pre">ce</span></code> in the shell. Not every <a class="reference internal" href="#term-logical-port"><span class="xref std std-term">logical port</span></a> is
+a front-panel port: <a class="reference internal" href="#term-CPU-port"><span class="xref std std-term">cpu0</span></a> and loopback ports are not.
+See <a class="reference internal" href="concepts/ports.html"><span class="doc">Ports and port bitmaps</span></a>.</p>
+</dd>
+<dt id="term-gport">gport<a class="headerlink" href="#term-gport" title="Link to this term"></a></dt><dd><p><em>Generic port</em>: a 32-bit SDK identifier that encodes the kind of port
+(local port, module/port, trunk, <a class="reference internal" href="#term-virtual-port"><span class="xref std std-term">virtual port</span></a>, queue …) and its
+number. See <a class="reference internal" href="reference/gport.html#clicmd-gport"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">gport</span></code></a>.</p>
+</dd>
+<dt id="term-hash-table">hash table<a class="headerlink" href="#term-hash-table" title="Link to this term"></a></dt><dd><p>A hardware table whose entries are found by hashing the key into a
+bucket, such as the <a class="reference internal" href="#term-L2X"><span class="xref std std-term">L2X</span></a> table or the L3 <a class="reference internal" href="#term-host-table"><span class="xref std std-term">host table</span></a>. Hash
+collisions can make an add fail while the table still has free entries.
+See <a class="reference internal" href="reference/hash.html#clicmd-hash"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">hash</span></code></a> and <a class="reference internal" href="reference/l2.html#clicmd-l2-conflict"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">conflict</span></code></a>.</p>
+</dd>
+<dt id="term-headroom">headroom<a class="headerlink" href="#term-headroom" title="Link to this term"></a></dt><dd><p>Buffer cells reserved for a lossless <a class="reference internal" href="#term-priority-group"><span class="xref std std-term">priority group</span></a> to hold
+the packets that still arrive after the switch has sent a
+<a class="reference internal" href="#term-PFC"><span class="xref std std-term">PFC</span></a> pause. Per PG (<code class="docutils literal notranslate"><span class="pre">PG_HDRM_LIMIT</span></code>) and in shared headroom
+pools. See <a class="reference internal" href="howto/queues.html"><span class="doc">Troubleshooting queues and buffers</span></a>.</p>
+</dd>
+<dt id="term-HiGig">HiGig<a class="headerlink" href="#term-HiGig" title="Link to this term"></a></dt><dt id="term-HiGig2">HiGig2<a class="headerlink" href="#term-HiGig2" title="Link to this term"></a></dt><dd><p>Broadcom’s proprietary header for stacking switch chips: a module
+header in front of the Ethernet frame that carries the source and
+destination <a class="reference internal" href="#term-module-id"><span class="xref std std-term">module id</span></a> and port. SONiC does not use HiGig on
+Trident 3. <a class="reference internal" href="reference/h2higig2.html#clicmd-h2higig2"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">h2higig2</span></code></a> decodes a HiGig2 header.</p>
+</dd>
+<dt id="term-hit-bit">hit bit<a class="headerlink" href="#term-hit-bit" title="Link to this term"></a></dt><dd><p>A bit set by hardware when an entry (for example an L2 or L3 host
+entry) is used. Aging and route-usage tools read and clear it. See
+<a class="reference internal" href="reference/l2.html#clicmd-l2-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">show</span></code></a> and <a class="reference internal" href="reference/l3.html#clicmd-l3-l3table-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">l3table</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-host-table">host table<a class="headerlink" href="#term-host-table" title="Link to this term"></a></dt><dd><p>The L3 table of exact-match host routes (<code class="docutils literal notranslate"><span class="pre">/32</span></code> and <code class="docutils literal notranslate"><span class="pre">/128</span></code>),
+mostly ARP and neighbour entries, kept in a <a class="reference internal" href="#term-hash-table"><span class="xref std std-term">hash table</span></a>. See
+<a class="reference internal" href="reference/l3.html#clicmd-l3-l3table-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">l3table</span> <span class="pre">show</span></code></a> and <a class="reference internal" href="reference/l3.html#clicmd-l3-ip6host-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">ip6host</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-HWSKU">HWSKU<a class="headerlink" href="#term-HWSKU" title="Link to this term"></a></dt><dd><p><em>Hardware SKU</em> (stock keeping unit): SONiC’s name for a hardware
+variant of a platform. Its directory
+(<code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/hwsku</span></code> inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code>) holds <a class="reference internal" href="#term-config.bcm"><span class="xref std std-term">config.bcm</span></a>,
+<a class="reference internal" href="#term-sai.profile"><span class="xref std std-term">sai.profile</span></a> and <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code>.</p>
+</dd>
+<dt id="term-I2C">I2C<a class="headerlink" href="#term-I2C" title="Link to this term"></a></dt><dd><p><em>Inter-Integrated Circuit</em>: a two-wire serial bus for low-speed board
+devices such as sensors, clock chips and EEPROMs. The shell’s I2C
+utilities, such as <a class="reference internal" href="reference/adc.html#clicmd-adc"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">adc</span></code></a>, use the switch chip’s own I2C bus
+as wired on Broadcom reference boards; on SONiC switches these
+devices are normally on the CPU’s buses instead.</p>
+</dd>
+<dt id="term-IFA">IFA<a class="headerlink" href="#term-IFA" title="Link to this term"></a></dt><dd><p><em>In-band Flow Analyzer</em>: Broadcom’s in-band network telemetry, one of
+the <a class="reference internal" href="#term-FlexFlow"><span class="xref std std-term">FlexFlow</span></a> features. It needs the IFA <a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a> and the
+configuration variable <a class="reference internal" href="concepts/config/variables/telemetry.html#confval-ifa_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ifa_enable</span></code></a>. See <a class="reference internal" href="reference/flowdb.html#clicmd-flowdb"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">flowdb</span></code></a>
+and <a class="reference internal" href="concepts/eapps.html"><span class="doc">Embedded applications</span></a>.</p>
+</dd>
+<dt id="term-IFP">IFP<a class="headerlink" href="#term-IFP" title="Link to this term"></a></dt><dd><p><em>Ingress Field Processor</em>: the main <a class="reference internal" href="#term-field-processor"><span class="xref std std-term">field processor</span></a> stage,
+after lookups in the ingress pipeline; SONiC ACLs live here. Its rules
+are in <code class="docutils literal notranslate"><span class="pre">IFP_TCAM</span></code>. See <a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FieldProcessor</span></code></a>.</p>
+</dd>
+<dt id="term-IPFIX">IPFIX<a class="headerlink" href="#term-IPFIX" title="Link to this term"></a></dt><dd><p><em>IP Flow Information Export</em> (IETF RFC 7011): the flow-record export
+format used by the <a class="reference internal" href="#term-flow-tracker"><span class="xref std std-term">flow tracker</span></a>. See <a class="reference internal" href="reference/ipfix.html#clicmd-ipfix-start"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">IPFIX</span> <span class="pre">start</span></code></a>.</p>
+</dd>
+<dt id="term-IPMC">IPMC<a class="headerlink" href="#term-IPMC" title="Link to this term"></a></dt><dd><p><em>IP multicast</em>: the multicast routing table and replication. See
+<a class="reference internal" href="reference/ipmc.html#clicmd-ipmc"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ipmc</span></code></a>.</p>
+</dd>
+<dt id="term-iProc">iProc<a class="headerlink" href="#term-iProc" title="Link to this term"></a></dt><dd><p><em>Internal Processor</em>: the embedded ARM subsystem of the switch chip,
+with its own SRAM and the Cortex-<a class="reference internal" href="#term-M0"><span class="xref std std-term">M0</span></a> cores. See
+<a class="reference internal" href="reference/iprocread.html#clicmd-iprocread"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">iprocread</span></code></a>.</p>
+</dd>
+<dt id="term-KNET">KNET<a class="headerlink" href="#term-KNET" title="Link to this term"></a></dt><dd><p><em>Kernel Network</em>: Broadcom’s kernel network driver
+(<code class="docutils literal notranslate"><span class="pre">linux-bcm-knet</span></code>). It creates the
+Linux netdevs (<a class="reference internal" href="#term-netif"><span class="xref std std-term">netifs</span></a>) such as SONiC’s <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code>
+and moves packets between them and the <a class="reference internal" href="#term-CPU-port"><span class="xref std std-term">CPU port</span></a>, steered by
+<a class="reference internal" href="#term-KNET-filter"><span class="xref std std-term">filters</span></a>. See <a class="reference internal" href="reference/knetctrl.html#clicmd-knetctrl"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span></code></a> and
+<a class="reference internal" href="howto/knet.html"><span class="doc">KNET and the CPU port</span></a>.</p>
+</dd>
+<dt id="term-KNET-filter">KNET filter<a class="headerlink" href="#term-KNET-filter" title="Link to this term"></a></dt><dd><p>A KNET rule that decides whether a packet sent to the CPU goes to a
+<a class="reference internal" href="#term-netif"><span class="xref std std-term">netif</span></a>, to the SDK’s receive code, or is dropped. See
+<a class="reference internal" href="reference/knetctrl.html#clicmd-knetctrl-filter-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">filter</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-KnetSync">KnetSync<a class="headerlink" href="#term-KnetSync" title="Link to this term"></a></dt><dd><p>The kernel-side support for <a class="reference internal" href="#term-PTP"><span class="xref std std-term">PTP</span></a> timestamping with
+<a class="reference internal" href="#term-KNET"><span class="xref std std-term">KNET</span></a>. It needs PTP firmware on an embedded core (an
+<a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a>). Without it, <a class="reference internal" href="reference/knetsync.html#clicmd-knetsync"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetsync</span></code></a> prints <code class="docutils literal notranslate"><span class="pre">Failed:</span>
+<span class="pre">KnetSync</span> <span class="pre">firmware</span> <span class="pre">not</span> <span class="pre">loaded</span></code>.</p>
+</dd>
+<dt id="term-L2-cache">L2 cache<a class="headerlink" href="#term-L2-cache" title="Link to this term"></a></dt><dd><p>A small TCAM (memory <code class="docutils literal notranslate"><span class="pre">L2_USER_ENTRY</span></code>) for MAC addresses that need
+special handling, such as the <a class="reference internal" href="#term-BPDU"><span class="xref std std-term">BPDU</span></a> addresses. See
+<a class="reference internal" href="reference/l2.html#clicmd-l2-cache-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">cache</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-L2X">L2X<a class="headerlink" href="#term-L2X" title="Link to this term"></a></dt><dt id="term-L2_ENTRY">L2_ENTRY<a class="headerlink" href="#term-L2_ENTRY" title="Link to this term"></a></dt><dt id="term-FDB">FDB<a class="headerlink" href="#term-FDB" title="Link to this term"></a></dt><dd><p>The MAC address table (<em>Forwarding Database</em>, FDB), a <a class="reference internal" href="#term-hash-table"><span class="xref std std-term">hash table</span></a>
+of 288K entries on Trident 3. <code class="docutils literal notranslate"><span class="pre">L2X</span></code> is the SDK’s view of it;
+<code class="docutils literal notranslate"><span class="pre">L2_ENTRY_SINGLE</span></code> and <code class="docutils literal notranslate"><span class="pre">L2_ENTRY_ONLY_SINGLE</span></code> are other views of the
+same table. See <a class="reference internal" href="reference/l2.html#clicmd-l2-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">show</span></code></a> and
+<a class="reference internal" href="concepts/memories-registers.html"><span class="doc">Memories and registers</span></a>.</p>
+</dd>
+<dt id="term-L3-interface">L3 interface<a class="headerlink" href="#term-L3-interface" title="Link to this term"></a></dt><dd><p>The SDK’s router interface: a VLAN (or port), a router MAC, a
+<a class="reference internal" href="#term-VRF"><span class="xref std std-term">VRF</span></a> and an MTU. Packets addressed to its MAC are routed. See
+<a class="reference internal" href="reference/l3.html#clicmd-l3-intf-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">intf</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-LAG">LAG<a class="headerlink" href="#term-LAG" title="Link to this term"></a></dt><dt id="term-trunk">trunk<a class="headerlink" href="#term-trunk" title="Link to this term"></a></dt><dd><p><em>Link Aggregation Group</em>. The SDK calls it a trunk; SONiC’s
+PortChannels are trunks underneath. Member choice uses the
+<a class="reference internal" href="#term-RTAG7"><span class="xref std std-term">RTAG7</span></a> hash. See <a class="reference internal" href="reference/trunk.html#clicmd-trunk-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">trunk</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-lane">lane<a class="headerlink" href="#term-lane" title="Link to this term"></a></dt><dd><p>One SerDes transmit/receive pair. A 100G port on Trident 3 uses four
+25G lanes. <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code> and the <code class="docutils literal notranslate"><span class="pre">portmap</span></code> variables assign
+lanes to ports. See <a class="reference internal" href="reference/portmod.html#clicmd-portmod-info-pm"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">info</span> <span class="pre">pm</span></code></a> and <a class="reference internal" href="concepts/ports.html"><span class="doc">Ports and port bitmaps</span></a>.</p>
+</dd>
+<dt id="term-learning">learning<a class="headerlink" href="#term-learning" title="Link to this term"></a></dt><dt id="term-aging">aging<a class="headerlink" href="#term-aging" title="Link to this term"></a></dt><dd><p>Learning adds a source MAC address and port to the <a class="reference internal" href="#term-L2X"><span class="xref std std-term">L2X</span></a> table;
+aging removes entries not seen for the age time. An SDK thread reports
+both events to the software. See <a class="reference internal" href="reference/l2mode.html#clicmd-l2mode"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2mode</span></code></a> and <a class="reference internal" href="reference/age.html#clicmd-age"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">age</span></code></a>.</p>
+</dd>
+<dt id="term-LED-processor">LED processor<a class="headerlink" href="#term-LED-processor" title="Link to this term"></a></dt><dd><p>The program that drives the front-panel port LEDs from link state. On
+Trident 3 it runs on an <a class="reference internal" href="#term-M0"><span class="xref std std-term">M0</span></a> core together with the link-scan
+firmware. See <a class="reference internal" href="reference/led.html#clicmd-led"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">led</span></code></a> and <a class="reference internal" href="reference/m0.html#clicmd-m0"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">M0</span></code></a>.</p>
+</dd>
+<dt id="term-libsai">libsai<a class="headerlink" href="#term-libsai" title="Link to this term"></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">libsai.so</span></code>, the Broadcom <a class="reference internal" href="#term-SAI"><span class="xref std std-term">SAI</span></a> library loaded by
+<a class="reference internal" href="#term-syncd"><span class="xref std std-term">syncd</span></a>. It contains the <a class="reference internal" href="#term-SDK"><span class="xref std std-term">SDK</span></a> and the diag shell.</p>
+</dd>
+<dt id="term-linkscan">linkscan<a class="headerlink" href="#term-linkscan" title="Link to this term"></a></dt><dd><p>The SDK task that watches each port’s link state and reconfigures the
+MAC on a change. On SONiC this is how <code class="docutils literal notranslate"><span class="pre">syncd</span></code> learns that a port went
+up or down. On Trident 3 the scanning is done by <a class="reference internal" href="#term-M0"><span class="xref std std-term">M0</span></a> firmware.
+See <a class="reference internal" href="reference/linkscan.html#clicmd-linkscan"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">linkscan</span></code></a>.</p>
+</dd>
+<dt id="term-LLFC">LLFC<a class="headerlink" href="#term-LLFC" title="Link to this term"></a></dt><dd><p><em>Link Layer Flow Control</em>: flow-control settings of a port’s MAC,
+shown next to the <a class="reference internal" href="#term-PFC"><span class="xref std std-term">PFC</span></a> settings by <a class="reference internal" href="reference/portmod.html#clicmd-portmod-fc"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">fc</span></code></a>.</p>
+</dd>
+<dt id="term-LLS">LLS<a class="headerlink" href="#term-LLS" title="Link to this term"></a></dt><dd><p><em>Link List Scheduler</em>: the Trident 3 egress <a class="reference internal" href="#term-scheduler"><span class="xref std std-term">scheduler</span></a>, a tree
+of nodes per port that ends in queues. See <a class="reference internal" href="reference/lls.html#clicmd-lls"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">lls</span></code></a>.</p>
+</dd>
+<dt id="term-logical-port">logical port<a class="headerlink" href="#term-logical-port" title="Link to this term"></a></dt><dd><p>The SDK’s port number, used in the shell’s port names and bitmaps. It
+is neither the SONiC <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> number nor the <a class="reference internal" href="#term-physical-port"><span class="xref std std-term">physical port</span></a>
+number. See <a class="reference internal" href="reference/show.html#clicmd-show-pmap"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">pmap</span></code></a> and <a class="reference internal" href="concepts/ports.html"><span class="doc">Ports and port bitmaps</span></a>.</p>
+</dd>
+<dt id="term-LTSW">LTSW<a class="headerlink" href="#term-LTSW" title="Link to this term"></a></dt><dd><p>The SDK driver family for newer chips programmed through logical
+tables (Trident 4, Tomahawk 4 and later, using the SDKLT/HSDK
+software). Trident 3 is an <a class="reference internal" href="#term-ESW"><span class="xref std std-term">ESW</span></a> device, so LTSW commands are not
+available. See <a class="reference internal" href="reference/mode.html#clicmd-mode"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mode</span></code></a>.</p>
+</dd>
+<dt id="term-M0">M0<a class="headerlink" href="#term-M0" title="Link to this term"></a></dt><dd><p>The ARM Cortex-M0 microcontroller cores in the chip’s <a class="reference internal" href="#term-iProc"><span class="xref std std-term">iProc</span></a>
+subsystem. On SONiC Trident 3 switches core 0 runs the link-scan and
+<a class="reference internal" href="#term-LED-processor"><span class="xref std std-term">LED processor</span></a> firmware. See <a class="reference internal" href="reference/m0.html#clicmd-m0-status"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">M0</span> <span class="pre">status</span></code></a>.</p>
+</dd>
+<dt id="term-MAC">MAC<a class="headerlink" href="#term-MAC" title="Link to this term"></a></dt><dd><p>Two meanings: a <em>MAC address</em>, or the Ethernet <em>MAC</em> (media access
+control) layer of a port, the hardware between the switch pipeline and
+the <a class="reference internal" href="#term-SerDes"><span class="xref std std-term">SerDes</span></a>. For the latter on Trident 3, see <a class="reference internal" href="#term-CLMAC"><span class="xref std std-term">CLMAC</span></a>.</p>
+</dd>
+<dt id="term-MCS">MCS<a class="headerlink" href="#term-MCS" title="Link to this term"></a></dt><dd><p><em>Micro Controller Subsystem</em>: the chip’s embedded microcontroller
+cores (<code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">1</span></code>) that run firmware for features such as
+<a class="reference internal" href="#term-IFA"><span class="xref std std-term">IFA</span></a>, <a class="reference internal" href="#term-PTP"><span class="xref std std-term">PTP</span></a> and <a class="reference internal" href="#term-BFD"><span class="xref std std-term">BFD</span></a>. The cores stay in reset
+until an <a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a> is loaded; the SONiC image on the switches in
+this guide loads none. See <a class="reference internal" href="reference/mcsstatus.html#clicmd-mcsstatus"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSStatus</span></code></a> and
+<a class="reference internal" href="concepts/eapps.html"><span class="doc">Embedded applications</span></a>.</p>
+</dd>
+<dt id="term-MDIO">MDIO<a class="headerlink" href="#term-MDIO" title="Link to this term"></a></dt><dt id="term-MIIM">MIIM<a class="headerlink" href="#term-MIIM" title="Link to this term"></a></dt><dd><p><em>Management Data Input/Output</em> and <em>MII Management</em> (MII: Media
+Independent Interface): the management bus over which the SDK reads
+and writes <a class="reference internal" href="#term-PHY"><span class="xref std std-term">PHY</span></a> registers. See <a class="reference internal" href="reference/mtimeout.html#clicmd-mtimeout"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mtimeout</span></code></a>.</p>
+</dd>
+<dt id="term-memory">memory<a class="headerlink" href="#term-memory" title="Link to this term"></a></dt><dt id="term-table">table<a class="headerlink" href="#term-table" title="Link to this term"></a></dt><dd><p>In the SDK, a hardware table addressed by index, such as <code class="docutils literal notranslate"><span class="pre">L2X</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ING_L3_NEXT_HOP</span></code>. List them with <a class="reference internal" href="reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a>, read them with
+<a class="reference internal" href="reference/dump.html#clicmd-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dump</span></code></a>. See <a class="reference internal" href="concepts/memories-registers.html"><span class="doc">Memories and registers</span></a>.</p>
+</dd>
+<dt id="term-MIB-counters">MIB counters<a class="headerlink" href="#term-MIB-counters" title="Link to this term"></a></dt><dd><p><em>Management Information Base</em> counters: the per-port hardware
+statistics counters (packets, octets, errors by
+type), read by the <a class="reference internal" href="#term-counter-thread"><span class="xref std std-term">counter thread</span></a>. See <a class="reference internal" href="reference/show.html#clicmd-show-counters"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span></code></a>
+and <a class="reference internal" href="reference/show.html#clicmd-show-mib"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">mib</span></code></a>.</p>
+</dd>
+<dt id="term-MiM">MiM<a class="headerlink" href="#term-MiM" title="Link to this term"></a></dt><dd><p><em>MAC-in-MAC</em>, IEEE 802.1ah provider backbone bridging. The SDK supports
+it; SONiC does not use it. See <a class="reference internal" href="reference/mim.html#clicmd-mim"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mim</span></code></a>.</p>
+</dd>
+<dt id="term-mirror-destination">mirror destination<a class="headerlink" href="#term-mirror-destination" title="Link to this term"></a></dt><dt id="term-MTP">MTP<a class="headerlink" href="#term-MTP" title="Link to this term"></a></dt><dd><p>Where mirrored packets are sent: a port, possibly with an encapsulation
+for remote mirroring (RSPAN, ERSPAN). Broadcom documentation calls the
+mirror target the <em>mirror-to port</em> (MTP). See
+<a class="reference internal" href="reference/mirror.html#clicmd-mirror-dest-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mirror</span> <span class="pre">dest</span> <span class="pre">show</span></code></a> and <a class="reference internal" href="howto/mirror-to-cpu.html"><span class="doc">Capturing port traffic with tcpdump</span></a>.</p>
+</dd>
+<dt id="term-MMU">MMU<a class="headerlink" href="#term-MMU" title="Link to this term"></a></dt><dd><p><em>Memory Management Unit</em>: the chip’s packet buffer and its admission,
+queuing and scheduling logic between the ingress and egress pipelines.
+See <a class="reference internal" href="reference/mmudebug.html#clicmd-mmudebug"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mmudebug</span></code></a>, <a class="reference internal" href="#term-THDI"><span class="xref std std-term">THDI</span></a> and <a class="reference internal" href="#term-LLS"><span class="xref std std-term">LLS</span></a>.</p>
+</dd>
+<dt id="term-MOD">MOD<a class="headerlink" href="#term-MOD" title="Link to this term"></a></dt><dt id="term-Mirror-on-Drop">Mirror on Drop<a class="headerlink" href="#term-Mirror-on-Drop" title="Link to this term"></a></dt><dd><p>Reporting of packets the switch drops, run by the <code class="docutils literal notranslate"><span class="pre">ft-mod</span></code>
+<a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a> on top of the <a class="reference internal" href="#term-flow-tracker"><span class="xref std std-term">flow tracker</span></a>. See
+<a class="reference internal" href="concepts/eapps.html"><span class="doc">Embedded applications</span></a>.</p>
+</dd>
+<dt id="term-module-id">module id<a class="headerlink" href="#term-module-id" title="Link to this term"></a></dt><dt id="term-modid">modid<a class="headerlink" href="#term-modid" title="Link to this term"></a></dt><dd><p>The number of a switch chip in a stacked system; ports are addressed
+as (module, port). A single-chip SONiC switch uses one module ID. See
+<a class="reference internal" href="reference/modmap.html#clicmd-modmap"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">modmap</span></code></a> and <a class="reference internal" href="reference/stackmode.html#clicmd-stackmode"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">stackmode</span></code></a>.</p>
+</dd>
+<dt id="term-MPLS">MPLS<a class="headerlink" href="#term-MPLS" title="Link to this term"></a></dt><dd><p><em>Multiprotocol Label Switching</em>. The SDK supports MPLS label switching
+and VPNs; see <a class="reference internal" href="reference/mpls.html#clicmd-mpls"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mpls</span></code></a>.</p>
+</dd>
+<dt id="term-my-station">my station<a class="headerlink" href="#term-my-station" title="Link to this term"></a></dt><dt id="term-L2-station">L2 station<a class="headerlink" href="#term-L2-station" title="Link to this term"></a></dt><dd><p>A TCAM (memory <code class="docutils literal notranslate"><span class="pre">MY_STATION_TCAM</span></code>) of router MAC addresses; a packet
+whose destination MAC matches is sent to L3 routing. See
+<a class="reference internal" href="reference/l2.html#clicmd-l2-station-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">station</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-netif">netif<a class="headerlink" href="#term-netif" title="Link to this term"></a></dt><dd><p>A KNET network interface: a Linux netdev bound to a switch port or VLAN.
+SONiC’s <code class="docutils literal notranslate"><span class="pre">EthernetN</span></code> interfaces are netifs. See
+<a class="reference internal" href="reference/knetctrl.html#clicmd-knetctrl-netif-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetctrl</span> <span class="pre">netif</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-next-hop">next hop<a class="headerlink" href="#term-next-hop" title="Link to this term"></a></dt><dd><p>Where a routed packet goes next: an outgoing interface and a
+destination MAC. In the SDK it is an <a class="reference internal" href="#term-egress-object"><span class="xref std std-term">egress object</span></a>, stored in
+<code class="docutils literal notranslate"><span class="pre">ING_L3_NEXT_HOP</span></code> and <code class="docutils literal notranslate"><span class="pre">EGR_L3_NEXT_HOP</span></code>.</p>
+</dd>
+<dt id="term-OAM">OAM<a class="headerlink" href="#term-OAM" title="Link to this term"></a></dt><dd><p><em>Operations, Administration and Maintenance</em>: Ethernet connectivity
+fault management (IEEE 802.1ag / Y.1731). See <a class="reference internal" href="reference/oam.html#clicmd-oam"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">oam</span></code></a>.</p>
+</dd>
+<dt id="term-OBM">OBM<a class="headerlink" href="#term-OBM" title="Link to this term"></a></dt><dd><p><em>Oversubscription Buffer Management</em>: a small buffer per port macro in
+front of the ingress pipeline, used when the ports of a port macro
+can together deliver more than the pipeline accepts. Packets it drops
+never reach the <a class="reference internal" href="#term-MMU"><span class="xref std std-term">MMU</span></a>; they are counted in <code class="docutils literal notranslate"><span class="pre">OBM_*</span></code> counters.
+See <a class="reference internal" href="howto/queues.html"><span class="doc">Troubleshooting queues and buffers</span></a>.</p>
+</dd>
+<dt id="term-OCP-SAI">OCP SAI<a class="headerlink" href="#term-OCP-SAI" title="Link to this term"></a></dt><dd><p>The Open Compute Project’s standard <em>Switch Abstraction Interface</em>
+headers. The Broadcom <a class="reference internal" href="#term-SAI"><span class="xref std std-term">SAI</span></a> implements a given OCP SAI version;
+<a class="reference internal" href="reference/bsv.html#clicmd-bsv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bsv</span></code></a> prints both.</p>
+</dd>
+<dt id="term-OneSync">OneSync<a class="headerlink" href="#term-OneSync" title="Link to this term"></a></dt><dd><p>Broadcom’s <a class="reference internal" href="#term-PTP"><span class="xref std std-term">PTP</span></a> firmware for the embedded cores, with
+host-side support through <a class="reference internal" href="#term-KnetSync"><span class="xref std std-term">KnetSync</span></a>. Controlled with
+<a class="reference internal" href="reference/onesync.html#clicmd-onesync"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">onesync</span></code></a>. Shipped as an <a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a> by Broadcom’s
+enterprise SONiC, not by community images.</p>
+</dd>
+<dt id="term-OpenBCM">OpenBCM<a class="headerlink" href="#term-OpenBCM" title="Link to this term"></a></dt><dd><p>Broadcom’s public release of the SDK source code, including the diag
+shell. See <a class="reference internal" href="sources.html"><span class="doc">Further reading</span></a>.</p>
+</dd>
+<dt id="term-orchagent">orchagent<a class="headerlink" href="#term-orchagent" title="Link to this term"></a></dt><dd><p>The SONiC process (in the <code class="docutils literal notranslate"><span class="pre">swss</span></code> container) that turns configuration
+and routing state into SAI objects in <a class="reference internal" href="#term-ASIC_DB"><span class="xref std std-term">ASIC_DB</span></a>. It does not see
+changes made from the shell.</p>
+</dd>
+<dt id="term-packet-watcher">packet watcher<a class="headerlink" href="#term-packet-watcher" title="Link to this term"></a></dt><dt id="term-PW">PW<a class="headerlink" href="#term-PW" title="Link to this term"></a></dt><dd><p>A shell thread that receives packets sent to the CPU and prints them.
+See <a class="reference internal" href="reference/packetwatcher.html#clicmd-packetwatcher"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">PacketWatcher</span></code></a>.</p>
+</dd>
+<dt id="term-PBMP">PBMP<a class="headerlink" href="#term-PBMP" title="Link to this term"></a></dt><dt id="term-port-bitmap">port bitmap<a class="headerlink" href="#term-port-bitmap" title="Link to this term"></a></dt><dd><p>A set of ports, written in the shell as a list such as <code class="docutils literal notranslate"><span class="pre">xe0-xe3,ce1</span></code>
+or as a hex bitmap of <a class="reference internal" href="#term-logical-port"><span class="xref std std-term">logical port</span></a> numbers. See <a class="reference internal" href="reference/pbmp.html#clicmd-pbmp"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pbmp</span></code></a>
+and <a class="reference internal" href="concepts/ports.html#bcmsh-pbmp-grammar"><span class="std std-ref">Port bitmap grammar</span></a>.</p>
+</dd>
+<dt id="term-PCS">PCS<a class="headerlink" href="#term-PCS" title="Link to this term"></a></dt><dd><p><em>Physical Coding Sublayer</em>: the part of a port’s physical layer
+between the <a class="reference internal" href="#term-MAC"><span class="xref std std-term">MAC</span></a> and the <a class="reference internal" href="#term-PMD"><span class="xref std std-term">PMD</span></a> that handles line coding
+(for example 64b/66b), lane alignment and <a class="reference internal" href="#term-FEC"><span class="xref std std-term">FEC</span></a>. See
+<a class="reference internal" href="reference/portmod.html#clicmd-portmod-status"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">status</span></code></a>.</p>
+</dd>
+<dt id="term-PFC">PFC<a class="headerlink" href="#term-PFC" title="Link to this term"></a></dt><dd><p><em>Priority-based Flow Control</em> (IEEE 802.1Qbb): pause frames per
+priority, sent when a <a class="reference internal" href="#term-priority-group"><span class="xref std std-term">priority group</span></a> fills. See
+<a class="reference internal" href="reference/portmod.html#clicmd-portmod-fc"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">fc</span></code></a>.</p>
+</dd>
+<dt id="term-PG">PG<a class="headerlink" href="#term-PG" title="Link to this term"></a></dt><dt id="term-priority-group">priority group<a class="headerlink" href="#term-priority-group" title="Link to this term"></a></dt><dd><p>An ingress buffer accounting class of a port. Packet priorities map to
+PGs, and <a class="reference internal" href="#term-THDI"><span class="xref std std-term">THDI</span></a> limits and PFC work per PG. Trident 3 has eight
+PGs per ingress port.</p>
+</dd>
+<dt id="term-PHY">PHY<a class="headerlink" href="#term-PHY" title="Link to this term"></a></dt><dd><p><em>Physical layer transceiver</em>: the physical-layer device of a port. On
+Trident 3 every front-panel port is a lane of an on-chip <a class="reference internal" href="#term-SerDes"><span class="xref std std-term">SerDes</span></a>;
+an external PHY exists only if the board has one. See <a class="reference internal" href="reference/phy.html#clicmd-phy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span></code></a>.</p>
+</dd>
+<dt id="term-physical-port">physical port<a class="headerlink" href="#term-physical-port" title="Link to this term"></a></dt><dd><p>The chip’s number for a SerDes lane position, as opposed to the
+<a class="reference internal" href="#term-logical-port"><span class="xref std std-term">logical port</span></a>. Written <code class="docutils literal notranslate"><span class="pre">phy&lt;n&gt;</span></code> in a <a class="reference internal" href="#term-port-bitmap"><span class="xref std std-term">port bitmap</span></a>. See
+<a class="reference internal" href="reference/show.html#clicmd-show-pmap"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">pmap</span></code></a>.</p>
+</dd>
+<dt id="term-pipe">pipe<a class="headerlink" href="#term-pipe" title="Link to this term"></a></dt><dt id="term-pipeline">pipeline<a class="headerlink" href="#term-pipeline" title="Link to this term"></a></dt><dd><p>One copy of the packet-processing pipeline. Trident 3 has two, <code class="docutils literal notranslate"><span class="pre">pipe0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">pipe1</span></code>, each serving half of the ports; many tables exist once
+per pipe (<code class="docutils literal notranslate"><span class="pre">IFP_TCAM_WIDE_PIPE0</span></code>). See
+<a class="reference internal" href="concepts/memories-registers.html"><span class="doc">Memories and registers</span></a>.</p>
+</dd>
+<dt id="term-PKTIO">PKTIO<a class="headerlink" href="#term-PKTIO" title="Link to this term"></a></dt><dd><p><em>Packet I/O</em>: an alternative packet driver for <a class="reference internal" href="reference/tx.html#clicmd-tx"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">tx</span></code></a> and
+<a class="reference internal" href="reference/packetwatcher.html#clicmd-packetwatcher"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">PacketWatcher</span></code></a>; switched with <a class="reference internal" href="reference/pktio.html#clicmd-pktio"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pktio</span></code></a>.</p>
+</dd>
+<dt id="term-PMD">PMD<a class="headerlink" href="#term-PMD" title="Link to this term"></a></dt><dd><p><em>Physical Medium Dependent</em> sublayer: the part of a port’s physical
+layer that drives and receives the signal on the medium; on Trident 3
+the transmit and receive circuits of the <a class="reference internal" href="#term-SerDes"><span class="xref std std-term">SerDes</span></a>. See
+<a class="reference internal" href="reference/phy.html#clicmd-phy-diag"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span></code></a>.</p>
+</dd>
+<dt id="term-policer">policer<a class="headerlink" href="#term-policer" title="Link to this term"></a></dt><dd><p>A meter that marks or drops traffic above a configured rate, attached
+to a <a class="reference internal" href="#term-field-entry"><span class="xref std std-term">field entry</span></a>. It colours each packet green, yellow or red,
+and the entry’s actions can depend on the colour (<code class="docutils literal notranslate"><span class="pre">GpCopyToCpu</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RpDrop</span></code>). SONiC’s <a class="reference internal" href="#term-CoPP"><span class="xref std std-term">CoPP</span></a> uses packet-based <a class="reference internal" href="#term-srTCM"><span class="xref std std-term">srTCM</span></a>
+policers. See <a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-policer-create"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">policer</span> <span class="pre">create</span></code></a>.
+Port storm control is set with <a class="reference internal" href="reference/rate.html#clicmd-rate"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rate</span></code></a> instead.</p>
+</dd>
+<dt id="term-Port-Macro">Port Macro<a class="headerlink" href="#term-Port-Macro" title="Link to this term"></a></dt><dt id="term-PM">PM<a class="headerlink" href="#term-PM" title="Link to this term"></a></dt><dd><p>A <a class="reference internal" href="#term-SerDes"><span class="xref std std-term">SerDes</span></a> core with its MAC (<a class="reference internal" href="#term-CLMAC"><span class="xref std std-term">CLMAC</span></a>), serving four
+<a class="reference internal" href="#term-lane"><span class="xref std std-term">lanes</span></a> on Trident 3. See <a class="reference internal" href="reference/portmod.html#clicmd-portmod-info-pm"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">info</span> <span class="pre">pm</span></code></a> and
+<a class="reference internal" href="reference/flexport.html#clicmd-flexport"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FLEXport</span></code></a>.</p>
+</dd>
+<dt id="term-port-type-prefix">port type prefix<a class="headerlink" href="#term-port-type-prefix" title="Link to this term"></a></dt><dd><p>The letters of a shell port name: <code class="docutils literal notranslate"><span class="pre">xe</span></code> for 10G/25G, <code class="docutils literal notranslate"><span class="pre">ce</span></code> for 100G,
+<code class="docutils literal notranslate"><span class="pre">ge</span></code> for 1G, <code class="docutils literal notranslate"><span class="pre">cpu</span></code> and <code class="docutils literal notranslate"><span class="pre">lb</span></code> for the CPU and loopback ports. On
+Trident 3 the prefix follows the configured speed, so a port’s name can
+change. See <a class="reference internal" href="concepts/ports.html"><span class="doc">Ports and port bitmaps</span></a>.</p>
+</dd>
+<dt id="term-port_config.ini">port_config.ini<a class="headerlink" href="#term-port_config.ini" title="Link to this term"></a></dt><dd><p>SONiC’s per-<a class="reference internal" href="#term-HWSKU"><span class="xref std std-term">HWSKU</span></a> file that names each <a class="reference internal" href="#term-EthernetN"><span class="xref std std-term">EthernetN</span></a>
+interface and lists its <a class="reference internal" href="#term-lane"><span class="xref std std-term">lanes</span></a>, speed and alias.</p>
+</dd>
+<dt id="term-PortMod">PortMod<a class="headerlink" href="#term-PortMod" title="Link to this term"></a></dt><dd><p><em>Port module</em>: the SDK layer that drives the MAC and SerDes of each
+<a class="reference internal" href="#term-Port-Macro"><span class="xref std std-term">Port Macro</span></a>. See <a class="reference internal" href="reference/portmod.html#clicmd-portmod"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">PortMod</span></code></a>.</p>
+</dd>
+<dt id="term-PRBS">PRBS<a class="headerlink" href="#term-PRBS" title="Link to this term"></a></dt><dd><p><em>Pseudo-Random Bit Sequence</em>: a test pattern sent over a SerDes lane to
+measure bit errors. It replaces traffic on the port. See
+<a class="reference internal" href="reference/phy.html#clicmd-phy-prbs"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">prbs</span></code></a> and <a class="reference internal" href="reference/portmod.html#clicmd-portmod-prbs-get"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">prbs</span> <span class="pre">get</span></code></a>.</p>
+</dd>
+<dt id="term-presel">presel<a class="headerlink" href="#term-presel" title="Link to this term"></a></dt><dd><p><em>Preselector</em>: a <a class="reference internal" href="#term-field-processor"><span class="xref std std-term">field processor</span></a> rule that picks which
+<a class="reference internal" href="#term-field-group"><span class="xref std std-term">field groups</span></a> apply to a packet. See
+<a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-show-presel"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">show</span> <span class="pre">presel</span></code></a>.</p>
+</dd>
+<dt id="term-PTP">PTP<a class="headerlink" href="#term-PTP" title="Link to this term"></a></dt><dd><p><em>Precision Time Protocol</em> (IEEE 1588). The chip supports it with
+embedded firmware (an <a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a>), which community SONiC images do
+not ship; see <a class="reference internal" href="reference/ptp.html#clicmd-ptp"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ptp</span></code></a>, <a class="reference internal" href="#term-OneSync"><span class="xref std std-term">OneSync</span></a>, <a class="reference internal" href="#term-BroadSync"><span class="xref std std-term">BroadSync</span></a> and
+<a class="reference internal" href="#term-KnetSync"><span class="xref std std-term">KnetSync</span></a>.</p>
+</dd>
+<dt id="term-PVTMON">PVTMON<a class="headerlink" href="#term-PVTMON" title="Link to this term"></a></dt><dd><p>The chip’s on-die <em>Process, Voltage and Temperature monitors</em>. Read them
+with <a class="reference internal" href="reference/show.html#clicmd-show-tempmonitor"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">tempmonitor</span></code></a> or the <code class="docutils literal notranslate"><span class="pre">TOP_PVTMON_RESULT_*</span></code>
+registers (<a class="reference internal" href="reference/getreg.html#clicmd-getreg-chg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span> <span class="pre">chg</span></code></a>).</p>
+</dd>
+<dt id="term-qset">qset<a class="headerlink" href="#term-qset" title="Link to this term"></a></dt><dd><p><em>Qualifier set</em>: the packet fields a <a class="reference internal" href="#term-field-group"><span class="xref std std-term">field group</span></a> can match. See
+<a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-qset-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">qset</span> <span class="pre">show</span></code></a>. Compare <a class="reference internal" href="#term-aset"><span class="xref std std-term">aset</span></a>.</p>
+</dd>
+<dt id="term-queue">queue<a class="headerlink" href="#term-queue" title="Link to this term"></a></dt><dd><p>An egress buffer queue of a port. Trident 3 has unicast and multicast
+queues per port, selected by <a class="reference internal" href="#term-CoS"><span class="xref std std-term">CoS</span></a> and served by the
+<a class="reference internal" href="#term-scheduler"><span class="xref std std-term">scheduler</span></a>. See <a class="reference internal" href="reference/cos.html#clicmd-cos"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span></code></a> and <a class="reference internal" href="reference/show.html#clicmd-show-pmap"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">pmap</span></code></a>.</p>
+</dd>
+<dt id="term-rc-script">rc script<a class="headerlink" href="#term-rc-script" title="Link to this term"></a></dt><dt id="term-soc-script">soc script<a class="headerlink" href="#term-soc-script" title="Link to this term"></a></dt><dd><p>A text file of shell commands, usually named <code class="docutils literal notranslate"><span class="pre">*.soc</span></code>, run with
+<a class="reference internal" href="reference/rcload.html#clicmd-rcload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rcload</span></code></a>. See <a class="reference internal" href="concepts/scripting.html"><span class="doc">Scripting</span></a>.</p>
+</dd>
+<dt id="term-RDBGC">RDBGC<a class="headerlink" href="#term-RDBGC" title="Link to this term"></a></dt><dt id="term-TDBGC">TDBGC<a class="headerlink" href="#term-TDBGC" title="Link to this term"></a></dt><dd><p><em>Receive Debug Counter</em> and <em>Transmit Debug Counter</em>: programmable
+counters that count packets
+matching a set of triggers, mostly drop reasons. See
+<a class="reference internal" href="reference/customstat.html#clicmd-customstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">customstat</span></code></a>.</p>
+</dd>
+<dt id="term-register">register<a class="headerlink" href="#term-register" title="Link to this term"></a></dt><dd><p>A named hardware control or status word, possibly one per port or
+block, such as <code class="docutils literal notranslate"><span class="pre">ING_CONFIG_64</span></code> or <code class="docutils literal notranslate"><span class="pre">CLMAC_CTRL</span></code>. See
+<a class="reference internal" href="reference/listreg.html#clicmd-listreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listreg</span></code></a>, <a class="reference internal" href="reference/getreg.html#clicmd-getreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">getreg</span></code></a> and
+<a class="reference internal" href="concepts/memories-registers.html"><span class="doc">Memories and registers</span></a>.</p>
+</dd>
+<dt id="term-RTAG7">RTAG7<a class="headerlink" href="#term-RTAG7" title="Link to this term"></a></dt><dd><p><em>Rules Tag 7</em>: Broadcom’s configurable packet hash used to pick an
+<a class="reference internal" href="#term-ECMP"><span class="xref std std-term">ECMP</span></a> or <a class="reference internal" href="#term-LAG"><span class="xref std std-term">LAG</span></a> member. See <a class="reference internal" href="reference/switchcontrol.html#clicmd-switchcontrol"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">SwitchControl</span></code></a> and
+<a class="reference internal" href="reference/hashdestination.html#clicmd-hashdestination"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">HashDestination</span></code></a>.</p>
+</dd>
+<dt id="term-S-channel">S-channel<a class="headerlink" href="#term-S-channel" title="Link to this term"></a></dt><dt id="term-schan">schan<a class="headerlink" href="#term-schan" title="Link to this term"></a></dt><dt id="term-S-bus">S-bus<a class="headerlink" href="#term-S-bus" title="Link to this term"></a></dt><dt id="term-SBUS">SBUS<a class="headerlink" href="#term-SBUS" title="Link to this term"></a></dt><dd><p>The chip’s internal command bus over which the CPU reads and writes
+registers and tables. The bus rings inside the chip are the S-bus;
+the S-channel is the <a class="reference internal" href="#term-CMIC"><span class="xref std std-term">CMIC</span></a> interface that sends messages over
+them. See <a class="reference internal" href="reference/schan.html#clicmd-schan"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">schan</span></code></a>.</p>
+</dd>
+<dt id="term-SAI">SAI<a class="headerlink" href="#term-SAI" title="Link to this term"></a></dt><dd><p><em>Switch Abstraction Interface</em>: the vendor-neutral API that SONiC uses
+to program the switch. Broadcom’s SAI (<code class="docutils literal notranslate"><span class="pre">libsai</span></code>) runs inside
+<a class="reference internal" href="#term-syncd"><span class="xref std std-term">syncd</span></a> and calls the <a class="reference internal" href="#term-SDK"><span class="xref std std-term">SDK</span></a>. See <a class="reference internal" href="#term-OCP-SAI"><span class="xref std std-term">OCP SAI</span></a> and
+<a class="reference internal" href="reference/bcmsai.html#clicmd-bcmsai"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span></code></a>.</p>
+</dd>
+<dt id="term-sai.profile">sai.profile<a class="headerlink" href="#term-sai.profile" title="Link to this term"></a></dt><dd><p>A file in the <a class="reference internal" href="#term-HWSKU"><span class="xref std std-term">HWSKU</span></a> directory with settings passed to the SAI at
+start-up, among them which <a class="reference internal" href="#term-config.bcm"><span class="xref std std-term">config.bcm</span></a> to load.</p>
+</dd>
+<dt id="term-scache">scache<a class="headerlink" href="#term-scache" title="Link to this term"></a></dt><dd><p>The SDK’s warm-boot store, where it keeps software state that cannot be
+read back from the hardware, so that a <a class="reference internal" href="#term-warm-boot"><span class="xref std std-term">warm boot</span></a> can restore it.
+See <a class="reference internal" href="reference/warmboot.html#clicmd-warmboot-scache"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">warmboot</span> <span class="pre">scache</span></code></a>.</p>
+</dd>
+<dt id="term-scheduler">scheduler<a class="headerlink" href="#term-scheduler" title="Link to this term"></a></dt><dd><p>The egress logic that decides which <a class="reference internal" href="#term-queue"><span class="xref std std-term">queue</span></a> of a port sends next,
+by strict priority or by weighted or deficit round robin. On Trident 3 it is the
+<a class="reference internal" href="#term-LLS"><span class="xref std std-term">LLS</span></a>. See <a class="reference internal" href="reference/cos.html#clicmd-cos"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span></code></a> and <a class="reference internal" href="reference/lls.html#clicmd-lls"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">lls</span></code></a>.</p>
+</dd>
+<dt id="term-SDK">SDK<a class="headerlink" href="#term-SDK" title="Link to this term"></a></dt><dd><p><em>Software Development Kit</em>: Broadcom’s switch software. SONiC for
+Trident 3 ships SDK 6.5, linked into the Broadcom <a class="reference internal" href="#term-SAI"><span class="xref std std-term">SAI</span></a> and run
+inside <a class="reference internal" href="#term-syncd"><span class="xref std std-term">syncd</span></a>. The <a class="reference internal" href="#term-diag-shell"><span class="xref std std-term">diag shell</span></a> is part of it.</p>
+</dd>
+<dt id="term-SDKLT">SDKLT<a class="headerlink" href="#term-SDKLT" title="Link to this term"></a></dt><dd><p><em>Logical Table Software Development Kit</em>: Broadcom’s SDK for newer
+chips programmed through logical tables. Trident 3 uses SDK 6.5
+instead; see <a class="reference internal" href="#term-LTSW"><span class="xref std std-term">LTSW</span></a>.</p>
+</dd>
+<dt id="term-Seastone2">Seastone2<a class="headerlink" href="#term-Seastone2" title="Link to this term"></a></dt><dd><p>A Celestica 32-port 100G switch built on Trident 3 (BCM56870), supported
+by SONiC. Its <a class="reference internal" href="#term-config.bcm"><span class="xref std std-term">config.bcm</span></a> is
+<code class="docutils literal notranslate"><span class="pre">td3-seastone_2-32x100G-vxlan.config.bcm</span></code>.</p>
+</dd>
+<dt id="term-SER">SER<a class="headerlink" href="#term-SER" title="Link to this term"></a></dt><dd><p><em>Soft Error Recovery</em>: detection and repair of parity and <a class="reference internal" href="#term-ECC"><span class="xref std std-term">ECC</span></a>
+errors in the chip’s memories. See <a class="reference internal" href="reference/ser.html#clicmd-ser"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ser</span></code></a>.</p>
+</dd>
+<dt id="term-SerDes">SerDes<a class="headerlink" href="#term-SerDes" title="Link to this term"></a></dt><dd><p><em>Serializer/deserializer</em>: the high-speed transceiver for each
+<a class="reference internal" href="#term-lane"><span class="xref std std-term">lane</span></a>. Trident 3 front-panel ports use Falcon SerDes cores (up
+to 25G per lane). See <a class="reference internal" href="#term-TSC"><span class="xref std std-term">TSC</span></a> and <a class="reference internal" href="reference/phy.html#clicmd-phy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span></code></a>.</p>
+</dd>
+<dt id="term-service-pool">service pool<a class="headerlink" href="#term-service-pool" title="Link to this term"></a></dt><dd><p>A share of the <a class="reference internal" href="#term-MMU"><span class="xref std std-term">MMU</span></a> buffer that priority groups (ingress) or
+queues (egress) draw their shared space from. Trident 3 has four
+ingress and four egress service pools, plus headroom pools. SONiC’s
+<code class="docutils literal notranslate"><span class="pre">BUFFER_POOL</span></code> entries are service pools. See <a class="reference internal" href="howto/queues.html"><span class="doc">Troubleshooting queues and buffers</span></a>.</p>
+</dd>
+<dt id="term-sFlow">sFlow<a class="headerlink" href="#term-sFlow" title="Link to this term"></a></dt><dt id="term-port-sampling">port sampling<a class="headerlink" href="#term-port-sampling" title="Link to this term"></a></dt><dd><p><em>Sampled Flow</em>: packet sampling for flow monitoring. The chip samples
+one packet in <em>N</em> per port and sends it to the CPU, where SONiC’s sFlow
+agent picks it up. See <a class="reference internal" href="reference/portsamp.html#clicmd-portsamp"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portsamp</span></code></a>.</p>
+</dd>
+<dt id="term-srTCM">srTCM<a class="headerlink" href="#term-srTCM" title="Link to this term"></a></dt><dd><p><em>Single Rate Three Color Marker</em> (RFC 2697): a <a class="reference internal" href="#term-policer"><span class="xref std std-term">policer</span></a> with one
+rate (CIR) and two bursts (CBS, EBS). SONiC’s <code class="docutils literal notranslate"><span class="pre">sr_tcm</span></code> mode; the
+shell’s <code class="docutils literal notranslate"><span class="pre">Mode=SrTcm</span></code>.</p>
+</dd>
+<dt id="term-stat">stat<a class="headerlink" href="#term-stat" title="Link to this term"></a></dt><dd><p>A counter attached to a <a class="reference internal" href="#term-field-entry"><span class="xref std std-term">field entry</span></a> that counts packets or bytes
+matched. See <a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-stat-get"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">stat</span> <span class="pre">get</span></code></a>.</p>
+</dd>
+<dt id="term-STG">STG<a class="headerlink" href="#term-STG" title="Link to this term"></a></dt><dd><p><em>Spanning Tree Group</em>: a set of VLANs sharing one spanning-tree state
+per port. See <a class="reference internal" href="reference/stg.html#clicmd-stg-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">stg</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-storm-control">storm control<a class="headerlink" href="#term-storm-control" title="Link to this term"></a></dt><dd><p>Per-port rate limits for broadcast, multicast and <a class="reference internal" href="#term-DLF"><span class="xref std std-term">DLF</span></a> traffic.
+See <a class="reference internal" href="reference/rate.html#clicmd-rate"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rate</span></code></a>.</p>
+</dd>
+<dt id="term-STP">STP<a class="headerlink" href="#term-STP" title="Link to this term"></a></dt><dd><p><em>Spanning Tree Protocol</em> (IEEE 802.1D): the protocol that blocks
+redundant L2 paths. The chip keeps its per-port state for each
+<a class="reference internal" href="#term-STG"><span class="xref std std-term">STG</span></a>. See <a class="reference internal" href="reference/stg.html#clicmd-stg-stp"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">stg</span> <span class="pre">stp</span></code></a>.</p>
+</dd>
+<dt id="term-StrataXGS">StrataXGS<a class="headerlink" href="#term-StrataXGS" title="Link to this term"></a></dt><dt id="term-XGS">XGS<a class="headerlink" href="#term-XGS" title="Link to this term"></a></dt><dd><p><em>10 Gig Switching</em>: Broadcom’s family name for its Ethernet switch
+chips, Trident 3 included. Built-in help sometimes names XGS
+generations, as in “Only for XGS4 devices” in <a class="reference internal" href="reference/mpls.html#clicmd-mpls"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mpls</span></code></a>.</p>
+</dd>
+<dt id="term-SwitchControl">SwitchControl<a class="headerlink" href="#term-SwitchControl" title="Link to this term"></a></dt><dd><p>The SDK’s global and per-port switch settings: CPU copy of protocol
+packets, hash setup, mirroring options and more. See
+<a class="reference internal" href="reference/switchcontrol.html#clicmd-switchcontrol"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">SwitchControl</span></code></a>.</p>
+</dd>
+<dt id="term-swss">swss<a class="headerlink" href="#term-swss" title="Link to this term"></a></dt><dd><p>SONiC’s <em>Switch State Service</em> container, which runs
+<a class="reference internal" href="#term-orchagent"><span class="xref std std-term">orchagent</span></a>. If <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts, <code class="docutils literal notranslate"><span class="pre">swss</span></code> restarts with it.</p>
+</dd>
+<dt id="term-syncd">syncd<a class="headerlink" href="#term-syncd" title="Link to this term"></a></dt><dd><p>The SONiC container and process that reads <a class="reference internal" href="#term-ASIC_DB"><span class="xref std std-term">ASIC_DB</span></a> and programs
+the switch through the <a class="reference internal" href="#term-SAI"><span class="xref std std-term">SAI</span></a>. The SDK, and with it the
+diag shell, runs inside <code class="docutils literal notranslate"><span class="pre">syncd</span></code>. See <a class="reference internal" href="access.html"><span class="doc">Accessing the shell</span></a>.</p>
+</dd>
+<dt id="term-TCAM">TCAM<a class="headerlink" href="#term-TCAM" title="Link to this term"></a></dt><dd><p><em>Ternary Content-Addressable Memory</em>: a table matched by value and mask,
+highest priority wins. Used for routes (<a class="reference internal" href="#term-DEFIP"><span class="xref std std-term">DEFIP</span></a>), the
+<a class="reference internal" href="#term-field-processor"><span class="xref std std-term">field processor</span></a> and the <a class="reference internal" href="#term-L2-cache"><span class="xref std std-term">L2 cache</span></a>. (<a class="reference internal" href="reference/tcam.html#clicmd-tcam"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">tcam</span></code></a> is
+for external TCAMs, which Trident 3 systems do not have.)</p>
+</dd>
+<dt id="term-THDI">THDI<a class="headerlink" href="#term-THDI" title="Link to this term"></a></dt><dd><p><em>Threshold Ingress</em>: the ingress threshold logic of the <a class="reference internal" href="#term-MMU"><span class="xref std std-term">MMU</span></a>,
+with per-port and per-
+<a class="reference internal" href="#term-PG"><span class="xref std std-term">PG</span></a> cell accounting and limits that decide whether a packet is
+admitted to the buffer and when PFC pause is sent.</p>
+</dd>
+<dt id="term-THDU">THDU<a class="headerlink" href="#term-THDU" title="Link to this term"></a></dt><dt id="term-THDM">THDM<a class="headerlink" href="#term-THDM" title="Link to this term"></a></dt><dt id="term-THDO">THDO<a class="headerlink" href="#term-THDO" title="Link to this term"></a></dt><dd><p><em>Threshold egress Unicast</em> and <em>Threshold egress Multicast</em>: egress
+threshold logic of the <a class="reference internal" href="#term-MMU"><span class="xref std std-term">MMU</span></a>. On Trident 3 THDU accounts
+unicast cells per <a class="reference internal" href="#term-queue"><span class="xref std std-term">queue</span></a> and THDM multicast; <code class="docutils literal notranslate"><span class="pre">THDO</span></code> is the
+egress block name of older chips, still seen in some register names.</p>
+</dd>
+<dt id="term-Tomahawk-3">Tomahawk 3<a class="headerlink" href="#term-Tomahawk-3" title="Link to this term"></a></dt><dt id="term-TH3">TH3<a class="headerlink" href="#term-TH3" title="Link to this term"></a></dt><dd><p>A Broadcom switch chip. Some commands present on Trident 3 builds, such
+as <a class="reference internal" href="reference/tmshow.html#clicmd-tmshow"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">tmshow</span></code></a> and <a class="reference internal" href="reference/l2learn.html#clicmd-l2learn"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2learn</span></code></a>, work only on Tomahawk 3.</p>
+</dd>
+<dt id="term-TPID">TPID<a class="headerlink" href="#term-TPID" title="Link to this term"></a></dt><dd><p><em>Tag Protocol Identifier</em>: the EtherType of a VLAN tag, <code class="docutils literal notranslate"><span class="pre">0x8100</span></code> by
+default. See <a class="reference internal" href="reference/dtag.html#clicmd-dtag"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">dtag</span></code></a> for Q-in-Q (double tagging).</p>
+</dd>
+<dt id="term-trap-group">trap group<a class="headerlink" href="#term-trap-group" title="Link to this term"></a></dt><dd><p>A SONiC <a class="reference internal" href="#term-CoPP"><span class="xref std std-term">CoPP</span></a> group (<code class="docutils literal notranslate"><span class="pre">COPP_GROUP</span></code>): a set of traps sharing
+one CPU queue, one <a class="reference internal" href="#term-policer"><span class="xref std std-term">policer</span></a> and one counter. See
+<a class="reference internal" href="howto/copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>.</p>
+</dd>
+<dt id="term-Trident-3">Trident 3<a class="headerlink" href="#term-Trident-3" title="Link to this term"></a></dt><dt id="term-TD3">TD3<a class="headerlink" href="#term-TD3" title="Link to this term"></a></dt><dd><p>The Broadcom StrataXGS switch chip family this reference covers; here
+the <a class="reference internal" href="#term-BCM56870"><span class="xref std std-term">BCM56870</span></a> (Trident 3-X7), with 128 SerDes lanes of up to
+25G, for example 32 × 100G ports.</p>
+</dd>
+<dt id="term-TSC">TSC<a class="headerlink" href="#term-TSC" title="Link to this term"></a></dt><dt id="term-Falcon">Falcon<a class="headerlink" href="#term-Falcon" title="Link to this term"></a></dt><dt id="term-Merlin">Merlin<a class="headerlink" href="#term-Merlin" title="Link to this term"></a></dt><dd><p><em>TDM-based SerDes Controller</em> (TDM: time-division multiplexing):
+Broadcom SerDes cores. The letter after TSC names the core: TSC-F
+(also written TSC4-F or TSCF) is Falcon, TSC-M Merlin. Trident 3
+front-panel ports use Falcon cores, four 25G <a class="reference internal" href="#term-lane"><span class="xref std std-term">lanes</span></a>
+each; Merlin cores serve lower-speed ports. See <a class="reference internal" href="reference/phy.html#clicmd-phy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span></code></a> and
+<a class="reference internal" href="reference/portmod.html#clicmd-portmod"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">PortMod</span></code></a>.</p>
+</dd>
+<dt id="term-uC">uC<a class="headerlink" href="#term-uC" title="Link to this term"></a></dt><dt id="term-uKernel">uKernel<a class="headerlink" href="#term-uKernel" title="Link to this term"></a></dt><dd><p>An embedded microcontroller core of the <a class="reference internal" href="#term-MCS"><span class="xref std std-term">MCS</span></a>, numbered <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">1</span></code> on Trident 3 (ARM Cortex-R5), and the small firmware
+kernel its <a class="reference internal" href="#term-eApp"><span class="xref std std-term">eApp</span></a> runs on. SDK messages such as <code class="docutils literal notranslate"><span class="pre">uKernel</span> <span class="pre">BFD</span>
+<span class="pre">application</span> <span class="pre">not</span> <span class="pre">available</span></code> mean that no application for that feature
+is running.</p>
+</dd>
+<dt id="term-UDF">UDF<a class="headerlink" href="#term-UDF" title="Link to this term"></a></dt><dd><p><em>User-Defined Field</em>: packet bytes at a configurable offset that the
+<a class="reference internal" href="#term-field-processor"><span class="xref std std-term">field processor</span></a> can match. On Trident 3 UDF definitions come
+partly from the <a class="reference internal" href="#term-CANCUN"><span class="xref std std-term">CANCUN</span></a> packages. See
+<a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor-qual"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fieldprocessor</span> <span class="pre">qual</span></code></a>.</p>
+</dd>
+<dt id="term-unit">unit<a class="headerlink" href="#term-unit" title="Link to this term"></a></dt><dd><p>One switch <a class="reference internal" href="#term-ASIC"><span class="xref std std-term">ASIC</span></a> attached to the SDK, numbered from 0. Trident 3
+SONiC switches have one unit, 0. See <a class="reference internal" href="concepts/units.html"><span class="doc">Units</span></a>.</p>
+</dd>
+<dt id="term-VFI">VFI<a class="headerlink" href="#term-VFI" title="Link to this term"></a></dt><dd><p><em>Virtual Forwarding Instance</em>: a bridge domain that is not a plain VLAN,
+used for VXLAN and other overlays; ports join it as
+<a class="reference internal" href="#term-virtual-port"><span class="xref std std-term">virtual ports</span></a>.</p>
+</dd>
+<dt id="term-VFP">VFP<a class="headerlink" href="#term-VFP" title="Link to this term"></a></dt><dd><p><em>VLAN Field Processor</em>: the <a class="reference internal" href="#term-field-processor"><span class="xref std std-term">field processor</span></a> stage at the start
+of the ingress pipeline, before VLAN and forwarding lookups. Its rules
+are in <code class="docutils literal notranslate"><span class="pre">VFP_TCAM</span></code>. See <a class="reference internal" href="reference/fieldprocessor.html#clicmd-fieldprocessor"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FieldProcessor</span></code></a>.</p>
+</dd>
+<dt id="term-virtual-port">virtual port<a class="headerlink" href="#term-virtual-port" title="Link to this term"></a></dt><dt id="term-VP">VP<a class="headerlink" href="#term-VP" title="Link to this term"></a></dt><dd><p>An SDK port that is not a physical port, such as a VXLAN tunnel or an
+MPLS pseudowire; it belongs to a <a class="reference internal" href="#term-VFI"><span class="xref std std-term">VFI</span></a>. Shown as a
+<a class="reference internal" href="#term-gport"><span class="xref std std-term">gport</span></a>.</p>
+</dd>
+<dt id="term-VLAN">VLAN<a class="headerlink" href="#term-VLAN" title="Link to this term"></a></dt><dd><p><em>Virtual Local Area Network</em>: a virtual LAN, identified by a 12-bit VLAN
+ID. The ports and settings of each VLAN are in <a class="reference internal" href="#term-VLAN_TAB"><span class="xref std std-term">VLAN_TAB</span></a>;
+untagged packets get the port’s default VLAN (<a class="reference internal" href="reference/pvlan.html#clicmd-pvlan"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pvlan</span></code></a>). See
+<a class="reference internal" href="reference/vlan.html#clicmd-vlan-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-VLAN_TAB">VLAN_TAB<a class="headerlink" href="#term-VLAN_TAB" title="Link to this term"></a></dt><dd><p>The ingress VLAN table: VLAN membership, <a class="reference internal" href="#term-STG"><span class="xref std std-term">STG</span></a> and flood settings
+per VLAN ID. <code class="docutils literal notranslate"><span class="pre">EGR_VLAN</span></code> is its egress counterpart. See
+<a class="reference internal" href="reference/vlan.html#clicmd-vlan-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-VRF">VRF<a class="headerlink" href="#term-VRF" title="Link to this term"></a></dt><dd><p><em>Virtual Routing and Forwarding</em> instance: a separate routing table.
+Routes and <a class="reference internal" href="#term-L3-interface"><span class="xref std std-term">L3 interfaces</span></a> carry a VRF number. See
+<a class="reference internal" href="reference/l3.html#clicmd-l3-defip-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">defip</span> <span class="pre">show</span></code></a>.</p>
+</dd>
+<dt id="term-VXLAN">VXLAN<a class="headerlink" href="#term-VXLAN" title="Link to this term"></a></dt><dd><p><em>Virtual eXtensible LAN</em>: Ethernet tunnelled over UDP/IP. On Trident 3
+it is part of <a class="reference internal" href="#term-FlexFlow"><span class="xref std std-term">FlexFlow</span></a> and uses <a class="reference internal" href="#term-VFI"><span class="xref std std-term">VFIs</span></a> and
+<a class="reference internal" href="#term-virtual-port"><span class="xref std std-term">virtual ports</span></a>. See <a class="reference internal" href="reference/flowdb.html#clicmd-flowdb"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">flowdb</span></code></a>.</p>
+</dd>
+<dt id="term-warm-boot">warm boot<a class="headerlink" href="#term-warm-boot" title="Link to this term"></a></dt><dd><p>Restarting the software (<code class="docutils literal notranslate"><span class="pre">syncd</span></code>) without resetting the chip, so
+forwarding continues. The SDK restores its state from the
+<a class="reference internal" href="#term-scache"><span class="xref std std-term">scache</span></a>. See <a class="reference internal" href="reference/warmboot.html#clicmd-warmboot"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">warmboot</span></code></a>.</p>
+</dd>
+<dt id="term-WRED">WRED<a class="headerlink" href="#term-WRED" title="Link to this term"></a></dt><dd><p><em>Weighted Random Early Detection</em>: drops (or ECN-marks) packets with a
+probability that grows with queue depth. See <a class="reference internal" href="reference/cos.html#clicmd-cos-discard"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cos</span> <span class="pre">discard</span></code></a>.</p>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cint-api/functions/other.html" class="btn btn-neutral float-left" title="Other functions (94)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sources.html" class="btn btn-neutral float-right" title="Further reading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VXLAN tunnels &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="In-band Flow Analyzer (IFA 2.0)" href="ifa.html" />
+    <link rel="prev" title="MPLS label switching" href="mpls.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">VXLAN tunnels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-sonic-side">The SONiC side</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-the-chip-holds">What the chip holds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-encapsulation-in-the-counters">Checking encapsulation in the counters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#known-problems">Known problems</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">VXLAN tunnels</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vxlan-tunnels">
+<h1>VXLAN tunnels<a class="headerlink" href="#vxlan-tunnels" title="Link to this heading"></a></h1>
+<p>On a SONiC Trident 3 switch with a VXLAN hardware SKU, the chip encapsulates
+and decapsulates VXLAN itself. SONiC programs the tunnels through the SAI,
+which uses the SDK’s <em>flow</em> API on this chip (the classic <code class="docutils literal notranslate"><span class="pre">bcm_vxlan</span></code> API
+is not available). There is no diag-shell command to create a VXLAN tunnel
+by hand; this page shows how to see what SONiC programmed and how to check
+that packets are really encapsulated and decapsulated in hardware.</p>
+<p>The example stretches VLAN 100 between two switches over VNI 10100. Each
+switch has one host in the VLAN, and the switches reach each other’s
+tunnel address (VTEP) over a routed link.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Switch</p></th>
+<th class="head"><p>VTEP (Loopback0)</p></th>
+<th class="head"><p>Core link</p></th>
+<th class="head"><p>Host port in VLAN 100</p></th>
+<th class="head"><p>Host</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sw2</p></td>
+<td><p>198.18.255.2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Ethernet112</span></code> (<code class="docutils literal notranslate"><span class="pre">ce27</span></code>), 198.18.0.0/31</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Ethernet11</span></code> (<code class="docutils literal notranslate"><span class="pre">xe3</span></code>)</p></td>
+<td><p>203.0.113.102</p></td>
+</tr>
+<tr class="row-odd"><td><p>sw4</p></td>
+<td><p>198.18.255.4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Ethernet120</span></code> (<code class="docutils literal notranslate"><span class="pre">ce29</span></code>), 198.18.0.1/31</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Ethernet11</span></code> (<code class="docutils literal notranslate"><span class="pre">xe3</span></code>)</p></td>
+<td><p>203.0.113.104</p></td>
+</tr>
+</tbody>
+</table>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>VXLAN needs flex flows (<code class="docutils literal notranslate"><span class="pre">flow_init_mode=1</span></code>) and RIOT (<code class="docutils literal notranslate"><span class="pre">riot_enable=1</span></code>)
+in the switch’s <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>, plus <code class="docutils literal notranslate"><span class="pre">sai_tunnel_support=1</span></code> for the SAI.
+Not every SONiC SKU sets them. Check with <a class="reference internal" href="../reference/config.html#clicmd-config-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">show</span></code></a>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; config show flow</span>
+<span class="go">    flow_init_mode=1</span>
+</pre></div>
+</div>
+</div>
+<p>The SAI’s tunnel summary says whether VXLAN is available and how many
+tunnels are in use (see <a class="reference internal" href="../reference/bcmsai.html#clicmd-bcmsai-mptnl"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span> <span class="pre">MPTnl</span></code></a>):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; bcmsai MPTnl Global</span>
+<span class="go"> Tunnel Global Information</span>
+
+<span class="go"> Configuration Information:</span>
+<span class="go">VxLAN BUM Bit Enable:No</span>
+
+<span class="go"> Capability Information:</span>
+<span class="go">VxLAN:Yes IPinIP/GRE:Yes VxLAN_Decap_Only:Yes VxLAN_L3VNI_Only:No</span>
+
+<span class="go"> vxlan_flow_handle(1) vxlan_rsvd_vpn(45055) tnl_l3_rif(8192) def_vni(0)</span>
+<span class="go"> vxlan_drop_nh(132768) ipip_drop_nh(132769) ifp_misc_group_dscp_to_tc(0)</span>
+<span class="go"> bcm_vxlan_ing_stat_pool_id(0x0) bcm_vxlan_egr_stat_pool_id(0x0)</span>
+<span class="go"> bcm_ipinip_ing_stat_pool_id(0x0) bcm_ipinip_egr_stat_pool_id(0x0)</span>
+<span class="go"> route_mode(Any prefix) ecmp_sharing_mode(No Sharing) acc_mode(1) lag_nh_del_track_cnt(0)       nh_hwid_mismatch(0) uniform_decap_qos_map(3072)</span>
+
+<span class="go"> Scaling Information:</span>
+<span class="go"> tnl(curr:2::max:518) vxlan(curr:2::max:5) ipip(curr:0::max:513) tnl_ul_max_path(2)</span>
+<span class="go"> tnlmap(max(192) vlan(curr:1::max:128) vrf(curr:0::max:64) lpbk(curr:0::max:5))</span>
+
+<span class="go">...</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tnl(curr:2…)</span></code> and <code class="docutils literal notranslate"><span class="pre">vxlan(curr:2…)</span></code> count the local VTEP and one tunnel
+to a remote VTEP; <code class="docutils literal notranslate"><span class="pre">vlan(curr:1…)</span></code> is one VLAN-to-VNI mapping.</p>
+</section>
+<section id="the-sonic-side">
+<h2>The SONiC side<a class="headerlink" href="#the-sonic-side" title="Link to this heading"></a></h2>
+<p>The tunnel is configured in SONiC, not in the diag shell. On sw2 (sw4 uses
+its own addresses):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>loopback<span class="w"> </span>add<span class="w"> </span>Loopback0
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>interface<span class="w"> </span>ip<span class="w"> </span>add<span class="w"> </span>Loopback0<span class="w"> </span><span class="m">198</span>.18.255.2/32
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>interface<span class="w"> </span>ip<span class="w"> </span>add<span class="w"> </span>Ethernet112<span class="w"> </span><span class="m">198</span>.18.0.0/31
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>route<span class="w"> </span>add<span class="w"> </span>prefix<span class="w"> </span><span class="m">198</span>.18.255.4/32<span class="w"> </span>nexthop<span class="w"> </span><span class="m">198</span>.18.0.1
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>vxlan<span class="w"> </span>add<span class="w"> </span>vtep<span class="w"> </span><span class="m">198</span>.18.255.2
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>vxlan<span class="w"> </span>evpn_nvo<span class="w"> </span>add<span class="w"> </span>nvo<span class="w"> </span>vtep
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>vlan<span class="w"> </span>add<span class="w"> </span><span class="m">100</span>
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>vlan<span class="w"> </span>member<span class="w"> </span>add<span class="w"> </span>-u<span class="w"> </span><span class="m">100</span><span class="w"> </span>Ethernet11
+<span class="gp">$ </span>sudo<span class="w"> </span>config<span class="w"> </span>vxlan<span class="w"> </span>map<span class="w"> </span>add<span class="w"> </span>vtep<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">10100</span>
+</pre></div>
+</div>
+<p>Remote VTEPs normally come from BGP EVPN. Without BGP, a remote VTEP can be
+added for a test directly in the application database with <code class="docutils literal notranslate"><span class="pre">swssconfig</span></code>
+in the <code class="docutils literal notranslate"><span class="pre">swss</span></code> container. A plain <code class="docutils literal notranslate"><span class="pre">redis-cli</span> <span class="pre">hset</span></code> is not enough: it
+stores the entry, but nothing tells <code class="docutils literal notranslate"><span class="pre">orchagent</span></code> about it.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s1">'[{"VXLAN_REMOTE_VNI_TABLE:Vlan100:198.18.255.4": {"vni": "10100"}, "OP": "SET"}]'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>swss<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'cat &gt; /root/rvni.json &amp;&amp; swssconfig /root/rvni.json'</span>
+<span class="gp">$ </span>show<span class="w"> </span>vxlan<span class="w"> </span>remotevtep
+<span class="go">+--------------+--------------+-------------------+--------------+</span>
+<span class="go">| SIP          | DIP          | Creation Source   | OperStatus   |</span>
+<span class="go">+==============+==============+===================+==============+</span>
+<span class="go">| 198.18.255.2 | 198.18.255.4 | EVPN              | oper_up      |</span>
+<span class="go">+--------------+--------------+-------------------+--------------+</span>
+</pre></div>
+</div>
+<p>The hosts then reach each other through the tunnel (<code class="docutils literal notranslate"><span class="pre">ping</span></code> from one VM to
+the other: 5 of 5 replies, with dynamic ARP).</p>
+</section>
+<section id="what-the-chip-holds">
+<h2>What the chip holds<a class="headerlink" href="#what-the-chip-holds" title="Link to this heading"></a></h2>
+<p>The tunnel’s termination entry (packets to the local VTEP address are
+decapsulated):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; bcmsai MPTnl TeRm</span>
+<span class="go"> Terminator Information</span>
+<span class="go">=======================================================</span>
+<span class="go">term_idx(id:1::flags:0x0::type:1::tnl_id(1)::sip:af:v4 addr:0.0.0.0::sip_mask:af:v4 addr:0.0.0.0::dip:af:v4 addr:198.18.255.2::dip_mask:af:v4 addr:255.255.255.255::pd_vp(0x0)::pd_ecmp(0)</span>
+
+<span class="go"> PD Information</span>
+<span class="go"> rsc_bit_map(0x0) RSC term(no)</span>
+<span class="go"> term_id(0x0) init_id(0x0) vxlan_port(0x0) cls(0) l3_intf(0x0) ing_stats_id(no:0x0)</span>
+
+<span class="go">=======================================================</span>
+
+
+<span class="go"> Total Term Count: 1</span>
+<span class="go">=======================================================</span>
+</pre></div>
+</div>
+</div>
+<p>The tunnel next hop: the underlay neighbour and the port the encapsulated
+packets leave on (<code class="docutils literal notranslate"><span class="pre">port(0x73)</span></code> is port 115, <code class="docutils literal notranslate"><span class="pre">ce27</span></code>):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; bcmsai MPTnl Nh</span>
+<span class="go"> Tunnel NH Information</span>
+<span class="go">=======================================================</span>
+<span class="go"> PI Information</span>
+<span class="go"> id(0x1) ip(af:v4 addr:198.18.0.1) flags(0xe) t_cnt(0x1) oper(yes)</span>
+
+<span class="go"> List of Tunnels num(1)</span>
+<span class="go"> nh_tnl_id(0x2)</span>
+
+<span class="go"> PD Information</span>
+<span class="go"> pdid(0x206a4::132772) rif (0x2) rsc(0x22)</span>
+<span class="go"> RSC uc_nh(yes) is_trunk(no) trunk_id(115)</span>
+
+<span class="go"> Underlay Information</span>
+<span class="go"> nh_ul_info egr(0x61a82::400002) rif (0) vid(0) mac(b2:e7:73:41:29:b5) is_t(no) port(0x73)</span>
+<span class="go">=======================================================</span>
+
+<span class="go">=======================================================</span>
+
+<span class="go"> Total NH Count(1)</span>
+</pre></div>
+</div>
+</div>
+<p>The VNI-to-VLAN mapping:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; bcmsai MPTnl TnlMapEnt</span>
+<span class="go"> Tunnel Map Entry Information</span>
+<span class="go">=======================================================</span>
+
+<span class="go"> tnl_map_entry(type:vni_vlan::key:10100::val:100::tnl_map:1::vp:0x0)</span>
+<span class="go"> Total Map Entry Count: 1</span>
+<span class="go">=======================================================</span>
+</pre></div>
+</div>
+</div>
+<p>The L2 table shows how the SAI builds a VXLAN VLAN on this chip. VLAN 100
+becomes a VPN, shown as <code class="docutils literal notranslate"><span class="pre">vlan=28772</span></code> (<code class="docutils literal notranslate"><span class="pre">0x7064</span></code>, 0x7000 plus the VLAN),
+and the access port becomes a <em>flow port</em> in it, shown by its <code class="docutils literal notranslate"><span class="pre">GPORT</span></code>
+(<code class="docutils literal notranslate"><span class="pre">0xb…</span></code>) instead of a port name:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l2 show</span>
+<span class="go">mac=52:54:00:d5:ca:e0 vlan=28772 GPORT=0xb0000002 port=0xb0000002(flow) Hit</span>
+<span class="go">mac=74:83:ef:3f:2c:fd vlan=28772 GPORT=0xb0000002 port=0xb0000002(flow) Hit</span>
+<span class="go">mac=e0:39:d7:88:3b:00 vlan=1 GPORT=0x0 modid=0 port=0/cpu0 Static CPU</span>
+</pre></div>
+</div>
+</div>
+<p>Both MACs here are local, learned on the access flow port (the host and the
+attached router behind <code class="docutils literal notranslate"><span class="pre">xe3</span></code>). The remote host’s MAC does not appear: in
+SONiC’s EVPN mode the tunnel does not learn, because remote MACs are
+expected from BGP EVPN. Without BGP, every packet to a remote host is an
+unknown unicast and is flooded to the tunnel. <code class="docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">show</span> <span class="pre">100</span></code> lists only
+the access port; the tunnel is not a member of the VLAN’s port bitmap.</p>
+</section>
+<section id="checking-encapsulation-in-the-counters">
+<h2>Checking encapsulation in the counters<a class="headerlink" href="#checking-encapsulation-in-the-counters" title="Link to this heading"></a></h2>
+<p>Send a known number of packets between the hosts and compare the port
+counters. Here 10 pings of 1000 bytes went from the sw2 host to the sw4 host
+and back. On sw2:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show counters changed xe3,ce27</span>
+<span class="go">CLMIB_R1518.xe3          :                    10                 +10</span>
+<span class="go">CLMIB_RBYT.xe3                   :             2,305,788             +10,460</span>
+<span class="go">CLMIB_T1518.xe3          :                    10                 +10</span>
+<span class="go">CLMIB_TBYT.xe3                   :             2,832,665             +10,460</span>
+<span class="go">RTUN.ce27                :                    42                 +10</span>
+<span class="go">CLMIB_R1518.ce27         :                    10                 +10</span>
+<span class="go">CLMIB_RBYT.ce27          :             2,655,019             +11,277</span>
+<span class="go">CLMIB_T1518.ce27         :                    10                 +10</span>
+<span class="go">CLMIB_TBYT.ce27          :             2,656,835             +11,277</span>
+<span class="go">MC_PERQ_PKT(0).ce27      :                    26                 +10</span>
+<span class="go">MC_PERQ_BYTE(0).ce27     :                12,974             +10,960</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xe3</span></code> received 10 frames of 1046 bytes from the host and sent it 10
+replies of the same size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ce27</span></code> sent 10 frames of 1096 bytes: the same frames with 50 bytes of
+VXLAN encapsulation (outer Ethernet, IPv4, UDP and VXLAN headers). They
+went through the multicast queue (<code class="docutils literal notranslate"><span class="pre">MC_PERQ</span></code>) because they were flooded
+(see above).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ce27</span></code> received the 10 encapsulated replies, and <code class="docutils literal notranslate"><span class="pre">RTUN</span></code> counts them as
+tunnel-terminated.</p></li>
+</ul>
+<p>sw4 shows the mirror image, with <code class="docutils literal notranslate"><span class="pre">RTUN</span></code> on <code class="docutils literal notranslate"><span class="pre">ce29</span></code>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show counters changed xe3,ce29</span>
+<span class="go">CLMIB_T1518.xe3          :                    10                 +10</span>
+<span class="go">CLMIB_TBYT.xe3                   :             2,134,604             +10,460</span>
+<span class="go">RTUN.ce29                :                    46                 +10</span>
+<span class="go">CLMIB_T1518.ce29         :                    10                 +10</span>
+<span class="go">CLMIB_TBYT.ce29          :             1,884,150             +11,277</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="known-problems">
+<h2>Known problems<a class="headerlink" href="#known-problems" title="Link to this heading"></a></h2>
+<p>Traffic from the switch’s own CPU into a VXLAN VLAN (for example a ping
+from an address on <code class="docutils literal notranslate"><span class="pre">Vlan100</span></code>) does not go through the chip’s tunnel. SONiC
+sends it through a Linux VXLAN device, which needs its own remote entries;
+with the static remote VTEP above, an address on <code class="docutils literal notranslate"><span class="pre">Vlan100</span></code> could not reach
+the remote host, and a host could not reach a remote <code class="docutils literal notranslate"><span class="pre">Vlan100</span></code> address.
+Test with hosts on both sides.</p>
+<p>Removing the VLAN from SONiC after the test can leave <code class="docutils literal notranslate"><span class="pre">orchagent</span></code> unable to
+finish: its log repeats <code class="docutils literal notranslate"><span class="pre">removeVlan:</span> <span class="pre">VLAN</span> <span class="pre">Vlan100</span> <span class="pre">still</span> <span class="pre">has</span> <span class="pre">2</span> <span class="pre">FDB</span>
+<span class="pre">entries</span></code>, the VLAN stays in the chip (<code class="docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">show</span></code> still lists it, with no
+ports), and <code class="docutils literal notranslate"><span class="pre">sonic-clear</span> <span class="pre">fdb</span> <span class="pre">all</span></code> does not help. Restarting <code class="docutils literal notranslate"><span class="pre">swss</span></code>
+clears it.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mpls.html" class="btn btn-neutral float-left" title="MPLS label switching" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ifa.html" class="btn btn-neutral float-right" title="In-band Flow Analyzer (IFA 2.0)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

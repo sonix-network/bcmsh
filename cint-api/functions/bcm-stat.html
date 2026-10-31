@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_stat_* (177) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_stk_* (70)" href="bcm-stk.html" />
+    <link rel="prev" title="bcm_sat_* (61)" href="bcm-sat.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_stat_*</span></code> (177)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-stat-177">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_stat_*</span></code> (177)<a class="headerlink" href="#bcm-stat-177" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_STAT_BITMAP_CLEAR_ALL(bcm_stat_bitmap_t *_bitmap);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_BITMAP_GET(bcm_stat_bitmap_t *_bitmap, int *_bit);  /* not in OpenBCM 6.5.27 */
+void BCM_STAT_BITMAP_SET(bcm_stat_bitmap_t *_bitmap, int *_bit);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_COUNTER_STAT_IS_BYTES_GET(int *stat);
+int BCM_STAT_COUNTER_STAT_OFFSET_GET(int *stat);
+int BCM_STAT_COUNTER_STAT_SET(int *is_bytes, int *offset);
+int BCM_STAT_GENERIC_KEY_CORE_ID_GET(int *key);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_GENERIC_KEY_CORE_ID_SET(int *key, int *core_id);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_GENERIC_KEY_CPX_CORE_ID_GET(int *key);
+int BCM_STAT_GENERIC_KEY_CPX_CORE_ID_SET(int *key, int *core_id);
+int BCM_STAT_GENERIC_KEY_CPX_EVICTION_MACHINE_ID_GET(int *key);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_GENERIC_KEY_CPX_EVICTION_MACHINE_ID_SET(int *key, int *cpx_evm_id);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_GENERIC_KEY_CPX_INSTANCE_EVICTION_MACHINE_ID_CPX_GET(int *key);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_GENERIC_KEY_CPX_INSTANCE_EVICTION_MACHINE_ID_EVM_GET(int *key);  /* not in OpenBCM 6.5.27 */
+int BCM_STAT_GENERIC_KEY_CPX_INSTANCE_EVICTION_MACHINE_ID_SET(int *key, int *cpx_id, int *evm_id);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_clear(int unit, bcm_port_t port);
+int bcm_stat_clear_single(int unit, bcm_port_t port, bcm_stat_val_t type);
+int bcm_stat_control_get(int unit, int flags, bcm_stat_control_t type, int *arg);
+int bcm_stat_control_set(int unit, int flags, bcm_stat_control_t type, int arg);
+void bcm_stat_counter_command_id_key_t_init(bcm_stat_counter_command_id_key_t *stat_counter_command_id_key);
+int bcm_stat_counter_config_get(int unit, bcm_stat_counter_engine_t *engine, bcm_stat_counter_config_t *config);
+int bcm_stat_counter_config_set(int unit, bcm_stat_counter_engine_t *engine, bcm_stat_counter_config_t *config);
+int bcm_stat_counter_control_get(int unit, bcm_stat_counter_control_t *counter_ctrl);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_counter_control_set(int unit, bcm_stat_counter_control_t *counter_ctrl);  /* not in OpenBCM 6.5.27 */
+void bcm_stat_counter_control_t_init(bcm_stat_counter_control_t *counter_ctrl);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_counter_database_control_get(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_database_control_t control, uint32 *arg);
+int bcm_stat_counter_database_control_set(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_database_control_t control, uint32 arg);
+int bcm_stat_counter_database_create(int unit, uint32 flags, bcm_core_t core_id, int *database_id);
+int bcm_stat_counter_database_destroy(int unit, uint32 flags, bcm_stat_counter_database_t *database);
+int bcm_stat_counter_database_enable_get(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_enable_t *enable);
+int bcm_stat_counter_database_enable_set(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_enable_t *enable);
+int bcm_stat_counter_database_eviction_get(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_eviction_t *eviction);
+int bcm_stat_counter_database_eviction_set(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_eviction_t *eviction);
+int bcm_stat_counter_database_mapping_get(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_database_mapping_t *map_config);
+int bcm_stat_counter_database_mapping_set(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_database_mapping_t *map_config);
+void bcm_stat_counter_database_t_init(bcm_stat_counter_database_t *stat_counter_database);
+void bcm_stat_counter_enable_t_init(bcm_stat_counter_enable_t *stat_counter_enable);
+int bcm_stat_counter_engine_attach(int unit, uint32 flags, bcm_stat_counter_database_t *database, int engine_id);
+int bcm_stat_counter_engine_control_get(int unit, uint32 flags, bcm_stat_engine_t *engine, bcm_stat_counter_engine_control_t control, uint32 *arg);
+int bcm_stat_counter_engine_control_set(int unit, uint32 flags, bcm_stat_engine_t *engine, bcm_stat_counter_engine_control_t control, uint32 arg);
+int bcm_stat_counter_engine_detach(int unit, uint32 flags, bcm_stat_counter_database_t *database, int engine_id);
+int bcm_stat_counter_eviction_get(int unit, uint32 flags, bcm_stat_engine_t *engine, bcm_stat_eviction_t *eviction);
+int bcm_stat_counter_eviction_set(int unit, uint32 flags, bcm_stat_engine_t *engine, bcm_stat_eviction_t *eviction);
+int bcm_stat_counter_expansion_select_get(int unit, uint32 flags, bcm_stat_counter_interface_key_t *interface, bcm_stat_expansion_select_t *expansion_select);
+int bcm_stat_counter_expansion_select_set(int unit, uint32 flags, bcm_stat_counter_interface_key_t *interface, bcm_stat_expansion_select_t *expansion_select);
+int bcm_stat_counter_explicit_get(int unit, uint32 flags, bcm_stat_counter_explicit_input_data_t *stat_counter_input_data, bcm_stat_counter_output_data_t *stat_counter_output_data);
+void bcm_stat_counter_explicit_input_data_t_init(bcm_stat_counter_explicit_input_data_t *stat_counter_explicit_input_data);
+int bcm_stat_counter_filter_get(int unit, bcm_stat_counter_source_t source, int filter_max_count, bcm_stat_counter_filter_t *filter_array, int *filter_count);
+int bcm_stat_counter_filter_group_get(int unit, uint32 flags, bcm_stat_counter_command_id_key_t *key, bcm_stat_counter_group_filter_t filter, int *is_active);
+int bcm_stat_counter_filter_group_set(int unit, uint32 flags, bcm_stat_counter_command_id_key_t *key, bcm_stat_counter_group_filter_t filter, int is_active);
+int bcm_stat_counter_filter_is_active_get(int unit, bcm_stat_counter_source_t source, bcm_stat_counter_filter_t filter, int *is_active);
+int bcm_stat_counter_filter_set(int unit, bcm_stat_counter_source_t source, bcm_stat_counter_filter_t *filter_array, int filter_count, int is_active);
+int bcm_stat_counter_generic_control_get(int unit, uint32 flags, int Key, bcm_stat_counter_generic_control_t control, uint32 *arg);
+int bcm_stat_counter_generic_control_set(int unit, uint32 flags, int Key, bcm_stat_counter_generic_control_t control, uint32 arg);
+int bcm_stat_counter_get(int unit, uint32 flags, bcm_stat_counter_input_data_t *stat_counter_input_data, bcm_stat_counter_output_data_t *stat_counter_output_data);
+void bcm_stat_counter_input_data_t_init(bcm_stat_counter_input_data_t *stat_input_data);
+int bcm_stat_counter_interface_get(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_interface_t *config);
+void bcm_stat_counter_interface_key_t_init(bcm_stat_counter_interface_key_t *stat_counter_interface_key);
+int bcm_stat_counter_interface_set(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_interface_t *config);
+void bcm_stat_counter_interface_t_init(bcm_stat_counter_interface_t *stat_counter_interface);
+int bcm_stat_counter_lif_counting_get(int unit, uint32 flags, bcm_stat_counter_source_t *source, bcm_stat_counter_lif_mask_t *counting_mask, bcm_stat_counter_lif_stack_id_t *lif_stack_id_to_count);
+int bcm_stat_counter_lif_counting_range_get(int unit, uint32 flags, bcm_stat_counter_source_type_t source, bcm_stat_counter_lif_range_id_t range_id, bcm_stat_counter_lif_counting_range_t *lif_range);
+int bcm_stat_counter_lif_counting_range_set(int unit, uint32 flags, bcm_stat_counter_source_type_t source, bcm_stat_counter_lif_range_id_t range_id, bcm_stat_counter_lif_counting_range_t *lif_range);
+int bcm_stat_counter_lif_counting_set(int unit, uint32 flags, bcm_stat_counter_source_t *source, bcm_stat_counter_lif_mask_t *counting_mask, bcm_stat_counter_lif_stack_id_t lif_stack_id_to_count);
+void bcm_stat_counter_output_data_t_init(bcm_stat_counter_output_data_t *stat_counter_output_data);
+void bcm_stat_counter_set_config_t_init(bcm_stat_counter_set_config_t *set_config);  /* not in OpenBCM 6.5.27 */
+void bcm_stat_counter_set_map_t_init(bcm_stat_counter_set_map_t *stat_counter_set_map);
+int bcm_stat_counter_set_mapping_get(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_set_map_t *counter_set_map);
+int bcm_stat_counter_set_mapping_set(int unit, uint32 flags, bcm_stat_counter_database_t *database, bcm_stat_counter_set_map_t *counter_set_map);
+int bcm_stat_cpx_database_create(int unit, uint32 flags, bcm_stat_cpx_database_key_t *key, int *database_handle);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_custom_add(int unit, bcm_port_t port, bcm_stat_val_t type, bcm_custom_stat_trigger_t trigger);
+int bcm_stat_custom_check(int unit, bcm_port_t port, bcm_stat_val_t type, bcm_custom_stat_trigger_t trigger, int *result);
+int bcm_stat_custom_counter_id_move(int unit, bcm_stat_custom_base_index_action_t idx_action, bcm_stat_custom_counter_info_t counter_info_old, bcm_stat_custom_counter_info_t *counter_info_new);
+void bcm_stat_custom_counter_info_t_init(bcm_stat_custom_counter_info_t *counter_info);
+int bcm_stat_custom_delete(int unit, bcm_port_t port, bcm_stat_val_t type, bcm_custom_stat_trigger_t trigger);
+int bcm_stat_custom_delete_all(int unit, bcm_port_t port, bcm_stat_val_t type);
+int bcm_stat_custom_get(int unit, bcm_port_t port, bcm_stat_val_t type, uint32 *flags);
+int bcm_stat_custom_group_create(int unit, uint32 mode_id, bcm_stat_object_t object, uint32 *stat_counter_id, uint32 *num_entries);
+int bcm_stat_custom_group_id_create(int unit, uint32 mode_id, bcm_stat_object_t object, uint32 pool_id, uint32 base_idx, bcm_stat_custom_counter_info_t *counter_info);
+int bcm_stat_custom_set(int unit, bcm_port_t port, bcm_stat_val_t type, uint32 flags);
+int bcm_stat_database_eviction_boundaries_get(int unit, uint32 flags, bcm_stat_counter_database_t *database, int type_id, bcm_stat_eviction_boundaries_t *boundaries);
+int bcm_stat_database_eviction_boundaries_set(int unit, uint32 flags, bcm_stat_counter_database_t *database, int type_id, bcm_stat_eviction_boundaries_t *boundaries);
+void bcm_stat_database_mapping_t_init(bcm_stat_database_mapping_t *map_config);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_direct_get(int unit, bcm_port_t port, bcm_stat_val_t type, uint64 *value);
+int bcm_stat_direct_multi_get(int unit, bcm_port_t port, int nstat, bcm_stat_val_t *stat_arr, uint64 *value_arr);
+int bcm_stat_drop_event_counter_get(int unit, bcm_pkt_drop_event_t type, uint64 *value);
+int bcm_stat_drop_event_counter_set(int unit, bcm_pkt_drop_event_t type, uint64 value);
+int bcm_stat_drop_event_counter_sync_get(int unit, bcm_pkt_drop_event_t type, uint64 *value);
+int bcm_stat_egress_receive_tm_pointer_format_get(int unit, int flags, bcm_stat_egress_receive_tm_pointer_format_t *pointer_format);
+int bcm_stat_egress_receive_tm_pointer_format_set(int unit, int flags, bcm_stat_egress_receive_tm_pointer_format_t *pointer_format);
+void bcm_stat_engine_t_init(bcm_stat_engine_t *stat_engine);
+int bcm_stat_ep_recirc_clear(int unit, bcm_pbmp_t pbmp, bcm_stat_ep_recirc_t type);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_ep_recirc_get(int unit, bcm_pbmp_t pbmp, bcm_stat_ep_recirc_t type, uint64 *value);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_ep_recirc_sync_get(int unit, bcm_pbmp_t pbmp, bcm_stat_ep_recirc_t type, uint64 *value);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_eviction_boundaries_get(int unit, uint32 flags, bcm_stat_engine_t *engine, bcm_stat_eviction_boundaries_t *boundaries);
+int bcm_stat_eviction_boundaries_set(int unit, uint32 flags, bcm_stat_engine_t *engine, bcm_stat_eviction_boundaries_t *boundaries);
+void bcm_stat_eviction_boundaries_t_init(bcm_stat_eviction_boundaries_t *stat_eviction_boundaries);
+void bcm_stat_eviction_t_init(bcm_stat_eviction_t *stat_eviction);
+void bcm_stat_expansion_data_mapping_t_init(bcm_stat_expansion_data_mapping_t *stat_expansion_data_mapping);
+void bcm_stat_expansion_select_t_init(bcm_stat_expansion_select_t *stat_expansion_select);
+int bcm_stat_flex_counter_get(int unit, uint32 stat_counter_id, bcm_stat_flex_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_stat_flex_counter_set(int unit, uint32 stat_counter_id, bcm_stat_flex_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_stat_flex_counter_sync_get(int unit, uint32 stat_counter_id, bcm_stat_flex_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_stat_flex_pool_info_multi_get(int unit, bcm_stat_flex_direction_t direction, uint32 num_pools, bcm_stat_flex_pool_stat_info_t *flex_pool_stat, uint32 *actual_num_pools);
+void bcm_stat_flex_pool_stat_info_t_init(bcm_stat_flex_pool_stat_info_t *stat_flex_pool_stat_info);
+int bcm_stat_get(int unit, bcm_port_t port, bcm_stat_val_t type, uint64 *value);
+int bcm_stat_get32(int unit, bcm_port_t port, bcm_stat_val_t type, uint32 *value);
+int bcm_stat_group_create(int unit, bcm_stat_object_t object, bcm_stat_group_mode_t group_mode, uint32 *stat_counter_id, uint32 *num_entries);
+int bcm_stat_group_destroy(int unit, uint32 stat_counter_id);
+int bcm_stat_group_drop_reasons_get(int unit, uint32 flags, bcm_stat_counter_group_filter_t group, int max_drop_reason_count, bcm_cosq_drop_reason_t *drop_reasons_array, int *drop_reasons_count);
+int bcm_stat_group_drop_reasons_set(int unit, uint32 flags, bcm_stat_counter_group_filter_t group, bcm_cosq_drop_reason_t *drop_reasons_array, int drop_reasons_count);
+int bcm_stat_group_dump(int unit, bcm_stat_object_t object, bcm_stat_group_mode_t group_mode);
+int bcm_stat_group_dump_all(int unit);
+int bcm_stat_group_mode_attr_class_id_create(int unit, bcm_stat_group_mode_attr_t attr, uint32 num_of_attr_values, uint32 *attr_values, bcm_stat_group_mode_attr_class_id_t *attr_class_id);
+int bcm_stat_group_mode_attr_class_id_destroy(int unit, bcm_stat_group_mode_attr_class_id_t attr_class_id);
+void bcm_stat_group_mode_attr_selector_t_init(bcm_stat_group_mode_attr_selector_t *attr_selector);
+void bcm_stat_group_mode_hint_t_init(bcm_stat_group_mode_hint_t *stat_hint);
+int bcm_stat_group_mode_id_config_create(int unit, uint32 options, bcm_stat_group_mode_id_config_t *stat_config, uint32 num_selectors, bcm_stat_group_mode_attr_selector_t *attr_sel, uint32 *mode_id);
+int bcm_stat_group_mode_id_config_get(int unit, uint32 mode_id, bcm_stat_group_mode_id_config_t *config, uint32 num_selectors, bcm_stat_group_mode_attr_selector_t *attr_sel, uint32 *actual_num_selectors);
+void bcm_stat_group_mode_id_config_t_init(bcm_stat_group_mode_id_config_t *stat_config);
+int bcm_stat_group_mode_id_create(int unit, uint32 flags, uint32 total_counters, uint32 num_selectors, bcm_stat_group_mode_attr_selector_t *attr_selectors, uint32 *mode_id);
+int bcm_stat_group_mode_id_destroy(int unit, uint32 mode_id);
+int bcm_stat_group_mode_id_get(int unit, uint32 mode_id, uint32 *flags, uint32 *total_counters, uint32 num_selectors, bcm_stat_group_mode_attr_selector_t *attr_selectors, uint32 *actual_num_selectors);
+int bcm_stat_id_get_all(int unit, bcm_stat_object_t object, int stat_max, uint32 *stat_array, int *stat_count);
+int bcm_stat_init(int unit);
+int bcm_stat_latency_port_stat_id_get(int unit, int flags, bcm_stat_latency_port_stat_id_key_t *key, int *stat_id);
+int bcm_stat_lif_counting_profile_get(int unit, uint32 flags, int lif_counting_profile, bcm_stat_lif_counting_t *lif_counting);
+int bcm_stat_lif_counting_profile_set(int unit, uint32 flags, int lif_counting_profile, bcm_stat_lif_counting_t *lif_counting);
+int bcm_stat_lif_counting_stack_level_priority_get(int unit, uint32 flags, bcm_stat_lif_counting_source_t *source, bcm_stat_counter_lif_stack_id_t lif_stack_level, int *priority);
+int bcm_stat_lif_counting_stack_level_priority_set(int unit, uint32 flags, bcm_stat_lif_counting_source_t *source, bcm_stat_counter_lif_stack_id_t lif_stack_level, int priority);
+int bcm_stat_mirror_mon_sample_count_get(int unit, bcm_stat_mirror_mon_sample_count_t *count);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_mirror_mon_sample_count_set(int unit, bcm_stat_mirror_mon_sample_count_t *count);  /* not in OpenBCM 6.5.27 */
+void bcm_stat_mirror_mon_sample_count_t_init(bcm_stat_mirror_mon_sample_count_t *count);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_multi_get(int unit, bcm_port_t port, int nstat, bcm_stat_val_t *stat_arr, uint64 *value_arr);
+int bcm_stat_multi_get32(int unit, bcm_port_t port, int nstat, bcm_stat_val_t *stat_arr, uint32 *value_arr);
+int bcm_stat_pkt_events_list_get(int unit, bcm_switch_stage_t dir, bcm_stat_pkt_event_type_t evt_type, bcm_stat_pkt_event_info_t *pkt_evt_info, uint32 *count);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_pkt_size_adjust_select_get(int unit, int flags, bcm_stat_counter_command_id_key_t *key, bcm_stat_pkt_size_adjust_select_type_t select_type, int *enable);
+int bcm_stat_pkt_size_adjust_select_set(int unit, int flags, bcm_stat_counter_command_id_key_t *key, bcm_stat_pkt_size_adjust_select_type_t select_type, int enable);
+int bcm_stat_port_group_create(int unit, uint32 num_gports, bcm_gport_t *gport, uint32 *group_id);
+int bcm_stat_port_group_destroy(int unit, uint32 group_id);
+void bcm_stat_pp_info_t_init(bcm_stat_pp_info_t *stat_pp_info);
+int bcm_stat_pp_metadata_get(int unit, bcm_stat_pp_metadata_info_t *metadata_info);
+void bcm_stat_pp_metadata_info_t_init(bcm_stat_pp_metadata_info_t *metadata_info);
+int bcm_stat_pp_metadata_set(int unit, bcm_stat_pp_metadata_info_t *metadata_info);
+int bcm_stat_pp_profile_create(int unit, int flags, bcm_stat_counter_interface_type_t engine_source, int *stat_pp_profile, bcm_stat_pp_profile_info_t *stat_pp_profile_info);
+int bcm_stat_pp_profile_delete(int unit, int stat_pp_profile);
+int bcm_stat_pp_profile_get(int unit, int stat_pp_profile, bcm_stat_pp_profile_info_t *stat_pp_profile_info);
+void bcm_stat_pp_profile_info_t_init(bcm_stat_pp_profile_info_t *pp_profile);
+int bcm_stat_rate_get(int unit, bcm_port_t port, bcm_stat_val_t type, uint64 *rate);
+int bcm_stat_rate_multi_get(int unit, bcm_port_t port, int nstat, bcm_stat_val_t *stat_arr, uint64 *rate_arr);
+int bcm_stat_rdb_control_get(int unit, bcm_port_t port, bcm_stat_rdb_ctrl_t *rdb_ctrl);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_rdb_control_set(int unit, bcm_port_t port, bcm_stat_rdb_ctrl_t *rdb_ctrl);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_simple_port_cfg_get(int unit, bcm_stat_simple_port_ctr_cfg_t *simple_port_cfg);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_simple_port_cfg_set(int unit, bcm_stat_simple_port_ctr_cfg_t *simple_port_cfg);  /* not in OpenBCM 6.5.27 */
+void bcm_stat_simple_port_ctr_cfg_t_init(bcm_stat_simple_port_ctr_cfg_t *simple_port_cfg);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_stif_record_extended_format_get(int unit, bcm_core_t core_id, uint32 flags, int format_id, bcm_stat_stif_report_format_t *report_format);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_stif_record_extended_format_set(int unit, bcm_core_t core_id, uint32 flags, int format_id, bcm_stat_stif_report_format_t *report_format);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_stif_record_format_get(int unit, int flags, int max_nof_elements, bcm_stat_stif_record_format_element_t *elements_array, int *nof_elements);
+int bcm_stat_stif_record_format_set(int unit, int flags, int nof_elements, bcm_stat_stif_record_format_element_t *record_format_elements);
+int bcm_stat_stif_record_qualifier_config_get(int unit, bcm_core_t core_id, uint32 flags, bcm_stat_stif_record_qualifier_key_t *key, bcm_stat_stif_record_qualifier_config_t *qual_config);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_stif_record_qualifier_config_set(int unit, bcm_core_t core_id, uint32 flags, bcm_stat_stif_record_qualifier_key_t *key, bcm_stat_stif_record_qualifier_config_t *qual_config);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_stif_source_mapping_get(int unit, int flags, bcm_stat_stif_source_t source, bcm_port_t *port);
+int bcm_stat_stif_source_mapping_set(int unit, int flags, bcm_stat_stif_source_t source, bcm_port_t port);
+int bcm_stat_switch_mon_action_sample_count_get(int unit, bcm_stat_switch_mon_action_sample_count_t *count);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_switch_mon_action_sample_count_set(int unit, bcm_stat_switch_mon_action_sample_count_t *count);  /* not in OpenBCM 6.5.27 */
+void bcm_stat_switch_mon_action_sample_count_t_init(bcm_stat_switch_mon_action_sample_count_t *count);  /* not in OpenBCM 6.5.27 */
+int bcm_stat_sync(int unit);
+int bcm_stat_sync_get(int unit, bcm_port_t port, bcm_stat_val_t type, uint64 *value);
+int bcm_stat_sync_get32(int unit, bcm_port_t port, bcm_stat_val_t type, uint32 *value);
+int bcm_stat_sync_multi_get(int unit, bcm_port_t port, int nstat, bcm_stat_val_t *stat_arr, uint64 *value_arr);
+int bcm_stat_sync_multi_get32(int unit, bcm_port_t port, int nstat, bcm_stat_val_t *stat_arr, uint32 *value_arr);
+int bcm_stat_threshold_get(int unit, bcm_port_t port, bcm_stat_val_t stat, bcm_stat_threshold_t *threshold);
+int bcm_stat_threshold_set(int unit, bcm_port_t port, bcm_stat_val_t stat, bcm_stat_threshold_t *threshold);
+int bcm_stat_trace_event_counter_get(int unit, bcm_pkt_trace_event_t type, uint64 *value);
+int bcm_stat_trace_event_counter_set(int unit, bcm_pkt_trace_event_t type, uint64 value);
+int bcm_stat_trace_event_counter_sync_get(int unit, bcm_pkt_trace_event_t type, uint64 *value);
+void bcm_stat_value_t_init(bcm_stat_value_t *stat_value);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-sat.html" class="btn btn-neutral float-left" title="bcm_sat_* (61)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-stk.html" class="btn btn-neutral float-right" title="bcm_stk_* (70)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Port mapping and SerDes &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Forwarding table sizes" href="tables.html" />
+    <link rel="prev" title="Configuration variables" href="../config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Port mapping and SerDes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#physical-and-logical-ports">Physical and logical ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#portmap"><code class="docutils literal notranslate"><span class="pre">portmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#breaking-out-a-100g-port-into-410g">Breaking out a 100G port into 4×10G</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inactive-ports-for-later-breakout">Inactive ports for later breakout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lane-order-and-polarity">Lane order and polarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transmit-equalisation">Transmit equalisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port-types-oversubscription-and-other-port-variables">Port types, oversubscription and other port variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variables/index.html">Variable reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../config.html">Configuration variables</a></li>
+      <li class="breadcrumb-item active">Port mapping and SerDes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="port-mapping-and-serdes">
+<h1>Port mapping and SerDes<a class="headerlink" href="#port-mapping-and-serdes" title="Link to this heading"></a></h1>
+<p>Which SerDes lanes form which port, at what speed, with which lane order,
+polarity and transmit equalisation, is set in <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>. These values
+describe the board’s wiring and the port layout the HWSKU offers. They are read
+once, when <code class="docutils literal notranslate"><span class="pre">syncd</span></code> initialises the chip (see
+<a class="reference internal" href="../config.html#bcmsh-config-names"><span class="std std-ref">Names, scopes and precedence</span></a> for the name forms).</p>
+<section id="physical-and-logical-ports">
+<h2>Physical and logical ports<a class="headerlink" href="#physical-and-logical-ports" title="Link to this heading"></a></h2>
+<p>Trident 3 (BCM56870) has 128 front-panel SerDes lanes in 32 cores of four,
+numbered as <em>physical ports</em> 1–128, plus one management lane, physical port
+129. The chip has two pipelines: physical ports 1–64 belong to pipe 0, 65–128
+and the management port to pipe 1.</p>
+<p>SDK <em>logical</em> port numbers, the numbers the shell prints and the
+<code class="docutils literal notranslate"><span class="pre">portmap_&lt;port&gt;</span></code> suffix, are tied to the physical lane of the port’s first
+lane:</p>
+<ul class="simple">
+<li><p>logical 1–64 are physical 1–64 (same number);</p></li>
+<li><p>logical 67–130 are physical 65–128 (physical + 2);</p></li>
+<li><p>logical 66 is the management port, physical 129;</p></li>
+<li><p>logical 0 is the CPU port, 65 and 131 are the two internal loopback ports;
+these three are fixed and never appear in <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>.</p></li>
+</ul>
+<p>A <code class="docutils literal notranslate"><span class="pre">portmap</span></code> line that breaks this rule fails initialisation with <code class="docutils literal notranslate"><span class="pre">Port</span>
+<span class="pre">&lt;n&gt;:</span> <span class="pre">Invalid</span> <span class="pre">port</span> <span class="pre">map</span> <span class="pre">configuration</span></code>. The SONiC lane numbers in
+<code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code> are physical port numbers.</p>
+</section>
+<section id="portmap">
+<span id="bcmsh-config-portmap"></span><h2><code class="docutils literal notranslate"><span class="pre">portmap</span></code><a class="headerlink" href="#portmap" title="Link to this heading"></a></h2>
+<p>Each port is one <a class="reference internal" href="variables/ports.html#confval-portmap"><code class="xref std std-confval docutils literal notranslate"><span class="pre">portmap</span></code></a> line:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>portmap_&lt;logical&gt;=&lt;physical&gt;:&lt;speed&gt;[:&lt;option&gt;[:&lt;option&gt;]]
+</pre></div>
+</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;speed&gt;</span></code></dt><dd><p>Maximum speed in Gb/s: <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2.5</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">11</span></code>, <code class="docutils literal notranslate"><span class="pre">20</span></code>, <code class="docutils literal notranslate"><span class="pre">21</span></code>,
+<code class="docutils literal notranslate"><span class="pre">25</span></code>, <code class="docutils literal notranslate"><span class="pre">27</span></code>, <code class="docutils literal notranslate"><span class="pre">40</span></code>, <code class="docutils literal notranslate"><span class="pre">42</span></code>, <code class="docutils literal notranslate"><span class="pre">50</span></code>, <code class="docutils literal notranslate"><span class="pre">53</span></code>, <code class="docutils literal notranslate"><span class="pre">100</span></code> or <code class="docutils literal notranslate"><span class="pre">106</span></code> (the
+odd values are HiGig speeds). <code class="docutils literal notranslate"><span class="pre">100</span></code> and <code class="docutils literal notranslate"><span class="pre">106</span></code> are only accepted when
+<a class="reference internal" href="variables/ports.html#confval-oversubscribe_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">oversubscribe_mode</span></code></a> is set, which is why every 32×100G SONiC
+file sets <code class="docutils literal notranslate"><span class="pre">oversubscribe_mode=1</span></code>.</p>
+</dd>
+<dt>First option</dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">4</span></code>: number of lanes (default 4 for a front-panel
+port); <code class="docutils literal notranslate"><span class="pre">i</span></code>: create the port inactive (disabled), as a placeholder for a
+later breakout; <code class="docutils literal notranslate"><span class="pre">m</span></code>: management port (on physical 128); or a speed cap
+in Gb/s for a flex port, for example <code class="docutils literal notranslate"><span class="pre">portmap_1=1:10:100</span></code>.</p>
+</dd>
+<dt>Second option</dt><dd><p><code class="docutils literal notranslate"><span class="pre">i</span></code> (inactive) or <code class="docutils literal notranslate"><span class="pre">m</span></code> (management).</p>
+</dd>
+</dl>
+<p>Every physical lane can belong to only one logical port. A port with four
+lanes uses its physical lane and the next three, so <code class="docutils literal notranslate"><span class="pre">portmap_1=1:100</span></code>
+occupies lanes 1–4 and lanes 2–4 must not appear in another <code class="docutils literal notranslate"><span class="pre">portmap</span></code>.</p>
+<p>The Celestica Seastone2 HWSKU defines 31 ports at 100G, one front-panel port
+split into four 10G ports, and the management port:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>portmap_1=1:100
+portmap_5=5:100
+portmap_9=9:10:1
+portmap_10=10:10:1
+portmap_11=11:10:1
+portmap_12=12:10:1
+portmap_13=13:100
+...
+portmap_71=69:100
+...
+portmap_66=129:10:m
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">portmap_71=69:100</span></code> shows the second pipe’s numbering: physical 69 is
+logical 71. The shell names these ports <code class="docutils literal notranslate"><span class="pre">ce0</span></code>, <code class="docutils literal notranslate"><span class="pre">ce1</span></code>, <code class="docutils literal notranslate"><span class="pre">xe0</span></code>–<code class="docutils literal notranslate"><span class="pre">xe3</span></code> and
+so on (see <a class="reference internal" href="../ports.html"><span class="doc">Ports and port bitmaps</span></a>).</p>
+</section>
+<section id="breaking-out-a-100g-port-into-410g">
+<h2>Breaking out a 100G port into 4×10G<a class="headerlink" href="#breaking-out-a-100g-port-into-410g" title="Link to this heading"></a></h2>
+<p>Splitting front-panel port 1 (lanes 1–4) into four 10G ports needs three
+changes, then a <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restart (see <a class="reference internal" href="../config.html"><span class="doc">Configuration variables</span></a>). The example is
+the difference between two Dell S5232F-ON HWSKUs, one with port 1 at 100G and
+one with it broken out.</p>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>: replace the 100G port by four one-lane ports:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-portmap_1.0=1:100</span>
+<span class="gi">+portmap_1.0=1:10:1</span>
+<span class="gi">+portmap_2.0=2:10:1</span>
+<span class="gi">+portmap_3.0=3:10:1</span>
+<span class="gi">+portmap_4.0=4:10:1</span>
+</pre></div>
+</div>
+<p>The lane map and polarity variables are per core and per lane and stay as
+they are. If the file sets per-port <a class="reference internal" href="variables/ports.html#confval-serdes_preemphasis"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_preemphasis</span></code></a> values,
+add <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_2</span></code> to <code class="docutils literal notranslate"><span class="pre">_4</span></code> for the new ports.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code>: replace the one 100G port with four ports of one lane
+each:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w"> </span># name          lanes                 alias              index   subport  mtu     speed
+<span class="gd">-Ethernet0       1,2,3,4               hundredGigE1/1     1       0        9100    100000</span>
+<span class="gi">+Ethernet0       1                     hundredGigE1/1/1   1       1        9100    10000</span>
+<span class="gi">+Ethernet1       2                     hundredGigE1/1/2   1       2        9100    10000</span>
+<span class="gi">+Ethernet2       3                     hundredGigE1/1/3   1       3        9100    10000</span>
+<span class="gi">+Ethernet3       4                     hundredGigE1/1/4   1       4        9100    10000</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_db.json</span></code>: replace <code class="docutils literal notranslate"><span class="pre">Ethernet0</span></code> in the <code class="docutils literal notranslate"><span class="pre">PORT</span></code> table with the
+four new ports (and move any configuration that referred to it), or
+regenerate the file from the new <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code>.</p></li>
+</ol>
+<p>After the restart the shell shows the four ports as <code class="docutils literal notranslate"><span class="pre">xe</span></code> ports on logical
+ports 1–4:</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; config show portmap_</span>
+<span class="go">drivshell&gt; show pmap</span>
+</pre></div>
+</div>
+</div>
+<p>SONiC’s dynamic port breakout (<code class="docutils literal notranslate"><span class="pre">config</span> <span class="pre">interface</span> <span class="pre">breakout</span></code>) changes ports at
+runtime instead. It needs the core to be flex-enabled with
+<a class="reference internal" href="variables/ports.html#confval-port_flex_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">port_flex_enable</span></code></a> and the platform’s breakout description; the
+initial layout still comes from <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>.</p>
+</section>
+<section id="inactive-ports-for-later-breakout">
+<h2>Inactive ports for later breakout<a class="headerlink" href="#inactive-ports-for-later-breakout" title="Link to this heading"></a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">i</span></code> a port exists in the port map but stays disabled. Defining the
+spare lanes of a 4×10G-capable port this way lets <a class="reference internal" href="../../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a> or
+<a class="reference internal" href="../../reference/flexport.html#clicmd-flexport"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">FLEXport</span></code></a> change the layout without a port-map change. The SDK
+checks the bandwidth of every core and pipe at initialisation, inactive
+ports included; a layout that exceeds a limit fails with messages such as
+<code class="docutils literal notranslate"><span class="pre">PGW_CL4</span> <span class="pre">and</span> <span class="pre">PGW_CL5</span> <span class="pre">total</span> <span class="pre">line</span> <span class="pre">rate</span> <span class="pre">bandwidth</span> <span class="pre">(230</span> <span class="pre">Gb)</span> <span class="pre">exceeds</span> <span class="pre">200</span> <span class="pre">Gb</span></code>.
+<a class="reference internal" href="../../howto/live-config.html"><span class="doc">Changing the chip configuration live</span></a> shows both cases.</p>
+</section>
+<section id="lane-order-and-polarity">
+<h2>Lane order and polarity<a class="headerlink" href="#lane-order-and-polarity" title="Link to this heading"></a></h2>
+<p>Boards route the four lanes of a core to the front-panel connector in any
+order and may swap the P and N wires of a lane. <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> tells the
+SerDes how to undo this. The values are fixed by the board design: copy them
+from the vendor’s file and never change them to fix a link problem.</p>
+<dl class="simple">
+<dt><a class="reference internal" href="variables/ports.html#confval-phy_chain_tx_lane_map_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical</span></code></a> and <a class="reference internal" href="variables/ports.html#confval-phy_chain_rx_lane_map_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical</span></code></a></dt><dd><p>One variable per core, on the core’s first physical lane, <code class="docutils literal notranslate"><span class="pre">{&lt;physical&gt;.0}</span></code>.
+The value has one hexadecimal digit per lane, lane 0 in the lowest digit;
+<code class="docutils literal notranslate"><span class="pre">0x3210</span></code> is straight through.</p>
+</dd>
+<dt><a class="reference internal" href="variables/ports.html#confval-phy_chain_tx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical</span></code></a> and <a class="reference internal" href="variables/ports.html#confval-phy_chain_rx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical</span></code></a></dt><dd><p>One variable per lane: <code class="docutils literal notranslate"><span class="pre">1</span></code> inverts the lane, <code class="docutils literal notranslate"><span class="pre">0</span></code> leaves it.</p>
+</dd>
+</dl>
+<p>From the Seastone2 HWSKU, core 3 (physical 9–12):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>phy_chain_tx_lane_map_physical{9.0}=0x0132
+phy_chain_rx_lane_map_physical{9.0}=0x3210
+phy_chain_tx_polarity_flip_physical{9.0}=0x0
+phy_chain_rx_polarity_flip_physical{9.0}=0x0
+phy_chain_tx_polarity_flip_physical{10.0}=0x0
+phy_chain_rx_polarity_flip_physical{10.0}=0x1
+phy_chain_tx_polarity_flip_physical{11.0}=0x0
+phy_chain_rx_polarity_flip_physical{11.0}=0x0
+phy_chain_tx_polarity_flip_physical{12.0}=0x1
+phy_chain_rx_polarity_flip_physical{12.0}=0x1
+</pre></div>
+</div>
+</section>
+<section id="transmit-equalisation">
+<h2>Transmit equalisation<a class="headerlink" href="#transmit-equalisation" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="variables/ports.html#confval-serdes_preemphasis"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_preemphasis</span></code></a> sets the transmit FIR taps of a port as one
+number, <code class="docutils literal notranslate"><span class="pre">0x&lt;post&gt;&lt;main&gt;&lt;pre&gt;</span></code>. The Seastone2 value
+<code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_83=0x0d4f08</span></code> means post-cursor 0x0d (13), main 0x4f
+(79), pre-cursor 0x08 (8) for all lanes of logical port 83. To set one lane,
+use <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_lane&lt;L&gt;_&lt;port&gt;</span></code>; a lane value overrides the port
+value. <a class="reference internal" href="variables/ports.html#confval-serdes_tx_taps"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_tx_taps</span></code></a> is an alternative, decimal form.</p>
+<p>Good values depend on the trace length to each cage and on the cable or
+optic; vendors tune them per port. <a class="reference internal" href="../../reference/phy.html#clicmd-phy-diag"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">dsc</span></code>
+sub-command shows the SerDes state of a port, including the transmit taps in
+use.</p>
+</section>
+<section id="port-types-oversubscription-and-other-port-variables">
+<h2>Port types, oversubscription and other port variables<a class="headerlink" href="#port-types-oversubscription-and-other-port-variables" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><a class="reference internal" href="variables/ports.html#confval-oversubscribe_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">oversubscribe_mode</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code> on every 100G SONiC HWSKU (see <a class="reference internal" href="#bcmsh-config-portmap"><span class="std std-ref">portmap</span></a>).
+<code class="docutils literal notranslate"><span class="pre">2</span></code> with <a class="reference internal" href="variables/ports.html#confval-pbmp_oversubscribe"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pbmp_oversubscribe</span></code></a> oversubscribes only some ports.</p>
+</dd>
+<dt><a class="reference internal" href="variables/ports.html#confval-pbmp_xport_xe"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pbmp_xport_xe</span></code></a></dt><dd><p>Bitmap of logical ports that come up as Ethernet; SONiC files set all
+front-panel ports, for example <code class="docutils literal notranslate"><span class="pre">0x3ffffffffffffffffffffffffffffffffe</span></code>
+on Seastone2.</p>
+</dd>
+<dt><a class="reference internal" href="variables/ports.html#confval-port_flex_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">port_flex_enable</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code> allows runtime breakout and speed changes on all cores. SONiC files
+exclude the management port: <code class="docutils literal notranslate"><span class="pre">port_flex_enable_66=0</span></code>.</p>
+</dd>
+<dt><a class="reference internal" href="variables/ports.html#confval-phy_an_c73"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_an_c73</span></code></a></dt><dd><p>Clause 73 auto-negotiation mode; <code class="docutils literal notranslate"><span class="pre">phy_an_c73=1</span></code> (Seastone2) or <code class="docutils literal notranslate"><span class="pre">3</span></code>
+(Dell) with the management ports excluded.</p>
+</dd>
+<dt><a class="reference internal" href="variables/ports.html#confval-serdes_if_type"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_if_type</span></code></a></dt><dd><p>Interface type number; <code class="docutils literal notranslate"><span class="pre">serdes_if_type_ce=14</span></code> (CR4) sets all 100G ports.</p>
+</dd>
+<dt><a class="reference internal" href="variables/ports.html#confval-dport_map_port"><code class="xref std std-confval docutils literal notranslate"><span class="pre">dport_map_port</span></code></a></dt><dd><p>Only renumbers ports in diag-shell commands, see
+<a class="reference internal" href="../ports.html#bcmsh-pbmp-grammar"><span class="std std-ref">Port bitmap grammar</span></a>. Dell S5232F files set it for every port.</p>
+</dd>
+</dl>
+<p>The <a class="reference internal" href="variables/ports.html"><span class="doc">port variable reference</span></a> lists all of them.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../config.html" class="btn btn-neutral float-left" title="Configuration variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tables.html" class="btn btn-neutral float-right" title="Forwarding table sizes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

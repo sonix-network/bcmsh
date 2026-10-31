@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_oam_* (159) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_pkt_* (70)" href="bcm-pkt.html" />
+    <link rel="prev" title="bcm_multicast_* (134)" href="bcm-multicast.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_oam_*</span></code> (159)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-oam-159">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_oam_*</span></code> (159)<a class="headerlink" href="#bcm-oam-159" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_OAM_ACTION_CLEAR(bcm_oam_endpoint_action_t *_action, int *_action_type);
+void BCM_OAM_ACTION_CLEAR_ALL(bcm_oam_endpoint_action_t *_action);
+int BCM_OAM_ACTION_GET(bcm_oam_endpoint_action_t *_action, int *_action_type);
+void BCM_OAM_ACTION_SET(bcm_oam_endpoint_action_t *_action, int *_action_type);
+void BCM_OAM_CONDITION_CLEAR(bcm_oam_conditions_t *_condition, bcm_oam_condition_t *_drop);
+void BCM_OAM_CONDITION_CLEAR_ALL(bcm_oam_conditions_t *_condition);
+int BCM_OAM_CONDITION_GET(bcm_oam_conditions_t *_condition, bcm_oam_condition_t *_drop);
+void BCM_OAM_CONDITION_SET(bcm_oam_conditions_t *_condition, bcm_oam_condition_t *_drop);
+void BCM_OAM_EVENT_TYPE_CLEAR(bcm_oam_event_types_t *_event_types, int *_event_type);
+void BCM_OAM_EVENT_TYPE_CLEAR_ALL(bcm_oam_event_types_t *_event_types);
+int BCM_OAM_EVENT_TYPE_GET(bcm_oam_event_types_t *_event_types, int *_event_type);
+void BCM_OAM_EVENT_TYPE_SET(bcm_oam_event_types_t *_event_types, int *_event_type);
+void BCM_OAM_EVENT_TYPE_SET_ALL(bcm_oam_event_types_t *_event_types);
+void BCM_OAM_LOOKUP_TYPE_CLEAR(bcm_oam_lookup_types_t *_type, bcm_oam_lookup_type_t *_lookup_type);
+void BCM_OAM_LOOKUP_TYPE_CLEAR_ALL(bcm_oam_lookup_types_t *_type);
+int BCM_OAM_LOOKUP_TYPE_GET(bcm_oam_lookup_types_t *_type, bcm_oam_lookup_type_t *_lookup_type);
+void BCM_OAM_LOOKUP_TYPE_SET(bcm_oam_lookup_types_t *_type, bcm_oam_lookup_type_t *_lookup_type);
+void BCM_OAM_OPCODES_BITMAP_CLEAR(bcm_oam_opcodes_t *_opcodes_bitmap, int *_opcode_);
+void BCM_OAM_OPCODES_BITMAP_CLEAR_ALL(bcm_oam_opcodes_t *_opcodes_bitmap);
+int BCM_OAM_OPCODES_BITMAP_GET(bcm_oam_opcodes_t *_opcodes_bitmap, int *_opcode_);
+void BCM_OAM_OPCODES_BITMAP_SET(bcm_oam_opcodes_t *_opcodes_bitmap, int *_opcode_);
+void BCM_OAM_OPCODES_BITMAP_SET_ALL(bcm_oam_opcodes_t *_opcodes_bitmap);
+void BCM_OAM_OPCODE_CLEAR(bcm_oam_endpoint_action_t *_action, int *_opcode);
+void BCM_OAM_OPCODE_CLEAR_ALL(bcm_oam_endpoint_action_t *_action);
+int BCM_OAM_OPCODE_GET(bcm_oam_endpoint_action_t *_action, int *_opcode);
+void BCM_OAM_OPCODE_SET(bcm_oam_endpoint_action_t *_action, int *_opcode);
+void bcm_oam_action_key_t_init(bcm_oam_action_key_t *action_key_ptr);
+void bcm_oam_action_result_t_init(bcm_oam_action_result_t *action_result_ptr);
+int bcm_oam_ais_add(int unit, bcm_oam_ais_t *ais_ptr);
+int bcm_oam_ais_delete(int unit, bcm_oam_ais_t *ais_ptr);
+int bcm_oam_ais_get(int unit, bcm_oam_ais_t *ais_ptr);
+void bcm_oam_ais_t_init(bcm_oam_ais_t *ais_ptr);
+int bcm_oam_control_get(int unit, bcm_oam_control_type_t type, uint64 *arg);
+int bcm_oam_control_indexed_get(int unit, bcm_oam_control_key_t key, uint64 *arg);
+int bcm_oam_control_indexed_set(int unit, bcm_oam_control_key_t key, uint64 arg);
+int bcm_oam_control_set(int unit, bcm_oam_control_type_t type, uint64 arg);
+int bcm_oam_csf_add(int unit, bcm_oam_csf_t *csf_ptr);
+int bcm_oam_csf_delete(int unit, bcm_oam_csf_t *csf_ptr);
+int bcm_oam_csf_get(int unit, bcm_oam_csf_t *csf_ptr);
+void bcm_oam_csf_t_init(bcm_oam_csf_t *csf_ptr);
+int bcm_oam_delay_add(int unit, bcm_oam_delay_t *delay_ptr);
+int bcm_oam_delay_delete(int unit, bcm_oam_delay_t *delay_ptr);
+int bcm_oam_delay_get(int unit, bcm_oam_delay_t *delay_ptr);
+void bcm_oam_delay_t_init(bcm_oam_delay_t *delay_ptr);
+int bcm_oam_detach(int unit);
+int bcm_oam_endpoint_action_set(int unit, bcm_oam_endpoint_t id, bcm_oam_endpoint_action_t *action);
+void bcm_oam_endpoint_action_t_init(bcm_oam_endpoint_action_t *action_ptr);
+int bcm_oam_endpoint_create(int unit, bcm_oam_endpoint_info_t *endpoint_info);
+int bcm_oam_endpoint_destroy(int unit, bcm_oam_endpoint_t endpoint);
+int bcm_oam_endpoint_destroy_all(int unit, bcm_oam_group_t group);
+int bcm_oam_endpoint_egress_intf_egress_attach(int unit, bcm_oam_endpoint_t endpoint_id, bcm_if_t egress_intf);
+int bcm_oam_endpoint_egress_intf_egress_attach_get(int unit, bcm_oam_endpoint_t endpoint_id, int max_count, bcm_if_t *egress_intf, int *count);
+int bcm_oam_endpoint_egress_intf_egress_detach(int unit, bcm_oam_endpoint_t endpoint_id, bcm_if_t egress_intf);
+int bcm_oam_endpoint_faults_multi_get(int unit, uint32 flags, bcm_oam_protocol_type_t endpoint_protocol, uint32 max_endpoints, bcm_oam_endpoint_fault_t *faults, uint32 *endpoint_count);
+int bcm_oam_endpoint_get(int unit, bcm_oam_endpoint_t endpoint, bcm_oam_endpoint_info_t *endpoint_info);
+int bcm_oam_endpoint_gport_egress_attach(int unit, bcm_oam_endpoint_t endpoint, bcm_gport_t gport);
+int bcm_oam_endpoint_gport_egress_attach_get(int unit, bcm_oam_endpoint_t endpoint, int max_count, bcm_gport_t *gport, int *count);
+int bcm_oam_endpoint_gport_egress_detach(int unit, bcm_oam_endpoint_t endpoint, bcm_gport_t gport);
+void bcm_oam_endpoint_info_t_init(bcm_oam_endpoint_info_t *endpoint_info);
+int bcm_oam_endpoint_traverse(int unit, bcm_oam_group_t group, bcm_oam_endpoint_traverse_cb cb, void *user_data);
+int bcm_oam_event_register(int unit, bcm_oam_event_types_t event_types, bcm_oam_event_cb cb, void *user_data);
+int bcm_oam_event_unregister(int unit, bcm_oam_event_types_t event_types, bcm_oam_event_cb cb);
+int bcm_oam_group_create(int unit, bcm_oam_group_info_t *group_info);
+int bcm_oam_group_destroy(int unit, bcm_oam_group_t group);
+int bcm_oam_group_destroy_all(int unit);
+int bcm_oam_group_get(int unit, bcm_oam_group_t group, bcm_oam_group_info_t *group_info);
+void bcm_oam_group_info_t_init(bcm_oam_group_info_t *group_info);
+int bcm_oam_group_traverse(int unit, bcm_oam_group_traverse_cb cb, void *user_data);
+int bcm_oam_init(int unit);
+int bcm_oam_lif_profile_get(int unit, uint32 flags, bcm_gport_t gport, bcm_oam_profile_t *ingress_oam_profile, bcm_oam_profile_t *egress_oam_profile);
+int bcm_oam_lif_profile_set(int unit, uint32 flags, bcm_gport_t gport, bcm_oam_profile_t ingress_oam_profile, bcm_oam_profile_t egress_oam_profile);
+int bcm_oam_lookup_enable_get(int unit, bcm_oam_lookup_type_t type, bcm_oam_conditions_t *condition);
+int bcm_oam_lookup_enable_multi_set(int unit, bcm_oam_lookup_types_t types, bcm_oam_conditions_t conditions, int enable);
+int bcm_oam_lookup_enable_set(int unit, bcm_oam_lookup_type_t type, bcm_oam_condition_t condition, int enable);
+int bcm_oam_loopback_add(int unit, bcm_oam_loopback_t *loopback_ptr);
+int bcm_oam_loopback_delete(int unit, bcm_oam_loopback_t *loopback_ptr);
+int bcm_oam_loopback_get(int unit, bcm_oam_loopback_t *loopback_ptr);
+void bcm_oam_loopback_t_init(bcm_oam_loopback_t *loopback_ptr);
+int bcm_oam_loss_add(int unit, bcm_oam_loss_t *loss_ptr);
+int bcm_oam_loss_delete(int unit, bcm_oam_loss_t *loss_ptr);
+int bcm_oam_loss_get(int unit, bcm_oam_loss_t *loss_ptr);
+void bcm_oam_loss_t_init(bcm_oam_loss_t *loss_ptr);
+int bcm_oam_mpls_tp_channel_type_rx_delete(int unit, bcm_oam_mpls_tp_channel_type_t channel_type, int num_values, int *list_of_values);
+int bcm_oam_mpls_tp_channel_type_rx_get(int unit, bcm_oam_mpls_tp_channel_type_t channel_type, int num_values, int *list_of_values, int *value_count);
+int bcm_oam_mpls_tp_channel_type_rx_set(int unit, bcm_oam_mpls_tp_channel_type_t channel_type, int num_values, int *list_of_values);
+int bcm_oam_mpls_tp_channel_type_tx_delete(int unit, bcm_oam_mpls_tp_channel_type_t channel_type, int value);
+int bcm_oam_mpls_tp_channel_type_tx_get(int unit, bcm_oam_mpls_tp_channel_type_t channel_type, int *value);
+int bcm_oam_mpls_tp_channel_type_tx_set(int unit, bcm_oam_mpls_tp_channel_type_t channel_type, int value);
+int bcm_oam_opcode_group_get(int unit, bcm_oam_protocol_type_t protocol, bcm_oam_opcode_t opcode, uint8 *opcode_group);
+int bcm_oam_opcode_group_set(int unit, bcm_oam_protocol_type_t protocol, bcm_oam_opcodes_t opcodes, uint8 opcode_group);
+int bcm_oam_opcode_map_get(int unit, int opcode, int *profile);
+int bcm_oam_opcode_map_set(int unit, int opcode, int profile);
+int bcm_oam_opcodes_count_profile_create(int unit, uint8 *lm_count_profile);
+int bcm_oam_opcodes_count_profile_delete(int unit, uint8 lm_count_profile);
+int bcm_oam_opcodes_count_profile_get(int unit, uint8 lm_count_profile, uint8 count_enable, bcm_oam_opcodes_t *opcodes_bitmap);
+int bcm_oam_opcodes_count_profile_set(int unit, uint8 lm_count_profile, uint8 count_enable, bcm_oam_opcodes_t *opcodes_bitmap);
+void bcm_oam_performance_event_data_t_init(bcm_oam_performance_event_data_t *performance_event_data_ptr);
+int bcm_oam_performance_event_register(int unit, bcm_oam_event_types_t event_types, bcm_oam_performance_event_cb cb, void *user_data);
+int bcm_oam_performance_event_unregister(int unit, bcm_oam_event_types_t event_types, bcm_oam_performance_event_cb cb);
+int bcm_oam_pm_event_register(int unit, bcm_oam_event_types_t event_types, bcm_oam_pm_event_cb cb, void *user_data);
+int bcm_oam_pm_event_unregister(int unit, bcm_oam_event_types_t event_types, bcm_oam_pm_event_cb cb);
+int bcm_oam_pm_loss_stats_get(int unit, int loss_id, bcm_oam_pm_stats_t *stats_ptr);
+int bcm_oam_pm_profile_attach(int unit, bcm_oam_endpoint_t endpoint_id, int profile_id);
+int bcm_oam_pm_profile_attach_get(int unit, bcm_oam_endpoint_t endpoint_id, int *profile_id);
+int bcm_oam_pm_profile_create(int unit, bcm_oam_pm_profile_info_t *profile_info);
+int bcm_oam_pm_profile_delete(int unit, bcm_oam_pm_profile_t profile_id);
+int bcm_oam_pm_profile_delete_all(int unit);
+int bcm_oam_pm_profile_detach(int unit, bcm_oam_endpoint_t endpoint_id, int profile_id);
+int bcm_oam_pm_profile_get(int unit, bcm_oam_pm_profile_info_t *profile_info);
+int bcm_oam_pm_profile_traverse(int unit, bcm_oam_pm_profile_traverse_cb cb, void *user_data);
+int bcm_oam_pm_raw_data_read_done(int unit, bcm_oam_event_types_t event_types, uint32 read_index);
+int bcm_oam_pm_stats_get(int unit, bcm_oam_endpoint_t endpoint_id, bcm_oam_pm_stats_t *stats_ptr);
+int bcm_oam_primary_vlan_create(int unit, bcm_oam_primary_vlan_info_t *primary_vlan_info);
+int bcm_oam_primary_vlan_destroy(int unit, bcm_oam_primary_vlan_info_t *primary_vlan_info);
+int bcm_oam_primary_vlan_get(int unit, bcm_oam_primary_vlan_info_t *primary_vlan_info);
+void bcm_oam_primary_vlan_info_t_init(bcm_oam_primary_vlan_info_t *primary_vlan_info);
+int bcm_oam_primary_vlan_traverse(int unit, bcm_oam_primary_vlan_traverse_cb trav_fn, void *user_data);
+int bcm_oam_profile_action_get(int unit, uint32 flags, bcm_oam_profile_t profile_id, bcm_oam_action_key_t *oam_action_key, bcm_oam_action_result_t *oam_action_result);
+int bcm_oam_profile_action_set(int unit, uint32 flags, bcm_oam_profile_t profile_id, bcm_oam_action_key_t *oam_action_key, bcm_oam_action_result_t *oam_action_result);
+int bcm_oam_profile_create(int unit, uint32 flags, bcm_oam_profile_type_t oam_profile_type, bcm_oam_profile_t *profile_id);
+int bcm_oam_profile_delete(int unit, uint32 flags, bcm_oam_profile_t profile_id);
+int bcm_oam_profile_id_get_by_type(int unit, uint8 profile_id, bcm_oam_profile_type_t oam_profile_type, uint32 *flags, bcm_oam_profile_t *enc_profile_id);
+int bcm_oam_protection_packet_header_get(int unit, bcm_pkt_blk_t *packet_header);
+int bcm_oam_protection_packet_header_set(int unit, bcm_pkt_blk_t *packet_header);
+int bcm_oam_psc_add(int unit, bcm_oam_psc_t *psc_ptr);
+int bcm_oam_psc_delete(int unit, bcm_oam_psc_t *psc_ptr);
+int bcm_oam_psc_get(int unit, bcm_oam_psc_t *psc_ptr);
+void bcm_oam_psc_t_init(bcm_oam_psc_t *psc_ptr);
+int bcm_oam_pw_status_add(int unit, bcm_oam_pw_status_t *pw_status_ptr);
+int bcm_oam_pw_status_delete(int unit, bcm_oam_pw_status_t *pw_status_ptr);
+int bcm_oam_pw_status_get(int unit, bcm_oam_pw_status_t *pw_status_ptr);
+void bcm_oam_pw_status_t_init(bcm_oam_pw_status_t *pw_status_ptr);
+int bcm_oam_reflector_encap_create(int unit, uint32 flags, bcm_if_t *encap_id);
+int bcm_oam_reflector_encap_destroy(int unit, uint32 flags, bcm_if_t encap_id);
+int bcm_oam_sd_sf_detection_add(int unit, bcm_oam_sd_sf_detection_t *sd_sf_ptr);
+int bcm_oam_sd_sf_detection_delete(int unit, bcm_oam_sd_sf_detection_t *sd_sf_ptr);
+int bcm_oam_sd_sf_detection_get(int unit, bcm_oam_sd_sf_detection_t *sd_sf_ptr);
+void bcm_oam_sd_sf_detection_t_init(bcm_oam_sd_sf_detection_t *sd_sf_ptr);
+int bcm_oam_test_id_tlv_dm_up_encap_create(int unit, uint32 flags, bcm_if_t *encap_id);  /* not in OpenBCM 6.5.27 */
+int bcm_oam_test_id_tlv_dm_up_encap_destroy(int unit, uint32 flags, bcm_if_t encap_id);  /* not in OpenBCM 6.5.27 */
+int bcm_oam_tod_leap_control_get(int unit, bcm_oam_timestamp_format_t ts_format, bcm_oam_tod_leap_control_t *leap_info);
+int bcm_oam_tod_leap_control_set(int unit, bcm_oam_timestamp_format_t ts_format, bcm_oam_tod_leap_control_t leap_info);
+int bcm_oam_trunk_ports_add(int unit, bcm_gport_t trunk_gport, int max_ports, bcm_gport_t *port_arr);
+int bcm_oam_trunk_ports_delete(int unit, bcm_gport_t trunk_gport, int max_ports, bcm_gport_t *port_arr);
+int bcm_oam_trunk_ports_get(int unit, bcm_gport_t trunk_gport, int max_ports, bcm_gport_t *port_arr, int *port_count);
+int bcm_oam_tst_rx_add(int unit, bcm_oam_tst_rx_t *tst_ptr);
+int bcm_oam_tst_rx_delete(int unit, bcm_oam_tst_rx_t *tst_ptr);
+int bcm_oam_tst_rx_get(int unit, bcm_oam_tst_rx_t *tst_ptr);
+void bcm_oam_tst_rx_t_init(bcm_oam_tst_rx_t *tst_rx_info);
+int bcm_oam_tst_tx_add(int unit, bcm_oam_tst_tx_t *tst_ptr);
+int bcm_oam_tst_tx_delete(int unit, bcm_oam_tst_tx_t *tst_ptr);
+int bcm_oam_tst_tx_get(int unit, bcm_oam_tst_tx_t *tst_ptr);
+void bcm_oam_tst_tx_t_init(bcm_oam_tst_tx_t *tst_tx_info);
+int bcm_oam_upmep_cosq_get(int unit, bcm_oam_upmep_pdu_type_t upmep_pdu_type, bcm_cos_queue_t *cosq);
+int bcm_oam_upmep_cosq_set(int unit, bcm_oam_upmep_pdu_type_t upmep_pdu_type, bcm_cos_queue_t cosq);
+int bcm_oam_y_1711_alarm_add(int unit, bcm_oam_y_1711_alarm_t *alarm_ptr);
+int bcm_oam_y_1711_alarm_delete(int unit, bcm_oam_y_1711_alarm_t *alarm_ptr);
+int bcm_oam_y_1711_alarm_get(int unit, bcm_oam_y_1711_alarm_t *alarm_ptr);
+void bcm_oam_y_1711_alarm_t_init(bcm_oam_y_1711_alarm_t *alarm_ptr);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-multicast.html" class="btn btn-neutral float-left" title="bcm_multicast_* (134)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-pkt.html" class="btn btn-neutral float-right" title="bcm_pkt_* (70)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

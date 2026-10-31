@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lt &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LtCAPture" href="ltcapture.html" />
+    <link rel="prev" title="ls" href="ls.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Command reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#shell-commands">Shell commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#commands-for-other-chip-families">Commands for other chip families</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#logical-table-switch-mode">Logical-table switch mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#bcma-command-line"><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Command reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">lt</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lt">
+<h1><code class="docutils literal notranslate"><span class="pre">lt</span></code><a class="headerlink" href="#lt" title="Link to this heading"></a></h1>
+<p>A command of the separate <code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line; see <a class="reference internal" href="../index.html#bcmsh-other-interpreters"><span class="std std-ref">Commands for other chip families</span></a>.</p>
+<p>Logical table access.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>lt list [&lt;opt&gt;] [&lt;lt-match-string&gt; ...]
+traverse [&lt;attrlist&gt;] [&lt;opt&gt;] [&lt;lt-match-string&gt; ...]
+[&lt;cmd-params&gt;] &lt;table-op&gt; [&lt;table-op&gt; ...]
+</pre></div>
+</div>
+<p class="rubric">Built-in help</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;table-op&gt; := &lt;lt-name&gt; [&lt;attrlist&gt;] [&lt;env-var-list&gt;] [&lt;trvs-cfg&gt;]
+                        &lt;entry-op&gt; [&lt;entry-op&gt; ...]
+&lt;entry-op&gt; := &lt;op&gt; [&lt;opt&gt;] [&lt;field&gt;=&lt;val&gt; ...]
+
+The &lt;table-op&gt; performs logical table operation(s) through an entry
+in the given logical table &lt;lt-name&gt;.
+The asterisk (*) can be used to set the specified field to
+its default value.
+The minus sign (-) can be used to unset the specified field.
+
+&lt;cmd-params&gt; := &lt;param&gt;=&lt;val&gt; [&lt;param&gt;=&lt;val&gt; ...] | =
+  The &lt;cmd-params&gt; is used to configure the commit parameters for
+  the logical table operations. Default is to commit the logical
+  table operations in synchronous entry mode.
+Current available parameters are:
+  TRans=0|1: Commit in entry or transaction mode.
+  TransType=Atomic|Batch: Transaction type.
+                          Valid in transaction mode.
+  Async=0|1: Commit in synchronous mode or asynchronous mode.
+  PRIority=Normal|High: Priority level used in asynchronous mode.
+  NoTiFy=Commit|Hw|All|None: Notification option in asynchronous mode.
+  ScalarDisplayMode=Hex|Dec|HexDec: Display mode for scalar field.
+  ArrayDisplayMode=Hex|Dec|HexDec: Display mode for array field.
+  ArrayDelimiter=Comma|Newline|Space: Display style for arrays.
+  FieldDelimiter=Comma|Newline|Space: Display style for fields.
+  Verbose=0|1: Whether to run the command in verbose mode.
+  Quiet=0|1: Set to 1 to suppress normal command output.
+  ContCmdMode=0|1: Valid in transaction mode only and default value is
+                   always 0. Identify multiple transaction commands in
+                   continuous command mode that starts from 1 and ends
+                   with 0.
+  CacheBypass=0|1: Obtain entry data directly from hardware if set
+                   to 1. Default value is 0.
+  DEFault=0|1: Whether to save the current parameters to default.
+The current command parameters can be shown and modified by using
+the '=' syntax as well.
+
+
+&lt;attrlist&gt;: attr=&lt;attr&gt;[,&lt;attr&gt;...]
+  Currently the supported &lt;attr&gt;s are CACHE_BYPASS, FILTER_DFLT,
+  FILTER_OUTPUT, FILTER_PERF, LPM_LOOKUP, TRVS_SNAPSHOT,
+  and TRVS_DONE.
+
+&lt;env-var-list&gt;: EnvVar=&lt;str&gt;[,&lt;str&gt;...]
+  Applicable to LOOKUP, index-with-allocate INSERT operation or
+  TRAVERSE operation with -l option (LOOKUP while traversing) to set
+  result for the fields name containing &lt;str&gt; to CLI local variables.
+  Use '*' to set all fields for LOOKUP operation and key fields for
+  index-with-allocate INSERT operation.
+  For array field, each element n will be expanded to variable name
+  &lt;field_name&gt;__n associate with the element value. Token matching for
+  specific index m or indices range m to n of array field can be
+  specified as &lt;str&gt;[m] or &lt;str&gt;[m-n].
+  For TRAVERSE operation with no options specified, each key field
+  value of the traversed entry will be concatenated with commas and
+  set to CLI local variables.
+  The variables will be automatically cleared at the next LT operation.
+
+&lt;trvs-cfg&gt;: MaxTrvsNum=&lt;val&gt;
+  Applicable to TRAVERSE operation to limit the number of traversing
+  entries listed in the CLI output. The &lt;val&gt; should be positive to
+  take effect.
+
+The valid &lt;op&gt;s in table &lt;entry-op&gt; are:
+  insert, delete, update, lookup and traverse.
+Field qualifier is supported for the traverse opcode to filter
+unwanted entries from the traverse result. The supported field
+qualifiers are ==, !=, &gt;=, &lt;=, &gt; and &lt;.
+The number of (qualified) entries traversed will also be saved in the
+local environment variable "$0", which can be useful for scripting.
+
+&lt;opt&gt;: A dash followed by one or more letters.
+lt &lt;table-op&gt;
+  -a: Auto-fill default values for any unspecified key fields.
+      Applicable to insert/update/lookup/delete operations.
+  -i: Automatically attempt an insert operation if an update
+      operation returns entry-not-found.
+  -f: Force all unspecified fields to reset to their default values.
+      Applicable to update operation.
+  -l: Applicable to traverse operation to perform lookup in traverse.
+  -u: Applicable to traverse operation to perform update in traverse.
+  -d: Applicable to traverse operation to perform delete in traverse.
+  -r: List all returned fields for insert and update operations.
+lt list
+  -l: Use long output format when listing table information.
+  -b: Use brief output format when listing table information.
+  -d: Display table documentation.
+  -m: Display physical table mapping information.
+lt traverse
+  -l: List all entry fields instead of key fields only.
+      LTs with no entries will be silently ignored.
+  -v: List the traverse result in verbose mode. All matching LTs
+      will be displayed regardless of the number of entries.
+
+The 'lt list' and 'lt traverse' commands can operate on multiple
+LTs depending on the specified lt-match-string(s).
+The number of tables listed or traversed will also be saved in the
+local environment variable "$0", which can be useful for scripting.
+</pre></div>
+</div>
+<p class="rubric">Built-in examples</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>list -b
+list -l ^TABLE
+list -m TABLE
+list -d CTR_MAC
+list -ld @CTR_MAC
+CTR_CONTROL update COLLECTION_ENABLE=1 INTERVAL=2000000\
+PORT_ID[1-3]=1,PORT_ID[5]=1,PORT_ID[7]=1
+CTR_MAC insert PORT_ID=2 TX_PKT=100 RX_PKT=90
+CTR_MAC lookup PORT_ID=2
+CTR_MAC attr=CACHE_BYPASS lookup PORT_ID=2
+CTR_MAC update -i PORT_ID=3 TX_PKT=200
+CTR_MAC traverse
+CTR_MAC traverse -u TX_PKT=0 RX_PKT=0
+CTR_MAC traverse -l OPERATIONAL_STATE==VALID TX_BYTES&gt;0
+CTR_MAC mtn=1 traverse
+traverse -v CTR_MAC
+CTR_CONTROL update INTERVAL=* PORT_ID[5]=0
+CTR_CONTROL EnvVar=MULTIPLIER,PORT_ID[0],id[3-5] lookup
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ls.html" class="btn btn-neutral float-left" title="ls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ltcapture.html" class="btn btn-neutral float-right" title="LtCAPture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

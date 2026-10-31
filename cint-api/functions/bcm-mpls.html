@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_mpls_* (124) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_multicast_* (134)" href="bcm-multicast.html" />
+    <link rel="prev" title="bcm_mirror_* (129)" href="bcm-mirror.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_mpls_*</span></code> (124)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-mpls-124">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_mpls_*</span></code> (124)<a class="headerlink" href="#bcm-mpls-124" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_MPLS_HEADER_EXP_GET(bcm_mpls_label_t *_hdr, int *_exp);
+bcm_mpls_label_t BCM_MPLS_HEADER_EXP_SET(bcm_mpls_label_t *_hdr, int *_exp);
+int BCM_MPLS_HEADER_LABEL_GET(bcm_mpls_label_t *_hdr, int *_label);
+bcm_mpls_label_t BCM_MPLS_HEADER_LABEL_SET(bcm_mpls_label_t *_hdr, int *_label);
+int BCM_MPLS_HEADER_S_BIT_GET(bcm_mpls_label_t *_hdr, int *_s);
+bcm_mpls_label_t BCM_MPLS_HEADER_S_BIT_SET(bcm_mpls_label_t *_hdr, int *_s);
+int BCM_MPLS_HEADER_TTL_GET(bcm_mpls_label_t *_hdr, int *_ttl);
+bcm_mpls_label_t BCM_MPLS_HEADER_TTL_SET(bcm_mpls_label_t *_hdr, int *_ttl);
+int BCM_MPLS_INDEXED_LABEL_INDEX_GET(bcm_mpls_label_t *_label);
+void BCM_MPLS_INDEXED_LABEL_SET(bcm_mpls_label_t *_label, int *_label_value, int *_index);
+int BCM_MPLS_INDEXED_LABEL_VALUE_GET(bcm_mpls_label_t *_label);
+int bcm_mpls_cleanup(int unit);
+void bcm_mpls_control_pkt_action_t_init(bcm_mpls_control_pkt_action_t *action);
+int bcm_mpls_control_pkt_add(int unit, uint32 options, bcm_mpls_control_pkt_match_t *match, bcm_mpls_control_pkt_action_t *action);
+int bcm_mpls_control_pkt_delete(int unit, bcm_mpls_control_pkt_match_t *match);
+int bcm_mpls_control_pkt_delete_all(int unit);
+int bcm_mpls_control_pkt_get(int unit, bcm_mpls_control_pkt_match_t *match, bcm_mpls_control_pkt_action_t *action);
+void bcm_mpls_control_pkt_match_t_init(bcm_mpls_control_pkt_match_t *match);
+int bcm_mpls_control_pkt_traverse(int unit, bcm_mpls_control_pkt_traverse_cb cb, void *user_data);
+void bcm_mpls_egress_label_t_init(bcm_mpls_egress_label_t *label);
+int bcm_mpls_entropy_identifier_add(int unit, uint32 options, bcm_mpls_entropy_identifier_t *info);
+int bcm_mpls_entropy_identifier_delete(int unit, bcm_mpls_entropy_identifier_t *info);
+int bcm_mpls_entropy_identifier_delete_all(int unit);
+int bcm_mpls_entropy_identifier_get(int unit, bcm_mpls_entropy_identifier_t *info);
+void bcm_mpls_entropy_identifier_t_init(bcm_mpls_entropy_identifier_t *info);
+int bcm_mpls_entropy_identifier_traverse(int unit, bcm_mpls_entropy_identifier_traverse_cb cb, void *user_data);
+int bcm_mpls_esi_encap_add(int unit, bcm_mpls_esi_info_t *esi_info);
+int bcm_mpls_esi_encap_delete(int unit, bcm_mpls_esi_info_t *esi_info);
+int bcm_mpls_esi_encap_get(int unit, bcm_mpls_esi_info_t *esi_info);
+int bcm_mpls_esi_encap_traverse(int unit, bcm_mpls_esi_encap_traverse_cb cb, void *user_data);
+void bcm_mpls_esi_info_t_init(bcm_mpls_esi_info_t *esi_info);
+int bcm_mpls_exp_map_create(int unit, uint32 flags, int *exp_map_id);
+int bcm_mpls_exp_map_destroy(int unit, int exp_map_id);
+int bcm_mpls_exp_map_get(int unit, int exp_map_id, bcm_mpls_exp_map_t *exp_map);
+int bcm_mpls_exp_map_set(int unit, int exp_map_id, bcm_mpls_exp_map_t *exp_map);
+void bcm_mpls_exp_map_t_init(bcm_mpls_exp_map_t *exp_map);
+int bcm_mpls_init(int unit);
+int bcm_mpls_label_flexctr_object_get(int unit, bcm_mpls_label_t label, bcm_gport_t port, uint32 *value);
+int bcm_mpls_label_flexctr_object_set(int unit, bcm_mpls_label_t label, bcm_gport_t port, uint32 value);
+int bcm_mpls_label_stat_attach(int unit, bcm_mpls_label_t label, bcm_gport_t port, uint32 stat_counter_id);
+int bcm_mpls_label_stat_clear(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat);
+int bcm_mpls_label_stat_counter_get(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_label_stat_counter_set(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_label_stat_counter_sync_get(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_label_stat_detach(int unit, bcm_mpls_label_t label, bcm_gport_t port);
+int bcm_mpls_label_stat_enable_set(int unit, bcm_mpls_label_t label, bcm_gport_t port, int enable);
+int bcm_mpls_label_stat_get(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint64 *val);
+int bcm_mpls_label_stat_get32(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 *val);
+int bcm_mpls_label_stat_id_get(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 *stat_counter_id);
+int bcm_mpls_label_stat_sync_get(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint64 *val);
+int bcm_mpls_label_stat_sync_get32(int unit, bcm_mpls_label_t label, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 *val);
+int bcm_mpls_port_add(int unit, bcm_vpn_t vpn, bcm_mpls_port_t *mpls_port);
+int bcm_mpls_port_delete(int unit, bcm_vpn_t vpn, bcm_gport_t mpls_port_id);
+int bcm_mpls_port_delete_all(int unit, bcm_vpn_t vpn);
+int bcm_mpls_port_get(int unit, bcm_vpn_t vpn, bcm_mpls_port_t *mpls_port);
+int bcm_mpls_port_get_all(int unit, bcm_vpn_t vpn, int port_max, bcm_mpls_port_t *port_array, int *port_count);
+int bcm_mpls_port_stat_attach(int unit, bcm_vpn_t vpn, bcm_gport_t port, uint32 stat_counter_id);
+int bcm_mpls_port_stat_counter_get(int unit, bcm_vpn_t vpn, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_port_stat_counter_set(int unit, bcm_vpn_t vpn, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_port_stat_counter_sync_get(int unit, bcm_vpn_t vpn, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_port_stat_detach(int unit, bcm_vpn_t vpn, bcm_gport_t port);
+int bcm_mpls_port_stat_enable_set(int unit, bcm_gport_t mpls_port, int enable);
+int bcm_mpls_port_stat_get(int unit, bcm_gport_t mpls_port, bcm_cos_t cos, bcm_mpls_port_stat_t stat, uint64 *val);
+int bcm_mpls_port_stat_get32(int unit, bcm_gport_t mpls_port, bcm_cos_t cos, bcm_mpls_port_stat_t stat, uint32 *val);
+int bcm_mpls_port_stat_id_get(int unit, bcm_vpn_t vpn, bcm_gport_t port, bcm_mpls_stat_t stat, uint32 *stat_counter_id);
+int bcm_mpls_port_stat_set(int unit, bcm_gport_t mpls_port, bcm_cos_t cos, bcm_mpls_port_stat_t stat, uint64 val);
+int bcm_mpls_port_stat_set32(int unit, bcm_gport_t mpls_port, bcm_cos_t cos, bcm_mpls_port_stat_t stat, uint32 val);
+void bcm_mpls_port_t_init(bcm_mpls_port_t *mpls_port);
+int bcm_mpls_port_traverse(int unit, bcm_mpls_port_traverse_info_t additional_info, bcm_mpls_port_traverse_cb trav_fn, void *user_data);
+int bcm_mpls_range_action_add(int unit, bcm_mpls_label_t label_low, bcm_mpls_label_t label_high, bcm_mpls_range_action_t *action);
+int bcm_mpls_range_action_get(int unit, bcm_mpls_label_t label_low, bcm_mpls_label_t label_high, bcm_mpls_range_action_t *action);
+int bcm_mpls_range_action_remove(int unit, bcm_mpls_label_t label_low, bcm_mpls_label_t label_high);
+void bcm_mpls_range_action_t_init(bcm_mpls_range_action_t *label);
+int bcm_mpls_special_label_egress_add(int unit, bcm_mpls_special_label_type_t label_type, bcm_mpls_special_label_t label_info);
+int bcm_mpls_special_label_egress_delete(int unit, bcm_mpls_special_label_type_t label_type, bcm_mpls_special_label_t label_info);
+int bcm_mpls_special_label_egress_delete_all(int unit);
+int bcm_mpls_special_label_egress_get(int unit, bcm_mpls_special_label_type_t label_type, bcm_mpls_special_label_t *label_info);
+int bcm_mpls_special_label_egress_traverse(int unit, bcm_mpls_special_label_egress_traverse_cb cb, void *user_data);
+int bcm_mpls_special_label_identifier_add(int unit, bcm_mpls_special_label_type_t label_type, bcm_mpls_special_label_t label_info);
+int bcm_mpls_special_label_identifier_delete(int unit, bcm_mpls_special_label_type_t label_type, bcm_mpls_special_label_t label_info);
+int bcm_mpls_special_label_identifier_delete_all(int unit);
+int bcm_mpls_special_label_identifier_get(int unit, bcm_mpls_special_label_type_t label_type, bcm_mpls_special_label_t *label_info);
+int bcm_mpls_special_label_identifier_traverse(int unit, bcm_mpls_special_label_identifier_traverse_cb cb, void *user_data);
+int bcm_mpls_special_label_push_action_get(int unit, bcm_mpls_special_label_push_element_t *element, int *push_action);
+int bcm_mpls_special_label_push_action_set(int unit, bcm_mpls_special_label_push_element_t *element, int push_action);
+void bcm_mpls_special_label_push_element_t_init(bcm_mpls_special_label_push_element_t *element);
+void bcm_mpls_special_label_t_init(bcm_mpls_special_label_t *label_info);
+void bcm_mpls_stat_info_t_init(bcm_mpls_stat_info_t *stat_info);
+int bcm_mpls_tunnel_encap_create(int unit, uint32 options, bcm_mpls_tunnel_encap_t *tunnel_encap);
+int bcm_mpls_tunnel_encap_destroy(int unit, bcm_gport_t tunnel_id);
+int bcm_mpls_tunnel_encap_destroy_all(int unit);
+int bcm_mpls_tunnel_encap_get(int unit, bcm_mpls_tunnel_encap_t *tunnel_encap);
+void bcm_mpls_tunnel_encap_t_init(bcm_mpls_tunnel_encap_t *tunnel_encap);
+int bcm_mpls_tunnel_initiator_clear(int unit, bcm_if_t intf);
+int bcm_mpls_tunnel_initiator_clear_all(int unit);
+int bcm_mpls_tunnel_initiator_create(int unit, bcm_if_t intf, int num_labels, bcm_mpls_egress_label_t *label_array);
+int bcm_mpls_tunnel_initiator_flexctr_object_get(int unit, bcm_if_t intf, uint32 *value);
+int bcm_mpls_tunnel_initiator_get(int unit, bcm_if_t intf, int label_max, bcm_mpls_egress_label_t *label_array, int *label_count);
+int bcm_mpls_tunnel_initiator_set(int unit, bcm_if_t intf, int num_labels, bcm_mpls_egress_label_t *label_array);
+int bcm_mpls_tunnel_initiator_traverse(int unit, bcm_mpls_tunnel_initiator_traverse_info_t *additional_info, bcm_mpls_tunnel_initiator_traverse_cb cb, void *user_data);
+int bcm_mpls_tunnel_label_counter_id_detach(int unit, bcm_if_t intf_id, uint32 stat_counter_id);
+int bcm_mpls_tunnel_label_counter_id_num_get(int unit, bcm_if_t intf_id, int *num_counters, uint32 *stat_counter_id);
+int bcm_mpls_tunnel_label_counter_id_stat_get(int unit, bcm_if_t intf_id, uint32 stat_counter_id, bcm_mpls_stat_info_t *stat_info);
+int bcm_mpls_tunnel_label_counter_id_stat_set(int unit, bcm_if_t intf_id, uint32 stat_counter_id, bcm_mpls_stat_info_t *stat_info);
+int bcm_mpls_tunnel_label_counter_id_stat_sync_get(int unit, bcm_if_t intf_id, uint32 stat_counter_id, bcm_mpls_stat_info_t *stat_info);
+int bcm_mpls_tunnel_stat_attach(int unit, bcm_if_t intf_id, uint32 stat_counter_id);
+int bcm_mpls_tunnel_stat_counter_get(int unit, bcm_if_t intf_id, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_tunnel_stat_counter_set(int unit, bcm_if_t intf_id, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_tunnel_stat_counter_sync_get(int unit, bcm_if_t intf_id, bcm_mpls_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_mpls_tunnel_stat_detach(int unit, bcm_if_t intf_id);
+int bcm_mpls_tunnel_stat_id_get(int unit, bcm_if_t intf_id, bcm_mpls_stat_t stat, uint32 *stat_counter_id);
+int bcm_mpls_tunnel_switch_add(int unit, bcm_mpls_tunnel_switch_t *info);
+int bcm_mpls_tunnel_switch_create(int unit, bcm_mpls_tunnel_switch_t *info);
+int bcm_mpls_tunnel_switch_delete(int unit, bcm_mpls_tunnel_switch_t *info);
+int bcm_mpls_tunnel_switch_delete_all(int unit);
+int bcm_mpls_tunnel_switch_get(int unit, bcm_mpls_tunnel_switch_t *info);
+void bcm_mpls_tunnel_switch_t_init(bcm_mpls_tunnel_switch_t *info);
+int bcm_mpls_tunnel_switch_traverse(int unit, bcm_mpls_tunnel_switch_traverse_cb cb, void *user_data);
+void bcm_mpls_vpn_config_t_init(bcm_mpls_vpn_config_t *info);
+int bcm_mpls_vpn_id_create(int unit, bcm_mpls_vpn_config_t *info);
+int bcm_mpls_vpn_id_destroy(int unit, bcm_vpn_t vpn);
+int bcm_mpls_vpn_id_destroy_all(int unit);
+int bcm_mpls_vpn_id_get(int unit, bcm_vpn_t vpn, bcm_mpls_vpn_config_t *info);
+int bcm_mpls_vpn_traverse(int unit, bcm_mpls_vpn_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-mirror.html" class="btn btn-neutral float-left" title="bcm_mirror_* (129)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-multicast.html" class="btn btn-neutral float-right" title="bcm_multicast_* (134)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

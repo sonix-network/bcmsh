@@ -1,0 +1,1154 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cint recipes &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Command reference" href="../reference/index.html" />
+    <link rel="prev" title="Changing the chip configuration live" href="live-config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cint recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#chip-identity">Chip identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-status">Port status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#port-counters">Port counters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#l3-table-usage">L3 table usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#routes">Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#egress-objects">Egress objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#l2-table">L2 table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vlans">VLANs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#knet-interfaces">KNET interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#field-processor-groups">Field-processor groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enum-values-and-switch-controls">Enum values and switch controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#diag-commands-from-cint">Diag commands from Cint</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cint recipes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cint-recipes">
+<h1>Cint recipes<a class="headerlink" href="#cint-recipes" title="Link to this heading"></a></h1>
+<p>Small Cint programs that read state through the SDK API on a Trident 3
+SONiC switch. All of them are read-only: they call only <code class="docutils literal notranslate"><span class="pre">*_get</span></code> and
+<code class="docutils literal notranslate"><span class="pre">*_traverse</span></code> functions and change nothing on the switch. Each starts with
+<code class="docutils literal notranslate"><span class="pre">cint_reset();</span></code> so it can be run again, and ends by printing <code class="docutils literal notranslate"><span class="pre">DONE</span>
+<span class="pre">&lt;name&gt;</span></code>; if that line is missing, the program did not run to the end. See
+<a class="reference internal" href="../concepts/cint.html"><span class="doc">Cint: the C interpreter</span></a> for how Cint runs and <a class="reference internal" href="../concepts/cint-language.html"><span class="doc">The Cint language</span></a>
+for the language.</p>
+<p>Copy a program to <code class="docutils literal notranslate"><span class="pre">/root</span></code> in the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container and run it from the
+host (see <a class="reference internal" href="../concepts/cint.html"><span class="doc">Cint: the C interpreter</span></a> for why not <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>docker<span class="w"> </span>cp<span class="w"> </span>hello_info.c<span class="w"> </span>syncd:/root/
+<span class="gp">$ </span>bcmcmd<span class="w"> </span>-t<span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="s2">"cint /root/hello_info.c"</span>
+</pre></div>
+</div>
+</div>
+<p>or from an interactive <a class="reference internal" href="../access.html#clicmd-bcmsh"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bcmsh</span></code></a> session with <code class="docutils literal notranslate"><span class="pre">cint</span> <span class="pre">/root/hello_info.c</span></code>.</p>
+<p>Programs that walk a table hold that table’s lock while they run, so
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> waits to update it. They print only the first entries, but they
+still visit every entry; on a switch with a large L2 or route table, run
+them when a short delay in programming is acceptable.</p>
+<section id="chip-identity">
+<h2>Chip identity<a class="headerlink" href="#chip-identity" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">bcm_info_get</span></code> returns the PCI vendor and device ID and the revision. The
+Trident 3 below reports device <code class="docutils literal notranslate"><span class="pre">0xb870</span></code>; other members of the family
+report other IDs, for example <code class="docutils literal notranslate"><span class="pre">0xb873</span></code> in the capture in the <a class="reference internal" href="../reference/cint.html#clicmd-cint"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cint</span></code></a>
+reference. The structure printed by <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">info</span></code> ends with per-die arrays
+that are all zero on Trident 3.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">hello_info.c</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * hello_info.c - print the chip identity with bcm_info_get().</span>
+<span class="cm"> * Read-only.  Run:  cint /root/hello_info.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">hello_info</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_info_t</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_info_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_info_get failed: %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"vendor 0x%04x device 0x%04x revision 0x%02x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">info</span><span class="p">.</span><span class="n">vendor</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">revision</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">hello_info</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE hello_info</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/hello_info.c</span>
+<span class="go">vendor 0x14e4 device 0xb870 revision 0x01</span>
+<span class="go">bcm_info_t info = {</span>
+<span class="go">    unsigned int vendor = 5348 (0x14e4)</span>
+<span class="go">    unsigned int device = 47216 (0xb870)</span>
+<span class="go">    unsigned int revision = 1 (0x1)</span>
+<span class="go">    unsigned int capability = 13 (0xd)</span>
+<span class="go">    int num_pipes = 2 (0x2)</span>
+<span class="go">    int num_pp_pipes = 0 (0x0)</span>
+<span class="go">    int num_buffers = 0 (0x0)</span>
+<span class="go">    int num_instances_per_pp_pipe = 0 (0x0)</span>
+<span class="go">    unsigned int package_rev_id = 0 (0x0)</span>
+<span class="go">    unsigned int interposer_rev_id = 0 (0x0)</span>
+<span class="go">    int dies_num = 0 (0x0)</span>
+<span class="go">    unsigned int[16] die_dev_id = {</span>
+<span class="go">        unsigned int die_dev_id[0] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[1] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[2] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[3] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[4] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[5] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[6] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[7] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[8] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[9] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[10] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[11] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[12] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[13] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[14] = 0 (0x0)</span>
+<span class="go">        unsigned int die_dev_id[15] = 0 (0x0)</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="port-status">
+<h2>Port status<a class="headerlink" href="#port-status" title="Link to this heading"></a></h2>
+<p>One line per front-panel port with the admin state, link state, speed and
+untagged VLAN. Port numbers are SDK logical port numbers, as shown by
+<a class="reference internal" href="../reference/portstat.html#clicmd-portstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ps</span></code></a>; see <a class="reference internal" href="../concepts/ports.html"><span class="doc">Ports and port bitmaps</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">port_status.c</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * port_status.c - one line per front-panel port: enable, link, speed and</span>
+<span class="cm"> * untagged VLAN.  Read-only.  Run:  cint /root/port_status.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ps_show</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_t</span><span class="w"> </span><span class="n">port</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_vlan_t</span><span class="w"> </span><span class="n">pvid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vid</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_port_enable_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">enable</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"port %3d: bcm_port_enable_get: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">bcm_port_link_status_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">link</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_port_speed_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">speed</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_port_untagged_vlan_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pvid</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pvid</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"port %3d: enable %d link %d speed %6d pvid %4d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">enable</span><span class="p">,</span><span class="w"> </span><span class="n">link</span><span class="p">,</span><span class="w"> </span><span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="n">vid</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ps_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_port_t</span><span class="w"> </span><span class="n">port</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_pbmp_t</span><span class="w"> </span><span class="n">pbm</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_port_config_t</span><span class="w"> </span><span class="n">config</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">bcm_port_config_t_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">config</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_port_config_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">config</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_port_config_get failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">pbm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">port</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"front-panel ports: ${pbm}</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BCM_PBMP_ITER</span><span class="p">(</span><span class="n">pbm</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ps_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">);</span>
+<span class="w">        </span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d ports</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ps_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE port_status</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/port_status.c</span>
+<span class="go">front-panel ports: { 1 5 9 10 11 12 13 17 21 25 29 33 37 41 45 49 53 57 61 66 67 71 75 79 83 87 91 95 99 103 107 111 115 119 123 127 }</span>
+<span class="go">port   1: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port   5: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port   9: enable 1 link 1 speed  10000 pvid    1</span>
+<span class="go">port  10: enable 1 link 1 speed  10000 pvid    1</span>
+<span class="go">port  11: enable 1 link 1 speed  10000 pvid    1</span>
+<span class="go">port  12: enable 1 link 1 speed  10000 pvid  902</span>
+<span class="go">port  13: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  17: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  21: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  25: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  29: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  33: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  37: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  41: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  45: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  49: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  53: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  57: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  61: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  66: enable 0 link 0 speed  10000 pvid    1</span>
+<span class="go">port  67: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  71: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  75: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  79: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  83: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  87: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  91: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  95: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port  99: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port 103: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port 107: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port 111: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port 115: enable 1 link 1 speed 100000 pvid    1</span>
+<span class="go">port 119: enable 1 link 1 speed 100000 pvid    1</span>
+<span class="go">port 123: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">port 127: enable 0 link 0 speed 100000 pvid    1</span>
+<span class="go">36 ports</span>
+<span class="go">DONE port_status</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="port-counters">
+<h2>Port counters<a class="headerlink" href="#port-counters" title="Link to this heading"></a></h2>
+<p>Reads 64-bit counters of one port with <code class="docutils literal notranslate"><span class="pre">bcm_stat_get</span></code>. The port number is
+the first argument; without one, port 1 is read. These are the SDK’s
+counters, the same ones <a class="reference internal" href="../reference/show.html#clicmd-show-counters"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span></code></a> reads, so they are not reset
+by <code class="docutils literal notranslate"><span class="pre">sonic-clear</span> <span class="pre">counters</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">port_counters.c</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * port_counters.c - read a few SNMP-style counters of one port with</span>
+<span class="cm"> * bcm_stat_get().  Read-only.</span>
+<span class="cm"> * Run:  cint /root/port_counters.c [&lt;logical port&gt;]     (default: port 1)</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">pc_atoi</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="sc">'0'</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="sc">'9'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="sc">'0'</span><span class="p">);</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">pc_show</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_port_t</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_stat_val_t</span><span class="w"> </span><span class="n">stat</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">uint64</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">COMPILER_64_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">val</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_stat_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">stat</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">val</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"  %-22s error %d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"  %-22s ${val}  hi %u lo %u</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span>
+<span class="w">           </span><span class="n">COMPILER_64_HI</span><span class="p">(</span><span class="o">&amp;</span><span class="n">val</span><span class="p">),</span><span class="w"> </span><span class="n">COMPILER_64_LO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">val</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">pc_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_port_t</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ARGC</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc_atoi</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"port %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfHCInOctets</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfHCInOctets"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfHCInUcastPkts</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfHCInUcastPkts"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfInErrors</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfInErrors"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfInDiscards</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfInDiscards"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfHCOutOctets</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfHCOutOctets"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfHCOutUcastPkts</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfHCOutUcastPkts"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfOutErrors</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfOutErrors"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pc_show</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">snmpIfOutDiscards</span><span class="p">,</span><span class="w"> </span><span class="s">"snmpIfOutDiscards"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">pc_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE port_counters</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/port_counters.c 1</span>
+<span class="go">port 1</span>
+<span class="go">  snmpIfHCInOctets       {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">  snmpIfHCInUcastPkts    {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">  snmpIfInErrors         {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">  snmpIfInDiscards       {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">  snmpIfHCOutOctets      {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">  snmpIfHCOutUcastPkts   {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">  snmpIfOutErrors        {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">  snmpIfOutDiscards      {0x00000000 0x00000000}  hi 0 lo 0</span>
+<span class="go">DONE port_counters</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="l3-table-usage">
+<h2>L3 table usage<a class="headerlink" href="#l3-table-usage" title="Link to this heading"></a></h2>
+<p>How full the route, host, next-hop and interface tables are, from
+<code class="docutils literal notranslate"><span class="pre">bcm_l3_info</span></code>. <a class="reference internal" href="../reference/l3.html#clicmd-l3-info"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">info</span></code></a> shows similar numbers.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">l3_info.c</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * l3_info.c - L3 table sizes and usage from bcm_l3_info().</span>
+<span class="cm"> * Read-only.  Run:  cint /root/l3_info.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">li_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_l3_info_t</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_l3_info</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_l3_info failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"routes  used %d of %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_used_route</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_max_route</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"hosts   used %d of %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_used_host</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_max_host</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"egress  used %d of %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_used_nexthop</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_max_nexthop</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"intf    used %d of %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_used_intf</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">l3info_max_intf</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">li_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE l3_info</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/l3_info.c</span>
+<span class="go">routes  used 6 of 32768</span>
+<span class="go">hosts   used 3 of 16384</span>
+<span class="go">egress  used 7 of 65536</span>
+<span class="go">intf    used 6 of 16383</span>
+<span class="go">bcm_l3_info_t info = {</span>
+<span class="go">    int l3info_max_vrf = 4095 (0xfff)</span>
+<span class="go">    int l3info_used_vrf = -1 (0xffffffff)</span>
+<span class="go">    int l3info_max_intf = 16383 (0x3fff)</span>
+<span class="go">    int l3info_max_intf_group = 4095 (0xfff)</span>
+<span class="go">    int l3info_max_host = 16384 (0x4000)</span>
+<span class="go">    int l3info_max_route = 32768 (0x8000)</span>
+<span class="go">    int l3info_max_ecmp_groups = 4096 (0x1000)</span>
+<span class="go">    int l3info_max_ecmp = 128 (0x80)</span>
+<span class="go">    int l3info_max_ecmp_failover_size = 0 (0x0)</span>
+<span class="go">    int l3info_used_intf = 6 (0x6)</span>
+<span class="go">    int l3info_used_host = 3 (0x3)</span>
+<span class="go">    int l3info_used_route = 6 (0x6)</span>
+<span class="go">    int l3info_max_lpm_block = 0 (0x0)</span>
+<span class="go">    int l3info_used_lpm_block = 0 (0x0)</span>
+<span class="go">    int l3info_max_l3 = 16384 (0x4000)</span>
+<span class="go">    int l3info_max_defip = 16384 (0x4000)</span>
+<span class="go">    int l3info_used_l3 = 3 (0x3)</span>
+<span class="go">    int l3info_used_defip = 6 (0x6)</span>
+<span class="go">    int l3info_max_nexthop = 65536 (0x10000)</span>
+<span class="go">    int l3info_used_nexthop = 7 (0x7)</span>
+<span class="go">    int l3info_max_tunnel_init = 4096 (0x1000)</span>
+<span class="go">    int l3info_used_tunnel_init = 0 (0x0)</span>
+<span class="go">    int l3info_max_tunnel_term = 2048 (0x800)</span>
+<span class="go">    int l3info_used_tunnel_term = 0 (0x0)</span>
+<span class="go">    int l3info_used_host_ip4 = 1 (0x1)</span>
+<span class="go">    int l3info_used_host_ip6 = 2 (0x2)</span>
+<span class="go">}</span>
+<span class="go">DONE l3_info</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="routes">
+<h2>Routes<a class="headerlink" href="#routes" title="Link to this heading"></a></h2>
+<p>Walks the IPv4 and then the IPv6 route table with <code class="docutils literal notranslate"><span class="pre">bcm_l3_route_traverse</span></code>
+and prints the first 20 of each. The third and fourth arguments of
+<code class="docutils literal notranslate"><span class="pre">bcm_l3_route_traverse</span></code> are the first and last position <em>in the walk</em>,
+counted from 0, not table indices; a route with several ECMP paths may count
+once per path. The <code class="docutils literal notranslate"><span class="pre">intf</span></code> column is the egress object or ECMP group, as in
+<a class="reference internal" href="../reference/l3.html#clicmd-l3-defip-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">defip</span> <span class="pre">show</span></code></a>. IPv6 addresses print as eight full groups
+(<code class="docutils literal notranslate"><span class="pre">fe80:0000:0000:…</span></code>), without <code class="docutils literal notranslate"><span class="pre">::</span></code> shortening.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">l3_routes.c</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * l3_routes.c - print the first routes of the IPv4 and IPv6 route tables</span>
+<span class="cm"> * with bcm_l3_route_traverse() and a Cint callback.  Read-only.</span>
+<span class="cm"> * Run:  cint /root/l3_routes.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">lr_seen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lr_v4_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_l3_route_t</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_ip_t</span><span class="w"> </span><span class="n">net</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_subnet</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_ip_t</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_ip_mask</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_vrf</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">intf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_intf</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_flags</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">lr_seen</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"v4 %3d vrf %d ${net} mask ${mask} intf %d flags 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">vrf</span><span class="p">,</span><span class="w"> </span><span class="n">intf</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lr_v6_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_l3_route_t</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_ip6_t</span><span class="w"> </span><span class="n">net</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_ip6_net</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_ip6_t</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_ip6_mask</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vrf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_vrf</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">intf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_intf</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">l3a_flags</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">lr_seen</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"v6 %3d vrf %d ${net} mask ${mask} intf %d flags 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">vrf</span><span class="p">,</span><span class="w"> </span><span class="n">intf</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lr_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">lr_seen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_l3_route_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">lr_v4_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"IPv4: rv %d (%s), %d shown (limit %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">lr_seen</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">lr_seen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_l3_route_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">BCM_L3_IP6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">lr_v6_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"IPv6: rv %d (%s), %d shown (limit %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">lr_seen</span><span class="p">,</span><span class="w"> </span><span class="n">limit</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">lr_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE l3_routes</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/l3_routes.c</span>
+<span class="go">v4 10240 vrf 0 198.51.100.0 mask 255.255.255.0 intf 132807 flags 0x0</span>
+<span class="go">v4 12288 vrf 0 0.0.0.0 mask 0.0.0.0 intf 132806 flags 0x100000</span>
+<span class="go">IPv4: rv 0 (Ok), 2 shown (limit 20)</span>
+<span class="go">v6 13312 vrf 0 fe80:0000:0000:0000:0000:0000:0000:0000 mask ffc0:0000:0000:0000:0000:0000:0000:0000 intf 132807 flags 0x20000</span>
+<span class="go">v6 14336 vrf 0 0000:0000:0000:0000:0000:0000:0000:0000 mask 0000:0000:0000:0000:0000:0000:0000:0000 intf 132806 flags 0x120000</span>
+<span class="go">IPv6: rv 0 (Ok), 2 shown (limit 20)</span>
+<span class="go">DONE l3_routes</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="egress-objects">
+<h2>Egress objects<a class="headerlink" href="#egress-objects" title="Link to this heading"></a></h2>
+<p>Lists L3 egress objects (next hops) with their MAC address, VLAN and port.
+The numbers match the <code class="docutils literal notranslate"><span class="pre">INTF</span></code> column of <a class="reference internal" href="../reference/l3.html#clicmd-l3-egress-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l3</span> <span class="pre">egress</span> <span class="pre">show</span></code></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">l3_egress.c</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * l3_egress.c - list L3 egress objects (next hops) with</span>
+<span class="cm"> * bcm_l3_egress_traverse().  Prints the first 50.  Read-only.</span>
+<span class="cm"> * Run:  cint /root/l3_egress.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">le_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">le_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">le_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_if_t</span><span class="w"> </span><span class="n">intf</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_l3_egress_t</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vlan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">vlan</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">le_count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">le_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">le_limit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"egress %d: mac %02x:%02x:%02x:%02x:%02x:%02x vlan %d port %d module %d trunk %d intf %d flags 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">intf</span><span class="p">,</span>
+<span class="w">           </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac_addr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac_addr</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="w">           </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac_addr</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac_addr</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac_addr</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+<span class="w">           </span><span class="n">vlan</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">module</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">trunk</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">intf</span><span class="p">,</span>
+<span class="w">           </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">le_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">le_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_l3_egress_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">le_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"rv %d (%s), %d egress objects</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">le_count</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">le_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE l3_egress</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/l3_egress.c</span>
+<span class="go">egress 132768: mac 00:00:00:00:00:01 vlan 1 port 0 module 0 trunk 0 intf 8192 flags 0xa00</span>
+<span class="go">egress 132769: mac 00:00:00:00:00:01 vlan 1 port 0 module 0 trunk 0 intf 8192 flags 0x200</span>
+<span class="go">egress 132770: mac 00:00:00:00:00:00 vlan 0 port 12 module 0 trunk -1 intf -1 flags 0x0</span>
+<span class="go">egress 132771: mac ff:ff:ff:ff:ff:ff vlan 0 port 12 module 0 trunk 0 intf 8195 flags 0x800</span>
+<span class="go">egress 132806: mac e0:39:d7:88:3b:00 vlan 1 port 0 module 0 trunk -1 intf 8194 flags 0x100000</span>
+<span class="go">egress 132807: mac e0:39:d7:88:3b:00 vlan 0 port 0 module 0 trunk -1 intf 16383 flags 0xb001000</span>
+<span class="go">rv 0 (Ok), 6 egress objects</span>
+<span class="go">DONE l3_egress</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="l2-table">
+<h2>L2 table<a class="headerlink" href="#l2-table" title="Link to this heading"></a></h2>
+<p>Counts the MAC table and prints the first 30 entries. Compare
+<a class="reference internal" href="../reference/l2.html#clicmd-l2-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">show</span></code></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">l2_table.c</span><a class="headerlink" href="#id7" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * l2_table.c - count the L2 (MAC) table and print the first 30 entries</span>
+<span class="cm"> * with bcm_l2_traverse().  Read-only.  Run:  cint /root/l2_table.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">lt2_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">lt2_static</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">lt2_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lt2_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_l2_addr_t</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">vid</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">lt2_count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">info</span><span class="o">-&gt;</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_L2_STATIC</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lt2_static</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lt2_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">lt2_limit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%02x:%02x:%02x:%02x:%02x:%02x vlan %4d port %3d modid %d tgid %d flags 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="w">           </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">mac</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+<span class="w">           </span><span class="n">vid</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">modid</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">tgid</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">lt2_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">lt2_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">lt2_static</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_l2_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">lt2_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"rv %d (%s), %d entries (%d static)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">lt2_count</span><span class="p">,</span><span class="w"> </span><span class="n">lt2_static</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">lt2_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE l2_table</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/l2_table.c</span>
+<span class="go">e0:39:d7:88:3b:00 vlan    1 port   0 modid 0 tgid 0 flags 0x20</span>
+<span class="go">rv 0 (Ok), 1 entries (1 static)</span>
+<span class="go">DONE l2_table</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="vlans">
+<h2>VLANs<a class="headerlink" href="#vlans" title="Link to this heading"></a></h2>
+<p>Lists every VLAN with its member and untagged ports. <code class="docutils literal notranslate"><span class="pre">bcm_vlan_list</span></code>
+allocates the list; the program frees it with <code class="docutils literal notranslate"><span class="pre">bcm_vlan_list_destroy</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">vlans.c</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * vlans.c - list VLANs with their member and untagged ports using</span>
+<span class="cm"> * bcm_vlan_list().  Read-only; frees the list it receives.</span>
+<span class="cm"> * Run:  cint /root/vlans.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">vl_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vid</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_vlan_t</span><span class="w"> </span><span class="n">dflt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_vlan_data_t</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_pbmp_t</span><span class="w"> </span><span class="n">pbm</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_pbmp_t</span><span class="w"> </span><span class="n">ubm</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_vlan_default_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dflt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dflt</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"default VLAN %d (rv %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">vid</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_vlan_list</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">count</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_vlan_list failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">vid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">vlan_tag</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pbm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">port_bitmap</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ubm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">ut_port_bitmap</span><span class="p">;</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"vlan %4d ports ${pbm} untagged ${ubm}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">vid</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d VLANs</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bcm_vlan_list_destroy</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">vl_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE vlans</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/vlans.c</span>
+<span class="go">default VLAN 1 (rv 0)</span>
+<span class="go">vlan    1 ports { } untagged { }</span>
+<span class="go">vlan  902 ports { 12 } untagged { 12 }</span>
+<span class="go">vlan 3999 ports { } untagged { }</span>
+<span class="go">vlan 4095 ports { } untagged { }</span>
+<span class="go">4 VLANs</span>
+<span class="go">DONE vlans</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="knet-interfaces">
+<h2>KNET interfaces<a class="headerlink" href="#knet-interfaces" title="Link to this heading"></a></h2>
+<p>Lists the KNET network interfaces, the Linux network devices through which
+SONiC sends and receives packets on each port, with the SDK port each is
+bound to. See <a class="reference internal" href="knet.html"><span class="doc">KNET and the CPU port</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">knet_netifs.c</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * knet_netifs.c - list KNET network interfaces (the kernel netdevs that</span>
+<span class="cm"> * SONiC uses for its EthernetN ports) and the SDK port each is bound to.</span>
+<span class="cm"> * Read-only.  Run:  cint /root/knet_netifs.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">kn_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">kn_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_knet_netif_t</span><span class="w"> </span><span class="o">*</span><span class="n">netif</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vlan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">netif</span><span class="o">-&gt;</span><span class="n">vlan</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">kn_count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"netif %3d %-16s type %d port %3d vlan %4d flags 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">netif</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">netif</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">netif</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">netif</span><span class="o">-&gt;</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">vlan</span><span class="p">,</span>
+<span class="w">           </span><span class="n">netif</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">kn_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">kn_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_knet_netif_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">kn_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"rv %d (%s), %d netifs</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">kn_count</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">kn_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE knet_netifs</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/knet_netifs.c</span>
+<span class="go">netif   1 Ethernet0        type 2 port   1 vlan    0 flags 0x4</span>
+<span class="go">netif   2 Ethernet4        type 2 port   5 vlan    0 flags 0x4</span>
+<span class="go">netif   3 Ethernet8        type 2 port   9 vlan    0 flags 0x4</span>
+<span class="go">netif   4 Ethernet9        type 2 port  10 vlan    0 flags 0x4</span>
+<span class="go">netif   5 Ethernet10       type 2 port  11 vlan    0 flags 0x4</span>
+<span class="go">netif   6 Ethernet11       type 2 port  12 vlan    0 flags 0x4</span>
+<span class="go">netif   7 Ethernet12       type 2 port  13 vlan    0 flags 0x4</span>
+<span class="go">netif   8 Ethernet16       type 2 port  17 vlan    0 flags 0x4</span>
+<span class="go">netif   9 Ethernet20       type 2 port  21 vlan    0 flags 0x4</span>
+<span class="go">netif  10 Ethernet24       type 2 port  25 vlan    0 flags 0x4</span>
+<span class="go">netif  11 Ethernet28       type 2 port  29 vlan    0 flags 0x4</span>
+<span class="go">netif  12 Ethernet32       type 2 port  33 vlan    0 flags 0x4</span>
+<span class="go">netif  13 Ethernet36       type 2 port  37 vlan    0 flags 0x4</span>
+<span class="go">netif  14 Ethernet40       type 2 port  41 vlan    0 flags 0x4</span>
+<span class="go">netif  15 Ethernet44       type 2 port  45 vlan    0 flags 0x4</span>
+<span class="go">netif  16 Ethernet48       type 2 port  49 vlan    0 flags 0x4</span>
+<span class="go">netif  17 Ethernet52       type 2 port  53 vlan    0 flags 0x4</span>
+<span class="go">netif  18 Ethernet56       type 2 port  57 vlan    0 flags 0x4</span>
+<span class="go">netif  19 Ethernet60       type 2 port  61 vlan    0 flags 0x4</span>
+<span class="go">netif  20 Ethernet64       type 2 port  67 vlan    0 flags 0x4</span>
+<span class="go">netif  21 Ethernet68       type 2 port  71 vlan    0 flags 0x4</span>
+<span class="go">netif  22 Ethernet72       type 2 port  75 vlan    0 flags 0x4</span>
+<span class="go">netif  23 Ethernet76       type 2 port  79 vlan    0 flags 0x4</span>
+<span class="go">netif  24 Ethernet80       type 2 port  83 vlan    0 flags 0x4</span>
+<span class="go">netif  25 Ethernet84       type 2 port  87 vlan    0 flags 0x4</span>
+<span class="go">netif  26 Ethernet88       type 2 port  91 vlan    0 flags 0x4</span>
+<span class="go">netif  27 Ethernet92       type 2 port  95 vlan    0 flags 0x4</span>
+<span class="go">netif  28 Ethernet96       type 2 port  99 vlan    0 flags 0x4</span>
+<span class="go">netif  29 Ethernet100      type 2 port 103 vlan    0 flags 0x4</span>
+<span class="go">netif  30 Ethernet104      type 2 port 107 vlan    0 flags 0x4</span>
+<span class="go">netif  31 Ethernet108      type 2 port 111 vlan    0 flags 0x4</span>
+<span class="go">netif  32 Ethernet112      type 2 port 115 vlan    0 flags 0x4</span>
+<span class="go">netif  33 Ethernet116      type 2 port 119 vlan    0 flags 0x4</span>
+<span class="go">netif  34 Ethernet120      type 2 port 123 vlan    0 flags 0x4</span>
+<span class="go">netif  35 Ethernet124      type 2 port 127 vlan    0 flags 0x4</span>
+<span class="go">netif  36 Ethernet128      type 2 port  66 vlan    0 flags 0x4</span>
+<span class="go">rv 0 (Ok), 36 netifs</span>
+<span class="go">DONE knet_netifs</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="field-processor-groups">
+<h2>Field-processor groups<a class="headerlink" href="#field-processor-groups" title="Link to this heading"></a></h2>
+<p>Lists the field-processor groups (SONiC ACL tables and the SAI’s own trap
+rules are implemented as field-processor groups), how many entries each
+has, and the priority of up to 16 entries per group. <a class="reference internal" href="../reference/fieldprocessor.html#clicmd-fieldprocessor-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">fp</span> <span class="pre">show</span></code></a>
+prints the full contents.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">field_groups.c</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * field_groups.c - list field-processor (ACL) groups, their usage and the</span>
+<span class="cm"> * priority of their first entries.  Read-only.</span>
+<span class="cm"> * Run:  cint /root/field_groups.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">fg_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">fg_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_field_group_t</span><span class="w"> </span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">bcm_field_group_status_t</span><span class="w"> </span><span class="n">st</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_field_entry_t</span><span class="w"> </span><span class="n">entries</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">prio</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">fg_groups</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_field_group_status_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">st</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"group %d: status error %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"group %d: %d entries, %d free of %d, prio %d..%d, %d counters</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="n">entry_count</span><span class="p">,</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="n">entries_free</span><span class="p">,</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="n">entries_total</span><span class="p">,</span>
+<span class="w">           </span><span class="n">st</span><span class="p">.</span><span class="n">prio_min</span><span class="p">,</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="n">prio_max</span><span class="p">,</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="n">counter_count</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_field_entry_multi_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">entries</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">prio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">bcm_field_entry_prio_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">prio</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"    entry %d prio %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">prio</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">fg_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">fg_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_field_group_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">fg_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"rv %d (%s), %d groups</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">fg_groups</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">fg_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE field_groups</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/field_groups.c</span>
+<span class="go">group 3: 0 entries, 1024 free of 1024, prio -2147483647..2147483647, 0 counters</span>
+<span class="go">group 2: 6 entries, 506 free of 512, prio 0..2147483647, 5 counters</span>
+<span class="go">    entry 3 prio 0</span>
+<span class="go">    entry 4 prio 2147483647</span>
+<span class="go">    entry 5 prio 2147483646</span>
+<span class="go">    entry 6 prio 2147483645</span>
+<span class="go">    entry 7 prio 2147483644</span>
+<span class="go">    entry 8 prio 2147483643</span>
+<span class="go">group 1: 29 entries, 3043 free of 3072, prio 0..2147483647, 25 counters</span>
+<span class="go">    entry 1 prio 0</span>
+<span class="go">    entry 2 prio 0</span>
+<span class="go">    entry 9 prio 1</span>
+<span class="go">    entry 10 prio 1</span>
+<span class="go">    entry 11 prio 1</span>
+<span class="go">    entry 12 prio 2</span>
+<span class="go">    entry 13 prio 1</span>
+<span class="go">    entry 14 prio 4</span>
+<span class="go">    entry 15 prio 4</span>
+<span class="go">    entry 16 prio 4</span>
+<span class="go">    entry 17 prio 4</span>
+<span class="go">    entry 18 prio 4</span>
+<span class="go">    entry 19 prio 4</span>
+<span class="go">    entry 20 prio 4</span>
+<span class="go">    entry 21 prio 4</span>
+<span class="go">    entry 22 prio 4</span>
+<span class="go">rv 0 (Ok), 3 groups</span>
+<span class="go">DONE field_groups</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="enum-values-and-switch-controls">
+<h2>Enum values and switch controls<a class="headerlink" href="#enum-values-and-switch-controls" title="Link to this heading"></a></h2>
+<p>Shows how to get the number behind an enum name in this build, print an
+enum by name, and read a switch control.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">enum_values.c</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * enum_values.c - resolve SDK enum names to numbers in this build and read</span>
+<span class="cm"> * one switch control.  Read-only.  Run:  cint /root/enum_values.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ev_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_switch_control_t</span><span class="w"> </span><span class="n">ctl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_stat_val_t</span><span class="w"> </span><span class="n">stat</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ctl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcmSwitchL3EgressMode</span><span class="p">;</span>
+<span class="w">    </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcmSwitchL3EgressMode = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print</span><span class="w"> </span><span class="n">ctl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snmpIfHCInOctets</span><span class="p">;</span>
+<span class="w">    </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stat</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"snmpIfHCInOctets = %d (${stat})</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_switch_control_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcmSwitchL3EgressMode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_switch_control_get(L3EgressMode): rv %d (%s), value %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ev_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE enum_values</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/enum_values.c</span>
+<span class="go">bcmSwitchL3EgressMode = 230</span>
+<span class="go">bcm_switch_control_t ctl = bcmSwitchL3EgressMode (230)</span>
+<span class="go">snmpIfHCInOctets = 58 (snmpIfHCInOctets)</span>
+<span class="go">bcm_switch_control_get(L3EgressMode): rv 0 (Ok), value 1</span>
+<span class="go">DONE enum_values</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Link to this heading"></a></h2>
+<p>Prints the arguments given after the file name.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">args.c</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * args.c - show the arguments passed after the file name.</span>
+<span class="cm"> * Read-only.  Run:  cint /root/args.c one two 3</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">args_show</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"ARGC = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">ARGC</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARGC</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"ARGV[%d] = </span><span class="se">\"</span><span class="s">%s</span><span class="se">\"\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ARGV</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">args_show</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE args</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/args.c one two 3</span>
+<span class="go">ARGC = 3</span>
+<span class="go">ARGV[0] = "one"</span>
+<span class="go">ARGV[1] = "two"</span>
+<span class="go">ARGV[2] = "3"</span>
+<span class="go">DONE args</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="diag-commands-from-cint">
+<h2>Diag commands from Cint<a class="headerlink" href="#diag-commands-from-cint" title="Link to this heading"></a></h2>
+<p>Runs <a class="reference internal" href="../reference/portstat.html#clicmd-portstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ps</span></code></a> through <code class="docutils literal notranslate"><span class="pre">bshell</span></code> and prints the result codes, including
+the code for an unknown command.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">bshell_ps.c</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * bshell_ps.c - run a diag shell command from Cint with bshell().</span>
+<span class="cm"> * Read-only.  Run:  cint /root/bshell_ps.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">bp_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bshell</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="s">"ps"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"bshell(ps) returned %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bshell</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="s">"nosuchcommand"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"bshell(nosuchcommand) returned %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">bp_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE bshell_ps</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/bshell_ps.c</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ce0(  1)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce1(  5)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       xe0(  9)  up     1   10G  FD   SW  No   Forward         Untag    F    XFI  9122    No          IEEE</span>
+<span class="go">       xe1( 10)  up     1   10G  FD   SW  No   Forward         Untag    F    XFI  9122    No          IEEE</span>
+<span class="go">       xe2( 11)  up     1   10G  FD   SW  No   Forward         Untag    F    XFI  9122    No          IEEE</span>
+<span class="go">       xe3( 12)  up     1   10G  FD   SW  No   Forward          None    F    XFI  9122    No          IEEE</span>
+<span class="go">       ce2( 13)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce3( 17)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce4( 21)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce5( 25)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce6( 29)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce7( 33)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce8( 37)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       ce9( 41)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce10( 45)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce11( 49)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce12( 53)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce13( 57)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce14( 61)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       xe4( 66)  !ena   1   10G  FD   SW  No   Forward         Untag    F    XFI  9122    No          IEEE</span>
+<span class="go">      ce15( 67)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce16( 71)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce17( 75)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce18( 79)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce19( 83)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce20( 87)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce21( 91)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">      ce22( 95)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="live-config.html" class="btn btn-neutral float-left" title="Changing the chip configuration live" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/index.html" class="btn btn-neutral float-right" title="Command reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

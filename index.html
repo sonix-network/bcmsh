@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcmsh: the Broadcom diag shell &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7f41d439"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">bcmsh: the Broadcom diag shell</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcmsh-the-broadcom-diag-shell">
+<h1>bcmsh: the Broadcom diag shell<a class="headerlink" href="#bcmsh-the-broadcom-diag-shell" title="Link to this heading"></a></h1>
+<p>The Broadcom diag shell is the command interpreter built into the Broadcom
+switch SDK. On SONiC switches it is reached with <code class="docutils literal notranslate"><span class="pre">bcmsh</span></code> or <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> and
+shows the prompt <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code>. It gives direct access to the switch ASIC:
+port status, forwarding tables, registers, counters and the SDK API.</p>
+<p>This guide describes the shell as shipped with SONiC for Trident 3
+(BCM56870) switches. It covers how to reach the shell, the concepts its
+commands share, task-oriented how-tos, and a reference entry for every
+command, including those not listed by <code class="docutils literal notranslate"><span class="pre">help</span></code>.</p>
+<p>New here? Start with <a class="reference internal" href="access.html"><span class="doc">Accessing the shell</span></a> and <a class="reference internal" href="basics.html"><span class="doc">Reading this guide</span></a>, then look up commands in
+the <a class="reference internal" href="reference/index.html"><span class="doc">Command reference</span></a> or the <a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a>.</p>
+<div class="note bcmsh-about admonition">
+<p class="admonition-title">Who we are</p>
+<div class="bcmsh-logos docutils container">
+<a class="reference external image-reference" href="https://kamel.network/"><img alt="Kamel Networks" src="_images/kamel.png" style="height: 72px;" />
+</a>
+<a class="reference external image-reference" href="https://sonix.network/"><img alt="SONIX" src="_images/sonix.svg" style="height: 40px;" />
+</a>
+</div>
+<p>This is a collection of knowledge we have gathered while running
+<a class="reference external" href="https://sonix.network/">SONIX</a>, the first free and open source IX in
+Sweden. Come <a class="reference external" href="https://matrix.to/#/#sonix:kamel.network">say hi</a> if this is
+useful to you!</p>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Accessing the shell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="access.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#shell-server-start-up">Shell server start-up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#host-commands">Host commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#other-network-operating-systems">Other network operating systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#the-drivshell-front-end">The <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> front-end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#shell-modes-and-prompts">Shell modes and prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#command-line-syntax">Command-line syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#control-commands">Control commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#rc-scripts">rc scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#line-editing-history-and-output">Line editing, history and output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#files-inside-the-syncd-container">Files inside the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html#interrupting-commands">Interrupting commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Reading this guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#command-entries">Command entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Example validation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="validation.html#hardware-validated"><span class="bcmsh-badge-hardware">Hardware-validated</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation.html#vmm-validated"><span class="bcmsh-badge-vmm">VMM-validated</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="validation.html#unvalidated"><span class="bcmsh-badge-unvalidated">Unvalidated</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/ports.html">Ports and port bitmaps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/ports.html#port-names">Port names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/ports.html#port-bitmap-grammar">Port bitmap grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/ports.html#port-status">Port status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/memories-registers.html">Memories and registers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/memories-registers.html#finding-names">Finding names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/memories-registers.html#table-views">Table views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/memories-registers.html#table-suffixes">Table suffixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/memories-registers.html#register-references">Register references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/memories-registers.html#fields-and-values">Fields and values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/memories-registers.html#display-options">Display options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/memories-registers.html#safety">Safety</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/config.html">Configuration variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config/ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config/tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config/mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config/variables/index.html">Variable reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint.html">Cint: the C interpreter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#cint-or-diag-commands">Cint or diag commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#starting-and-leaving-the-interpreter">Starting and leaving the interpreter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#running-a-file">Running a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#the-interpreter-keeps-its-state">The interpreter keeps its state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#registered-api">Registered API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#running-diag-commands-from-cint">Running diag commands from Cint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#bcmsai-cint">BCMSAI Cint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/cint-language.html">The Cint language</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#program-structure">Program structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#types-and-declarations">Types and declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#unsupported-features">Unsupported features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#control-flow">Control flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#enums-and-constants">Enums and constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#printing">Printing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/cint-language.html#return-codes">Return codes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/scripting.html">Scripting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/scripting.html#variables">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/scripting.html#expressions-and-conditions">Expressions and conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/scripting.html#loops">Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/scripting.html#rc-scripts">rc scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/scripting.html#shell-options">Shell options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/scripting.html#diagnostic-tests">Diagnostic tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/eapps.html">Embedded applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#embedded-cores">Embedded cores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#capabilities">Capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#processor-specifications">Processor specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#memory-map">Memory map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#firmware-files">Firmware files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#applications-for-trident-3">Applications for Trident 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#the-eapp-configuration-file">The eApp configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#sonic-images">SONiC images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#checking-eapp-state">Checking eApp state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/eapps.html#loading-an-eapp-by-hand">Loading an eApp by hand</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto/knet.html">KNET and the CPU port</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/knet.html#router-macs-and-the-cpu">Router MACs and the CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/knet.html#inspecting-knet-from-the-diag-shell">Inspecting KNET from the diag shell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/copp.html">Protecting the CPU with CoPP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/copp.html#from-sonic-trap-groups-to-fp-entries">From SONiC trap groups to FP entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/copp.html#reading-a-trap-entry">Reading a trap entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/copp.html#counting-what-reaches-the-cpu">Counting what reaches the CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/copp.html#why-doesn-t-my-protocol-reach-the-cpu">Why doesn’t my protocol reach the CPU?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/copp.html#changing-copp">Changing CoPP</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/queues.html">Troubleshooting queues and buffers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#the-buffer-in-brief">The buffer in brief</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#priority-groups-and-service-pools">Priority groups and service pools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#egress-queue-limits">Egress queue limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#the-queue-as-the-sdk-sees-it">The queue as the SDK sees it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#sonic-qos-and-the-hardware">SONiC QoS and the hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#queue-drops">Queue drops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#watching-counters">Watching counters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#watermarks">Watermarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#changing-queues-from-the-shell">Changing queues from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#pfc">PFC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/queues.html#troubleshooting-checklist">Troubleshooting checklist</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/acl.html">Debugging ACL rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/acl.html#an-example-acl">An example ACL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/acl.html#finding-the-table-in-the-shell">Finding the table in the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/acl.html#is-the-rule-matching">Is the rule matching?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/acl.html#a-drop-rule-that-still-lets-packets-reach-the-cpu">A DROP rule that still lets packets reach the CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/acl.html#copy-or-mirror-matching-packets-to-the-cpu">Copy or mirror matching packets to the CPU</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/link-debug.html">Debugging a link</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#is-the-port-up">Is the port up?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#signal-and-lock-phy-diag-dsc">Signal and lock: <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">dsc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#eye-diagram">Eye diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#bit-error-rate-with-prbs">Bit error rate with PRBS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#transmit-fir-taps">Transmit FIR taps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#fec">FEC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#speed">Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/link-debug.html#putting-it-back">Putting it back</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/phy.html">PHYs and RJ-45 SFPs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/phy.html#which-phy-does-a-port-have">Which PHY does a port have?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/phy.html#phy-settings">PHY settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/phy.html#rj-45-sfps">RJ-45 SFPs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/l2-switch.html#check-that-the-ports-are-free">1. Check that the ports are free</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/l2-switch.html#vlans">2. VLANs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/l2-switch.html#port-settings">3. Port settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/l2-switch.html#check-l2-forwarding">4. Check L2 forwarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/l2-switch.html#svis-in-the-switch-chip">5. SVIs in the switch chip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/l2-switch.html#svi-addresses-on-the-cpu">6. SVI addresses on the CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/l2-switch.html#removing-it-again">Removing it again</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/lacp.html">Port channels and LACP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/lacp.html#finding-the-trunk">Finding the trunk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/lacp.html#lacpdus">LACPDUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/lacp.html#a-member-that-lacp-has-taken-out">A member that LACP has taken out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/lacp.html#a-member-whose-link-is-down">A member whose link is down</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/lacp.html#changing-trunks">Changing trunks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/mpls.html">MPLS label switching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#the-router-mac">1. The router MAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#vlans-and-l3-interfaces">2. VLANs and L3 interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#pushing-a-label">3. Pushing a label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#popping-a-label">4. Popping a label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#the-other-switch">5. The other switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#checking-the-path">6. Checking the path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/mpls.html#removing-it-again">Removing it again</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/vxlan.html">VXLAN tunnels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/vxlan.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/vxlan.html#the-sonic-side">The SONiC side</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/vxlan.html#what-the-chip-holds">What the chip holds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/vxlan.html#checking-encapsulation-in-the-counters">Checking encapsulation in the counters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/vxlan.html#known-problems">Known problems</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#the-example-network">The example network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#the-embedded-application">The embedded application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#recording-the-starting-state">Recording the starting state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#setting-up-the-initiator">Setting up the initiator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#setting-up-a-transit-node">Setting up a transit node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#time-stamps">Time stamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#capturing-the-probes">Capturing the probes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#the-probe">The probe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#the-metadata">The metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#removing-it-again">Removing it again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/ifa.html#what-is-missing">What is missing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto/cint-recipes.html">Cint recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#chip-identity">Chip identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#port-status">Port status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#port-counters">Port counters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#l3-table-usage">L3 table usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#routes">Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#egress-objects">Egress objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#l2-table">L2 table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#vlans">VLANs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#knet-interfaces">KNET interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#field-processor-groups">Field-processor groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#enum-values-and-switch-controls">Enum values and switch controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#arguments">Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/cint-recipes.html#diag-commands-from-cint">Diag commands from Cint</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Command reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/index.html#shell-commands">Shell commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/index.html#commands-for-other-chip-families">Commands for other chip families</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cint-api/index.html">Cint API on this build</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cint-api/index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cint-api/index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Further reading</a></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

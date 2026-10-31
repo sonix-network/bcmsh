@@ -1,0 +1,2139 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ports, lanes and SerDes &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Forwarding tables and routing" href="tables.html" />
+    <link rel="prev" title="Variable reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Variable reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Ports, lanes and SerDes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tables.html">Forwarding tables and routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acl.html">ACL, field processor and UDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmu.html">Buffers, queues and QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry, timing and OAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu.html">CPU, DMA, interrupts and counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chip.html">Chip, boot, warm boot and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sai.html">SAI-specific variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../config.html">Configuration variables</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Variable reference</a></li>
+      <li class="breadcrumb-item active">Ports, lanes and SerDes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ports-lanes-and-serdes">
+<h1>Ports, lanes and SerDes<a class="headerlink" href="#ports-lanes-and-serdes" title="Link to this heading"></a></h1>
+<p>Logical-to-physical port mapping, breakout, lane swaps and polarity, transmit equalisation, auto-negotiation and link scanning. See <a class="reference internal" href="../ports.html"><span class="doc">Port mapping and SerDes</span></a> for the formats and worked examples.</p>
+<p>Set in several SONiC Trident 3 HWSKU files: <a class="reference internal" href="#confval-dport_map_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">dport_map_enable</span></code></a>, <a class="reference internal" href="#confval-dport_map_port"><code class="xref std std-confval docutils literal notranslate"><span class="pre">dport_map_port</span></code></a>, <a class="reference internal" href="#confval-higig2_hdr_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">higig2_hdr_mode</span></code></a>, <a class="reference internal" href="#confval-module_64ports"><code class="xref std std-confval docutils literal notranslate"><span class="pre">module_64ports</span></code></a>, <a class="reference internal" href="#confval-oversubscribe_mixed_sister_25_50_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">oversubscribe_mixed_sister_25_50_enable</span></code></a>, <a class="reference internal" href="#confval-oversubscribe_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">oversubscribe_mode</span></code></a>, <a class="reference internal" href="#confval-pbmp_gport_stack"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pbmp_gport_stack</span></code></a>, <a class="reference internal" href="#confval-pbmp_oversubscribe"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pbmp_oversubscribe</span></code></a>, <a class="reference internal" href="#confval-pbmp_xport_xe"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pbmp_xport_xe</span></code></a>, <a class="reference internal" href="#confval-phy_an_c37"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_an_c37</span></code></a>, <a class="reference internal" href="#confval-phy_an_c73"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_an_c73</span></code></a>, <a class="reference internal" href="#confval-phy_chain_rx_lane_map_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical</span></code></a>, <a class="reference internal" href="#confval-phy_chain_rx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical</span></code></a>, <a class="reference internal" href="#confval-phy_chain_tx_lane_map_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical</span></code></a>, <a class="reference internal" href="#confval-phy_chain_tx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical</span></code></a>, <a class="reference internal" href="#confval-phy_port_primary_and_offset"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_port_primary_and_offset</span></code></a>, <a class="reference internal" href="#confval-port_flex_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">port_flex_enable</span></code></a>, <a class="reference internal" href="#confval-port_gmii_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">port_gmii_mode</span></code></a>, <a class="reference internal" href="#confval-port_init_autoneg"><code class="xref std std-confval docutils literal notranslate"><span class="pre">port_init_autoneg</span></code></a>, <a class="reference internal" href="#confval-port_phy_addr"><code class="xref std std-confval docutils literal notranslate"><span class="pre">port_phy_addr</span></code></a>, <a class="reference internal" href="#confval-portmap"><code class="xref std std-confval docutils literal notranslate"><span class="pre">portmap</span></code></a>, <a class="reference internal" href="#confval-serdes_core_rx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_core_rx_polarity_flip_physical</span></code></a>, <a class="reference internal" href="#confval-serdes_core_tx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_core_tx_polarity_flip_physical</span></code></a>, <a class="reference internal" href="#confval-serdes_driver_current"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_driver_current</span></code></a>, <a class="reference internal" href="#confval-serdes_if_type"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_if_type</span></code></a>, <a class="reference internal" href="#confval-serdes_preemphasis"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_preemphasis</span></code></a>.</p>
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_boot_abort_on_mac_init_fail">
+<span class="sig-name descname"><span class="pre">bcm_boot_abort_on_mac_init_fail</span></span><a class="headerlink" href="#confval-bcm_boot_abort_on_mac_init_fail" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_linkscan_errdelay">
+<span class="sig-name descname"><span class="pre">bcm_linkscan_errdelay</span></span><a class="headerlink" href="#confval-bcm_linkscan_errdelay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">10000000</span></code></dd>
+</dl>
+<p>The amount of time in microseconds for which the bcm_linkscan module will suspend a port from further update processing after “bcm_linkscan_maxerr” errors are detected. After this delay, the error state for the port is cleared and normal linkscan processing resumes on the port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bcm_linkscan_errdelay_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_linkscan_errdelay_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_linkscan_errdelay</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_linkscan_interval">
+<span class="sig-name descname"><span class="pre">bcm_linkscan_interval</span></span><a class="headerlink" href="#confval-bcm_linkscan_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">250000</span></code></dd>
+</dl>
+<p>Link scan interval in microseconds. The SAI starts link scanning with this interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bcm_linkscan_interval_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_linkscan_interval_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_linkscan_interval</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_linkscan_maxerr">
+<span class="sig-name descname"><span class="pre">bcm_linkscan_maxerr</span></span><a class="headerlink" href="#confval-bcm_linkscan_maxerr" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">5</span></code></dd>
+</dl>
+<p>The number of port update errors which will cause the bcm_linkscan module to suspend a port from update processing for the period of time set in “bcm_linkscan_errdelay”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bcm_linkscan_maxerr_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_linkscan_maxerr_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">bcm_linkscan_maxerr</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_linkscan_pbmp">
+<span class="sig-name descname"><span class="pre">bcm_linkscan_pbmp</span></span><a class="headerlink" href="#confval-bcm_linkscan_pbmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Linkscan: Specify ports on which bcm_init will run linkscan (default all).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_xlate_api_port_enable">
+<span class="sig-name descname"><span class="pre">bcm_xlate_api_port_enable</span></span><a class="headerlink" href="#confval-bcm_xlate_api_port_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable translation of physical port numbers within the BCM layer. This feature allows a new device to emulate an older similar device even if the physical port map is different. Note that translation support must be compiled in as well.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_xlate_port">
+<span class="sig-name descname"><span class="pre">bcm_xlate_port</span></span><a class="headerlink" href="#confval-bcm_xlate_port" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Indication if the port should be remapped given a mapping function</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_xlate_port_enable">
+<span class="sig-name descname"><span class="pre">bcm_xlate_port_enable</span></span><a class="headerlink" href="#confval-bcm_xlate_port_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Convenience variable that can be used to turn off both physical and system port mapping. This variable overrides the dedicated variables described above.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_xlate_port_map">
+<span class="sig-name descname"><span class="pre">bcm_xlate_port_map</span></span><a class="headerlink" href="#confval-bcm_xlate_port_map" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>String identification of port mapping function to be used.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_xlate_sysport_enable">
+<span class="sig-name descname"><span class="pre">bcm_xlate_sysport_enable</span></span><a class="headerlink" href="#confval-bcm_xlate_sysport_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable translation of system port numbers to physical port numbers in hardware (if supported by the switch device). This feature may be used to complement the BCM API translation feature, but can also be used to limit the use of module IDs on devices with 32 or fewer ports in case some physical port numbers reside beyond 31.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dport_map_direct">
+<span class="sig-name descname"><span class="pre">dport_map_direct</span></span><a class="headerlink" href="#confval-dport_map_direct" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Traditionally, specifying a raw number instead of a port name in the diag shell will be parsed as if port numbers are counted from 1 up to the number of enabled ports. Typically this would mean that for a gigabit switch, port 1 would correspond to ge0, and so forth. Setting this flag causes raw port numbers to be parsed as internal port numbers.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dport_map_enable">
+<span class="sig-name descname"><span class="pre">dport_map_enable</span></span><a class="headerlink" href="#confval-dport_map_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable the diag-shell port numbering set with <a class="reference internal" href="#confval-dport_map_port"><code class="xref std std-confval docutils literal notranslate"><span class="pre">dport_map_port</span></code></a>. Has no effect on forwarding or on SONiC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 13 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dport_map_indexed">
+<span class="sig-name descname"><span class="pre">dport_map_indexed</span></span><a class="headerlink" href="#confval-dport_map_indexed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Port names for each port type (fe, ge, etc.) will increment by one starting at zero, e.g. if a switch has four xe ports with dport numbers 24, 25, 26, and 27, they will be named xe0, xe1, xe2, and xe3. In non-indexed mode the ports would be named xe24, xe25, xe26, and xe27.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dport_map_port">
+<span class="sig-name descname"><span class="pre">dport_map_port</span></span><a class="headerlink" href="#confval-dport_map_port" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Diag-shell port number for logical port <code class="docutils literal notranslate"><span class="pre">&lt;port&gt;</span></code>: <code class="docutils literal notranslate"><span class="pre">dport_map_port_&lt;port&gt;=&lt;dport&gt;</span></code>. Only changes how bare numbers are read in shell commands (see <a class="reference internal" href="../../ports.html#bcmsh-pbmp-grammar"><span class="std std-ref">Port bitmap grammar</span></a>); needs <a class="reference internal" href="#confval-dport_map_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">dport_map_enable</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dport_map_port_&lt;logical</span> <span class="pre">port&gt;</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 35 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">6</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-eee_phy_config_ignore">
+<span class="sig-name descname"><span class="pre">eee_phy_config_ignore</span></span><a class="headerlink" href="#confval-eee_phy_config_ignore" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>PHY config ingnored for EEE controls</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ext_phy_autodetect_en">
+<span class="sig-name descname"><span class="pre">ext_phy_autodetect_en</span></span><a class="headerlink" href="#confval-ext_phy_autodetect_en" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>To enable/disable the SGMII Slave Autodetect function 0x0 = Disable SGMII Slave Auto-detect function 0x1 = Enable SGMII Slave Auto-detect function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ext_phy_autodetect_en_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">ext_phy_autodetect_en_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">ext_phy_autodetect_en</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ext_phy_serdes_fiber_iface">
+<span class="sig-name descname"><span class="pre">ext_phy_serdes_fiber_iface</span></span><a class="headerlink" href="#confval-ext_phy_serdes_fiber_iface" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select Fiber Interface when SGMII Slave Autodetect is disabled 0x0 = 1000Base-X, 0x1 = 100Base-FX, 0x2 = SGMII-Slave.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ext_phy_serdes_fiber_iface_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">ext_phy_serdes_fiber_iface_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">ext_phy_serdes_fiber_iface</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fabric_port_enable">
+<span class="sig-name descname"><span class="pre">fabric_port_enable</span></span><a class="headerlink" href="#confval-fabric_port_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>BCM5696X : 0 =&gt; Disable support for Ethernet to HiGig2 transformation 1 =&gt; Enable support for Ethernet to HiGig2 transformation Ethernet to HiGig2 transformation involves two steps - Encapsulation change from IEEE to HiGig2 and - Port speed change from Ethernet port speeds to HiGig2 port speeds When fabric_port_enable=0, encapsulation changes are still permitted, but Ethernet to HiGig2 speed change is disallowed. If the initial portmap contains HiGig2 ports then fabric_port_enable config is ignored</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fast_sw_rx_los_pbmp">
+<span class="sig-name descname"><span class="pre">fast_sw_rx_los_pbmp</span></span><a class="headerlink" href="#confval-fast_sw_rx_los_pbmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fcmap_enable">
+<span class="sig-name descname"><span class="pre">fcmap_enable</span></span><a class="headerlink" href="#confval-fcmap_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Specifies to enable or disable FCMAP feature on the specified port. FCMAP feature might be provided by a PHY device attached to switch port. (Default is to disable FCMAP)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">fcmap_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">fcmap_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">fcmap_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flex_port_phy_addr">
+<span class="sig-name descname"><span class="pre">flex_port_phy_addr</span></span><a class="headerlink" href="#confval-flex_port_phy_addr" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Configure the PHY address(es) for the flex-ports</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">flex_port_phy_addr_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">flex_port_phy_addr_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">flex_port_phy_addr</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-higig2_hdr_mode">
+<span class="sig-name descname"><span class="pre">higig2_hdr_mode</span></span><a class="headerlink" href="#confval-higig2_hdr_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Make all HG ports default to HiGig2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">higig2_hdr_mode_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">higig2_hdr_mode_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">higig2_hdr_mode</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-higig2_multicast_l2_range">
+<span class="sig-name descname"><span class="pre">higig2_multicast_l2_range</span></span><a class="headerlink" href="#confval-higig2_multicast_l2_range" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Multicast ranges This value sets the allowed range of multicast indices in the Higig2 header for stack ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-higig2_multicast_l3_range">
+<span class="sig-name descname"><span class="pre">higig2_multicast_l3_range</span></span><a class="headerlink" href="#confval-higig2_multicast_l3_range" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Multicast ranges This value sets the allowed range of IP multicast indices in the Higig2 header for stack ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-higig2_multicast_vlan_range">
+<span class="sig-name descname"><span class="pre">higig2_multicast_vlan_range</span></span><a class="headerlink" href="#confval-higig2_multicast_vlan_range" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Multicast ranges The Higig2 header format concatenates the broadcast, multicast, and IP multicast indices into one generic multicast index. The mapping between the individual indices and the combined index is specified by these. The default values are indicated. This value sets the allowed range of broadcast indices in the Higig2 header for stack ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-link_delay_-speed-_ns">
+<span class="sig-name descname"><span class="pre">link_delay_&lt;speed&gt;_ns</span></span><a class="headerlink" href="#confval-link_delay_-speed-_ns" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Link delay in nanoseconds reported for ports of one speed, used for timestamp correction; <code class="docutils literal notranslate"><span class="pre">link_delay_ns</span></code> for all other speeds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">link_delay_100gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_100mbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_10gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_10mbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_1gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_200gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_20gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_25gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_2_5gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_400gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_40gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_50gbe_ns</span></code>, <code class="docutils literal notranslate"><span class="pre">link_delay_ns</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-0"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-linkscan_thread_pri">
+<span class="sig-name descname"><span class="pre">linkscan_thread_pri</span></span><a class="headerlink" href="#confval-linkscan_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">50</span></code></dd>
+</dl>
+<p>Specifies the priority of the BCM Linkscan thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mac_length_check_enable">
+<span class="sig-name descname"><span class="pre">mac_length_check_enable</span></span><a class="headerlink" href="#confval-mac_length_check_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable MAC to check 802.3 frame length field</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mac_line_lb">
+<span class="sig-name descname"><span class="pre">mac_line_lb</span></span><a class="headerlink" href="#confval-mac_line_lb" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">mac_line_lb_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">mac_line_lb_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">mac_line_lb</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-max_mtu_size">
+<span class="sig-name descname"><span class="pre">max_mtu_size</span></span><a class="headerlink" href="#confval-max_mtu_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property is used to specify max mtu size for the device. If this is not specified, the defalut mtu size supported by the device is used as max mtu</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mld_lane_swap">
+<span class="sig-name descname"><span class="pre">mld_lane_swap</span></span><a class="headerlink" href="#confval-mld_lane_swap" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Swap MLD lane tx lane 0 through 23</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-module_64ports">
+<span class="sig-name descname"><span class="pre">module_64ports</span></span><a class="headerlink" href="#confval-module_64ports" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Use 64 ports per module identifier. Set in many SONiC Trident 3 files, but not read by the SDK on a running SONiC Trident 3 switch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 42 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">module_64ports=1</span></code>; not read by the SDK on that switch</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-oversubscribe_mixed_sister_25_50_enable">
+<span class="sig-name descname"><span class="pre">oversubscribe_mixed_sister_25_50_enable</span></span><a class="headerlink" href="#confval-oversubscribe_mixed_sister_25_50_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow 25G and 50G ports on sister lanes of the same core in mixed oversubscription mode. Set by some SONiC Trident 3 files together with <a class="reference internal" href="#confval-pbmp_oversubscribe"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pbmp_oversubscribe</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-oversubscribe_mode">
+<span class="sig-name descname"><span class="pre">oversubscribe_mode</span></span><a class="headerlink" href="#confval-oversubscribe_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">port bitmap</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">0</span></code> line rate, <code class="docutils literal notranslate"><span class="pre">1</span></code> all ports oversubscribed, <code class="docutils literal notranslate"><span class="pre">2</span></code> mixed (ports in <a class="reference internal" href="#confval-pbmp_oversubscribe"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pbmp_oversubscribe</span></code></a>). On Trident 3 a 100G port is only accepted in oversubscribed mode, so every 32×100G SONiC file sets <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 45 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">oversubscribe_mode=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pbmp_gport_stack">
+<span class="sig-name descname"><span class="pre">pbmp_gport_stack</span></span><a class="headerlink" href="#confval-pbmp_gport_stack" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">port bitmap</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Port bitmap of HiGig stacking ports. SONiC Trident 3 files set it to all zeros (<code class="docutils literal notranslate"><span class="pre">pbmp_gport_stack.0=0x0…</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 7 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x0000000000000000000000000000000000000000000000000000000000000000</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">pbmp_gport_stack.0=0x0000000000000000000000000000000000000000000000000000000000000000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pbmp_oversubscribe">
+<span class="sig-name descname"><span class="pre">pbmp_oversubscribe</span></span><a class="headerlink" href="#confval-pbmp_oversubscribe" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">port bitmap</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Port bitmap of the ports to run oversubscribed when <a class="reference internal" href="#confval-oversubscribe_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">oversubscribe_mode</span></code></a> is 2 (mixed).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 12 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x6fffffffffffffffdfffffffffffffffe</span></code>, <code class="docutils literal notranslate"><span class="pre">0x7fff9fffffffffffffffe</span></code>, <code class="docutils literal notranslate"><span class="pre">0x7f878787f878787f9fe1e1e1fe1e1e1fe</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pbmp_oversubscribe_mixed_sister_25_50_init">
+<span class="sig-name descname"><span class="pre">pbmp_oversubscribe_mixed_sister_25_50_init</span></span><a class="headerlink" href="#confval-pbmp_oversubscribe_mixed_sister_25_50_init" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">port bitmap</dd>
+</dl>
+<p>Port bitmap for 25G ports use 50G TDM calendar during initialization. It refers to logical port number. This SOC property only apply to TH2 and other devices which use new type flex port API(bcm_port_resource_multi_set).</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pbmp_subport">
+<span class="sig-name descname"><span class="pre">pbmp_subport</span></span><a class="headerlink" href="#confval-pbmp_subport" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">port bitmap</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Port bitmap for ports that support subport feature. This specifies subport feature to be enabled with any mode of vlan tag based or LinkPHY channel/stream based.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pbmp_xport_ge">
+<span class="sig-name descname"><span class="pre">pbmp_xport_ge</span></span><a class="headerlink" href="#confval-pbmp_xport_ge" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">port bitmap</dd>
+</dl>
+<p>Some BCM56xxx devices, such as the BCM568xx series, allow the XPORTs to be configured as XE, HG, and GE ports. XPORTs set in this bitmap will be GE ports.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">0x00001fffffffffffe</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pbmp_xport_xe">
+<span class="sig-name descname"><span class="pre">pbmp_xport_xe</span></span><a class="headerlink" href="#confval-pbmp_xport_xe" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">port bitmap</dd>
+</dl>
+<p>Port bitmap (logical ports, hexadecimal) of the ports that come up as Ethernet ports. Every SONiC Trident 3 file sets all front-panel ports.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 47 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x3ffffffffffffffffffffffffffffffffe</span></code>, <code class="docutils literal notranslate"><span class="pre">0x6fffffffffffffffdfffffffffffffffe</span></code>, <code class="docutils literal notranslate"><span class="pre">0xffffffffffffffffffffffffffffffffffffffffe</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">pbmp_xport_xe=0x3ffffffffffffffffffffffffffffffffe</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_an_allow_pll_change">
+<span class="sig-name descname"><span class="pre">phy_an_allow_pll_change</span></span><a class="headerlink" href="#confval-phy_an_allow_pll_change" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This controls if pll change allowed during AN enable(1), disable(0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_an_allow_pll_change_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_allow_pll_change_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_allow_pll_change</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_an_c37">
+<span class="sig-name descname"><span class="pre">phy_an_c37</span></span><a class="headerlink" href="#confval-phy_an_c37" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Clause 37 auto-negotiation of a port (1G): 0 off, 1 CL37 with BAM, 2 CL37 without BAM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_an_c37_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c37_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c37</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_an_c72">
+<span class="sig-name descname"><span class="pre">phy_an_c72</span></span><a class="headerlink" href="#confval-phy_an_c72" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Clause 72 link training on a port: 1 on, 0 off.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_an_c72_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c72_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c72</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_an_c72_tx_init_skip_on_restart">
+<span class="sig-name descname"><span class="pre">phy_an_c72_tx_init_skip_on_restart</span></span><a class="headerlink" href="#confval-phy_an_c72_tx_init_skip_on_restart" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>skip the TXFIR initialization in a restart event during the AN link training, and initialize TXFIR in 1G mode (CL73 AN) to (0,100,0). This configure is for 25G with short cable in Falcon/Falcon16 core. enable(1), disable(0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_an_c72_tx_init_skip_on_restart_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c72_tx_init_skip_on_restart_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c72_tx_init_skip_on_restart</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_an_c73">
+<span class="sig-name descname"><span class="pre">phy_an_c73</span></span><a class="headerlink" href="#confval-phy_an_c73" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Clause 73 auto-negotiation mode of a port: 0 off, 1 CL73 with BAM, 2 CL73 without BAM, 3 CL73 and MSA, 4 MSA only, 5 CL73 and CL37. <code class="docutils literal notranslate"><span class="pre">phy_an_c73=1</span></code> sets all ports; <code class="docutils literal notranslate"><span class="pre">phy_an_c73_&lt;port&gt;=0</span></code> excludes one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_an_c73_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c73_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_c73</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 27 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_an_c73=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_an_fec">
+<span class="sig-name descname"><span class="pre">phy_an_fec</span></span><a class="headerlink" href="#confval-phy_an_fec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This controls the clause 91(FEC) enable(2), the clause 74(FEC) enable(1), disable(0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_an_fec_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_fec_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_an_fec</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_an_lt_msft">
+<span class="sig-name descname"><span class="pre">phy_an_lt_msft</span></span><a class="headerlink" href="#confval-phy_an_lt_msft" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable the Microsoft link-training variant on a port. Set by some SONiC Trident 3 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 2 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_autoneg_master_lane">
+<span class="sig-name descname"><span class="pre">phy_autoneg_master_lane</span></span><a class="headerlink" href="#confval-phy_autoneg_master_lane" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This SOC property is used to select the auto-negotiation master lane for a port. The auto-negotiation master lane selection should be done by the user prior to enabling auto-negotiation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_autoneg_master_lane_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_autoneg_master_lane_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_autoneg_master_lane</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_autoneg_timeout">
+<span class="sig-name descname"><span class="pre">phy_autoneg_timeout</span></span><a class="headerlink" href="#confval-phy_autoneg_timeout" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Per-port parameter on maximum time to wait for PHY autoneg busy condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_autoneg_timeout_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_autoneg_timeout_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_autoneg_timeout</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_chain_length">
+<span class="sig-name descname"><span class="pre">phy_chain_length</span></span><a class="headerlink" href="#confval-phy_chain_length" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This specifies the position of external phy in the phy chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_length_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_length_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_length</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_chain_rx_lane_map_physical">
+<span class="sig-name descname"><span class="pre">phy_chain_rx_lane_map_physical</span></span><a class="headerlink" href="#confval-phy_chain_rx_lane_map_physical" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0x3210</span></code></dd>
+</dl>
+<p>Receive lane swap of the internal SerDes core whose first lane is physical port <code class="docutils literal notranslate"><span class="pre">N</span></code>, in the same format as <a class="reference internal" href="#confval-phy_chain_tx_lane_map_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 46 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x3210</span></code>, <code class="docutils literal notranslate"><span class="pre">0x1032</span></code>, <code class="docutils literal notranslate"><span class="pre">0x2031</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical{89.0}=0x2031</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical{113.0}=0x2031</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical{21.0}=0x2031</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical{29.0}=0x2031</span></code> and 29 more</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_chain_rx_polarity_flip_physical">
+<span class="sig-name descname"><span class="pre">phy_chain_rx_polarity_flip_physical</span></span><a class="headerlink" href="#confval-phy_chain_rx_polarity_flip_physical" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0x0</span></code></dd>
+</dl>
+<p>Invert the receive P/N polarity of physical lane <code class="docutils literal notranslate"><span class="pre">N</span></code>, as <a class="reference internal" href="#confval-phy_chain_tx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 45 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x0</span></code>, <code class="docutils literal notranslate"><span class="pre">0x1</span></code>, <code class="docutils literal notranslate"><span class="pre">0xf</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical{16.0}=0x1</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical{94.0}=0x1</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical{59.0}=0x0</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical{1.0}=0x0</span></code> and 128 more</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_chain_tx_lane_map_physical">
+<span class="sig-name descname"><span class="pre">phy_chain_tx_lane_map_physical</span></span><a class="headerlink" href="#confval-phy_chain_tx_lane_map_physical" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0x3210</span></code></dd>
+</dl>
+<p>Transmit lane swap of the internal SerDes core whose first lane is physical port <code class="docutils literal notranslate"><span class="pre">N</span></code>: <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical{N.0}=0x&lt;l3&gt;&lt;l2&gt;&lt;l1&gt;&lt;l0&gt;</span></code>. One hexadecimal digit per lane, lane 0 in the lowest digit. <code class="docutils literal notranslate"><span class="pre">.0</span></code> selects the internal SerDes; <code class="docutils literal notranslate"><span class="pre">.1</span></code> and up are external PHYs. Board wiring; copy it from the vendor’s file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 46 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x3210</span></code>, <code class="docutils literal notranslate"><span class="pre">0x0123</span></code>, <code class="docutils literal notranslate"><span class="pre">0x2301</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical{49.0}=0x2103</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical{93.0}=0x0312</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical{33.0}=0x0213</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical{125.0}=0x0123</span></code> and 29 more</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_chain_tx_polarity_flip_physical">
+<span class="sig-name descname"><span class="pre">phy_chain_tx_polarity_flip_physical</span></span><a class="headerlink" href="#confval-phy_chain_tx_polarity_flip_physical" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0x0</span></code></dd>
+</dl>
+<p>Invert the transmit P/N polarity of physical lane <code class="docutils literal notranslate"><span class="pre">N</span></code>: <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{N.0}=1</span></code>. One variable per lane. Board wiring; copy it from the vendor’s file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 45 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x0</span></code>, <code class="docutils literal notranslate"><span class="pre">0x1</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{34.0}=0x0</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{77.0}=0x0</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{2.0}=0x0</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{117.0}=0x1</span></code> and 128 more</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_driver_current">
+<span class="sig-name descname"><span class="pre">phy_driver_current</span></span><a class="headerlink" href="#confval-phy_driver_current" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Configure the given driver current value for applicable external phy devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_driver_current_lane&lt;N&gt;_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_driver_current_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_driver_current</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_enable">
+<span class="sig-name descname"><span class="pre">phy_enable</span></span><a class="headerlink" href="#confval-phy_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>If phy_enable is set to 0, all ports will use the null PHY driver. This is useful for simulations on Quickturn.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_force_firmware_load">
+<span class="sig-name descname"><span class="pre">phy_force_firmware_load</span></span><a class="headerlink" href="#confval-phy_force_firmware_load" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Firmware load policy for PHYs: 0 may skip the load, 1 force, 2 automatic; with 1, the second hexadecimal digit selects the download method (<code class="docutils literal notranslate"><span class="pre">0x11</span></code> force over MDIO). The SAI sets it itself on some boot paths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_force_firmware_load_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_force_firmware_load_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_force_firmware_load</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_gearbox_enable">
+<span class="sig-name descname"><span class="pre">phy_gearbox_enable</span></span><a class="headerlink" href="#confval-phy_gearbox_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Mark a port as connected through an external gearbox PHY.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_gearbox_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_gearbox_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_gearbox_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_init_flr_enable">
+<span class="sig-name descname"><span class="pre">phy_init_flr_enable</span></span><a class="headerlink" href="#confval-phy_init_flr_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>This property specifies the flr support and flr enable for the certain port. Format: phy_init_flr_enable_lport=flr_support:timeout_time lport: logic port id. flr_support : choose if to download the flr ucode. timeout_time: timeout time, the format of timeout_time is 0 ————-FLR disable 1 ————-FLR enable with timeout_time=50ms 2 ————-FLR enable with timeout_time=75ms 3 ————-FLR enable with timeout_time=100ms 4 ————-FLR enable with timeout_time=150ms 5 ————-FLR enable with timeout_time=250ms 6 ————-FLR enable with timeout_time=500ms For Example: phy_init_flr_enable_1=1:0 Download flr ucode on the PM core that port 1 is attached, but not enable flr on port 1. phy_init_flr_enable_1=1:1 Download flr ucode on the PM core that port 1 is attached, and enable flr on port 1 with timeout of 50ms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_init_flr_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_init_flr_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_init_flr_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_init_speed">
+<span class="sig-name descname"><span class="pre">phy_init_speed</span></span><a class="headerlink" href="#confval-phy_init_speed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Default speed that the external PHY will initialize with</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_init_speed_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_init_speed_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_init_speed</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_mod_auto_detect">
+<span class="sig-name descname"><span class="pre">phy_mod_auto_detect</span></span><a class="headerlink" href="#confval-phy_mod_auto_detect" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable module auto detection for devices that are able to detect when a module is inserted or removed. 0 disable, 1 enable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_mod_auto_detect_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_mod_auto_detect_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_mod_auto_detect</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_pcs_repeater">
+<span class="sig-name descname"><span class="pre">phy_pcs_repeater</span></span><a class="headerlink" href="#confval-phy_pcs_repeater" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Bypass the PCS retimer function to provide better latency. However it requires a more clean input clock than in retimer mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_pcs_repeater_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_pcs_repeater_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_pcs_repeater</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_pcs_rx_polarity_flip">
+<span class="sig-name descname"><span class="pre">phy_pcs_rx_polarity_flip</span></span><a class="headerlink" href="#confval-phy_pcs_rx_polarity_flip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Flip PCS lane RX polarity. See phy_xaui_tx_polarity_flip for values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_pcs_rx_polarity_flip_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_pcs_rx_polarity_flip_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_pcs_rx_polarity_flip</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_pcs_tx_polarity_flip">
+<span class="sig-name descname"><span class="pre">phy_pcs_tx_polarity_flip</span></span><a class="headerlink" href="#confval-phy_pcs_tx_polarity_flip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Flip PCS lane TX polarity. See phy_xaui_tx_polarity_flip for values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_pcs_tx_polarity_flip_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_pcs_tx_polarity_flip_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_pcs_tx_polarity_flip</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_port_primary_and_offset">
+<span class="sig-name descname"><span class="pre">phy_port_primary_and_offset</span></span><a class="headerlink" href="#confval-phy_port_primary_and_offset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Base port and slice of a multi-port external PHY: <code class="docutils literal notranslate"><span class="pre">phy_port_primary_and_offset_&lt;port&gt;=0xPPOO</span></code> (primary port, slice offset). Only for boards with an external PHY.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_port_primary_and_offset_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_port_primary_and_offset_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_port_primary_and_offset</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x0100</span></code>, <code class="docutils literal notranslate"><span class="pre">0x0101</span></code>, <code class="docutils literal notranslate"><span class="pre">0x0102</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_preemphasis">
+<span class="sig-name descname"><span class="pre">phy_preemphasis</span></span><a class="headerlink" href="#confval-phy_preemphasis" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Configure the given preemphasis value for applicable external phy devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_preemphasis_lane&lt;N&gt;_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_preemphasis_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_preemphasis</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_reset_timeout">
+<span class="sig-name descname"><span class="pre">phy_reset_timeout</span></span><a class="headerlink" href="#confval-phy_reset_timeout" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specify IEEE MII reset timeout value for copper PHY devices</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_rx_lane_map">
+<span class="sig-name descname"><span class="pre">phy_rx_lane_map</span></span><a class="headerlink" href="#confval-phy_rx_lane_map" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Legacy receive lane map of a port; on Trident 3 use <a class="reference internal" href="#confval-phy_chain_rx_lane_map_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_rx_lane_map_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_rx_lane_map{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_lane_map{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_lane_map_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_lane_map</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_rx_los">
+<span class="sig-name descname"><span class="pre">phy_rx_los</span></span><a class="headerlink" href="#confval-phy_rx_los" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable Loss Of Signal(LOS) function. 0 disable, 1 enable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_rx_los_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_los_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_los</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_rx_los_invert">
+<span class="sig-name descname"><span class="pre">phy_rx_los_invert</span></span><a class="headerlink" href="#confval-phy_rx_los_invert" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Invert PHYs LOS signal level. 0 not invert, 1 invert</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_rx_los_invert_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_los_invert_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_los_invert</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_rx_polarity_flip">
+<span class="sig-name descname"><span class="pre">phy_rx_polarity_flip</span></span><a class="headerlink" href="#confval-phy_rx_polarity_flip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Legacy per-port receive polarity flip (bit per lane); on Trident 3 SONiC files use <a class="reference internal" href="#confval-phy_chain_rx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_rx_polarity_flip{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_polarity_flip{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_polarity_flip_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_rx_polarity_flip</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_sys_interface">
+<span class="sig-name descname"><span class="pre">phy_sys_interface</span></span><a class="headerlink" href="#confval-phy_sys_interface" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specify the sytem side interface to be configured for the PHY</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_sys_interface_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_sys_interface_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_sys_interface</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_topology">
+<span class="sig-name descname"><span class="pre">phy_topology</span></span><a class="headerlink" href="#confval-phy_topology" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Describes how the lanes of a logical port pass through an external PHY (gearbox or retimer) when the lane order is not a simple logical-to-logical mapping, for example when a port spans several SerDes cores or one core is muxed onto several line-side ports. The SDK uses it to find the physical lane behind a logical lane, for example to run PRBS on one lane. Two forms:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">phy_topology_&lt;pport&gt;_&lt;xphy&gt;=&lt;mdio&gt;:&lt;sys_lane&gt;:&lt;line_lane&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phy_topology_&lt;pport&gt;_&lt;xphy&gt;_map&lt;n&gt;=&lt;mdio&gt;:&lt;sys_lane&gt;:&lt;line_lane&gt;</span></code>, when one port needs several lane entries</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;pport&gt;</span></code> is the physical port, <code class="docutils literal notranslate"><span class="pre">&lt;xphy&gt;</span></code> the position of the external PHY in the chain (see <a class="reference internal" href="#confval-phy_chain_length"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_length</span></code></a>), <code class="docutils literal notranslate"><span class="pre">&lt;mdio&gt;</span></code> its MDIO address, <code class="docutils literal notranslate"><span class="pre">&lt;sys_lane&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;line_lane&gt;</span></code> the physical lane numbers on its system and line side, and <code class="docutils literal notranslate"><span class="pre">&lt;n&gt;</span></code> the index of the entry for that port and PHY.</p>
+<p>First form: three internal cores connected to one external PHY, with the lane swap crossing the core boundary between cores 1 and 2. Logical lane 4 (core 1, lane 0) is physical lane 8 on the external PHY’s system side:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> ________          ________
+|        |________|        |
+|        |        |        |
+|        |________|        |
+| CORE0  |        | EXTPHY |
+|        |________|        |
+|        |        |        |
+|        |________|        |
+|________|        |        |
+                  |        |
+         Sys side |        |
+ ________         |        |
+|        |        |        | Line side
+|        |\       |        |__________
+|        | \      |        |
+| CORE0  |\ \    /|        |__________
+|        | \ \  / |        |
+|        |\ \ \/ /|        |__________
+|        | \ \/\/ |        |
+|________|\ \/\/\/|        |__________
+           \/\/\/\|        |
+ ________  /\/\/\ |        |
+|        |/ /\/\ \|        |
+|        | / /\ \ |        |
+|        |/ /  \ \|        |
+| CORE0  | /    \ | EXTPHY |
+|        |/      \|        |
+|        |        |        |
+|        |________|        |
+|________|        |________|
+</pre></div>
+</div>
+<p>Second form (mux mode): one core connected to an external PHY that splits its line side into two ports of four lanes, each using two system-side lanes:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                   ________
+                  |        |
+ ________         |        |__________
+|        |________|        |__________\
+|        |        |        |__________ - PORT1
+|        |________|        |__________/
+|        |        |        |
+|  CORE  |        | EXTPHY |
+|        |________|        |__________
+|        |        |        |__________\
+|        |________|        |__________ - PORT2
+|________|        |        |__________/
+                  |        |
+                  |________|
+         Sys side           Line side
+</pre></div>
+</div>
+<p>The matching entries, with the external PHY at MDIO address <code class="docutils literal notranslate"><span class="pre">0x10</span></code> and the first physical port 8:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Port 1
+phy_topology_8_1_map1=0x10:0:0
+phy_topology_8_1_map2=0x10:0:1
+phy_topology_9_1_map1=0x10:1:2
+phy_topology_9_1_map2=0x10:1:3
+# Port 2
+phy_topology_10_1_map1=0x10:1:4
+phy_topology_10_1_map2=0x10:1:5
+phy_topology_11_1_map1=0x10:1:6
+phy_topology_11_1_map2=0x10:1:7
+</pre></div>
+</div>
+<p>Not needed on switches without external PHYs, such as the Trident 3 switches SONiC runs on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_topology_&lt;pport&gt;_&lt;xphy&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_topology_&lt;pport&gt;_&lt;xphy&gt;_map&lt;n&gt;</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_tx_lane_map">
+<span class="sig-name descname"><span class="pre">phy_tx_lane_map</span></span><a class="headerlink" href="#confval-phy_tx_lane_map" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Legacy transmit lane map of a port; on Trident 3 use <a class="reference internal" href="#confval-phy_chain_tx_lane_map_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_lane_map_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_tx_lane_map{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_tx_lane_map{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_tx_lane_map_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_tx_lane_map</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_tx_polarity_flip">
+<span class="sig-name descname"><span class="pre">phy_tx_polarity_flip</span></span><a class="headerlink" href="#confval-phy_tx_polarity_flip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Legacy per-port transmit polarity flip (bit per lane); on Trident 3 SONiC files use <a class="reference internal" href="#confval-phy_chain_tx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_tx_polarity_flip{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_tx_polarity_flip{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_tx_polarity_flip_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_tx_polarity_flip</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-phy_ull_datapath">
+<span class="sig-name descname"><span class="pre">phy_ull_datapath</span></span><a class="headerlink" href="#confval-phy_ull_datapath" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specify the data path mode to be configured for the PHY</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">phy_ull_datapath_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_ull_datapath_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">phy_ull_datapath</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_allow_tpid_disable">
+<span class="sig-name descname"><span class="pre">port_allow_tpid_disable</span></span><a class="headerlink" href="#confval-port_allow_tpid_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Allows default TPID on ports to be disabled. When all TPID are deleted from a port, the default TPID is added back. If enabled, this control will prevent a port from automatically adding the default TPID back to that port. port_allow_tpid_disable{logical port number}=0 or 1 Valid values are 0 or 1. Default value is 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_allow_tpid_disable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_allow_tpid_disable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_allow_tpid_disable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_fc_type">
+<span class="sig-name descname"><span class="pre">port_fc_type</span></span><a class="headerlink" href="#confval-port_fc_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_fc_type{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_fc_type{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_fc_type_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_fc_type</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_fec">
+<span class="sig-name descname"><span class="pre">port_fec</span></span><a class="headerlink" href="#confval-port_fec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>FEC mode of a port at start-up: 0 none, 1 CL74 (Base-R), 2 CL91 (RS-FEC). SONiC sets FEC through the SAI instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_fec_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_fec_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_fec</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_flex_enable">
+<span class="sig-name descname"><span class="pre">port_flex_enable</span></span><a class="headerlink" href="#confval-port_flex_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Allow the four-lane core that holds physical port <code class="docutils literal notranslate"><span class="pre">N</span></code> to be reconfigured at runtime (breakout, speed and lane changes through SONiC dynamic port breakout or <a class="reference internal" href="../../../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a>). <code class="docutils literal notranslate"><span class="pre">port_flex_enable=1</span></code> enables all cores; <code class="docutils literal notranslate"><span class="pre">port_flex_enable{&lt;physical&gt;}=0</span></code> or <code class="docutils literal notranslate"><span class="pre">port_flex_enable_&lt;logical&gt;=0</span></code> excludes one, as SONiC files do for the management ports. Set it on the first lane of a core.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_flex_enable{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_flex_enable{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_flex_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_flex_enable</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 44 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_flex_enable=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_flex_max_ports">
+<span class="sig-name descname"><span class="pre">port_flex_max_ports</span></span><a class="headerlink" href="#confval-port_flex_max_ports" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Maximum number of ports a core can be split into: 1, 2 or 4 (default 4), set on the first physical port of the core, <code class="docutils literal notranslate"><span class="pre">port_flex_max_ports{&lt;physical&gt;}</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_flex_max_ports{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_flex_max_ports{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_flex_max_ports_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_flex_max_ports</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_gmii_mode">
+<span class="sig-name descname"><span class="pre">port_gmii_mode</span></span><a class="headerlink" href="#confval-port_gmii_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Mode of a port macro on chips with QSGMII-capable cores: 0 Ethernet, 1 QSGMII, 2 USGMII; set on the first physical port of the macro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_gmii_mode{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_gmii_mode{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">port_gmii_mode_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_gmii_mode</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_init_adv">
+<span class="sig-name descname"><span class="pre">port_init_adv</span></span><a class="headerlink" href="#confval-port_init_adv" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Default local advertisement settings for a port</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_init_adv_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_adv_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_adv</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_init_autoneg">
+<span class="sig-name descname"><span class="pre">port_init_autoneg</span></span><a class="headerlink" href="#confval-port_init_autoneg" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Enable auto-negotiation on a port at start-up (<code class="docutils literal notranslate"><span class="pre">port_init_autoneg_&lt;port&gt;=1</span></code>). SONiC usually overrides it through the SAI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_init_autoneg_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_autoneg_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_autoneg</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 7 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_init_cl72">
+<span class="sig-name descname"><span class="pre">port_init_cl72</span></span><a class="headerlink" href="#confval-port_init_cl72" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Initialize port with CL72 enabled</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_init_cl72_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_cl72_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_cl72</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_init_duplex">
+<span class="sig-name descname"><span class="pre">port_init_duplex</span></span><a class="headerlink" href="#confval-port_init_duplex" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Default duplex mode the port will initialize with</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_init_duplex_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_duplex_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_duplex</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_init_speed">
+<span class="sig-name descname"><span class="pre">port_init_speed</span></span><a class="headerlink" href="#confval-port_init_speed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Speed of a port at start-up in Mb/s. SONiC sets speeds from <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code> through the SAI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_init_speed_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_speed_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_init_speed</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_max_speed">
+<span class="sig-name descname"><span class="pre">port_max_speed</span></span><a class="headerlink" href="#confval-port_max_speed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>overwrite the default port max speed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_max_speed_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_max_speed_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_max_speed</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_phy_addr">
+<span class="sig-name descname"><span class="pre">port_phy_addr</span></span><a class="headerlink" href="#confval-port_phy_addr" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>MDIO address of the external PHY of a port. Only for boards with an external PHY or gearbox.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_phy_addr_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_addr_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_addr</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0xff</span></code>, <code class="docutils literal notranslate"><span class="pre">0x21</span></code>, <code class="docutils literal notranslate"><span class="pre">0x22</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_phy_clause">
+<span class="sig-name descname"><span class="pre">port_phy_clause</span></span><a class="headerlink" href="#confval-port_phy_clause" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>MDIO Bus Property to select the MDIO access mechanism (CLAUSE22 / CLAUSE45)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_phy_clause_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_clause_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_clause</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_phy_id0">
+<span class="sig-name descname"><span class="pre">port_phy_id0</span></span><a class="headerlink" href="#confval-port_phy_id0" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>First part of a uniqe PHY identifier, if not specified in register</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_phy_id1">
+<span class="sig-name descname"><span class="pre">port_phy_id1</span></span><a class="headerlink" href="#confval-port_phy_id1" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Second part of a uniqe PHY identifier, if not specified in register</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_phy_mode_reverse">
+<span class="sig-name descname"><span class="pre">port_phy_mode_reverse</span></span><a class="headerlink" href="#confval-port_phy_mode_reverse" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Phy operating in the reverse direction. To set reverse mode for phy84728 and phy8706 set port_phy_mode_reverse_phy84728 and set port_phy_mode_reverse_phy8706</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_phy_mode_reverse_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_mode_reverse_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_mode_reverse</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_phy_precondition_before_probe">
+<span class="sig-name descname"><span class="pre">port_phy_precondition_before_probe</span></span><a class="headerlink" href="#confval-port_phy_precondition_before_probe" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This controls whether to precondition this port before probing of PHY on this port for applicable PHY devices, precondition(1)/not(0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_phy_precondition_before_probe_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_precondition_before_probe_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_phy_precondition_before_probe</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_priorities">
+<span class="sig-name descname"><span class="pre">port_priorities</span></span><a class="headerlink" href="#confval-port_priorities" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Set the number of Outgoing local port queue-pairs (1/2/8) per port</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_sched_hsp">
+<span class="sig-name descname"><span class="pre">port_sched_hsp</span></span><a class="headerlink" href="#confval-port_sched_hsp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>use HSP scheduler for the port. On TD2/TD2+ chip, only the lowest 16 MMU port numbers on each pipe can be configured to reside in the HSP scheduler. Port that enabled in the HSP scheduler, reserves an additional MMU port with offset of 36.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">port_sched_hsp_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_sched_hsp_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">port_sched_hsp</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-portmap">
+<span class="sig-name descname"><span class="pre">portmap</span></span><a class="headerlink" href="#confval-portmap" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Creates logical port <code class="docutils literal notranslate"><span class="pre">&lt;port&gt;</span></code> on physical lane <code class="docutils literal notranslate"><span class="pre">&lt;physical&gt;</span></code> with a maximum speed in Gb/s: <code class="docutils literal notranslate"><span class="pre">portmap_&lt;port&gt;=&lt;physical&gt;:&lt;speed&gt;[:&lt;option&gt;][:&lt;option&gt;]</span></code>. Options are a lane count (<code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">4</span></code>), <code class="docutils literal notranslate"><span class="pre">i</span></code> (inactive: created but disabled, a placeholder for later breakout) or <code class="docutils literal notranslate"><span class="pre">m</span></code> (management port), or a speed cap for flex ports. Valid speeds are 1, 2.5, 10, 11, 20, 21, 25, 27, 40, 42, 50, 53, 100 and 106; 100 and 106 need <a class="reference internal" href="#confval-oversubscribe_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">oversubscribe_mode</span></code></a>. Physical lanes 1–128 are the front-panel SerDes, 129 (and 128 with <code class="docutils literal notranslate"><span class="pre">m</span></code>) the management port. See <a class="reference internal" href="../ports.html"><span class="doc">Port mapping and SerDes</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">portmap_&lt;logical</span> <span class="pre">port&gt;</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 47 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">121:100</span></code>, <code class="docutils literal notranslate"><span class="pre">125:100</span></code>, <code class="docutils literal notranslate"><span class="pre">41:100</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">portmap_9=9:10:1</span></code>, <code class="docutils literal notranslate"><span class="pre">portmap_10=10:10:1</span></code>, <code class="docutils literal notranslate"><span class="pre">portmap_123=121:100</span></code>, <code class="docutils literal notranslate"><span class="pre">portmap_115=113:100</span></code> and 32 more</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-portmon_interval">
+<span class="sig-name descname"><span class="pre">portmon_interval</span></span><a class="headerlink" href="#confval-portmon_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Interval (in usecs) at which the port monitor thread will run. The port monitor can be used to handle workarounds which are required only with specific equipment configurations.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-portmon_thread_pri">
+<span class="sig-name descname"><span class="pre">portmon_thread_pri</span></span><a class="headerlink" href="#confval-portmon_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">50</span></code></dd>
+</dl>
+<p>Specifies the priority of the BCM Portmon thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-rcpu_port">
+<span class="sig-name descname"><span class="pre">rcpu_port</span></span><a class="headerlink" href="#confval-rcpu_port" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>switch port connected to slave RCPU device.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-rsvd4_port_init_speed_id">
+<span class="sig-name descname"><span class="pre">rsvd4_port_init_speed_id</span></span><a class="headerlink" href="#confval-rsvd4_port_init_speed_id" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Initial speed for rsvd4 port Speeds 4: 3072.0 8: 6144.0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">rsvd4_port_init_speed_id_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">rsvd4_port_init_speed_id_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">rsvd4_port_init_speed_id</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-rx_fast_los_link">
+<span class="sig-name descname"><span class="pre">rx_fast_los_link</span></span><a class="headerlink" href="#confval-rx_fast_los_link" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even">unset</dd>
+</dl>
+<p>Enables accelerated linkscan mode on specified port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">rx_fast_los_link_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">rx_fast_los_link_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">rx_fast_los_link</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-rx_fast_los_poll_count_max">
+<span class="sig-name descname"><span class="pre">rx_fast_los_poll_count_max</span></span><a class="headerlink" href="#confval-rx_fast_los_poll_count_max" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Indicates the maximum number of times linkscan will poll in accelerated mode without a status change in any accelerated mode ports.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-rx_fast_los_usec">
+<span class="sig-name descname"><span class="pre">rx_fast_los_usec</span></span><a class="headerlink" href="#confval-rx_fast_los_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Indicates the linkscan time interval in usecs during accelerated mode.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-same_speed_intf_do_not_overwrite">
+<span class="sig-name descname"><span class="pre">same_speed_intf_do_not_overwrite</span></span><a class="headerlink" href="#confval-same_speed_intf_do_not_overwrite" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property is used to enable whether overwrite the speed when the new speed/interface is same as current 0 =&gt; Overwrite the speed no matter the new spseed and interface 1 =&gt; Do not overwrite the speed if the new speed/interface is same as current</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_asymmetric_speed_mode">
+<span class="sig-name descname"><span class="pre">serdes_asymmetric_speed_mode</span></span><a class="headerlink" href="#confval-serdes_asymmetric_speed_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable Asymmetric fixed speed mode. 1 enable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_asymmetric_speed_mode_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_asymmetric_speed_mode_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_asymmetric_speed_mode</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_core_rx_polarity_flip_physical">
+<span class="sig-name descname"><span class="pre">serdes_core_rx_polarity_flip_physical</span></span><a class="headerlink" href="#confval-serdes_core_rx_polarity_flip_physical" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Per-core polarity variable of newer chips. Found in some SONiC Trident 3 files, but this build reads it only for other chips; use <a class="reference internal" href="#confval-phy_chain_rx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_rx_polarity_flip_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_core_rx_polarity_flip_physical{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_core_rx_polarity_flip_physical{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_core_rx_polarity_flip_physical_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_core_rx_polarity_flip_physical</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 8 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0xc</span></code>, <code class="docutils literal notranslate"><span class="pre">0x3</span></code>, <code class="docutils literal notranslate"><span class="pre">0x0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_core_tx_polarity_flip_physical">
+<span class="sig-name descname"><span class="pre">serdes_core_tx_polarity_flip_physical</span></span><a class="headerlink" href="#confval-serdes_core_tx_polarity_flip_physical" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Per-core polarity variable of newer chips. Found in some SONiC Trident 3 files, but this build reads it only for other chips; use <a class="reference internal" href="#confval-phy_chain_tx_polarity_flip_physical"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_core_tx_polarity_flip_physical{&lt;physical&gt;.&lt;phy&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_core_tx_polarity_flip_physical{&lt;physical&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_core_tx_polarity_flip_physical_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_core_tx_polarity_flip_physical</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 8 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x0</span></code>, <code class="docutils literal notranslate"><span class="pre">0xc</span></code>, <code class="docutils literal notranslate"><span class="pre">0x3</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_driver_current">
+<span class="sig-name descname"><span class="pre">serdes_driver_current</span></span><a class="headerlink" href="#confval-serdes_driver_current" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Transmit driver current of a port’s SerDes lanes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_driver_current_lane&lt;N&gt;_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_driver_current_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_driver_current</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 5 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0xf</span></code>, <code class="docutils literal notranslate"><span class="pre">0xe</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_fec_enable">
+<span class="sig-name descname"><span class="pre">serdes_fec_enable</span></span><a class="headerlink" href="#confval-serdes_fec_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable forward error correction on a port’s SerDes at start-up. SONiC sets FEC per port through the SAI (<code class="docutils literal notranslate"><span class="pre">fec</span></code> in <code class="docutils literal notranslate"><span class="pre">CONFIG_DB</span></code>) instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_fec_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_fec_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_fec_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_fifo_low_latency">
+<span class="sig-name descname"><span class="pre">serdes_fifo_low_latency</span></span><a class="headerlink" href="#confval-serdes_fifo_low_latency" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_fifo_low_latency_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_fifo_low_latency_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_fifo_low_latency</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_firmware_mode">
+<span class="sig-name descname"><span class="pre">serdes_firmware_mode</span></span><a class="headerlink" href="#confval-serdes_firmware_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Serdes micro controller firmware mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_firmware_mode_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_firmware_mode_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_firmware_mode</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_if_type">
+<span class="sig-name descname"><span class="pre">serdes_if_type</span></span><a class="headerlink" href="#confval-serdes_if_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Interface type of a port as a number from the SDK’s interface list (9 SFI, 10 XFI, 11 KR, 12 KR4, 13 CR, 14 CR4, 15 XLAUI, 16 SR). <code class="docutils literal notranslate"><span class="pre">serdes_if_type_ce=14</span></code> applies to every <code class="docutils literal notranslate"><span class="pre">ce</span></code> port. SONiC normally sets the interface type through the SAI instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_if_type_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_if_type_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_if_type</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 7 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">14</span></code>, <code class="docutils literal notranslate"><span class="pre">13</span></code>, <code class="docutils literal notranslate"><span class="pre">16</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_if_type_ce=14</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_lane_config">
+<span class="sig-name descname"><span class="pre">serdes_lane_config</span></span><a class="headerlink" href="#confval-serdes_lane_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>SerDes lane options of a port, one variable per option: <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_dfe_&lt;port&gt;=on|off|lp</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_media_type_&lt;port&gt;=backplane|copper|optics</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_unreliable_los_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_cl72_auto_polarity_en_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_cl72_restart_timeout_en_&lt;port&gt;</span></code>. The global <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_dfe=on</span></code> found in some SONiC Trident 3 files was not read by the SDK on a running switch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_lane_config_channel_mode&lt;N&gt;_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_lane_config</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">serdes_lane_config_dfe=on</span></code>; not read by the SDK on that switch</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_lcpll">
+<span class="sig-name descname"><span class="pre">serdes_lcpll</span></span><a class="headerlink" href="#confval-serdes_lcpll" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Serdes reference clock selection External Clock = 0, Internal LCPLL = 1</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_preemphasis">
+<span class="sig-name descname"><span class="pre">serdes_preemphasis</span></span><a class="headerlink" href="#confval-serdes_preemphasis" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Transmit equaliser (FIR taps) of a port: <code class="docutils literal notranslate"><span class="pre">0x&lt;post&gt;&lt;main&gt;&lt;pre&gt;</span></code>, one byte each (bits 0–7 pre-cursor, 8–15 main, 16–23 post-cursor). <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_&lt;port&gt;</span></code> sets all lanes of the port; <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_lane&lt;L&gt;_&lt;port&gt;</span></code> sets lane <code class="docutils literal notranslate"><span class="pre">L</span></code> and takes precedence. Values depend on the board and the cable or optic; copy them from the vendor’s file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_lane&lt;N&gt;_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x105004</span></code>, <code class="docutils literal notranslate"><span class="pre">0x164105</span></code>, <code class="docutils literal notranslate"><span class="pre">0x14410a</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_91=0x0f4d08</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_83=0x0d4f08</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_75=0x0d4f08</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_67=0x0d4f08</span></code> and 28 more</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_rx_los">
+<span class="sig-name descname"><span class="pre">serdes_rx_los</span></span><a class="headerlink" href="#confval-serdes_rx_los" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable serdes Loss Of Signal(LOS) function. 0 disable, 1 enable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_rx_los_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_rx_los_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_rx_los</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_rx_los_invert">
+<span class="sig-name descname"><span class="pre">serdes_rx_los_invert</span></span><a class="headerlink" href="#confval-serdes_rx_los_invert" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Invert serdes LOS signal level. 0 not invert, 1 invert</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_rx_los_invert_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_rx_los_invert_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_rx_los_invert</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_scrambler_enable">
+<span class="sig-name descname"><span class="pre">serdes_scrambler_enable</span></span><a class="headerlink" href="#confval-serdes_scrambler_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Serdes scrambler enable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_scrambler_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_scrambler_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_scrambler_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_timesync_adjust_in_linkscan">
+<span class="sig-name descname"><span class="pre">serdes_timesync_adjust_in_linkscan</span></span><a class="headerlink" href="#confval-serdes_timesync_adjust_in_linkscan" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_timesync_adjust_in_linkscan_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_timesync_adjust_in_linkscan_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_timesync_adjust_in_linkscan</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_timesync_enable">
+<span class="sig-name descname"><span class="pre">serdes_timesync_enable</span></span><a class="headerlink" href="#confval-serdes_timesync_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This configuration property is used to enable/disable Serdes PHY TimeSync. This property may be configured with the base name to control all ports, or with the suffix “_lport#” to configure a specific port. This is only for Tomahawk3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_timesync_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_timesync_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_timesync_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_timesync_one_step_enable">
+<span class="sig-name descname"><span class="pre">serdes_timesync_one_step_enable</span></span><a class="headerlink" href="#confval-serdes_timesync_one_step_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This configuration property is used to enable One Step Serdes PHY TimeSync One step is diabled or not specifiy, two step will be enabled. This property may be configured with the base name to control all ports, or with the suffix “_lport#” to configure a specific port. This is only for Tomahawk3.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_timesync_one_step_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_timesync_one_step_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_timesync_one_step_enable</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_tx_los_usec">
+<span class="sig-name descname"><span class="pre">serdes_tx_los_usec</span></span><a class="headerlink" href="#confval-serdes_tx_los_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>TX serdes LOS interval to reset the LP receiver</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-serdes_tx_taps">
+<span class="sig-name descname"><span class="pre">serdes_tx_taps</span></span><a class="headerlink" href="#confval-serdes_tx_taps" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Transmit equaliser as a list, <code class="docutils literal notranslate"><span class="pre">serdes_tx_taps_&lt;port&gt;=nrz:&lt;pre&gt;:&lt;main&gt;:&lt;post&gt;:…</span></code>; overrides <a class="reference internal" href="#confval-serdes_preemphasis"><code class="xref std std-confval docutils literal notranslate"><span class="pre">serdes_preemphasis</span></code></a> when set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">serdes_tx_taps_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_tx_taps_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">serdes_tx_taps</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sw_autoneg_polling_interval">
+<span class="sig-name descname"><span class="pre">sw_autoneg_polling_interval</span></span><a class="headerlink" href="#confval-sw_autoneg_polling_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Software Autoneg Polling Interval in msec</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-xphy_primary_core_num">
+<span class="sig-name descname"><span class="pre">xphy_primary_core_num</span></span><a class="headerlink" href="#confval-xphy_primary_core_num" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This specifies the primary core number to which it belongs to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">xphy_primary_core_num_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">xphy_primary_core_num_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">xphy_primary_core_num</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Variable reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tables.html" class="btn btn-neutral float-right" title="Forwarding tables and routing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

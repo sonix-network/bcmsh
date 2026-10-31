@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_l3_* (368) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_mirror_* (129)" href="bcm-mirror.html" />
+    <link rel="prev" title="bcm_l2_* (147)" href="bcm-l2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_l3_*</span></code> (368)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-l3-368">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_l3_*</span></code> (368)<a class="headerlink" href="#bcm-l3-368" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_L3_AR_RESOLUTION_INDEX_SET(int *_resolution_idx, int *_pri_a, int *_alt_a, int *_pri_b, int *_alt_b);  /* not in OpenBCM 6.5.27 */
+void BCM_L3_ITF_FEC_TO_GPORT_FORWARD_GROUP(int *_gport_forward_group, int *_l3_itf_fec);
+void BCM_L3_ITF_LIF_TO_GPORT_FLOW_LIF(int *_gport_flow_lif, int *_l3_itf_lif);
+void BCM_L3_ITF_LIF_TO_GPORT_TUNNEL(int *_gport_tunnel, int *_l3_itf_lif);
+void BCM_L3_ITF_SET(int *_l3_itf, int *_type, int *_id);
+int BCM_L3_ITF_SUB_TYPE_GET(int *_l3_itf);
+int BCM_L3_ITF_SUB_TYPE_IS_SET(int *_l3_itf);
+int BCM_L3_ITF_SUB_TYPE_IS_VIRTUAL_EGRESS_POINTED(int *_l3_itf);
+int BCM_L3_ITF_SUB_TYPE_VALUE_GET(int *_l3_itf);
+int BCM_L3_ITF_SUB_TYPE_VIRTUAL_EGRESS_POINTED_GET(int *_l3_itf);
+int BCM_L3_ITF_SUB_TYPE_VIRTUAL_EGRESS_POINTED_SET(int *_l3_itf, int *_virtual_egress_pointed_val);
+int BCM_L3_ITF_TYPE_IS_FEC(int *_l3_itf);
+int BCM_L3_ITF_TYPE_IS_LIF(int *_l3_itf);
+int BCM_L3_ITF_TYPE_IS_RIF(int *_l3_itf);
+int BCM_L3_ITF_VAL_GET(int *_l3_itf);
+int bcm_l3_aacl_add(int unit, uint32 options, bcm_l3_aacl_t *aacl);
+int bcm_l3_aacl_delete(int unit, bcm_l3_aacl_t *aacl);
+int bcm_l3_aacl_delete_all(int unit, bcm_l3_aacl_t *aacl);
+int bcm_l3_aacl_find(int unit, bcm_l3_aacl_t *aacl);
+int bcm_l3_aacl_matched_traverse(int unit, uint32 flags, bcm_l3_aacl_traverse_cb trav_fn, void *user_data);
+void bcm_l3_aacl_t_init(bcm_l3_aacl_t *aacl);
+int bcm_l3_aacl_traverse(int unit, bcm_l3_aacl_traverse_cb trav_fn, void *user_data);
+int bcm_l3_alpm_resource_get(int unit, bcm_l3_route_group_t grp, bcm_l3_alpm_resource_t *resource);
+void bcm_l3_alpm_resource_t_init(bcm_l3_alpm_resource_t *resource);
+int bcm_l3_alpm_sanity_check(int unit, int chk_type);
+int bcm_l3_alpm_trace_cb_register(int unit, bcm_l3_alpm_trace_cb_f write_cb, void *user_data);
+int bcm_l3_alpm_trace_cb_unregister(int unit, bcm_l3_alpm_trace_cb_f write_cb);
+int bcm_l3_ar_resolution_get(int unit, int ar_resolution_index, bcm_l3_ar_resolution_t *resolution_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ar_resolution_set(int unit, int ar_resolution_index, bcm_l3_ar_resolution_t *resolution_info);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_ar_resolution_t_init(bcm_l3_ar_resolution_t *resolution_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ar_vc_map_add(int unit, bcm_l3_ar_vc_map_t *vc_map);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ar_vc_map_delete(int unit, bcm_l3_ar_vc_map_t *vc_map);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ar_vc_map_delete_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ar_vc_map_get(int unit, bcm_l3_ar_vc_map_t *vc_map);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_ar_vc_map_t_init(bcm_l3_ar_vc_map_t *vc_map);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ar_vc_map_traverse(int unit, bcm_l3_ar_vc_map_traverse_cb trav_fn, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_cleanup(int unit);
+void bcm_l3_dense_member_t_init(bcm_l3_dense_member_t *member);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_dense_route_add(int unit, uint32 options, bcm_l3_dense_route_t *route, int base, int num_members, bcm_l3_dense_member_t *member_array);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_dense_route_delete(int unit, bcm_l3_dense_route_t *route);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_dense_route_delete_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_dense_route_find(int unit, bcm_l3_dense_route_t *route, bcm_l3_dense_member_t *member);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_dense_route_get(int unit, bcm_l3_dense_route_t *route, int base, int num_members, bcm_l3_dense_member_t *member_array, int *num_actual_members);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_dense_route_selective_delete_all(int unit, uint32 flags);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_dense_route_t_init(bcm_l3_dense_route_t *route);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_dense_route_traverse(int unit, uint32 flags, bcm_l3_dense_route_traverse_cb trav_fn, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_agm_attach(int unit, bcm_if_t l3_ecmp_id, bcm_switch_agm_id_t agm_id);
+int bcm_l3_ecmp_agm_attach_get(int unit, bcm_if_t l3_ecmp_id, bcm_switch_agm_id_t *agm_id);
+int bcm_l3_ecmp_agm_detach(int unit, bcm_if_t l3_ecmp_id, bcm_switch_agm_id_t agm_id);
+int bcm_l3_ecmp_create(int unit, uint32 options, bcm_l3_egress_ecmp_t *ecmp_info, int ecmp_member_count, bcm_l3_ecmp_member_t *ecmp_member_array);
+int bcm_l3_ecmp_destroy(int unit, bcm_if_t ecmp_group_id);
+int bcm_l3_ecmp_dlb_member_flexctr_object_get(int unit, bcm_if_t ecmp_intf, bcm_l3_ecmp_member_t *ecmp_member, uint32 *value);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_member_quality_adjust_get(int unit, int profile_id, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_member_quality_adjust_multi_get(int unit, int profile_id, bcm_if_t ecmp_intf, int array_size, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_member_quality_adjust_multi_set(int unit, int profile_id, bcm_if_t ecmp_intf, int array_size, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_member_quality_adjust_set(int unit, int profile_id, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_ecmp_dlb_member_quality_adjust_t_init(bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_ecmp_dlb_mon_cfg_t_init(bcm_l3_ecmp_dlb_mon_cfg_t *dlb_mon_cfg);
+int bcm_l3_ecmp_dlb_mon_config_get(int unit, bcm_if_t intf, bcm_l3_ecmp_dlb_mon_cfg_t *dlb_mon_cfg);
+int bcm_l3_ecmp_dlb_mon_config_set(int unit, bcm_if_t ecmp_intf, bcm_l3_ecmp_dlb_mon_cfg_t *dlb_mon_cfg);
+int bcm_l3_ecmp_dlb_port_map_create(int unit, uint32 options, int *map_id);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_port_map_destroy(int unit, int map_id);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_port_map_multi_get(int unit, int map_id, int array_size, bcm_port_t *port_array, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_port_map_multi_set(int unit, int map_id, int array_size, bcm_port_t *port_array);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_port_pfc_status_get(int unit, bcm_port_t port, int dlb_pfc_cos, bcm_l3_ecmp_dlb_pfc_status_t *status);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_port_quality_adjust_get(int unit, int profile_id, bcm_port_t port, bcm_l3_ecmp_dlb_quality_adjust_t *adjust);
+int bcm_l3_ecmp_dlb_port_quality_adjust_set(int unit, int profile_id, bcm_port_t port, bcm_l3_ecmp_dlb_quality_adjust_t adjust);
+int bcm_l3_ecmp_dlb_port_quality_attr_get(int unit, bcm_port_t port, bcm_l3_ecmp_dlb_port_quality_attr_t *quality_attr);
+int bcm_l3_ecmp_dlb_port_quality_attr_set(int unit, bcm_port_t port, bcm_l3_ecmp_dlb_port_quality_attr_t *quality_attr);
+void bcm_l3_ecmp_dlb_port_quality_attr_t_init(bcm_l3_ecmp_dlb_port_quality_attr_t *quality_attr);
+int bcm_l3_ecmp_dlb_port_quality_get(int unit, bcm_l3_ecmp_dlb_port_quality_t *port_quality);
+void bcm_l3_ecmp_dlb_port_quality_t_init(bcm_l3_ecmp_dlb_port_quality_t *port_quality);
+int bcm_l3_ecmp_dlb_port_vc_quality_get(int unit, bcm_l3_ecmp_dlb_port_vc_quality_t *port_vc_quality);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_ecmp_dlb_port_vc_quality_t_init(bcm_l3_ecmp_dlb_port_vc_quality_t *port_vc_quality);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quality_adjust_list_add(int unit, bcm_l3_ecmp_dlb_quality_adjust_t adjust);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quality_adjust_list_default_get(int unit, bcm_l3_ecmp_dlb_quality_adjust_t *adjust);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quality_adjust_list_default_set(int unit, bcm_l3_ecmp_dlb_quality_adjust_t adjust);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quality_adjust_list_delete(int unit, bcm_l3_ecmp_dlb_quality_adjust_t adjust);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quality_adjust_list_get_all(int unit, int array_size, bcm_l3_ecmp_dlb_quality_adjust_t *adjust_array, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quality_adjust_list_max_get(int unit, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quality_adjust_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_l3_ecmp_dlb_quality_adjust_profile_destroy(int unit, int profile_id);
+int bcm_l3_ecmp_dlb_quantization_threshold_get(int unit, int quan_threshold_id, bcm_l3_ecmp_dlb_quantization_threshold_t *quan_threshold);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_quantization_threshold_set(int unit, int quan_threshold_id, bcm_l3_ecmp_dlb_quantization_threshold_t *quan_threshold);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_ecmp_dlb_quantization_threshold_t_init(bcm_l3_ecmp_dlb_quantization_threshold_t *quan_threshold);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dlb_stat_get(int unit, bcm_if_t ecmp_intf, bcm_l3_ecmp_dlb_stat_t type, uint64 *value);
+int bcm_l3_ecmp_dlb_stat_set(int unit, bcm_if_t ecmp_intf, bcm_l3_ecmp_dlb_stat_t type, uint64 value);
+int bcm_l3_ecmp_dlb_stat_sync_get(int unit, bcm_if_t ecmp_intf, bcm_l3_ecmp_dlb_stat_t type, uint64 *value);
+int bcm_l3_ecmp_dlb_trigger_reassignment(int unit, bcm_if_t dlb_ecmp_group_num, bcm_port_t port, int percentage);
+int bcm_l3_ecmp_dlb_trunk_port_add(int unit, bcm_if_t ecmp_intf, bcm_trunk_t tid, bcm_port_t port);
+int bcm_l3_ecmp_dlb_trunk_port_delete(int unit, bcm_if_t ecmp_intf, bcm_trunk_t tid, bcm_port_t port);
+int bcm_l3_ecmp_dynamic_ip_protocol_get(int unit, uint32 *flags, int protocol_max, int *protocol_array, int *protocol_count);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_dynamic_ip_protocol_set(int unit, uint32 flags, int protocol_count, int *protocol_array);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_find(int unit, int ecmp_member_count, bcm_l3_ecmp_member_t *ecmp_member_array, bcm_l3_egress_ecmp_t *ecmp_info);
+int bcm_l3_ecmp_flexctr_object_get(int unit, bcm_if_t intf_id, uint32 *value);
+int bcm_l3_ecmp_flexctr_object_set(int unit, bcm_if_t intf_id, uint32 value);
+int bcm_l3_ecmp_get(int unit, bcm_l3_egress_ecmp_t *ecmp_info, int ecmp_member_size, bcm_l3_ecmp_member_t *ecmp_member_array, int *ecmp_member_count);
+int bcm_l3_ecmp_group_index_get(int unit, bcm_if_t ecmp_intf, uint32 *index);
+int bcm_l3_ecmp_group_info_get(int unit, bcm_l3_ecmp_group_info_t *l3_ecmp_group_info);
+void bcm_l3_ecmp_group_info_t_init(bcm_l3_ecmp_group_info_t *l3_ecmp_group_info);
+int bcm_l3_ecmp_member_add(int unit, bcm_if_t ecmp_group_id, bcm_l3_ecmp_member_t *ecmp_member);
+int bcm_l3_ecmp_member_delete(int unit, bcm_if_t ecmp_group_id, bcm_l3_ecmp_member_t *ecmp_member);
+int bcm_l3_ecmp_member_delete_all(int unit, bcm_if_t ecmp_group_id);
+void bcm_l3_ecmp_member_t_init(bcm_l3_ecmp_member_t *ecmp_member);
+int bcm_l3_ecmp_port_egress_get(int unit, bcm_l3_ecmp_port_egress_t *ecmp_port_egress);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_port_egress_set(int unit, bcm_l3_ecmp_port_egress_t *ecmp_port_egress);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_ecmp_port_egress_t_init(bcm_l3_ecmp_port_egress_t *ecmp_port_egress);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_port_link_status_get(int unit, bcm_port_t port, int *status);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_port_link_status_set(int unit, bcm_port_t port, int status);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_port_vc_fc_status_get(int unit, bcm_l3_ecmp_port_vc_t port_vc, int *status);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_port_vc_fc_status_set(int unit, bcm_l3_ecmp_port_vc_t port_vc, int status);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_stat_attach(int unit, bcm_if_t intf_id, uint32 stat_counter_id);
+int bcm_l3_ecmp_stat_detach(int unit, bcm_if_t intf_id);
+int bcm_l3_ecmp_stat_id_get(int unit, bcm_if_t intf_id, uint32 *stat_counter_id);
+int bcm_l3_ecmp_tertiary_member_add(int unit, bcm_if_t ecmp_group_id, int array_size, bcm_l3_ecmp_member_t *ecmp_member_array);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_tertiary_member_delete(int unit, bcm_if_t ecmp_group_id, bcm_l3_ecmp_member_t *ecmp_member);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_tertiary_member_delete_all(int unit, bcm_if_t ecmp_group_id);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_tertiary_member_get_all(int unit, bcm_if_t ecmp_group_id, int array_size, bcm_l3_ecmp_member_t *ecmp_member_array, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_ecmp_traverse(int unit, bcm_l3_ecmp_traverse_cb trav_fn, void *user_data);
+int bcm_l3_ecmp_tunnel_priority_map_create(int unit, bcm_l3_ecmp_tunnel_priority_map_info_t *map_info);
+int bcm_l3_ecmp_tunnel_priority_map_destroy(int unit, bcm_l3_ecmp_tunnel_priority_map_info_t *map_info);
+int bcm_l3_ecmp_tunnel_priority_map_get(int unit, bcm_l3_ecmp_tunnel_priority_map_info_t *map_info);
+int bcm_l3_ecmp_tunnel_priority_map_set(int unit, bcm_l3_ecmp_tunnel_priority_map_info_t *map_info);
+int bcm_l3_egress_allocation_get(int unit, uint32 flags, bcm_l3_egress_t *egr, uint32 nof_members, bcm_if_t *if_id);
+int bcm_l3_egress_arp_traverse(int unit, bcm_l3_egress_traverse_cb trav_fn, void *user_data);
+int bcm_l3_egress_create(int unit, uint32 flags, bcm_l3_egress_t *egr, bcm_if_t *if_id);
+int bcm_l3_egress_destroy(int unit, bcm_if_t intf);
+int bcm_l3_egress_ecmp_add(int unit, bcm_l3_egress_ecmp_t *ecmp, bcm_if_t intf);
+int bcm_l3_egress_ecmp_create(int unit, bcm_l3_egress_ecmp_t *ecmp, int intf_count, bcm_if_t *intf_array);
+int bcm_l3_egress_ecmp_delete(int unit, bcm_l3_egress_ecmp_t *ecmp, bcm_if_t intf);
+int bcm_l3_egress_ecmp_destroy(int unit, bcm_l3_egress_ecmp_t *ecmp);
+int bcm_l3_egress_ecmp_ethertype_get(int unit, uint32 *flags, int ethertype_max, int *ethertype_array, int *ethertype_count);
+int bcm_l3_egress_ecmp_ethertype_set(int unit, uint32 flags, int ethertype_count, int *ethertype_array);
+int bcm_l3_egress_ecmp_find(int unit, int intf_count, bcm_if_t *intf_array, bcm_l3_egress_ecmp_t *ecmp);
+int bcm_l3_egress_ecmp_get(int unit, bcm_l3_egress_ecmp_t *ecmp, int intf_size, bcm_if_t *intf_array, int *intf_count);
+int bcm_l3_egress_ecmp_member_status_get(int unit, bcm_if_t intf, int *status);
+int bcm_l3_egress_ecmp_member_status_set(int unit, bcm_if_t intf, int status);
+int bcm_l3_egress_ecmp_resilient_add(int unit, uint32 flags, bcm_l3_egress_ecmp_resilient_entry_t *entry);
+int bcm_l3_egress_ecmp_resilient_delete(int unit, uint32 flags, bcm_l3_egress_ecmp_resilient_entry_t *entry);
+int bcm_l3_egress_ecmp_resilient_replace(int unit, uint32 flags, bcm_l3_egress_ecmp_resilient_entry_t *match_entry, int *num_entries, bcm_l3_egress_ecmp_resilient_entry_t *replace_entry);
+int bcm_l3_egress_ecmp_resilient_traverse(int unit, uint32 flags, bcm_l3_egress_ecmp_resilient_entry_t *match_entry, bcm_l3_egress_ecmp_resilient_traverse_cb trav_fn, void *user_data);
+void bcm_l3_egress_ecmp_t_init(bcm_l3_egress_ecmp_t *ecmp);
+int bcm_l3_egress_ecmp_traverse(int unit, bcm_l3_egress_ecmp_traverse_cb trav_fn, void *user_data);
+int bcm_l3_egress_ecmp_tunnel_priority_set(int unit, bcm_l3_egress_ecmp_t *ecmp, int intf_count, bcm_if_t *intf_array);
+int bcm_l3_egress_ecmp_user_profile_create(int unit, bcm_l3_egress_ecmp_t *ecmp, int intf_count, bcm_if_t *intf_array);
+int bcm_l3_egress_ecmp_user_profile_destroy(int unit, bcm_l3_egress_ecmp_t *ecmp);
+int bcm_l3_egress_ecmp_user_profile_get(int unit, bcm_l3_egress_ecmp_t *ecmp, int intf_size, bcm_if_t *intf_array, int *intf_count);
+int bcm_l3_egress_find(int unit, bcm_l3_egress_t *egr, bcm_if_t *intf);
+int bcm_l3_egress_flexctr_object_get(int unit, bcm_if_t intf_id, uint32 *value);
+int bcm_l3_egress_flexctr_object_set(int unit, bcm_if_t intf_id, uint32 value);
+int bcm_l3_egress_forwarding_profile_create(int unit, bcm_l3_egress_forwarding_profile_t *info, uint32 *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_egress_forwarding_profile_destroy(int unit, uint32 profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_egress_forwarding_profile_get(int unit, uint32 profile_id, bcm_l3_egress_forwarding_profile_t *info);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_egress_forwarding_profile_t_init(bcm_l3_egress_forwarding_profile_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_egress_get(int unit, bcm_if_t intf, bcm_l3_egress_t *egr);
+int bcm_l3_egress_id_flexctr_object_get(int unit, bcm_if_t intf_id, bcm_flexctr_direction_t direction, uint32 *value);
+int bcm_l3_egress_multi_alloc(int unit, bcm_l3_egress_multi_info_t egress_multi_info, bcm_if_t *base_egress_id);
+int bcm_l3_egress_multi_free(int unit, bcm_if_t base_egress_id);
+void bcm_l3_egress_multi_info_t_init(bcm_l3_egress_multi_info_t *egress_multi_info);
+int bcm_l3_egress_multipath_add(int unit, bcm_if_t mpintf, bcm_if_t intf);
+int bcm_l3_egress_multipath_create(int unit, uint32 flags, int intf_count, bcm_if_t *intf_array, bcm_if_t *mpintf);
+int bcm_l3_egress_multipath_delete(int unit, bcm_if_t mpintf, bcm_if_t intf);
+int bcm_l3_egress_multipath_destroy(int unit, bcm_if_t mpintf);
+int bcm_l3_egress_multipath_find(int unit, int intf_count, bcm_if_t *intf_array, bcm_if_t *mpintf);
+int bcm_l3_egress_multipath_get(int unit, bcm_if_t mpintf, int intf_size, bcm_if_t *intf_array, int *intf_count);
+int bcm_l3_egress_multipath_max_create(int unit, uint32 flags, int max_paths, int intf_count, bcm_if_t *intf_array, bcm_if_t *mpintf);
+int bcm_l3_egress_multipath_traverse(int unit, bcm_l3_egress_multipath_traverse_cb trav_fn, void *user_data);
+int bcm_l3_egress_nexthop_index_get(int unit, bcm_if_t intf_id, uint32 *index);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_egress_stat_attach(int unit, bcm_if_t intf_id, uint32 stat_counter_id);
+int bcm_l3_egress_stat_counter_get(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_egress_stat_counter_set(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_egress_stat_counter_sync_get(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_egress_stat_detach(int unit, bcm_if_t intf_id);
+int bcm_l3_egress_stat_id_get(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 *stat_counter_id);
+void bcm_l3_egress_t_init(bcm_l3_egress_t *egr);
+int bcm_l3_egress_traverse(int unit, bcm_l3_egress_traverse_cb trav_fn, void *user_data);
+int bcm_l3_enable_set(int unit, int enable);
+int bcm_l3_host_add(int unit, bcm_l3_host_t *info);
+int bcm_l3_host_age(int unit, uint32 flags, bcm_l3_host_traverse_cb age_cb, void *user_data);
+int bcm_l3_host_conflict_get(int unit, bcm_l3_key_t *ipkey, bcm_l3_key_t *cf_array, int cf_max, int *cf_count);
+int bcm_l3_host_delete(int unit, bcm_l3_host_t *ip_addr);
+int bcm_l3_host_delete_all(int unit, bcm_l3_host_t *info);
+int bcm_l3_host_delete_by_interface(int unit, bcm_l3_host_t *info);
+int bcm_l3_host_delete_by_network(int unit, bcm_l3_route_t *ip_addr);
+int bcm_l3_host_find(int unit, bcm_l3_host_t *info);
+int bcm_l3_host_flexctr_object_get(int unit, bcm_l3_host_t *info, uint32 *value);
+int bcm_l3_host_flexctr_object_set(int unit, bcm_l3_host_t *info, uint32 value);
+int bcm_l3_host_invalidate_entry(int unit, bcm_ip_t info);
+int bcm_l3_host_stat_attach(int unit, bcm_l3_host_t *info, uint32 stat_counter_id);
+int bcm_l3_host_stat_counter_get(int unit, bcm_l3_host_t *info, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_host_stat_counter_set(int unit, bcm_l3_host_t *info, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_host_stat_counter_sync_get(int unit, bcm_l3_host_t *info, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_host_stat_detach(int unit, bcm_l3_host_t *info);
+int bcm_l3_host_stat_id_get(int unit, bcm_l3_host_t *info, bcm_l3_stat_t stat, uint32 *stat_counter_id);
+void bcm_l3_host_t_init(bcm_l3_host_t *ip);
+int bcm_l3_host_traverse(int unit, uint32 flags, uint32 start, uint32 end, bcm_l3_host_traverse_cb cb, void *user_data);
+int bcm_l3_host_validate_entry(int unit, bcm_ip_t info);
+int bcm_l3_info(int unit, bcm_l3_info_t *l3info);
+void bcm_l3_info_t_init(bcm_l3_info_t *info);
+int bcm_l3_ingress_create(int unit, bcm_l3_ingress_t *ing_intf, bcm_if_t *intf_id);
+int bcm_l3_ingress_destroy(int unit, bcm_if_t intf_id);
+int bcm_l3_ingress_find(int unit, bcm_l3_ingress_t *ing_intf, bcm_if_t *intf_id);
+int bcm_l3_ingress_get(int unit, bcm_if_t intf, bcm_l3_ingress_t *ing_intf);
+int bcm_l3_ingress_stat_attach(int unit, bcm_if_t intf_id, uint32 stat_counter_id);
+int bcm_l3_ingress_stat_counter_get(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_ingress_stat_counter_set(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_ingress_stat_counter_sync_get(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_ingress_stat_detach(int unit, bcm_if_t intf_id);
+int bcm_l3_ingress_stat_id_get(int unit, bcm_if_t intf_id, bcm_l3_stat_t stat, uint32 *stat_counter_id);
+void bcm_l3_ingress_t_init(bcm_l3_ingress_t *ing_intf);
+int bcm_l3_ingress_traverse(int unit, bcm_l3_ingress_traverse_cb trav_fn, void *user_data);
+int bcm_l3_init(int unit);
+int bcm_l3_intf_create(int unit, bcm_l3_intf_t *intf);
+int bcm_l3_intf_delete(int unit, bcm_l3_intf_t *intf);
+int bcm_l3_intf_delete_all(int unit);
+int bcm_l3_intf_find(int unit, bcm_l3_intf_t *intf);
+int bcm_l3_intf_find_vlan(int unit, bcm_l3_intf_t *intf);
+int bcm_l3_intf_flexctr_object_get(int unit, bcm_if_t intf_id, bcm_flexctr_direction_t direction, uint32 *value);
+int bcm_l3_intf_get(int unit, bcm_l3_intf_t *intf);
+void bcm_l3_intf_qos_t_init(bcm_l3_intf_qos_t *intf_qos);
+int bcm_l3_intf_stat_attach(int unit, bcm_if_t intf_id, uint32 stat_counter_id);
+int bcm_l3_intf_stat_detach(int unit, bcm_if_t intf_id);
+int bcm_l3_intf_stat_id_get(int unit, bcm_if_t intf_id, uint32 *stat_counter_id);
+void bcm_l3_intf_t_init(bcm_l3_intf_t *intf);
+int bcm_l3_intf_traverse(int unit, bcm_l3_intf_traverse_cb trav_fn, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_intf_vpn_get(int unit, bcm_if_t l3_intf_id, uint32 *flags, bcm_vpn_t *vpn);
+int bcm_l3_intf_vpn_set(int unit, bcm_if_t l3_intf_id, uint32 flags, bcm_vpn_t vpn);
+int bcm_l3_ip4_options_action_get(int unit, int ip4_options_profile_id, int ip4_option, bcm_l3_ip4_options_action_t *action);
+int bcm_l3_ip4_options_action_set(int unit, int ip4_options_profile_id, int ip4_option, bcm_l3_ip4_options_action_t action);
+int bcm_l3_ip4_options_profile_create(int unit, uint32 flags, bcm_l3_ip4_options_action_t default_action, int *ip4_options_profile_id);
+int bcm_l3_ip4_options_profile_destroy(int unit, int ip4_options_profile_id);
+int bcm_l3_ip6_prefix_map_add(int unit, bcm_ip6_t ip6_addr);
+int bcm_l3_ip6_prefix_map_delete(int unit, bcm_ip6_t ip6_addr);
+int bcm_l3_ip6_prefix_map_delete_all(int unit);
+int bcm_l3_ip6_prefix_map_get(int unit, int map_size, bcm_ip6_t *ip6_array, int *ip6_count);
+void bcm_l3_key_t_init(bcm_l3_key_t *key);
+int bcm_l3_large_nat_egress_add(int unit, bcm_l3_large_nat_egress_t *nat_info);
+int bcm_l3_large_nat_egress_control_add(int unit, bcm_l3_large_nat_egress_control_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_egress_control_delete(int unit, bcm_l3_large_nat_egress_control_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_egress_control_delete_all(int unit, bcm_l3_large_nat_egress_control_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_egress_control_get(int unit, bcm_l3_large_nat_egress_control_t *nat_info);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_large_nat_egress_control_t_init(bcm_l3_large_nat_egress_control_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_egress_control_traverse(int unit, uint32 flags, bcm_l3_large_nat_egress_control_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_egress_delete(int unit, bcm_l3_large_nat_egress_t *nat_info);
+int bcm_l3_large_nat_egress_get(int unit, bcm_l3_large_nat_egress_t *nat_info);
+void bcm_l3_large_nat_egress_t_init(bcm_l3_large_nat_egress_t *nat_info);
+int bcm_l3_large_nat_egress_translation_traverse(int unit, uint32 flags, uint32 start, uint32 end, bcm_l3_large_nat_egress_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_egress_traverse(int unit, bcm_l3_large_nat_egress_traverse_cb cb, void *user_data);
+int bcm_l3_large_nat_ingress_add(int unit, bcm_l3_large_nat_ingress_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_ingress_delete(int unit, bcm_l3_large_nat_ingress_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_ingress_delete_all(int unit, bcm_l3_large_nat_ingress_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_ingress_get(int unit, bcm_l3_large_nat_ingress_t *nat_info);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_large_nat_ingress_t_init(bcm_l3_large_nat_ingress_t *nat_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_large_nat_ingress_traverse(int unit, uint32 flags, bcm_l3_large_nat_ingress_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_max_ecmp_limit_get(int unit, bcm_l3_ecmp_level_t level, int *max);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_max_ecmp_limit_set(int unit, bcm_l3_ecmp_level_t level, int max);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_mc_randomization_bits_get(int unit, uint8 *num_of_bits);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_mc_randomization_bits_set(int unit, uint8 num_of_bits);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_mtu_adjustment_profile_create(int unit, uint32 options, bcm_l3_mtu_adjustment_profile_t *adjustment_profile);
+int bcm_l3_mtu_adjustment_profile_destroy(int unit, int profile_id);
+int bcm_l3_mtu_adjustment_profile_get(int unit, bcm_l3_mtu_adjustment_profile_t *adjustment_profile);
+void bcm_l3_mtu_adjustment_profile_t_init(bcm_l3_mtu_adjustment_profile_t *adjustment);
+int bcm_l3_nat_egress_add(int unit, bcm_l3_nat_egress_t *nat_info);
+int bcm_l3_nat_egress_delete(int unit, bcm_l3_nat_id_t nat_id);
+int bcm_l3_nat_egress_destroy(int unit, bcm_l3_nat_egress_t *nat_info);
+int bcm_l3_nat_egress_get(int unit, bcm_l3_nat_egress_t *nat_info);
+int bcm_l3_nat_egress_stat_attach(int unit, bcm_l3_nat_egress_t *info, uint32 stat_counter_id);
+int bcm_l3_nat_egress_stat_counter_get(int unit, bcm_l3_nat_egress_t *info, bcm_l3_nat_egress_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_nat_egress_stat_counter_set(int unit, bcm_l3_nat_egress_t *info, bcm_l3_nat_egress_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_nat_egress_stat_counter_sync_get(int unit, bcm_l3_nat_egress_t *info, bcm_l3_nat_egress_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_nat_egress_stat_detach(int unit, bcm_l3_nat_egress_t *info);
+int bcm_l3_nat_egress_stat_id_get(int unit, bcm_l3_nat_egress_t *info, bcm_l3_nat_egress_stat_t stat, uint32 *stat_counter_id);
+int bcm_l3_nat_egress_stat_multi_get(int unit, bcm_l3_nat_egress_t *info, int nstat, bcm_l3_nat_egress_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l3_nat_egress_stat_multi_get32(int unit, bcm_l3_nat_egress_t *info, int nstat, bcm_l3_nat_egress_stat_t *stat_arr, uint32 *value_arr);
+int bcm_l3_nat_egress_stat_multi_set(int unit, bcm_l3_nat_egress_t *info, int nstat, bcm_l3_nat_egress_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l3_nat_egress_stat_multi_set32(int unit, bcm_l3_nat_egress_t *info, int nstat, bcm_l3_nat_egress_stat_t *stat_arr, uint32 *value_arr);
+void bcm_l3_nat_egress_t_init(bcm_l3_nat_egress_t *nat_info);
+int bcm_l3_nat_egress_traverse(int unit, uint32 flags, uint32 start, uint32 end, bcm_l3_nat_egress_traverse_cb cb, void *user_data);
+int bcm_l3_nat_info_add(int unit, bcm_l3_nat_info_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_info_delete(int unit, bcm_l3_nat_info_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_info_get(int unit, bcm_l3_nat_info_t *info);  /* not in OpenBCM 6.5.27 */
+void bcm_l3_nat_info_t_init(bcm_l3_nat_info_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_info_traverse(int unit, bcm_l3_nat_info_traverse_info_t *additional_info, bcm_l3_nat_info_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_ingress_add(int unit, bcm_l3_nat_ingress_t *nat_info);
+int bcm_l3_nat_ingress_age(int unit, uint32 flags, bcm_l3_nat_ingress_traverse_cb age_cb, void *user_data);
+int bcm_l3_nat_ingress_counter_get(int unit, bcm_l3_nat_ingress_counter_t *counter_info, bcm_stat_value_t *counter_values);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_ingress_counter_set(int unit, bcm_l3_nat_ingress_counter_t *counter_info, bcm_stat_value_t counter_values);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_ingress_counter_sync_get(int unit, bcm_l3_nat_ingress_counter_t *counter_info, bcm_stat_value_t *counter_values);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_ingress_counter_t_init(int unit, bcm_l3_nat_ingress_counter_t *counter_info);  /* not in OpenBCM 6.5.27 */
+int bcm_l3_nat_ingress_delete(int unit, bcm_l3_nat_ingress_t *nat_info);
+int bcm_l3_nat_ingress_delete_all(int unit, bcm_l3_nat_ingress_t *nat_info);
+int bcm_l3_nat_ingress_find(int unit, bcm_l3_nat_ingress_t *nat_info);
+void bcm_l3_nat_ingress_t_init(bcm_l3_nat_ingress_t *nat_info);
+int bcm_l3_nat_ingress_traverse(int unit, uint32 flags, uint32 start, uint32 end, bcm_l3_nat_ingress_traverse_cb cb, void *user_data);
+int bcm_l3_route_add(int unit, bcm_l3_route_t *info);
+int bcm_l3_route_age(int unit, uint32 flags, bcm_l3_route_traverse_cb age_out, void *user_data);
+int bcm_l3_route_delete(int unit, bcm_l3_route_t *info);
+int bcm_l3_route_delete_all(int unit, bcm_l3_route_t *info);
+int bcm_l3_route_delete_by_interface(int unit, bcm_l3_route_t *info);
+int bcm_l3_route_find(int unit, bcm_l3_host_t *host, bcm_l3_route_t *route);
+int bcm_l3_route_flexctr_object_get(int unit, bcm_l3_route_t *info, uint32 *value);
+int bcm_l3_route_flexctr_object_set(int unit, bcm_l3_route_t *info, uint32 value);
+int bcm_l3_route_get(int unit, bcm_l3_route_t *info);
+int bcm_l3_route_max_ecmp_get(int unit, int *max);
+int bcm_l3_route_max_ecmp_set(int unit, int max);
+int bcm_l3_route_multipath_get(int unit, bcm_l3_route_t *the_route, bcm_l3_route_t *path_array, int max_path, int *path_count);
+int bcm_l3_route_stat_attach(int unit, bcm_l3_route_t *info, uint32 stat_counter_id);
+int bcm_l3_route_stat_counter_get(int unit, bcm_l3_route_t *info, bcm_l3_route_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_route_stat_counter_set(int unit, bcm_l3_route_t *info, bcm_l3_route_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_route_stat_counter_sync_get(int unit, bcm_l3_route_t *info, bcm_l3_route_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_route_stat_detach(int unit, bcm_l3_route_t *info);
+int bcm_l3_route_stat_enable_set(int unit, bcm_l3_route_t *route, int enable);
+int bcm_l3_route_stat_get(int unit, bcm_l3_route_t *route, bcm_l3_stat_t stat, uint64 *val);
+int bcm_l3_route_stat_get32(int unit, bcm_l3_route_t *route, bcm_l3_stat_t stat, uint32 *val);
+int bcm_l3_route_stat_id_get(int unit, bcm_l3_route_t *info, bcm_l3_route_stat_t stat, uint32 *stat_counter_id);
+int bcm_l3_route_stat_multi_get(int unit, bcm_l3_route_t *info, int nstat, bcm_l3_route_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l3_route_stat_multi_get32(int unit, bcm_l3_route_t *info, int nstat, bcm_l3_route_stat_t *stat_arr, uint32 *value_arr);
+int bcm_l3_route_stat_multi_set(int unit, bcm_l3_route_t *info, int nstat, bcm_l3_route_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l3_route_stat_multi_set32(int unit, bcm_l3_route_t *info, int nstat, bcm_l3_route_stat_t *stat_arr, uint32 *value_arr);
+int bcm_l3_route_stat_set(int unit, bcm_l3_route_t *route, bcm_l3_stat_t stat, uint64 val);
+int bcm_l3_route_stat_set32(int unit, bcm_l3_route_t *route, bcm_l3_stat_t stat, uint32 val);
+void bcm_l3_route_t_init(bcm_l3_route_t *route);
+int bcm_l3_route_traverse(int unit, uint32 flags, uint32 start, uint32 end, bcm_l3_route_traverse_cb trav_fn, void *user_data);
+int bcm_l3_source_bind_add(int unit, bcm_l3_source_bind_t *info);
+int bcm_l3_source_bind_delete(int unit, bcm_l3_source_bind_t *info);
+int bcm_l3_source_bind_delete_all(int unit);
+int bcm_l3_source_bind_enable_get(int unit, bcm_port_t port, int *enable);
+int bcm_l3_source_bind_enable_set(int unit, bcm_port_t port, int enable);
+int bcm_l3_source_bind_get(int unit, bcm_l3_source_bind_t *info);
+void bcm_l3_source_bind_t_init(bcm_l3_source_bind_t *info);
+int bcm_l3_source_bind_traverse(int unit, bcm_l3_source_bind_traverse_cb cb, void *user_data);
+int bcm_l3_subnet_route_find(int unit, bcm_l3_route_t *input, bcm_l3_route_t *route);
+void bcm_l3_tunnel_term_extn_t_init(bcm_l3_tunnel_term_extn_t *extn_attribute);
+int bcm_l3_tunnel_term_global_cfg_get(int unit, bcm_l3_tunnel_term_extn_t *extn_attribute);
+int bcm_l3_tunnel_term_global_cfg_set(int unit, bcm_l3_tunnel_term_extn_t *extn_attribute);
+int bcm_l3_vpbr_entry_add(int unit, bcm_l3_vpbr_entry_t *entry);
+int bcm_l3_vpbr_entry_delete(int unit, bcm_l3_vpbr_entry_t *entry);
+int bcm_l3_vpbr_entry_delete_all(int unit, bcm_l3_vpbr_entry_t *entry);
+int bcm_l3_vpbr_entry_get(int unit, bcm_l3_vpbr_entry_t *entry);
+void bcm_l3_vpbr_entry_t_init(bcm_l3_vpbr_entry_t *vpbr_info);
+int bcm_l3_vpbr_traverse(int unit, uint32 flags, bcm_l3_vpbr_traverse_cb cb, void *user_data);
+int bcm_l3_vrf_route_data_mode_get(int unit, bcm_vrf_t vrf, uint32 flags, bcm_l3_vrf_route_data_mode_t *mode);
+int bcm_l3_vrf_route_data_mode_set(int unit, bcm_vrf_t vrf, uint32 flags, bcm_l3_vrf_route_data_mode_t mode);
+int bcm_l3_vrf_stat_attach(int unit, bcm_vrf_t vrf, uint32 stat_counter_id);
+int bcm_l3_vrf_stat_counter_get(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_vrf_stat_counter_set(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_vrf_stat_counter_sync_get(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_l3_vrf_stat_detach(int unit, bcm_vrf_t vrf);
+int bcm_l3_vrf_stat_enable_set(int unit, bcm_vrf_t vrf, int enable);
+int bcm_l3_vrf_stat_get(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint64 *val);
+int bcm_l3_vrf_stat_get32(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint32 *val);
+int bcm_l3_vrf_stat_id_get(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint32 *stat_counter_id);
+int bcm_l3_vrf_stat_multi_get(int unit, bcm_vrf_t vrf, int nstat, bcm_l3_vrf_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l3_vrf_stat_multi_get32(int unit, bcm_vrf_t vrf, int nstat, bcm_l3_vrf_stat_t *stat_arr, uint32 *value_arr);
+int bcm_l3_vrf_stat_multi_set(int unit, bcm_vrf_t vrf, int nstat, bcm_l3_vrf_stat_t *stat_arr, uint64 *value_arr);
+int bcm_l3_vrf_stat_multi_set32(int unit, bcm_vrf_t vrf, int nstat, bcm_l3_vrf_stat_t *stat_arr, uint32 *value_arr);
+int bcm_l3_vrf_stat_set(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint64 val);
+int bcm_l3_vrf_stat_set32(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint32 val);
+int bcm_l3_vrf_stat_sync_get(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint64 *val);
+int bcm_l3_vrf_stat_sync_get32(int unit, bcm_vrf_t vrf, bcm_l3_vrf_stat_t stat, uint32 *val);
+int bcm_l3_vrrp_add(int unit, bcm_vlan_t vlan, uint32 vrid);
+int bcm_l3_vrrp_config_add(int unit, uint32 flags, bcm_vlan_t vlan, uint32 vrid);
+int bcm_l3_vrrp_config_delete(int unit, uint32 flags, bcm_vlan_t vlan, uint32 vrid);
+int bcm_l3_vrrp_config_delete_all(int unit, uint32 flags, bcm_vlan_t vlan);
+int bcm_l3_vrrp_config_get(int unit, uint32 flags, bcm_vlan_t vlan, uint32 alloc_size, uint32 *vrid_array, uint32 *count);
+int bcm_l3_vrrp_delete(int unit, bcm_vlan_t vlan, uint32 vrid);
+int bcm_l3_vrrp_delete_all(int unit, bcm_vlan_t vlan);
+int bcm_l3_vrrp_get(int unit, bcm_vlan_t vlan, int alloc_size, int *vrid_array, int *count);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-l2.html" class="btn btn-neutral float-left" title="bcm_l2_* (147)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-mirror.html" class="btn btn-neutral float-right" title="bcm_mirror_* (129)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

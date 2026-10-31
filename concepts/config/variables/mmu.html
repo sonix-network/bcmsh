@@ -1,0 +1,698 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buffers, queues and QoS &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Telemetry, timing and OAM" href="telemetry.html" />
+    <link rel="prev" title="ACL, field processor and UDF" href="acl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Variable reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ports.html">Ports, lanes and SerDes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tables.html">Forwarding tables and routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acl.html">ACL, field processor and UDF</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Buffers, queues and QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry, timing and OAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu.html">CPU, DMA, interrupts and counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chip.html">Chip, boot, warm boot and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sai.html">SAI-specific variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../config.html">Configuration variables</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Variable reference</a></li>
+      <li class="breadcrumb-item active">Buffers, queues and QoS</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="buffers-queues-and-qos">
+<h1>Buffers, queues and QoS<a class="headerlink" href="#buffers-queues-and-qos" title="Link to this heading"></a></h1>
+<p>MMU buffer configuration, queue counts, cut-through and PFC. See <a class="reference internal" href="../mmu.html"><span class="doc">Buffers and queues</span></a>.</p>
+<p>Set in several SONiC Trident 3 HWSKU files: <a class="reference internal" href="#confval-asf_mem_profile"><code class="xref std std-confval docutils literal notranslate"><span class="pre">asf_mem_profile</span></code></a>, <a class="reference internal" href="#confval-bcm_num_cos"><code class="xref std std-confval docutils literal notranslate"><span class="pre">bcm_num_cos</span></code></a>, <a class="reference internal" href="#confval-default_cpu_tx_queue"><code class="xref std std-confval docutils literal notranslate"><span class="pre">default_cpu_tx_queue</span></code></a>, <a class="reference internal" href="#confval-mmu_init_config"><code class="xref std std-confval docutils literal notranslate"><span class="pre">mmu_init_config</span></code></a>, <a class="reference internal" href="#confval-mmu_lossless"><code class="xref std std-confval docutils literal notranslate"><span class="pre">mmu_lossless</span></code></a>, <a class="reference internal" href="#confval-pfc_deadlock_seq_control"><code class="xref std std-confval docutils literal notranslate"><span class="pre">pfc_deadlock_seq_control</span></code></a>.</p>
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-asf_mem_profile">
+<span class="sig-name descname"><span class="pre">asf_mem_profile</span></span><a class="headerlink" href="#confval-asf_mem_profile" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Cut-through (ASF) buffer profile: <code class="docutils literal notranslate"><span class="pre">0</span></code> store-and-forward only, <code class="docutils literal notranslate"><span class="pre">1</span></code> cut-through between ports of similar speed, <code class="docutils literal notranslate"><span class="pre">2</span></code> cut-through between all speeds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 9 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_num_cos">
+<span class="sig-name descname"><span class="pre">bcm_num_cos</span></span><a class="headerlink" href="#confval-bcm_num_cos" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">8</span></code></dd>
+</dl>
+<p>Number of class-of-service queues the SDK configures per port at start-up. Dell S5232F files set 10.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 40 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">8</span></code>, <code class="docutils literal notranslate"><span class="pre">9</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bst_sync_thread_pri">
+<span class="sig-name descname"><span class="pre">bst_sync_thread_pri</span></span><a class="headerlink" href="#confval-bst_sync_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">50</span></code></dd>
+</dl>
+<p>Specifies the priority of the bcm_bst_sync_thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-buffer_stats_collect_mode">
+<span class="sig-name descname"><span class="pre">buffer_stats_collect_mode</span></span><a class="headerlink" href="#confval-buffer_stats_collect_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Flags to denote pstats and oob stats mode. TH only supports 0. 0x0 Instantaneous mode 0x1 Max use count mode with HW clear on Read</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-buffer_stats_collect_type">
+<span class="sig-name descname"><span class="pre">buffer_stats_collect_type</span></span><a class="headerlink" href="#confval-buffer_stats_collect_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Flags to enable pstats or oob stats. only one can be enabled at a time. TH only supports 0 and 1. 0x0 None: disable both oob stats and pstats 0x1 OOB STATS: only enable out-of-band stats 0x2 PSTATS: only enable packetized statistic</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-default_cpu_tx_queue">
+<span class="sig-name descname"><span class="pre">default_cpu_tx_queue</span></span><a class="headerlink" href="#confval-default_cpu_tx_queue" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Queue used for packets sent from the CPU without an explicit queue. Read by the SAI’s MMU set-up.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 18 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">9</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-hybrid_pfc_deadlock_enable">
+<span class="sig-name descname"><span class="pre">hybrid_pfc_deadlock_enable</span></span><a class="headerlink" href="#confval-hybrid_pfc_deadlock_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Control whether to enable hybrid PFC deadlock. 0 – Do not enable hybrid PFC deadlock. Only support HW based PFC deadlock (default). 1 – Enable hybrid PFC deadlock. Support both HW and SW based PFC deadlock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 2 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lb_port_use_uc_queues">
+<span class="sig-name descname"><span class="pre">lb_port_use_uc_queues</span></span><a class="headerlink" href="#confval-lb_port_use_uc_queues" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property defines whether SOBMH packets sent to loopback ports use unicast or multicast queues. The value is 0 to use multicast queues and 1 to use unicast queues.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lccdrain_timeout_usec">
+<span class="sig-name descname"><span class="pre">lccdrain_timeout_usec</span></span><a class="headerlink" href="#confval-lccdrain_timeout_usec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>When a link goes down for any reason, the driver waits for all packets to that port to drain from the MMU before continuing. There is a timeout in case the packet count is non-zero AND non-decrementing. This is only for devices with UniMAC and TriMAC.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mirror_copy_counting_disable">
+<span class="sig-name descname"><span class="pre">mirror_copy_counting_disable</span></span><a class="headerlink" href="#confval-mirror_copy_counting_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This soc property is used to disable the mirror copy counting on all pool nums To disable a specific pool num, use the suffix “_poolx”. x represents the pool num default value is 0 (mirror copy counting is enabled).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">mirror_copy_counting_disable_pool&lt;N&gt;</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mirror_dest_cosq_mode">
+<span class="sig-name descname"><span class="pre">mirror_dest_cosq_mode</span></span><a class="headerlink" href="#confval-mirror_dest_cosq_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_config_override">
+<span class="sig-name descname"><span class="pre">mmu_config_override</span></span><a class="headerlink" href="#confval-mmu_config_override" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Use the SDK’s built-in MMU settings (1) or the <code class="docutils literal notranslate"><span class="pre">buf.*</span></code> variables (0). The <code class="docutils literal notranslate"><span class="pre">buf.*</span></code> values are used only when this is 0 and they pass the SDK’s checks; otherwise the built-in settings stay.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_flow_fanin">
+<span class="sig-name descname"><span class="pre">mmu_flow_fanin</span></span><a class="headerlink" href="#confval-mmu_flow_fanin" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of simultaneous senders to each port for flow control purposes</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_flow_percent">
+<span class="sig-name descname"><span class="pre">mmu_flow_percent</span></span><a class="headerlink" href="#confval-mmu_flow_percent" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Percentage of per-port cells usable before flow control starts</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_init_config">
+<span class="sig-name descname"><span class="pre">mmu_init_config</span></span><a class="headerlink" href="#confval-mmu_init_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Name of a built-in MMU start-up configuration, read by the SAI’s MMU set-up.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 8 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">&quot;TD3-DELL-lossless&quot;</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_lossless">
+<span class="sig-name descname"><span class="pre">mmu_lossless</span></span><a class="headerlink" href="#confval-mmu_lossless" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Initial MMU profile: 0 lossy, 1 lossless (PFC-ready headroom). SONiC programs buffers through the SAI at runtime, so most files leave it at 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 15 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_lossless_pbmp">
+<span class="sig-name descname"><span class="pre">mmu_lossless_pbmp</span></span><a class="headerlink" href="#confval-mmu_lossless_pbmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select ports to apply MMU lossless configuration (valid only if mmu_lossless=1). This property is only required for specific chips that have limited MMU lossless ports, such as BCM5354x,BCM5667X. For example, enable MMU lossless mode on port 4~7. mmu_lossless=1 mmu_lossless_pbmp=0xf0</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_mem_size">
+<span class="sig-name descname"><span class="pre">mmu_mem_size</span></span><a class="headerlink" href="#confval-mmu_mem_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_num_dmvoq_queues">
+<span class="sig-name descname"><span class="pre">mmu_num_dmvoq_queues</span></span><a class="headerlink" href="#confval-mmu_num_dmvoq_queues" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>MMU configuration of number of dmvoq queues</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_overcommit">
+<span class="sig-name descname"><span class="pre">mmu_overcommit</span></span><a class="headerlink" href="#confval-mmu_overcommit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Non-stack port overcommit factor for dynamic pool</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_overcommit_stack">
+<span class="sig-name descname"><span class="pre">mmu_overcommit_stack</span></span><a class="headerlink" href="#confval-mmu_overcommit_stack" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Stack port overcommit factor for dynamic pool</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_port_num_mc_queue">
+<span class="sig-name descname"><span class="pre">mmu_port_num_mc_queue</span></span><a class="headerlink" href="#confval-mmu_port_num_mc_queue" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Number of unicast and multicast queues per port mmu_port_num_mc_queue = 0 (12 unicast, 0 multicast) mmu_port_num_mc_queue = 1 (10 unicast, 2 multicast) mmu_port_num_mc_queue = 2 (8 unicast, 4 multicast) mmu_port_num_mc_queue = 3 (6 unicast, 6 multicast)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_queue_flush_timeout">
+<span class="sig-name descname"><span class="pre">mmu_queue_flush_timeout</span></span><a class="headerlink" href="#confval-mmu_queue_flush_timeout" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Timeout delay in microseconds for queue flush complete</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_red_drop_percent">
+<span class="sig-name descname"><span class="pre">mmu_red_drop_percent</span></span><a class="headerlink" href="#confval-mmu_red_drop_percent" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Percentage of per-port/per-cos packets used before red packets will be dropped</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_reset_bytes">
+<span class="sig-name descname"><span class="pre">mmu_reset_bytes</span></span><a class="headerlink" href="#confval-mmu_reset_bytes" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>(1536 * 2) offset from dynamic cell set limits for reset (enable) limits. Rounded up from bytes to next cell size.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_static_bytes">
+<span class="sig-name descname"><span class="pre">mmu_static_bytes</span></span><a class="headerlink" href="#confval-mmu_static_bytes" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Per-port/per-cos static reserved limit. Rounded up from bytes to next cell size. Remaining cells are put in dynamic pool. If 0, then mmu_static_percent is used.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_static_percent">
+<span class="sig-name descname"><span class="pre">mmu_static_percent</span></span><a class="headerlink" href="#confval-mmu_static_percent" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Percentage of per-port/per-cos cells to use as static reserved limit. Remaining cells are put in dynamic pool. Only used if mmu_static_bytes is 0.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mmu_yellow_drop_percent">
+<span class="sig-name descname"><span class="pre">mmu_yellow_drop_percent</span></span><a class="headerlink" href="#confval-mmu_yellow_drop_percent" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Percentage of per-port/per-cos packets used before yellow packets will be dropped</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-num_queues">
+<span class="sig-name descname"><span class="pre">num_queues</span></span><a class="headerlink" href="#confval-num_queues" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>In 5644x, 48 queues will be shared across host CPU and other micro controllers, this variable can be configured suffix with _pci _uc0 etc..</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-num_queues_pci">
+<span class="sig-name descname"><span class="pre">num_queues_pci</span></span><a class="headerlink" href="#confval-num_queues_pci" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of CPU (CMIC) queues served by the PCIe host.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">46</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-num_queues_uc0">
+<span class="sig-name descname"><span class="pre">num_queues_uc0</span></span><a class="headerlink" href="#confval-num_queues_uc0" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of CPU queues served by embedded microcontroller 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-num_queues_uc1">
+<span class="sig-name descname"><span class="pre">num_queues_uc1</span></span><a class="headerlink" href="#confval-num_queues_uc1" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Number of CPU queues served by embedded microcontroller 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-oob_pstats_hw_cor_en">
+<span class="sig-name descname"><span class="pre">oob_pstats_hw_cor_en</span></span><a class="headerlink" href="#confval-oob_pstats_hw_cor_en" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pfc_deadlock_seq_control">
+<span class="sig-name descname"><span class="pre">pfc_deadlock_seq_control</span></span><a class="headerlink" href="#confval-pfc_deadlock_seq_control" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Order of PFC deadlock handling: 0 calls the user callback after setting PFC XOFF, 1 before.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 8 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-port_uc_mc_accounting_combine">
+<span class="sig-name descname"><span class="pre">port_uc_mc_accounting_combine</span></span><a class="headerlink" href="#confval-port_uc_mc_accounting_combine" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>0: Separate port use-count, port limit and port resume for UC and MC. 1: Combined port use-count, port limit and port resume for UC and MC.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-profile_pg_1hdrm_8shared">
+<span class="sig-name descname"><span class="pre">profile_pg_1hdrm_8shared</span></span><a class="headerlink" href="#confval-profile_pg_1hdrm_8shared" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>0 - profile priority group with 1 shared profile and 8 headroom profiles, 1 - profile priority group with 8 shared profiles and 1 headroom profile</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pstats_desc_all">
+<span class="sig-name descname"><span class="pre">pstats_desc_all</span></span><a class="headerlink" href="#confval-pstats_desc_all" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-pstats_mor_disable">
+<span class="sig-name descname"><span class="pre">pstats_mor_disable</span></span><a class="headerlink" href="#confval-pstats_mor_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qos_default_map">
+<span class="sig-name descname"><span class="pre">qos_default_map</span></span><a class="headerlink" href="#confval-qos_default_map" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>This configuration property is used to enable/disable default QoS mapping loading when creating a QoS map. Note: qos_default_map = 0 (default): disable loading default Qos mapping. qos_default_map = 1: enable loading default Qos mapping.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qos_map_dot1p_nonsharable_mode">
+<span class="sig-name descname"><span class="pre">qos_map_dot1p_nonsharable_mode</span></span><a class="headerlink" href="#confval-qos_map_dot1p_nonsharable_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qos_map_dscp_nonsharable_mode">
+<span class="sig-name descname"><span class="pre">qos_map_dscp_nonsharable_mode</span></span><a class="headerlink" href="#confval-qos_map_dscp_nonsharable_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select DSCP map profile sharable mode. 0 - DSCP map profile shares among some map IDs (Default option). 1 - Each QoS map ID holds an exclusive DSCP map profile.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qos_map_egr_dscp_nonsharable_mode">
+<span class="sig-name descname"><span class="pre">qos_map_egr_dscp_nonsharable_mode</span></span><a class="headerlink" href="#confval-qos_map_egr_dscp_nonsharable_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select whether the QoS egress DSCP table entries are non-sharable. 0 - The entries within the table are sharable between QoS maps (Default option). 1 - The entries within the table are non-sharable. Each QoS map has an exclusive set for itself.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-qos_map_multi_get_mode">
+<span class="sig-name descname"><span class="pre">qos_map_multi_get_mode</span></span><a class="headerlink" href="#confval-qos_map_multi_get_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select the output mode of API bcm_qos_map_multi_get. 0 - Get all HW QoS map entries regardless of valid or not (default). 1 - Get configurable QoS map entries.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-service_queue_dynamic_config">
+<span class="sig-name descname"><span class="pre">service_queue_dynamic_config</span></span><a class="headerlink" href="#confval-service_queue_dynamic_config" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>TRUE =&gt; Support a. Changing service queue configuration with traffic. b. Allows multiple SERVICE_QUEUE_MAP table entries can share same egress Service Queue Group. FALSE =&gt; Default Setting Note: Hw limites number of port profile indexes to be 8. i.e. Max 8 unique combination of PORT_OFFSETS can be mapped. However, due to software use of memory profile indexing, one of these profile is used as a work entry. Thus we are limite to maximum of 7 unique port profiles.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="acl.html" class="btn btn-neutral float-left" title="ACL, field processor and UDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="telemetry.html" class="btn btn-neutral float-right" title="Telemetry, timing and OAM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

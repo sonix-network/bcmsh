@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forwarding table sizes &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Buffers and queues" href="mmu.html" />
+    <link rel="prev" title="Port mapping and SerDes" href="ports.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Forwarding table sizes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#shared-table-banks">Shared table banks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-a-larger-mac-table">Example: a larger MAC table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#route-tables">Route tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ecmp">ECMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vxlan-and-routing-into-tunnels">VXLAN and routing into tunnels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variables/index.html">Variable reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../config.html">Configuration variables</a></li>
+      <li class="breadcrumb-item active">Forwarding table sizes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="forwarding-table-sizes">
+<h1>Forwarding table sizes<a class="headerlink" href="#forwarding-table-sizes" title="Link to this heading"></a></h1>
+<p>Trident 3 has a pool of shared hash memory, the <em>unified forwarding table</em>
+(UFT), that is divided between the MAC (L2) table, the L3 host table, the
+exact-match table and ALPM route storage when the chip is initialised. The
+division is set in <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> and cannot change while the switch runs.</p>
+<section id="shared-table-banks">
+<h2>Shared table banks<a class="headerlink" href="#shared-table-banks" title="Link to this heading"></a></h2>
+<p>Each table has a dedicated part and can take shared banks on top:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Dedicated</p></th>
+<th class="head"><p>One shared bank adds</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="variables/tables.html#confval-l2_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l2_mem_entries</span></code></a></p></td>
+<td><p>32768</p></td>
+<td><p>32768</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="variables/tables.html#confval-l3_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_mem_entries</span></code></a></p></td>
+<td><p>16384</p></td>
+<td><p>32768</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="variables/tables.html#confval-fpem_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">fpem_mem_entries</span></code></a></p></td>
+<td><p>0</p></td>
+<td><p>16384</p></td>
+</tr>
+</tbody>
+</table>
+<p>The SDK rounds each request up to whole banks. A request for one exact-match
+bank gets two. At most 8 shared banks can be given out in total. With
+<a class="reference internal" href="variables/tables.html#confval-l3_alpm_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_alpm_enable</span></code></a> set, the MAC, host and exact-match tables can use at
+most four shared banks; ALPM uses the rest. If the requests do not fit, chip
+initialisation fails and <code class="docutils literal notranslate"><span class="pre">syncd</span></code> does not start.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">l2_mem_entries=163840</span></code> (used by some SONiC Trident 3 HWSKUs)
+asks for 131072 entries beyond the dedicated 32768, which is four shared
+banks. That fits next to ALPM only if <a class="reference internal" href="variables/tables.html#confval-l3_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_mem_entries</span></code></a> and
+<a class="reference internal" href="variables/tables.html#confval-fpem_mem_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">fpem_mem_entries</span></code></a> stay at their dedicated sizes.</p>
+<p>L3 host entries and route prefixes are different resources: host entries
+(exact <code class="docutils literal notranslate"><span class="pre">/32</span></code> and <code class="docutils literal notranslate"><span class="pre">/128</span></code> neighbours) live in the host table, route
+prefixes in the LPM TCAM or, with ALPM, in the ALPM banks.</p>
+</section>
+<section id="example-a-larger-mac-table">
+<h2>Example: a larger MAC table<a class="headerlink" href="#example-a-larger-mac-table" title="Link to this heading"></a></h2>
+<p>To double the MAC table on a switch without ALPM:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-l2_mem_entries=32768</span>
+<span class="gi">+l2_mem_entries=65536</span>
+</pre></div>
+</div>
+<p>This uses one shared bank. After a <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restart, check the value the
+SDK read and the capacity SONiC sees:</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; config get l2_mem_entries</span>
+<span class="go">drivshell&gt; echo $config_var_val</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>crm<span class="w"> </span>show<span class="w"> </span>resources<span class="w"> </span>all
+</pre></div>
+</div>
+</div>
+</section>
+<section id="route-tables">
+<h2>Route tables<a class="headerlink" href="#route-tables" title="Link to this heading"></a></h2>
+<p>Without ALPM, route prefixes are stored in the LPM TCAM.</p>
+<dl class="simple">
+<dt><a class="reference internal" href="variables/tables.html#confval-ipv6_lpm_128b_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ipv6_lpm_128b_enable</span></code></a></dt><dd><p>Allows IPv6 prefixes longer than /64. Every SONiC Trident 3 file sets it.</p>
+</dd>
+<dt><a class="reference internal" href="variables/tables.html#confval-num_ipv6_lpm_128b_entries"><code class="xref std std-confval docutils literal notranslate"><span class="pre">num_ipv6_lpm_128b_entries</span></code></a></dt><dd><p>How many of those long IPv6 prefixes to reserve room for (default 4096).
+Each takes the space of several IPv4 or short IPv6 prefixes.</p>
+</dd>
+<dt><a class="reference internal" href="variables/tables.html#confval-lpm_scaling_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">lpm_scaling_enable</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code> also allows 64-bit IPv6 prefixes in the unreserved paired TCAM. The
+Celestica Seastone2 files set it.</p>
+</dd>
+<dt><a class="reference internal" href="variables/tables.html#confval-l3_alpm_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_alpm_enable</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (parallel) or <code class="docutils literal notranslate"><span class="pre">2</span></code> (combined) moves prefixes to ALPM, which holds
+many more routes in shared UFT banks. The Dell
+S5232F-ON files use <code class="docutils literal notranslate"><span class="pre">l3_alpm_enable=2</span></code> with <code class="docutils literal notranslate"><span class="pre">lpm_scaling_enable=0</span></code>.</p>
+</dd>
+</dl>
+<p>The number of routes that fit depends on the prefix lengths and the mix of
+IPv4 and IPv6; there is no single “route count”. <code class="docutils literal notranslate"><span class="pre">crm</span> <span class="pre">show</span> <span class="pre">resources</span> <span class="pre">all</span></code>
+shows what SONiC can still add.</p>
+</section>
+<section id="ecmp">
+<h2>ECMP<a class="headerlink" href="#ecmp" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><a class="reference internal" href="variables/tables.html#confval-l3_ecmp_levels"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_ecmp_levels</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">2</span></code>. Two levels (hierarchical ECMP) are needed for
+VXLAN overlay ECMP across underlay ECMP and split the ECMP tables between
+the levels.</p>
+</dd>
+<dt><a class="reference internal" href="variables/tables.html#confval-l3_max_ecmp_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">l3_max_ecmp_mode</span></code></a></dt><dd><p>ECMP scaling mode; <code class="docutils literal notranslate"><span class="pre">1</span></code> in most SONiC Trident 3 files.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SAI_NUM_ECMP_MEMBERS</span></code> in <code class="docutils literal notranslate"><span class="pre">sai.profile</span></code></dt><dd><p>The largest ECMP group SONiC creates (64 on the Seastone2 HWSKU). It is a SAI
+setting, not a configuration variable.</p>
+</dd>
+</dl>
+</section>
+<section id="vxlan-and-routing-into-tunnels">
+<h2>VXLAN and routing into tunnels<a class="headerlink" href="#vxlan-and-routing-into-tunnels" title="Link to this heading"></a></h2>
+<p>VXLAN in SONiC needs the flex-flow VXLAN engine, routing in and out of
+tunnels (RIOT) and SAI tunnel support. The Seastone2 VXLAN HWSKU sets:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sai_tunnel_support=1
+use_all_splithorizon_groups=1
+bcm_tunnel_term_compatible_mode=1
+flow_init_mode=1
+l3_ecmp_levels=2
+riot_enable=1
+riot_overlay_l3_intf_mem_size=8192
+riot_overlay_l3_egress_mem_size=32768
+riot_overlay_ecmp_resilient_hash_size=16384
+</pre></div>
+</div>
+<p>The three <code class="docutils literal notranslate"><span class="pre">riot_overlay_*</span></code> sizes reserve router interfaces, next hops and
+resilient-hash entries for the overlay out of the shared L3 tables; the
+underlay gets less.</p>
+<p>All table variables are in the <a class="reference internal" href="variables/tables.html"><span class="doc">table variable reference</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ports.html" class="btn btn-neutral float-left" title="Port mapping and SerDes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mmu.html" class="btn btn-neutral float-right" title="Buffers and queues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embedded applications &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="KNET and the CPU port" href="../howto/knet.html" />
+    <link rel="prev" title="Scripting" href="scripting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Scripting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Embedded applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#embedded-cores">Embedded cores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#capabilities">Capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#processor-specifications">Processor specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory-map">Memory map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#firmware-files">Firmware files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applications-for-trident-3">Applications for Trident 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-eapp-configuration-file">The eApp configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sonic-images">SONiC images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-eapp-state">Checking eApp state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-an-eapp-by-hand">Loading an eApp by hand</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Embedded applications</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="embedded-applications">
+<h1>Embedded applications<a class="headerlink" href="#embedded-applications" title="Link to this heading"></a></h1>
+<p>Some switch features are not run by the SDK on the host CPU but by firmware
+on processors inside the switch chip. Broadcom calls these firmware images
+<em>embedded applications</em>, or <em>eApps</em>. This chapter describes which eApps exist
+for Trident 3, how the SAI loads them, what SONiC images ship, and how to
+see from the shell whether one is running. It also covers the processors,
+memory map and firmware files available to custom applications.</p>
+<section id="embedded-cores">
+<h2>Embedded cores<a class="headerlink" href="#embedded-cores" title="Link to this heading"></a></h2>
+<p>Trident 3 has two ARM Cortex-R5 cores for eApps, <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">1</span></code>. The
+shell’s <a class="reference internal" href="../glossary.html#term-MCS"><span class="xref std std-term">MCS</span></a> commands (<a class="reference internal" href="../reference/mcsstatus.html#clicmd-mcsstatus"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSStatus</span></code></a>, <a class="reference internal" href="../reference/mcsload.html#clicmd-mcsload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSLoad</span></code></a>,
+<a class="reference internal" href="../reference/mcsmsg.html#clicmd-mcsmsg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSMsg</span></code></a>, <a class="reference internal" href="../reference/mcscmd.html#clicmd-mcscmd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSCmd</span></code></a>, <a class="reference internal" href="../reference/mcsdump.html#clicmd-mcsdump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSDump</span></code></a>,
+<a class="reference internal" href="../reference/mcstimestamp.html#clicmd-mcstimestamp"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSTimeStamp</span></code></a>) work on these cores. Each core runs one application
+at a time on top of Broadcom’s small firmware kernel, the <em>uKernel</em>. The SDK
+talks to the application over a message channel; a feature module such as
+IFA or BFD only works once its application answers on that channel.</p>
+<p>A core stays in reset until an eApp is loaded onto it. <a class="reference internal" href="../reference/mcsstatus.html#clicmd-mcsstatus"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSStatus</span></code></a>
+then shows <code class="docutils literal notranslate"><span class="pre">RESET</span></code>. This is the normal state on a switch whose SONiC
+image loads no eApps, and does not mean the core is faulty.</p>
+<p>The chip also has Cortex-M0 cores (see <a class="reference internal" href="../glossary.html#term-M0"><span class="xref std std-term">M0</span></a>). These are separate
+processors: on SONiC Trident 3 switches core 0 runs the link-scan and LED
+firmware, independent of the eApps.</p>
+</section>
+<section id="capabilities">
+<h2>Capabilities<a class="headerlink" href="#capabilities" title="Link to this heading"></a></h2>
+<p>An eApp can do work close to the switch hardware while the host SDK manages
+normal switching. Besides the packaged telemetry and time-synchronisation
+applications below, custom firmware can:</p>
+<ul class="simple">
+<li><p>Exchange control messages and bulk data with the host.</p></li>
+<li><p>Read switch registers and counters over the S-channel, for example to
+sample a counter periodically without a host request for every sample.</p></li>
+<li><p>Transmit Ethernet packets and receive packets steered to its CPU queue.</p></li>
+<li><p>Keep results in shared SRAM for the host to read.</p></li>
+</ul>
+<p>A custom application has run on two Trident 3 switches, sampling counters
+every 100 ms and exchanging one discovery packet per second between them.
+Both cores can run custom applications concurrently. These examples show
+control and monitoring uses; they do not establish line-rate packet
+processing. Receiving packets requires queue steering, and an application
+must coordinate its DMA channels and other resources with the host SDK.
+Loading firmware alone does not configure those paths.</p>
+</section>
+<section id="processor-specifications">
+<h2>Processor specifications<a class="headerlink" href="#processor-specifications" title="Link to this heading"></a></h2>
+<p>The following configuration was measured on BCM56870 A0 switches. The clock
+is approximate; do not use it as a guaranteed frequency for every platform.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Configuration</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application processors</p></td>
+<td><p>Two ARM Cortex-R5 r1p3 cores, ARMv7-R</p></td>
+</tr>
+<tr class="row-odd"><td><p>Instruction sets and data</p></td>
+<td><p>ARM (A32) and Thumb-2; little-endian data</p></td>
+</tr>
+<tr class="row-even"><td><p>Measured CPU clock</p></td>
+<td><p>Approximately 858 MHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>Instruction TCM (ATCM), per core</p></td>
+<td><p>128 KiB</p></td>
+</tr>
+<tr class="row-even"><td><p>Data TCM (BTCM), per core</p></td>
+<td><p>256 KiB, ECC-protected</p></td>
+</tr>
+<tr class="row-odd"><td><p>L1 caches, per core</p></td>
+<td><p>16 KiB instruction and 16 KiB data; four-way, 32-byte cache lines</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory protection</p></td>
+<td><p>MPU with 16 regions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Shared RTS SRAM</p></td>
+<td><p>1 MiB, accessible by both R5 cores and the host</p></td>
+</tr>
+</tbody>
+</table>
+<p>TCM is tightly coupled memory local to a processor. It is separate from
+both the shared SRAM and the switch’s packet buffer. Cache sizes describe
+the hardware; firmware decides whether to enable caches. Custom firmware
+must initialise its BTCM with word stores before using unwritten memory:
+accessing uninitialised ECC memory can fault.</p>
+</section>
+<section id="memory-map">
+<h2>Memory map<a class="headerlink" href="#memory-map" title="Link to this heading"></a></h2>
+<p>Each R5 sees its own TCM at the same local addresses. The host and DMA
+engines use a different alias for each core’s TCM. Shared SRAM keeps the
+same address in the R5 and global address spaces. The diagram shows the
+application-relevant regions, not a complete peripheral map; gaps are not
+additional application RAM.</p>
+<pre  class="mermaid">
+        flowchart LR
+    subgraph C0[&quot;uC 0 local view&quot;]
+        A0[&quot;ATCM: 128 KiB&lt;br/&gt;0x00000000–0x0001ffff&quot;]
+        B0[&quot;BTCM: 256 KiB&lt;br/&gt;0x00040000–0x0007ffff&quot;]
+    end
+    subgraph G[&quot;Global / host-visible view&quot;]
+        GA0[&quot;uC 0 ATCM: 0x01100000&quot;]
+        GB0[&quot;uC 0 BTCM: 0x01120000&quot;]
+        GA1[&quot;uC 1 ATCM: 0x01160000&quot;]
+        GB1[&quot;uC 1 BTCM: 0x01180000&quot;]
+        S[&quot;Shared RTS SRAM: 1 MiB&lt;br/&gt;0x01200000–0x012fffff&lt;br/&gt;SDK messaging within SRAM at 0x0127f000&quot;]
+    end
+    subgraph C1[&quot;uC 1 local view&quot;]
+        A1[&quot;ATCM: 128 KiB&lt;br/&gt;0x00000000–0x0001ffff&quot;]
+        B1[&quot;BTCM: 256 KiB&lt;br/&gt;0x00040000–0x0007ffff&quot;]
+    end
+    A0 --&gt; GA0
+    B0 --&gt; GB0
+    A1 --&gt; GA1
+    B1 --&gt; GB1
+    C0 --- S
+    C1 --- S
+    </pre><p>ATCM holds the exception vectors, code and read-only data. BTCM holds
+writable data and stacks. Shared SRAM supports host communication and
+application data, but includes SDK messaging storage: an application must
+reserve that storage rather than treating the whole megabyte as free.
+The M0 LED/link-scan processors have their own memory and firmware.</p>
+</section>
+<section id="firmware-files">
+<h2>Firmware files<a class="headerlink" href="#firmware-files" title="Link to this heading"></a></h2>
+<p>The R5 images discussed here use Motorola S-record files (<code class="docutils literal notranslate"><span class="pre">.srec</span></code>).
+These are text files describing bytes to write at specified addresses;
+they are not raw binaries or ELF executables. A core-specific filename such
+as <code class="docutils literal notranslate"><span class="pre">BCM56870_0_ifa2.srec</span></code> identifies the intended chip and core, but does
+not by itself prove compatibility with the installed SDK or CANCUN version.</p>
+<p>The examined IFA2, Mirror on Drop and OneSync files contain:</p>
+<ul class="simple">
+<li><p>An S0 header naming the file.</p></li>
+<li><p>S3 data records with 32-bit addresses, payload bytes and record checksums.</p></li>
+<li><p>An S7 termination record carrying an entry address.</p></li>
+</ul>
+<p>Their data spans code in ATCM, initial data in BTCM and initial messaging
+storage in shared SRAM. The S-record container describes loading; the
+firmware inside it must also implement the SDK’s startup and messaging
+contract. Converting arbitrary ARM code to S-record text is insufficient.</p>
+<p>For <a class="reference internal" href="../reference/mcsload.html#clicmd-mcsload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSLoad</span></code></a>, keep each data record’s payload length a multiple
+of four bytes. An unaligned payload can fail with
+<code class="docutils literal notranslate"><span class="pre">record</span> <span class="pre">Not</span> <span class="pre">Multiple</span> <span class="pre">of</span> <span class="pre">4</span></code>. Choose the image built for the target core.
+Some stock files also initialise shared messaging storage for both cores,
+so loading one can affect communication with an application on the other.</p>
+<p>The R5 S-record files are separate from M0 <code class="docutils literal notranslate"><span class="pre">.bin</span></code> firmware, PCIe-loader
+images and CANCUN <code class="docutils literal notranslate"><span class="pre">.pkg</span></code> files; these formats and execution domains are
+not interchangeable.</p>
+</section>
+<section id="applications-for-trident-3">
+<h2>Applications for Trident 3<a class="headerlink" href="#applications-for-trident-3" title="Link to this heading"></a></h2>
+<p>Broadcom builds the following eApps for BCM56870/BCM56873. Each is built
+once per core, as <code class="docutils literal notranslate"><span class="pre">BCM56870_0_&lt;name&gt;.srec</span></code> for <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">0</span></code> and
+<code class="docutils literal notranslate"><span class="pre">BCM56870_1_&lt;name&gt;.srec</span></code> for <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">1</span></code>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 22.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature name</p></th>
+<th class="head"><p>Image</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IFA2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ifa2</span></code></p></td>
+<td><p><a class="reference internal" href="../glossary.html#term-IFA"><span class="xref std std-term">IFA</span></a> 2.0, in-band flow analysis (telemetry inserted into data
+packets). Tied to specific <a class="reference internal" href="../glossary.html#term-CANCUN"><span class="xref std std-term">CANCUN</span></a> versions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">IFA</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ifa</span></code></p></td>
+<td><p>IFA 1.0, the earlier version of the same feature.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ft-mod</span></code></p></td>
+<td><p><a class="reference internal" href="../glossary.html#term-MOD"><span class="xref std std-term">MOD</span></a> (Mirror on Drop) on top of the <a class="reference internal" href="../glossary.html#term-flow-tracker"><span class="xref std std-term">flow tracker</span></a>:
+reports packets the switch drops.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Flowtracker</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ft</span></code></p></td>
+<td><p>The <a class="reference internal" href="../glossary.html#term-flow-tracker"><span class="xref std std-term">flow tracker</span></a> application with <a class="reference internal" href="../glossary.html#term-IPFIX"><span class="xref std std-term">IPFIX</span></a> export.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PTP</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">onesync</span></code>, <code class="docutils literal notranslate"><span class="pre">knetsync</span></code></p></td>
+<td><p><a class="reference internal" href="../glossary.html#term-PTP"><span class="xref std std-term">PTP</span></a> time synchronisation (<a class="reference internal" href="../glossary.html#term-OneSync"><span class="xref std std-term">OneSync</span></a>,
+<a class="reference internal" href="../glossary.html#term-KnetSync"><span class="xref std std-term">KnetSync</span></a>); see <a class="reference internal" href="../reference/onesync.html#clicmd-onesync"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">onesync</span></code></a> and <a class="reference internal" href="../reference/knetsync.html#clicmd-knetsync"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">knetsync</span></code></a>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The same configuration files also list an <code class="docutils literal notranslate"><span class="pre">IFACC</span></code> image (<code class="docutils literal notranslate"><span class="pre">ifacc.bin</span></code>)
+that runs on an M0 core rather than an R5 core.</p>
+<p>Other SDK features are eApp-based as well, among them <a class="reference internal" href="../glossary.html#term-BFD"><span class="xref std std-term">BFD</span></a>,
+<a class="reference internal" href="../glossary.html#term-BroadSync"><span class="xref std std-term">BroadSync</span></a> and TX beacons (<a class="reference internal" href="../reference/txbeacon.html#clicmd-txbeacon"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">txbeacon</span></code></a>). No Trident 3 image
+for these is listed in the SONiC configuration files described below.</p>
+</section>
+<section id="the-eapp-configuration-file">
+<h2>The eApp configuration file<a class="headerlink" href="#the-eapp-configuration-file" title="Link to this heading"></a></h2>
+<p>The Broadcom SAI loads eApps itself; normally nothing has to be typed in
+the shell. It reads a JSON file named by the configuration variable
+<a class="reference internal" href="config/variables/sai.html#confval-sai_eapp_config_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_eapp_config_file</span></code></a> (normally
+<code class="docutils literal notranslate"><span class="pre">/etc/broadcom/eapps_cfg.json</span></code>). The file has a directory and a list of
+applications:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">"json-version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">"embedded-apps-location"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/lib/eapps"</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">"embedded-apps"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">       </span><span class="p">{</span>
+<span class="w">           </span><span class="nt">"feature-names"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"IFA2"</span><span class="p">],</span>
+<span class="w">           </span><span class="nt">"file-name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"BCM56870_0_ifa2.srec"</span><span class="p">,</span>
+<span class="w">           </span><span class="nt">"app-version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"4.4.4.0"</span><span class="p">,</span>
+<span class="w">           </span><span class="nt">"compatible-silicon"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"BCM56870"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BCM56873"</span><span class="p">],</span>
+<span class="w">           </span><span class="nt">"compatible-cancun"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"06.13.00"</span><span class="p">],</span>
+<span class="w">           </span><span class="nt">"r5-core-affinity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">           </span><span class="nt">"load-at-init"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">   </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">embedded-apps-location</span></code></p></td>
+<td><p>Directory that holds the image files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">feature-names</span></code></p></td>
+<td><p>The SAI feature the image provides (<code class="docutils literal notranslate"><span class="pre">IFA2</span></code>, <code class="docutils literal notranslate"><span class="pre">MOD</span></code>, <code class="docutils literal notranslate"><span class="pre">PTP</span></code> …).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">file-name</span></code></p></td>
+<td><p>Image file in that directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">app-version</span></code></p></td>
+<td><p>Expected application version.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compatible-silicon</span></code></p></td>
+<td><p>Chips the image is built for. Entries for other chips are skipped.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compatible-cancun</span></code></p></td>
+<td><p>CANCUN versions the image works with, if the list is present. If the
+loaded CANCUN is not in it, the SAI logs <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">current</span> <span class="pre">Cancun</span> <span class="pre">is</span> <span class="pre">not</span>
+<span class="pre">in</span> <span class="pre">the</span> <span class="pre">compatible-cancun</span> <span class="pre">list.</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r5-core-affinity</span></code>, <code class="docutils literal notranslate"><span class="pre">m0-core-affinity</span></code></p></td>
+<td><p>Which embedded core the image runs on.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">load-at-init</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> loads the image while the switch initialises, <code class="docutils literal notranslate"><span class="pre">0</span></code> when the
+feature is configured. IFA cannot be loaded at initialisation
+(<code class="docutils literal notranslate"><span class="pre">Loading</span> <span class="pre">IFA</span> <span class="pre">firmware</span> <span class="pre">during</span> <span class="pre">Init</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">supported.</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../reference/bcmsai.html#clicmd-bcmsai-dump_eapp_config"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span> <span class="pre">dump_eapp_config</span></code></a> prints the configuration the SAI has
+read. If it prints only an empty <code class="docutils literal notranslate"><span class="pre">embedded-apps-location:</span></code> line, the SAI
+has no eApp configuration and will load nothing.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>When a feature needs its application, the SAI checks the entry against the
+chip and CANCUN version, loads the image onto the core named in the file
+with the shell command <a class="reference internal" href="../reference/mcsload.html#clicmd-mcsload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSLoad</span></code></a> (<code class="docutils literal notranslate"><span class="pre">mcsload</span> <span class="pre">&lt;core&gt;</span> <span class="pre">&lt;dir&gt;/&lt;file&gt;</span>
+<span class="pre">InitMCS=true</span></code>, or <code class="docutils literal notranslate"><span class="pre">StartUC=true</span></code>), and then starts the SDK feature
+module. For PTP it then also runs <a class="reference internal" href="../reference/onesync.html#clicmd-onesync-init"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">onesync</span> <span class="pre">init</span></code></a>. Unloading stops
+the core’s messaging (<a class="reference internal" href="../reference/mcsmsg.html#clicmd-mcsmsg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSMsg</span></code></a>).</p>
+<p>The SDK feature module finds the application over the message channel. If
+no application answers, it logs a warning such as <code class="docutils literal notranslate"><span class="pre">uKernel</span> <span class="pre">BFD</span> <span class="pre">application</span>
+<span class="pre">not</span> <span class="pre">available</span></code> or <code class="docutils literal notranslate"><span class="pre">uKernel</span> <span class="pre">IFA</span> <span class="pre">application</span> <span class="pre">not</span> <span class="pre">available</span></code> and carries on
+without the feature. These messages at start-up are harmless on a switch
+that does not use the feature.</p>
+<p>Some features also need a configuration variable. IFA needs
+<a class="reference internal" href="config/variables/telemetry.html#confval-ifa_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ifa_enable</span></code></a> set to <code class="docutils literal notranslate"><span class="pre">1</span></code>; without it the SDK skips IFA set-up and
+the SAI logs <code class="docutils literal notranslate"><span class="pre">ifa_enable</span> <span class="pre">config</span> <span class="pre">property</span> <span class="pre">is</span> <span class="pre">disabled.</span></code>. The flow-tracker
+applications need <a class="reference internal" href="config/variables/telemetry.html#confval-flowtracker_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">flowtracker_enable</span></code></a>.</p>
+</section>
+<section id="sonic-images">
+<h2>SONiC images<a class="headerlink" href="#sonic-images" title="Link to this heading"></a></h2>
+<p>What a switch runs depends on its SONiC image:</p>
+<ul class="simple">
+<li><p><strong>Community SONiC builds</strong>, including the one on the switches described
+in <a class="reference internal" href="../validation.html"><span class="doc">Example validation</span></a>, ship no eApp images. The SAI package still contains a sample eApp
+configuration, but it points to a directory that does not exist, and the
+configured <a class="reference internal" href="config/variables/sai.html#confval-sai_eapp_config_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_eapp_config_file</span></code></a> is missing. Both cores stay in
+<code class="docutils literal notranslate"><span class="pre">RESET</span></code> and <a class="reference internal" href="../reference/bcmsai.html#clicmd-bcmsai-dump_eapp_config"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span> <span class="pre">dump_eapp_config</span></code></a> prints an empty
+configuration. Features that need an eApp (IFA, Mirror on Drop, the flow
+tracker application, PTP, BroadSync, BFD offload) have no firmware to talk
+to; their shell commands report that the firmware is not loaded or that
+the feature is not initialised.</p></li>
+<li><p><strong>Broadcom’s enterprise SONiC</strong> ships the eApps in three packages in the
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> container, <code class="docutils literal notranslate"><span class="pre">embedded-apps-ifa</span></code> (IFA2), <code class="docutils literal notranslate"><span class="pre">embedded-apps-mod</span></code>
+(MOD) and <code class="docutils literal notranslate"><span class="pre">embedded-apps-timesync</span></code> (OneSync PTP), installed in
+<code class="docutils literal notranslate"><span class="pre">/usr/lib/eapps</span></code>, and the configuration file
+<code class="docutils literal notranslate"><span class="pre">/etc/broadcom/eapps_cfg.json</span></code> on the host, which is mapped into the
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> container. Its Trident 3 common configuration sets
+<a class="reference internal" href="config/variables/sai.html#confval-sai_eapp_config_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_eapp_config_file</span></code></a> and <a class="reference internal" href="config/variables/telemetry.html#confval-ifa_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">ifa_enable</span></code></a>. All entries
+load on demand, so the cores stay in reset until a feature such as IFA is
+configured.</p></li>
+</ul>
+</section>
+<section id="checking-eapp-state">
+<h2>Checking eApp state<a class="headerlink" href="#checking-eapp-state" title="Link to this heading"></a></h2>
+<p>These commands are read-only:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/mcsstatus.html#clicmd-mcsstatus"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSStatus</span></code></a> shows each core’s state: <code class="docutils literal notranslate"><span class="pre">RESET</span></code> with no
+application, <code class="docutils literal notranslate"><span class="pre">Ok</span></code> with the application’s version and name when one runs.
+<code class="docutils literal notranslate"><span class="pre">mcsstatus</span> <span class="pre">Quick=true</span></code> pings the cores instead.</p></li>
+<li><p><a class="reference internal" href="../reference/bcmsai.html#clicmd-bcmsai-dump_eapp_config"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">BCMSAI</span> <span class="pre">dump_eapp_config</span></code></a> shows the eApp configuration the SAI
+has read.</p></li>
+<li><p><a class="reference internal" href="../reference/config.html#clicmd-config-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">show</span></code></a> with <code class="docutils literal notranslate"><span class="pre">ifa</span></code>, <code class="docutils literal notranslate"><span class="pre">flowtracker</span></code> or <code class="docutils literal notranslate"><span class="pre">sai_eapp</span></code> shows
+the related configuration variables.</p></li>
+<li><p><a class="reference internal" href="../reference/mcsdump.html#clicmd-mcsdump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSDump</span></code></a> with a core number shows the thread table of a running
+application.</p></li>
+</ul>
+<p>On a switch without eApps both cores are in reset:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mcsstatus</span>
+<span class="go">uC 0 status: RESET</span>
+<span class="go">uC 1 status: RESET</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: No eApp configuration</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; BCMSAI dump_eapp_config</span>
+<span class="go">embedded-apps-location:</span>
+</pre></div>
+</div>
+</div>
+<p>With an application loaded, <a class="reference internal" href="../reference/mcsstatus.html#clicmd-mcsstatus"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSStatus</span></code></a> reports the core as <code class="docutils literal notranslate"><span class="pre">Ok</span></code>
+and prints the application’s version string, which ends in the feature name.
+This is the IFA 2.0 application on <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">0</span></code>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mcsstatus</span>
+<span class="go">uC 0 status: Ok</span>
+<span class="go">version:  4.4.4.0 EA1 Wed Dec  6 18:05:42 PST 2023 IFA2</span>
+<span class="go">uC 1 status: RESET</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="loading-an-eapp-by-hand">
+<h2>Loading an eApp by hand<a class="headerlink" href="#loading-an-eapp-by-hand" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/mcsload.html#clicmd-mcsload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSLoad</span></code></a> loads an image from a file inside the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container.
+Give <code class="docutils literal notranslate"><span class="pre">InitMCS=true</span></code> on the first load, as the SAI does, to initialise
+the subsystem. On success the shell reports that the core’s messaging is up:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mcsload 0 /root/BCM56870_0_ifa2.srec InitMCS=true</span>
+<span class="go">UC0 messaging system: up</span>
+</pre></div>
+</div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">BCM56870</span></code> image built for the core you load it onto
+(<code class="docutils literal notranslate"><span class="pre">BCM56870_0_…</span></code> for <code class="docutils literal notranslate"><span class="pre">uC</span> <span class="pre">0</span></code>). Loading it does not configure the feature: the SDK module
+must still be initialised, with its configuration variable set, before the
+feature does anything. A hand-loaded application is gone after <code class="docutils literal notranslate"><span class="pre">syncd</span></code>
+restarts: both cores are back in reset. <a class="reference internal" href="../howto/ifa.html"><span class="doc">In-band Flow Analyzer (IFA 2.0)</span></a> shows a full example with the
+IFA 2.0 application.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Loading firmware by hand changes the switch behind SONiC’s back.
+<a class="reference internal" href="../reference/mcsload.html#clicmd-mcsload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">MCSLoad</span></code></a> resets the core first, so any feature already running
+on that core stops. Use it only on a test switch.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scripting.html" class="btn btn-neutral float-left" title="Scripting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../howto/knet.html" class="btn btn-neutral float-right" title="KNET and the CPU port" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

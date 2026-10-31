@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_fabric_* (185) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_fcoe_* (51)" href="bcm-fcoe.html" />
+    <link rel="prev" title="bcm_cpri_* (247)" href="bcm-cpri.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_fabric_*</span></code> (185)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-fabric-185">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_fabric_*</span></code> (185)<a class="headerlink" href="#bcm-fabric-185" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_FORWARDING_CLEAR(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_FORWARDING_GET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_FORWARDING_SET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_GLOBAL_CAPTURE_CLEAR(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_GLOBAL_CAPTURE_GET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_GLOBAL_CAPTURE_SET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_CLEAR(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_GET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_SET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_WITH_STATISTICS_CLEAR(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_WITH_STATISTICS_GET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_WITH_STATISTICS_SET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_SOP_ONLY_CLEAR(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_SOP_ONLY_GET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_SOP_ONLY_SET(uint32 *map);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_FLOW_PROFILE_KEY_SET(int *flow_profile, int *visibility);  /* not in OpenBCM 6.5.27 */
+bcm_module_t BCM_FABRIC_GROUP_MODID_SET(bcm_module_t *id);
+bcm_module_t BCM_FABRIC_GROUP_MODID_UNSET(bcm_module_t *id);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_FEC_CLEAR(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_FEC_GET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_FEC_SET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LEAKY_BUCKET_CLEAR(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LEAKY_BUCKET_GET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LEAKY_BUCKET_SET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LINK_INTEGRITY_CLEAR(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LINK_INTEGRITY_GET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LINK_INTEGRITY_SET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_REMOTE_FAULT_CLEAR(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_REMOTE_FAULT_GET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_REMOTE_FAULT_SET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_SERDES_CLEAR(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_SERDES_GET(int *arg);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_SERDES_SET(int *arg);  /* not in OpenBCM 6.5.27 */
+bcm_module_t BCM_FABRIC_LOCAL_MODID_SET(bcm_module_t *id);
+bcm_module_t BCM_FABRIC_LOCAL_MODID_UNSET(bcm_module_t *id);
+uint32 BCM_FABRIC_MODID_IS_GROUP(bcm_module_t *modid);
+uint32 BCM_FABRIC_MODID_IS_LOCAL(bcm_module_t *modid);
+uint32 BCM_FABRIC_MODID_IS_MODULE(bcm_module_t *modid);
+void BCM_FABRIC_MODULE_VEC_CLR(bcm_fabric_module_vector_t *vec, bcm_module_t *modid);
+uint32 BCM_FABRIC_MODULE_VEC_GET(bcm_fabric_module_vector_t *vec, bcm_module_t *modid);
+void BCM_FABRIC_MODULE_VEC_SET(bcm_fabric_module_vector_t *vec, bcm_module_t *modid);
+void BCM_FABRIC_MODULE_VEC_ZERO(bcm_fabric_module_vector_t *vec);
+int BCM_FABRIC_PREDICATE_VECTOR_CLR(bcm_fabric_predicate_vector_t *_vec, int *_n);
+int BCM_FABRIC_PREDICATE_VECTOR_GET(bcm_fabric_predicate_vector_t *_vec, int *_n);
+int BCM_FABRIC_PREDICATE_VECTOR_SET(bcm_fabric_predicate_vector_t *_vec, int *_n);
+uint32 BCM_FABRIC_STAT_INDEX_BLOCK_PIPE_SET(int *block, int *pipe);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_STAT_INDEX_BLOCK_SET(int *block);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_STAT_INDEX_LINK_CORE_SET(int *link, int *core);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_STAT_INDEX_LINK_PIPE_SET(int *link, int *pipe);
+uint32 BCM_FABRIC_STAT_INDEX_LINK_SET(int *link);
+uint32 BCM_FABRIC_STAT_VALUE_LINK_GET(uint64 *value);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_STAT_VALUE_MAX_WMK_GET(uint64 *value);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_STAT_VALUE_MIN_WMK_GET(uint64 *value);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_STAT_VALUE_WMK_GET(uint64 *value);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_FABRIC_TH_INDEX_CAST_LEVEL_SET(int *cast, int *level);
+uint32 BCM_FABRIC_TH_INDEX_CAST_PRIO_SET(int *cast, int *prio);
+uint32 BCM_FABRIC_TH_INDEX_FMC_SLOW_START_PHASE_SET(int *fmc_shaper, int *slow_start_phase);
+uint32 BCM_FABRIC_TH_INDEX_PIPE_LEVEL_SET(int *pipe, int *level);
+uint32 BCM_FABRIC_TH_INDEX_PIPE_LINK_SET(int *pipe, int *link);
+int BCM_FABRIC_VIRTUAL_LINK_CORE_SET(int *core);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_action_create(int unit, bcm_fabric_action_info_t *action_info, bcm_fabric_action_t *action_id);
+int bcm_fabric_action_destroy(int unit, bcm_fabric_action_t action_id);
+int bcm_fabric_action_destroy_all(int unit);
+int bcm_fabric_action_get(int unit, bcm_fabric_action_t action_id, bcm_fabric_action_info_t *action_info);
+void bcm_fabric_action_info_t_init(int unit, bcm_fabric_action_info_t *action_info);
+int bcm_fabric_action_traverse(int unit, bcm_fabric_action_traverse_cb cb, void *user_data);
+int bcm_fabric_auto_isolate_callback_register(int unit, uint32 flags, bcm_fabric_auto_isolate_callback_t user_func, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_auto_isolate_callback_unregister(int unit, uint32 flags, bcm_fabric_auto_isolate_callback_t user_func, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_bandwidth_core_profile_get(int unit, int core, uint32 flags, int profile_count, bcm_fabric_bandwidth_profile_t *profile_array);
+int bcm_fabric_bandwidth_core_profile_set(int unit, int core, uint32 flags, int profile_count, bcm_fabric_bandwidth_profile_t *profile_array);
+int bcm_fabric_bandwidth_profile_get(int unit, int profile_count, bcm_fabric_bandwidth_profile_t *profile_array);
+int bcm_fabric_bandwidth_profile_set(int unit, int profile_count, bcm_fabric_bandwidth_profile_t *profile_array);
+int bcm_fabric_block_indexes_get(int unit, uint32 flags, bcm_fabric_block_type_t block, bcm_fabric_device_type_t device_type, int block_arr_len, uint32 *blocks_arr, int *nof_blocks);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_cgm_control_get(int unit, uint32 flags, bcm_fabric_cgm_control_type_t control_type, bcm_fabric_cgm_control_id_t control_id, int *value);
+int bcm_fabric_cgm_control_set(int unit, uint32 flags, bcm_fabric_cgm_control_type_t control_type, bcm_fabric_cgm_control_id_t control_id, int value);
+int bcm_fabric_config_discard_get(int unit, bcm_fabric_config_discard_t *discard);
+int bcm_fabric_config_discard_set(int unit, bcm_fabric_config_discard_t *discard);
+int bcm_fabric_control_get(int unit, bcm_fabric_control_t type, int *arg);
+int bcm_fabric_control_set(int unit, bcm_fabric_control_t type, int arg);
+int bcm_fabric_destination_link_min_get(int unit, uint32 flags, bcm_module_t module_id, int *num_of_links);
+int bcm_fabric_destination_link_min_set(int unit, uint32 flags, bcm_module_t module_id, int num_of_links);
+int bcm_fabric_init(int unit);
+int bcm_fabric_jitter_wmk_get(int unit, uint32 flags, bcm_fabric_jitter_wmk_key_t *key, bcm_fabric_jitter_wmk_info_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_link_connectivity_status_get(int unit, int link_partner_max, bcm_fabric_link_connectivity_t *link_partner_array, int *link_partner_count);
+int bcm_fabric_link_connectivity_status_single_get(int unit, bcm_port_t link_id, bcm_fabric_link_connectivity_t *link_partner_info);
+int bcm_fabric_link_control_get(int unit, bcm_port_t link, bcm_fabric_link_control_t type, int *arg);
+int bcm_fabric_link_control_set(int unit, bcm_port_t link, bcm_fabric_link_control_t type, int arg);
+int bcm_fabric_link_integrity_get(int unit, uint32 flags, int nof_links, bcm_gport_t *links_array, int *is_active);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_link_profile_get(int unit, int profile_id, uint32 flags, uint32 links_count_max, uint32 *links_count, bcm_port_t *links);
+int bcm_fabric_link_profile_set(int unit, int profile_id, uint32 flags, uint32 links_count, bcm_port_t *links);
+int bcm_fabric_link_remote_pipe_mapping_get(int unit, bcm_port_t port, bcm_fabric_link_remote_pipe_mapping_t *mapping_config);
+int bcm_fabric_link_remote_pipe_mapping_set(int unit, bcm_port_t port, bcm_fabric_link_remote_pipe_mapping_t *mapping_config);
+void bcm_fabric_link_remote_pipe_mapping_t_init(bcm_fabric_link_remote_pipe_mapping_t *pipe_mapping);
+int bcm_fabric_link_status_get(int unit, bcm_port_t link_id, uint32 *link_status, uint32 *errored_token_count);
+int bcm_fabric_link_threshold_add(int unit, uint32 flags, int *fifo_type);
+int bcm_fabric_link_threshold_delete(int unit, int fifo_type);
+int bcm_fabric_link_thresholds_attach(int unit, int fifo_type, uint32 links_count, bcm_port_t *links);
+int bcm_fabric_link_thresholds_get(int unit, int fifo_type, uint32 count, bcm_fabric_link_threshold_type_t *type, int *value);
+int bcm_fabric_link_thresholds_pipe_get(int unit, int fifo_type, bcm_fabric_pipe_t pipe, uint32 flags, uint32 count, bcm_fabric_link_threshold_type_t *type, int *value);
+int bcm_fabric_link_thresholds_pipe_set(int unit, int fifo_type, bcm_fabric_pipe_t pipe, uint32 flags, uint32 count, bcm_fabric_link_threshold_type_t *type, int *value);
+int bcm_fabric_link_thresholds_retrieve(int unit, int fifo_type, uint32 links_count_max, bcm_port_t *links, uint32 *links_count);
+int bcm_fabric_link_thresholds_set(int unit, int fifo_type, uint32 count, bcm_fabric_link_threshold_type_t *type, int *value);
+int bcm_fabric_link_topology_config_get(int unit, uint32 flags, bcm_module_t destination, bcm_fabric_topology_type_t type, int links_count_max, int *links_count, bcm_port_t *links_array);
+int bcm_fabric_link_topology_config_set(int unit, uint32 flags, bcm_module_t destination, bcm_fabric_topology_type_t type, int links_count, bcm_port_t *links_array);
+int bcm_fabric_link_topology_get(int unit, bcm_module_t destination, int max_links_count, int *links_count, bcm_port_t *links_array);
+int bcm_fabric_link_topology_set(int unit, bcm_module_t destination, int links_count, bcm_port_t *links_array);
+int bcm_fabric_modid_group_find(int unit, bcm_module_t modid, bcm_module_t *group);
+int bcm_fabric_modid_group_get(int unit, bcm_module_t group, int modid_max_count, bcm_module_t *modid_array, int *modid_count);
+int bcm_fabric_modid_group_set(int unit, bcm_module_t group, int modid_count, bcm_module_t *modid_array);
+int bcm_fabric_modid_local_mapping_get(int unit, bcm_module_t local_modid, bcm_module_t *modid);
+int bcm_fabric_modid_local_mapping_set(int unit, bcm_module_t local_modid, bcm_module_t modid);
+int bcm_fabric_module_control_get(int unit, uint32 flags, bcm_module_t modid, bcm_fabric_module_control_t control, int *value);
+int bcm_fabric_module_control_set(int unit, uint32 flags, bcm_module_t modid, bcm_fabric_module_control_t control, int value);
+int bcm_fabric_multicast_get(int unit, bcm_multicast_t group, uint32 flags, int destid_count_max, int *destid_count, bcm_module_t *destid_array);
+int bcm_fabric_multicast_local_route_get(int unit, uint32 flags, uint32 nof_groups, bcm_multicast_t *groups, int *enable);
+int bcm_fabric_multicast_local_route_set(int unit, uint32 flags, uint32 nof_groups, bcm_multicast_t *groups, int *enable);
+int bcm_fabric_multicast_multi_get(int unit, uint32 flags, uint32 ngroups, bcm_multicast_t *groups, bcm_fabric_module_vector_t *dest_array);
+int bcm_fabric_multicast_multi_set(int unit, uint32 flags, uint32 ngroups, bcm_multicast_t *groups, bcm_fabric_module_vector_t *dest_array);
+int bcm_fabric_multicast_set(int unit, bcm_multicast_t group, uint32 flags, uint32 destid_count, bcm_module_t *destid_array);
+int bcm_fabric_pcp_dest_mode_config_get(int unit, uint32 flags, bcm_module_t modid, bcm_fabric_pcp_mode_config_t *pcp_config);
+int bcm_fabric_pcp_dest_mode_config_set(int unit, uint32 flags, bcm_module_t modid, bcm_fabric_pcp_mode_config_t *pcp_config);
+int bcm_fabric_port_create(int unit, bcm_gport_t parent_port, int offset, uint32 flags, bcm_gport_t *port);
+int bcm_fabric_port_destroy(int unit, bcm_gport_t parent_port);
+int bcm_fabric_port_get(int unit, bcm_gport_t child_port, uint32 flags, bcm_gport_t *parent_port);
+int bcm_fabric_predicate_action_create(int unit, bcm_fabric_predicate_action_info_t *predicate_action, bcm_fabric_predicate_action_t *predicate_action_id);
+int bcm_fabric_predicate_action_destroy(int unit, bcm_fabric_predicate_action_t predicate_action_id);
+int bcm_fabric_predicate_action_destroy_all(int unit);
+int bcm_fabric_predicate_action_get(int unit, bcm_fabric_predicate_action_t predicate_action_id, bcm_fabric_predicate_action_info_t *predicate_action_info);
+void bcm_fabric_predicate_action_info_t_init(int unit, bcm_fabric_predicate_action_info_t *predicate_action_info);
+int bcm_fabric_predicate_action_traverse(int unit, bcm_fabric_predicate_action_traverse_cb cb, void *user_data);
+int bcm_fabric_predicate_create(int unit, bcm_fabric_predicate_info_t *pred_info, bcm_fabric_predicate_t *pred_id);
+int bcm_fabric_predicate_destroy(int unit, bcm_fabric_predicate_t pred_id);
+int bcm_fabric_predicate_destroy_all(int unit);
+int bcm_fabric_predicate_get(int unit, bcm_fabric_predicate_t pred_id, bcm_fabric_predicate_info_t *pred_info);
+void bcm_fabric_predicate_info_t_init(int unit, bcm_fabric_predicate_info_t *pred_info);
+int bcm_fabric_predicate_traverse(int unit, bcm_fabric_predicate_traverse_cb cb, void *user_data);
+int bcm_fabric_priority_get(int unit, uint32 flags, bcm_cos_t ingress_pri, bcm_color_t color, int *fabric_priority);
+int bcm_fabric_priority_set(int unit, uint32 flags, bcm_cos_t ingress_pri, bcm_color_t color, int fabric_priority);
+int bcm_fabric_profile_map_get(int unit, uint32 flags, bcm_fabric_profile_map_t map_type, uint32 key, uint32 *map);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_profile_map_set(int unit, uint32 flags, bcm_fabric_profile_map_t map_type, uint32 key, uint32 map);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_profile_threshold_get(int unit, int profile_id, bcm_fabric_threshold_id_t threshold_id, bcm_fabric_threshold_type_t threshold_type, uint32 flags, int *value);
+int bcm_fabric_profile_threshold_set(int unit, int profile_id, bcm_fabric_threshold_id_t threshold_id, bcm_fabric_threshold_type_t threshold_type, uint32 flags, int value);
+int bcm_fabric_qsel_create(int unit, uint32 flags, int base, int count, bcm_fabric_qsel_t *qsel_id);
+int bcm_fabric_qsel_destroy(int unit, bcm_fabric_qsel_t qsel_id);
+int bcm_fabric_qsel_destroy_all(int unit);
+int bcm_fabric_qsel_entry_get(int unit, bcm_fabric_qsel_t qsel_id, int offset, bcm_gport_t *queue, bcm_fabric_qsel_offset_t *qsel_offset_id);
+int bcm_fabric_qsel_entry_multi_get(int unit, bcm_fabric_qsel_t qsel_id, int offset, int count, bcm_gport_t *queue, bcm_fabric_qsel_offset_t *qsel_offset_id);
+int bcm_fabric_qsel_entry_multi_set(int unit, bcm_fabric_qsel_t qsel_id, int offset, int count, bcm_gport_t *queue, bcm_fabric_qsel_offset_t *qsel_offset_id);
+int bcm_fabric_qsel_entry_set(int unit, bcm_fabric_qsel_t qsel_id, int offset, bcm_gport_t queue, bcm_fabric_qsel_offset_t qsel_offset_id);
+int bcm_fabric_qsel_entry_traverse(int unit, bcm_fabric_qsel_t qsel_id, bcm_fabric_qsel_entry_traverse_cb cb, void *user_data);
+int bcm_fabric_qsel_get(int unit, bcm_fabric_qsel_t qsel_id, uint32 *flags, int *base, int *count);
+int bcm_fabric_qsel_offset_create(int unit, uint32 flags, bcm_fabric_qsel_offset_t *qsel_offset_id);
+int bcm_fabric_qsel_offset_destroy(int unit, bcm_fabric_qsel_offset_t qsel_offset_id);
+int bcm_fabric_qsel_offset_destroy_all(int unit);
+int bcm_fabric_qsel_offset_entry_get(int unit, bcm_fabric_qsel_offset_t qsel_offset_id, bcm_cos_t int_pri, int *offset);
+int bcm_fabric_qsel_offset_entry_set(int unit, bcm_fabric_qsel_offset_t qsel_offset_id, bcm_cos_t int_pri, int offset);
+int bcm_fabric_qsel_offset_entry_traverse(int unit, bcm_fabric_qsel_offset_t qsel_offset_id, bcm_fabric_qsel_offset_entry_traverse_cb cb, void *user_data);
+int bcm_fabric_qsel_offset_traverse(int unit, bcm_fabric_qsel_offset_traverse_cb cb, void *user_data);
+int bcm_fabric_qsel_traverse(int unit, bcm_fabric_qsel_traverse_cb cb, void *user_data);
+int bcm_fabric_rci_biasing_probability_get(int unit, uint32 flags, bcm_fabric_rci_biasing_probability_info_t *probability_info, int *probability);
+int bcm_fabric_rci_biasing_probability_set(int unit, uint32 flags, bcm_fabric_rci_biasing_probability_info_t *probability_info, int *probability);
+int bcm_fabric_rci_config_get(int unit, bcm_fabric_rci_config_t *rci_config);
+int bcm_fabric_rci_config_set(int unit, bcm_fabric_rci_config_t rci_config);
+void bcm_fabric_rci_config_t_init(bcm_fabric_rci_config_t *rci_config);
+int bcm_fabric_rci_resolution_get(int unit, uint32 flags, bcm_fabric_rci_resolution_key_t *key, bcm_fabric_rci_resolution_config_t *config);
+int bcm_fabric_rci_resolution_set(int unit, uint32 flags, bcm_fabric_rci_resolution_key_t *key, bcm_fabric_rci_resolution_config_t *config);
+int bcm_fabric_reachability_status_get(int unit, int moduleid, int links_max, uint32 *links_array, int *links_count);
+int bcm_fabric_route_config_get(int unit, uint32 flags, bcm_gport_t gport, bcm_fabric_route_type_t route_type, uint32 dest_id_len, uint32 *dest_id_arr, uint32 *nof_dest_id);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_route_config_set(int unit, uint32 flags, bcm_gport_t gport, bcm_fabric_route_type_t route_type, uint32 nof_dest_id, uint32 *dest_id_arr);  /* not in OpenBCM 6.5.27 */
+int bcm_fabric_route_rx(int unit, uint32 flags, uint32 data_out_max_size, uint32 *data_out, uint32 *data_out_size);
+void bcm_fabric_route_t_init(bcm_fabric_route_t *fabric_route);
+int bcm_fabric_route_tx(int unit, uint32 flags, bcm_fabric_route_t *route, uint32 data_in_size, uint32 *data_in);
+int bcm_fabric_stat_get(int unit, uint32 flags, bcm_fabric_stat_index_t index, bcm_fabric_stat_t stat, uint64 *value);
+int bcm_fabric_static_replication_set(int unit, bcm_port_t port, uint32 flags, uint32 destid_count, bcm_module_t *destid_array);
+int bcm_fabric_system_upgrade_phase1_get(int unit, int flags, int *master_id, bcm_fabric_system_upgrade_target_t *target);
+int bcm_fabric_system_upgrade_phase1_set(int unit, int flags, int master_id, bcm_fabric_system_upgrade_target_t target);
+int bcm_fabric_system_upgrade_phase2_trig(int unit, int flags);
+int bcm_fabric_system_upgrade_phase3_get(int unit, int flags, bcm_fabric_system_upgrade_status_t *status);
+int bcm_fabric_tdm_direct_routing_get(int unit, bcm_gport_t gport, bcm_fabric_tdm_direct_routing_t *routing_info);
+int bcm_fabric_tdm_direct_routing_set(int unit, bcm_gport_t gport, bcm_fabric_tdm_direct_routing_t *routing_info);
+int bcm_fabric_tdm_editing_get(int unit, bcm_gport_t gport, bcm_fabric_tdm_editing_t *editing);
+int bcm_fabric_tdm_editing_set(int unit, bcm_gport_t gport, bcm_fabric_tdm_editing_t *editing);
+void bcm_fabric_tdm_editing_t_init(bcm_fabric_tdm_editing_t *editing);
+int bcm_fabric_wfd_profile_get(int unit, uint32 flags, int profile_id, int links_count_max, bcm_fabric_wfd_link_config_t *wfd_config, int *links_count);
+int bcm_fabric_wfd_profile_set(int unit, uint32 flags, int profile_id, int links_count, bcm_fabric_wfd_link_config_t *wfd_config);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-cpri.html" class="btn btn-neutral float-left" title="bcm_cpri_* (247)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-fcoe.html" class="btn btn-neutral float-right" title="bcm_fcoe_* (51)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_cpri_* (247) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_fabric_* (185)" href="bcm-fabric.html" />
+    <link rel="prev" title="bcm_cosq_* (841)" href="bcm-cosq.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_cpri_*</span></code> (247)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-cpri-247">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_cpri_*</span></code> (247)<a class="headerlink" href="#bcm-cpri-247" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_CPRI_CW_L1_FUNCTION_LOF_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_FUNCTION_LOF_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_LOF_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_LOS_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_FUNCTION_LOS_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_LOS_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_RAI_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_FUNCTION_RAI_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_RAI_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_RESET_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_FUNCTION_RESET_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_RESET_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_SDI_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_FUNCTION_SDI_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_FUNCTION_SDI_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_ETH_PTR_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_ETH_PTR_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_ETH_PTR_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_HDLC_RATE_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_HDLC_RATE_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_HDLC_RATE_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_LOF_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_LOF_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_LOF_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_LOS_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_LOS_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_LOS_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_RAI_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_RAI_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_RAI_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_RESET_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_RESET_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_RESET_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_SDI_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_SDI_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_SDI_SET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_VER_CLR(uint32 *flags);
+int BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_VER_GET(uint32 *flags);
+void BCM_CPRI_CW_L1_SIGNAL_PROT_MAP_VER_SET(uint32 *flags);
+int bcm_cpri_decap_presentation_time_config_get(int unit, bcm_port_t port, bcm_cpri_decap_presentation_config_t *config);
+int bcm_cpri_decap_presentation_time_config_set(int unit, bcm_port_t port, bcm_cpri_decap_presentation_config_t *config);
+int bcm_cpri_detach(int unit);
+int bcm_cpri_encap_control_queue_tag_to_flow_id_map_get(int unit, int port, uint32 tag_id, uint32 *flow_id);
+int bcm_cpri_encap_control_queue_tag_to_flow_id_map_set(int unit, int port, uint32 tag_id, uint32 flow_id);
+int bcm_cpri_encap_presentation_time_config_get(int unit, bcm_port_t port, bcm_cpri_presentation_ts_attribute_t attribute, bcm_cpri_presentation_time_t *time_offset);
+int bcm_cpri_encap_presentation_time_config_set(int unit, bcm_port_t port, bcm_cpri_presentation_ts_attribute_t attribute, bcm_cpri_presentation_time_t *time);
+int bcm_cpri_init(int unit);
+int bcm_cpri_port_1588_timestamp_capture_config_get(int unit, bcm_port_t port, bcm_cpri_dir_t direction, bcm_cpri_1588_capture_config_t *config);
+int bcm_cpri_port_1588_timestamp_capture_config_set(int unit, bcm_port_t port, bcm_cpri_dir_t direction, bcm_cpri_1588_capture_config_t *config);
+int bcm_cpri_port_1588_timestamp_config_get(int unit, bcm_port_t port, bcm_cpri_dir_t direction, bcm_cpri_1588_config_t *config);
+int bcm_cpri_port_1588_timestamp_config_set(int unit, bcm_port_t port, bcm_cpri_dir_t direction, bcm_cpri_1588_config_t *config);
+int bcm_cpri_port_1588_timestamp_get(int unit, bcm_port_t port, bcm_cpri_dir_t direction, bcm_cpri_1588_ts_type_t type, int max_count, int *count, bcm_cpri_1588_timestamp_t *ts_list);
+int bcm_cpri_port_1588_timestamp_ts_config_get(int unit, bcm_port_t port, bcm_cpri_dir_t direction, bcm_cpri_1588_ts_type_t type, bcm_cpri_1588_timestamp_ts_config_t *config);
+int bcm_cpri_port_1588_timestamp_ts_config_set(int unit, bcm_port_t port, bcm_cpri_dir_t direction, bcm_cpri_1588_ts_type_t type, bcm_cpri_1588_timestamp_ts_config_t *config);
+int bcm_cpri_port_agnostic_config_get(int unit, bcm_port_t port, bcm_cpri_dir_t dir, int *enable, bcm_cpri_port_agnostic_config_t *config);
+int bcm_cpri_port_agnostic_config_set(int unit, bcm_port_t port, bcm_cpri_dir_t dir, int enable, bcm_cpri_port_agnostic_config_t *config);
+int bcm_cpri_port_compression_lookup_table_get(int unit, bcm_gport_t port, int max_depth, int *table_depth, uint32 *comp_table);
+int bcm_cpri_port_compression_lookup_table_set(int unit, bcm_gport_t port, int table_depth, uint32 *comp_table);
+int bcm_cpri_port_compression_saturation_config_get(int unit, bcm_port_t port, uint32 *threshold_value);
+int bcm_cpri_port_compression_saturation_config_set(int unit, bcm_port_t port, uint32 threshold_value);
+int bcm_cpri_port_cw_fast_eth_config_get(int unit, int port, bcm_cpri_fast_eth_config_info_t *config);
+int bcm_cpri_port_cw_fast_eth_config_set(int unit, int port, bcm_cpri_fast_eth_config_info_t *config);
+int bcm_cpri_port_cw_slow_hdlc_config_get(int unit, int port, bcm_cpri_slow_hdlc_config_info_t *config);
+int bcm_cpri_port_cw_slow_hdlc_config_set(int unit, int port, bcm_cpri_slow_hdlc_config_info_t *config);
+int bcm_cpri_port_debug_clear(int unit, bcm_gport_t port, bcm_cpri_debug_attr_t type, int index);
+int bcm_cpri_port_debug_get(int unit, bcm_gport_t port, bcm_cpri_debug_attr_t type, int index, int buffer_size, uint32 *data);
+int bcm_cpri_port_debug_set(int unit, bcm_gport_t port, bcm_cpri_debug_attr_t type, int index, int buffer_size, uint32 *data);
+int bcm_cpri_port_decap_ethertype_get(int unit, bcm_gport_t port, bcm_cpri_ethertype_t type, uint16 *tpid);
+int bcm_cpri_port_decap_ethertype_set(int unit, bcm_gport_t port, bcm_cpri_ethertype_t type, uint16 tpid);
+int bcm_cpri_port_decap_flow_config_clear(int unit, bcm_gport_t port, uint8 roe_subtype);
+int bcm_cpri_port_decap_flow_config_get(int unit, bcm_gport_t port, uint8 roe_subtype, bcm_cpri_decap_flow_config_t *config);
+int bcm_cpri_port_decap_flow_config_set(int unit, bcm_gport_t port, uint8 roe_subtype, bcm_cpri_decap_flow_config_t *config);
+int bcm_cpri_port_decap_flow_to_queue_mapping_clear(int unit, bcm_gport_t port, uint32 flow_id);
+int bcm_cpri_port_decap_flow_to_queue_mapping_get(int unit, bcm_gport_t port, uint32 flow_id, uint32 *queue_num);
+int bcm_cpri_port_decap_flow_to_queue_mapping_set(int unit, bcm_gport_t port, uint32 flow_id, uint32 queue_num);
+int bcm_cpri_port_decap_queue_flow_control_get(int unit, bcm_gport_t port, uint32 queue_num, uint32 *xon_threshold, uint32 *xoff_threshold, int *enable);
+int bcm_cpri_port_decap_queue_flow_control_set(int unit, bcm_gport_t port, uint32 queue_num, uint32 xon_threshold, uint32 xoff_threshold, int enable);
+int bcm_cpri_port_decap_queue_to_ordering_info_index_get(int unit, bcm_gport_t port, uint32 queue_num, uint32 *ordering_info_index);
+int bcm_cpri_port_decap_queue_to_ordering_info_index_set(int unit, bcm_gport_t port, uint32 queue_num, uint32 ordering_info_index);
+int bcm_cpri_port_decap_roe_ordering_info_get(int unit, bcm_gport_t port, int index, bcm_cpri_decap_roe_oi_t *ordering_info);
+int bcm_cpri_port_decap_roe_ordering_info_set(int unit, bcm_gport_t port, int index, bcm_cpri_decap_roe_oi_t *ordering_info);
+int bcm_cpri_port_decap_roe_ordering_sequence_offset_get(int unit, bcm_gport_t port, int queue, bcm_cpri_roe_oi_seq_offset_t *seq_offset);
+int bcm_cpri_port_decap_roe_ordering_sequence_offset_set(int unit, bcm_gport_t port, int queue, bcm_cpri_roe_oi_seq_offset_t *seq_offset);
+int bcm_cpri_port_decap_secondary_key_to_queue_mapping_get(int unit, bcm_port_t port, uint32 secondary_key, uint32 *queue_num);
+int bcm_cpri_port_decap_secondary_key_to_queue_mapping_set(int unit, bcm_port_t port, uint32 secondary_key, uint32 queue_num);
+int bcm_cpri_port_decompression_lookup_table_get(int unit, bcm_gport_t port, int max_depth, int *table_depth, uint32 *comp_table);
+int bcm_cpri_port_decompression_lookup_table_set(int unit, bcm_gport_t port, int table_depth, uint32 *comp_table);
+int bcm_cpri_port_decompression_saturation_config_get(int unit, bcm_port_t port, uint32 *sat_value);
+int bcm_cpri_port_decompression_saturation_config_set(int unit, bcm_port_t port, uint32 sat_value);
+int bcm_cpri_port_encap_get(int unit, bcm_gport_t port, int queue_num, bcm_cpri_encap_info_t *encap_config);
+int bcm_cpri_port_encap_roe_entry_macda_get(int unit, bcm_gport_t port, int index, bcm_mac_t *macaddr);
+int bcm_cpri_port_encap_roe_entry_macda_set(int unit, bcm_gport_t port, int index, bcm_mac_t macaddr);
+int bcm_cpri_port_encap_roe_entry_macsa_get(int unit, bcm_gport_t port, int index, bcm_mac_t *macaddr);
+int bcm_cpri_port_encap_roe_entry_macsa_set(int unit, bcm_gport_t port, int index, bcm_mac_t macaddr);
+int bcm_cpri_port_encap_roe_entry_vlan_get(int unit, bcm_gport_t port, uint32 flags, uint32 index, bcm_vlan_t *vlan_id);
+int bcm_cpri_port_encap_roe_entry_vlan_set(int unit, bcm_gport_t port, uint32 flags, uint32 index, bcm_vlan_t vlan_id);
+int bcm_cpri_port_encap_roe_ordering_info_get(int unit, bcm_gport_t port, int index, bcm_cpri_encap_roe_oi_t *ordering_info);
+int bcm_cpri_port_encap_roe_ordering_info_set(int unit, bcm_gport_t port, int index, bcm_cpri_encap_roe_oi_t *ordering_info);
+int bcm_cpri_port_encap_roe_ordering_sequence_offset_get(int unit, bcm_gport_t port, int queue, int control, bcm_cpri_roe_oi_seq_offset_t *seq_offset);
+int bcm_cpri_port_encap_roe_ordering_sequence_offset_set(int unit, bcm_gport_t port, int queue, int control, bcm_cpri_roe_oi_seq_offset_t *seq_offset);
+int bcm_cpri_port_encap_set(int unit, bcm_gport_t port, int queue_num, bcm_cpri_encap_info_t *encap_config);
+int bcm_cpri_port_encap_vlan_config_get(int unit, bcm_gport_t port, bcm_cpri_encap_vlan_config_t *vlan_config);
+int bcm_cpri_port_encap_vlan_config_set(int unit, bcm_gport_t port, bcm_cpri_encap_vlan_config_t *vlan_config);
+int bcm_cpri_port_fec_aux_config_get(int unit, bcm_gport_t port, bcm_cpri_fec_aux_config_t param_id, uint32 *value);
+int bcm_cpri_port_fec_aux_config_set(int unit, bcm_gport_t port, bcm_cpri_fec_aux_config_t param_id, uint32 value);
+int bcm_cpri_port_fec_enable_get(int unit, bcm_gport_t port, bcm_cpri_dir_t dir, int *enable);
+int bcm_cpri_port_fec_enable_set(int unit, bcm_gport_t port, bcm_cpri_dir_t dir, int enable);
+int bcm_cpri_port_fec_stat_get(int unit, bcm_gport_t port, bcm_cpri_fec_stat_type_t type, uint32 *counter_value);
+int bcm_cpri_port_fec_timestamp_config_get(int unit, bcm_gport_t port, bcm_cpri_dir_t dir, bcm_cpri_fec_timestamp_config_t *config);
+int bcm_cpri_port_fec_timestamp_config_set(int unit, bcm_gport_t port, bcm_cpri_dir_t dir, bcm_cpri_fec_timestamp_config_t *config);
+int bcm_cpri_port_frame_config_get(int unit, bcm_port_t port, bcm_cpri_port_frame_config_t *config);
+int bcm_cpri_port_frame_config_set(int unit, bcm_port_t port, bcm_cpri_port_frame_config_t *config);
+int bcm_cpri_port_interrupt_callback_register(int unit, bcm_cpri_interrupt_type_t cpri_intr_type, bcm_cpri_port_interrupt_callback_t callback, void *user_data);
+int bcm_cpri_port_interrupt_callback_unregister(int unit, bcm_cpri_interrupt_type_t cpri_intr_type, bcm_cpri_port_interrupt_callback_t callback);
+int bcm_cpri_port_interrupt_enable_get(int unit, bcm_port_t port, bcm_cpri_interrupt_type_t cpri_intr_type, int data, int *enable);
+int bcm_cpri_port_interrupt_enable_set(int unit, bcm_port_t port, bcm_cpri_interrupt_type_t cpri_intr_type, int data, int enable);
+int bcm_cpri_port_rsvd4_agnostic_mode_config_get(int unit, bcm_port_t port, bcm_cpri_dir_t direction, int *enable, bcm_cpri_port_rsvd4_agnostic_config_t *config);
+int bcm_cpri_port_rsvd4_agnostic_mode_config_set(int unit, bcm_port_t port, bcm_cpri_dir_t direction, int enable, bcm_cpri_port_rsvd4_agnostic_config_t *config);
+int bcm_cpri_port_rsvd4_cm_fast_eth_config_get(int unit, int port, bcm_rsvd4_fast_eth_config_info_t *config);
+int bcm_cpri_port_rsvd4_cm_fast_eth_config_set(int unit, int port, int control_flow_id, bcm_rsvd4_fast_eth_config_info_t *config);
+int bcm_cpri_port_rsvd4_dbm_entry_clear(int unit, bcm_gport_t port, int index);
+int bcm_cpri_port_rsvd4_dbm_entry_get(int unit, bcm_gport_t port, int index, bcm_rsvd4_dbm_entry_t *entry);
+int bcm_cpri_port_rsvd4_dbm_entry_set(int unit, bcm_gport_t port, int index, bcm_rsvd4_dbm_entry_t *entry);
+int bcm_cpri_port_rsvd4_rx_bfn_sync_config_get(int unit, bcm_gport_t port, uint16 *master_frame_count, uint64 *master_frame_start);
+int bcm_cpri_port_rsvd4_rx_bfn_sync_config_set(int unit, bcm_gport_t port, uint16 master_frame_count, uint64 master_frame_start);
+int bcm_cpri_port_rsvd4_rx_control_flow_add(int unit, int port, int control_flow_id, bcm_rsvd4_control_flow_config_t *config);
+int bcm_cpri_port_rsvd4_rx_control_flow_delete(int unit, int port, int control_flow_id, bcm_rsvd4_control_flow_config_t *control_flow_cfg);
+int bcm_cpri_port_rsvd4_rx_control_flow_get(int unit, int port, int control_flow_id, bcm_rsvd4_control_flow_config_t *config);
+int bcm_cpri_port_rsvd4_rx_current_frame_sync_info_get(int unit, bcm_gport_t port, bcm_rsvd4_frame_sync_info_t *frame_sync_info);
+int bcm_cpri_port_rsvd4_rx_flow_add(int unit, bcm_gport_t port, int flow_id, bcm_rsvd4_rx_flow_info_t *flow_info);
+int bcm_cpri_port_rsvd4_rx_flow_delete(int unit, bcm_gport_t port, int flow_id);
+int bcm_cpri_port_rsvd4_rx_frame_config_debug_set(int unit, bcm_gport_t port, bcm_rsvd4_rx_config_t config_type, uint32 value);
+int bcm_cpri_port_rsvd4_rx_frame_config_get(int unit, bcm_gport_t port, bcm_rsvd4_rx_frame_config_t *config);
+int bcm_cpri_port_rsvd4_rx_frame_config_set(int unit, bcm_gport_t port, bcm_rsvd4_rx_frame_config_t *config);
+int bcm_cpri_port_rsvd4_rx_fsm_control_get(int unit, bcm_gport_t port, bcm_rsvd4_rx_fsm_control_t control_type, uint32 *value);
+int bcm_cpri_port_rsvd4_rx_fsm_control_set(int unit, bcm_gport_t port, bcm_rsvd4_rx_fsm_control_t control_type, uint32 value);
+int bcm_cpri_port_rsvd4_rx_fsm_state_set(int unit, bcm_gport_t port, bcm_rsvd4_rx_fsm_state_t state);
+int bcm_cpri_port_rsvd4_rx_override_set(int unit, bcm_gport_t port, bcm_rsvd4_rx_params_t parameter, int enable, int value);
+int bcm_cpri_port_rsvd4_secondary_dbm_entry_clear(int unit, bcm_gport_t port, int index);
+int bcm_cpri_port_rsvd4_secondary_dbm_entry_get(int unit, bcm_gport_t port, int index, bcm_rsvd4_secondary_dbm_entry_t *entry);
+int bcm_cpri_port_rsvd4_secondary_dbm_entry_set(int unit, bcm_gport_t port, int index, bcm_rsvd4_secondary_dbm_entry_t *entry);
+int bcm_cpri_port_rsvd4_sync_profile_entry_get(int unit, int port, int index, bcm_rsvd4_sync_profile_entry_t *config);
+int bcm_cpri_port_rsvd4_sync_profile_entry_set(int unit, int port, int index, bcm_rsvd4_sync_profile_entry_t *config);
+int bcm_cpri_port_rsvd4_tx_cm_eth_config_set(int unit, int port, bcm_rsvd4_tx_cm_eth_config_t *config);
+int bcm_cpri_port_rsvd4_tx_cm_hdr_config_entry_get(int unit, int port, int index, bcm_rsvd4_tx_cm_hdr_entry_t *entry);
+int bcm_cpri_port_rsvd4_tx_cm_hdr_config_entry_set(int unit, int port, int index, bcm_rsvd4_tx_cm_hdr_entry_t *entry);
+int bcm_cpri_port_rsvd4_tx_cm_hdr_lkup_entry_get(int unit, int port, int flow_id, int *header_index);
+int bcm_cpri_port_rsvd4_tx_cm_hdr_lkup_entry_set(int unit, int port, int flow_id, int header_index);
+int bcm_cpri_port_rsvd4_tx_cm_raw_config_set(int unit, int port, bcm_rsvd4_tx_cm_raw_config_t *config);
+int bcm_cpri_port_rsvd4_tx_cm_tunnel_crc_config_get(int unit, int port, bcm_rsvd4_cm_tunnel_crc_option_t *crc_option);
+int bcm_cpri_port_rsvd4_tx_cm_tunnel_crc_config_set(int unit, int port, bcm_rsvd4_cm_tunnel_crc_option_t crc_option);
+int bcm_cpri_port_rsvd4_tx_control_flow_add(int unit, int port, int control_flow_id, bcm_rsvd4_tx_control_flow_config_t *config);
+int bcm_cpri_port_rsvd4_tx_control_flow_get(int unit, int port, int control_flow_id, bcm_rsvd4_tx_control_flow_config_t *config);
+int bcm_cpri_port_rsvd4_tx_control_flow_group_member_add(int unit, int port, bcm_rsvd4_control_group_id_t group_num, bcm_rsvd4_tx_control_flow_group_config_t *config);
+int bcm_cpri_port_rsvd4_tx_control_flow_group_member_delete(int unit, int port, bcm_rsvd4_control_group_id_t group_num, bcm_rsvd4_priority_t priority);
+int bcm_cpri_port_rsvd4_tx_control_flow_group_member_get(int unit, int port, bcm_rsvd4_control_group_id_t group_num, bcm_rsvd4_priority_t priority, bcm_rsvd4_tx_control_flow_group_config_t *config);
+int bcm_cpri_port_rsvd4_tx_control_flow_group_member_get_all(int unit, int port, bcm_rsvd4_control_group_id_t group_num, bcm_rsvd4_control_group_entry_t *group_config);
+int bcm_cpri_port_rsvd4_tx_current_frame_sync_info_get(int unit, bcm_gport_t port, bcm_rsvd4_frame_sync_info_t *frame_sync_info);
+int bcm_cpri_port_rsvd4_tx_flow_add(int unit, bcm_gport_t port, int flow_id, bcm_rsvd4_tx_flow_info_t *flow_info);
+int bcm_cpri_port_rsvd4_tx_flow_delete(int unit, bcm_gport_t port, int flow_id);
+int bcm_cpri_port_rsvd4_tx_frame_config_debug_set(int unit, bcm_gport_t port, bcm_rsvd4_tx_config_t config_type, uint32 value);
+int bcm_cpri_port_rsvd4_tx_frame_config_get(int unit, bcm_gport_t port, bcm_rsvd4_tx_frame_config_t *config);
+int bcm_cpri_port_rsvd4_tx_frame_config_set(int unit, bcm_gport_t port, bcm_rsvd4_tx_frame_config_t *config);
+int bcm_cpri_port_rsvd4_tx_fsm_control_get(int unit, bcm_gport_t port, bcm_rsvd4_tx_fsm_control_t control_type, uint32 *value);
+int bcm_cpri_port_rsvd4_tx_fsm_control_set(int unit, bcm_gport_t port, bcm_rsvd4_tx_fsm_control_t control_type, uint32 value);
+int bcm_cpri_port_rsvd4_tx_fsm_state_set(int unit, bcm_gport_t port, bcm_rsvd4_tx_fsm_state_t state);
+int bcm_cpri_port_rsvd4_tx_modulo_rule_entry_get(int unit, bcm_gport_t port, uint32 modulo_rule_num, bcm_cpri_tx_rule_type_t modulo_rule_type, bcm_cpri_modulo_rule_entry_t *modulo_rule);
+int bcm_cpri_port_rsvd4_tx_modulo_rule_entry_set(int unit, bcm_gport_t port, uint32 modulo_rule_num, bcm_cpri_tx_rule_type_t modulo_rule_type, bcm_cpri_modulo_rule_entry_t *modulo_rule);
+int bcm_cpri_port_rsvd4_tx_override_set(int unit, bcm_gport_t port, bcm_rsvd4_tx_params_t parameter, int enable, int value);
+int bcm_cpri_port_rsvd4_tx_position_entry_get(int unit, bcm_gport_t port, uint32 pos_index, bcm_cpri_dbm_position_entry_t *pos_entry);
+int bcm_cpri_port_rsvd4_tx_position_entry_set(int unit, bcm_gport_t port, uint32 pos_index, bcm_cpri_dbm_position_entry_t *pos_entry);
+int bcm_cpri_port_rx_8b10b_descrambler_enable_get(int unit, bcm_gport_t port, int *enable);
+int bcm_cpri_port_rx_8b10b_descrambler_enable_set(int unit, bcm_gport_t port, int enable);
+int bcm_cpri_port_rx_axc_frame_add(int unit, bcm_gport_t port, int axc_id, bcm_cpri_axc_frame_info_t *axc_info);
+int bcm_cpri_port_rx_axc_frame_delete(int unit, bcm_gport_t port, int axc_id);
+int bcm_cpri_port_rx_axc_frame_get(int unit, bcm_gport_t port, int axc_id, bcm_cpri_axc_frame_info_t *axc_info);
+int bcm_cpri_port_rx_axc_frame_get_all(int unit, bcm_gport_t port, int max_count, bcm_cpri_axc_frame_info_t *axc_info_list, int *axc_count);
+int bcm_cpri_port_rx_cw_gcw_config_get(int unit, int port, uint8 index, bcm_cpri_rx_gcw_config_info_t *config);
+int bcm_cpri_port_rx_cw_gcw_config_set(int unit, int port, uint8 index, bcm_cpri_rx_gcw_config_info_t *config);
+int bcm_cpri_port_rx_cw_gcw_word_get(int unit, bcm_port_t port, int group_index, uint16 *gcw_word);
+int bcm_cpri_port_rx_cw_l1_inband_info_get(int unit, int port, bcm_cpri_cw_l1_inband_info_t *l1_inband_info);
+int bcm_cpri_port_rx_cw_l1_signal_protection_get(int unit, int port, uint32 signal_map, uint32 *enable);
+int bcm_cpri_port_rx_cw_l1_signal_protection_set(int unit, int port, uint32 signal_map, uint32 enable);
+int bcm_cpri_port_rx_cw_rsvd5_config_get(int unit, int port, bcm_cpri_rx_rsvd5_config_info_t *config);
+int bcm_cpri_port_rx_cw_rsvd5_config_set(int unit, int port, bcm_cpri_rx_rsvd5_config_info_t *config);
+int bcm_cpri_port_rx_cw_sync_info_get(int unit, int port, uint32 *hyper_frame_num, uint32 *radio_frame_num);
+int bcm_cpri_port_rx_cw_vsd_config_get(int unit, int port, bcm_cpri_rx_vsd_config_info_t *config);
+int bcm_cpri_port_rx_cw_vsd_config_set(int unit, int port, bcm_cpri_rx_vsd_config_info_t *config);
+int bcm_cpri_port_rx_cw_vsd_ctrl_flow_add(int unit, int port, uint16 group_id, bcm_cpri_rx_vsd_flow_info_t *config);
+int bcm_cpri_port_rx_cw_vsd_ctrl_flow_delete(int unit, int port, uint16 group_id);
+int bcm_cpri_port_rx_cw_vsd_ctrl_flow_get(int unit, int port, uint16 group_id, bcm_cpri_rx_vsd_flow_info_t *config);
+int bcm_cpri_port_rx_cw_vsd_raw_config_get(int unit, int port, uint8 vsd_raw_id, bcm_cpri_rx_vsd_raw_config_info_t *config);
+int bcm_cpri_port_rx_cw_vsd_raw_config_set(int unit, int port, uint8 vsd_raw_id, bcm_cpri_rx_vsd_raw_config_info_t *config);
+int bcm_cpri_port_rx_pipeline_clear(int unit, bcm_gport_t port);
+int bcm_cpri_port_rx_speed_get(int unit, bcm_gport_t port, bcm_cpri_port_type_t *port_type, bcm_cpri_port_speed_t *speed);
+int bcm_cpri_port_rx_speed_set(int unit, bcm_gport_t port, bcm_cpri_port_type_t port_type, bcm_cpri_port_speed_t speed);
+int bcm_cpri_port_rx_tag_config_get(int unit, int port, bcm_cpri_control_tag_config_t *config);
+int bcm_cpri_port_rx_tag_config_set(int unit, int port, bcm_cpri_control_tag_config_t *config);
+int bcm_cpri_port_rx_tag_entry_add(int unit, int port, bcm_cpri_tag_gen_entry_t *config);
+int bcm_cpri_port_rx_tag_entry_delete(int unit, int port, bcm_cpri_tag_gen_entry_t *config);
+int bcm_cpri_port_stat_get(int unit, bcm_gport_t port, bcm_cpri_stat_type_t type, uint64 *val);
+int bcm_cpri_port_tunnel_mode_config_get(int unit, bcm_port_t port, bcm_cpri_dir_t direction, int *enable, bcm_cpri_port_tunnel_config_t *config);
+int bcm_cpri_port_tunnel_mode_config_set(int unit, bcm_port_t port, bcm_cpri_dir_t direction, int enable, bcm_cpri_port_tunnel_config_t *config);
+int bcm_cpri_port_tx_8b10b_scrambler_enable_get(int unit, bcm_gport_t port, int *enable);
+int bcm_cpri_port_tx_8b10b_scrambler_enable_set(int unit, bcm_gport_t port, int enable);
+int bcm_cpri_port_tx_8b10b_scrambler_seed_get(int unit, bcm_gport_t port, uint32 *seed_value);
+int bcm_cpri_port_tx_8b10b_scrambler_seed_set(int unit, bcm_gport_t port, uint32 seed_value);
+int bcm_cpri_port_tx_axc_frame_add(int unit, bcm_gport_t port, int axc_id, bcm_cpri_axc_frame_info_t *axc_info);
+int bcm_cpri_port_tx_axc_frame_delete(int unit, bcm_gport_t port, int axc_id);
+int bcm_cpri_port_tx_axc_frame_get(int unit, bcm_gport_t port, int axc_id, bcm_cpri_axc_frame_info_t *axc_info);
+int bcm_cpri_port_tx_axc_frame_get_all(int unit, bcm_gport_t port, int max_count, bcm_cpri_axc_frame_info_t *axc_info_list, int *axc_count);
+int bcm_cpri_port_tx_cw_gcw_config_get(int unit, int port, uint8 index, bcm_cpri_tx_gcw_config_info_t *config);
+int bcm_cpri_port_tx_cw_gcw_config_set(int unit, int port, uint8 index, bcm_cpri_tx_gcw_config_info_t *config);
+int bcm_cpri_port_tx_cw_gcw_filter_get(int unit, int port, bcm_cpri_tx_gcw_tx_filter_info_t *config);
+int bcm_cpri_port_tx_cw_gcw_filter_set(int unit, int port, bcm_cpri_tx_gcw_tx_filter_info_t *config);
+int bcm_cpri_port_tx_cw_gcw_word_set(int unit, bcm_port_t port, int group_index, uint16 gcw_word);
+int bcm_cpri_port_tx_cw_l1_inband_info_get(int unit, int port, bcm_cpri_cw_l1_inband_info_t *inband_info);
+int bcm_cpri_port_tx_cw_l1_inband_info_set(int unit, int port, bcm_cpri_cw_l1_inband_info_t *inband_info);
+int bcm_cpri_port_tx_cw_rsvd5_config_get(int unit, int port, bcm_cpri_tx_cw_rsvd5_config_info_t *config);
+int bcm_cpri_port_tx_cw_rsvd5_config_set(int unit, int port, bcm_cpri_tx_cw_rsvd5_config_info_t *config);
+int bcm_cpri_port_tx_cw_sync_info_get(int unit, int port, bcm_cpri_cw_sync_info_t *entry);
+int bcm_cpri_port_tx_cw_sync_info_set(int unit, int port, bcm_cpri_cw_sync_info_t *entry);
+int bcm_cpri_port_tx_cw_vsd_config_get(int unit, int port, bcm_cpri_tx_vsd_config_info_t *entry);
+int bcm_cpri_port_tx_cw_vsd_config_set(int unit, int port, bcm_cpri_tx_vsd_config_info_t *entry);
+int bcm_cpri_port_tx_cw_vsd_ctrl_flow_add(int unit, int port, uint16 group_id, bcm_cpri_tx_vsd_flow_info_t *config);
+int bcm_cpri_port_tx_cw_vsd_ctrl_flow_delete(int unit, int port, uint16 group_id);
+int bcm_cpri_port_tx_cw_vsd_ctrl_flow_get(int unit, int port, uint16 group_id, bcm_cpri_tx_vsd_flow_info_t *config);
+int bcm_cpri_port_tx_cw_vsd_raw_filter_get(int unit, int port, bcm_cpri_tx_cw_vsd_raw_filter_info_t *config);
+int bcm_cpri_port_tx_cw_vsd_raw_filter_set(int unit, int port, bcm_cpri_tx_cw_vsd_raw_filter_info_t *config);
+int bcm_cpri_port_tx_cw_vsd_raw_flow_config_get(int unit, int port, uint8 index, bcm_cpri_tx_vsd_raw_config_info_t *config);
+int bcm_cpri_port_tx_cw_vsd_raw_flow_config_set(int unit, int port, uint8 index, bcm_cpri_tx_vsd_raw_config_info_t *config);
+int bcm_cpri_port_tx_enable_get(int unit, bcm_gport_t port, int *enable);
+int bcm_cpri_port_tx_enable_set(int unit, bcm_gport_t port, int enable);
+int bcm_cpri_port_tx_frame_tgen_config_get(int unit, bcm_gport_t port, int *enable, bcm_cpri_tx_frame_tgen_config_t *tgen_config);
+int bcm_cpri_port_tx_frame_tgen_config_set(int unit, bcm_gport_t port, int enable, bcm_cpri_tx_frame_tgen_config_t *tgen_config);
+int bcm_cpri_port_tx_pipeline_clear(int unit, bcm_gport_t port);
+int bcm_cpri_port_tx_speed_get(int unit, bcm_gport_t port, bcm_cpri_port_type_t *port_type, bcm_cpri_port_speed_t *speed);
+int bcm_cpri_port_tx_speed_set(int unit, bcm_gport_t port, bcm_cpri_port_type_t port_type, bcm_cpri_port_speed_t speed);
+int bcm_cpri_rsvd1_msg_get(int unit, bcm_cpri_rsvd1_msg_t *rsvd1_msg);
+int bcm_cpri_speed_scan_callback_register(int unit, bcm_cpri_speed_scan_handler_t callback, void *user_data);
+int bcm_cpri_speed_scan_callback_unregister(int unit, bcm_cpri_speed_scan_handler_t callback);
+int bcm_cpri_speed_scan_config_get(int unit, int *interval_in_us, int *enable);
+int bcm_cpri_speed_scan_config_set(int unit, int interval_in_us, int enable);
+int bcm_cpri_speed_scan_init(int unit);
+int bcm_cpri_speed_scan_port_config_add(int unit, bcm_port_t port, bcm_cpri_port_speed_t *speed_list, int num_speed);
+int bcm_cpri_speed_scan_port_config_delete(int unit, bcm_port_t port);
+int bcm_cpri_speed_scan_port_config_get(int unit, bcm_port_t port, bcm_cpri_port_speed_t *speed_list, int num_element, int *num_speed);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-cosq.html" class="btn btn-neutral float-left" title="bcm_cosq_* (841)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-fabric.html" class="btn btn-neutral float-right" title="bcm_fabric_* (185)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

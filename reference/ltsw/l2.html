@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L2 &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="L3" href="l3.html" />
+    <link rel="prev" title="IPMC" href="ipmc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Command reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#shell-commands">Shell commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#commands-for-other-chip-families">Commands for other chip families</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#logical-table-switch-mode">Logical-table switch mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#bcma-command-line"><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Command reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">L2</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="l2">
+<h1><code class="docutils literal notranslate"><span class="pre">L2</span></code><a class="headerlink" href="#l2" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This command belongs to the shell mode for newer (logical-table) switch chips and is not available on Trident 3.</p>
+</div>
+<p>Manage L2 (MAC) addresses</p>
+<p class="rubric">Built-in help</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Usages:
+      l2 add [Module=&lt;mod&gt;] [Port=&lt;port&gt;] [MACaddress=&lt;mac&gt;] [Vlanid=&lt;id&gt;]
+             [Trunk=true|false] [TrunkGroupId=&lt;id&gt;]
+             [STatic=true|false] [SourceCosPriority=true|false]
+             [DiscardSource=true|false] [DiscardDest]=true|false]
+             [HIT=true|false] [CPUmirror=true|false] [Group=&lt;group&gt;]
+             [Egress_if=&lt;egress interface&gt;] [PortDbId=port_db_id]
+            - Add L2 address associated with port
+      l2 del [MACaddress=&lt;mac&gt;] [Vlanid=&lt;id&gt;] [PortDbId=port_db_id]
+            - Delete L2 address with given mac and vlanid
+      l2 get [MACaddress=&lt;mac&gt;] [Vlanid=&lt;id&gt;] [PortDbId=port_db_id]
+            - Look up L2 address with given mac and vlanid
+      l2 show
+            - Show all L2 addresses
+      l2 count
+            - Show current L2 address count
+      l2 clear [Module=&lt;n&gt;] [Port=&lt;port&gt;] [MACaddress=&lt;mac&gt;] [PortDbId=port_db_id]
+               [Vlanid=&lt;id&gt;] [TrunkGroupID=&lt;id&gt;] [Static=true|false]
+            - Remove all L2 entries on the given module, module/port,
+               VLAN, or trunk group ID
+      l2 replace [Module=&lt;n&gt;] [Port=&lt;port&gt;] [MACaddress=&lt;mac&gt;]
+                 [Vlanid=&lt;id&gt;] [Trunk=true|false] [TrunkGroupId=&lt;id&gt;]
+                 [STatic=true|false] [NewModule=&lt;n&gt;] [NewPort=&lt;port&gt;]
+                 [NewTrunkGroupId=&lt;id&gt;] [PortDbId=port_db_id]
+            - Replace all L2 entries matching given module/port or mac
+              vlanid, trunk with new destination
+      l2 age [Timer=&lt;n&gt;|on|off]
+            - Setup L2 age timer in seconds
+              If not specify timer value, then display setting
+            - On|Off
+              Off is to stop L2 age without breaking current interval
+              On is to resume L2 age with current interval
+      l2 station add [Priority=&lt;val&gt;] [ID=&lt;Sid&gt;]
+             [MACaddress=&lt;mac&gt;] [MACaddressMask=&lt;mask&gt;]
+             [Vlanid=&lt;id&gt;] [VlanidMask=&lt;mask&gt;]
+             [Ivid=&lt;id&gt;] [IvidMask=&lt;mask&gt;]
+             [Vfi=&lt;id&gt;] [VfiMask=&lt;mask&gt;]
+             [SourcePort=&lt;id&gt;] [SourcePortMask=&lt;mask&gt;]
+             [IPv4=true|false] [IPv6=true|false] [ArpRarp=true|false]
+             [MPLS=true|false] [MiM=true|false] [TRILL=true|false]
+             [FCoE=true|false] [OAM=true|false] [CPUmirror=true|false]
+             [Replace=true|false] [Discard=true|false]
+            - Add L2 station entry
+      l2 station delete ID=&lt;sid&gt;
+            - Delete L2 station entry
+      l2 station clear
+            - Delete all L2 station entries
+      l2 station show [ID=&lt;sid&gt;]
+            - Show L2 station entry, if not specify sid, then display all
+      l2 station size
+            - Show L2 station size
+      l2 init
+            - Init L2 module
+      l2 detach
+            - Detach L2 module
+      l2 learn [on|off]
+            - Enable/Disable global L2 learning
+              On is to enable, off is to disable
+              If no specify on or off, display current L2 learning setting
+      l2 cache add [CacheIndex=&lt;index&gt;]
+             [MACaddress=&lt;mac&gt;] [MACaddressMask=&lt;mac&gt;]
+             [Vlanid=&lt;id&gt;] [VlanidMask=&lt;mask&gt;] [LookupClass=&lt;class&gt;]
+             [SourcePort=&lt;id&gt;] [SourcePortMask=&lt;mask&gt;]
+             [Module=&lt;modid&gt;] [Port=&lt;port&gt;]
+             [Trunk=true|false] [TrunkGroupId=&lt;id&gt;]
+             [SetPriority=true|false] [PRIOrity=&lt;prio&gt;]
+             [DiscardDest]=true|false] [CPUmirror=true|false]
+             [BPDU=true|false] [L3=true|false]
+             [ReplacePriority=true|false] [LearnDisable=true|false]
+             [PROTocolPacKeT=true|false]
+            - Add L2 cache entry
+      l2 cache del CacheIndex=&lt;index&gt; [Count=&lt;value&gt;]
+            - Delete L2 cache entry
+      l2 cache show
+            - Show L2 cache entries
+      l2 cache clear [ReInit=true|false]
+            - Delete all L2 cache entries
+      l2 cache size
+            - Show L2 cache table size
+      l2 size
+            - Show L2 table size
+      l2 dense add [MACaddress=&lt;mac&gt;] [Vlanid=&lt;id&gt;]
+             [SouRCe=true|false] [DeSTination=true|false]
+             [OUICOMPressed=true|false]
+             [Replace=true|false]
+             [Port=&lt;port&gt;] [Trunk=true|false] [TrunkGroupId=&lt;id&gt;]
+             [SetPriority=true|false] [PRIOrity=&lt;prio&gt;]
+             [STatic=true|false] [SourceCosPriority=true|false]
+             [DiscardSource=true|false]
+             [HIT=true|false] [Group=&lt;group&gt;]
+            - Add an L2 dense address entry. Set Replace to update if entry exists
+      l2 dense get [MACaddress=&lt;mac&gt;] [Vlanid=&lt;id&gt;]
+             [SouRCe=true|false] [DeSTination=true|false]
+             [OUICOMPressed=true|false]
+            - Get an L2 dense address entry
+      l2 dense delete [MACaddress=&lt;mac&gt;] [Vlanid=&lt;id&gt;]
+             [SouRCe=true|false] [DeSTination=true|false]
+             [OUICOMPressed=true|false]
+            - Delete an L2 dense address entry
+      l2 dense show [SouRCe=true|false] [DeSTination=true|false]
+             [OUICOMPressed=true|false]
+            - Show all L2 dense address entries of specified type
+      l2 dense clear
+            - Delete all L2 dense address entries
+      l2 dense perf OPs=&lt;val&gt; [loops=&lt;val&gt;]
+             [nsets=&lt;val&gt;] [UseApi=&lt;bool&gt;]
+           - Test L2 dense address operation performance.
+           - OPs: B0 - Add, B1 - Update, B2 - Lookup, B3 - Delete.
+           - loops: Number of runs. Forced to 1 if no delete operation.
+           - nsets: Number of sets.
+           - UseApi: 1 - Use BCM API.
+      l2 OUICOMPression add [Priority=&lt;val&gt;]
+             [MACaddress=&lt;mac&gt;] [MACaddressMask=&lt;mask&gt;]
+             [COMPressedOUI=&lt;compressedoui&gt;]
+            - Add a MAC OUI compression entry
+      l2 OUICOMPression replace [Priority=&lt;val&gt;]
+             [MACaddress=&lt;mac&gt;] [MACaddressMask=&lt;mask&gt;]
+             [COMPressedOUI=&lt;compressedoui&gt;]
+            - Replace an existing MAC OUI compression entry or add a new one
+      l2 OUICOMPression get
+             [MACaddress=&lt;mac&gt;] [MACaddressMask=&lt;mask&gt;]
+            - Get a MAC OUI compression entry with given MAC OUI and mask
+      l2 OUICOMPression delete
+             [MACaddress=&lt;mac&gt;] [MACaddressMask=&lt;mask&gt;]
+            - Delete a MAC OUI compression entry
+      l2 OUICOMPression clear
+            - Delete all MAC OUI compression entries
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ipmc.html" class="btn btn-neutral float-left" title="IPMC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="l3.html" class="btn btn-neutral float-right" title="L3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

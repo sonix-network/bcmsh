@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration variables &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Port mapping and SerDes" href="config/ports.html" />
+    <link rel="prev" title="Memories and registers" href="memories-registers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config/ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config/variables/index.html">Variable reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration variables</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration-variables">
+<h1>Configuration variables<a class="headerlink" href="#configuration-variables" title="Link to this heading"></a></h1>
+<p>The SDK and the Broadcom SAI are configured by <em>configuration variables</em>,
+also called SOC properties: <code class="docutils literal notranslate"><span class="pre">name=value</span></code> pairs such as
+<code class="docutils literal notranslate"><span class="pre">l2_mem_entries=32768</span></code> or <code class="docutils literal notranslate"><span class="pre">portmap_1=1:100</span></code>. They decide things that
+cannot change while the switch runs: which SerDes lanes form which port, how
+the shared forwarding tables are divided, how the buffers are set up, which
+optional features are started.</p>
+<p>On SONiC the variables come from the HWSKU’s <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> file. This chapter
+explains where that file is, how it is read, how variable names are looked
+up, and when a change takes effect. The pages below cover port mapping,
+table sizing and buffers in detail, and the variable reference lists every
+variable the Trident 3 SAI and SDK read.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config/ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config/tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config/mmu.html">Buffers and queues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config/variables/index.html">Variable reference</a></li>
+</ul>
+</div>
+<section id="configuration-files">
+<h2>Configuration files<a class="headerlink" href="#configuration-files" title="Link to this heading"></a></h2>
+<p>Each SONiC platform directory has one directory per HWSKU (hardware SKU),
+<code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/device/&lt;platform&gt;/&lt;hwsku&gt;/</span></code> on the host. Inside the
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> container the same directory is <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/hwsku/</span></code>. It
+holds <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code> (SONiC’s port names and lanes), the buffer and QoS
+templates, <code class="docutils literal notranslate"><span class="pre">sai.profile</span></code> and the <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> file. <code class="docutils literal notranslate"><span class="pre">sai.profile</span></code> names
+the file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SAI_INIT_CONFIG_FILE=/usr/share/sonic/hwsku/td3-seastone_2-32x100G-vxlan.config.bcm
+SAI_NUM_ECMP_MEMBERS=64
+</pre></div>
+</div>
+<p>The other <code class="docutils literal notranslate"><span class="pre">sai.profile</span></code> keys, such as <code class="docutils literal notranslate"><span class="pre">SAI_NUM_ECMP_MEMBERS</span></code>, are read by
+the SAI directly; they are not configuration variables and cannot be set in
+<code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">syncd</span></code> starts, the SAI reads <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> line by line and stores
+every <code class="docutils literal notranslate"><span class="pre">name=value</span></code> pair in the SDK’s configuration table. It then adds a few
+values of its own before it initialises the chip:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">l3_intf_vlan_split_egress=1</span></code>, always, whatever the file says;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bcm_tunnel_term_compatible_mode=1</span></code>, <code class="docutils literal notranslate"><span class="pre">sram_scan_enable=1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">mem_cache_enable=1</span></code> if the file does not set them;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scache_filename</span></code>, the warm-boot state file.</p></li>
+</ul>
+<p>During initialisation each part of the SDK and the SAI looks up the variables
+it needs. A variable that nobody looks up has no effect, and there is no
+warning: a misspelt name or a variable meant for another chip is accepted and
+ignored. <a class="reference internal" href="../reference/config.html#clicmd-config-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">dump</span></code></a> shows which variables were looked up (see
+<a class="reference internal" href="#inspecting-the-configuration">Inspecting the configuration</a>).</p>
+<p>Two more variables point to diag-shell scripts that the SAI runs during a
+cold start: <a class="reference internal" href="config/variables/sai.html#confval-sai_preinit_cmd_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_preinit_cmd_file</span></code></a> before the chip’s <code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">misc</span></code>
+step, <a class="reference internal" href="config/variables/sai.html#confval-sai_postinit_cmd_file"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_postinit_cmd_file</span></code></a> after initialisation. Dell S5232F-ON
+HWSKUs use the first to load the LED firmware with <a class="reference internal" href="../reference/m0.html#clicmd-m0"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">m0</span></code></a>.</p>
+</section>
+<section id="file-format">
+<h2>File format<a class="headerlink" href="#file-format" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>One <code class="docutils literal notranslate"><span class="pre">name=value</span></code> per line. The name ends at the first <code class="docutils literal notranslate"><span class="pre">=</span></code>; spaces and
+tabs around the name and the value are removed.</p></li>
+<li><p>A line whose <strong>first character</strong> is <code class="docutils literal notranslate"><span class="pre">#</span></code> is a comment. There are no
+end-of-line comments: in <code class="docutils literal notranslate"><span class="pre">l2_mem_entries=32768</span>&#160; <span class="pre">#</span> <span class="pre">default</span></code> the value is
+<code class="docutils literal notranslate"><span class="pre">32768</span>&#160; <span class="pre">#</span> <span class="pre">default</span></code>. Numeric variables stop reading at the space, but
+string values keep the text.</p></li>
+<li><p>Empty lines are ignored. Keep lines shorter than 256 characters.</p></li>
+<li><p>If a name appears twice, the later line wins.</p></li>
+<li><p>Names are case-sensitive and are not checked. <code class="docutils literal notranslate"><span class="pre">PHY_AN_ALLOW_PLL_CHANGE=1</span></code>,
+found in some SONiC files, is never read; the SDK looks up
+<a class="reference internal" href="config/variables/ports.html#confval-phy_an_allow_pll_change"><code class="xref std std-confval docutils literal notranslate"><span class="pre">phy_an_allow_pll_change</span></code></a>.</p></li>
+<li><p>Numbers are C-style: <code class="docutils literal notranslate"><span class="pre">32768</span></code>, <code class="docutils literal notranslate"><span class="pre">0x8000</span></code>. Port bitmaps are hexadecimal
+numbers with one bit per logical port (bit 1 is logical port 1).</p></li>
+</ul>
+</section>
+<section id="names-scopes-and-precedence">
+<span id="bcmsh-config-names"></span><h2>Names, scopes and precedence<a class="headerlink" href="#names-scopes-and-precedence" title="Link to this heading"></a></h2>
+<p>Many variables apply to one port, lane, unit or index. The SDK looks them up
+by trying a list of names, from the most specific to the plain name, and
+takes the first one that exists. A variable that is not found anywhere gets
+a default chosen by the code that reads it.</p>
+<dl class="simple">
+<dt>Global variables</dt><dd><p><code class="docutils literal notranslate"><span class="pre">name.&lt;unit&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">l2_mem_entries.0</span></code>), then <code class="docutils literal notranslate"><span class="pre">name.&lt;chip&gt;</span></code>
+(<code class="docutils literal notranslate"><span class="pre">name.BCM56870_A0</span></code>), <code class="docutils literal notranslate"><span class="pre">name.&lt;chip</span> <span class="pre">group&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">name.BCM56870</span></code>), and
+finally <code class="docutils literal notranslate"><span class="pre">name</span></code>. The unit and chip suffixes matter only when one
+configuration serves several chips; on SONiC there is one unit, <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Some SONiC files write every variable with <code class="docutils literal notranslate"><span class="pre">.0</span></code>
+(<code class="docutils literal notranslate"><span class="pre">portmap_1.0=1:100</span></code>); this is the same as writing it without.</p>
+</dd>
+<dt>Per-port variables</dt><dd><p><code class="docutils literal notranslate"><span class="pre">name_&lt;port</span> <span class="pre">name&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_ce0</span></code>), <code class="docutils literal notranslate"><span class="pre">name_&lt;port</span> <span class="pre">type&gt;</span></code>
+(<code class="docutils literal notranslate"><span class="pre">serdes_if_type_ce</span></code>: all <code class="docutils literal notranslate"><span class="pre">ce</span></code> ports), <code class="docutils literal notranslate"><span class="pre">name_&lt;logical</span> <span class="pre">port&gt;</span></code>
+(<code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_1</span></code>), and finally <code class="docutils literal notranslate"><span class="pre">name</span></code> for all ports. Each of
+these can also carry the unit or chip suffix. Port names depend on the
+port’s speed (see <a class="reference internal" href="ports.html"><span class="doc">Ports and port bitmaps</span></a>), so HWSKU files use logical port numbers.</p>
+</dd>
+<dt>Per-lane (physical port) variables</dt><dd><p><code class="docutils literal notranslate"><span class="pre">name{&lt;physical&gt;.&lt;phy&gt;.&lt;phy</span> <span class="pre">port&gt;.&lt;lane&gt;}</span></code>, <code class="docutils literal notranslate"><span class="pre">name{&lt;physical&gt;.&lt;phy&gt;}</span></code>,
+<code class="docutils literal notranslate"><span class="pre">name{&lt;physical&gt;}</span></code>, then the per-port forms of the logical port on that
+lane. <code class="docutils literal notranslate"><span class="pre">&lt;phy&gt;</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code> for the switch’s own SerDes and 1 and up for
+external PHYs, so SONiC files write <code class="docutils literal notranslate"><span class="pre">phy_chain_tx_polarity_flip_physical{9.0}=1</span></code>.</p>
+</dd>
+<dt>Indexed variables</dt><dd><p><code class="docutils literal notranslate"><span class="pre">name_&lt;suffix&gt;&lt;N&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">ptp_bs_fref_0</span></code>), then <code class="docutils literal notranslate"><span class="pre">name_&lt;suffix&gt;</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">name</span></code>. Per-port indexed variables combine both:
+<code class="docutils literal notranslate"><span class="pre">serdes_preemphasis_lane2_9</span></code> is lane 2 of logical port 9.</p>
+</dd>
+<dt>MMU buffer variables</dt><dd><p><code class="docutils literal notranslate"><span class="pre">buf.&lt;object&gt;&lt;N&gt;.&lt;attribute&gt;</span></code>, falling back to
+<code class="docutils literal notranslate"><span class="pre">buf.&lt;object&gt;.&lt;attribute&gt;</span></code>, each with the per-port forms. See
+<a class="reference internal" href="config/mmu.html"><span class="doc">Buffers and queues</span></a>.</p>
+</dd>
+</dl>
+<p>The SDK keeps a per-variable flag when a lookup hits, but it does not record
+which of the forms matched. If two forms are set, the more specific one wins:
+with <code class="docutils literal notranslate"><span class="pre">phy_an_c73=1</span></code> and <code class="docutils literal notranslate"><span class="pre">phy_an_c73_66=0</span></code> port 66 gets 0 and every other
+port 1.</p>
+</section>
+<section id="applying-changes">
+<h2>Applying changes<a class="headerlink" href="#applying-changes" title="Link to this heading"></a></h2>
+<p>Almost every variable is read once, while <code class="docutils literal notranslate"><span class="pre">syncd</span></code> initialises the chip.
+Editing <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> changes nothing until <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">config</span> <span class="pre">reload</span></code> restarts <code class="docutils literal notranslate"><span class="pre">syncd</span></code> together with the other SONiC
+services and reinitialises the chip. Traffic stops while it runs.</p></li>
+<li><p>A cold <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">reboot</span></code> does the same and is the safest choice after a port
+map or table-size change.</p></li>
+<li><p>Do not change <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> before a warm or fast reboot. These restart
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> from saved state that was built with the old values.</p></li>
+</ul>
+<p>Edit the file on the host, under <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/device/</span></code>, not inside the
+container. The change survives a reboot but not the installation of another
+SONiC image, which brings its own copy of the device directory; keep the
+modified HWSKU in your own configuration management.</p>
+<p>A port map change must go together with <code class="docutils literal notranslate"><span class="pre">port_config.ini</span></code> (SONiC’s view of
+the same ports) and, for SONiC 202012 and later, the <code class="docutils literal notranslate"><span class="pre">PORT</span></code> table in
+<code class="docutils literal notranslate"><span class="pre">config_db.json</span></code>. <a class="reference internal" href="config/ports.html"><span class="doc">Port mapping and SerDes</span></a> has a complete example.</p>
+</section>
+<section id="changing-variables-from-the-shell">
+<h2>Changing variables from the shell<a class="headerlink" href="#changing-variables-from-the-shell" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/config.html#clicmd-config"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span></code></a> changes the SDK’s in-memory copy of the variables. The file
+is not touched, and a later <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restart reads the file again. Because
+the variables are read during initialisation, a change made with
+<a class="reference internal" href="../reference/config.html#clicmd-config"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span></code></a> usually only takes effect after <a class="reference internal" href="../reference/init.html#clicmd-init"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">init</span></code></a>, which
+reinitialises the chip behind SONiC’s back and leaves the switch inconsistent
+until <code class="docutils literal notranslate"><span class="pre">syncd</span></code> is restarted. <a class="reference internal" href="../howto/live-config.html"><span class="doc">Changing the chip configuration live</span></a> describes this for
+experiments.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On SONiC, <a class="reference internal" href="../reference/config.html#clicmd-config-refresh"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">refresh</span></code></a> does not reread <code class="docutils literal notranslate"><span class="pre">config.bcm</span></code>: it
+empties the in-memory configuration. Anything that reads a variable
+afterwards gets the built-in default. Do not use it on a running switch.</p>
+</div>
+</section>
+<section id="inspecting-the-configuration">
+<h2>Inspecting the configuration<a class="headerlink" href="#inspecting-the-configuration" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/config.html#clicmd-config-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">show</span></code></a> lists the variables, optionally only those whose name
+contains a string. <a class="reference internal" href="../reference/config.html#clicmd-config-get"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">get</span></code></a> puts one value in the shell variable
+<code class="docutils literal notranslate"><span class="pre">config_var_val</span></code> for use in scripts:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; config get l2_mem_entries</span>
+<span class="go">Environment variable (config_var_val) was set</span>
+<span class="go">drivshell&gt; echo $config_var_val $config_var_not_set</span>
+<span class="go">32768 0</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="../reference/config.html#clicmd-config-dump"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">dump</span></code></a> shows every variable with a flag. <code class="docutils literal notranslate"><span class="pre">0x0004</span></code> means the
+SDK has looked the variable up since start-up; <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> means nothing has
+read it so far. That is the quickest way to find a variable that has no
+effect. On a Celestica Seastone2 running SONiC, two variables from its
+<code class="docutils literal notranslate"><span class="pre">config.bcm</span></code> were never read:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Excerpt: variables read (0x0004) and not read (0x0000)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; config dump</span>
+<span class="go">...</span>
+<span class="go">hash:  41, line:   0, flag: 0x0004, portmap_9=9:10:1</span>
+<span class="go">...</span>
+<span class="go">hash: 291, line:   0, flag: 0x0000, serdes_lane_config_dfe=on</span>
+<span class="go">...</span>
+<span class="go">hash: 488, line:   0, flag: 0x0004, l2_mem_entries=32768</span>
+<span class="go">...</span>
+<span class="go">hash: 890, line:   0, flag: 0x0000, module_64ports=1</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">module_64ports</span></code> and <code class="docutils literal notranslate"><span class="pre">serdes_lane_config_dfe</span></code> had no effect on that switch. <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> is also normal for variables that are read
+only on demand: <code class="docutils literal notranslate"><span class="pre">memlist_enable</span></code> and <code class="docutils literal notranslate"><span class="pre">reglist_enable</span></code> are read when
+<a class="reference internal" href="../reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a> or <a class="reference internal" href="../reference/listreg.html#clicmd-listreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listreg</span></code></a> runs.</p>
+<p>To compare a switch with its file, capture the shell’s view and the file side
+by side (the shell output is indented by four spaces):</p>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">admin@sonic:~$ </span>bcmcmd<span class="w"> </span><span class="s2">"config show"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^    //p'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>&gt;<span class="w"> </span>/tmp/live.txt
+<span class="gp">admin@sonic:~$ </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>syncd<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'cat /usr/share/sonic/hwsku/*.config.bcm'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">'^#'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>&gt;<span class="w"> </span>/tmp/file.txt
+<span class="gp">admin@sonic:~$ </span>diff<span class="w"> </span>/tmp/file.txt<span class="w"> </span>/tmp/live.txt
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="memories-registers.html" class="btn btn-neutral float-left" title="Memories and registers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="config/ports.html" class="btn btn-neutral float-right" title="Port mapping and SerDes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

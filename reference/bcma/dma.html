@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DMA &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DOP" href="dop.html" />
+    <link rel="prev" title="di" href="di.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Command reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#shell-commands">Shell commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#commands-for-other-chip-families">Commands for other chip families</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#logical-table-switch-mode">Logical-table switch mode</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#bcma-command-line"><code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Command reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">DMA</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dma">
+<h1><code class="docutils literal notranslate"><span class="pre">DMA</span></code><a class="headerlink" href="#dma" title="Link to this heading"></a></h1>
+<p>A command of the separate <code class="docutils literal notranslate"><span class="pre">bcma</span></code> command line; see <a class="reference internal" href="../index.html#bcmsh-other-interpreters"><span class="std std-ref">Commands for other chip families</span></a>.</p>
+<p>DMA facilities interface.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>DMA alloc [&lt;mem-unit&gt;] &lt;count&gt; [&lt;name&gt;]
+free &lt;dma-id&gt;|all
+load &lt;dma-id&gt; [&lt;mem-unit&gt;] &lt;data&gt;
+fill &lt;dma-id&gt; [&lt;mem-unit&gt;] &lt;value&gt; [&lt;count&gt;]
+edit &lt;dma-id&gt; [&lt;mem-unit&gt;]
+dump &lt;dma-id&gt; [&lt;mem-unit&gt;] [&lt;count&gt;]
+info
+</pre></div>
+</div>
+<p class="rubric">Built-in help</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This command provides access to the DMA memory API via the following
+sub-commands:
+    alloc - Allocate cache-coherent DMA memory region.
+        &lt;mem-unit&gt; - Memory unit (see below).
+        &lt;count&gt;    - Number of memory units to allocate.
+        &lt;name&gt;     - Optional string to identify the DMA region.
+    free  - Free DMA memory region.
+        &lt;dma-id&gt;   - DMA memory ID (see below).
+    load  - Write data o DMA memory.
+        &lt;dma-id&gt;   - DMA memory ID (see below).
+        &lt;mem-unit&gt; - Memory unit (see below).
+        &lt;data&gt;     - Space-separated list of data values which will be
+                     parsed according to the selected memory unit.
+                     If the memory unit is Byte, data may be specified
+                     as a sequence of hex bytes. e.g. 0x123456abcdef.
+                     Underscores in the hex bytes will be ignored.
+                     If the memory unit is HEXdigit, data may be
+                     specified as a sequence of hex digits. e.g. 12ef.
+                     Spaces, commas, underscores or hyphens in the hex
+                     digits will be ignored. This is for the
+                     convenience of data copy and paste.
+    fill  - Fill DMA memory with a single value.
+        &lt;dma-id&gt;   - DMA memory ID (see below).
+        &lt;mem-unit&gt; - Memory unit (see below).
+        &lt;value&gt;    - Value to fill into the DMA memory.
+        &lt;count&gt;    - Number of memory units to fill. If not specified,
+                     the entire DMA region will be filled.
+    edit  - Edit DMA memory interactively.
+        &lt;dma-id&gt;   - DMA memory ID (see below).
+        &lt;mem-unit&gt; - Memory unit (see below).
+    dump  - Dump the contents of DMA memory.
+        &lt;dma-id&gt;   - DMA memory ID (see below).
+        &lt;mem-unit&gt; - Memory unit (see below).
+        &lt;count&gt;    - Number of memory units to dump. If not specified,
+                     the entire DMA region will be dumped.
+    info  - List all allocated DMA memory regions, including the
+            logical address, size in bytes, physical address,
+            cache-coherent information, and the region name (if any).
+            No map/unmap is required for DMA memory regions with
+            cache-coherent attribute.
+
+The default memory unit is Byte, but Halfword (16-bits) or
+Word (32-bits) can be used if this is more suitable for the DMA memory
+contents. HEXdigit is an extra type supported in sub-command 'load'.
+
+The DMA memory ID is either the logical address of the DMA memory or
+the associated name (optionally) specified during allocation.
+
+If the option &lt;name&gt; parameter is specified with the allocation
+command, then a set of local environment variables will be created
+as follows:
+    $dma_&lt;name&gt;_laddr - Logical address of the DMA memory region.
+    $dma_&lt;name&gt;_paddr - Physical address of the DMA memory region.
+    $dma_&lt;name&gt;_size  - Size of the DMA memory region.
+
+The following local variables will be created/updated for each
+successful memory allocation whether the &lt;name&gt; is specified or not:
+    $dma_laddr - Logical address of the DMA memory region.
+    $dma_paddr - Physical address of the DMA memory region.
+    $dma_size  - Size of the DMA memory region.
+</pre></div>
+</div>
+<p class="rubric">Built-in examples</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>alloc 35
+alloc w 10
+alloc h 20 xyz
+info
+load xyz hex 01,02-03_04 05060708090a0b0c
+load xyz 1 2 3 4 5 6 7 8 9 0xa 11 12
+load xyz h 0x0201 0x0403 0x0605 0x0807 0x0a09 0xc0b
+load xyz w 0x04030201 0x08070605 0x0c0b0a09
+fill 0x7fa11543ba83 b 0x5a 10
+fill 0x7fa11543ba80 w 0x5aa5a55a 5
+fill xyz 0
+edit 0x7fa1_1543ba84 w
+edit xyz
+dump xyz
+dump xyz w 5
+dump $dma_laddr 10
+free xyz
+free all
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="di.html" class="btn btn-neutral float-left" title="di" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dop.html" class="btn btn-neutral float-right" title="DOP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_ptp_* (190) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_rx_* (146)" href="bcm-rx.html" />
+    <link rel="prev" title="bcm_port_* (557)" href="bcm-port.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_ptp_*</span></code> (190)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-ptp-190">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_ptp_*</span></code> (190)<a class="headerlink" href="#bcm-ptp-190" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ptp_acceptable_master_add(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int priority1_alt_value, bcm_ptp_clock_peer_address_t *master_info);
+int bcm_ptp_acceptable_master_enabled_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint8 *enabled);
+int bcm_ptp_acceptable_master_enabled_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint8 enabled);
+int bcm_ptp_acceptable_master_list(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int max_num_masters, int *num_masters, bcm_ptp_clock_peer_address_t *master_addr);
+int bcm_ptp_acceptable_master_remove(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_peer_address_t *master_info);
+int bcm_ptp_acceptable_master_table_clear(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num);
+int bcm_ptp_acceptable_master_table_size_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int *max_table_entries);
+int bcm_ptp_bs_time_info_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_bs_time_info_t *time);
+int bcm_ptp_cb_register(int unit, bcm_ptp_cb_types_t cb_types, bcm_ptp_cb cb, void *user_data);
+int bcm_ptp_cb_unregister(int unit, bcm_ptp_cb_types_t cb_types, bcm_ptp_cb cb);
+int bcm_ptp_clock_accuracy_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_accuracy_t *accuracy);
+int bcm_ptp_clock_accuracy_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_accuracy_t *accuracy);
+int bcm_ptp_clock_apts_enable_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *enable);
+int bcm_ptp_clock_apts_enable_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int enable);
+int bcm_ptp_clock_apts_gps_offset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *offset_nsec);
+int bcm_ptp_clock_apts_gps_offset_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int offset_nsec);
+int bcm_ptp_clock_apts_input_source_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_nUM, bcm_ptp_clock_apts_source_t apts_source, bcm_ptp_clock_apts_input_source_config_t *input_source_config);
+int bcm_ptp_clock_apts_input_source_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_apts_source_t apts_source, bcm_ptp_clock_apts_input_source_config_t *input_source_config);
+int bcm_ptp_clock_apts_mode_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_apts_mode_t *current_mode);
+int bcm_ptp_clock_apts_source_enable_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_apts_source_t source, int *enable);
+int bcm_ptp_clock_apts_source_enable_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_apts_source_t source, int enable);
+int bcm_ptp_clock_apts_source_prio_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *num_sources, bcm_ptp_clock_apts_source_t *priority_list);
+int bcm_ptp_clock_apts_source_prio_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int num_sources, bcm_ptp_clock_apts_source_t *priority_list);
+int bcm_ptp_clock_bmca_override_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 *flags, uint32 *enable_mask);
+int bcm_ptp_clock_bmca_override_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 flags, uint32 enable_mask);
+int bcm_ptp_clock_create(int unit, bcm_ptp_stack_id_t ptp_id, bcm_ptp_clock_info_t *clock_info);
+int bcm_ptp_clock_current_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_current_dataset_t *dataset);
+int bcm_ptp_clock_default_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_default_dataset_t *dataset);
+int bcm_ptp_clock_domain_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 *domain);
+int bcm_ptp_clock_domain_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 domain);
+int bcm_ptp_clock_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_info_t *clock_info);
+int bcm_ptp_clock_local_priority_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 *local_priority);
+int bcm_ptp_clock_local_priority_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 local_priority);
+int bcm_ptp_clock_max_steps_removed_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 *max_steps_removed);
+int bcm_ptp_clock_max_steps_removed_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 max_steps_removed);
+int bcm_ptp_clock_parent_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_parent_dataset_t *dataset);
+int bcm_ptp_clock_peer_age_timer_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 *aging_time);
+int bcm_ptp_clock_peer_age_timer_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 aging_time);
+int bcm_ptp_clock_port_announce_receipt_timeout_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, uint32 *timeout);
+int bcm_ptp_clock_port_announce_receipt_timeout_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, uint32 timeout);
+int bcm_ptp_clock_port_configure(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_ptp_clock_port_info_t *info);
+int bcm_ptp_clock_port_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_ptp_port_dataset_t *dataset);
+int bcm_ptp_clock_port_delay_asymmetry_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int *delay_asymmetry_ns);
+int bcm_ptp_clock_port_delay_asymmetry_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int delay_asymmetry_ns);
+int bcm_ptp_clock_port_delay_mechanism_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, uint32 *delay_mechanism);
+int bcm_ptp_clock_port_delay_mechanism_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, uint32 delay_mechanism);
+int bcm_ptp_clock_port_disable(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port);
+int bcm_ptp_clock_port_drop_counters_enable_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int enable);
+int bcm_ptp_clock_port_drop_counters_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_ptp_clock_port_packet_drop_counters_t *per_port_packet_drop_counters);
+int bcm_ptp_clock_port_enable(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port);
+int bcm_ptp_clock_port_identity_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_ptp_port_identity_t *identity);
+int bcm_ptp_clock_port_info_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_ptp_clock_port_info_t *info);
+int bcm_ptp_clock_port_latency_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, uint32 *latency_in, uint32 *latency_out);
+int bcm_ptp_clock_port_latency_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, uint32 latency_in, uint32 latency_out);
+int bcm_ptp_clock_port_log_announce_interval_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int *interval);
+int bcm_ptp_clock_port_log_announce_interval_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int interval);
+int bcm_ptp_clock_port_log_min_delay_req_interval_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int *interval);
+int bcm_ptp_clock_port_log_min_delay_req_interval_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int interval);
+int bcm_ptp_clock_port_log_min_pdelay_req_interval_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int *interval);
+int bcm_ptp_clock_port_log_min_pdelay_req_interval_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int interval);
+int bcm_ptp_clock_port_log_sync_interval_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int *interval);
+int bcm_ptp_clock_port_log_sync_interval_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, int interval);
+int bcm_ptp_clock_port_mac_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_mac_t *mac);
+int bcm_ptp_clock_port_protocol_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_ptp_protocol_t *protocol);
+int bcm_ptp_clock_port_tlv_config_add(int unit, bcm_ptp_stack_id_t ptp_id, int clock_index, uint32 clock_port, bcm_ptp_tlv_type_t tlv_type, uint16 data_len, uint8 *data, bcm_ptp_tlv_action_t action, int config_id);
+int bcm_ptp_clock_port_tlv_config_delete(int unit, bcm_ptp_stack_id_t ptp_id, int clock_index, uint32 clock_port, int config_id);
+int bcm_ptp_clock_port_tlv_config_delete_all(int unit, bcm_ptp_stack_id_t ptp_id, int clock_index, uint32 clock_port);
+int bcm_ptp_clock_port_type_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, bcm_ptp_port_type_t *type);
+int bcm_ptp_clock_port_version_number_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 clock_port, uint32 *version);
+int bcm_ptp_clock_priority1_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 *priority1);
+int bcm_ptp_clock_priority1_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 priority1);
+int bcm_ptp_clock_priority2_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 *priority2);
+int bcm_ptp_clock_priority2_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 priority2);
+int bcm_ptp_clock_quality_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_quality_t *clock_quality, uint32 flags);
+int bcm_ptp_clock_quality_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_quality_t clock_quality, uint32 flags);
+int bcm_ptp_clock_slaveonly_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 *slaveonly);
+int bcm_ptp_clock_slaveonly_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 slaveonly);
+int bcm_ptp_clock_time_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_timestamp_t *time);
+int bcm_ptp_clock_time_properties_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_time_properties_t *data);
+int bcm_ptp_clock_time_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_timestamp_t *time);
+int bcm_ptp_clock_timescale_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_timescale_t *timescale);
+int bcm_ptp_clock_timescale_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_timescale_t *timescale);
+int bcm_ptp_clock_tlv_enable_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_index, uint32 clock_port, int config_id, int *enable);
+int bcm_ptp_clock_tlv_enable_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_index, uint32 clock_port, int config_id, int enable);
+int bcm_ptp_clock_traceability_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_trace_t *trace);
+int bcm_ptp_clock_traceability_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_trace_t *trace);
+int bcm_ptp_clock_user_description_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 *desc);
+int bcm_ptp_clock_utc_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_utc_t *utc);
+int bcm_ptp_clock_utc_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_utc_t *utc);
+int bcm_ptp_ctdev_alarm_callback_register(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_ctdev_alarm_cb alarm_cb);
+int bcm_ptp_ctdev_alarm_callback_unregister(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num);
+int bcm_ptp_ctdev_alpha_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint16 *alpha_numerator, uint16 *alpha_denominator);
+int bcm_ptp_ctdev_alpha_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint16 alpha_numerator, uint16 alpha_denominator);
+int bcm_ptp_ctdev_enable_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *enable, uint32 *flags);
+int bcm_ptp_ctdev_enable_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int enable, uint32 flags);
+int bcm_ptp_ctdev_verbose_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *verbose);
+int bcm_ptp_ctdev_verbose_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int verbose);
+int bcm_ptp_detach(int unit);
+int bcm_ptp_external_phy_synchronize(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_external_phy_config_t *extphy_config);
+int bcm_ptp_foreign_master_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_foreign_master_dataset_t *data_set);
+int bcm_ptp_g8275p1_traceability_info_clock_class_map(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_g8275p1_clock_traceability_info_t traceability_info, uint8 *clock_class);
+int bcm_ptp_init(int unit);
+int bcm_ptp_input_channel_precedence_mode_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int channel_select_mode);
+int bcm_ptp_input_channel_switching_mode_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int channel_switching_mode);
+int bcm_ptp_input_channels_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *num_channels, bcm_ptp_channel_t *channels);
+int bcm_ptp_input_channels_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int num_channels, bcm_ptp_channel_t *channels);
+int bcm_ptp_modular_enable_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *enable, uint32 *flags);
+int bcm_ptp_modular_enable_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int enable, uint32 flags);
+int bcm_ptp_modular_phyts_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *phyts, int *framesync_pin);
+int bcm_ptp_modular_phyts_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int phyts, int framesync_pin);
+int bcm_ptp_modular_portbitmap_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_pbmp_t *pbmp);
+int bcm_ptp_modular_portbitmap_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_pbmp_t pbmp);
+int bcm_ptp_modular_verbose_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *verbose);
+int bcm_ptp_modular_verbose_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int verbose);
+int bcm_ptp_ntp_tod_offset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 flags, bcm_ptp_time_spec_t *ptp_tod_offset, bcm_ptp_time_spec_t *ntp_tod_offset);
+int bcm_ptp_ntp_tod_offset_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 flags, bcm_ptp_time_spec_t *ptp_tod_offset, bcm_ptp_time_spec_t *ntp_tod_offset);
+int bcm_ptp_packet_counters_clear(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint32 counter_bitmap);
+int bcm_ptp_packet_counters_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_packet_counters_t *counters);
+int bcm_ptp_peer_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int max_num_peers, bcm_ptp_peer_entry_t *peers, int *num_peers);
+int bcm_ptp_phase_offset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_phase_offset_t *offset);
+int bcm_ptp_phase_offset_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_phase_offset_t *offset);
+int bcm_ptp_pkt_flags_override_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 *override_flag, uint32 *override_value);
+int bcm_ptp_pkt_flags_override_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint32 override_flag, uint32 override_value);
+int bcm_ptp_port_voq_map_config_get(int unit, bcm_ptp_port_voq_map_config_t *port_voq_map);  /* not in OpenBCM 6.5.27 */
+int bcm_ptp_port_voq_map_config_set(int unit, bcm_ptp_port_voq_map_config_t *port_voq_map);  /* not in OpenBCM 6.5.27 */
+int bcm_ptp_primary_domain_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *primary_domain);
+int bcm_ptp_primary_domain_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int primary_domain);
+int bcm_ptp_servo_configuration_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_servo_config_t *config);
+int bcm_ptp_servo_configuration_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_servo_config_t *config);
+int bcm_ptp_servo_performance_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_servo_performance_t *perf);
+int bcm_ptp_servo_status_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_servo_status_t *status);
+int bcm_ptp_servo_threshold_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_servo_threshold_t *threshold);
+int bcm_ptp_servo_threshold_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_servo_threshold_t *threshold);
+int bcm_ptp_signal_output_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *signal_output_count, bcm_ptp_signal_output_t *signal_output_id);
+int bcm_ptp_signal_output_remove(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int signal_output_id);
+int bcm_ptp_signal_output_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *signal_output_id, bcm_ptp_signal_output_t *output_info);
+int bcm_ptp_signaled_unicast_master_add(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_unicast_master_t *master_info, uint32 mask);
+int bcm_ptp_signaled_unicast_master_remove(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_peer_address_t *master_info);
+int bcm_ptp_signaled_unicast_slave_list(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int max_num_slaves, int *num_slaves, bcm_ptp_clock_peer_t *slave_info);
+int bcm_ptp_signaled_unicast_slave_table_clear(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int callstack);
+int bcm_ptp_signaling_arbiter_register(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_signaling_arbiter_t arb, void *user_data);
+int bcm_ptp_signaling_arbiter_unregister(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num);
+int bcm_ptp_stack_create(int unit, bcm_ptp_stack_info_t *ptp_info);
+int bcm_ptp_stack_destroy(int unit, bcm_ptp_stack_id_t ptp_id);
+int bcm_ptp_stack_get(int unit, bcm_ptp_stack_id_t ptp_id, bcm_ptp_stack_info_t *ptp_info);
+int bcm_ptp_stack_get_all(int unit, int max_size, bcm_ptp_stack_info_t *ptp_info, int *no_of_stacks);
+int bcm_ptp_static_unicast_master_add(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_unicast_master_t *master_info);
+int bcm_ptp_static_unicast_master_list(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int max_num_masters, int *num_masters, bcm_ptp_clock_peer_address_t *master_addr);
+int bcm_ptp_static_unicast_master_remove(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_peer_address_t *master_info);
+int bcm_ptp_static_unicast_master_table_clear(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num);
+int bcm_ptp_static_unicast_master_table_size_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int *max_table_entries);
+int bcm_ptp_static_unicast_slave_add(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_peer_t *slave_info);
+int bcm_ptp_static_unicast_slave_list(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, int max_num_slaves, int *num_slaves, bcm_ptp_clock_peer_t *slave_info);
+int bcm_ptp_static_unicast_slave_remove(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_peer_t *slave_info);
+int bcm_ptp_static_unicast_slave_table_clear(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num);
+int bcm_ptp_sync_phy(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_sync_phy_input_t sync_input);
+int bcm_ptp_telecom_g8265_init(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num);
+int bcm_ptp_telecom_g8265_network_option_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_telecom_g8265_network_option_t *network_option);
+int bcm_ptp_telecom_g8265_network_option_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_telecom_g8265_network_option_t network_option);
+int bcm_ptp_telecom_g8265_packet_master_add(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_port_address_t *address);
+int bcm_ptp_telecom_g8265_packet_master_best_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_telecom_g8265_pktmaster_t *pktmaster);
+int bcm_ptp_telecom_g8265_packet_master_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_clock_port_address_t *address, bcm_ptp_telecom_g8265_pktmaster_t *pktmaster);
+int bcm_ptp_telecom_g8265_packet_master_list(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int max_master_count, int *num_masters, int *best_master, bcm_ptp_telecom_g8265_pktmaster_t *pktmaster);
+int bcm_ptp_telecom_g8265_packet_master_lockout_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 lockout, bcm_ptp_clock_port_address_t *address);
+int bcm_ptp_telecom_g8265_packet_master_non_reversion_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 nonres, bcm_ptp_clock_port_address_t *address);
+int bcm_ptp_telecom_g8265_packet_master_priority_override(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint8 override, bcm_ptp_clock_port_address_t *address);
+int bcm_ptp_telecom_g8265_packet_master_priority_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint16 priority, bcm_ptp_clock_port_address_t *address);
+int bcm_ptp_telecom_g8265_packet_master_remove(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, bcm_ptp_clock_port_address_t *address);
+int bcm_ptp_telecom_g8265_packet_master_wait_duration_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint64 wait_sec, bcm_ptp_clock_port_address_t *address);
+int bcm_ptp_telecom_g8265_pktstats_thresholds_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_telecom_g8265_pktstats_t *thresholds);
+int bcm_ptp_telecom_g8265_pktstats_thresholds_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_telecom_g8265_pktstats_t thresholds);
+int bcm_ptp_telecom_g8265_quality_level_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_telecom_g8265_quality_level_t ql);
+int bcm_ptp_telecom_g8265_receipt_timeout_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_message_type_t message_type, uint32 *receipt_timeout);
+int bcm_ptp_telecom_g8265_receipt_timeout_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_message_type_t message_type, uint32 receipt_timeout);
+int bcm_ptp_telecom_g8265_shutdown(int unit);
+int bcm_ptp_time_format_set(int unit, bcm_ptp_stack_id_t ptp_id, bcm_ptp_time_type_t type);
+int bcm_ptp_timesource_input_status_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_timesource_status_t *status);
+int bcm_ptp_tod_input_sources_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *num_tod_sources, bcm_ptp_tod_input_t *tod_sources);
+int bcm_ptp_tod_input_sources_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int num_tod_sources, bcm_ptp_tod_input_t *tod_sources);
+int bcm_ptp_tod_output_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *tod_output_count, bcm_ptp_tod_output_t *tod_output);
+int bcm_ptp_tod_output_remove(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int tod_output_id);
+int bcm_ptp_tod_output_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int *tod_output_id, bcm_ptp_tod_output_t *output_info);
+int bcm_ptp_transparent_clock_default_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, bcm_ptp_transparent_clock_default_dataset_t *data_set);
+int bcm_ptp_transparent_clock_port_dataset_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, uint16 clock_port, bcm_ptp_transparent_clock_port_dataset_t *data_set);
+int bcm_ptp_unicast_request_duration_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint32 *duration);
+int bcm_ptp_unicast_request_duration_max_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint32 *duration_max);
+int bcm_ptp_unicast_request_duration_max_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint32 duration_max);
+int bcm_ptp_unicast_request_duration_min_get(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint32 *duration_min);
+int bcm_ptp_unicast_request_duration_min_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint32 duration_min);
+int bcm_ptp_unicast_request_duration_set(int unit, bcm_ptp_stack_id_t ptp_id, int clock_num, int port_num, uint32 duration);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-port.html" class="btn btn-neutral float-left" title="bcm_port_* (557)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-rx.html" class="btn btn-neutral float-right" title="bcm_rx_* (146)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1008 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_cosq_* (841) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_cpri_* (247)" href="bcm-cpri.html" />
+    <link rel="prev" title="All registered functions" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_cosq_*</span></code> (841)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-cosq-841">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_cosq_*</span></code> (841)<a class="headerlink" href="#bcm-cosq-841" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_COSQ_AQM_ACTION_PROFILE_CNI_FWD_ACTION_VALID_GET(int *enable);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_FWD_ACTION_VALID_SET(int *enable, int *fwd_action_valid);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_MIRROR_ACTION_VALID_GET(int *enable);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_MIRROR_ACTION_VALID_SET(int *enable, int *mirror_action_valid);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_RESULT_GET(int *enable);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_RESULT_SET(int *enable, int *cni_result);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_CONTROL_FABRIC_CONNECT_MIN_UTILIZATION_FRACTIONAL_GET(int *utilization);
+uint32 BCM_COSQ_CONTROL_FABRIC_CONNECT_MIN_UTILIZATION_SET(int *whole_utilization, int *fractional_utilization);
+int BCM_COSQ_CONTROL_FABRIC_CONNECT_MIN_UTILIZATION_WHOLE_GET(int *utilization);
+void BCM_COSQ_COPY_TO_SECONADRY_REASON_REMOVE(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_COPY_TO_SECONDARY_REASON_ADD(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_COPY_TO_SECONDARY_REASON_INIT(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_COPY_TO_SECONDARY_REASON_TEST(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_EVENT_TYPE_CLEAR(bcm_cosq_event_types_t *_event_types, bcm_cosq_event_type_t *_event_type);
+void BCM_COSQ_EVENT_TYPE_CLEAR_ALL(bcm_cosq_event_types_t *_event_types);
+bcm_cosq_event_type_t BCM_COSQ_EVENT_TYPE_GET(bcm_cosq_event_types_t *_event_types, bcm_cosq_event_type_t *_event_type);
+void BCM_COSQ_EVENT_TYPE_SET(bcm_cosq_event_types_t *_event_types, bcm_cosq_event_type_t *_event_type);
+void BCM_COSQ_EVENT_TYPE_SET_ALL(bcm_cosq_event_types_t *_event_types);
+int BCM_COSQ_GENERIC_KEY_COLOR_GET(int *key);
+int BCM_COSQ_GENERIC_KEY_COLOR_SET(int *key, int *color);
+int BCM_COSQ_GENERIC_KEY_LAT_BIN_COLOR_BIN_GET(int *key);
+int BCM_COSQ_GENERIC_KEY_LAT_BIN_COLOR_COLOR_GET(int *key);
+int BCM_COSQ_GENERIC_KEY_LAT_BIN_COLOR_SET(int *key, int *bin, int *color);
+int BCM_COSQ_GENERIC_KEY_PRIO_GET(int *key);
+int BCM_COSQ_GENERIC_KEY_PRIO_SET(int *key, int *prio);
+int BCM_COSQ_GENERIC_KEY_TC_DP_DP_GET(int *key);
+int BCM_COSQ_GENERIC_KEY_TC_DP_SET(int *key, int *tc, int *dp);
+int BCM_COSQ_GENERIC_KEY_TC_DP_TC_GET(int *key);
+uint32 BCM_COSQ_GPORT_ATTACH_ID_SYSPORT_SET(int *_attach_id, int *_sysport);
+int BCM_COSQ_GPORT_COMPOSITE_SF2_CORE_GET(int *_gport);
+void BCM_COSQ_GPORT_COMPOSITE_SF2_CORE_SET(int *_gport_sf2, int *_gport, int *_core_id);
+int BCM_COSQ_GPORT_COMPOSITE_SF2_GET(int *_gport);
+void BCM_COSQ_GPORT_COMPOSITE_SF2_SET(int *_gport_sf2, int *_gport);
+int BCM_COSQ_GPORT_CORE_DATAPATH_SET(int *_gport, int *_core, int *_dp);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_CORE_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_DATAPATH_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_DST_QUEUE_GET(int *_gport);
+void BCM_COSQ_GPORT_DST_QUEUE_SET(int *_gport, int *_qid);
+int BCM_COSQ_GPORT_E2E_INTERFACE_GET(int *_gport);
+int BCM_COSQ_GPORT_E2E_INTERFACE_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_E2E_PORT_GET(int *_gport);
+void BCM_COSQ_GPORT_E2E_PORT_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_E2E_PORT_TCG_GET(int *_gport);
+void BCM_COSQ_GPORT_E2E_PORT_TCG_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_E2E_PORT_TC_GET(int *_gport);
+int BCM_COSQ_GPORT_E2E_PORT_TC_SCHED_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_GPORT_E2E_PORT_TC_SCHED_SET(int *_gport, int *_port);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_GPORT_E2E_PORT_TC_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_EGRESS_FC_TC_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_GPORT_EGRESS_FC_TC_SET(int *_gport, int *_port);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_GPORT_FABRIC_CLOS_COMMON_FABRIC_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_COMMON_LOCAL0_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_COMMON_LOCAL1_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_COMMON_MULTICAST_FABRIC_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_COMMON_UNICAST_FABRIC_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FABRIC_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FABRIC_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FABRIC_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FMQ_BESTEFFORT_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FMQ_BEST_EFFORT_MIX_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FMQ_BEST_EFFORT_OCB_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FMQ_GUARANTEED_MIX_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FMQ_GUARANTEED_OCB_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_FMQ_GUARANTEED_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL0_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL0_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL0_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL0_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL0_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL0_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL0_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL1_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL1_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL1_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL1_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL1_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL1_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_LOCAL1_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_SCOPE_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_FABRIC_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_FABRIC_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_FABRIC_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_FABRIC_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_FABRIC_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_FABRIC_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_LOCAL_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_LOCAL_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_CLOS_UNICAST_LOCAL_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_COMMON_DEV1_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_COMMON_DEV2_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_COMMON_DEV3_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_COMMON_LOCAL0_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_COMMON_LOCAL1_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_COMMON_MC_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV1_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV1_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV1_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV1_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV2_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV2_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV2_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV2_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV3_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV3_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV3_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV3_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_DEV_SET(int *_gport, int *_dev_id);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL0_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL0_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL0_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL0_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL0_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL1_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL1_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL1_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL1_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL1_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_LOCAL_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_MC_MIX_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_MC_MIX_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_MC_OCB_HIGH_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_MC_OCB_LOW_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_MC_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_MESH_SCOPE_SET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_PIPE_EGRESS_SET(int *_gport, int *_fabric_port, int *_fabric_pipe);
+void BCM_COSQ_GPORT_FABRIC_PIPE_INGRESS_SET(int *_gport, int *_fabric_port, int *_fabric_pipe);
+void BCM_COSQ_GPORT_FABRIC_PIPE_MIDDLE_SET(int *_gport, int *_fabric_port, int *_fabric_pipe);
+int BCM_COSQ_GPORT_FABRIC_PIPE_PIPE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_PIPE_PORT_GET(int *_gport);
+void BCM_COSQ_GPORT_FABRIC_PIPE_SET(int *_gport, int *_fabric_port, int *_fabric_pipe);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_GENERIC_PIPE_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_GENERIC_PIPE_PIPE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_GENERIC_PIPE_SET(int *_gport, int *_core, int *_pipe);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_LOCAL_MCAST_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_LOCAL_MCAST_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_LOCAL_TDM_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_LOCAL_TDM_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_LOCAL_UCAST_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_LOCAL_UCAST_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_MCAST_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_MCAST_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_TDM_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_TDM_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_UCAST_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_FABRIC_RX_QUEUE_UCAST_SET(int *_gport, int *_core);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT0_CORE_SET(int *_gport, int *_core_id);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT0_SET(int *_gport);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT1_CORE_SET(int *_gport, int *_core_id);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT1_SET(int *_gport);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT2_CORE_SET(int *_gport, int *_core_id);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT2_SET(int *_gport);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT_AGR_CORE_SET(int *_gport, int *_core_id);
+void BCM_COSQ_GPORT_FMQ_BESTEFFORT_AGR_SET(int *_gport);
+void BCM_COSQ_GPORT_FMQ_CLASS_CORE_SET(int *_gport, int *_core_id, int *_class);
+void BCM_COSQ_GPORT_FMQ_CLASS_SET(int *_gport, int *_class);
+void BCM_COSQ_GPORT_FMQ_GUARANTEED_CORE_SET(int *_gport, int *_core_id);
+void BCM_COSQ_GPORT_FMQ_GUARANTEED_SET(int *_gport);
+void BCM_COSQ_GPORT_FMQ_ROOT_CORE_SET(int *_gport, int *_core_id);
+void BCM_COSQ_GPORT_FMQ_ROOT_SET(int *_gport);
+int BCM_COSQ_GPORT_INBAND_COE_GET(int *_gport);
+void BCM_COSQ_GPORT_INBAND_COE_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_CPU_DATAPATH_GUARANTEED_SET(int *_gport, int *_core, int *_datapath);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_CPU_GUARANTEED_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_DATAPATH_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_NIF_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_RCY_DATAPATH_GUARANTEED_SET(int *_gport, int *_core, int *_datapath);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_RCY_GUARANTEED_SET(int *_gport, int *_core);
+int BCM_COSQ_GPORT_ISQ_CORE_GET(int *_gport);
+void BCM_COSQ_GPORT_ISQ_CORE_QUEUE_SET(int *_gport, int *_core, int *_qid);
+int BCM_COSQ_GPORT_ISQ_QID_GET(int *_gport);
+void BCM_COSQ_GPORT_ISQ_ROOT_CORE_SET(int *_gport, int *_core_id);
+void BCM_COSQ_GPORT_ISQ_ROOT_SET(int *_gport);
+void BCM_COSQ_GPORT_ISQ_SET(int *_gport, int *_qid);
+int BCM_COSQ_GPORT_IS_COMPOSITE_SF2(int *_gport);
+int BCM_COSQ_GPORT_IS_CORE(int *_gport);
+int BCM_COSQ_GPORT_IS_CORE_DATAPATH(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_IS_DST_QUEUE(int *_gport);
+int BCM_COSQ_GPORT_IS_E2E_INTERFACE(int *_gport);
+int BCM_COSQ_GPORT_IS_E2E_PORT(int *_gport);
+int BCM_COSQ_GPORT_IS_E2E_PORT_TC(int *_gport);
+int BCM_COSQ_GPORT_IS_E2E_PORT_TCG(int *_gport);
+int BCM_COSQ_GPORT_IS_E2E_PORT_TC_SCHED(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_IS_EGRESS_FC_TC(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_IS_FABRIC_PIPE(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_PIPE_EGRESS(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_PIPE_INGRESS(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_PIPE_MIDDLE(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_RX_QUEUE_GENERIC_PIPE(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_RX_QUEUE_LOCAL_MCAST(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_RX_QUEUE_LOCAL_TDM(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_RX_QUEUE_LOCAL_UCAST(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_RX_QUEUE_MCAST(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_RX_QUEUE_TDM(int *_gport);
+int BCM_COSQ_GPORT_IS_FABRIC_RX_QUEUE_UCAST(int *_gport);
+int BCM_COSQ_GPORT_IS_FMQ_BESTEFFORT0(int *_gport);
+int BCM_COSQ_GPORT_IS_FMQ_BESTEFFORT1(int *_gport);
+int BCM_COSQ_GPORT_IS_FMQ_BESTEFFORT2(int *_gport);
+int BCM_COSQ_GPORT_IS_FMQ_BESTEFFORT_AGR(int *_gport);
+int BCM_COSQ_GPORT_IS_FMQ_CLASS(int *_gport);
+int BCM_COSQ_GPORT_IS_FMQ_GUARANTEED(int *_gport);
+int BCM_COSQ_GPORT_IS_FMQ_ROOT(int *_gport);
+int BCM_COSQ_GPORT_IS_INBAND_COE(int *_gport);
+int BCM_COSQ_GPORT_IS_INGRESS_RECEIVE_CPU_DATAPATH_GUARANTEED(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_IS_INGRESS_RECEIVE_CPU_GUARANTEED(int *_gport);
+int BCM_COSQ_GPORT_IS_INGRESS_RECEIVE_NIF(int *_gport);
+int BCM_COSQ_GPORT_IS_INGRESS_RECEIVE_RCY_DATAPATH_GUARANTEED(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_IS_INGRESS_RECEIVE_RCY_GUARANTEED(int *_gport);
+int BCM_COSQ_GPORT_IS_ISQ(int *_gport);
+int BCM_COSQ_GPORT_IS_ISQ_ROOT(int *_gport);
+int BCM_COSQ_GPORT_IS_MCAST_EGRESS_QUEUE(int *_gport);
+int BCM_COSQ_GPORT_IS_MCAST_VOQ(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_IS_MULTIPATH(int *_gport);
+int BCM_COSQ_GPORT_IS_PORT_TC(int *_gport);
+int BCM_COSQ_GPORT_IS_PORT_TCG(int *_gport);
+int BCM_COSQ_GPORT_IS_PORT_TC_SCHED(int *_gport);
+int BCM_COSQ_GPORT_IS_RCY(int *gport);
+int BCM_COSQ_GPORT_IS_RCY_MIRR(int *gport);
+int BCM_COSQ_GPORT_IS_SCHED_CIR(int *_gport);
+int BCM_COSQ_GPORT_IS_SCHED_PIR(int *_gport);
+int BCM_COSQ_GPORT_IS_SHARED_SHAPER_ELEM(int *_gport);
+int BCM_COSQ_GPORT_IS_SRC_QUEUE(int *_gport);
+int BCM_COSQ_GPORT_IS_SYSTEM_RED(int *_gport);
+int BCM_COSQ_GPORT_IS_UCAST_EGRESS_QUEUE(int *_gport);
+int BCM_COSQ_GPORT_IS_UCAST_VOQ(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_IS_VOQ_CONNECTOR(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ_CT(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ_CTCC(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ_CTTC(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ_GL(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ_PG(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ_PP(int *_gport);
+int BCM_COSQ_GPORT_IS_VSQ_SRC_PORT(int *_gport);
+int BCM_COSQ_GPORT_MCAST_EGRESS_QUEUE_GET(int *_gport);
+void BCM_COSQ_GPORT_MCAST_EGRESS_QUEUE_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_MCAST_VOQ_QID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_GPORT_MCAST_VOQ_SET(int *_gport, int *_sysport_id, int *_qid, int *_voq_id);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_MCAST_VOQ_SYSPORTID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_MCAST_VOQ_VOQID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_MULTIPATH_GET(int *_gport);
+void BCM_COSQ_GPORT_MULTIPATH_SET(int *_gport, int *_id);
+int BCM_COSQ_GPORT_PORT_TCG_GET(int *_gport);
+void BCM_COSQ_GPORT_PORT_TCG_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_PORT_TC_GET(int *_gport);
+int BCM_COSQ_GPORT_PORT_TC_SCHED_GET(int *_gport);
+void BCM_COSQ_GPORT_PORT_TC_SCHED_SET(int *_gport, int *_port);
+void BCM_COSQ_GPORT_PORT_TC_SET(int *_gport, int *_port);
+void BCM_COSQ_GPORT_PRIORITY_PROFILE_SET(int *_flags, int *_profile);
+int BCM_COSQ_GPORT_RCY_MIRR_SET(int *gport, int *core);
+int BCM_COSQ_GPORT_RCY_SET(int *gport, int *core);
+int BCM_COSQ_GPORT_SCHED_CIR_CORE_GET(int *_gport);
+void BCM_COSQ_GPORT_SCHED_CIR_CORE_SET(int *_gport, int *_cid, int *_core_id);
+int BCM_COSQ_GPORT_SCHED_CIR_GET(int *_gport);
+void BCM_COSQ_GPORT_SCHED_CIR_SET(int *_gport_cir, int *_gport);
+int BCM_COSQ_GPORT_SCHED_PIR_CORE_GET(int *_gport);
+void BCM_COSQ_GPORT_SCHED_PIR_CORE_SET(int *_gport, int *_cid, int *_core_id);
+int BCM_COSQ_GPORT_SCHED_PIR_GET(int *_gport);
+void BCM_COSQ_GPORT_SCHED_PIR_SET(int *_gport_pir, int *_gport);
+int BCM_COSQ_GPORT_SHARED_SHAPER_ELEM_CORE_GET(int *_gport);
+int BCM_COSQ_GPORT_SHARED_SHAPER_ELEM_FLOW_GET(int *_gport);
+void BCM_COSQ_GPORT_SHARED_SHAPER_ELEM_SET(int *_gport, int *_cid, int *_core_id);
+int BCM_COSQ_GPORT_SRC_QUEUE_GET(int *_gport);
+void BCM_COSQ_GPORT_SRC_QUEUE_SET(int *_gport, int *_qid);
+void BCM_COSQ_GPORT_STAT_PROFILE_ADD(bcm_cosq_gport_stat_profile_t *_profile_set, int *_stat);
+void BCM_COSQ_GPORT_STAT_PROFILE_INIT(bcm_cosq_gport_stat_profile_t *_profile_set);
+void BCM_COSQ_GPORT_STAT_PROFILE_REMOVE(bcm_cosq_gport_stat_profile_t *_profile_set, int *_stat);
+int BCM_COSQ_GPORT_STAT_PROFILE_TEST(bcm_cosq_gport_stat_profile_t *_profile_set, int *_stat);
+void BCM_COSQ_GPORT_SYSTEM_RED_SET(int *_gport);
+int BCM_COSQ_GPORT_UCAST_EGRESS_QUEUE_GET(int *_gport);
+void BCM_COSQ_GPORT_UCAST_EGRESS_QUEUE_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_UCAST_VOQ_QID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_GPORT_UCAST_VOQ_SET(int *_gport, int *_sysport_id, int *_qid, int *_voq_id);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_UCAST_VOQ_SYSPORTID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_UCAST_VOQ_VOQID_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_VOQ_CONNECTOR_CORE_GET(int *_gport);
+void BCM_COSQ_GPORT_VOQ_CONNECTOR_CORE_SET(int *_gport, int *_cid, int *_core_id);
+int BCM_COSQ_GPORT_VOQ_CONNECTOR_ID_GET(int *_gport);
+void BCM_COSQ_GPORT_VOQ_CONNECTOR_SET(int *_gport, int *_cid);
+int BCM_COSQ_GPORT_VSQ_CC_GET(int *_gport);
+int BCM_COSQ_GPORT_VSQ_CORE_ID_GET(int *_gport);
+void BCM_COSQ_GPORT_VSQ_CTCC_SET(int *_gport, int *_core_id, int *_is_ocb_only, int *_category, int *_connection_class);
+void BCM_COSQ_GPORT_VSQ_CTTC_SET(int *_gport, int *_core_id, int *_is_ocb_only, int *_category, int *_traffic_class);
+int BCM_COSQ_GPORT_VSQ_CT_GET(int *_gport);
+void BCM_COSQ_GPORT_VSQ_CT_SET(int *_gport, int *_core_id, int *_is_ocb_only, int *_category);
+void BCM_COSQ_GPORT_VSQ_GL_SET(int *_gport, int *_core_id);
+int BCM_COSQ_GPORT_VSQ_IS_OCB_ONLY(int *_gport);
+int BCM_COSQ_GPORT_VSQ_PG_GET(int *_gport);
+void BCM_COSQ_GPORT_VSQ_PG_SET(int *_gport, int *_core_id, int *_pg_vsq_id);
+int BCM_COSQ_GPORT_VSQ_PP_GET(int *_gport);
+void BCM_COSQ_GPORT_VSQ_PP_SET(int *_gport, int *_core_id, int *_is_ocb_only, int *_statistics_tag);
+void BCM_COSQ_GPORT_VSQ_SET(int *_gport, int *_type, int *_type_info);
+int BCM_COSQ_GPORT_VSQ_SHARED_CORES_GROUP_GET(int *_gport);  /* not in OpenBCM 6.5.27 */
+void BCM_COSQ_GPORT_VSQ_SHARED_SET(int *_gport, int *_cores_group);  /* not in OpenBCM 6.5.27 */
+int BCM_COSQ_GPORT_VSQ_SRC_PORT_GET(int *_gport);
+void BCM_COSQ_GPORT_VSQ_SRC_PORT_SET(int *_gport, int *_core_id, int *_is_ocb_only, int *_src_port_vsq_id);
+int BCM_COSQ_GPORT_VSQ_TC_GET(int *_gport);
+int BCM_COSQ_GPORT_VSQ_TYPE_GET(int *_gport);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GET(int *_gport);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPA_CATEGORY_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPB_CATEGORY_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPB_TC_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPC_CATEGORY_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPC_CONNECTION_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPD_STATISTICS_TAG_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPE_SRC_PORT_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPE_TC_GET(int *_type_info);
+int BCM_COSQ_GPORT_VSQ_TYPE_INFO_GROUPF_SRC_PORT_GET(int *_type_info);
+uint32 BCM_COSQ_ICGM_STAT_INDEX_POOL_SET(uint32 *pool_id);
+int BCM_COSQ_INGRESS_PORT_DROP_ETH_MAP_KEY(int *pcp, int *dei);
+int BCM_COSQ_INGRESS_PORT_DROP_IP_MAP_KEY(int *dscp);
+int BCM_COSQ_INGRESS_PORT_DROP_MPLS_MAP_KEY(int *exp);
+int BCM_COSQ_INGRESS_PORT_DROP_TM_MAP_KEY(int *tc, int *dp);
+int BCM_COSQ_PRIO_VALID(int *prio);
+void BCM_COSQ_PRI_PROFILE_CLEAR(bcm_cosq_gport_priority_profile_t *_profile, int *_offset);
+void BCM_COSQ_PRI_PROFILE_CLEAR_ALL(bcm_cosq_gport_priority_profile_t *_profile);
+int BCM_COSQ_PRI_PROFILE_GET(bcm_cosq_gport_priority_profile_t *_profile, int *_offset);
+void BCM_COSQ_PRI_PROFILE_SET(bcm_cosq_gport_priority_profile_t *_profile, int *_offset);
+void BCM_COSQ_PRI_PROFILE_SET_ALL(bcm_cosq_gport_priority_profile_t *_profile);
+int BCM_COSQ_TH_INDEX_CAST_PRIO_FWDACT_DP_SET(int *cast, int *priority, int *forward_action, int *dp);
+int BCM_COSQ_TH_INDEX_CAST_SET(int *cast);
+int BCM_COSQ_TH_INDEX_DP_SET(int *dp);
+int BCM_COSQ_TH_INDEX_POOL_DP_SET(int *pool_id, int *dp);
+int BCM_COSQ_TH_INDEX_POOL_PRIO_SET(int *prio, int *pool_id);
+int BCM_COSQ_TH_INDEX_PRIO_SET(int *prio);
+int BCM_COSQ_TH_INDEX_TC_SET(int *tc);
+void BCM_COSQ_VSQ_TYPE_INFO_GROUPA_SET(int *_type_info, int *_category);
+void BCM_COSQ_VSQ_TYPE_INFO_GROUPB_SET(int *_type_info, int *_category, int *_tc);
+void BCM_COSQ_VSQ_TYPE_INFO_GROUPC_SET(int *_type_info, int *_category, int *_connection);
+void BCM_COSQ_VSQ_TYPE_INFO_GROUPD_SET(int *_type_info, int *_statistics_tag);
+void BCM_COSQ_VSQ_TYPE_INFO_GROUPE_SET(int *_type_info, int *_src_port, int *_tc);
+void BCM_COSQ_VSQ_TYPE_INFO_GROUPF_SET(int *_type_info, int *_src_port);
+int bcm_cosq_aqm_action_profile_get(int unit, uint32 flags, int profile, bcm_cosq_aqm_action_profile_type_t profile_type, uint32 src_bitmap, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_aqm_action_profile_set(int unit, uint32 flags, int profile, bcm_cosq_aqm_action_profile_type_t profile_type, uint32 src_bitmap, uint32 src_bitmap_mask, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_aqm_profile_create(int unit, int flags, bcm_gport_t *profile_gport);
+int bcm_cosq_aqm_profile_destroy(int unit, int flags, bcm_gport_t profile_gport);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_ar_control_get(int unit, bcm_cosq_ar_control_t type, int *arg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_ar_control_set(int unit, bcm_cosq_ar_control_t type, int arg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_ar_port_control_get(int unit, bcm_gport_t port, bcm_cosq_ar_port_control_t type, int *arg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_ar_port_control_set(int unit, bcm_gport_t port, bcm_cosq_ar_port_control_t type, int arg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_ar_profile_get(int unit, bcm_cosq_ar_profile_type_t profile_type, int profile_id, bcm_cosq_ar_profile_params_t *profile_params);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_ar_profile_set(int unit, bcm_cosq_ar_profile_type_t profile_type, int profile_id, bcm_cosq_ar_profile_params_t *profile_params);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_bandwidth_fabric_adjust_get(int unit, uint32 flags, bcm_cosq_bandwidth_fabric_adjust_key_t *key, uint32 *bandwidth);
+int bcm_cosq_bandwidth_fabric_adjust_set(int unit, uint32 flags, bcm_cosq_bandwidth_fabric_adjust_key_t *key, uint32 bandwidth);
+int bcm_cosq_bandwidth_get(int unit, uint32 flags, bcm_cosq_bandwidth_key_t key, bcm_cosq_bandwidth_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_bandwidth_set(int unit, uint32 flags, bcm_cosq_bandwidth_key_t key, bcm_cosq_bandwidth_config_t config);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_bst_multi_profile_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_bst_stat_id_t bid, int array_size, bcm_cosq_bst_profile_t *profile_array, int *count);
+int bcm_cosq_bst_multi_profile_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_bst_stat_id_t bid, int array_size, bcm_cosq_bst_profile_t *profile_array);
+int bcm_cosq_bst_profile_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_bst_stat_id_t bid, bcm_cosq_bst_profile_t *profile);
+int bcm_cosq_bst_profile_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_bst_stat_id_t bid, bcm_cosq_bst_profile_t *profile);
+void bcm_cosq_bst_profile_t_init(bcm_cosq_bst_profile_t *profile);
+int bcm_cosq_bst_stat_clear(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_bst_stat_id_t bid);
+int bcm_cosq_bst_stat_extended_clear(int unit, bcm_cosq_object_id_t *id, bcm_bst_stat_id_t bid);
+int bcm_cosq_bst_stat_extended_get(int unit, bcm_cosq_object_id_t *id, bcm_bst_stat_id_t bid, uint32 options, uint64 *value);
+int bcm_cosq_bst_stat_extended_get32(int unit, bcm_cosq_object_id_t *id, bcm_bst_stat_id_t bid, uint32 options, uint32 *value);
+int bcm_cosq_bst_stat_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_bst_stat_id_t bid, uint32 options, uint64 *value);
+int bcm_cosq_bst_stat_get32(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_bst_stat_id_t bid, uint32 options, uint32 *value);
+int bcm_cosq_bst_stat_multi_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 options, int max_values, bcm_bst_stat_id_t *id_list, uint64 *values);
+int bcm_cosq_bst_stat_multi_get32(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 options, int max_values, bcm_bst_stat_id_t *id_list, uint32 *values);
+int bcm_cosq_bst_stat_sync(int unit, bcm_bst_stat_id_t bid);
+int bcm_cosq_buffer_id_multi_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_dir_t direction, int array_max, bcm_cosq_buffer_id_t *buf_id_array, int *array_count);
+int bcm_cosq_buffer_utilization_get(int unit, bcm_cosq_buffer_id_t buffer, bcm_cosq_buffer_utilization_t *info);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_buffer_utilization_t_init(bcm_cosq_buffer_utilization_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_burst_monitor_detach(int unit);
+int bcm_cosq_burst_monitor_dma_config_get(int unit, uint32 *host_mem_size, uint32 **host_mem_addr);
+int bcm_cosq_burst_monitor_dma_config_set(int unit, uint32 host_mem_size, uint32 **host_mem_addr);
+int bcm_cosq_burst_monitor_flow_view_config_get(int unit, bcm_cosq_burst_monitor_flow_view_info_t *flow_view_data);
+int bcm_cosq_burst_monitor_flow_view_config_set(int unit, uint32 options, bcm_cosq_burst_monitor_flow_view_info_t *flow_view_data);
+int bcm_cosq_burst_monitor_flow_view_data_clear(int unit);
+int bcm_cosq_burst_monitor_flow_view_data_get(int unit, uint32 usr_mem_size, uint8 *usr_mem_addr);
+int bcm_cosq_burst_monitor_flow_view_stats_get(int unit, uint32 mem_size, uint8 *mem_addr, int max_num_flows, int view_id, uint32 flags, int *num_flows);
+int bcm_cosq_burst_monitor_get(int unit, int max_gports, bcm_gport_t *gport_list, int *num_gports);
+int bcm_cosq_burst_monitor_get_current_time(int unit, uint64 *time_usecs);
+int bcm_cosq_burst_monitor_init(int unit);
+int bcm_cosq_burst_monitor_set(int unit, int num_gports, bcm_gport_t *gport_list);
+int bcm_cosq_burst_monitor_view_summary_get(int unit, uint32 mem_size, uint8 *mem_addr, int max_num_views, int *num_views);
+int bcm_cosq_cbfc_deadlock_control_get(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_cbfc_deadlock_control_t control, uint64 *arg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_cbfc_deadlock_control_set(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_cbfc_deadlock_control_t control, uint64 arg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_cbfc_deadlock_event_register(int unit, bcm_cosq_cbfc_deadlock_event_cb_t cb, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_cbfc_deadlock_event_unregister(int unit, bcm_cosq_cbfc_deadlock_event_cb_t cb, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_cbfc_deadlock_vc_state_get(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_cbfc_deadlock_state_t *state);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_cbfs_shaper_t_init(bcm_cosq_cbfs_shaper_t *shaper);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_cbfs_stat_get(int unit, bcm_port_t port, bcm_cosq_cbfs_stat_t stat, uint32 flags, uint64 *value);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_cbfs_stat_set(int unit, bcm_port_t port, bcm_cosq_cbfs_stat_t stat, uint64 value);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_classifier_create(int unit, bcm_cosq_classifier_t *classifier, int *classifier_id);
+int bcm_cosq_classifier_destroy(int unit, int classifier_id);
+int bcm_cosq_classifier_get(int unit, int classifier_id, bcm_cosq_classifier_t *classifier);
+int bcm_cosq_classifier_id_get(int unit, bcm_cosq_classifier_t *classifier, int array_count, bcm_cos_t *priority_array, bcm_cos_queue_t *cosq_array, int *classifier_id);
+int bcm_cosq_classifier_mapping_clear(int unit, bcm_gport_t port, int classifier_id);
+int bcm_cosq_classifier_mapping_get(int unit, bcm_gport_t port, int classifier_id, bcm_gport_t *queue_group, bcm_cos_t priority, bcm_cos_queue_t *cosq);
+int bcm_cosq_classifier_mapping_multi_get(int unit, bcm_gport_t port, int classifier_id, bcm_gport_t *queue_group, int array_max, bcm_cos_t *priority_array, bcm_cos_queue_t *cosq_array, int *array_count);
+int bcm_cosq_classifier_mapping_multi_set(int unit, bcm_gport_t port, int classifier_id, bcm_gport_t queue_group, int array_count, bcm_cos_t *priority_array, bcm_cos_queue_t *cosq_array);
+int bcm_cosq_classifier_mapping_set(int unit, bcm_gport_t port, int classifier_id, bcm_gport_t queue_group, bcm_cos_t priority, bcm_cos_queue_t cosq);
+void bcm_cosq_classifier_t_init(bcm_cosq_classifier_t *classifier);
+int bcm_cosq_color_resolution_profile_get(int unit, uint32 flags, bcm_cosq_buffer_id_t buffer, int profile_id, bcm_cosq_color_resolution_t *color_resolution);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_color_resolution_profile_set(int unit, uint32 flags, bcm_cosq_buffer_id_t buffer, int profile_id, bcm_cosq_color_resolution_t *color_resolution);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_color_resolution_t_init(bcm_cosq_color_resolution_t *color_resolution);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_config_get(int unit, int *numq);
+int bcm_cosq_config_set(int unit, int numq);
+void bcm_cosq_congestion_info_t_init(bcm_cosq_congestion_info_t *config);
+int bcm_cosq_congestion_mapping_get(int unit, int fabric_modid, bcm_cosq_congestion_mapping_info_t *mapping_info);
+void bcm_cosq_congestion_mapping_info_t_init(bcm_cosq_congestion_mapping_info_t *config);
+int bcm_cosq_congestion_mapping_set(int unit, int fabric_modid, bcm_cosq_congestion_mapping_info_t *mapping_info);
+void bcm_cosq_control_data_t_init(bcm_cosq_control_data_t *control);
+int bcm_cosq_control_dynamic_get(int unit, bcm_cosq_control_t type, bcm_cosq_dynamic_setting_type_t *dynamic);
+int bcm_cosq_control_extended_get(int unit, bcm_cosq_object_id_t *id, bcm_cosq_control_data_t *control);
+int bcm_cosq_control_extended_set(int unit, bcm_cosq_object_id_t *id, bcm_cosq_control_data_t *control);
+int bcm_cosq_control_get(int unit, bcm_gport_t port, bcm_cos_queue_t cosq, bcm_cosq_control_t type, int *arg);
+int bcm_cosq_control_range_get(int unit, bcm_gport_t port, uint32 flags, bcm_cosq_control_range_type_t type, bcm_cosq_range_t *range);
+int bcm_cosq_control_range_set(int unit, bcm_gport_t port, uint32 flags, bcm_cosq_control_range_type_t type, bcm_cosq_range_t *range);
+int bcm_cosq_control_set(int unit, bcm_gport_t port, bcm_cos_queue_t cosq, bcm_cosq_control_t type, int arg);
+void bcm_cosq_copy_to_secondary_map_action_t_init(bcm_cosq_copy_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_copy_to_secondary_map_add(int unit, uint32 options, bcm_cosq_copy_to_secondary_map_match_t *match, bcm_cosq_copy_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_copy_to_secondary_map_delete(int unit, bcm_cosq_copy_to_secondary_map_match_t *match);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_copy_to_secondary_map_delete_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_copy_to_secondary_map_get(int unit, bcm_cosq_copy_to_secondary_map_match_t *match, bcm_cosq_copy_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_copy_to_secondary_map_match_t_init(bcm_cosq_copy_to_secondary_map_match_t *match);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_copy_to_secondary_map_traverse(int unit, bcm_cosq_copy_to_secondary_map_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_cpu_cosq_enable_get(int unit, bcm_cos_queue_t cosq, int *enable);
+int bcm_cosq_cpu_cosq_enable_set(int unit, bcm_cos_queue_t cosq, int enable);
+int bcm_cosq_dcn_drop_pkt_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_dcn_drop_pkt_profile_destroy(int unit, int profile_id);
+int bcm_cosq_dcn_drop_pkt_profile_get(int unit, int profile_id, bcm_cosq_object_id_t *object_id, bcm_cosq_dcn_drop_pkt_profile_t *profile);
+int bcm_cosq_dcn_drop_pkt_profile_set(int unit, int profile_id, bcm_cosq_object_id_t *object_id, bcm_cosq_dcn_drop_pkt_profile_t *profile);
+void bcm_cosq_dcn_drop_pkt_profile_t_init(bcm_cosq_dcn_drop_pkt_profile_t *profile);
+int bcm_cosq_debug_stat_match_get(int unit, bcm_port_t port, bcm_cosq_stat_t stat, bcm_cosq_debug_stat_match_t *match);
+int bcm_cosq_debug_stat_match_set(int unit, bcm_port_t port, bcm_cosq_stat_t stat, bcm_cosq_debug_stat_match_t *match);
+void bcm_cosq_debug_stat_match_t_init(bcm_cosq_debug_stat_match_t *match);
+int bcm_cosq_delay_tolerance_level_get(int unit, int delay_tolerance_level, bcm_cosq_delay_tolerance_t *delay_tolerance);
+int bcm_cosq_delay_tolerance_level_set(int unit, int delay_tolerance_level, bcm_cosq_delay_tolerance_t *delay_tolerance);
+void bcm_cosq_delay_tolerance_preset_attr_t_init(bcm_cosq_delay_tolerance_preset_attr_t *preset_attr);
+int bcm_cosq_delay_tolerance_preset_get(int unit, bcm_cosq_delay_tolerance_preset_attr_t *preset_attr, bcm_cosq_delay_tolerance_t *delay_tolerance);
+int bcm_cosq_dest_credit_size_get(int unit, bcm_module_t dest_modid, uint32 *credit_size);
+int bcm_cosq_dest_credit_size_set(int unit, bcm_module_t dest_modid, uint32 credit_size);
+int bcm_cosq_detach(int unit);
+int bcm_cosq_device_info_get(int unit, bcm_cosq_device_info_t *info);
+void bcm_cosq_device_info_t_init(bcm_cosq_device_info_t *info);
+int bcm_cosq_discard_get(int unit, uint32 *flags);
+int bcm_cosq_discard_port_get(int unit, bcm_port_t port, bcm_cos_queue_t cosq, uint32 color, int *drop_start, int *drop_slope, int *average_time);
+int bcm_cosq_discard_port_set(int unit, bcm_port_t port, bcm_cos_queue_t cosq, uint32 color, int drop_start, int drop_slope, int average_time);
+int bcm_cosq_discard_profile_create(int unit, int *profile_id);
+int bcm_cosq_discard_profile_destroy(int unit, int profile_id);
+int bcm_cosq_discard_profile_get(int unit, int profile_id, int max, bcm_cosq_discard_rule_t *rule_array, int *rule_count);
+int bcm_cosq_discard_profile_update(int unit, int profile_id, bcm_cosq_discard_rule_t *rule);
+void bcm_cosq_discard_rule_t_init(bcm_cosq_discard_rule_t *rule);
+int bcm_cosq_discard_set(int unit, uint32 flags);
+int bcm_cosq_dlb_queue_mapping_get(int unit, int array_size, bcm_cos_queue_t *cosq_array, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_dlb_queue_mapping_set(int unit, int array_size, bcm_cos_queue_t *cosq_array);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_drop_reason_status_get(int unit, bcm_cosq_drop_reason_status_key_t key, int array_max_size, int *array_size, uint32 *drop_reasons);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_dynamic_ecn_threshold_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_dynamic_ecn_threshold_profile_destroy(int unit, int profile_id);
+int bcm_cosq_dynamic_ecn_threshold_profile_get(int unit, int profile_id, bcm_cosq_object_id_t *object_id, bcm_cosq_dynamic_ecn_threshold_profile_t *profile);
+int bcm_cosq_dynamic_ecn_threshold_profile_set(int unit, int profile_id, bcm_cosq_object_id_t *object_id, bcm_cosq_dynamic_ecn_threshold_profile_t *profile);
+void bcm_cosq_dynamic_ecn_threshold_profile_t_init(bcm_cosq_dynamic_ecn_threshold_profile_t *profile);
+int bcm_cosq_ebst_control_get(int unit, bcm_cosq_ebst_control_t type, int *arg);
+int bcm_cosq_ebst_control_set(int unit, bcm_cosq_ebst_control_t type, int arg);
+int bcm_cosq_ebst_data_get(int unit, bcm_cosq_object_id_t *object_id, bcm_bst_stat_id_t bid, int array_size, bcm_cosq_ebst_data_entry_t *entry_array, int *count);
+int bcm_cosq_ebst_data_stat_info_get(int unit, bcm_cosq_object_id_t *object_id, bcm_cosq_ebst_data_stat_info_t *info);
+void bcm_cosq_ebst_data_stat_info_t_init(bcm_cosq_ebst_data_stat_info_t *info);
+int bcm_cosq_ebst_enable_get(int unit, int *enable);
+int bcm_cosq_ebst_enable_set(int unit, int enable);
+int bcm_cosq_ebst_monitor_get(int unit, bcm_cosq_object_id_t *object_id, bcm_bst_stat_id_t bid, bcm_cosq_ebst_monitor_t *monitor);
+int bcm_cosq_ebst_monitor_set(int unit, bcm_cosq_object_id_t *object_id, bcm_bst_stat_id_t bid, bcm_cosq_ebst_monitor_t *monitor);
+void bcm_cosq_ebst_monitor_t_init(bcm_cosq_ebst_monitor_t *monitor);
+int bcm_cosq_ebst_threshold_profile_get(int unit, bcm_cosq_object_id_t *object_id, bcm_bst_stat_id_t bid, bcm_cosq_ebst_threshold_profile_t *profile);
+int bcm_cosq_ebst_threshold_profile_set(int unit, bcm_cosq_object_id_t *object_id, bcm_bst_stat_id_t bid, bcm_cosq_ebst_threshold_profile_t *profile);
+void bcm_cosq_ebst_threshold_profile_t_init(bcm_cosq_ebst_threshold_profile_t *profile);
+int bcm_cosq_egress_editor_profile_config_get(int unit, int profile_id, bcm_cosq_egress_editor_profile_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_egress_editor_profile_config_set(int unit, int profile_id, bcm_cosq_egress_editor_profile_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_egress_editor_profile_create(int unit, uint32 flags, bcm_gport_t gport, int *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_egress_editor_profile_destroy(int unit, uint32 flags, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_event_register(int unit, bcm_cosq_event_types_t event_types, bcm_gport_t port, bcm_cos_queue_t cosq, bcm_cosq_event_cb cb, void *user_data);
+int bcm_cosq_event_unregister(int unit, bcm_cosq_event_types_t event_types, bcm_gport_t port, bcm_cos_queue_t cosq, bcm_cosq_event_cb cb);
+void bcm_cosq_fadt_info_t_init(bcm_cosq_fadt_info_t *info);
+int bcm_cosq_fc_path_add(int unit, bcm_cosq_fc_direction_type_t fc_direction, bcm_cosq_fc_endpoint_t *source, bcm_cosq_fc_endpoint_t *target);
+int bcm_cosq_fc_path_delete(int unit, bcm_cosq_fc_direction_type_t fc_direction, bcm_cosq_fc_endpoint_t *source, bcm_cosq_fc_endpoint_t *target);
+int bcm_cosq_fc_path_get(int unit, bcm_cosq_fc_direction_type_t fc_direction, bcm_cosq_fc_endpoint_t *source, int target_max, bcm_cosq_fc_endpoint_t *target, int *target_count);
+int bcm_cosq_fill_level_threshold_profile_get(int unit, uint32 flags, int profile_id, bcm_cosq_fill_level_threshold_profile_t *cosq_profile);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_fill_level_threshold_profile_set(int unit, uint32 flags, int profile_id, bcm_cosq_fill_level_threshold_profile_t *cosq_profile);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_fill_level_threshold_profile_t_init(bcm_cosq_fill_level_threshold_profile_t *threshold_profile);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_generic_control_get(int unit, uint32 flags, bcm_gport_t gport, uint32 key, bcm_cosq_generic_control_t type, uint32 *arg);
+int bcm_cosq_generic_control_set(int unit, uint32 flags, bcm_gport_t gport, uint32 key, bcm_cosq_generic_control_t type, uint32 arg);
+int bcm_cosq_global_voq_get(int unit, uint32 flags, bcm_port_t port, bcm_cosq_global_voq_info_t *info, uint32 *is_set);
+void bcm_cosq_global_voq_info_t_init(bcm_cosq_global_voq_info_t *info);
+int bcm_cosq_global_voq_set(int unit, uint32 flags, bcm_port_t port, bcm_cosq_global_voq_info_t *info, uint32 *status);
+int bcm_cosq_global_voq_trigger_event_read(int unit, uint32 flags, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_global_voq_trigger_event_t *event);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_gport_add(int unit, bcm_gport_t port, int numq, uint32 flags, bcm_gport_t *gport);
+int bcm_cosq_gport_attach(int unit, bcm_gport_t sched_port, bcm_gport_t input_port, bcm_cos_queue_t cosq);
+int bcm_cosq_gport_attach_get(int unit, bcm_gport_t sched_port, bcm_gport_t *input_port, bcm_cos_queue_t *cosq);
+int bcm_cosq_gport_bandwidth_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 *kbits_sec_min, uint32 *kbits_sec_max, uint32 *flags);
+int bcm_cosq_gport_bandwidth_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 kbits_sec_min, uint32 kbits_sec_max, uint32 flags);
+int bcm_cosq_gport_child_get(int unit, bcm_gport_t in_gport, bcm_cos_queue_t cosq, bcm_gport_t *out_gport);
+int bcm_cosq_gport_color_size_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_color_t color, uint32 flags, bcm_cosq_gport_size_t *gport_size);
+int bcm_cosq_gport_color_size_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_color_t color, uint32 flags, bcm_cosq_gport_size_t *gport_size);
+int bcm_cosq_gport_congestion_config_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_congestion_info_t *config);
+int bcm_cosq_gport_congestion_config_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_congestion_info_t *config);
+int bcm_cosq_gport_connection_get(int unit, bcm_cosq_gport_connection_t *gport_connect);
+int bcm_cosq_gport_connection_set(int unit, bcm_cosq_gport_connection_t *gport_connect);
+int bcm_cosq_gport_delete(int unit, bcm_gport_t gport);
+int bcm_cosq_gport_destmod_attach(int unit, bcm_gport_t gport, bcm_port_t ingress_port, bcm_module_t dest_modid, int fabric_egress_port);
+int bcm_cosq_gport_destmod_detach(int unit, bcm_gport_t gport, bcm_port_t ingress_port, bcm_module_t dest_modid, int fabric_egress_port);
+int bcm_cosq_gport_detach(int unit, bcm_gport_t sched_port, bcm_gport_t input_port, bcm_cos_queue_t cosq);
+int bcm_cosq_gport_discard_extended_get(int unit, bcm_cosq_object_id_t *id, bcm_cosq_gport_discard_t *discard);
+int bcm_cosq_gport_discard_extended_set(int unit, bcm_cosq_object_id_t *id, bcm_cosq_gport_discard_t *discard);
+int bcm_cosq_gport_discard_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_gport_discard_t *discard);
+int bcm_cosq_gport_discard_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_gport_discard_t *discard);
+void bcm_cosq_gport_discard_t_init(bcm_cosq_gport_discard_t *discard);
+int bcm_cosq_gport_dynamic_sched_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_dynamic_state_t state, int *weight);
+int bcm_cosq_gport_dynamic_sched_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_dynamic_state_t state, int weight);
+int bcm_cosq_gport_egress_map_get(int unit, bcm_gport_t gport, bcm_cos_t ingress_pri, bcm_color_t ingress_dp, bcm_cos_queue_t *offset);
+int bcm_cosq_gport_egress_map_set(int unit, bcm_gport_t gport, bcm_cos_t ingress_pri, bcm_color_t ingress_dp, bcm_cos_queue_t offset);
+int bcm_cosq_gport_egress_mapping_get(int unit, bcm_gport_t gport, bcm_cos_t *int_pri, bcm_cos_t *cos, uint32 flags);
+int bcm_cosq_gport_egress_mapping_set(int unit, bcm_gport_t gport, bcm_cos_t int_pri, bcm_cos_t cos, uint32 flags);
+int bcm_cosq_gport_egress_multicast_config_get(int unit, bcm_gport_t gport, bcm_cos_t ingress_pri, bcm_color_t ingress_dp, uint32 flags, bcm_cosq_egress_multicast_config_t *config);
+int bcm_cosq_gport_egress_multicast_config_set(int unit, bcm_gport_t gport, bcm_cos_t ingress_pri, bcm_color_t ingress_dp, uint32 flags, bcm_cosq_egress_multicast_config_t *config);
+int bcm_cosq_gport_enable_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, int *enable);
+int bcm_cosq_gport_enable_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, int enable);
+int bcm_cosq_gport_fadt_threshold_get(int unit, uint32 flags, bcm_cosq_fadt_info_t *fadt_info, bcm_cosq_fadt_threshold_t *threshold);
+int bcm_cosq_gport_fadt_threshold_set(int unit, uint32 flags, bcm_cosq_fadt_info_t *fadt_info, bcm_cosq_fadt_threshold_t *threshold);
+int bcm_cosq_gport_flow_control_get(int unit, bcm_gport_t port, bcm_cos_t int_pri, uint32 *flow_control_mask);
+int bcm_cosq_gport_flow_control_set(int unit, bcm_gport_t port, bcm_cos_t int_pri, uint32 flow_control_mask);
+int bcm_cosq_gport_get(int unit, bcm_gport_t gport, bcm_gport_t *physical_port, int *num_cos_levels, uint32 *flags);
+int bcm_cosq_gport_handle_core_get(int unit, bcm_core_t core, bcm_cosq_gport_info_core_t *gport_info, bcm_gport_t *out_gport);
+int bcm_cosq_gport_handle_get(int unit, bcm_cosq_gport_type_t gport_type, bcm_cosq_gport_info_t *gport_info);
+int bcm_cosq_gport_info_get(int unit, bcm_gport_t gport, bcm_cosq_gport_level_info_t *info);
+void bcm_cosq_gport_level_info_t_init(bcm_cosq_gport_level_info_t *info);
+int bcm_cosq_gport_mapping_get(int unit, bcm_port_t ing_port, bcm_cos_t int_pri, uint32 flags, bcm_gport_t *gport, bcm_cos_queue_t *cosq);
+int bcm_cosq_gport_mapping_set(int unit, bcm_port_t ing_port, bcm_cos_t int_pri, uint32 flags, bcm_gport_t gport, bcm_cos_queue_t cosq);
+int bcm_cosq_gport_multipath_add(int unit, bcm_gport_t multipath_gport, bcm_gport_t member_gport, bcm_cos_queue_t member_gport_cosq);
+int bcm_cosq_gport_multipath_delete(int unit, bcm_gport_t multipath_gport, bcm_gport_t member_gport, bcm_cos_queue_t member_gport_cosq);
+int bcm_cosq_gport_multipath_get(int unit, bcm_gport_t multipath_gport, int member_gport_max, bcm_gport_t *member_gport_array, bcm_cos_queue_t *member_gport_cosq_array, int *member_gport_count);
+int bcm_cosq_gport_parent_get(int unit, bcm_gport_t child_port, bcm_cos_queue_t cos, bcm_gport_t *parent_port);
+int bcm_cosq_gport_parent_set(int unit, bcm_gport_t child_port, bcm_gport_t parent_port);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_gport_pkt_size_adjust_get(int unit, bcm_cosq_pkt_size_adjust_info_t *adjust_info, int *delta);
+int bcm_cosq_gport_pkt_size_adjust_set(int unit, bcm_cosq_pkt_size_adjust_info_t *adjust_info, int delta);
+int bcm_cosq_gport_pon_link_sla_get(int unit, bcm_gport_t gport, bcm_cos_pon_link_sla_t *link_sla);
+int bcm_cosq_gport_pon_link_sla_set(int unit, bcm_gport_t gport, bcm_cos_pon_link_sla_t *link_sla);
+int bcm_cosq_gport_queue_attach(int unit, uint32 flags, bcm_gport_t ingress_queue, bcm_cos_t ingress_int_pri, bcm_gport_t egress_queue, bcm_cos_t egress_int_pri, int *attach_id);
+int bcm_cosq_gport_queue_attach_get(int unit, bcm_gport_t ingress_queue, bcm_cos_t ingress_int_pri, bcm_gport_t *egress_queue, bcm_cos_t *egress_int_pri, int attach_id);
+int bcm_cosq_gport_queue_detach(int unit, bcm_gport_t ingress_queue, bcm_cos_t ingress_int_pri, int attach_id);
+int bcm_cosq_gport_queue_offset_mapping_get(int unit, uint32 flags, bcm_gport_t gport, int count, bcm_cosq_queue_offset_mapping_key_t *key_array, bcm_cosq_queue_offset_t *offset_array);
+int bcm_cosq_gport_queue_offset_mapping_set(int unit, uint32 flags, bcm_gport_t gport, int count, bcm_cosq_queue_offset_mapping_key_t *key_array, bcm_cosq_queue_offset_t *offset_array);
+int bcm_cosq_gport_rate_class_create(int unit, bcm_gport_t gport, uint32 flags, bcm_cosq_rate_class_create_info_t *create_info);
+int bcm_cosq_gport_reattach(int unit, bcm_gport_t sched_port, bcm_gport_t input_port, bcm_cos_queue_t cosq);
+int bcm_cosq_gport_report_threshold_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_report_threshold_t *threshold);
+int bcm_cosq_gport_report_threshold_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_report_threshold_t *threshold);
+int bcm_cosq_gport_sched_config_get(int unit, bcm_gport_t gport, int sched_mode, int int_pri, uint32 *flags);
+int bcm_cosq_gport_sched_config_set(int unit, bcm_gport_t gport, int sched_mode, int int_pri, uint32 flags);
+int bcm_cosq_gport_sched_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, int *mode, int *weight);
+int bcm_cosq_gport_sched_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, int mode, int weight);
+int bcm_cosq_gport_size_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 *bytes_min, uint32 *bytes_max);
+int bcm_cosq_gport_size_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 bytes_min, uint32 bytes_max);
+int bcm_cosq_gport_stat_enable_get(int unit, bcm_gport_t gport, int *enable);
+int bcm_cosq_gport_stat_enable_set(int unit, bcm_gport_t gport, int enable);
+int bcm_cosq_gport_stat_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_gport_stats_t stat, uint64 *value);
+int bcm_cosq_gport_stat_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_gport_stats_t stat, uint64 value);
+int bcm_cosq_gport_stat_sync_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_gport_stats_t stat, uint64 *value);
+int bcm_cosq_gport_static_threshold_get(int unit, uint32 flags, bcm_cosq_static_threshold_info_t *thresh_info, bcm_cosq_static_threshold_t *threshold);
+int bcm_cosq_gport_static_threshold_set(int unit, uint32 flags, bcm_cosq_static_threshold_info_t *thresh_info, bcm_cosq_static_threshold_t *threshold);
+int bcm_cosq_gport_statistic_multi_get(int unit, bcm_gport_t gport, bcm_gport_t lgl_gport, bcm_cos_queue_t cosq, int stat_count, bcm_cosq_gport_stats_t *stats_array, int value_count, uint64 *value_array);
+int bcm_cosq_gport_statistic_multi_set(int unit, bcm_gport_t gport, bcm_gport_t lgl_gport, bcm_cos_queue_t cosq, int stat_count, bcm_cosq_gport_stats_t *stats_array, uint64 value);
+int bcm_cosq_gport_threshold_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_threshold_t *threshold);
+int bcm_cosq_gport_threshold_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_threshold_t *threshold);
+int bcm_cosq_gport_traverse(int unit, bcm_cosq_gport_traverse_cb cb, void *user_data);
+int bcm_cosq_gport_traverse_by_port(int unit, bcm_gport_t port, bcm_cosq_gport_traverse_cb cb, void *user_data);
+int bcm_cosq_gport_vsq_add(int unit, bcm_gport_t vsq, bcm_gport_t queue, bcm_cos_queue_t cosq);
+int bcm_cosq_gport_vsq_create(int unit, bcm_cosq_vsq_info_t *vsq_info, bcm_gport_t *vsq_gport);
+int bcm_cosq_gport_vsq_delete(int unit, bcm_gport_t vsq, bcm_gport_t queue, bcm_cos_queue_t cosq);
+int bcm_cosq_gport_vsq_delete_all(int unit, bcm_gport_t vsq);
+int bcm_cosq_gport_vsq_destroy(int unit, bcm_gport_t vsq_gport);
+int bcm_cosq_gport_vsq_get(int unit, bcm_gport_t vsq, int queue_max, bcm_gport_t *queue_array, bcm_cos_queue_t *cosq_array, int *queue_count);
+int bcm_cosq_gvoq_id_create(int unit, uint32 flags, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 *gvoq_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_hdrm_pool_limit_set(int unit, int hdrm_pool, int num_lossless_class, int arr_size, bcm_cosq_pkt_size_dist_t *pkt_dist_array);
+int bcm_cosq_hull_ecn_marking_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_hull_ecn_marking_profile_destroy(int unit, int profile_id);
+int bcm_cosq_hull_ecn_marking_profile_get(int unit, bcm_cosq_hull_ecn_marking_profile_t *profile);
+int bcm_cosq_hull_ecn_marking_profile_set(int unit, bcm_cosq_hull_ecn_marking_profile_t *profile);
+void bcm_cosq_hull_ecn_marking_profile_t_init(bcm_cosq_hull_ecn_marking_profile_t *profile);
+int bcm_cosq_hull_meter_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_hull_meter_profile_destroy(int unit, int profile_id);
+int bcm_cosq_hull_meter_profile_get(int unit, bcm_cosq_hull_meter_profile_t *profile);
+int bcm_cosq_hull_meter_profile_set(int unit, bcm_cosq_hull_meter_profile_t *profile);
+void bcm_cosq_hull_meter_profile_t_init(bcm_cosq_hull_meter_profile_t *profile);
+int bcm_cosq_icgm_resource_stat_get(int unit, bcm_cosq_icgm_resource_stat_key_t *stat_key, uint64 *value);
+int bcm_cosq_ingress_admit_profile_get(int unit, uint32 flags, bcm_cosq_ingress_admit_profile_type_t type, int admit_profile_id, bcm_cosq_ingress_admit_profile_t *admit_profile);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_ingress_admit_profile_set(int unit, uint32 flags, bcm_cosq_ingress_admit_profile_type_t type, int admit_profile_id, bcm_cosq_ingress_admit_profile_t *admit_profile);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_ingress_drop_control_frame_config_t_init(bcm_cosq_ingress_drop_control_frame_config_t *config);
+void bcm_cosq_ingress_drop_flex_key_construct_id_t_init(bcm_cosq_ingress_drop_flex_key_construct_id_t *config);
+void bcm_cosq_ingress_drop_flex_key_construct_t_init(bcm_cosq_ingress_drop_flex_key_construct_t *config);
+void bcm_cosq_ingress_drop_flex_key_entry_t_init(bcm_cosq_ingress_drop_flex_key_entry_t *config);
+void bcm_cosq_ingress_drop_flex_key_t_init(bcm_cosq_ingress_drop_flex_key_t *config);
+int bcm_cosq_ingress_port_drop_control_frame_get(int unit, bcm_port_t port, uint32 flags, uint32 control_frame_index, bcm_cosq_ingress_drop_control_frame_config_t *control_frame_config);
+int bcm_cosq_ingress_port_drop_control_frame_set(int unit, bcm_port_t port, uint32 flags, uint32 control_frame_index, bcm_cosq_ingress_drop_control_frame_config_t *control_frame_config);
+int bcm_cosq_ingress_port_drop_custom_ether_type_get(int unit, bcm_port_t port, uint32 flags, uint32 ether_type_code, uint32 *ether_type_val);
+int bcm_cosq_ingress_port_drop_custom_ether_type_set(int unit, bcm_port_t port, uint32 flags, uint32 ether_type_code, uint32 ether_type_val);
+int bcm_cosq_ingress_port_drop_default_priority_get(int unit, bcm_port_t port, uint32 flags, uint32 *default_priority);
+int bcm_cosq_ingress_port_drop_default_priority_set(int unit, bcm_port_t port, uint32 flags, uint32 default_priority);
+int bcm_cosq_ingress_port_drop_enable_get(int unit, bcm_port_t port, uint32 flags, int *enable_mode);
+int bcm_cosq_ingress_port_drop_enable_set(int unit, bcm_port_t port, uint32 flags, int enable_mode);
+int bcm_cosq_ingress_port_drop_flex_key_construct_get(int unit, bcm_cosq_ingress_drop_flex_key_construct_id_t *key_id, uint32 flags, bcm_cosq_ingress_drop_flex_key_construct_t *flex_key_config);
+int bcm_cosq_ingress_port_drop_flex_key_construct_set(int unit, bcm_cosq_ingress_drop_flex_key_construct_id_t *key_id, uint32 flags, bcm_cosq_ingress_drop_flex_key_construct_t *flex_key_config);
+int bcm_cosq_ingress_port_drop_flex_key_entry_get(int unit, bcm_port_t port, uint32 flags, uint32 key_index, bcm_cosq_ingress_drop_flex_key_entry_t *flex_key_info);
+int bcm_cosq_ingress_port_drop_flex_key_entry_set(int unit, bcm_port_t port, uint32 flags, uint32 key_index, bcm_cosq_ingress_drop_flex_key_entry_t *flex_key_info);
+int bcm_cosq_ingress_port_drop_map_get(int unit, bcm_port_t port, uint32 flags, bcm_cosq_ingress_port_drop_map_t map, uint32 key, int *priority);
+int bcm_cosq_ingress_port_drop_map_set(int unit, bcm_port_t port, uint32 flags, bcm_cosq_ingress_port_drop_map_t map, uint32 key, int priority);
+void bcm_cosq_ingress_port_drop_mpls_special_label_config_t_init(bcm_cosq_ingress_port_drop_mpls_special_label_config_t *config);
+int bcm_cosq_ingress_port_drop_mpls_special_label_get(int unit, bcm_port_t port, uint32 flags, uint32 label_index, bcm_cosq_ingress_port_drop_mpls_special_label_config_t *label_config);
+int bcm_cosq_ingress_port_drop_mpls_special_label_set(int unit, bcm_port_t port, uint32 flags, uint32 label_index, bcm_cosq_ingress_port_drop_mpls_special_label_config_t *label_config);
+int bcm_cosq_ingress_port_drop_threshold_get(int unit, bcm_port_t port, uint32 flags, int priority, uint32 *value);
+int bcm_cosq_ingress_port_drop_threshold_set(int unit, bcm_port_t port, uint32 flags, int priority, uint32 value);
+int bcm_cosq_ingress_queue_bundle_gport_add(int unit, bcm_cosq_ingress_queue_bundle_gport_config_t *config, bcm_gport_t *gport);
+int bcm_cosq_init(int unit);
+int bcm_cosq_inst_congestion_info_get(int unit, uint32 flags, bcm_cosq_inst_congestion_info_key_t *key, bcm_cosq_inst_congestion_info_data_t *data);
+int bcm_cosq_latency_profile_create(int unit, int flags, bcm_gport_t *profile_gport);
+int bcm_cosq_latency_profile_destroy(int unit, int flags, bcm_gport_t profile_gport);
+int bcm_cosq_llr_xoff_event_register(int unit, bcm_cosq_llr_xoff_event_cb_t cb, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_llr_xoff_event_unregister(int unit, bcm_cosq_llr_xoff_event_cb_t cb, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_mapping_get(int unit, bcm_cos_t priority, bcm_cos_queue_t *cosq);
+int bcm_cosq_mapping_set(int unit, bcm_cos_t priority, bcm_cos_queue_t cosq);
+void bcm_cosq_mapping_t_init(bcm_cosq_mapping_t *control);
+int bcm_cosq_max_latency_pkts_get(int unit, bcm_gport_t gport, uint32 flags, int max_count, bcm_cosq_max_latency_pkts_t *max_latency_pkts, int *actual_count);
+int bcm_cosq_mirror_on_drop_group_get(int unit, uint32 flags, int group_id, bcm_cosq_mirror_on_drop_group_info_t *group_info);
+int bcm_cosq_mirror_on_drop_group_set(int unit, uint32 flags, int group_id, bcm_cosq_mirror_on_drop_group_info_t *group_info);
+int bcm_cosq_mod_control_get(int unit, bcm_cosq_mod_control_t *control);
+int bcm_cosq_mod_control_set(int unit, bcm_cosq_mod_control_t *control);
+void bcm_cosq_mod_control_t_init(bcm_cosq_mod_control_t *control);
+int bcm_cosq_mod_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_mod_profile_destroy(int unit, int profile_id);
+int bcm_cosq_mod_profile_get(int unit, int profile_id, bcm_cosq_mod_profile_t *profile);
+int bcm_cosq_mod_profile_set(int unit, int profile_id, bcm_cosq_mod_profile_t *profile);
+void bcm_cosq_mod_profile_t_init(bcm_cosq_mod_profile_t *profile);
+int bcm_cosq_mod_stat_get(int unit, bcm_cosq_object_id_t *id, bcm_cosq_mod_stat_t stat, uint64 *value);
+int bcm_cosq_mod_stat_set(int unit, bcm_cosq_object_id_t *id, bcm_cosq_mod_stat_t stat, uint64 value);
+int bcm_cosq_non_minimal_remap_profile_create(int unit, uint32 options, int *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_non_minimal_remap_profile_destroy(int unit, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_non_minimal_remap_profile_get(int unit, int profile_id, bcm_cosq_non_minmial_remap_t *remap);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_non_minimal_remap_profile_set(int unit, int profile_id, bcm_cosq_non_minmial_remap_t *remap);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_non_minmial_remap_t_init(bcm_cosq_non_minmial_remap_t *remap);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_object_id_t_init(bcm_cosq_object_id_t *id);
+int bcm_cosq_obq_profile_create(int unit, uint32 options, int *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_obq_profile_destroy(int unit, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_obq_profile_get(int unit, int profile_id, int count, bcm_cosq_obq_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_obq_profile_set(int unit, int profile_id, int count, bcm_cosq_obq_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_obq_profile_t_init(bcm_cosq_obq_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_pause_queue_status_get(int unit, bcm_gport_t gport, uint8 *pause_status);
+int bcm_cosq_pfc_class_config_profile_get(int unit, int profile_id, int max_count, bcm_cosq_pfc_class_map_config_t *config_array, int *count);
+int bcm_cosq_pfc_class_config_profile_set(int unit, int profile_id, int count, bcm_cosq_pfc_class_map_config_t *config_array);
+void bcm_cosq_pfc_class_map_config_t_init(bcm_cosq_pfc_class_map_config_t *config);
+int bcm_cosq_pfc_class_mapping_get(int unit, bcm_gport_t port, int array_max, bcm_cosq_pfc_class_mapping_t *mapping_array, int *array_count);
+int bcm_cosq_pfc_class_mapping_set(int unit, bcm_gport_t port, int array_count, bcm_cosq_pfc_class_mapping_t *mapping_array);
+void bcm_cosq_pfc_class_mapping_t_init(bcm_cosq_pfc_class_mapping_t *mapping);
+int bcm_cosq_pfc_config_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 flags, bcm_cosq_pfc_config_t *config);
+int bcm_cosq_pfc_config_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 flags, bcm_cosq_pfc_config_t *config);
+int bcm_cosq_pfc_dd_recovery_mode_get(int unit, bcm_port_t port, bcm_cosq_pfc_dd_recovery_mode_t *recovery_mode);
+int bcm_cosq_pfc_dd_recovery_mode_set(int unit, bcm_port_t port, bcm_cosq_pfc_dd_recovery_mode_t recovery_mode);
+int bcm_cosq_pfc_deadlock_config_get(int unit, int priority, bcm_cosq_pfc_deadlock_config_t *config);
+int bcm_cosq_pfc_deadlock_config_set(int unit, int priority, bcm_cosq_pfc_deadlock_config_t *config);
+void bcm_cosq_pfc_deadlock_config_t_init(bcm_cosq_pfc_deadlock_config_t *config);
+int bcm_cosq_pfc_deadlock_control_get(int unit, bcm_port_t port, int pfc_priority, bcm_cosq_pfc_deadlock_control_t type, int *arg);
+int bcm_cosq_pfc_deadlock_control_set(int unit, bcm_port_t port, int pfc_priority, bcm_cosq_pfc_deadlock_control_t type, int arg);
+int bcm_cosq_pfc_deadlock_info_get(int unit, int priority, bcm_cosq_pfc_deadlock_info_t *pfc_deadlock_info);
+void bcm_cosq_pfc_deadlock_info_t_init(bcm_cosq_pfc_deadlock_info_t *pfc_deadlock_info);
+int bcm_cosq_pfc_deadlock_queue_config_get(int unit, bcm_gport_t gport, bcm_cosq_pfc_deadlock_queue_config_t *q_config);
+int bcm_cosq_pfc_deadlock_queue_config_set(int unit, bcm_gport_t gport, bcm_cosq_pfc_deadlock_queue_config_t *q_config);
+void bcm_cosq_pfc_deadlock_queue_config_t_init(bcm_cosq_pfc_deadlock_queue_config_t *q_config);
+int bcm_cosq_pfc_deadlock_queue_status_get(int unit, bcm_gport_t gport, uint8 *deadlock_status);
+int bcm_cosq_pfc_deadlock_recovery_event_register(int unit, bcm_cosq_pfc_deadlock_recovery_event_cb_t callback, void *userdata);
+int bcm_cosq_pfc_deadlock_recovery_event_unregister(int unit, bcm_cosq_pfc_deadlock_recovery_event_cb_t callback, void *userdata);
+int bcm_cosq_pfc_deadlock_recovery_exit(int unit, bcm_port_t port, bcm_cos_t cosq);
+int bcm_cosq_pfc_deadlock_recovery_start(int unit, bcm_port_t port, bcm_cos_t cosq);
+int bcm_cosq_pfc_monitor_control_get(int unit, bcm_cosq_pfc_monitor_control_t *control);
+int bcm_cosq_pfc_monitor_control_set(int unit, bcm_cosq_pfc_monitor_control_t *control);
+void bcm_cosq_pfc_monitor_control_t_init(bcm_cosq_pfc_monitor_control_t *control);
+int bcm_cosq_pfc_monitor_dataset_entry_get(int unit, int dataset_id, int array_size, bcm_cosq_pfc_monitor_dataset_entry_t *entry_array, int *count);
+int bcm_cosq_pfc_monitor_dataset_info_get(int unit, int dataset_id, bcm_cosq_pfc_monitor_dataset_info_t *info);
+int bcm_cosq_pfc_monitor_event_register(int unit, bcm_cosq_pfc_monitor_event_cb_t callback, void *userdata);
+int bcm_cosq_pfc_monitor_event_unregister(int unit, bcm_cosq_pfc_monitor_event_cb_t callback, void *userdata);
+int bcm_cosq_pfc_monitor_port_control_get(int unit, bcm_port_t port, bcm_cosq_pfc_monitor_port_control_t *control);
+int bcm_cosq_pfc_monitor_port_control_set(int unit, bcm_port_t port, bcm_cosq_pfc_monitor_port_control_t *control);
+void bcm_cosq_pfc_monitor_port_control_t_init(bcm_cosq_pfc_monitor_port_control_t *control);
+int bcm_cosq_pg_lossless_drop_status_clear(int unit, bcm_port_t port);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_pg_lossless_drop_status_get(int unit, bcm_port_t port, int array_size, int *drop_status_array, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_pkt_flow_param_override_get(int unit, bcm_cosq_pkt_type_t pkt_type, bcm_cosq_pkt_flow_param_override_t *param_override);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_pkt_flow_param_override_set(int unit, bcm_cosq_pkt_type_t pkt_type, bcm_cosq_pkt_flow_param_override_t *param_override);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_pkt_flow_param_override_t_init(bcm_cosq_pkt_flow_param_override_t *param_override);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_pkt_size_adjust_delta_map_get(int unit, int delta, int *final_delta);
+int bcm_cosq_pkt_size_adjust_delta_map_set(int unit, int delta, int final_delta);
+int bcm_cosq_port_bandwidth_get(int unit, bcm_port_t port, bcm_cos_queue_t cosq, uint32 *kbits_sec_min, uint32 *kbits_sec_max, uint32 *flags);
+int bcm_cosq_port_bandwidth_set(int unit, bcm_port_t port, bcm_cos_queue_t cosq, uint32 kbits_sec_min, uint32 kbits_sec_max, uint32 flags);
+int bcm_cosq_port_cbfc_rx_control_get(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_control_t *rx_control);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_rx_control_set(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_control_t *rx_control);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_rx_info_get(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_info_t *rx_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_rx_info_set(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_info_t *rx_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_rx_vc_info_get(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_rx_vc_info_t *rx_vc_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_rx_vc_info_set(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_rx_vc_info_t *rx_vc_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_info_get(int unit, bcm_port_t port, bcm_cosq_port_cbfc_tx_info_t *tx_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_info_set(int unit, bcm_port_t port, bcm_cosq_port_cbfc_tx_info_t *tx_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_vc_info_get(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_tx_vc_info_t *tx_vc_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_vc_info_set(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_tx_vc_info_t *tx_vc_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_vc_vcgroup_map_get(int unit, bcm_port_t port, int vc, int *vcgroup);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_vc_vcgroup_map_set(int unit, bcm_port_t port, int vc, int vcgroup);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_vcgroup_info_get(int unit, bcm_port_t port, int vc_group, bcm_cosq_port_cbfc_tx_vcgroup_info_t *tx_vcgroup_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_tx_vcgroup_info_set(int unit, bcm_port_t port, int vc_group, bcm_cosq_port_cbfc_tx_vcgroup_info_t *tx_vcgroup_info);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_vc_config_get(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_vc_cfg_t *vc_cfg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfc_vc_config_set(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_vc_cfg_t *vc_cfg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfs_shaper_get(int unit, bcm_port_t port, bcm_cosq_cbfs_shaper_t *shaper);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_cbfs_shaper_set(int unit, bcm_port_t port, bcm_cosq_cbfs_shaper_t *shaper);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_port_mapping_get(int unit, bcm_port_t port, bcm_cos_t priority, bcm_cos_queue_t *cosq);
+int bcm_cosq_port_mapping_multi_get(int unit, bcm_port_t port, int count, bcm_cos_t *priority_array, bcm_cos_queue_t *cosq_array);
+int bcm_cosq_port_mapping_multi_set(int unit, bcm_port_t port, int count, bcm_cos_t *priority_array, bcm_cos_queue_t *cosq_array);
+int bcm_cosq_port_mapping_set(int unit, bcm_port_t port, bcm_cos_t priority, bcm_cos_queue_t cosq);
+int bcm_cosq_port_optimized_pfc_group_num_get(int unit, bcm_port_t port, int *arg);
+int bcm_cosq_port_prigrp_hdrm_set(int unit, bcm_port_t port, uint32 pri_bmp, int cable_len, int arr_size, bcm_cosq_pkt_size_dist_t *pkt_dist_array);
+int bcm_cosq_port_priority_group_property_get(int unit, bcm_port_t port, int priority_group_id, bcm_cosq_port_prigroup_control_t type, int *arg);
+int bcm_cosq_port_priority_group_property_set(int unit, bcm_port_t port, int priority_group_id, bcm_cosq_port_prigroup_control_t type, int arg);
+int bcm_cosq_port_profile_get(int unit, bcm_port_t port, bcm_cosq_profile_type_t profile_type, int *profile_id);
+int bcm_cosq_port_profile_set(int unit, bcm_port_t port, bcm_cosq_profile_type_t profile_type, int profile_id);
+int bcm_cosq_port_sched_config_get(int unit, bcm_pbmp_t pbm, int weight_arr_size, int *weights, int *weight_arr_count, int *mode);
+int bcm_cosq_port_sched_config_set(int unit, bcm_pbmp_t pbm, int mode, int weight_arr_size, int *weights);
+int bcm_cosq_port_sched_get(int unit, bcm_pbmp_t pbm, int *mode, int *weights, int *delay);
+int bcm_cosq_port_sched_set(int unit, bcm_pbmp_t pbm, int mode, int *weights, int delay);
+int bcm_cosq_port_schedq_mapping_get(int unit, bcm_port_t port, int array_size, bcm_cosq_mapping_t *cosq_mapping_array, int *count);
+int bcm_cosq_port_schedq_mapping_set(int unit, bcm_port_t port, int array_size, bcm_cosq_mapping_t *cosq_mapping_arr);
+int bcm_cosq_priority_get(int unit, int start_queue, int end_queue, int *pri_profile_id);
+int bcm_cosq_priority_group_mapping_profile_extended_get(int unit, bcm_cosq_object_id_t *id, int profile_index, bcm_cosq_priority_group_mapping_profile_type_t type, int array_max, int *arg, int *array_count);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_priority_group_mapping_profile_extended_set(int unit, bcm_cosq_object_id_t *id, int profile_index, bcm_cosq_priority_group_mapping_profile_type_t type, int array_count, int *arg);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_priority_group_mapping_profile_get(int unit, int profile_index, bcm_cosq_priority_group_mapping_profile_type_t type, int array_max, int *arg, int *array_count);
+int bcm_cosq_priority_group_mapping_profile_set(int unit, int profile_index, bcm_cosq_priority_group_mapping_profile_type_t type, int array_count, int *arg);
+int bcm_cosq_priority_group_pfc_priority_mapping_profile_get(int unit, int profile_id, int array_max, int *pg_array, int *array_count);
+int bcm_cosq_priority_group_pfc_priority_mapping_profile_set(int unit, int profile_id, int array_count, int *pg_array);
+int bcm_cosq_priority_mapping_get_all(int unit, bcm_gport_t gport, int index, bcm_cosq_priority_mapping_t type, int pri_max, int *pri_array, int *pri_count);
+int bcm_cosq_priority_profile_get(int unit, int pri_profile_id, int *count, bcm_cosq_gport_priority_profile_t *pri_profile);
+int bcm_cosq_priority_profile_set(int unit, int pri_profile_id, int count, bcm_cosq_gport_priority_profile_t *pri_profile);
+int bcm_cosq_priority_set(int unit, int start_queue, int end_queue, int pri_profile_id);
+int bcm_cosq_profile_info_inuse_get(int unit, bcm_cosq_profile_type_t profile_type, int profile_id, int *in_use);
+int bcm_cosq_profile_info_portlist_get(int unit, bcm_cosq_profile_type_t profile_type, int profile_id, int max_port_count, bcm_port_t *port_list, int *port_count);
+int bcm_cosq_profile_mapping_get(int unit, bcm_gport_t gport_to_map, bcm_cos_queue_t cosq, uint32 flags, bcm_switch_profile_mapping_t *profile_mapping);
+int bcm_cosq_profile_mapping_set(int unit, bcm_gport_t gport_to_map, bcm_cos_queue_t cosq, uint32 flags, bcm_switch_profile_mapping_t *profile_mapping);
+int bcm_cosq_profile_property_dynamic_get(int unit, bcm_cosq_profile_type_t profile_type, bcm_cosq_dynamic_setting_type_t *dynamic);
+int bcm_cosq_qcn_config_get(int unit, bcm_gport_t port, bcm_cos_queue_t cosq, uint32 flags, bcm_cosq_qcn_config_t *config);
+int bcm_cosq_qcn_config_set(int unit, bcm_gport_t port, bcm_cos_queue_t cosq, uint32 flags, bcm_cosq_qcn_config_t *config);
+void bcm_cosq_queue_offset_mapping_key_t_init(bcm_cosq_queue_offset_mapping_key_t *key);
+int bcm_cosq_resource_allocation_get(int unit, uint32 flags, bcm_cosq_resource_t resource, bcm_cosq_allocation_entity_t *target, bcm_cosq_resource_amounts_t *amounts);
+int bcm_cosq_resource_allocation_set(int unit, uint32 flags, bcm_cosq_resource_t resource, bcm_cosq_allocation_entity_t *target, bcm_cosq_resource_amounts_t *amounts);
+int bcm_cosq_safc_class_mapping_get(int unit, bcm_gport_t port, int array_max, bcm_cosq_safc_class_mapping_t *mapping_array, int *array_count);
+int bcm_cosq_safc_class_mapping_set(int unit, bcm_gport_t port, int array_count, bcm_cosq_safc_class_mapping_t *mapping_array);
+void bcm_cosq_safc_class_mapping_t_init(bcm_cosq_safc_class_mapping_t *mapping);
+int bcm_cosq_sched_config_get(int unit, int weight_arr_size, int *weights, int *weight_arr_count, int *mode);
+int bcm_cosq_sched_config_set(int unit, int mode, int weight_arr_size, int *weights);
+int bcm_cosq_sched_get(int unit, int *mode, int *weights, int *delay);
+int bcm_cosq_sched_set(int unit, int mode, int *weights, int delay);
+int bcm_cosq_sched_weight_max_get(int unit, int mode, int *weight_max);
+int bcm_cosq_schedq_mapping_get(int unit, int profile_index, int array_max, bcm_cosq_mapping_t *cosq_mapping_arr, int *size);
+int bcm_cosq_schedq_mapping_set(int unit, int profile_index, int size, bcm_cosq_mapping_t *cosq_mapping_arr);
+int bcm_cosq_schedq_profile_create(int unit, uint32 options, int *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_schedq_profile_destroy(int unit, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_schedq_profile_get(int unit, int profile_id, int count, bcm_cosq_schedq_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_schedq_profile_set(int unit, int profile_id, int count, bcm_cosq_schedq_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+void bcm_cosq_schedq_profile_t_init(bcm_cosq_schedq_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_scheduler_gport_add(int unit, uint32 flags, bcm_cosq_scheduler_gport_params_t *params, bcm_gport_t *gport);
+int bcm_cosq_scheduler_gport_get(int unit, uint32 flags, bcm_gport_t gport, bcm_cosq_scheduler_gport_params_t *params);
+void bcm_cosq_scheduler_gport_params_t_init(bcm_cosq_scheduler_gport_params_t *params);
+int bcm_cosq_service_pool_get(int unit, bcm_service_pool_id_t id, bcm_cosq_service_pool_t *cosq_service_pool);
+int bcm_cosq_service_pool_override_get(int unit, bcm_cosq_service_pool_override_type_t type, bcm_service_pool_id_t *service_pool, int *enable);
+int bcm_cosq_service_pool_override_set(int unit, bcm_cosq_service_pool_override_type_t type, bcm_service_pool_id_t service_pool, int enable);
+int bcm_cosq_service_pool_set(int unit, bcm_service_pool_id_t id, bcm_cosq_service_pool_t cosq_service_pool);
+void bcm_cosq_service_pool_t_init(bcm_cosq_service_pool_t *service_pool);
+int bcm_cosq_slow_profile_get(int unit, bcm_cosq_slow_level_t *slow_level, bcm_cosq_slow_profile_attributes_t *attr);
+int bcm_cosq_slow_profile_set(int unit, bcm_cosq_slow_level_t *slow_level, bcm_cosq_slow_profile_attributes_t *attr);
+int bcm_cosq_src_vsqs_gport_add(int unit, bcm_gport_t port, bcm_cosq_src_vsqs_gport_config_t *config, bcm_gport_t *src_port_vsq_gport, bcm_gport_t *pg_base_vsq_gport);
+int bcm_cosq_src_vsqs_gport_get(int unit, bcm_gport_t port, bcm_cosq_src_vsqs_gport_config_t *config, bcm_gport_t *src_port_vsq_gport, bcm_gport_t *pg_base_vsq_gport);
+int bcm_cosq_stat_config_get(int unit, int stat_count, bcm_cosq_stat_t *stat_array);
+int bcm_cosq_stat_config_set(int unit, int stat_count, bcm_cosq_stat_t *stat_array);
+int bcm_cosq_stat_extended_get(int unit, bcm_cosq_object_id_t *id, bcm_cosq_stat_t stat, uint64 *value);
+int bcm_cosq_stat_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_stat_t stat, uint64 *value);
+int bcm_cosq_stat_get32(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_stat_t stat, uint32 *value);
+int bcm_cosq_stat_info_get(int unit, int flags, bcm_cosq_stat_info_key_t *key, bcm_cosq_stat_info_t *config);
+int bcm_cosq_stat_info_set(int unit, int flags, bcm_cosq_stat_info_key_t *key, bcm_cosq_stat_info_t *config);
+int bcm_cosq_stat_obj_map_get(int unit, int flags, bcm_cosq_obj_map_key_t *key, uint32 *object_stat_id);
+int bcm_cosq_stat_obj_map_set(int unit, int flags, bcm_cosq_obj_map_key_t *key, uint32 object_stat_id);
+int bcm_cosq_stat_set(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_stat_t stat, uint64 value);
+int bcm_cosq_stat_set32(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_stat_t stat, uint32 value);
+int bcm_cosq_stat_sync_extended_get(int unit, bcm_cosq_object_id_t *id, bcm_cosq_stat_t stat, uint64 *value);
+int bcm_cosq_stat_sync_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_stat_t stat, uint64 *value);
+int bcm_cosq_stat_sync_get32(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_stat_t stat, uint32 *value);
+int bcm_cosq_stat_sync_multi_get(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, int nstat, bcm_cosq_stat_t *stat_arr, uint64 *value_arr);
+int bcm_cosq_stat_sync_multi_get32(int unit, bcm_gport_t gport, bcm_cos_queue_t cosq, int nstat, bcm_cosq_stat_t *stat_arr, uint32 *value_arr);
+int bcm_cosq_subport_congestion_config_get(int unit, bcm_gport_t gport, bcm_cosq_subport_congestion_type_t congestion_type, bcm_cosq_subport_congestion_config_t *congestion_config);
+int bcm_cosq_subport_congestion_config_set(int unit, bcm_gport_t gport, bcm_cosq_subport_congestion_type_t congestion_type, bcm_cosq_subport_congestion_config_t *congestion_config);
+void bcm_cosq_subport_congestion_config_t_init(bcm_cosq_subport_congestion_config_t *mapping);
+int bcm_cosq_subport_e2ecc_class_mapping_get(int unit, bcm_gport_t gport, bcm_subport_cos_to_e2ecc_pri_map_t *cos_to_e2ecc_map);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_subport_e2ecc_class_mapping_set(int unit, bcm_gport_t subport_gport, bcm_subport_cos_to_e2ecc_pri_map_t *cos_to_e2ecc_map, int *cos_to_e2ecc_map_profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_subport_flow_control_get(int unit, bcm_gport_t subport, bcm_gport_t *sched_port);
+int bcm_cosq_subport_flow_control_set(int unit, bcm_gport_t subport, bcm_gport_t sched_port);
+int bcm_cosq_subport_pfc_class_mapping_get(int unit, bcm_gport_t gport, bcm_subport_cos_to_pfc_pri_map_t *cos_to_pfc_map);
+int bcm_cosq_subport_pfc_class_mapping_set(int unit, bcm_gport_t subport_gport, bcm_subport_cos_to_pfc_pri_map_t *cos_to_pfc_map, int *cos_to_pfc_map_profile_id);
+int bcm_cosq_subscriber_map_add(int unit, bcm_cosq_subscriber_map_t *map);
+int bcm_cosq_subscriber_map_delete(int unit, bcm_cosq_subscriber_map_t *map);
+int bcm_cosq_subscriber_map_delete_all(int unit);
+int bcm_cosq_subscriber_map_get(int unit, bcm_cosq_subscriber_map_t *map);
+int bcm_cosq_subscriber_traverse(int unit, bcm_cosq_subscriber_map_traverse_cb cb, void *user_data);
+int bcm_cosq_sysport_ingress_queue_map_get(int unit, uint32 flags, bcm_gport_t sysport, bcm_gport_t *ingress_queue);
+int bcm_cosq_sysport_ingress_queue_map_set(int unit, uint32 flags, bcm_gport_t sysport, bcm_gport_t ingress_queue);
+int bcm_cosq_tas_control_get(int unit, bcm_gport_t port, bcm_cosq_tas_control_t type, int *arg);
+int bcm_cosq_tas_control_set(int unit, bcm_gport_t port, bcm_cosq_tas_control_t type, int arg);
+int bcm_cosq_tas_profile_commit(int unit, bcm_gport_t port, bcm_cosq_tas_profile_id_t pid);
+int bcm_cosq_tas_profile_create(int unit, bcm_gport_t port, bcm_cosq_tas_profile_t *profile, bcm_cosq_tas_profile_id_t *pid);
+int bcm_cosq_tas_profile_destroy(int unit, bcm_gport_t port, bcm_cosq_tas_profile_id_t pid);
+int bcm_cosq_tas_profile_destroy_all(int unit, bcm_gport_t port);
+int bcm_cosq_tas_profile_get(int unit, bcm_gport_t port, bcm_cosq_tas_profile_id_t pid, bcm_cosq_tas_profile_t *profile);
+int bcm_cosq_tas_profile_set(int unit, bcm_gport_t port, bcm_cosq_tas_profile_id_t pid, bcm_cosq_tas_profile_t *profile);
+int bcm_cosq_tas_profile_status_get(int unit, bcm_gport_t port, bcm_cosq_tas_profile_id_t pid, bcm_cosq_tas_profile_status_t *status);
+void bcm_cosq_tas_profile_status_t_init(bcm_cosq_tas_profile_status_t *profile_status);
+void bcm_cosq_tas_profile_t_init(bcm_cosq_tas_profile_t *profile);
+int bcm_cosq_tas_profile_traverse(int unit, bcm_gport_t port, bcm_cosq_tas_profile_traverse_cb cb, void *user_data);
+int bcm_cosq_tas_status_get(int unit, bcm_gport_t port, bcm_cosq_tas_status_t type, int *arg);
+int bcm_cosq_tcb_buffer_multi_get(int unit, bcm_cosq_buffer_id_t buffer_id, int array_max, bcm_cosq_tcb_buffer_t *buffer_array, int *array_count);
+int bcm_cosq_tcb_cb_register(int unit, bcm_cosq_tcb_callback_t fn, void *user_data);
+int bcm_cosq_tcb_cb_unregister(int unit, bcm_cosq_tcb_callback_t fn);
+int bcm_cosq_tcb_config_get(int unit, bcm_cosq_buffer_id_t buffer_id, bcm_cosq_tcb_config_t *config);
+int bcm_cosq_tcb_config_set(int unit, bcm_cosq_buffer_id_t buffer_id, bcm_cosq_tcb_config_t *config);
+void bcm_cosq_tcb_config_t_init(bcm_cosq_tcb_config_t *config);
+int bcm_cosq_tcb_control_get(int unit, int buffer_id, bcm_cosq_tcb_control_t type, int *arg);
+int bcm_cosq_tcb_control_set(int unit, bcm_cosq_buffer_id_t buffer_id, bcm_cosq_tcb_control_t type, int arg);
+int bcm_cosq_tcb_event_multi_get(int unit, bcm_cosq_buffer_id_t buffer_id, int array_max, bcm_cosq_tcb_event_t *event_array, int *array_count, int *overflow_count);
+int bcm_cosq_tcb_gport_threshold_mapping_get(int unit, bcm_cosq_object_id_t *id, int *profile_index);
+int bcm_cosq_tcb_gport_threshold_mapping_set(int unit, bcm_cosq_object_id_t *id, int profile_index);
+int bcm_cosq_tcb_threshold_profile_create(int unit, int flags, bcm_cosq_buffer_id_t buffer_id, bcm_cosq_tcb_threshold_profile_t *threshold, int *profile_index);
+int bcm_cosq_tcb_threshold_profile_destroy(int unit, bcm_cosq_buffer_id_t buffer_id, int profile_index);
+int bcm_cosq_tcb_threshold_profile_get(int unit, bcm_cosq_buffer_id_t buffer_id, int profile_index, bcm_cosq_tcb_threshold_profile_t *threshold);
+void bcm_cosq_tcb_threshold_profile_t_init(bcm_cosq_tcb_threshold_profile_t *threshold);
+void bcm_cosq_threshold_t_init(bcm_cosq_threshold_t *threshold);
+int bcm_cosq_voq_connector_gport_add(int unit, bcm_cosq_voq_connector_gport_t *config, bcm_gport_t *gport);
+int bcm_cosq_voq_connector_gport_get(int unit, bcm_gport_t gport, bcm_cosq_voq_connector_gport_t *config);
+int bcm_cosq_voq_to_gvoq_map_get(int unit, uint32 flags, bcm_gport_t voq_gport, bcm_cos_queue_t cosq, uint32 *gvoq_id);  /* not in OpenBCM 6.5.27 */
+int bcm_cosq_voq_to_gvoq_map_set(int unit, uint32 flags, bcm_gport_t voq_gport, bcm_cos_queue_t cosq, uint32 gvoq_id);  /* not in OpenBCM 6.5.27 */
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="All registered functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-cpri.html" class="btn btn-neutral float-right" title="bcm_cpri_* (247)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,724 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_port_* (557) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_ptp_* (190)" href="bcm-ptp.html" />
+    <link rel="prev" title="bcm_policer_* (102)" href="bcm-policer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_port_*</span></code> (557)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-port-557">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_port_*</span></code> (557)<a class="headerlink" href="#bcm-port-557" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32 BCM_PORT_ABILITY_SPEED_MAX(int *abil);
+uint32 BCM_PORT_ABIL_SPD_MAX(int *abil);
+int BCM_PORT_CHANNEL_ID_PORT_BASE_GET(int *_channel_id);
+int BCM_PORT_CHANNEL_ID_PORT_CH_GET(int *_channel_id);
+void BCM_PORT_CHANNEL_ID_SET(int *_channel_id, int *_port_base, int *_port_ch);
+void BCM_PORT_FLEXE_TIME_SLOT_CLR(bcm_port_flexe_time_slot_t *time_slot, int *slot_id);
+int BCM_PORT_FLEXE_TIME_SLOT_GET(bcm_port_flexe_time_slot_t *time_slot, int *slot_id);
+void BCM_PORT_FLEXE_TIME_SLOT_SET(bcm_port_flexe_time_slot_t *time_slot, int *slot_id);
+void BCM_PORT_LLR_CONFIG_BUFFER_ALLOC_CUSTOM_CLEAR(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_LLR_CONFIG_BUFFER_ALLOC_CUSTOM_GET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_BUFFER_ALLOC_CUSTOM_SET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_DATA_AGE_CLEAR(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_DATA_AGE_GET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_DATA_AGE_SET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_LINK_DOWN_CLEAR(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_LINK_DOWN_GET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_LINK_DOWN_SET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_REPLAY_COUNT_CLEAR(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_REPLAY_COUNT_GET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_REPLAY_COUNT_SET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_REPEAT_ACK_CLEAR(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_LLR_CONFIG_REPEAT_ACK_GET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_CONFIG_REPEAT_ACK_SET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_REINIT_ON_DATA_AGE_EXPIRED_CLEAR(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_LLR_REINIT_ON_DATA_AGE_EXPIRED_GET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_REINIT_ON_DATA_AGE_EXPIRED_SET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_REINIT_ON_REPLAY_MAX_COUNT_CLEAR(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_LLR_REINIT_ON_REPLAY_MAX_COUNT_GET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_LLR_REINIT_ON_REPLAY_MAX_COUNT_SET(int *llr_flags);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_PORT_PHY_CLAUSE45_ADDR(int *_devad, int *_regad);
+uint32 BCM_PORT_PHY_CLAUSE45_DEVAD(uint32 *_reg_addr);
+uint32 BCM_PORT_PHY_CLAUSE45_REGAD(uint32 *_reg_addr);
+uint32 BCM_PORT_PHY_I2C_ADDR(int *_devad, int *_regad);
+uint32 BCM_PORT_PHY_I2C_DEVAD(uint32 *_reg_addr);
+uint32 BCM_PORT_PHY_I2C_REGAD(uint32 *_reg_addr);
+uint32 BCM_PORT_PHY_REG_ADDR(uint32 *_reg_addr);
+uint32 BCM_PORT_PHY_REG_BANK(uint32 *_reg_addr);
+uint32 BCM_PORT_PHY_REG_FLAGS(uint32 *_reg_addr);
+uint32 BCM_PORT_PHY_REG_INDIRECT_ADDR(uint32 *_flags, uint32 *_reg_type, uint32 *_reg_selector);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_BR_DFE_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_BR_DFE_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_BR_DFE_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_CL72_POLARITY_AUTO_EN_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_CL72_POLARITY_AUTO_EN_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_CL72_POLARITY_AUTO_EN_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_CL72_RESTART_TIMEOUT_EN_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_CL72_RESTART_TIMEOUT_EN_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_CL72_RESTART_TIMEOUT_EN_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_DFE_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_DFE_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_DFE_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_ES_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_ES_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_ES_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_NRZ_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_NRZ_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_NRZ_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_NS_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_NS_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_NS_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_PAM4_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_PAM4_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_FORCE_PAM4_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE_CLEAR(int *lane_config);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE_GET(int *lane_config);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE_SET(int *lane_config, int *lp_mode);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LP_DFE_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LP_DFE_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LP_DFE_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LP_PREC_EN_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LP_PREC_EN_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LP_PREC_EN_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_MEDIUM_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_MEDIUM_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_MEDIUM_SET(int *lane_config, int *medium_type);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_OS_DFE_CLEAR(int *lane_config);  /* not in OpenBCM 6.5.27 */
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_OS_DFE_GET(int *lane_config);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_OS_DFE_SET(int *lane_config);  /* not in OpenBCM 6.5.27 */
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_PAM4_CHANNEL_LOSS_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_PAM4_CHANNEL_LOSS_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_PAM4_CHANNEL_LOSS_SET(int *lane_config, int *channel_loss);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_SCRAMBLING_DISABLE_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_SCRAMBLING_DISABLE_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_SCRAMBLING_DISABLE_SET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_UNRELIABLE_LOS_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_UNRELIABLE_LOS_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_UNRELIABLE_LOS_SET(int *lane_config);
+int BCM_PORT_WIDE_DATA_STRENGTH_GET(uint64 *_data);
+void BCM_PORT_WIDE_DATA_STRENGTH_SET(uint64 *_data, int *_strength);
+int bcm_port_ability_advert_get(int unit, bcm_port_t port, bcm_port_ability_t *ability_mask);
+int bcm_port_ability_advert_set(int unit, bcm_port_t port, bcm_port_ability_t *ability_mask);
+int bcm_port_ability_get(int unit, bcm_port_t port, bcm_port_abil_t *local_ability_mask);
+int bcm_port_ability_local_get(int unit, bcm_port_t port, bcm_port_ability_t *local_ability_mask);
+int bcm_port_ability_remote_get(int unit, bcm_port_t port, bcm_port_ability_t *ability_mask);
+void bcm_port_ability_t_init(bcm_port_ability_t *ability);
+int bcm_port_add(int unit, bcm_port_t port, uint32 flags, bcm_port_interface_info_t *interface_info, bcm_port_mapping_info_t *mapping_info);
+int bcm_port_advert_get(int unit, bcm_port_t port, bcm_port_abil_t *ability_mask);
+int bcm_port_advert_remote_get(int unit, bcm_port_t port, bcm_port_abil_t *ability_mask);
+int bcm_port_advert_set(int unit, bcm_port_t port, bcm_port_abil_t ability_mask);
+int bcm_port_autoneg_ability_advert_get(int unit, bcm_port_t port, int max_num_ability, bcm_port_speed_ability_t *abilities_array, int *actual_num_ability);
+int bcm_port_autoneg_ability_advert_set(int unit, bcm_port_t port, int num_ability, bcm_port_speed_ability_t *abilities_array);
+int bcm_port_autoneg_ability_remote_get(int unit, bcm_port_t port, int max_num_ability, bcm_port_speed_ability_t *abilities_array, int *actual_num_ability);
+int bcm_port_autoneg_get(int unit, bcm_port_t port, int *autoneg);
+int bcm_port_autoneg_set(int unit, bcm_port_t port, int autoneg);
+void bcm_port_ber_proj_params_t_init(bcm_port_ber_proj_params_t *params);
+int bcm_port_bpdu_enable_get(int unit, bcm_port_t port, int *enable);
+int bcm_port_bpdu_enable_set(int unit, bcm_port_t port, int enable);
+int bcm_port_buffer_pbmp_get(int unit, int buffer_id, bcm_pbmp_t *pbmp);
+int bcm_port_cable_diag(int unit, bcm_port_t port, bcm_port_cable_diag_t *status);
+int bcm_port_cbfc_config_get(int unit, bcm_port_t port, bcm_port_cbfc_config_t *cbfc_config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_cbfc_config_set(int unit, bcm_port_t port, bcm_port_cbfc_config_t *cbfc_config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_cbfc_enable_get(int unit, bcm_port_t port, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_cbfc_enable_set(int unit, bcm_port_t port, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_cfi_color_get(int unit, bcm_port_t port, int cfi, bcm_color_t *color);
+int bcm_port_cfi_color_set(int unit, bcm_port_t port, int cfi, bcm_color_t color);
+int bcm_port_class_allocation_create(int unit, bcm_port_class_allocation_info_t *class_info);
+int bcm_port_class_allocation_destroy(int unit, bcm_port_class_allocation_info_t *class_info);
+int bcm_port_class_allocation_get(int unit, bcm_port_class_allocation_info_t *class_info);
+int bcm_port_class_get(int unit, bcm_port_t port, bcm_port_class_t pclass, uint32 *class_id);
+int bcm_port_class_set(int unit, bcm_port_t port, bcm_port_class_t pclass, uint32 class_id);
+int bcm_port_clear(int unit);
+int bcm_port_clm_callback_register(int unit, bcm_port_clm_callback_t callback, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_port_clm_callback_unregister(int unit, bcm_port_clm_callback_t callback, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_port_clm_config_get(int unit, bcm_port_t port, bcm_port_clm_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_clm_config_set(int unit, bcm_port_t port, bcm_port_clm_config_t *config);  /* not in OpenBCM 6.5.27 */
+void bcm_port_clm_config_t_init(bcm_port_clm_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_clm_delay_get(int unit, bcm_port_t port, bcm_port_clm_delay_t *delay);  /* not in OpenBCM 6.5.27 */
+void bcm_port_clm_delay_t_init(bcm_port_clm_delay_t *delay);  /* not in OpenBCM 6.5.27 */
+int bcm_port_clm_enable_get(int unit, bcm_port_t port, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_clm_enable_set(int unit, bcm_port_t port, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_clm_req_pkt_send(int unit, bcm_port_t port, bcm_port_clm_req_pkt_t *packet);  /* not in OpenBCM 6.5.27 */
+void bcm_port_clm_req_pkt_t_init(bcm_port_clm_req_pkt_t *packet);  /* not in OpenBCM 6.5.27 */
+int bcm_port_config_get(int unit, bcm_port_config_t *config);
+int bcm_port_config_phy_oam_get(int unit, bcm_port_t port, bcm_port_config_phy_oam_t *conf);
+int bcm_port_config_phy_oam_set(int unit, bcm_port_t port, bcm_port_config_phy_oam_t *conf);
+void bcm_port_config_t_init(bcm_port_config_t *pconfig);
+int bcm_port_congestion_config_get(int unit, bcm_gport_t port, bcm_port_congestion_config_t *config);
+int bcm_port_congestion_config_set(int unit, bcm_gport_t port, bcm_port_congestion_config_t *config);
+void bcm_port_congestion_config_t_init(bcm_port_congestion_config_t *config);
+int bcm_port_congestion_get(int unit, bcm_gport_t congestion_port, bcm_gport_t port, uint32 flags, int *channel_id);
+int bcm_port_congestion_set(int unit, bcm_gport_t congestion_port, bcm_gport_t port, uint32 flags, int channel_id);
+int bcm_port_control_get(int unit, bcm_port_t port, bcm_port_control_t type, int *value);
+int bcm_port_control_phy_oam_get(int unit, bcm_port_t port, bcm_port_control_phy_oam_t type, uint64 *value);
+int bcm_port_control_phy_oam_set(int unit, bcm_port_t port, bcm_port_control_phy_oam_t type, uint64 value);
+int bcm_port_control_phy_timesync_get(int unit, bcm_port_t port, bcm_port_control_phy_timesync_t type, uint64 *value);
+int bcm_port_control_phy_timesync_set(int unit, bcm_port_t port, bcm_port_control_phy_timesync_t type, uint64 value);
+int bcm_port_control_set(int unit, bcm_port_t port, bcm_port_control_t type, int value);
+int bcm_port_detach(int unit, bcm_pbmp_t pbmp, bcm_pbmp_t *detached);
+int bcm_port_discard_get(int unit, bcm_port_t port, int *mode);
+int bcm_port_discard_set(int unit, bcm_port_t port, int mode);
+int bcm_port_dscp_map_get(int unit, bcm_port_t port, int srccp, int *mapcp, int *prio);
+int bcm_port_dscp_map_mode_get(int unit, bcm_port_t port, int *mode);
+int bcm_port_dscp_map_mode_set(int unit, bcm_port_t port, int mode);
+int bcm_port_dscp_map_set(int unit, bcm_port_t port, int srccp, int mapcp, int prio);
+int bcm_port_dscp_unmap_get(int unit, bcm_port_t port, int internal_pri, bcm_color_t color, int *pkt_dscp);
+int bcm_port_dscp_unmap_set(int unit, bcm_port_t port, int internal_pri, bcm_color_t color, int pkt_dscp);
+int bcm_port_dtag_mode_get(int unit, bcm_port_t port, int *mode);
+int bcm_port_dtag_mode_set(int unit, bcm_port_t port, int mode);
+int bcm_port_duplex_get(int unit, bcm_port_t port, int *duplex);
+int bcm_port_duplex_set(int unit, bcm_port_t port, int duplex);
+void bcm_port_e2efc_remote_module_config_t_init(bcm_port_e2efc_remote_module_config_t *e2efc_rmod_cfg);
+int bcm_port_e2efc_remote_module_enable_get(int unit, bcm_module_t remote_module, bcm_port_e2efc_mode_t mode, int *enable, bcm_port_e2efc_remote_module_config_t *e2efc_rmod_cfg);
+int bcm_port_e2efc_remote_module_enable_set(int unit, bcm_module_t remote_module, bcm_port_e2efc_mode_t mode, int enable, bcm_port_e2efc_remote_module_config_t *e2efc_rmod_cfg);
+int bcm_port_e2efc_remote_module_traverse(int unit, bcm_port_e2efc_remote_module_traverse_cb cb, void *user_data);
+int bcm_port_e2efc_remote_port_add(int unit, bcm_port_e2efc_remote_port_config_t *e2efc_rport_cfg, int *rport_handle_id);
+void bcm_port_e2efc_remote_port_config_t_init(bcm_port_e2efc_remote_port_config_t *e2efc_rport_cfg);
+int bcm_port_e2efc_remote_port_delete(int unit, int rport_handle_id);
+int bcm_port_e2efc_remote_port_get(int unit, int rport_handle_id, bcm_port_e2efc_remote_port_config_t *e2efc_rport_cfg);
+int bcm_port_e2efc_remote_port_set(int unit, int rport_handle_id, bcm_port_e2efc_remote_port_config_t *e2efc_rport_cfg);
+int bcm_port_e2efc_remote_port_traverse(int unit, bcm_port_e2efc_remote_port_traverse_cb cb, void *user_data);
+int bcm_port_egress_get(int unit, bcm_port_t port, int modid, bcm_pbmp_t *pbmp);
+int bcm_port_egress_set(int unit, bcm_port_t port, int modid, bcm_pbmp_t pbmp);
+int bcm_port_enable_get(int unit, bcm_port_t port, int *enable);
+int bcm_port_enable_mode_get(int unit, bcm_port_t port, uint32 flags, bcm_port_enable_mode_t *enable_mode);  /* not in OpenBCM 6.5.27 */
+int bcm_port_enable_mode_set(int unit, bcm_port_t port, uint32 flags, bcm_port_enable_mode_t enable_mode);  /* not in OpenBCM 6.5.27 */
+int bcm_port_enable_set(int unit, bcm_port_t port, int enable);
+int bcm_port_encap_config_get(int unit, bcm_gport_t gport, bcm_port_encap_config_t *encap_config);
+int bcm_port_encap_config_set(int unit, bcm_gport_t gport, bcm_port_encap_config_t *encap_config);
+void bcm_port_encap_config_t_init(bcm_port_encap_config_t *encap_config);
+int bcm_port_encap_get(int unit, bcm_port_t port, int *mode);
+int bcm_port_encap_local_get(int unit, bcm_gport_t gport, uint32 flags, int *encap_local_id);
+int bcm_port_encap_map_get(int unit, uint32 flags, bcm_if_t encap_id, bcm_gport_t *port);
+int bcm_port_encap_map_set(int unit, uint32 flags, bcm_if_t encap_id, bcm_gport_t port);
+int bcm_port_encap_set(int unit, bcm_port_t port, int mode);
+int bcm_port_encrypted_pfc_tx_config_get(int unit, bcm_gport_t gport, bcm_port_encrypted_pfc_tx_config_t *config);
+int bcm_port_encrypted_pfc_tx_config_set(int unit, bcm_gport_t gport, bcm_port_encrypted_pfc_tx_config_t *config);
+void bcm_port_encrypted_pfc_tx_config_t_init(bcm_port_encrypted_pfc_tx_config_t *config);
+int bcm_port_encrypted_pfc_tx_deinit(int unit);
+int bcm_port_encrypted_pfc_tx_init(int unit, bcm_port_encrypted_pfc_tx_init_config_t *config);
+void bcm_port_encrypted_pfc_tx_init_config_t_init(bcm_port_encrypted_pfc_tx_init_config_t *config);
+int bcm_port_extender_mapping_info_get(int unit, uint32 flags, bcm_port_extender_mapping_type_t type, bcm_port_extender_mapping_info_t *mapping_info);
+int bcm_port_extender_mapping_info_set(int unit, uint32 flags, bcm_port_extender_mapping_type_t type, bcm_port_extender_mapping_info_t *mapping_info);
+void bcm_port_extender_mapping_info_t_init(bcm_port_extender_mapping_info_t *mapping_info);
+int bcm_port_fast_link_recovery_enable_get(int unit, bcm_port_t port, int *enable, bcm_port_flr_timeout_t *timeout);
+int bcm_port_fast_link_recovery_enable_set(int unit, bcm_port_t port, int enable, bcm_port_flr_timeout_t timeout);
+int bcm_port_fast_link_recovery_link_config_get(int unit, bcm_port_t port, uint32 flags, bcm_port_flr_link_config_t *config);
+int bcm_port_fast_link_recovery_link_config_set(int unit, bcm_port_t port, uint32 flags, bcm_port_flr_link_config_t *config);
+int bcm_port_fast_reboot_traffic_enable(int unit);
+int bcm_port_fault_get(int unit, bcm_port_t port, uint32 *flags);
+int bcm_port_fdr_callback_register(int unit, bcm_port_fdr_handler_t f, void *user_data);
+int bcm_port_fdr_callback_unregister(int unit, bcm_port_fdr_handler_t f, void *user_data);
+int bcm_port_fdr_config_get(int unit, bcm_port_t port, bcm_port_fdr_config_t *fdr_config);
+int bcm_port_fdr_config_set(int unit, bcm_port_t port, bcm_port_fdr_config_t *fdr_config);
+void bcm_port_fdr_config_t_init(bcm_port_fdr_config_t *fdr_config);
+int bcm_port_fdr_stats_get(int unit, bcm_port_t port, bcm_port_fdr_stats_t *fdr_stats);
+int bcm_port_fec_stat_auto_collect_clear(int unit, bcm_pbmp_t pbmp);  /* not in OpenBCM 6.5.27 */
+int bcm_port_fec_stat_auto_collect_config_get(int unit, bcm_port_fec_stat_auto_collect_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_fec_stat_auto_collect_config_set(int unit, bcm_port_fec_stat_auto_collect_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_fec_stat_auto_collect_data_get(int unit, bcm_port_t port, bcm_port_fec_stat_auto_collect_data_t *data);  /* not in OpenBCM 6.5.27 */
+int bcm_port_fec_stat_auto_collect_start(int unit, bcm_pbmp_t pbmp);  /* not in OpenBCM 6.5.27 */
+int bcm_port_fec_stat_auto_collect_stop(int unit, bcm_pbmp_t pbmp);  /* not in OpenBCM 6.5.27 */
+int bcm_port_flexe_flow_clear(int unit, bcm_port_t src_port, int channel, bcm_port_t dest_port);
+int bcm_port_flexe_flow_set(int unit, uint32 flags, bcm_port_t src_port, int channel, bcm_port_t dest_port);
+int bcm_port_flexe_group_cal_active_get(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_cal_t *active_cal);
+int bcm_port_flexe_group_cal_active_set(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_cal_t active_cal);
+int bcm_port_flexe_group_cal_slots_get(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_cal_t calendar_id, int max_nof_slots, int *calendar_slots, int *actual_nof_slots);
+int bcm_port_flexe_group_cal_slots_set(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_cal_t calendar_id, int nof_slots, int *calendar_slots);
+int bcm_port_flexe_group_create(int unit, bcm_gport_t gport, uint32 flags, int nof_pcs, bcm_port_flexe_group_phy_info_t *phy_info);
+int bcm_port_flexe_group_destroy(int unit, bcm_gport_t gport);
+int bcm_port_flexe_group_get(int unit, bcm_gport_t gport, uint32 flags, int max_nof_pcs, bcm_port_flexe_group_phy_info_t *phy_info, int *actual_nof_pcs);
+int bcm_port_flexe_group_har_action_set(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_har_action_t action);  /* not in OpenBCM 6.5.27 */
+int bcm_port_flexe_group_phy_add(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_phy_info_t *phy_info);
+int bcm_port_flexe_group_phy_remove(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_phy_info_t *phy_info);
+int bcm_port_flexe_oam_alarm_get(int unit, bcm_port_t port, uint32 flags, bcm_port_flexe_oam_alarm_t *alarms);
+int bcm_port_flexe_oam_control_get(int unit, bcm_port_t port, uint32 flags, bcm_port_flexe_oam_control_type_t type, uint32 *val);
+int bcm_port_flexe_oam_control_set(int unit, bcm_port_t port, uint32 flags, bcm_port_flexe_oam_control_type_t type, uint32 val);
+int bcm_port_flexe_oam_stat_get(int unit, bcm_port_t port, uint32 flags, bcm_port_flexe_oam_stat_t stat, uint64 *val);
+int bcm_port_flexe_oh_alarm_get(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_oh_alarm_t *alarms);
+int bcm_port_flexe_oh_get(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_oh_type_t type, int *val);
+int bcm_port_flexe_oh_set(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_oh_type_t type, int val);
+int bcm_port_flexstate_attach(int unit, bcm_gport_t port, uint32 action_id);
+int bcm_port_flexstate_detach_with_id(int unit, bcm_gport_t port, uint32 action_id);
+int bcm_port_flood_block_get(int unit, bcm_port_t ingress_port, bcm_port_t egress_port, uint32 *flags);
+int bcm_port_flood_block_pbmp_get(int unit, bcm_port_t ingress_port, uint32 flags, bcm_pbmp_t *egress_pbmp);  /* not in OpenBCM 6.5.27 */
+int bcm_port_flood_block_pbmp_set(int unit, bcm_port_t ingress_port, uint32 flags, bcm_pbmp_t egress_pbmp);  /* not in OpenBCM 6.5.27 */
+int bcm_port_flood_block_set(int unit, bcm_port_t ingress_port, bcm_port_t egress_port, uint32 flags);
+int bcm_port_flood_group_get(int unit, bcm_gport_t port, uint32 flags, bcm_port_flood_group_t *flood_groups);
+int bcm_port_flood_group_set(int unit, bcm_gport_t port, uint32 flags, bcm_port_flood_group_t *flood_groups);
+void bcm_port_flood_group_t_init(bcm_port_flood_group_t *flood_groups);
+int bcm_port_force_dest_get(int unit, bcm_gport_t gport, bcm_port_dest_info_t *dest_info);
+int bcm_port_force_dest_set(int unit, bcm_gport_t gport, bcm_port_dest_info_t *dest_info);
+int bcm_port_force_forward_get(int unit, bcm_port_t port, bcm_port_t *egr_port, int *enabled);
+int bcm_port_force_forward_mode_get(int unit, bcm_port_t port, bcm_port_t *egr_port, uint32 *flags);
+int bcm_port_force_forward_mode_set(int unit, bcm_port_t port, bcm_port_t egr_port, uint32 flags);
+int bcm_port_force_forward_set(int unit, bcm_port_t port, bcm_port_t egr_port, int enable);
+int bcm_port_force_vlan_config_get(int unit, bcm_port_force_vlan_config_t *config);
+int bcm_port_force_vlan_config_set(int unit, bcm_port_force_vlan_config_t *config);
+void bcm_port_force_vlan_config_t_init(bcm_port_force_vlan_config_t *config);
+int bcm_port_force_vlan_get(int unit, bcm_port_t port, bcm_vlan_t *vlan, int *pkt_prio, uint32 *flags);
+int bcm_port_force_vlan_set(int unit, bcm_port_t port, bcm_vlan_t vlan, int pkt_prio, uint32 flags);
+int bcm_port_frame_max_get(int unit, bcm_port_t port, int *size);
+int bcm_port_frame_max_set(int unit, bcm_port_t port, int size);
+int bcm_port_framer_channel_free(int unit, uint32 flags, bcm_port_framer_module_t module_id, int channel);
+int bcm_port_framer_channel_reserve(int unit, uint32 flags, bcm_port_framer_module_t module_id, int *channel);
+int bcm_port_get(int unit, bcm_port_t port, uint32 *flags, bcm_port_interface_info_t *interface_info, bcm_port_mapping_info_t *mapping_info);
+int bcm_port_gport_add(int unit, bcm_port_t local_port, bcm_gport_t modport);
+int bcm_port_gport_delete(int unit, bcm_port_t local_port, bcm_gport_t modport);
+int bcm_port_gport_delete_all(int unit, bcm_port_t local_port);
+int bcm_port_gport_egress_get(int unit, bcm_gport_t source_gport, uint32 *flags, int max_gports, bcm_gport_t *block_gports, int *num_gports);
+int bcm_port_gport_egress_set(int unit, bcm_gport_t source_gport, uint32 flags, int num_gports, bcm_gport_t *block_gports);
+int bcm_port_gport_free_range_get(int unit, uint32 gport_type, bcm_gport_t *gport_min, bcm_gport_t *gport_max);
+int bcm_port_gport_get(int unit, bcm_port_t port, bcm_gport_t *gport);
+int bcm_port_gport_get_all(int unit, bcm_port_t local_port, int size, bcm_gport_t *gport_array, int *count);
+int bcm_port_gport_is_free(int unit, bcm_gport_t gport);
+int bcm_port_group_range_get(int unit, bcm_port_group_type_t type, bcm_port_group_range_t *range);
+int bcm_port_hull_rate_egress_get(int unit, bcm_port_t port, uint32 *kbits_sec, uint32 *kbits_burst);
+int bcm_port_hull_rate_egress_set(int unit, bcm_port_t port, uint32 kbits_sec, uint32 kbits_burst);
+int bcm_port_ifg_get(int unit, bcm_port_t port, int speed, bcm_port_duplex_t duplex, int *bit_times);
+int bcm_port_ifg_set(int unit, bcm_port_t port, int speed, bcm_port_duplex_t duplex, int bit_times);
+int bcm_port_ifilter_get(int unit, bcm_port_t port, int *mode);
+int bcm_port_ifilter_set(int unit, bcm_port_t port, int mode);
+int bcm_port_ilkn_lane_map_get(int unit, int flags, bcm_port_t port, int num_of_lanes, int *lanes);
+int bcm_port_ilkn_lane_map_set(int unit, int flags, bcm_port_t port, int num_of_lanes, int *lanes);
+int bcm_port_info_get(int unit, bcm_port_t port, bcm_port_info_t *info);
+int bcm_port_info_restore(int unit, bcm_port_t port, bcm_port_info_t *info);
+int bcm_port_info_save(int unit, bcm_port_t port, bcm_port_info_t *info);
+int bcm_port_info_set(int unit, bcm_port_t port, bcm_port_info_t *info);
+void bcm_port_info_t_init(bcm_port_info_t *info);
+int bcm_port_ingress_tdm_failover_get(int unit, int flag, bcm_pbmp_t *tdm_enable_pbmp);
+int bcm_port_ingress_tdm_failover_set(int unit, int flag, bcm_pbmp_t tdm_enable_pbmp);
+int bcm_port_init(int unit);
+int bcm_port_inner_tpid_get(int unit, bcm_port_t port, uint16 *tpid);
+int bcm_port_inner_tpid_set(int unit, bcm_port_t port, uint16 tpid);
+int bcm_port_interface_config_get(int unit, bcm_port_t port, bcm_port_interface_config_t *config);
+int bcm_port_interface_config_set(int unit, bcm_port_t port, bcm_port_interface_config_t *config);
+void bcm_port_interface_config_t_init(bcm_port_interface_config_t *config);
+int bcm_port_interface_get(int unit, bcm_port_t port, bcm_port_if_t *intf);
+int bcm_port_interface_set(int unit, bcm_port_t port, bcm_port_if_t intf);
+int bcm_port_internal_get(int unit, uint32 flags, int internal_ports_max, bcm_gport_t *internal_gport, int *internal_ports_count);
+int bcm_port_ipmc_modify_get(int unit, bcm_port_t port, uint32 *flags);
+int bcm_port_ipmc_modify_set(int unit, bcm_port_t port, uint32 flags);
+int bcm_port_jam_get(int unit, bcm_port_t port, int *enable);
+int bcm_port_jam_set(int unit, bcm_port_t port, int enable);
+int bcm_port_l2_interface_gport_get(int unit, int interface_id, bcm_gport_t *port);
+int bcm_port_l2_interface_id_get(int unit, bcm_gport_t port, int *interface_id);
+int bcm_port_l2_tunnel_payload_tpid_add(int unit, bcm_port_t port, uint16 tpid, int color_select);
+int bcm_port_l2_tunnel_payload_tpid_delete(int unit, bcm_port_t port, uint16 tpid);
+int bcm_port_l2_tunnel_payload_tpid_delete_all(int unit, bcm_port_t port);
+int bcm_port_l2_tunnel_payload_tpid_get(int unit, bcm_port_t port, uint16 *tpid);
+int bcm_port_l2_tunnel_payload_tpid_get_all(int unit, bcm_port_t port, int size, uint16 *tpid_array, int *color_array, int *count);
+int bcm_port_l2_tunnel_payload_tpid_set(int unit, bcm_port_t port, uint16 tpid);
+int bcm_port_l3_enable_get(int unit, bcm_port_t port, int *enable);
+int bcm_port_l3_enable_set(int unit, bcm_port_t port, int enable);
+int bcm_port_l3_encapsulated_mtu_get(int unit, bcm_port_t port, int *size);
+int bcm_port_l3_encapsulated_mtu_set(int unit, bcm_port_t port, int size);
+int bcm_port_l3_modify_get(int unit, bcm_port_t port, uint32 *flags);
+int bcm_port_l3_modify_set(int unit, bcm_port_t port, uint32 flags);
+int bcm_port_l3_mtu_get(int unit, bcm_port_t port, int *size);
+int bcm_port_l3_mtu_set(int unit, bcm_port_t port, int size);
+int bcm_port_lane_info_get(int unit, bcm_port_t port, bcm_port_lane_info_t *lane_info);
+int bcm_port_lane_map_get(int unit, bcm_port_t port, bcm_port_lane_map_t *lane_map);
+int bcm_port_lane_map_set(int unit, bcm_port_t port, bcm_port_lane_map_t *lane_map);
+int bcm_port_lane_to_serdes_map_get(int unit, int flags, int map_size, bcm_port_lane_to_serdes_map_t *serdes_map);
+int bcm_port_lane_to_serdes_map_set(int unit, int flags, int map_size, bcm_port_lane_to_serdes_map_t *serdes_map);
+int bcm_port_learn_get(int unit, bcm_port_t port, uint32 *flags);
+int bcm_port_learn_modify(int unit, bcm_port_t port, uint32 add, uint32 remove);
+int bcm_port_learn_set(int unit, bcm_port_t port, uint32 flags);
+int bcm_port_link_failed_clear(int unit, bcm_port_t port);
+int bcm_port_link_state_get(int unit, bcm_port_t port, uint32 flags, bcm_port_link_state_t *state);
+int bcm_port_link_status_get(int unit, bcm_port_t port, int *status);
+int bcm_port_link_training_config_get(int unit, bcm_port_t port, bcm_port_link_training_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_link_training_config_set(int unit, bcm_port_t port, bcm_port_link_training_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_linkscan_get(int unit, bcm_port_t port, int *linkscan);
+int bcm_port_linkscan_set(int unit, bcm_port_t port, int linkscan);
+int bcm_port_llr_config_get(int unit, bcm_port_t port, bcm_port_llr_config_t *llr_config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_config_multi_set(int unit, int num_ports, bcm_port_llr_config_t *llr_config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_config_set(int unit, bcm_port_t port, bcm_port_llr_config_t *llr_config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_config_t_init(int unit, bcm_port_t port, int speed, int num_lanes, int RTT, bcm_port_llr_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_flush_callback_register(int unit, bcm_port_llr_flush_handler_t handler, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_flush_callback_unregister(int unit, bcm_port_llr_flush_handler_t handler, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_mode_enable_get(int unit, bcm_port_t port, bcm_port_llr_mode_type_t mode, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_mode_enable_set(int unit, bcm_port_t port, bcm_port_llr_mode_type_t mode, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_llr_status_get(int unit, bcm_port_t port, bcm_port_llr_status_t *llr_status);  /* not in OpenBCM 6.5.27 */
+int bcm_port_local_get(int unit, bcm_gport_t gport, bcm_port_t *local_port);
+int bcm_port_loopback_get(int unit, bcm_port_t port, int *loopback);
+int bcm_port_loopback_set(int unit, bcm_port_t port, int loopback);
+int bcm_port_management_packet_config_get(int unit, bcm_port_t port, bcm_port_management_packet_config_t *config_array, int max_config, int *config_count);
+int bcm_port_management_packet_config_set(int unit, bcm_port_t port, bcm_port_management_packet_config_t *config);
+void bcm_port_mapping_info_t_init(bcm_port_mapping_info_t *mapping);
+int bcm_port_master_get(int unit, bcm_port_t port, int *ms);
+int bcm_port_master_set(int unit, bcm_port_t port, int ms);
+int bcm_port_match_add(int unit, bcm_gport_t port, bcm_port_match_info_t *match);
+int bcm_port_match_delete(int unit, bcm_gport_t port, bcm_port_match_info_t *match);
+int bcm_port_match_delete_all(int unit, bcm_gport_t port);
+void bcm_port_match_info_t_init(bcm_port_match_info_t *port_match_info);
+int bcm_port_match_multi_get(int unit, bcm_gport_t port, int size, bcm_port_match_info_t *match_array, int *count);
+int bcm_port_match_replace(int unit, bcm_gport_t port, bcm_port_match_info_t *old_match, bcm_port_match_info_t *new_match);
+int bcm_port_match_set(int unit, bcm_gport_t port, int size, bcm_port_match_info_t *match_array);
+int bcm_port_mdix_get(int unit, bcm_port_t port, bcm_port_mdix_t *mode);
+int bcm_port_mdix_set(int unit, bcm_port_t port, bcm_port_mdix_t mode);
+int bcm_port_mdix_status_get(int unit, bcm_port_t port, bcm_port_mdix_status_t *status);
+int bcm_port_medium_config_get(int unit, bcm_port_t port, bcm_port_medium_t medium, bcm_phy_config_t *config);
+int bcm_port_medium_config_set(int unit, bcm_port_t port, bcm_port_medium_t medium, bcm_phy_config_t *config);
+int bcm_port_medium_get(int unit, bcm_port_t port, bcm_port_medium_t *medium);
+int bcm_port_medium_status_register(int unit, bcm_port_t port, bcm_port_medium_status_cb_t callback, void *user_data);
+int bcm_port_medium_status_unregister(int unit, bcm_port_t port, bcm_port_medium_status_cb_t callback, void *user_data);
+int bcm_port_modid_egress_get(int unit, bcm_port_t port, bcm_module_t modid, bcm_pbmp_t *pbmp);
+int bcm_port_modid_egress_set(int unit, bcm_port_t port, bcm_module_t modid, bcm_pbmp_t pbmp);
+int bcm_port_modid_enable_get(int unit, bcm_port_t port, int modid, int *enable);
+int bcm_port_modid_enable_set(int unit, bcm_port_t port, int modid, int enable);
+int bcm_port_mpi_diagnostic_get(int unit, bcm_port_t port, bcm_port_mpi_diagnostic_t *mpi_diag);  /* not in OpenBCM 6.5.27 */
+int bcm_port_network_group_add(int unit, bcm_gport_t gport, bcm_port_network_group_direction_t direction, bcm_port_network_group_t *group);
+int bcm_port_network_group_delete(int unit, bcm_gport_t gport, bcm_port_network_group_direction_t direction, bcm_port_network_group_t *group);
+int bcm_port_network_group_get_all(int unit, bcm_gport_t gport, bcm_port_network_group_direction_t direction, int array_size, bcm_port_network_group_t *group_array, int *count);
+void bcm_port_network_group_t_init(bcm_port_network_group_t *group);
+int bcm_port_nif_priority_get(int unit, bcm_gport_t local_port, uint32 flags, bcm_port_nif_prio_t *priority, bcm_pbmp_t *affected_ports);
+int bcm_port_nif_priority_set(int unit, bcm_gport_t local_port, uint32 flags, bcm_port_nif_prio_t *priority, bcm_pbmp_t *affected_ports);
+int bcm_port_pause_addr_get(int unit, bcm_port_t port, bcm_mac_t mac);
+int bcm_port_pause_addr_set(int unit, bcm_port_t port, bcm_mac_t mac);
+int bcm_port_pause_get(int unit, bcm_port_t port, int *pause_tx, int *pause_rx);
+int bcm_port_pause_set(int unit, bcm_port_t port, int pause_tx, int pause_rx);
+int bcm_port_pause_sym_get(int unit, bcm_port_t port, int *pause);
+int bcm_port_pause_sym_set(int unit, bcm_port_t port, int pause);
+int bcm_port_pch_timesync_config_get(int unit, bcm_port_t port, bcm_port_pch_timesync_config_t *pch_ts_config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_pch_timesync_config_set(int unit, bcm_port_t port, bcm_port_pch_timesync_config_t *pch_ts_config);  /* not in OpenBCM 6.5.27 */
+int bcm_port_pcs_lane_map_set(int unit, bcm_port_t port, uint32 flags, int num_map, bcm_port_lane_to_serdes_map_t *serdes_map);
+int bcm_port_pfm_get(int unit, bcm_port_t port, int *mode);
+int bcm_port_pfm_set(int unit, bcm_port_t port, int mode);
+int bcm_port_phy_am_lock_status_get(int unit, bcm_port_t port, bcm_port_phy_am_lock_status_t *am_lock);  /* not in OpenBCM 6.5.27 */
+int bcm_port_phy_control_get(int unit, bcm_port_t port, bcm_port_phy_control_t type, uint32 *value);
+int bcm_port_phy_control_set(int unit, bcm_port_t port, bcm_port_phy_control_t type, uint32 value);
+int bcm_port_phy_drv_name_get(int unit, bcm_port_t port, char *name, int len);
+int bcm_port_phy_fec_error_inject_config_get(int unit, bcm_port_t port, bcm_port_phy_fec_error_inject_config_t *config);
+int bcm_port_phy_fec_error_inject_config_set(int unit, bcm_port_t port, bcm_port_phy_fec_error_inject_config_t config);
+int bcm_port_phy_fec_error_inject_enable_get(int unit, bcm_port_t port, bcm_port_phy_fec_error_inject_enable_t *enable);
+int bcm_port_phy_fec_error_inject_enable_set(int unit, bcm_port_t port, bcm_port_phy_fec_error_inject_enable_t enable);
+int bcm_port_phy_fec_error_inject_get(int unit, bcm_port_t port, uint16 *error_control_map, bcm_port_phy_fec_error_mask_t *bit_error_mask);
+int bcm_port_phy_fec_error_inject_set(int unit, bcm_port_t port, uint16 error_control_map, bcm_port_phy_fec_error_mask_t bit_error_mask);
+int bcm_port_phy_firmware_set(int unit, bcm_port_t port, uint32 flags, int offset, uint8 *array, int length);
+int bcm_port_phy_firmware_type_get(int unit, bcm_port_t port, bcm_port_phy_firmware_type_t *fw_type);  /* not in OpenBCM 6.5.27 */
+int bcm_port_phy_firmware_type_set(int unit, bcm_port_t port, bcm_port_phy_firmware_type_t fw_type);  /* not in OpenBCM 6.5.27 */
+int bcm_port_phy_get(int unit, bcm_port_t port, uint32 flags, uint32 phy_reg_addr, uint32 *phy_data);
+int bcm_port_phy_mapping_info_get(int unit, uint32 phy_port, bcm_port_phy_mapping_info_t *mapping_info);  /* not in OpenBCM 6.5.27 */
+void bcm_port_phy_mapping_info_t_init(bcm_port_phy_mapping_info_t *mapping_info);  /* not in OpenBCM 6.5.27 */
+int bcm_port_phy_modify(int unit, bcm_port_t port, uint32 flags, uint32 phy_reg_addr, uint32 phy_data, uint32 phy_mask);
+int bcm_port_phy_multi_get(int unit, bcm_port_t port, uint32 flags, uint32 dev_addr, uint32 offset, int max_size, uint8 *data, int *actual_size);
+int bcm_port_phy_multicast_set(int unit, bcm_port_t port, uint32 mdio_buses, uint32 flags, uint32 phy_reg_addr, uint32 phy_data);
+int bcm_port_phy_reset(int unit, bcm_port_t port);
+int bcm_port_phy_reset_register(int unit, bcm_port_t port, bcm_port_phy_reset_cb_t callback, void *user_data);
+int bcm_port_phy_reset_unregister(int unit, bcm_port_t port, bcm_port_phy_reset_cb_t callback, void *user_data);
+int bcm_port_phy_rx_get(int unit, bcm_port_t port, bcm_port_phy_rx_t *rx);  /* not in OpenBCM 6.5.27 */
+void bcm_port_phy_rx_t_init(bcm_port_phy_rx_t *rx);  /* not in OpenBCM 6.5.27 */
+int bcm_port_phy_set(int unit, bcm_port_t port, uint32 flags, uint32 phy_reg_addr, uint32 phy_data);
+int bcm_port_phy_signal_detect_status_get(int unit, bcm_port_t port, bcm_port_phy_signal_detect_status_t *sd_status);
+int bcm_port_phy_timesync_config_get(int unit, bcm_port_t port, bcm_port_phy_timesync_config_t *conf);
+int bcm_port_phy_timesync_config_set(int unit, bcm_port_t port, bcm_port_phy_timesync_config_t *conf);
+void bcm_port_phy_timesync_config_t_init(bcm_port_phy_timesync_config_t *conf);
+int bcm_port_phy_timesync_enhanced_capture_get(int unit, bcm_port_t port, bcm_port_phy_timesync_enhanced_capture_t *value);
+int bcm_port_phy_tx_get(int unit, bcm_port_t port, bcm_port_phy_tx_t *tx);
+int bcm_port_phy_tx_set(int unit, bcm_port_t port, bcm_port_phy_tx_t *tx);
+void bcm_port_phy_tx_t_init(bcm_port_phy_tx_t *tx);
+int bcm_port_physical_pmap_info_get(int unit, bcm_port_t port, bcm_port_physical_pmap_info_t *phys_port_info);
+int bcm_port_pipe_pbmp_all_get(int unit, int pipe, bcm_pbmp_t *pbmp);  /* not in OpenBCM 6.5.27 */
+int bcm_port_pipe_pbmp_get(int unit, int pipe, bcm_pbmp_t *pbmp);
+int bcm_port_pmd_rx_lock_status_get(int unit, bcm_port_t port, bcm_port_pmd_rx_lock_status_t *lock_status);
+int bcm_port_polarity_get(int unit, bcm_port_t port, bcm_port_polarity_t *polarity);
+int bcm_port_polarity_set(int unit, bcm_port_t port, bcm_port_polarity_t *polarity);
+int bcm_port_policer_get(int unit, bcm_port_t port, bcm_policer_t *policer_id);
+int bcm_port_policer_set(int unit, bcm_port_t port, bcm_policer_t policer_id);
+int bcm_port_pon_info_get(int unit, bcm_port_t pon_port, bcm_port_pon_info_t *info);
+int bcm_port_pon_info_set(int unit, bcm_port_t pon_port, bcm_port_pon_info_t *info);
+int bcm_port_pon_tunnel_add(int unit, bcm_gport_t pon_port, uint32 flags, bcm_gport_t *tunnel_port_id);
+int bcm_port_pon_tunnel_map_get(int unit, bcm_gport_t pon_port, bcm_tunnel_id_t tunnel_id, bcm_gport_t *tunnel_port_id);
+int bcm_port_pon_tunnel_map_set(int unit, bcm_gport_t pon_port, bcm_tunnel_id_t tunnel_id, bcm_gport_t tunnel_port_id);
+int bcm_port_pon_tunnel_remove(int unit, bcm_gport_t tunnel_port_id);
+int bcm_port_post_ber_proj_get(int unit, bcm_port_t port, bcm_port_ber_proj_params_t *ber_proj, int max_errcnt, bcm_port_ber_proj_analyzer_errcnt_t *errcnt_array, int *actual_errcnt);
+int bcm_port_pp_pipe_instance_pbmp_get(int unit, int pipe, int instance, bcm_pbmp_t *pbmp);  /* not in OpenBCM 6.5.27 */
+int bcm_port_preemption_control_get(int unit, bcm_gport_t gport, bcm_port_preempt_control_t type, uint32 *arg);
+int bcm_port_preemption_control_set(int unit, bcm_gport_t gport, bcm_port_preempt_control_t type, uint32 arg);
+int bcm_port_preemption_status_get(int unit, bcm_gport_t gport, bcm_port_preempt_status_t type, uint32 *status);
+int bcm_port_priority_color_get(int unit, bcm_port_t port, int prio, bcm_color_t *color);
+int bcm_port_priority_color_set(int unit, bcm_port_t port, int prio, bcm_color_t color);
+int bcm_port_priority_config_get(int unit, bcm_port_t port, bcm_port_prio_config_t *priority_config);
+int bcm_port_priority_config_set(int unit, bcm_port_t port, bcm_port_prio_config_t *port_priority_config);
+int bcm_port_priority_group_config_get(int unit, bcm_gport_t gport, int priority_group, bcm_port_priority_group_config_t *prigrp_config);
+int bcm_port_priority_group_config_set(int unit, bcm_gport_t gport, int priority_group, bcm_port_priority_group_config_t *prigrp_config);
+void bcm_port_priority_group_config_t_init(bcm_port_priority_group_config_t *prigrp_config);
+int bcm_port_priority_group_mapping_get(int unit, bcm_gport_t gport, int prio, int *priority_group);
+int bcm_port_priority_group_mapping_set(int unit, bcm_gport_t gport, int prio, int priority_group);
+int bcm_port_probe(int unit, bcm_pbmp_t pbmp, bcm_pbmp_t *okay_pbmp);
+int bcm_port_protocol_vlan_add(int unit, bcm_port_t port, bcm_port_frametype_t frame, bcm_port_ethertype_t ether, bcm_vlan_t vid);
+int bcm_port_protocol_vlan_delete(int unit, bcm_port_t port, bcm_port_frametype_t frame, bcm_port_ethertype_t ether);
+int bcm_port_protocol_vlan_delete_all(int unit, bcm_port_t port);
+int bcm_port_queued_count_get(int unit, bcm_port_t port, uint32 *count);
+int bcm_port_rate_egress_get(int unit, bcm_port_t port, uint32 *kbits_sec, uint32 *kbits_burst);
+int bcm_port_rate_egress_pps_get(int unit, bcm_port_t port, uint32 *pps, uint32 *burst);
+int bcm_port_rate_egress_pps_set(int unit, bcm_port_t port, uint32 pps, uint32 burst);
+int bcm_port_rate_egress_set(int unit, bcm_port_t port, uint32 kbits_sec, uint32 kbits_burst);
+int bcm_port_rate_ingress_get(int unit, bcm_port_t port, uint32 *kbits_sec, uint32 *kbits_burst);
+int bcm_port_rate_ingress_set(int unit, bcm_port_t port, uint32 kbits_sec, uint32 kbits_burst);
+int bcm_port_rate_pause_get(int unit, bcm_port_t port, uint32 *kbits_pause, uint32 *kbits_resume);
+int bcm_port_rate_pause_set(int unit, bcm_port_t port, uint32 kbits_pause, uint32 kbits_resume);
+int bcm_port_redirect_config_get(int unit, bcm_gport_t gport, bcm_port_redirect_config_t *redirect_config);
+int bcm_port_redirect_config_set(int unit, bcm_gport_t port, bcm_port_redirect_config_t *redirect_config);
+void bcm_port_redirect_config_t_init(bcm_port_redirect_config_t *redirect_config);
+int bcm_port_remove(int unit, bcm_port_t port, uint32 flags);
+int bcm_port_resource_default_get(int unit, bcm_gport_t port, uint32 flags, bcm_port_resource_t *resource);
+int bcm_port_resource_get(int unit, bcm_gport_t port, bcm_port_resource_t *resource);
+int bcm_port_resource_max_speed_multi_get(int unit, bcm_port_resource_t *in_resource, int size, bcm_port_resource_t *resource, int *actual);  /* not in OpenBCM 6.5.27 */
+int bcm_port_resource_multi_set(int unit, int nport, bcm_port_resource_t *resource);
+int bcm_port_resource_set(int unit, bcm_gport_t port, bcm_port_resource_t *resource);
+int bcm_port_resource_speed_config_validate(int unit, bcm_port_resource_t *resource, bcm_pbmp_t *pbmp);
+int bcm_port_resource_speed_get(int unit, bcm_gport_t port, bcm_port_resource_t *resource);
+int bcm_port_resource_speed_multi_set(int unit, int nport, bcm_port_resource_t *resource);
+int bcm_port_resource_speed_set(int unit, bcm_gport_t port, bcm_port_resource_t *resource);
+void bcm_port_resource_t_init(bcm_port_resource_t *resource);
+int bcm_port_resource_traverse(int unit, bcm_port_resource_traverse_cb trav_fn, void *user_data);
+int bcm_port_rlm_config_get(int unit, bcm_port_t port, bcm_port_rlm_config_t *rlm_config, int *enable);
+int bcm_port_rlm_config_set(int unit, bcm_port_t port, bcm_port_rlm_config_t *rlm_config, int enable);
+void bcm_port_rlm_config_t_init(bcm_port_rlm_config_t *rlm_config);
+int bcm_port_rlm_status_get(int unit, bcm_port_t port, bcm_port_rlm_status_t *rlm_status);
+int bcm_port_sample_rate_get(int unit, bcm_port_t port, int *ingress_rate, int *egress_rate);
+int bcm_port_sample_rate_set(int unit, bcm_port_t port, int ingress_rate, int egress_rate);
+int bcm_port_selective_get(int unit, bcm_port_t port, bcm_port_info_t *info);
+int bcm_port_selective_set(int unit, bcm_port_t port, bcm_port_info_t *info);
+int bcm_port_serdes_core_info_get(int unit, bcm_port_t port, bcm_port_serdes_core_info_t *core_info);  /* not in OpenBCM 6.5.27 */
+void bcm_port_serdes_core_info_t_init(bcm_port_serdes_core_info_t *core_info);  /* not in OpenBCM 6.5.27 */
+int bcm_port_shel_mask_get(int unit, uint32 flags, bcm_gport_t gport, uint32 *enabled);  /* not in OpenBCM 6.5.27 */
+int bcm_port_shel_mask_set(int unit, uint32 flags, bcm_gport_t gport, uint32 enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_signal_quality_callback_register(int unit, bcm_port_signal_quality_callback_t user_func, void *user_data);
+int bcm_port_signal_quality_callback_unregister(int unit, bcm_port_signal_quality_callback_t user_func, void *user_data);
+int bcm_port_signal_quality_ser_config_get(int unit, bcm_port_t port, bcm_port_signal_quality_ser_config_t *config);
+int bcm_port_signal_quality_ser_config_set(int unit, bcm_port_t port, bcm_port_signal_quality_ser_config_t *config);
+int bcm_port_signal_quality_ser_status_get(int unit, bcm_port_t port, bcm_port_signal_quality_ser_status_t *status);
+int bcm_port_speed_ability_local_get(int unit, bcm_port_t port, int max_num_ability, bcm_port_speed_ability_t *abilities_array, int *actual_num_ability);
+int bcm_port_speed_get(int unit, bcm_port_t port, int *speed);
+int bcm_port_speed_max(int unit, bcm_port_t port, int *speed);
+int bcm_port_speed_set(int unit, bcm_port_t port, int speed);
+int bcm_port_stat_attach(int unit, bcm_gport_t port, uint32 stat_counter_id);
+int bcm_port_stat_counter_get(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_port_stat_counter_set(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_port_stat_counter_sync_get(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint32 num_entries, uint32 *counter_indexes, bcm_stat_value_t *counter_values);
+int bcm_port_stat_detach(int unit, bcm_gport_t port);
+int bcm_port_stat_detach_with_id(int unit, bcm_gport_t port, uint32 stat_counter_id);
+int bcm_port_stat_enable_set(int unit, bcm_gport_t port, int enable);
+int bcm_port_stat_get(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint64 *val);
+int bcm_port_stat_get32(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint32 *val);
+int bcm_port_stat_id_get(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint32 *stat_counter_id);
+int bcm_port_stat_multi_get(int unit, bcm_gport_t port, int nstat, bcm_port_stat_t *stat_arr, uint64 *value_arr);
+int bcm_port_stat_multi_get32(int unit, bcm_gport_t port, int nstat, bcm_port_stat_t *stat_arr, uint32 *value_arr);
+int bcm_port_stat_multi_set(int unit, bcm_gport_t port, int nstat, bcm_port_stat_t *stat_arr, uint64 *value_arr);
+int bcm_port_stat_multi_set32(int unit, bcm_gport_t port, int nstat, bcm_port_stat_t *stat_arr, uint32 *value_arr);
+int bcm_port_stat_set(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint64 val);
+int bcm_port_stat_set32(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint32 val);
+int bcm_port_stat_sync_get(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint64 *val);
+int bcm_port_stat_sync_get32(int unit, bcm_gport_t port, bcm_port_stat_t stat, uint32 *val);
+int bcm_port_stp_get(int unit, bcm_port_t port, int *state);
+int bcm_port_stp_set(int unit, bcm_port_t port, int state);
+int bcm_port_subsidiary_ports_get(int unit, bcm_port_t port, bcm_pbmp_t *pbmp);
+int bcm_port_tgid_get(int unit, bcm_port_t port, int *tgid, int *psc);
+int bcm_port_tgid_set(int unit, bcm_port_t port, int tgid, int psc);
+int bcm_port_timestamp_adjust_get(int unit, bcm_port_t port, bcm_port_timestamp_adjust_t *ts_adjust);
+int bcm_port_timestamp_adjust_set(int unit, bcm_port_t port, bcm_port_timestamp_adjust_t *ts_adjust);
+int bcm_port_timestamp_two_step_event_get(int unit, uint32 flags, bcm_port_t port, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_timestamp_two_step_event_register(int unit, uint32 flags, bcm_port_timestamp_event_cb_t callback, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_port_timestamp_two_step_event_set(int unit, uint32 flags, bcm_port_t port, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_port_timesync_config_get(int unit, bcm_port_t port, int array_size, bcm_port_timesync_config_t *config_array, int *array_count);
+int bcm_port_timesync_config_set(int unit, bcm_port_t port, int config_count, bcm_port_timesync_config_t *config_array);
+void bcm_port_timesync_config_t_init(bcm_port_timesync_config_t *port_timesync_config);
+int bcm_port_timesync_tx_info_get(int unit, bcm_port_t port, bcm_port_timesync_tx_info_t *tx_info);
+int bcm_port_tpid_add(int unit, bcm_port_t port, uint16 tpid, int color_select);
+int bcm_port_tpid_class_create(int unit, uint32 flags, bcm_port_tag_struct_type_t tag_struct_type, bcm_port_tag_format_class_t *tag_format_class_id);
+int bcm_port_tpid_class_destroy(int unit, uint32 flags, bcm_port_tag_format_class_t tag_format_class_id);
+int bcm_port_tpid_class_get(int unit, bcm_port_tpid_class_t *tpid_class);
+int bcm_port_tpid_class_set(int unit, bcm_port_tpid_class_t *tpid_class);
+void bcm_port_tpid_class_t_init(bcm_port_tpid_class_t *tpid_class);
+int bcm_port_tpid_delete(int unit, bcm_port_t port, uint16 tpid);
+int bcm_port_tpid_delete_all(int unit, bcm_port_t port);
+int bcm_port_tpid_get(int unit, bcm_port_t port, uint16 *tpid);
+int bcm_port_tpid_get_all(int unit, bcm_port_t port, int size, uint16 *tpid_array, int *color_array, int *count);
+int bcm_port_tpid_set(int unit, bcm_port_t port, uint16 tpid);
+int bcm_port_trunk_index_get(int unit, bcm_port_t port, int *port_index);
+int bcm_port_trunk_index_set(int unit, bcm_port_t port, int port_index);
+int bcm_port_txpi_rxcdr_clk_get(int unit, bcm_port_t port, uint32 *txpi_clk, uint32 *rxcdr_clk);
+int bcm_port_untagged_priority_get(int unit, bcm_port_t port, int *priority);
+int bcm_port_untagged_priority_set(int unit, bcm_port_t port, int priority);
+int bcm_port_untagged_vlan_get(int unit, bcm_port_t port, bcm_vlan_t *vid_ptr);
+int bcm_port_untagged_vlan_set(int unit, bcm_port_t port, bcm_vlan_t vid);
+int bcm_port_update(int unit, bcm_port_t port, int link);
+int bcm_port_vlan_dscp_map_get(int unit, bcm_port_t port, bcm_vlan_t vlan, int dscp, int *internal_pri, bcm_color_t *color);
+int bcm_port_vlan_dscp_map_set(int unit, bcm_port_t port, bcm_vlan_t vlan, int dscp, int internal_pri, bcm_color_t color);
+int bcm_port_vlan_inner_tag_get(int unit, bcm_port_t port, uint16 *inner_tag);
+int bcm_port_vlan_inner_tag_set(int unit, bcm_port_t port, uint16 inner_tag);
+int bcm_port_vlan_member_get(int unit, bcm_port_t port, uint32 *flags);
+int bcm_port_vlan_member_set(int unit, bcm_port_t port, uint32 flags);
+int bcm_port_vlan_pri_map_get(int unit, bcm_port_t port, bcm_vlan_t vlan, int pkt_pri, int cfi, int *internal_pri, bcm_color_t *color);
+int bcm_port_vlan_pri_map_set(int unit, bcm_port_t port, bcm_vlan_t vlan, int pkt_pri, int cfi, int internal_pri, bcm_color_t color);
+int bcm_port_vlan_priority_map_get(int unit, bcm_port_t port, int pkt_pri, int cfi, int *internal_pri, bcm_color_t *color);
+int bcm_port_vlan_priority_map_set(int unit, bcm_port_t port, int pkt_pri, int cfi, int internal_pri, bcm_color_t color);
+int bcm_port_vlan_priority_mapping_get(int unit, bcm_port_t port, bcm_vlan_t vid, int pkt_pri, int cfi, bcm_priority_mapping_t *pri_map);
+int bcm_port_vlan_priority_mapping_set(int unit, bcm_port_t port, bcm_vlan_t vid, int pkt_pri, int cfi, bcm_priority_mapping_t *pri_map);
+int bcm_port_vlan_priority_unmap_get(int unit, bcm_port_t port, int internal_pri, bcm_color_t color, int *pkt_pri, int *cfi);
+int bcm_port_vlan_priority_unmap_set(int unit, bcm_port_t port, int internal_pri, bcm_color_t color, int pkt_pri, int cfi);
+int bcm_port_vlan_vector_get(int unit, bcm_gport_t port_id, bcm_vlan_vector_t vlan_vec);
+int bcm_port_vlan_vector_set(int unit, bcm_gport_t port_id, bcm_vlan_vector_t vlan_vec);
+int bcm_port_wide_data_get(int unit, bcm_gport_t gport, uint32 flags, uint64 *data);
+int bcm_port_wide_data_set(int unit, bcm_gport_t gport, uint32 flags, uint64 data);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-policer.html" class="btn btn-neutral float-left" title="bcm_policer_* (102)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-ptp.html" class="btn btn-neutral float-right" title="bcm_ptp_* (190)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

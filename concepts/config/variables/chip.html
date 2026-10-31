@@ -1,0 +1,1241 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chip, boot, warm boot and diagnostics &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SAI-specific variables" href="sai.html" />
+    <link rel="prev" title="CPU, DMA, interrupts and counters" href="cpu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../config.html">Configuration variables</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ports.html">Port mapping and SerDes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">Forwarding table sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mmu.html">Buffers and queues</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Variable reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ports.html">Ports, lanes and SerDes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tables.html">Forwarding tables and routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acl.html">ACL, field processor and UDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmu.html">Buffers, queues and QoS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry, timing and OAM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu.html">CPU, DMA, interrupts and counters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Chip, boot, warm boot and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sai.html">SAI-specific variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#configuration-files">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#file-format">File format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#names-scopes-and-precedence">Names, scopes and precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#applying-changes">Applying changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#changing-variables-from-the-shell">Changing variables from the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#inspecting-the-configuration">Inspecting the configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../config.html">Configuration variables</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Variable reference</a></li>
+      <li class="breadcrumb-item active">Chip, boot, warm boot and diagnostics</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="chip-boot-warm-boot-and-diagnostics">
+<h1>Chip, boot, warm boot and diagnostics<a class="headerlink" href="#chip-boot-warm-boot-and-diagnostics" title="Link to this heading"></a></h1>
+<p>Clocks, the Cancun/flex package, memory caching and scanning (soft-error protection), warm-boot storage, module start-up and diag-shell behaviour.</p>
+<p>Set in several SONiC Trident 3 HWSKU files: <a class="reference internal" href="#confval-cancun_dir"><code class="xref std std-confval docutils literal notranslate"><span class="pre">cancun_dir</span></code></a>, <a class="reference internal" href="#confval-core_clock_frequency"><code class="xref std std-confval docutils literal notranslate"><span class="pre">core_clock_frequency</span></code></a>, <a class="reference internal" href="#confval-disable_pcie_firmware_check"><code class="xref std std-confval docutils literal notranslate"><span class="pre">disable_pcie_firmware_check</span></code></a>, <a class="reference internal" href="#confval-dpp_clock_ratio"><code class="xref std std-confval docutils literal notranslate"><span class="pre">dpp_clock_ratio</span></code></a>, <a class="reference internal" href="#confval-help_cli_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">help_cli_enable</span></code></a>, <a class="reference internal" href="#confval-mem_cache_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">mem_cache_enable</span></code></a>, <a class="reference internal" href="#confval-mem_scan_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">mem_scan_enable</span></code></a>, <a class="reference internal" href="#confval-memlist_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">memlist_enable</span></code></a>, <a class="reference internal" href="#confval-os"><code class="xref std std-confval docutils literal notranslate"><span class="pre">os</span></code></a>, <a class="reference internal" href="#confval-parity_correction"><code class="xref std std-confval docutils literal notranslate"><span class="pre">parity_correction</span></code></a>, <a class="reference internal" href="#confval-parity_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">parity_enable</span></code></a>, <a class="reference internal" href="#confval-reglist_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">reglist_enable</span></code></a>, <a class="reference internal" href="#confval-scache_filename"><code class="xref std std-confval docutils literal notranslate"><span class="pre">scache_filename</span></code></a>, <a class="reference internal" href="#confval-skip_L2_USER_ENTRY"><code class="xref std std-confval docutils literal notranslate"><span class="pre">skip_L2_USER_ENTRY</span></code></a>, <a class="reference internal" href="#confval-sram_scan_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sram_scan_enable</span></code></a>, <a class="reference internal" href="#confval-stable_location"><code class="xref std std-confval docutils literal notranslate"><span class="pre">stable_location</span></code></a>, <a class="reference internal" href="#confval-stable_size"><code class="xref std std-confval docutils literal notranslate"><span class="pre">stable_size</span></code></a>, <a class="reference internal" href="#confval-table_dma_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">table_dma_enable</span></code></a>, <a class="reference internal" href="#confval-warmboot_knet_shutdown_mode"><code class="xref std std-confval docutils literal notranslate"><span class="pre">warmboot_knet_shutdown_mode</span></code></a>.</p>
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bcm_sdk_diag_run">
+<span class="sig-name descname"><span class="pre">bcm_sdk_diag_run</span></span><a class="headerlink" href="#confval-bcm_sdk_diag_run" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-bist_timeout_msec">
+<span class="sig-name descname"><span class="pre">bist_timeout_msec</span></span><a class="headerlink" href="#confval-bist_timeout_msec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Memory Built-In-Self-Test (BIST) timeout in milliseconds</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-board_name">
+<span class="sig-name descname"><span class="pre">board_name</span></span><a class="headerlink" href="#confval-board_name" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Board driver name</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cache_coherency_check">
+<span class="sig-name descname"><span class="pre">cache_coherency_check</span></span><a class="headerlink" href="#confval-cache_coherency_check" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 1 Trident 3 HWSKU file; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cancun_debug_mode">
+<span class="sig-name descname"><span class="pre">cancun_debug_mode</span></span><a class="headerlink" href="#confval-cancun_debug_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cancun_dir">
+<span class="sig-name descname"><span class="pre">cancun_dir</span></span><a class="headerlink" href="#confval-cancun_dir" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Directory with the Cancun (flex pipeline) package files. On SONiC the SAI uses <a class="reference internal" href="sai.html#confval-sai_load_hw_config"><code class="xref std std-confval docutils literal notranslate"><span class="pre">sai_load_hw_config</span></code></a> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 3 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">/usr/share/sonic/platform/cancun/sdk_6.5.16/</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cancun_load_skip">
+<span class="sig-name descname"><span class="pre">cancun_load_skip</span></span><a class="headerlink" href="#confval-cancun_load_skip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-cfap_tests">
+<span class="sig-name descname"><span class="pre">cfap_tests</span></span><a class="headerlink" href="#confval-cfap_tests" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select memory tests run by cfapinit (default MT_PAT_FIVES and MT_PAT_AS)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-clear_on_hw_resetting">
+<span class="sig-name descname"><span class="pre">clear_on_hw_resetting</span></span><a class="headerlink" href="#confval-clear_on_hw_resetting" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-core_clock_frequency">
+<span class="sig-name descname"><span class="pre">core_clock_frequency</span></span><a class="headerlink" href="#confval-core_clock_frequency" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Core clock in MHz; an unsupported value is ignored. Dell S5232F files set 1525.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 39 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1525</span></code>, <code class="docutils literal notranslate"><span class="pre">893</span></code>, <code class="docutils literal notranslate"><span class="pre">445</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-custom_feature">
+<span class="sig-name descname"><span class="pre">custom_feature</span></span><a class="headerlink" href="#confval-custom_feature" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Customer-specific features. Is used with a propery name suffix per feature. features will likely be specific to a certain device type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">custom_feature_cmicx_ls_hw_cfg_async_enable&lt;N&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_feature_cpu_port_priorities&lt;N&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_feature_ptp_cosq_port&lt;N&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_feature_unet_channels&lt;N&gt;</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-custom_feature_shel_arm_enable">
+<span class="sig-name descname"><span class="pre">custom_feature_shel_arm_enable</span></span><a class="headerlink" href="#confval-custom_feature_shel_arm_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dcb_intr_mitigate_enable">
+<span class="sig-name descname"><span class="pre">dcb_intr_mitigate_enable</span></span><a class="headerlink" href="#confval-dcb_intr_mitigate_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Packet DMA interrupts should be mitigated to improve performance</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-delay_core_pll_lock">
+<span class="sig-name descname"><span class="pre">delay_core_pll_lock</span></span><a class="headerlink" href="#confval-delay_core_pll_lock" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_comma">
+<span class="sig-name descname"><span class="pre">diag_comma</span></span><a class="headerlink" href="#confval-diag_comma" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>ASCII comma character for show counters Use 44 for comma, 46 for period, 0 for none</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_lb_fill_rx">
+<span class="sig-name descname"><span class="pre">diag_lb_fill_rx</span></span><a class="headerlink" href="#confval-diag_lb_fill_rx" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Diagnostics loopback - if set to TRUE, all receive buffers are filled with 0xdeadbeef before DMAing into them. It is slow, but then you will know if loopback miscompares are due to skipped PCI writes.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_lb_packet_timeout">
+<span class="sig-name descname"><span class="pre">diag_lb_packet_timeout</span></span><a class="headerlink" href="#confval-diag_lb_packet_timeout" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Diagnostics loopback (tr 17 through tr 24) timeout in seconds for loopback packet reception</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_pw_buffer_size">
+<span class="sig-name descname"><span class="pre">diag_pw_buffer_size</span></span><a class="headerlink" href="#confval-diag_pw_buffer_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>When set to &gt;= 68, packet watcher will run in truncating mode, allocating smaller Rx buffers and accepting oversized packets on all Rx DMA channels.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_pw_thread_pri">
+<span class="sig-name descname"><span class="pre">diag_pw_thread_pri</span></span><a class="headerlink" href="#confval-diag_pw_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Packet watcher thread priority</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_shell_exit_do_nothing">
+<span class="sig-name descname"><span class="pre">diag_shell_exit_do_nothing</span></span><a class="headerlink" href="#confval-diag_shell_exit_do_nothing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Do nothing when exit diag shell without “clean” option</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_shell_use_slam">
+<span class="sig-name descname"><span class="pre">diag_shell_use_slam</span></span><a class="headerlink" href="#confval-diag_shell_use_slam" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Use a bulk memory operation when writing multiple table entries in the CLI.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-diag_tabs">
+<span class="sig-name descname"><span class="pre">diag_tabs</span></span><a class="headerlink" href="#confval-diag_tabs" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Tab width for diagnostics (especially ‘show counters’)</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-disable_pcie_firmware_check">
+<span class="sig-name descname"><span class="pre">disable_pcie_firmware_check</span></span><a class="headerlink" href="#confval-disable_pcie_firmware_check" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 6 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dpp_clock_ratio">
+<span class="sig-name descname"><span class="pre">dpp_clock_ratio</span></span><a class="headerlink" href="#confval-dpp_clock_ratio" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Ratio between the data-path pipeline clock and the core clock, as <code class="docutils literal notranslate"><span class="pre">&lt;n&gt;:&lt;m&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">2:3</span></code> in Dell S5232F files).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 33 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">2:3</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-dpr_clock_frequency">
+<span class="sig-name descname"><span class="pre">dpr_clock_frequency</span></span><a class="headerlink" href="#confval-dpr_clock_frequency" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>DPR clock frequency applied to switch chip, any unsupported frequency will be ignored.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-edk_init_disable">
+<span class="sig-name descname"><span class="pre">edk_init_disable</span></span><a class="headerlink" href="#confval-edk_init_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-egr_share_flex_counter_pool">
+<span class="sig-name descname"><span class="pre">egr_share_flex_counter_pool</span></span><a class="headerlink" href="#confval-egr_share_flex_counter_pool" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Specifies egress objects sharing same pool or using exclusive pool. Example: egr_share_flex_counter_pool=split(vlan,vfi) make egr_vlan, egr_vfi use exclusive pool. egr_share_flex_counter_pool=share(vlan,vfi) make egr_vlan, egr_vfi use same pool. An object can appear in both share case and split case, but in each case it can appear one time at most. Use token between each groups and use comma between each objects. eg: egr_share_flex_counter_pool=split(A,B,C);share(C,D); Some objects may use the same HW table, so only the first one will take effect. All valid egress object name: port, vlan, vlanxlate, vfi, l3intf, mimlookupid, l2gre, vxlan, l3nat, niv, wlan, mim.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-enhanced_ser_correction_event_report">
+<span class="sig-name descname"><span class="pre">enhanced_ser_correction_event_report</span></span><a class="headerlink" href="#confval-enhanced_ser_correction_event_report" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This soc property is used to enable enhanced SER correction event report mechanism (i.e. parity correction/ECC 1-bit correction/ECC 2-bit correction event are identified). 0 =&gt; Use the traditional SER correction event report mechanism: Report event with SOC_SWITCH_EVENT_DATA_ERROR_CORRECTED type for both parity and ECC error correction(including 1-bit and 2-bit). 1 =&gt; Use enhanced SER correction event report mechanism: Report event with SOC_SWITCH_EVENT_DATA_ERROR_ECC_1BIT_CORRECTED type for ECC 1-bit error correction. Report event with SOC_SWITCH_EVENT_DATA_ERROR_ECC_2BIT_CORRECTED type for ECC 2-bit error correction. Report event with SOC_SWITCH_EVENT_DATA_ERROR_PARITY_CORRECTED type for parity error correction.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fail_on_unsupported_attribute">
+<span class="sig-name descname"><span class="pre">fail_on_unsupported_attribute</span></span><a class="headerlink" href="#confval-fail_on_unsupported_attribute" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-failover_fixed_nh_offset_enable">
+<span class="sig-name descname"><span class="pre">failover_fixed_nh_offset_enable</span></span><a class="headerlink" href="#confval-failover_fixed_nh_offset_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable Tomahawk3-like L3/MPLS failover (protection switching) with fixed next hop offset from primary NH on EGR_L3_NEXT_HOP table. Set value 1 to enabled the feature and half of EGR_L3_NEXT_HOP is reserved for possible failover usage. Default value is 0 which disable the fixed next hop offset failover.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fc_coe_data_offset">
+<span class="sig-name descname"><span class="pre">fc_coe_data_offset</span></span><a class="headerlink" href="#confval-fc_coe_data_offset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">24</span></code></dd>
+</dl>
+<p>define offset in bytes from after Ethernet Frame for COE FC data. Valid range = [0-31]</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fifo_delay_value">
+<span class="sig-name descname"><span class="pre">fifo_delay_value</span></span><a class="headerlink" href="#confval-fifo_delay_value" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-fifo_overflow_threshhold">
+<span class="sig-name descname"><span class="pre">fifo_overflow_threshhold</span></span><a class="headerlink" href="#confval-fifo_overflow_threshhold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flex_stat_port_group_support">
+<span class="sig-name descname"><span class="pre">flex_stat_port_group_support</span></span><a class="headerlink" href="#confval-flex_stat_port_group_support" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Enable grouping ports together and assigning single stat identifier. Default value is 0 which disables this feature.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-flex_stat_share_enable">
+<span class="sig-name descname"><span class="pre">flex_stat_share_enable</span></span><a class="headerlink" href="#confval-flex_stat_share_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Once enabled, it will allow sharing flex statid across accounting objects. SDK will provide cumulative count for accounting objects sharing statid. User has to take great precaution in not sharing statid across conflicting accounting objects. Currently this config variable enables sharing statid for port module only.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-force_read_through">
+<span class="sig-name descname"><span class="pre">force_read_through</span></span><a class="headerlink" href="#confval-force_read_through" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-help_cli_enable">
+<span class="sig-name descname"><span class="pre">help_cli_enable</span></span><a class="headerlink" href="#confval-help_cli_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Print a command’s usage after <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">&lt;cmd&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">&lt;cmd&gt;</span></code> or unrecognised parameters; 0 suppresses it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">help_cli_enable=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ignore_device_unique_ids">
+<span class="sig-name descname"><span class="pre">ignore_device_unique_ids</span></span><a class="headerlink" href="#confval-ignore_device_unique_ids" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">list</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ing_share_flex_counter_pool">
+<span class="sig-name descname"><span class="pre">ing_share_flex_counter_pool</span></span><a class="headerlink" href="#confval-ing_share_flex_counter_pool" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Specifies ingress objects sharing same pool or using exclusive pool. Example: ing_share_flex_counter_pool=split(vlan,vfi) make vlan, vfi use exclusive pool. ing_share_flex_counter_pool=share(vlan,vfi) make vlan, vfi use same pool. An object can appear in both share case and split case, but in each case it can appear one time at most. Use token between each groups and use comma between each objects. eg: ing_share_flex_counter_pool=split(A,B,C);share(C,D); Some objects may use the same HW table, so only the first one will take effect. All valid object name: port, vlan, vlanxlate, vfi, l3intf, vrf, policy, mplsvclabel, mplsswitchlabel, mplsfrrlabel, l3host, trill, mimlookupid, l2gre, extpolicy, vxlan, vsan, fcoe, l3route, niv, ipmc.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-init_all_modules">
+<span class="sig-name descname"><span class="pre">init_all_modules</span></span><a class="headerlink" href="#confval-init_all_modules" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Initialise all SDK modules at <code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">bcm</span></code>, including those not needed by the application.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ipep_clock_gating_disable">
+<span class="sig-name descname"><span class="pre">ipep_clock_gating_disable</span></span><a class="headerlink" href="#confval-ipep_clock_gating_disable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This soc property is used to disable IP-EP clock gating for BCM5687x, BCM5677x, BCM5637x, BCM5647x and BCM5627x devices. This needs to be set if visibility feature is being used Example: ipep_clock_gating_disable=0 -&gt; Default, enables clock gating during init for power saving ipep_clock_gating_disable=1 -&gt; Disables IPEP clock gating during init, MUST for visibility feature.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-load_firmware">
+<span class="sig-name descname"><span class="pre">load_firmware</span></span><a class="headerlink" href="#confval-load_firmware" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Debug option for SerDes firmware loading: load method, checksum and verification. Leave unset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">load_firmware_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">load_firmware_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">load_firmware</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-low_power">
+<span class="sig-name descname"><span class="pre">low_power</span></span><a class="headerlink" href="#confval-low_power" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable all of the low power modes that the device/sw combination supported. 1 means enabling low power mode; 0 means disabling low power mode.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-lw_set_up_reinit_skip">
+<span class="sig-name descname"><span class="pre">lw_set_up_reinit_skip</span></span><a class="headerlink" href="#confval-lw_set_up_reinit_skip" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_cache_enable">
+<span class="sig-name descname"><span class="pre">mem_cache_enable</span></span><a class="headerlink" href="#confval-mem_cache_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Keep a software copy of hardware tables for faster reads and soft-error correction. The SAI sets it to 1 if the file does not; an explicit 0 is kept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 34 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">mem_cache_enable=1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_check_max_override">
+<span class="sig-name descname"><span class="pre">mem_check_max_override</span></span><a class="headerlink" href="#confval-mem_check_max_override" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Check for mem max override properties and reconfigure memories.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_check_nocache_override">
+<span class="sig-name descname"><span class="pre">mem_check_nocache_override</span></span><a class="headerlink" href="#confval-mem_check_nocache_override" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Check for mem no-cache override properties and avoid caching.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_clear_chunk_size">
+<span class="sig-name descname"><span class="pre">mem_clear_chunk_size</span></span><a class="headerlink" href="#confval-mem_clear_chunk_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">4096</span></code></dd>
+</dl>
+<p>The size in bytes of memory to be used when clearing a table using bulk table operations. The number of table entries cleared in one operation will vary by table entry width.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_clear_hw_acceleration">
+<span class="sig-name descname"><span class="pre">mem_clear_hw_acceleration</span></span><a class="headerlink" href="#confval-mem_clear_hw_acceleration" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Clear tables using the fastest method supported by the device.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_nocache_-MEMORY">
+<span class="sig-name descname"><span class="pre">mem_nocache_&lt;MEMORY&gt;</span></span><a class="headerlink" href="#confval-mem_nocache_-MEMORY" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Exclude one memory (named in upper case, as in <a class="reference internal" href="../../../reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a>) from the SDK’s software table cache when <a class="reference internal" href="#confval-mem_cache_enable"><code class="xref std std-confval docutils literal notranslate"><span class="pre">mem_cache_enable</span></code></a> is on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP</span></code>, <code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP_ALPM_IPV4</span></code>, <code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP_ALPM_IPV4_1</span></code>, <code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP_ALPM_IPV6_128</span></code>, <code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP_ALPM_IPV6_64</span></code>, <code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP_ALPM_IPV6_64_1</span></code>, <code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP_AUX_TABLE</span></code>, <code class="docutils literal notranslate"><span class="pre">mem_nocache_L3_DEFIP_PAIR_128</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-0"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_scan_chunk_size">
+<span class="sig-name descname"><span class="pre">mem_scan_chunk_size</span></span><a class="headerlink" href="#confval-mem_scan_chunk_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the number of table entries to be retrieved at a time during memory scanning.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_scan_enable">
+<span class="sig-name descname"><span class="pre">mem_scan_enable</span></span><a class="headerlink" href="#confval-mem_scan_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Run the background memory scan that detects and corrects soft errors in tables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 3 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_scan_interval">
+<span class="sig-name descname"><span class="pre">mem_scan_interval</span></span><a class="headerlink" href="#confval-mem_scan_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the memory scan repeat interval.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_scan_non_tcam_iterations">
+<span class="sig-name descname"><span class="pre">mem_scan_non_tcam_iterations</span></span><a class="headerlink" href="#confval-mem_scan_non_tcam_iterations" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies how many non-TCAM cycles to perform for every complete TCAM sweep in memscan.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_scan_rate">
+<span class="sig-name descname"><span class="pre">mem_scan_rate</span></span><a class="headerlink" href="#confval-mem_scan_rate" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the memory scan rate in terms of entries per pass.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-mem_scan_thread_pri">
+<span class="sig-name descname"><span class="pre">mem_scan_thread_pri</span></span><a class="headerlink" href="#confval-mem_scan_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the memory scanning and error correction thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-memcache_in_scache">
+<span class="sig-name descname"><span class="pre">memcache_in_scache</span></span><a class="headerlink" href="#confval-memcache_in_scache" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-memlist_enable">
+<span class="sig-name descname"><span class="pre">memlist_enable</span></span><a class="headerlink" href="#confval-memlist_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Allow <a class="reference internal" href="../../../reference/listmem.html#clicmd-listmem"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listmem</span></code></a> to list memories; read when the command runs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">memlist_enable=1</span></code>; not read by the SDK on that switch</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-num_subports">
+<span class="sig-name descname"><span class="pre">num_subports</span></span><a class="headerlink" href="#confval-num_subports" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Maximum number of subports or packet processing ports per physical port. This can be used to distribute the total number of available subports across physical ports(cascaded port) suffix with .portX, .geX or _geX.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-os">
+<span class="sig-name descname"><span class="pre">os</span></span><a class="headerlink" href="#confval-os" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Operating system of the diag application (<code class="docutils literal notranslate"><span class="pre">os=unix</span></code>). Found in many SONiC Trident 3 files; the SAI does not use it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 20 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">unix</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-parity_correction">
+<span class="sig-name descname"><span class="pre">parity_correction</span></span><a class="headerlink" href="#confval-parity_correction" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Correct parity and ECC errors from the software table cache when they are detected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-parity_counter_clear">
+<span class="sig-name descname"><span class="pre">parity_counter_clear</span></span><a class="headerlink" href="#confval-parity_counter_clear" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Control to clear or restore(last value accumulated in s/w) counter on parity error</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-parity_enable">
+<span class="sig-name descname"><span class="pre">parity_enable</span></span><a class="headerlink" href="#confval-parity_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Enable parity and ECC checking of on-chip memories and the soft-error interrupt handling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Forms<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">parity_enable_&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">parity_enable_&lt;type&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">parity_enable</span></code></p>
+</dd>
+<dt class="field-even">SONiC<span class="colon">:</span></dt>
+<dd class="field-even"><p>set in 23 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-odd">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">parity_enable=0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-reg_ser_error_assert">
+<span class="sig-name descname"><span class="pre">reg_ser_error_assert</span></span><a class="headerlink" href="#confval-reg_ser_error_assert" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-reglist_enable">
+<span class="sig-name descname"><span class="pre">reglist_enable</span></span><a class="headerlink" href="#confval-reglist_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Allow <a class="reference internal" href="../../../reference/listreg.html#clicmd-listreg"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">listreg</span></code></a> to list registers; read when the command runs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">reglist_enable=1</span></code>; not read by the SDK on that switch</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-scache_filename">
+<span class="sig-name descname"><span class="pre">scache_filename</span></span><a class="headerlink" href="#confval-scache_filename" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Warm-boot state file. The SAI sets it from its own configuration (on SONiC <code class="docutils literal notranslate"><span class="pre">/var/warmboot/brcm_bcm_scache</span></code>) before reading the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 7 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">/var/warmboot/wbscache</span></code>, <code class="docutils literal notranslate"><span class="pre">/tmp/scache</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">scache_filename=/var/warmboot/brcm_bcm_scache</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ser_log_print_one">
+<span class="sig-name descname"><span class="pre">ser_log_print_one</span></span><a class="headerlink" href="#confval-ser_log_print_one" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-skip_-module-_init">
+<span class="sig-name descname"><span class="pre">skip_&lt;module&gt;_init</span></span><a class="headerlink" href="#confval-skip_-module-_init" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Skip the start-up initialisation of one SDK module, for example <code class="docutils literal notranslate"><span class="pre">skip_l3_init=1</span></code>. The module is then unusable until it is initialised by hand. For bring-up and debugging only; never set on a SONiC switch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Names<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">skip_auth_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_common_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_cosq_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_field_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_hash_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_ipmc_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_l2_vlan_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_l3_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_mcast_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_mim_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_mirror_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_mpls_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_partial_port_hw_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_port_hw_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_qos_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_stack_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_stat_init</span></code>, <code class="docutils literal notranslate"><span class="pre">skip_trunk_init</span></code></p>
+</dd>
+</dl>
+<span class="target" id="index-1"></span></dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-skip_cancun_cch_reg_check">
+<span class="sig-name descname"><span class="pre">skip_cancun_cch_reg_check</span></span><a class="headerlink" href="#confval-skip_cancun_cch_reg_check" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-skip_L2_USER_ENTRY">
+<span class="sig-name descname"><span class="pre">skip_L2_USER_ENTRY</span></span><a class="headerlink" href="#confval-skip_L2_USER_ENTRY" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Skip creating the default L2 user entries at start-up.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 10 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-skip_system_scrub">
+<span class="sig-name descname"><span class="pre">skip_system_scrub</span></span><a class="headerlink" href="#confval-skip_system_scrub" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-soc_family">
+<span class="sig-name descname"><span class="pre">soc_family</span></span><a class="headerlink" href="#confval-soc_family" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Map a chip to a family. This is used in order to map several chips which require similar soc properties to a family, and than use the family as the property suffix. E.g, map chip X and Y to family Z, and than one can define property.Z than will be recognized by both X and Y.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-soc_mem_bulk_schan_op_mode">
+<span class="sig-name descname"><span class="pre">soc_mem_bulk_schan_op_mode</span></span><a class="headerlink" href="#confval-soc_mem_bulk_schan_op_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>Specifies S-Channel method/engine used for SOC memory bulk operations soc_mem_bulk_XXX(). FIFO - S-Channel FIFO engine is SBUS master. PIO - S-Channel PIO engine is SBUS master. FIFO engine is the recommended as default SBUS master for better performance. PIO mode is useful for debugging and performance comparison.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-soc_skip_reset">
+<span class="sig-name descname"><span class="pre">soc_skip_reset</span></span><a class="headerlink" href="#confval-soc_skip_reset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>Skip hardware reset (CMIC_CONFIG.RESET_CPS) when calling soc_reset(). This means that e.g. ‘init soc’ will NOT perform a hard reset.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sram_scan_chunk_size">
+<span class="sig-name descname"><span class="pre">sram_scan_chunk_size</span></span><a class="headerlink" href="#confval-sram_scan_chunk_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the number of table entries to be retrieved at a time during sram scanning.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sram_scan_enable">
+<span class="sig-name descname"><span class="pre">sram_scan_enable</span></span><a class="headerlink" href="#confval-sram_scan_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Run the background SRAM soft-error scan. The SAI sets it to 1 if the file does not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 3 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">sram_scan_enable=1</span></code>; not read by the SDK on that switch</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sram_scan_interval">
+<span class="sig-name descname"><span class="pre">sram_scan_interval</span></span><a class="headerlink" href="#confval-sram_scan_interval" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the sram scan repeat interval.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sram_scan_rate">
+<span class="sig-name descname"><span class="pre">sram_scan_rate</span></span><a class="headerlink" href="#confval-sram_scan_rate" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the sram scan rate in terms of entries per pass.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-sram_scan_thread_pri">
+<span class="sig-name descname"><span class="pre">sram_scan_thread_pri</span></span><a class="headerlink" href="#confval-sram_scan_thread_pri" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the priority of the sram scanning and error correction thread</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-ss_ignore_pbmp">
+<span class="sig-name descname"><span class="pre">ss_ignore_pbmp</span></span><a class="headerlink" href="#confval-ss_ignore_pbmp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specifies the port bitmap of the ports on which system snake should be skipped.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-stable_filename">
+<span class="sig-name descname"><span class="pre">stable_filename</span></span><a class="headerlink" href="#confval-stable_filename" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">string</dd>
+</dl>
+<p>File used for warm-boot state when <a class="reference internal" href="#confval-stable_location"><code class="xref std std-confval docutils literal notranslate"><span class="pre">stable_location</span></code></a> is 3.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-stable_flags">
+<span class="sig-name descname"><span class="pre">stable_flags</span></span><a class="headerlink" href="#confval-stable_flags" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Specify the stable cache flags to configure Warm Boot operations</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-stable_location">
+<span class="sig-name descname"><span class="pre">stable_location</span></span><a class="headerlink" href="#confval-stable_location" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Where warm-boot state is kept (memory, file or shared memory).</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-stable_size">
+<span class="sig-name descname"><span class="pre">stable_size</span></span><a class="headerlink" href="#confval-stable_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Size in bytes of the warm-boot state area (scache). SONiC files use <code class="docutils literal notranslate"><span class="pre">0x5500000</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 44 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">0x5500000</span></code>, <code class="docutils literal notranslate"><span class="pre">0x55000000</span></code>, <code class="docutils literal notranslate"><span class="pre">0x6400000</span></code></p>
+</dd>
+<dt class="field-even">On Seastone2<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">stable_size=0x5500000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-table_dma_enable">
+<span class="sig-name descname"><span class="pre">table_dma_enable</span></span><a class="headerlink" href="#confval-table_dma_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">1</span></code></dd>
+</dl>
+<p>Read whole tables by DMA instead of one entry at a time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 8 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-temp_monitor_select">
+<span class="sig-name descname"><span class="pre">temp_monitor_select</span></span><a class="headerlink" href="#confval-temp_monitor_select" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Select which on-chip temperature sensors the SDK monitors.</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-uat_mode">
+<span class="sig-name descname"><span class="pre">uat_mode</span></span><a class="headerlink" href="#confval-uat_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-warmboot_event_handler_enable">
+<span class="sig-name descname"><span class="pre">warmboot_event_handler_enable</span></span><a class="headerlink" href="#confval-warmboot_event_handler_enable" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+</dl>
+<p>Register Warm Boot event handler callback routine</p>
+</dd></dl>
+
+<dl class="std confval">
+<dt class="sig sig-object std" id="confval-warmboot_knet_shutdown_mode">
+<span class="sig-name descname"><span class="pre">warmboot_knet_shutdown_mode</span></span><a class="headerlink" href="#confval-warmboot_knet_shutdown_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd">number</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><code class="docutils literal notranslate"><span class="pre">0</span></code></dd>
+</dl>
+<p>This soc property is to indicate if shutdown KNET during doing warmboot. 0-shutdown by default 1-no shutdown</p>
+<dl class="field-list simple">
+<dt class="field-odd">SONiC<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set in 4 Trident 3 HWSKU files; <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cpu.html" class="btn btn-neutral float-left" title="CPU, DMA, interrupts and counters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sai.html" class="btn btn-neutral float-right" title="SAI-specific variables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

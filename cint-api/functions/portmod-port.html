@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>portmod_port_* (297) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Other bcm_* modules (932)" href="bcm-other.html" />
+    <link rel="prev" title="phymod_phy_* (257)" href="phymod-phy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">portmod_port_*</span></code> (297)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="portmod-port-297">
+<h1><code class="docutils literal notranslate"><span class="pre">portmod_port_*</span></code> (297)<a class="headerlink" href="#portmod-port-297" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_port_ability_advert_get(int unit, int port, uint32 phy_flags, portmod_port_ability_t *ability);
+int portmod_port_ability_advert_set(int unit, int port, uint32 phy_flags, portmod_port_ability_t *ability);
+int portmod_port_ability_local_get(int unit, int port, uint32 phy_flags, portmod_port_ability_t *ability);
+int portmod_port_ability_remote_get(int unit, int port, uint32 phy_flags, portmod_port_ability_t *ability);
+int portmod_port_add(int unit, int port, portmod_port_add_info_t *add_info);
+int portmod_port_adv_remote_get(int unit, int port, int *value);
+int portmod_port_am_lock_status_get(int unit, int port, uint32 *am_lock_status);  /* not in OpenBCM 6.5.27 */
+int portmod_port_autoneg_ability_advert_get(int unit, int port, int max_num_abilities, portmod_port_speed_ability_t *abilities, int *actual_num_abilities);
+int portmod_port_autoneg_ability_advert_set(int unit, int port, int num_abilities, portmod_port_speed_ability_t *abilities);
+int portmod_port_autoneg_ability_remote_get(int unit, int port, int max_num_abilities, portmod_port_speed_ability_t *abilities, int *actual_num_abilities);
+int portmod_port_autoneg_get(int unit, int port, uint32 phy_flags, phymod_autoneg_control_t *an);
+int portmod_port_autoneg_set(int unit, int port, uint32 phy_flags, phymod_autoneg_control_t *an);
+int portmod_port_autoneg_status_get(int unit, int port, phymod_autoneg_status_t *an_status);
+int portmod_port_callback_unregister(int unit, int port);
+int portmod_port_cdr_lock_get(int unit, int port, int *is_locked);
+int portmod_port_check_legacy_phy(int unit, int port, int *legacy_phy);
+int portmod_port_cl72_get(int unit, int port, uint32 *enable);
+int portmod_port_cl72_set(int unit, int port, uint32 enable);
+int portmod_port_cl72_status_get(int unit, int port, phymod_cl72_status_t *status);
+int portmod_port_clear_rx_lss_status_get(int unit, int port, int *lcl_fault, int *rmt_fault);
+int portmod_port_clear_rx_lss_status_set(int unit, int port, int lcl_fault, int rmt_fault);
+int portmod_port_cntmaxsize_get(int unit, int port, int *val);
+int portmod_port_cntmaxsize_set(int unit, int port, int val);
+int portmod_port_config_port_type_get(int unit, int port, int *type);
+int portmod_port_config_port_type_set(int unit, int port, int type);
+int portmod_port_control_phy_timesync_get(int unit, int port, portmod_port_control_phy_timesync_t config, uint64 *value);
+int portmod_port_control_phy_timesync_set(int unit, int port, portmod_port_control_phy_timesync_t config, uint64 value);
+int portmod_port_core_access_get(int unit, int port, int phyn, int max_cores, phymod_core_access_t *core_access_arr, int *nof_cores, int *is_most_ext);
+int portmod_port_core_num_get(int unit, int port, int *core_num);
+int portmod_port_credits_enable_set(int unit, int port, int enable);
+int portmod_port_default_interface_get(int unit, int port, portmod_port_interface_config_t *config, soc_port_if_t *interface);
+int portmod_port_diag_ctrl(int unit, int port, uint32 inst, int op_type, int op_cmd, void *arg);
+int portmod_port_diag_fifo_status_get(int unit, int port, portmod_fifo_status_t *diag_info);
+int portmod_port_diag_info_get(int unit, int port, portmod_port_diag_info_t *diag_info);
+int portmod_port_discard_set(int unit, int port, int discard);
+int portmod_port_drain_cell_get(int unit, int port, portmod_drain_cells_t *drain_cells);
+int portmod_port_drain_cell_start(int unit, int port);
+int portmod_port_drain_cell_stop(int unit, int port, portmod_drain_cells_t *drain_cells);
+int portmod_port_drain_cells_rx_enable(int unit, int port, int rx_en);
+int portmod_port_drv_name(int unit, int port);
+int portmod_port_drv_name_get(int unit, int port, char *name, int len);
+int portmod_port_duplex_get(int unit, int port, int *enable);
+int portmod_port_duplex_set(int unit, int port, int enable);
+int portmod_port_e2e_enable_get(int unit, int port, int *enable);
+int portmod_port_e2e_enable_set(int unit, int port, int enable);
+int portmod_port_e2ecc_hdr_get(int unit, int port, portmod_port_higig_e2ecc_hdr_t *e2ecc_hdr);
+int portmod_port_e2ecc_hdr_set(int unit, int port, portmod_port_higig_e2ecc_hdr_t *e2ecc_hdr);
+int portmod_port_edc_config_get(int unit, int port, portmod_edc_config_t *config);
+int portmod_port_edc_config_set(int unit, int port, portmod_edc_config_t *config);
+int portmod_port_eee_clock_get(int unit, int port, portmod_eee_clock_t *eee_clk);
+int portmod_port_eee_clock_set(int unit, int port, portmod_eee_clock_t *eee_clk);
+int portmod_port_eee_get(int unit, int port, portmod_eee_t *eee);
+int portmod_port_eee_set(int unit, int port, portmod_eee_t *eee);
+int portmod_port_egress_queue_drain_get(int unit, int port, uint64 *ctrl, int *rxen);
+int portmod_port_egress_queue_drain_rx_en(int unit, int port, int rx_en);
+int portmod_port_electrical_idle_enable_set(int unit, int port, int enable);
+int portmod_port_enable_get(int unit, int port, int flags, int *enable);
+int portmod_port_enable_set(int unit, int port, int flags, int enable);
+int portmod_port_encap_get(int unit, int port, int *flags, portmod_encap_t *encap);
+int portmod_port_encap_set(int unit, int port, int flags, portmod_encap_t encap);
+int portmod_port_encoding_get(int unit, int port, uint32 *properties, portmod_port_pcs_t *encoding);
+int portmod_port_encoding_set(int unit, int port, uint32 properties, portmod_port_pcs_t encoding);
+int portmod_port_external_los_enable_get(int unit, int port, uint32 *enable);
+int portmod_port_external_los_enable_set(int unit, int port, uint32 enable);
+int portmod_port_failover_mode_get(int unit, int port, phymod_failover_mode_t *failover);
+int portmod_port_failover_mode_set(int unit, int port, phymod_failover_mode_t failover);
+int portmod_port_fallback_lane_get(int unit, int port, int *fallback_lane);
+int portmod_port_faults_status_get(int unit, int port, portmod_port_fault_status_t *faults);
+int portmod_port_fdr_control_get(int unit, int port, portmod_fdr_port_control_t *fdr_ctrl);  /* not in OpenBCM 6.5.27 */
+int portmod_port_fdr_control_set(int unit, int port, portmod_fdr_port_control_t fdr_ctrl);  /* not in OpenBCM 6.5.27 */
+int portmod_port_fdr_stats_get(int unit, int port, portmod_fdr_port_stats_t *fdr_stats);  /* not in OpenBCM 6.5.27 */
+int portmod_port_fec_enable_get(int unit, int port, uint32 phy_flags, uint32 *enable);
+int portmod_port_fec_enable_set(int unit, int port, uint32 phy_flags, uint32 enable);
+int portmod_port_fec_error_inject_config_get(int unit, int port, portmod_fec_error_injection_config_t *error_injection_config);  /* not in OpenBCM 6.5.27 */
+int portmod_port_fec_error_inject_config_set(int unit, int port, portmod_fec_error_injection_config_t *error_injection_config);  /* not in OpenBCM 6.5.27 */
+int portmod_port_fec_error_inject_enable_get(int unit, int port, portmod_fec_error_injection_enable_t *error_injection_enable);  /* not in OpenBCM 6.5.27 */
+int portmod_port_fec_error_inject_enable_set(int unit, int port, portmod_fec_error_injection_enable_t *error_injection_enable);  /* not in OpenBCM 6.5.27 */
+int portmod_port_fec_error_inject_get(int unit, int port, uint16 *error_control_map, portmod_fec_error_mask_t *bit_error_mask);
+int portmod_port_fec_error_inject_set(int unit, int port, uint16 error_control_map, portmod_fec_error_mask_t bit_error_mask);
+int portmod_port_firmware_mode_get(int unit, int port, phymod_firmware_mode_t *fw_mode);
+int portmod_port_firmware_mode_set(int unit, int port, phymod_firmware_mode_t fw_mode);
+int portmod_port_first_phy_get(int unit, int port, int *phy, int *sub_phy);
+int portmod_port_flow_control_set(int unit, int port, int merge_mode_en, int parallel_fc_en);
+int portmod_port_flr_config_get(int unit, int port, int *enable, portmod_flr_timeout_t *timeout_time);
+int portmod_port_flr_config_set(int unit, int port, int enable, portmod_flr_timeout_t timeout_time);
+int portmod_port_frame_spacing_stretch_get(int unit, int port, int *spacing);
+int portmod_port_frame_spacing_stretch_set(int unit, int port, int spacing);
+int portmod_port_higig2_mode_get(int unit, int port, int *mode);
+int portmod_port_higig2_mode_set(int unit, int port, int mode);
+int portmod_port_higig_mode_get(int unit, int port, int *mode);
+int portmod_port_higig_mode_set(int unit, int port, int mode);
+int portmod_port_ilkn_nof_segments_get(int unit, int port, uint32 *nof_segments);
+int portmod_port_ilkn_nof_segments_set(int unit, int port, uint32 nof_segments);
+int portmod_port_interface_check(int unit, int port, portmod_port_interface_config_t *config, int is_ext_phy, soc_port_if_t interface, int *is_valid);
+int portmod_port_interface_config_get(int unit, int port, portmod_port_interface_config_t *config, int phy_init_flags);
+int portmod_port_interface_config_set(int unit, int port, portmod_port_interface_config_t *config, int phy_init_flags);
+int portmod_port_interrupt_enable_get(int unit, int port, int intr_type, uint32 *val);
+int portmod_port_interrupt_enable_set(int unit, int port, int intr_type, uint32 val);
+int portmod_port_interrupt_get(int unit, int port, int intr_type, uint32 *val);
+int portmod_port_interrupts_get(int unit, int port, int arr_max_size, uint32 *intr_arr, uint32 *size);
+int portmod_port_is_valid(int unit, int port, int *valid);
+int portmod_port_lag_failover_disable(int unit, int port);
+int portmod_port_lag_failover_loopback_get(int unit, int port, int *value);
+int portmod_port_lag_failover_loopback_set(int unit, int port, int value);
+int portmod_port_lag_failover_status_toggle(int unit, int port);
+int portmod_port_lag_remove_failover_lpbk_get(int unit, int port, int *val);
+int portmod_port_lag_remove_failover_lpbk_set(int unit, int port, int val);
+int portmod_port_lane_map_get(int unit, int port, uint32 flags, phymod_lane_map_t *lane_map);
+int portmod_port_lane_map_set(int unit, int port, uint32 flags, phymod_lane_map_t *lane_map);
+int portmod_port_lane_remap_set(int unit, int port, phymod_lane_map_t *lane_map);  /* not in OpenBCM 6.5.27 */
+int portmod_port_lanes_assign(int unit, int port, portmod_lanes_assign_info_t *assign_map);
+int portmod_port_lanes_retrieve(int unit, int port, portmod_lanes_assign_info_t *assign_map);
+int portmod_port_led_chain_config(int unit, int port, int value);
+int portmod_port_link_get(int unit, int port, int flags, int *link);
+int portmod_port_link_latch_down_get(int unit, int port, uint32 flags, int *link);
+int portmod_port_link_recovery_enable_get(int unit, int port, int *enable);
+int portmod_port_link_recovery_enable_set(int unit, int port, int enable);
+int portmod_port_llfc_control_get(int unit, int port, portmod_llfc_control_t *control);
+int portmod_port_llfc_control_set(int unit, int port, portmod_llfc_control_t *control);
+int portmod_port_local_fault_control_get(int unit, int port, portmod_local_fault_control_t *control);
+int portmod_port_local_fault_control_set(int unit, int port, portmod_local_fault_control_t *control);
+int portmod_port_local_fault_force_get(int unit, int port, int *enable);
+int portmod_port_local_fault_force_set(int unit, int port, int enable);
+int portmod_port_local_fault_reasons_get(int unit, int port, uint32 *local_fault_reasons);
+int portmod_port_local_fault_status_clear(int unit, int port);
+int portmod_port_local_fault_status_get(int unit, int port, int *value);
+int portmod_port_logical_lane_order_get(int unit, int port, int lane_order_max_size, int *lane_order, int *lane_order_actual_size);
+int portmod_port_logical_lane_order_set(int unit, int port, int *lane_order, int lane_order_size);
+int portmod_port_loopback_get(int unit, int port, portmod_loopback_mode_t loopback_type, int *enable);
+int portmod_port_loopback_set(int unit, int port, portmod_loopback_mode_t loopback_type, int enable);
+int portmod_port_mac_ctrl_set(int unit, int port, uint64 ctrl);
+int portmod_port_mac_enable_set(int unit, int port, int enable);
+int portmod_port_mac_reset_check(int unit, int port, int enable, int *reset);
+int portmod_port_mac_reset_get(int unit, int port, int *val);
+int portmod_port_mac_reset_set(int unit, int port, int val);
+int portmod_port_mac_rsv_mask_get(int unit, int port, uint32 *rsv_mask);
+int portmod_port_mac_rsv_mask_set(int unit, int port, uint32 rsv_mask);
+int portmod_port_mac_strip_crc_get(int unit, int port, uint32 *enable);
+int portmod_port_mac_strip_crc_set(int unit, int port, uint32 enable);
+int portmod_port_mac_timestamp_enable_get(int unit, int port, int *enable);
+int portmod_port_mac_timestamp_enable_set(int unit, int port, int enable);
+int portmod_port_mac_tx_crc_mode_get(int unit, int port, portmod_mac_tx_crc_mode_t *crc_mode);
+int portmod_port_mac_tx_crc_mode_set(int unit, int port, portmod_mac_tx_crc_mode_t crc_mode);
+int portmod_port_macro_add(int unit, portmod_pm_create_info_t *pm_info);
+int portmod_port_master_get(int unit, int port, int *master_mode);
+int portmod_port_master_set(int unit, int port, int master_mode);
+int portmod_port_max_packet_size_get(int unit, int port, int *value);
+int portmod_port_max_packet_size_set(int unit, int port, int value);
+int portmod_port_medium_config_get(int unit, int port, soc_port_medium_t medium, soc_phy_config_t *config);
+int portmod_port_medium_config_set(int unit, int port, soc_port_medium_t medium, soc_phy_config_t *config);
+int portmod_port_medium_get(int unit, int port, soc_port_medium_t *medium);
+int portmod_port_mode_get(int unit, int port, portmod_port_mode_info_t *mode);
+int portmod_port_mode_set(int unit, int port, portmod_port_mode_info_t *mode);
+int portmod_port_modid_set(int unit, int port, int value);
+int portmod_port_multi_get(int unit, int port, portmod_multi_get_t *multi_get);
+int portmod_port_nof_lanes_get(int unit, int port, int *nof_lanes);
+int portmod_port_notify(int unit, int port, int link);
+int portmod_port_pad_size_get(int unit, int port, int *value);
+int portmod_port_pad_size_set(int unit, int port, int value);
+int portmod_port_pass_through_calibrate(int unit, int port);
+int portmod_port_pass_through_fec_enable_get(int unit, int port, int *enable);
+int portmod_port_pass_through_fec_enable_set(int unit, int port, int enable);
+int portmod_port_pass_through_get(int unit, int port, int *loopback_en, int *enable);
+int portmod_port_pass_through_set(int unit, int port, int loopback_en, int enable);
+int portmod_port_pause_control_get(int unit, int port, portmod_pause_control_t *control);
+int portmod_port_pause_control_set(int unit, int port, portmod_pause_control_t *control);
+int portmod_port_pch_config_get(int unit, int port, portmod_pch_config_t *pch_config);  /* not in OpenBCM 6.5.27 */
+int portmod_port_pch_config_set(int unit, int port, portmod_pch_config_t *pch_config);  /* not in OpenBCM 6.5.27 */
+int portmod_port_pcs_enable_set(int unit, int port, uint32 enable);  /* not in OpenBCM 6.5.27 */
+int portmod_port_pcs_fsm_check(int unit, int port, int *status);
+int portmod_port_pcs_lane_map_reconfig(int unit, int port, uint32 tx_lane_swap, uint32 rx_lane_swap);
+int portmod_port_periodic_pause(int unit, int *is_active);  /* not in OpenBCM 6.5.27 */
+int portmod_port_periodic_resume(int unit, int is_active);  /* not in OpenBCM 6.5.27 */
+int portmod_port_pfc_config_get(int unit, int port, portmod_pfc_config_t *pfc_cfg);
+int portmod_port_pfc_config_set(int unit, int port, portmod_pfc_config_t *pfc_cfg);
+int portmod_port_pfc_control_get(int unit, int port, portmod_pfc_control_t *control);
+int portmod_port_pfc_control_set(int unit, int port, portmod_pfc_control_t *control);
+int portmod_port_pgw_reconfig(int unit, int port, portmod_port_mode_info_t *pmode, int phy_port, int flags);
+int portmod_port_phase_interpolator_rx_set(int unit, int port, int enable);
+int portmod_port_phase_interpolator_tx_set(int unit, int port, int enable);
+int portmod_port_phy_flr_link_up_event(int unit, int port);
+int portmod_port_phy_intr_enable_get(int unit, int port, uint32 *intr_enable);
+int portmod_port_phy_intr_enable_set(int unit, int port, uint32 intr_enable);
+int portmod_port_phy_intr_status_clear(int unit, int port);
+int portmod_port_phy_intr_status_get(int unit, int port, uint32 *intr_status);
+int portmod_port_phy_lane_access_get(int unit, int port, portmod_access_get_params_t *params, int max_phys, phymod_phy_access_t *access, int *nof_phys, int *is_most_ext);
+int portmod_port_phy_link_down_event(int unit, int port);
+int portmod_port_phy_link_up_event(int unit, int port);
+int portmod_port_phy_op_mode_get(int unit, int port, phymod_operation_mode_t *val);
+int portmod_port_phy_reg_read(int unit, int port, int lane, int flags, int reg_addr, uint32 *value);
+int portmod_port_phy_reg_write(int unit, int port, int lane, int flags, int reg_addr, uint32 value);
+int portmod_port_phy_timesync_do_sync(int unit, int port);
+int portmod_port_phys_get(int unit, int port, portmod_pbmp_t *phys);
+int portmod_port_pm_id_get(int unit, int port, int *pm_id);
+int portmod_port_pm_type_get(int unit, int port, int *real_port, portmod_dispatch_type_t *pm_type);
+int portmod_port_pmd_lock_counter_get(int unit, int port, uint32 *pmd_lock_counter_sum);
+int portmod_port_pmd_rx_lock_status_get(int unit, int port, uint32 *pmd_lock, uint32 *pmd_lock_change);
+int portmod_port_polarity_get(int unit, int port, phymod_polarity_t *polarity);
+int portmod_port_polarity_set(int unit, int port, phymod_polarity_t *polarity);
+int portmod_port_prbs_config_get(int unit, int port, portmod_prbs_mode_t mode, int flags, phymod_prbs_t *config);
+int portmod_port_prbs_config_set(int unit, int port, portmod_prbs_mode_t mode, int flags, phymod_prbs_t *config);
+int portmod_port_prbs_enable_get(int unit, int port, portmod_prbs_mode_t mode, int flags, int *enable);
+int portmod_port_prbs_enable_set(int unit, int port, portmod_prbs_mode_t mode, int flags, int enable);
+int portmod_port_prbs_status_get(int unit, int port, portmod_prbs_mode_t mode, int flags, phymod_prbs_status_t *status);
+int portmod_port_rate_egress_ppt_get(int unit, int port, uint32 *burst, uint32 *nof_tiks);
+int portmod_port_rate_egress_ppt_set(int unit, int port, uint32 burst, uint32 nof_tiks);
+int portmod_port_recover_am_idles_get(int unit, int port, uint32 *recover_am_idles);  /* not in OpenBCM 6.5.27 */
+int portmod_port_recover_am_idles_set(int unit, int port, uint32 recover_am_idles);  /* not in OpenBCM 6.5.27 */
+int portmod_port_ref_clk_get(int unit, int port, int *ref_clk);
+int portmod_port_remote_fault_control_get(int unit, int port, portmod_remote_fault_control_t *control);
+int portmod_port_remote_fault_control_set(int unit, int port, portmod_remote_fault_control_t *control);
+int portmod_port_remote_fault_force_get(int unit, int port, int *enable);
+int portmod_port_remote_fault_force_set(int unit, int port, int enable);
+int portmod_port_remote_fault_status_clear(int unit, int port);
+int portmod_port_remote_fault_status_get(int unit, int port, int *value);
+int portmod_port_remove(int unit, int port);
+int portmod_port_reset_get(int unit, int port, int mode, int opcode, int *value);
+int portmod_port_reset_set(int unit, int port, int mode, int opcode, int value);
+int portmod_port_rlm_config_get(int unit, int port, int *enable, portmod_port_rlm_config_t *rlm_status);
+int portmod_port_rlm_config_set(int unit, int port, int enable, portmod_port_rlm_config_t *rlm_config);
+int portmod_port_rlm_status_get(int unit, int port, portmod_port_rlm_status_t *rlm_status);
+int portmod_port_runt_threshold_get(int unit, int port, int *value);
+int portmod_port_runt_threshold_set(int unit, int port, int value);
+int portmod_port_rx_control_get(int unit, int port, portmod_rx_control_t *rx_ctrl);
+int portmod_port_rx_control_set(int unit, int port, portmod_rx_control_t *rx_ctrl);
+int portmod_port_rx_mac_enable_get(int unit, int port, int *enable);
+int portmod_port_rx_mac_enable_set(int unit, int port, int enable);
+int portmod_port_rx_mac_sa_get(int unit, int port, sal_mac_addr_t mac_sa);
+int portmod_port_rx_mac_sa_set(int unit, int port, sal_mac_addr_t mac_sa);
+int portmod_port_serdes_core_info_get(int unit, int port, phymod_serdes_core_info_t *core_info);  /* not in OpenBCM 6.5.27 */
+int portmod_port_signal_detect_status_get(int unit, int port, portmod_signal_detect_status_t *sd_status);
+int portmod_port_soft_reset(int unit, int port, portmod_mac_soft_reset_mode_t reset_mode, int *saved_rx_enable, uint64 *saved_mac_ctrl);
+int portmod_port_soft_reset_set(int unit, int port, int idx, int val, int flags);
+int portmod_port_soft_reset_toggle(int unit, int port, int idx);
+int portmod_port_speed_ability_local_get(int unit, int port, int max_num_abilities, portmod_port_speed_ability_t *abilities, int *num_abilities);
+int portmod_port_speed_config_get(int unit, int port, portmod_speed_config_t *speed_config);
+int portmod_port_speed_config_set(int unit, int port, portmod_speed_config_t *speed_config);
+int portmod_port_speed_config_validate(int unit, int port, portmod_speed_config_t *speed_config, portmod_pbmp_t *affected_pbmp);
+int portmod_port_speed_get(int unit, int port, int *speed);
+int portmod_port_synce_clk_ctrl_get(int unit, int port, portmod_port_synce_clk_ctrl_t *cfg);
+int portmod_port_synce_clk_ctrl_set(int unit, int port, portmod_port_synce_clk_ctrl_t *cfg);
+int portmod_port_timestamp_adjust_get(int unit, int port, soc_port_timestamp_adjust_t *ts_adjust);
+int portmod_port_timestamp_adjust_set(int unit, int port, soc_port_timestamp_adjust_t *ts_adjust);
+int portmod_port_timesync_capture_timestamp_get(int unit, int port, uint64 *cap_ts);
+int portmod_port_timesync_config_get(int unit, int port, portmod_phy_timesync_config_t *config);
+int portmod_port_timesync_config_set(int unit, int port, portmod_phy_timesync_config_t *config);
+int portmod_port_timesync_enable_get(int unit, int port, uint32 *enable);
+int portmod_port_timesync_enable_set(int unit, int port, uint32 enable);
+int portmod_port_timesync_framesync_mode_get(int unit, int port, portmod_timesync_framesync_t *framesync);
+int portmod_port_timesync_framesync_mode_set(int unit, int port, portmod_timesync_framesync_t *framesync);
+int portmod_port_timesync_heartbeat_timestamp_get(int unit, int port, uint64 *hb_ts);
+int portmod_port_timesync_load_ctrl_get(int unit, int port, uint32 *load_once, uint32 *load_always);
+int portmod_port_timesync_load_ctrl_set(int unit, int port, uint32 load_once, uint32 load_always);
+int portmod_port_timesync_local_time_get(int unit, int port, uint64 *local_time);
+int portmod_port_timesync_local_time_set(int unit, int port, uint64 local_time);
+int portmod_port_timesync_nco_addend_get(int unit, int port, uint32 *freq_step);
+int portmod_port_timesync_nco_addend_set(int unit, int port, uint32 freq_step);
+int portmod_port_timesync_rx_timestamp_offset_get(int unit, int port, uint32 *ts_offset);
+int portmod_port_timesync_rx_timestamp_offset_set(int unit, int port, uint32 ts_offset);
+int portmod_port_timesync_tx_info_get(int unit, int port, portmod_fifo_status_t *tx_info);
+int portmod_port_timesync_tx_timestamp_offset_get(int unit, int port, uint32 *ts_offset);
+int portmod_port_timesync_tx_timestamp_offset_set(int unit, int port, uint32 ts_offset);
+int portmod_port_to_phyaddr(int unit, int port);
+int portmod_port_to_phyaddr_int(int unit, int port);
+int portmod_port_trunk_hwfailover_config_get(int unit, int port, int *enable);
+int portmod_port_trunk_hwfailover_config_set(int unit, int port, int hw_count);
+int portmod_port_trunk_hwfailover_status_get(int unit, int port, int *loopback);
+int portmod_port_tx_average_ipg_get(int unit, int port, int *value);
+int portmod_port_tx_average_ipg_set(int unit, int port, int value);
+int portmod_port_tx_down(int unit, int port);
+int portmod_port_tx_get(int unit, int port, phymod_tx_t *tx);
+int portmod_port_tx_mac_enable_get(int unit, int port, int *enable);
+int portmod_port_tx_mac_enable_set(int unit, int port, int enable);
+int portmod_port_tx_mac_sa_get(int unit, int port, sal_mac_addr_t mac_sa);
+int portmod_port_tx_mac_sa_set(int unit, int port, sal_mac_addr_t mac_sa);
+int portmod_port_tx_padding_get(int unit, int port, int *pad_size);
+int portmod_port_tx_padding_set(int unit, int port, int pad_size);
+int portmod_port_tx_preamble_length_get(int unit, int port, int *value);
+int portmod_port_tx_preamble_length_set(int unit, int port, int value);
+int portmod_port_tx_set(int unit, int port, phymod_tx_t *tx);
+int portmod_port_tx_stall_get(int unit, int port, int *enable);
+int portmod_port_tx_stall_set(int unit, int port, int enable);
+int portmod_port_tx_threshold_get(int unit, int port, int *value);
+int portmod_port_tx_threshold_set(int unit, int port, int value);
+int portmod_port_txfifo_cell_cnt_get(int unit, int port, uint32 *cnt);
+int portmod_port_txpi_config_get(int unit, int port, portmod_txpi_config_t *config);  /* not in OpenBCM 6.5.27 */
+int portmod_port_txpi_config_set(int unit, int port, portmod_txpi_config_t config);  /* not in OpenBCM 6.5.27 */
+int portmod_port_txpi_override_get(int unit, int port, portmod_txpi_override_t *override);
+int portmod_port_txpi_override_set(int unit, int port, portmod_txpi_override_t *override);
+int portmod_port_txpi_rxcdr_clk_get(int unit, int port, uint32 *txpi_clk, uint32 *rxcdr_clk);
+int portmod_port_txpi_sdm_data_get(int unit, int port, int *value);
+int portmod_port_update(int unit, int port, portmod_port_update_control_t *update_control);
+int portmod_port_update_dynamic_state(int unit, int port, uint32 port_dynamic_state);
+int portmod_port_vcos_get(int unit, int port, portmod_vcos_speed_config_t *speed_config_list, int size, portmod_dual_vcos_t *dual_vco);
+int portmod_port_vlan_tag_get(int unit, int port, portmod_vlan_tag_t *vlan_tag);
+int portmod_port_vlan_tag_set(int unit, int port, portmod_vlan_tag_t *vlan_tag);
+int portmod_port_warmboot_db_restore(int unit, int port, portmod_port_interface_config_t *intf_config, portmod_port_init_config_t *init_config, phymod_operation_mode_t phy_op_mode);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phymod-phy.html" class="btn btn-neutral float-left" title="phymod_phy_* (257)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-other.html" class="btn btn-neutral float-right" title="Other bcm_* modules (932)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

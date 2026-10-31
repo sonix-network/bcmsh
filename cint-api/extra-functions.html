@@ -1,0 +1,1990 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Functions not in OpenBCM &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Structures and typedefs not in OpenBCM" href="extra-types.html" />
+    <link rel="prev" title="Cint API on this build" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions/index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Cint API on this build</a></li>
+      <li class="breadcrumb-item active">Functions not in OpenBCM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="functions-not-in-openbcm">
+<h1>Functions not in OpenBCM<a class="headerlink" href="#functions-not-in-openbcm" title="Link to this heading"></a></h1>
+<p>Functions that the Cint interpreter on this build registers but that
+OpenBCM 6.5.27’s Cint does not, grouped by module. Back to
+<a class="reference internal" href="index.html"><span class="doc">Cint API on this build</span></a>.</p>
+<p>Names in capitals are SDK macros that Cint registers as functions. Their
+parameters are shown as pointers, but you call them with plain variables as
+in C, for example <code class="docutils literal notranslate"><span class="pre">BCM_GPORT_MODPORT_SET(gport,</span> <span class="pre">modid,</span> <span class="pre">port);</span></code>.</p>
+<section id="bcm-capability-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_capability_*</span></code> (4)<a class="headerlink" href="#bcm-capability-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_capability_array_get(int unit, bcm_capability_array_t caid, int *size, int *array);
+int bcm_capability_supported_get(int unit, bcm_capability_t cid, int *supported);
+int bcm_capability_supported_multi_get(int unit, bcm_capability_t first_cid, int size, int *supported);
+int bcm_capability_value_get(int unit, bcm_capability_value_t cvid, int *val);
+</pre></div>
+</div>
+</section>
+<section id="bcm-cosq-128">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_cosq_*</span></code> (128)<a class="headerlink" href="#bcm-cosq-128" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_COSQ_AQM_ACTION_PROFILE_CNI_FWD_ACTION_VALID_GET(int *enable);
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_FWD_ACTION_VALID_SET(int *enable, int *fwd_action_valid);
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_MIRROR_ACTION_VALID_GET(int *enable);
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_MIRROR_ACTION_VALID_SET(int *enable, int *mirror_action_valid);
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_RESULT_GET(int *enable);
+int BCM_COSQ_AQM_ACTION_PROFILE_CNI_RESULT_SET(int *enable, int *cni_result);
+void BCM_COSQ_COPY_TO_SECONADRY_REASON_REMOVE(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);
+void BCM_COSQ_COPY_TO_SECONDARY_REASON_ADD(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);
+void BCM_COSQ_COPY_TO_SECONDARY_REASON_INIT(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp);
+int BCM_COSQ_COPY_TO_SECONDARY_REASON_TEST(bcm_cosq_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);
+int BCM_COSQ_GPORT_CORE_DATAPATH_SET(int *_gport, int *_core, int *_dp);
+int BCM_COSQ_GPORT_DATAPATH_GET(int *_gport);
+int BCM_COSQ_GPORT_E2E_PORT_TC_SCHED_GET(int *_gport);
+void BCM_COSQ_GPORT_E2E_PORT_TC_SCHED_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_EGRESS_FC_TC_GET(int *_gport);
+void BCM_COSQ_GPORT_EGRESS_FC_TC_SET(int *_gport, int *_port);
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_CPU_DATAPATH_GUARANTEED_SET(int *_gport, int *_core, int *_datapath);
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_DATAPATH_GET(int *_gport);
+int BCM_COSQ_GPORT_INGRESS_RECEIVE_RCY_DATAPATH_GUARANTEED_SET(int *_gport, int *_core, int *_datapath);
+int BCM_COSQ_GPORT_IS_CORE_DATAPATH(int *_gport);
+int BCM_COSQ_GPORT_IS_E2E_PORT_TC_SCHED(int *_gport);
+int BCM_COSQ_GPORT_IS_EGRESS_FC_TC(int *_gport);
+int BCM_COSQ_GPORT_IS_INGRESS_RECEIVE_CPU_DATAPATH_GUARANTEED(int *_gport);
+int BCM_COSQ_GPORT_IS_INGRESS_RECEIVE_RCY_DATAPATH_GUARANTEED(int *_gport);
+int BCM_COSQ_GPORT_IS_MCAST_VOQ(int *_gport);
+int BCM_COSQ_GPORT_IS_UCAST_VOQ(int *_gport);
+int BCM_COSQ_GPORT_MCAST_VOQ_QID_GET(int *_gport);
+void BCM_COSQ_GPORT_MCAST_VOQ_SET(int *_gport, int *_sysport_id, int *_qid, int *_voq_id);
+int BCM_COSQ_GPORT_MCAST_VOQ_SYSPORTID_GET(int *_gport);
+int BCM_COSQ_GPORT_MCAST_VOQ_VOQID_GET(int *_gport);
+int BCM_COSQ_GPORT_UCAST_VOQ_QID_GET(int *_gport);
+void BCM_COSQ_GPORT_UCAST_VOQ_SET(int *_gport, int *_sysport_id, int *_qid, int *_voq_id);
+int BCM_COSQ_GPORT_UCAST_VOQ_SYSPORTID_GET(int *_gport);
+int BCM_COSQ_GPORT_UCAST_VOQ_VOQID_GET(int *_gport);
+int BCM_COSQ_GPORT_VSQ_SHARED_CORES_GROUP_GET(int *_gport);
+void BCM_COSQ_GPORT_VSQ_SHARED_SET(int *_gport, int *_cores_group);
+int bcm_cosq_aqm_action_profile_get(int unit, uint32 flags, int profile, bcm_cosq_aqm_action_profile_type_t profile_type, uint32 src_bitmap, int *enable);
+int bcm_cosq_aqm_action_profile_set(int unit, uint32 flags, int profile, bcm_cosq_aqm_action_profile_type_t profile_type, uint32 src_bitmap, uint32 src_bitmap_mask, int enable);
+int bcm_cosq_aqm_profile_destroy(int unit, int flags, bcm_gport_t profile_gport);
+int bcm_cosq_ar_control_get(int unit, bcm_cosq_ar_control_t type, int *arg);
+int bcm_cosq_ar_control_set(int unit, bcm_cosq_ar_control_t type, int arg);
+int bcm_cosq_ar_port_control_get(int unit, bcm_gport_t port, bcm_cosq_ar_port_control_t type, int *arg);
+int bcm_cosq_ar_port_control_set(int unit, bcm_gport_t port, bcm_cosq_ar_port_control_t type, int arg);
+int bcm_cosq_ar_profile_get(int unit, bcm_cosq_ar_profile_type_t profile_type, int profile_id, bcm_cosq_ar_profile_params_t *profile_params);
+int bcm_cosq_ar_profile_set(int unit, bcm_cosq_ar_profile_type_t profile_type, int profile_id, bcm_cosq_ar_profile_params_t *profile_params);
+int bcm_cosq_bandwidth_get(int unit, uint32 flags, bcm_cosq_bandwidth_key_t key, bcm_cosq_bandwidth_config_t *config);
+int bcm_cosq_bandwidth_set(int unit, uint32 flags, bcm_cosq_bandwidth_key_t key, bcm_cosq_bandwidth_config_t config);
+int bcm_cosq_buffer_utilization_get(int unit, bcm_cosq_buffer_id_t buffer, bcm_cosq_buffer_utilization_t *info);
+void bcm_cosq_buffer_utilization_t_init(bcm_cosq_buffer_utilization_t *info);
+int bcm_cosq_cbfc_deadlock_control_get(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_cbfc_deadlock_control_t control, uint64 *arg);
+int bcm_cosq_cbfc_deadlock_control_set(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_cbfc_deadlock_control_t control, uint64 arg);
+int bcm_cosq_cbfc_deadlock_event_register(int unit, bcm_cosq_cbfc_deadlock_event_cb_t cb, void *userdata);
+int bcm_cosq_cbfc_deadlock_event_unregister(int unit, bcm_cosq_cbfc_deadlock_event_cb_t cb, void *userdata);
+int bcm_cosq_cbfc_deadlock_vc_state_get(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_cbfc_deadlock_state_t *state);
+void bcm_cosq_cbfs_shaper_t_init(bcm_cosq_cbfs_shaper_t *shaper);
+int bcm_cosq_cbfs_stat_get(int unit, bcm_port_t port, bcm_cosq_cbfs_stat_t stat, uint32 flags, uint64 *value);
+int bcm_cosq_cbfs_stat_set(int unit, bcm_port_t port, bcm_cosq_cbfs_stat_t stat, uint64 value);
+int bcm_cosq_color_resolution_profile_get(int unit, uint32 flags, bcm_cosq_buffer_id_t buffer, int profile_id, bcm_cosq_color_resolution_t *color_resolution);
+int bcm_cosq_color_resolution_profile_set(int unit, uint32 flags, bcm_cosq_buffer_id_t buffer, int profile_id, bcm_cosq_color_resolution_t *color_resolution);
+void bcm_cosq_color_resolution_t_init(bcm_cosq_color_resolution_t *color_resolution);
+void bcm_cosq_copy_to_secondary_map_action_t_init(bcm_cosq_copy_to_secondary_map_action_t *action);
+int bcm_cosq_copy_to_secondary_map_add(int unit, uint32 options, bcm_cosq_copy_to_secondary_map_match_t *match, bcm_cosq_copy_to_secondary_map_action_t *action);
+int bcm_cosq_copy_to_secondary_map_delete(int unit, bcm_cosq_copy_to_secondary_map_match_t *match);
+int bcm_cosq_copy_to_secondary_map_delete_all(int unit);
+int bcm_cosq_copy_to_secondary_map_get(int unit, bcm_cosq_copy_to_secondary_map_match_t *match, bcm_cosq_copy_to_secondary_map_action_t *action);
+void bcm_cosq_copy_to_secondary_map_match_t_init(bcm_cosq_copy_to_secondary_map_match_t *match);
+int bcm_cosq_copy_to_secondary_map_traverse(int unit, bcm_cosq_copy_to_secondary_map_traverse_cb cb, void *user_data);
+int bcm_cosq_dlb_queue_mapping_get(int unit, int array_size, bcm_cos_queue_t *cosq_array, int *count);
+int bcm_cosq_dlb_queue_mapping_set(int unit, int array_size, bcm_cos_queue_t *cosq_array);
+int bcm_cosq_drop_reason_status_get(int unit, bcm_cosq_drop_reason_status_key_t key, int array_max_size, int *array_size, uint32 *drop_reasons);
+int bcm_cosq_egress_editor_profile_config_get(int unit, int profile_id, bcm_cosq_egress_editor_profile_config_t *config);
+int bcm_cosq_egress_editor_profile_config_set(int unit, int profile_id, bcm_cosq_egress_editor_profile_config_t *config);
+int bcm_cosq_egress_editor_profile_create(int unit, uint32 flags, bcm_gport_t gport, int *profile_id);
+int bcm_cosq_egress_editor_profile_destroy(int unit, uint32 flags, int profile_id);
+int bcm_cosq_fill_level_threshold_profile_get(int unit, uint32 flags, int profile_id, bcm_cosq_fill_level_threshold_profile_t *cosq_profile);
+int bcm_cosq_fill_level_threshold_profile_set(int unit, uint32 flags, int profile_id, bcm_cosq_fill_level_threshold_profile_t *cosq_profile);
+void bcm_cosq_fill_level_threshold_profile_t_init(bcm_cosq_fill_level_threshold_profile_t *threshold_profile);
+int bcm_cosq_global_voq_trigger_event_read(int unit, uint32 flags, bcm_gport_t gport, bcm_cos_queue_t cosq, bcm_cosq_global_voq_trigger_event_t *event);
+int bcm_cosq_gport_parent_set(int unit, bcm_gport_t child_port, bcm_gport_t parent_port);
+int bcm_cosq_gvoq_id_create(int unit, uint32 flags, bcm_gport_t gport, bcm_cos_queue_t cosq, uint32 *gvoq_id);
+int bcm_cosq_ingress_admit_profile_get(int unit, uint32 flags, bcm_cosq_ingress_admit_profile_type_t type, int admit_profile_id, bcm_cosq_ingress_admit_profile_t *admit_profile);
+int bcm_cosq_ingress_admit_profile_set(int unit, uint32 flags, bcm_cosq_ingress_admit_profile_type_t type, int admit_profile_id, bcm_cosq_ingress_admit_profile_t *admit_profile);
+int bcm_cosq_llr_xoff_event_register(int unit, bcm_cosq_llr_xoff_event_cb_t cb, void *userdata);
+int bcm_cosq_llr_xoff_event_unregister(int unit, bcm_cosq_llr_xoff_event_cb_t cb, void *userdata);
+int bcm_cosq_non_minimal_remap_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_non_minimal_remap_profile_destroy(int unit, int profile_id);
+int bcm_cosq_non_minimal_remap_profile_get(int unit, int profile_id, bcm_cosq_non_minmial_remap_t *remap);
+int bcm_cosq_non_minimal_remap_profile_set(int unit, int profile_id, bcm_cosq_non_minmial_remap_t *remap);
+void bcm_cosq_non_minmial_remap_t_init(bcm_cosq_non_minmial_remap_t *remap);
+int bcm_cosq_obq_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_obq_profile_destroy(int unit, int profile_id);
+int bcm_cosq_obq_profile_get(int unit, int profile_id, int count, bcm_cosq_obq_profile_t *profile);
+int bcm_cosq_obq_profile_set(int unit, int profile_id, int count, bcm_cosq_obq_profile_t *profile);
+void bcm_cosq_obq_profile_t_init(bcm_cosq_obq_profile_t *profile);
+int bcm_cosq_pg_lossless_drop_status_clear(int unit, bcm_port_t port);
+int bcm_cosq_pg_lossless_drop_status_get(int unit, bcm_port_t port, int array_size, int *drop_status_array, int *count);
+int bcm_cosq_pkt_flow_param_override_get(int unit, bcm_cosq_pkt_type_t pkt_type, bcm_cosq_pkt_flow_param_override_t *param_override);
+int bcm_cosq_pkt_flow_param_override_set(int unit, bcm_cosq_pkt_type_t pkt_type, bcm_cosq_pkt_flow_param_override_t *param_override);
+void bcm_cosq_pkt_flow_param_override_t_init(bcm_cosq_pkt_flow_param_override_t *param_override);
+int bcm_cosq_port_cbfc_rx_control_get(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_control_t *rx_control);
+int bcm_cosq_port_cbfc_rx_control_set(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_control_t *rx_control);
+int bcm_cosq_port_cbfc_rx_info_get(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_info_t *rx_info);
+int bcm_cosq_port_cbfc_rx_info_set(int unit, bcm_port_t port, bcm_cosq_port_cbfc_rx_info_t *rx_info);
+int bcm_cosq_port_cbfc_rx_vc_info_get(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_rx_vc_info_t *rx_vc_info);
+int bcm_cosq_port_cbfc_rx_vc_info_set(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_rx_vc_info_t *rx_vc_info);
+int bcm_cosq_port_cbfc_tx_info_get(int unit, bcm_port_t port, bcm_cosq_port_cbfc_tx_info_t *tx_info);
+int bcm_cosq_port_cbfc_tx_info_set(int unit, bcm_port_t port, bcm_cosq_port_cbfc_tx_info_t *tx_info);
+int bcm_cosq_port_cbfc_tx_vc_info_get(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_tx_vc_info_t *tx_vc_info);
+int bcm_cosq_port_cbfc_tx_vc_info_set(int unit, bcm_port_t port, int vc, bcm_cosq_port_cbfc_tx_vc_info_t *tx_vc_info);
+int bcm_cosq_port_cbfc_tx_vc_vcgroup_map_get(int unit, bcm_port_t port, int vc, int *vcgroup);
+int bcm_cosq_port_cbfc_tx_vc_vcgroup_map_set(int unit, bcm_port_t port, int vc, int vcgroup);
+int bcm_cosq_port_cbfc_tx_vcgroup_info_get(int unit, bcm_port_t port, int vc_group, bcm_cosq_port_cbfc_tx_vcgroup_info_t *tx_vcgroup_info);
+int bcm_cosq_port_cbfc_tx_vcgroup_info_set(int unit, bcm_port_t port, int vc_group, bcm_cosq_port_cbfc_tx_vcgroup_info_t *tx_vcgroup_info);
+int bcm_cosq_port_cbfc_vc_config_get(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_vc_cfg_t *vc_cfg);
+int bcm_cosq_port_cbfc_vc_config_set(int unit, bcm_port_t port, bcm_vc_t vc, bcm_cosq_vc_cfg_t *vc_cfg);
+int bcm_cosq_port_cbfs_shaper_get(int unit, bcm_port_t port, bcm_cosq_cbfs_shaper_t *shaper);
+int bcm_cosq_port_cbfs_shaper_set(int unit, bcm_port_t port, bcm_cosq_cbfs_shaper_t *shaper);
+int bcm_cosq_priority_group_mapping_profile_extended_get(int unit, bcm_cosq_object_id_t *id, int profile_index, bcm_cosq_priority_group_mapping_profile_type_t type, int array_max, int *arg, int *array_count);
+int bcm_cosq_priority_group_mapping_profile_extended_set(int unit, bcm_cosq_object_id_t *id, int profile_index, bcm_cosq_priority_group_mapping_profile_type_t type, int array_count, int *arg);
+int bcm_cosq_schedq_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_cosq_schedq_profile_destroy(int unit, int profile_id);
+int bcm_cosq_schedq_profile_get(int unit, int profile_id, int count, bcm_cosq_schedq_profile_t *profile);
+int bcm_cosq_schedq_profile_set(int unit, int profile_id, int count, bcm_cosq_schedq_profile_t *profile);
+void bcm_cosq_schedq_profile_t_init(bcm_cosq_schedq_profile_t *profile);
+int bcm_cosq_subport_e2ecc_class_mapping_get(int unit, bcm_gport_t gport, bcm_subport_cos_to_e2ecc_pri_map_t *cos_to_e2ecc_map);
+int bcm_cosq_subport_e2ecc_class_mapping_set(int unit, bcm_gport_t subport_gport, bcm_subport_cos_to_e2ecc_pri_map_t *cos_to_e2ecc_map, int *cos_to_e2ecc_map_profile_id);
+int bcm_cosq_voq_to_gvoq_map_get(int unit, uint32 flags, bcm_gport_t voq_gport, bcm_cos_queue_t cosq, uint32 *gvoq_id);
+int bcm_cosq_voq_to_gvoq_map_set(int unit, uint32 flags, bcm_gport_t voq_gport, bcm_cos_queue_t cosq, uint32 gvoq_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-edk-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_edk_*</span></code> (2)<a class="headerlink" href="#bcm-edk-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_edk_flexctr_register(int unit, bcm_core_t core_id, int is_ingress, uint32 pool_id, int *edk_map_id);
+int bcm_edk_table_register(int unit, bcm_core_t core_id, bcm_edk_table_type_t tbl_type, bcm_edk_table_arg_t *arg, int *edk_map_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-evnt-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_evnt_*</span></code> (3)<a class="headerlink" href="#bcm-evnt-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_EVNT_CORES_GROUP_ID_DECODE(int *_cores_group);
+int BCM_EVNT_EVENTOR_ID_DECODE(int *_id);
+int BCM_EVNT_EVENTOR_ID_ENCODE(int *_cores_group, int *_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-fabric-48">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_fabric_*</span></code> (48)<a class="headerlink" href="#bcm-fabric-48" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_FORWARDING_CLEAR(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_FORWARDING_GET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_FORWARDING_SET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_GLOBAL_CAPTURE_CLEAR(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_GLOBAL_CAPTURE_GET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_GLOBAL_CAPTURE_SET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_CLEAR(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_GET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_SET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_WITH_STATISTICS_CLEAR(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_WITH_STATISTICS_GET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_WITH_STATISTICS_SET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_SOP_ONLY_CLEAR(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_SOP_ONLY_GET(uint32 *map);
+uint32 BCM_FABRIC_CELL_PROFILE_MAP_ACTION_SOP_ONLY_SET(uint32 *map);
+uint32 BCM_FABRIC_FLOW_PROFILE_KEY_SET(int *flow_profile, int *visibility);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_FEC_CLEAR(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_FEC_GET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_FEC_SET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LEAKY_BUCKET_CLEAR(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LEAKY_BUCKET_GET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LEAKY_BUCKET_SET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LINK_INTEGRITY_CLEAR(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LINK_INTEGRITY_GET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_LINK_INTEGRITY_SET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_REMOTE_FAULT_CLEAR(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_REMOTE_FAULT_GET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_REMOTE_FAULT_SET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_SERDES_CLEAR(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_SERDES_GET(int *arg);
+uint32 BCM_FABRIC_LINK_STATUS_SOURCE_SERDES_SET(int *arg);
+uint32 BCM_FABRIC_STAT_INDEX_BLOCK_PIPE_SET(int *block, int *pipe);
+uint32 BCM_FABRIC_STAT_INDEX_BLOCK_SET(int *block);
+uint32 BCM_FABRIC_STAT_INDEX_LINK_CORE_SET(int *link, int *core);
+uint32 BCM_FABRIC_STAT_VALUE_LINK_GET(uint64 *value);
+uint32 BCM_FABRIC_STAT_VALUE_MAX_WMK_GET(uint64 *value);
+uint32 BCM_FABRIC_STAT_VALUE_MIN_WMK_GET(uint64 *value);
+uint32 BCM_FABRIC_STAT_VALUE_WMK_GET(uint64 *value);
+int BCM_FABRIC_VIRTUAL_LINK_CORE_SET(int *core);
+int bcm_fabric_auto_isolate_callback_register(int unit, uint32 flags, bcm_fabric_auto_isolate_callback_t user_func, void *user_data);
+int bcm_fabric_auto_isolate_callback_unregister(int unit, uint32 flags, bcm_fabric_auto_isolate_callback_t user_func, void *user_data);
+int bcm_fabric_block_indexes_get(int unit, uint32 flags, bcm_fabric_block_type_t block, bcm_fabric_device_type_t device_type, int block_arr_len, uint32 *blocks_arr, int *nof_blocks);
+int bcm_fabric_jitter_wmk_get(int unit, uint32 flags, bcm_fabric_jitter_wmk_key_t *key, bcm_fabric_jitter_wmk_info_t *info);
+int bcm_fabric_link_integrity_get(int unit, uint32 flags, int nof_links, bcm_gport_t *links_array, int *is_active);
+int bcm_fabric_profile_map_get(int unit, uint32 flags, bcm_fabric_profile_map_t map_type, uint32 key, uint32 *map);
+int bcm_fabric_profile_map_set(int unit, uint32 flags, bcm_fabric_profile_map_t map_type, uint32 key, uint32 map);
+int bcm_fabric_route_config_get(int unit, uint32 flags, bcm_gport_t gport, bcm_fabric_route_type_t route_type, uint32 dest_id_len, uint32 *dest_id_arr, uint32 *nof_dest_id);
+int bcm_fabric_route_config_set(int unit, uint32 flags, bcm_gport_t gport, bcm_fabric_route_type_t route_type, uint32 nof_dest_id, uint32 *dest_id_arr);
+</pre></div>
+</div>
+</section>
+<section id="bcm-failover-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_failover_*</span></code> (2)<a class="headerlink" href="#bcm-failover-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_FAILOVER_FEC_HIERARCHY_GET(int *failover_fec_hierarchy, bcm_failover_t *failover_id);
+void BCM_FAILOVER_FEC_HIERARCHY_SET(bcm_failover_t *failover_id, int *failover_id_val, int *failover_fec_hierarchy);
+</pre></div>
+</div>
+</section>
+<section id="bcm-field-391">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_field_*</span></code> (391)<a class="headerlink" href="#bcm-field-391" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_FIELD_COPYTOCPU_REASON_ADD(bcm_field_copytocpu_reason_bmp_t *copytocpu_reason_bmp, int *reason);
+void BCM_FIELD_COPYTOCPU_REASON_INIT(bcm_field_copytocpu_reason_bmp_t *copytocpu_reason_bmp);
+void BCM_FIELD_COPYTOCPU_REASON_REMOVE(bcm_field_copytocpu_reason_bmp_t *copytocpu_reason_bmp, int *reason);
+int BCM_FIELD_COPYTOCPU_REASON_TEST(bcm_field_copytocpu_reason_bmp_t *copytocpu_reason_bmp, int *reason);
+void BCM_FIELD_COPY_TO_SECONDARY_REASON_ADD(bcm_field_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);
+void BCM_FIELD_COPY_TO_SECONDARY_REASON_INIT(bcm_field_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp);
+void BCM_FIELD_COPY_TO_SECONDARY_REASON_REMOVE(bcm_field_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);
+int BCM_FIELD_COPY_TO_SECONDARY_REASON_TEST(bcm_field_copy_to_secondary_reason_bmp_t *copy_to_secondary_reason_bmp, int *reason);
+void BCM_FIELD_DROP_REASON_BMP_ADD(bcm_field_drop_reason_bmp_t *drop_reason_set, bcm_field_drop_reason_t *q);
+void BCM_FIELD_DROP_REASON_BMP_INIT(bcm_field_drop_reason_bmp_t *drop_reason_set);
+void BCM_FIELD_DROP_REASON_BMP_REMOVE(bcm_field_drop_reason_bmp_t *drop_reason_set, bcm_field_drop_reason_t *q);
+int BCM_FIELD_DROP_REASON_BMP_TEST(bcm_field_drop_reason_bmp_t *drop_reason_set, bcm_field_drop_reason_t *q);
+void BCM_FIELD_PROFILE_IDX_BMP_ADD(bcm_field_profile_idx_bmp_t *idx_set, uint32 *q);
+void BCM_FIELD_PROFILE_IDX_BMP_INIT(bcm_field_profile_idx_bmp_t *idx_set);
+void BCM_FIELD_PROFILE_IDX_BMP_REMOVE(bcm_field_profile_idx_bmp_t *idx_set, uint32 *q);
+int BCM_FIELD_PROFILE_IDX_BMP_TEST(bcm_field_profile_idx_bmp_t *idx_set, uint32 *q);
+int BCM_FIELD_STATS_ID_INDEX_GET(int *_stat_id);
+int BCM_FIELD_STATS_ID_PIPE_GET(int *_stat_id);
+int BCM_FIELD_STATS_ID_POOL_GET(int *_stat_id);
+int BCM_FIELD_STATS_ID_SET(int *_stat_id, int *_stage, int *_pipe_id, int *_pool_id, int *_index);
+int BCM_FIELD_STATS_ID_STAGE_GET(int *_stat_id);
+int bcm_field_compression_hash_profile_get(int unit, bcm_field_compression_hash_info_t *compression_info);
+int bcm_field_compression_hash_profile_set(int unit, bcm_field_compression_hash_info_t compression_info);
+int bcm_field_context_param_get(int unit, uint32 flags, bcm_field_stage_t stage, bcm_field_context_t context_id, bcm_field_context_param_info_t *context_params);
+void bcm_field_control_config_t_init(bcm_field_control_config_t *fc_cfg);
+void bcm_field_copy_to_secondary_reason_info_t_init(bcm_field_copy_to_secondary_reason_info_t *copy_to_secondary_reason_info);
+int bcm_field_entry_flexctr_get(int unit, bcm_field_entry_t entry, bcm_field_flexctr_config_t *flexctr_cfg);
+int bcm_field_entry_flexstate_attach(int unit, bcm_field_entry_t entry, bcm_field_flexstate_config_t *flexstate_cfg);
+int bcm_field_entry_flexstate_detach(int unit, bcm_field_entry_t entry, bcm_field_flexstate_config_t *flexstate_cfg);
+int bcm_field_entry_flexstate_get(int unit, bcm_field_entry_t entry, int size, bcm_field_flexstate_config_t *flexstate_cfg, int *count);
+void bcm_field_entry_traverse_info_t_init(bcm_field_entry_traverse_info_t *traverse_info);
+void bcm_field_flexstate_config_t_init(bcm_field_flexstate_config_t *flexstate_cfg);
+int bcm_field_group_config_update(int unit, bcm_field_group_config_update_t *group_config);
+void bcm_field_group_config_update_t_init(bcm_field_group_config_update_t *group_config);
+int bcm_field_group_entry_copy(int unit, bcm_field_group_entry_copy_config_t *entry_copy_config);
+void bcm_field_group_entry_copy_config_t_init(bcm_field_group_entry_copy_config_t *group_entry_copy_config);
+int bcm_field_group_entry_traverse(int unit, bcm_field_entry_traverse_info_t *additional_info, bcm_field_group_entry_traverse_cb callback, void *user_data);
+int bcm_field_itmh_action_get(int unit, uint32 flags, bcm_field_itmh_key_info_t *itmh_key, bcm_field_itmh_action_info_t *itmh_action);
+void bcm_field_itmh_action_info_t_init(bcm_field_itmh_action_info_t *itmh_action_info);
+int bcm_field_itmh_action_set(int unit, uint32 flags, bcm_field_itmh_key_info_t *itmh_key, bcm_field_itmh_action_info_t *itmh_action);
+int bcm_field_qualify_AddrCompressionGbpSidEnable(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AddrCompressionGbpSidEnable_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrBits0_15(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_AfrHdrBits0_15_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_AfrHdrBits0_23(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_AfrHdrBits0_23_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_AfrHdrCnmUpdatedFlags(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrCnmUpdatedFlags_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrCnmUpdatedTtl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrCnmUpdatedTtl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrDscp(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrDscp_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrEcn(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrEcn_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrFlags(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrFlags_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrFlowLabel(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_AfrHdrFlowLabel_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_AfrHdrPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrTos(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrTos_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_AfrHdrTtl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_AfrHdrTtl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_CnpEligible(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_CnpEligible_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_CnpPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_CnpPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_CopyToCpuReason(int unit, bcm_field_entry_t entry, bcm_field_copytocpu_reason_bmp_t data, bcm_field_copytocpu_reason_bmp_t mask);
+int bcm_field_qualify_CopyToCpuReason_get(int unit, bcm_field_entry_t entry, bcm_field_copytocpu_reason_bmp_t *data, bcm_field_copytocpu_reason_bmp_t *mask);
+int bcm_field_qualify_CopyToSecondaryReason(int unit, bcm_field_entry_t entry, bcm_field_copy_to_secondary_reason_info_t *reasons_info);
+int bcm_field_qualify_CopyToSecondaryReason_get(int unit, bcm_field_entry_t entry, bcm_field_copy_to_secondary_reason_info_t *reasons_info);
+int bcm_field_qualify_CpuTxPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_CpuTxPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnBcmByte(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnBcmByte_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnByte2(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnByte2_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnByte3(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnByte3_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnByte4(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnByte4_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnByte5(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnByte5_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnByte6(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnByte6_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnEligible(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnEligible_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DcnNextProtocol(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DcnNextProtocol_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DropReasonControlProfileBmp(int unit, bcm_field_entry_t entry, bcm_field_profile_idx_bmp_t data, bcm_field_profile_idx_bmp_t mask);
+int bcm_field_qualify_DropReasonControlProfileBmp_get(int unit, bcm_field_entry_t entry, bcm_field_profile_idx_bmp_t *data, bcm_field_profile_idx_bmp_t *mask);
+int bcm_field_qualify_DstClassL3Interface(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_DstClassL3Interface_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_DstClassPort(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_DstClassPort_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_DstClassVPort(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_DstClassVPort_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_DstMacBit40(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_DstMacBit40_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_DvpFwdCtrlType(int unit, bcm_field_entry_t entry, bcm_field_dvp_fwd_ctrl_type_t type);
+int bcm_field_qualify_DvpFwdCtrlType_get(int unit, bcm_field_entry_t entry, bcm_field_dvp_fwd_ctrl_type_t *type);
+int bcm_field_qualify_EgressClassFieldCtrlId(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_EgressClassFieldCtrlId_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_EgressForwardingProfile(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_EgressForwardingProfile_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_FlexInstrHeader(int unit, bcm_field_entry_t entry, uint64 data, uint64 mask);
+int bcm_field_qualify_FlexInstrHeaderType(int unit, bcm_field_entry_t entry, bcm_field_flexinstr_header_type_t type);
+int bcm_field_qualify_FlexInstrHeaderType_get(int unit, bcm_field_entry_t entry, bcm_field_flexinstr_header_type_t *type);
+int bcm_field_qualify_FlexInstrHeader_get(int unit, bcm_field_entry_t entry, uint64 *data, uint64 *mask);
+int bcm_field_qualify_FlexInstrPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_FlexInstrPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_FlexStateApuClassId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_FlexStateApuClassId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_FlexStateTriggerStateControl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_FlexStateTriggerStateControl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_FlexStateTruthTableOutput(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_FlexStateTruthTableOutput_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_ForwardingField(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_ForwardingField_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_FragExtensionHeader2Type(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_FragExtensionHeader2Type_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_FragExtensionHeader3Type(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_FragExtensionHeader3Type_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_GbpL2ShimFlags(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_GbpL2ShimFlags_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_GbpPolicyApplied(int unit, bcm_field_entry_t entry, uint8 data);
+int bcm_field_qualify_GbpPolicyApplied_get(int unit, bcm_field_entry_t entry, uint8 *data);
+int bcm_field_qualify_GbpSidValid(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_GbpSidValid_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_GbpVxlanDFlag(int unit, bcm_field_entry_t entry, uint8 data);
+int bcm_field_qualify_GbpVxlanDFlag_get(int unit, bcm_field_entry_t entry, uint8 *data);
+int bcm_field_qualify_GmsContentId(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_GmsContentId_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_GmsMessageReason(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_GmsMessageReason_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_GmsVersion(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_GmsVersion_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_GoodIpPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_GoodIpPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_GreFlags(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_GreFlags_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_GreProtocolType(int unit, bcm_field_entry_t entry, bcm_field_gre_protocol_type_t protocolType);
+int bcm_field_qualify_GreProtocolType_get(int unit, bcm_field_entry_t entry, bcm_field_gre_protocol_type_t *protocolType);
+int bcm_field_qualify_IfaActionType(int unit, bcm_field_entry_t entry, bcm_field_ifa_action_type_t type);
+int bcm_field_qualify_IfaActionType_get(int unit, bcm_field_entry_t entry, bcm_field_ifa_action_type_t *type);
+int bcm_field_qualify_IfaMDAddCtrl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IfaMDAddCtrl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IfaMDFormat(int unit, bcm_field_entry_t entry, bcm_field_ifa_metadata_format_t type);
+int bcm_field_qualify_IfaMDFormat_get(int unit, bcm_field_entry_t entry, bcm_field_ifa_metadata_format_t *type);
+int bcm_field_qualify_IfaMetaDataBaseHeader(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_IfaMetaDataBaseHeader_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_IfaProbeExpMDInsertCtrl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IfaProbeExpMDInsertCtrl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IfaProbeExpQueryVcaPortNum(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_IfaProbeExpQueryVcaPortNum_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_IfaProbeExpQueryVcaQueueNum(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IfaProbeExpQueryVcaQueueNum_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IfaUdpHdrUpdateCtrl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IfaUdpHdrUpdateCtrl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IncCollectiveId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IncCollectiveId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IncFlowType(int unit, bcm_field_entry_t entry, bcm_field_inc_flow_type_t flow_type);
+int bcm_field_qualify_IncFlowType_get(int unit, bcm_field_entry_t entry, bcm_field_inc_flow_type_t *flow_type);
+int bcm_field_qualify_IncGroupId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IncGroupId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IncPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IncPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IncQpType(int unit, bcm_field_entry_t entry, bcm_field_inc_qp_type_t qp_type);
+int bcm_field_qualify_IncQpType_get(int unit, bcm_field_entry_t entry, bcm_field_inc_qp_type_t *qp_type);
+int bcm_field_qualify_IncSrcMemberId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IncSrcMemberId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IncomingDstIp6(int unit, bcm_field_entry_t entry, bcm_ip6_t data, bcm_ip6_t mask);
+int bcm_field_qualify_IncomingDstIp6_get(int unit, bcm_field_entry_t entry, bcm_ip6_t *data, bcm_ip6_t *mask);
+int bcm_field_qualify_IncomingTos(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IncomingTos_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IngAdaptClassId(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_IngAdaptClassId_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_IngAdaptOpaqueCtrlId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IngAdaptOpaqueCtrlId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IngressMirror(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IngressMirror_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_InnerL2Pkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_InnerL2Pkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_InputPrioVc(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_InputPrioVc_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_InstrActionType(int unit, bcm_field_entry_t entry, bcm_field_instr_action_type_t type);
+int bcm_field_qualify_InstrActionType_get(int unit, bcm_field_entry_t entry, bcm_field_instr_action_type_t *type);
+int bcm_field_qualify_IntPriInputPrioEnable(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IntPriInputPrioEnable_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_InterfaceClassVpn(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_InterfaceClassVpn_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_InterfacePreselClassPort(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_InterfacePreselClassPort_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_IpFirstOptionByte(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IpFirstOptionByte_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IpFragMBit(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IpFragMBit_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_IpTunnelTransitPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_IpTunnelTransitPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_L2Instr4byteTagData(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_L2Instr4byteTagData_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_L2Instr8byteTagData(int unit, bcm_field_entry_t entry, uint64 data, uint64 mask);
+int bcm_field_qualify_L2Instr8byteTagData_get(int unit, bcm_field_entry_t entry, uint64 *data, uint64 *mask);
+int bcm_field_qualify_L2InterfaceFwdCtrlType(int unit, bcm_field_entry_t entry, bcm_field_l2_intf_fwd_ctrl_type_t type);
+int bcm_field_qualify_L2InterfaceFwdCtrlType_get(int unit, bcm_field_entry_t entry, bcm_field_l2_intf_fwd_ctrl_type_t *type);
+int bcm_field_qualify_L2TagType(int unit, bcm_field_entry_t entry, bcm_field_l2_tag_type_t type);
+int bcm_field_qualify_L2TagType_get(int unit, bcm_field_entry_t entry, bcm_field_l2_tag_type_t *type);
+int bcm_field_qualify_L3EgressNatClassId(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_L3EgressNatClassId_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_L3InterfaceFwdCtrlType(int unit, bcm_field_entry_t entry, bcm_field_l3_intf_fwd_ctrl_type_t type);
+int bcm_field_qualify_L3InterfaceFwdCtrlType_get(int unit, bcm_field_entry_t entry, bcm_field_l3_intf_fwd_ctrl_type_t *type);
+int bcm_field_qualify_L3NextHopEfpCtrlId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_L3NextHopEfpCtrlId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_L3NextHopFwdCtrlType(int unit, bcm_field_entry_t entry, bcm_field_l3_nhop_fwd_ctrl_type_t type);
+int bcm_field_qualify_L3NextHopFwdCtrlType_get(int unit, bcm_field_entry_t entry, bcm_field_l3_nhop_fwd_ctrl_type_t *type);
+int bcm_field_qualify_L5HdrType(int unit, bcm_field_entry_t entry, bcm_field_l5_hdr_type_t pkt_type);
+int bcm_field_qualify_L5HdrType_get(int unit, bcm_field_entry_t entry, bcm_field_l5_hdr_type_t *pkt_type);
+int bcm_field_qualify_MimFlags(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_MimFlags_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_MimGbpSid(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_MimGbpSidValid(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_MimGbpSidValid_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_MimGbpSid_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_MirrorOnDropCopyToCpu(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_MirrorOnDropCopyToCpu_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_MirrorOnDropProfile(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_MirrorOnDropProfile_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_MirrorTransportInsertEnable(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_MirrorTransportInsertEnable_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_MmuNonSwitchCopyReason(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_MmuNonSwitchCopyReason_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_NatCmd(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_NatCmd_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_NatDstIndex(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_NatDstIndex_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_NatSrcIndex(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_NatSrcIndex_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_NonSwitchCopyValid(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_NonSwitchCopyValid_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_OamLmCtrEnable(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_OamLmCtrEnable_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_OpaqueObject5(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_OpaqueObject5_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_OpaqueObject6(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_OpaqueObject6_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_OuterL3HdrType(int unit, bcm_field_entry_t entry, bcm_field_l3_hdr_type_t type);
+int bcm_field_qualify_OuterL3HdrType_get(int unit, bcm_field_entry_t entry, bcm_field_l3_hdr_type_t *type);
+int bcm_field_qualify_Pdn(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_Pdn_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PktMiscCtrl2(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_PktMiscCtrl2_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_PktMiscCtrl3(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_PktMiscCtrl3_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_PortType(int unit, bcm_field_entry_t entry, bcm_field_PortType_t port_type);
+int bcm_field_qualify_PortType_get(int unit, bcm_field_entry_t entry, bcm_field_PortType_t *port_type);
+int bcm_field_qualify_PostcardMarkIndicator(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PostcardMarkIndicator_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PreForwardingIntPriority(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PreForwardingIntPriority_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PreL4HdrType(int unit, bcm_field_entry_t entry, bcm_field_pre_l4_hdr_type_t type);
+int bcm_field_qualify_PreL4HdrType_get(int unit, bcm_field_entry_t entry, bcm_field_pre_l4_hdr_type_t *type);
+int bcm_field_qualify_PrimaryColor(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryColor_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryCosQueueNum(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_PrimaryCosQueueNum_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_PrimaryDscpChange(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryDscpChange_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryDscpPreserve(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryDscpPreserve_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryDstL3Egress(int unit, bcm_field_entry_t entry, bcm_if_t if_id);
+int bcm_field_qualify_PrimaryDstL3Egress_get(int unit, bcm_field_entry_t entry, bcm_if_t *if_id);
+int bcm_field_qualify_PrimaryDstPort(int unit, bcm_field_entry_t entry, bcm_module_t data_modid, bcm_module_t mask_modid, bcm_port_t data_port, bcm_port_t mask_port);
+int bcm_field_qualify_PrimaryDstPort_get(int unit, bcm_field_entry_t entry, bcm_module_t *data_modid, bcm_module_t *mask_modid, bcm_port_t *data_port, bcm_port_t *mask_port);
+int bcm_field_qualify_PrimaryDstType(int unit, bcm_field_entry_t entry, bcm_field_DstType_t dst_type);
+int bcm_field_qualify_PrimaryDstType_get(int unit, bcm_field_entry_t entry, bcm_field_DstType_t *dst_type);
+int bcm_field_qualify_PrimaryEcnChange(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryEcnChange_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryEcnPreserve(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryEcnPreserve_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryIntCongestionNotification(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryIntCongestionNotification_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryL3UnicastRouted(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryL3UnicastRouted_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryMatchedRule(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_PrimaryMatchedRule_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_PrimaryMyStationHit(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryMyStationHit_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryOrAltPath(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryOrAltPath_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_PrimaryTos(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_PrimaryTos_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_ProtocolId(int unit, bcm_field_entry_t entry, bcm_field_protocol_id_type_t type);
+int bcm_field_qualify_ProtocolId_get(int unit, bcm_field_entry_t entry, bcm_field_protocol_id_type_t *type);
+int bcm_field_qualify_ProtocolPktFwdCtrl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_ProtocolPktFwdCtrl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_RecircleHdrCtrl(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_RecircleHdrCtrl_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_Roce2AETH(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_Roce2AETH_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_Roce2Bth(int unit, bcm_field_entry_t entry, uint32 length, uint8 *data, uint8 *mask);
+int bcm_field_qualify_Roce2BthDstQueuePairHi(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_Roce2BthDstQueuePairHi_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_Roce2BthDstQueuePairLo(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_Roce2BthDstQueuePairLo_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_Roce2BthFlags(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_Roce2BthFlags_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_Roce2BthOpCode(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_Roce2BthOpCode_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_Roce2Bth_get(int unit, bcm_field_entry_t entry, uint32 length, uint8 *data, uint8 *mask);
+int bcm_field_qualify_Roce2DETH(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_Roce2DETH_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_Roce2RETHDmaLength(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_Roce2RETHDmaLength_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_RoceBthDmaLengthOrQueueKey(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_RoceBthDmaLengthOrQueueKey_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_RoceBthMigrationReq(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_RoceBthMigrationReq_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_RoceBthPadCount(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_RoceBthPadCount_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_RoceBthReqAck(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_RoceBthReqAck_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_RoceBthSeqNum(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_RoceBthSeqNum_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_RoceBthSolicitedEvent(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_RoceBthSolicitedEvent_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_RoceBthSrcQueuePair(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_RoceBthSrcQueuePair_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_RoceBthTransportVersion(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_RoceBthTransportVersion_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_RxMdMiscCtrl(int unit, bcm_field_entry_t entry, bcm_field_rx_md_misc_ctrl_t type);
+int bcm_field_qualify_RxMdMiscCtrl_get(int unit, bcm_field_entry_t entry, bcm_field_rx_md_misc_ctrl_t *type);
+int bcm_field_qualify_SecondaryClassId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_SecondaryClassId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_SecondaryCopyType(int unit, bcm_field_entry_t entry, bcm_field_secondary_copy_type_t type);
+int bcm_field_qualify_SecondaryCopyType_get(int unit, bcm_field_entry_t entry, bcm_field_secondary_copy_type_t *type);
+int bcm_field_qualify_SecondaryInPort(int unit, bcm_field_entry_t entry, bcm_port_t data, bcm_port_t mask);
+int bcm_field_qualify_SecondaryInPort_get(int unit, bcm_field_entry_t entry, bcm_port_t *data, bcm_port_t *mask);
+int bcm_field_qualify_SecondaryPortCosQueueNum(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_SecondaryPortCosQueueNum_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_SrcClassL3Interface(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_SrcClassL3Interface_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_SrcClassPort(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_SrcClassPort_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_SrcClassVPort(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_SrcClassVPort_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_SrcPortKnockoutDisable(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_SrcPortKnockoutDisable_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_Srv6Action(int unit, bcm_field_entry_t entry, bcm_field_srv6_action_t action);
+int bcm_field_qualify_Srv6Action_get(int unit, bcm_field_entry_t entry, bcm_field_srv6_action_t *action);
+int bcm_field_qualify_Srv6CurrentSidBits_64_79(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_Srv6CurrentSidBits_64_79_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_Srv6CurrentSidBits_80_95(int unit, bcm_field_entry_t entry, uint16 data, uint16 mask);
+int bcm_field_qualify_Srv6CurrentSidBits_80_95_get(int unit, bcm_field_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_field_qualify_Srv6PtPkt(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_Srv6PtPkt_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_SvtagBytesRemoved(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_SvtagBytesRemoved_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_SvtagPrioGen1(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_SvtagPrioGen1_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_SwitchCopyToSecondaryReason(int unit, bcm_field_entry_t entry, bcm_field_switch_copy_to_secondary_reason_t reason);
+int bcm_field_qualify_SwitchCopyToSecondaryReason_get(int unit, bcm_field_entry_t entry, bcm_field_switch_copy_to_secondary_reason_t *reason);
+int bcm_field_qualify_TunnelAltTtl(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_TunnelAltTtl_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_TunnelDecapCtrlType(int unit, bcm_field_entry_t entry, bcm_field_tunnel_decap_ctrl_type_t type);
+int bcm_field_qualify_TunnelDecapCtrlType_get(int unit, bcm_field_entry_t entry, bcm_field_tunnel_decap_ctrl_type_t *type);
+int bcm_field_qualify_TxPortOpaqueCtrl(int unit, bcm_field_entry_t entry, bcm_field_PortType_t port_type);
+int bcm_field_qualify_TxPortOpaqueCtrl_get(int unit, bcm_field_entry_t entry, bcm_field_PortType_t *port_type);
+int bcm_field_qualify_UnderlayEgrL3NextHopOpaqueCtrlId(int unit, bcm_field_entry_t entry, int data, int mask);
+int bcm_field_qualify_UnderlayEgrL3NextHopOpaqueCtrlId_get(int unit, bcm_field_entry_t entry, int *data, int *mask);
+int bcm_field_qualify_UnderlayIpOptionHdrType(int unit, bcm_field_entry_t entry, bcm_field_ip_option_hdr_type_t type);
+int bcm_field_qualify_UnderlayIpOptionHdrType_get(int unit, bcm_field_entry_t entry, bcm_field_ip_option_hdr_type_t *type);
+int bcm_field_qualify_UnderlayNetworkTagType(int unit, bcm_field_entry_t entry, bcm_field_network_tag_type_t type);
+int bcm_field_qualify_UnderlayNetworkTagType_get(int unit, bcm_field_entry_t entry, bcm_field_network_tag_type_t *type);
+int bcm_field_qualify_VC(int unit, bcm_field_entry_t entry, uint32 data, uint32 mask);
+int bcm_field_qualify_VC_get(int unit, bcm_field_entry_t entry, uint32 *data, uint32 *mask);
+int bcm_field_qualify_VfpOpaqueCtrlId(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_VfpOpaqueCtrlId_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_VlanTagPresent(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_VlanTagPresent_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_VxlanGbpAFlagCtrlEnable(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_VxlanGbpAFlagCtrlEnable_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_WredMark(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_WredMark_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_qualify_WredResponse(int unit, bcm_field_entry_t entry, uint8 data, uint8 mask);
+int bcm_field_qualify_WredResponse_get(int unit, bcm_field_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_field_stage_action_info_get(int unit, bcm_field_stage_action_info_t *info);
+int bcm_field_stage_qual_info_get(int unit, bcm_field_stage_qual_info_t *info);
+int bcm_field_stat_info_get(int unit, bcm_field_stat_pool_t *stat_pool, bcm_field_stat_info_t *stat_info);
+void bcm_field_stat_info_t_init(bcm_field_stat_info_t *stat_info);
+void bcm_field_stat_pool_t_init(bcm_field_stat_pool_t *stat_pool);
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexctr-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexctr_*</span></code> (7)<a class="headerlink" href="#bcm-flexctr-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_flexctr_egr_drop_reason_val_get(int unit, bcm_flexctr_egr_drop_reason_t drop_reason, uint16 *drop_reason_value);
+int bcm_flexctr_second_pass_ingress_action_mask_get(int unit, int profile_id, uint32 stat_counter_id, int *mask);
+int bcm_flexctr_second_pass_ingress_action_mask_get_all(int unit, int profile_id, int array_size, uint32 *stat_counter_id_array, int *count);
+int bcm_flexctr_second_pass_ingress_action_mask_set(int unit, int profile_id, uint32 stat_counter_id, int mask);
+int bcm_flexctr_stat_bulk_direct_add(int unit, uint32 stat_counter_id);
+int bcm_flexctr_stat_bulk_direct_delete(int unit, uint32 stat_counter_id);
+int bcm_flexctr_stat_bulk_direct_get(int unit, uint32 stat_counter_id, bcm_flexctr_counter_value_t *ctr_val, uint32 *num_entries);
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexdigest-8">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexdigest_*</span></code> (8)<a class="headerlink" href="#bcm-flexdigest-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_flexdigest_qualify_FixedHve1ResultSet2(int unit, bcm_flexdigest_entry_t entry, uint8 data, uint8 mask);
+int bcm_flexdigest_qualify_FixedHve1ResultSet2_get(int unit, bcm_flexdigest_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_flexdigest_qualify_FixedHve2ResultSet2(int unit, bcm_flexdigest_entry_t entry, uint8 data, uint8 mask);
+int bcm_flexdigest_qualify_FixedHve2ResultSet2_get(int unit, bcm_flexdigest_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_flexdigest_qualify_IngAdaptOpaqueCtrlId(int unit, bcm_flexdigest_entry_t entry, uint8 data, uint8 mask);
+int bcm_flexdigest_qualify_IngAdaptOpaqueCtrlId_get(int unit, bcm_flexdigest_entry_t entry, uint8 *data, uint8 *mask);
+int bcm_flexdigest_qualify_VfpOpaqueCtrlId(int unit, bcm_flexdigest_entry_t entry, uint8 data, uint8 mask);
+int bcm_flexdigest_qualify_VfpOpaqueCtrlId_get(int unit, bcm_flexdigest_entry_t entry, uint8 *data, uint8 *mask);
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexinstr-53">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexinstr_*</span></code> (53)<a class="headerlink" href="#bcm-flexinstr-53" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_flexinstr_action_profile_create(int unit, uint32 options, int *profile_id, bcm_flexinstr_action_profile_t *profile);
+int bcm_flexinstr_action_profile_destroy(int unit, int profile_id);
+int bcm_flexinstr_action_profile_get(int unit, int profile_id, bcm_flexinstr_action_profile_t *profile);
+int bcm_flexinstr_action_profile_id_get_all(int unit, int array_size, int *profile_id_array, int *count);
+int bcm_flexinstr_action_profile_metrics_get(int unit, int profile_id, int metrics_id, bcm_flexinstr_metrics_config_t *metrics_config);
+int bcm_flexinstr_action_profile_metrics_number_get(int unit, int *count);
+int bcm_flexinstr_action_profile_metrics_set(int unit, int profile_id, int metrics_id, bcm_flexinstr_metrics_config_t *metrics_config);
+void bcm_flexinstr_action_profile_t_init(bcm_flexinstr_action_profile_t *profile);
+int bcm_flexinstr_cleanup(int unit);
+int bcm_flexinstr_control_get(int unit, bcm_flexinstr_control_t type, int *arg);
+int bcm_flexinstr_control_set(int unit, bcm_flexinstr_control_t type, int arg);
+int bcm_flexinstr_field_support_get(int unit, bcm_flexinstr_metadata_field_t field, int *supported);
+int bcm_flexinstr_gms_field_support_get(int unit, bcm_flexinstr_metadata_field_t field, int *supported);
+int bcm_flexinstr_gms_metadata_field_info_get(int unit, bcm_flexinstr_metadata_field_t field, bcm_flexinstr_metadata_field_info_t *field_info);
+int bcm_flexinstr_gms_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_flexinstr_gms_profile_destroy(int unit, int profile_id);
+int bcm_flexinstr_gms_profile_fields_get(int unit, int profile_id, int array_size, bcm_flexinstr_metadata_field_entry_t *field_entry_array, int *count);
+int bcm_flexinstr_gms_profile_fields_set(int unit, int profile_id, int array_size, bcm_flexinstr_metadata_field_entry_t *field_entry_array);
+int bcm_flexinstr_gms_profile_id_get_all(int unit, int array_size, int *profile_id_array, int *count);
+int bcm_flexinstr_init(int unit);
+void bcm_flexinstr_metadata_field_entry_t_init(bcm_flexinstr_metadata_field_entry_t *field_entry);
+int bcm_flexinstr_metadata_field_info_get(int unit, bcm_flexinstr_metadata_field_t field, bcm_flexinstr_metadata_field_info_t *field_info);
+void bcm_flexinstr_metadata_field_info_t_init(bcm_flexinstr_metadata_field_info_t *field_info);
+int bcm_flexinstr_metadata_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_flexinstr_metadata_profile_destroy(int unit, int profile_id);
+int bcm_flexinstr_metadata_profile_fields_get(int unit, int profile_id, int array_size, bcm_flexinstr_metadata_field_entry_t *field_entry_array, int *count);
+int bcm_flexinstr_metadata_profile_fields_set(int unit, int profile_id, int array_size, bcm_flexinstr_metadata_field_entry_t *field_entry_array);
+int bcm_flexinstr_metadata_profile_id_get_all(int unit, int array_size, int *profile_id_array, int *count);
+void bcm_flexinstr_metrics_config_t_init(bcm_flexinstr_metrics_config_t *metrics);
+int bcm_flexinstr_port_bandwidth_get(int unit, bcm_port_t port, int array_size, uint64 *bw_array, int *count);
+int bcm_flexinstr_range_entry_get(int unit, int profile_id, uint16 entry_id, bcm_flexinstr_range_entry_t *range_entry);
+int bcm_flexinstr_range_entry_get_all(int unit, int profile_id, int array_size, bcm_flexinstr_range_entry_t *range_entry_array, int *count);
+int bcm_flexinstr_range_entry_set(int unit, int profile_id, uint16 entry_id, bcm_flexinstr_range_entry_t *range_entry);
+void bcm_flexinstr_range_entry_t_init(bcm_flexinstr_range_entry_t *range_entry);
+int bcm_flexinstr_range_profile_create(int unit, uint32 options, int range_number, int *profile_id);
+int bcm_flexinstr_range_profile_destroy(int unit, int profile_id);
+int bcm_flexinstr_range_profile_id_get_all(int unit, int array_size, int *profile_id_array, int *count);
+int bcm_flexinstr_signal_type_map_get(int unit, int signal_type, bcm_flexinstr_signal_type_metrics_value_map_t *signal_type_metrics_map);
+int bcm_flexinstr_signal_type_map_set(int unit, int signal_type, bcm_flexinstr_signal_type_metrics_value_map_t *signal_type_metrics_map);
+void bcm_flexinstr_signal_type_metrics_value_map_t_init(bcm_flexinstr_signal_type_metrics_value_map_t *metrics_map);
+int bcm_flexinstr_srv6_pt_field_info_get(int unit, bcm_flexinstr_metadata_field_t field, bcm_flexinstr_metadata_field_info_t *field_info);
+int bcm_flexinstr_srv6_pt_field_support_get(int unit, bcm_flexinstr_metadata_field_t field, int *supported);
+int bcm_flexinstr_srv6_pt_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_flexinstr_srv6_pt_profile_destroy(int unit, int profile_id);
+int bcm_flexinstr_srv6_pt_profile_fields_get(int unit, int profile_id, int array_size, bcm_flexinstr_metadata_field_entry_t *field_entry_array, int *count);
+int bcm_flexinstr_srv6_pt_profile_fields_set(int unit, int profile_id, int array_size, bcm_flexinstr_metadata_field_entry_t *field_entry_array);
+int bcm_flexinstr_srv6_pt_profile_id_get_all(int unit, int array_size, int *profile_id_array, int *count);
+int bcm_flexinstr_srv6_pt_tts_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_flexinstr_srv6_pt_tts_profile_destroy(int unit, int profile_id);
+int bcm_flexinstr_srv6_pt_tts_profile_get(int unit, bcm_flexinstr_srv6_pt_tts_profile_t *profile);
+int bcm_flexinstr_srv6_pt_tts_profile_id_get_all(int unit, int array_size, int *profile_id_array, int *count);
+void bcm_flexinstr_srv6_pt_tts_profile_init(bcm_flexinstr_srv6_pt_tts_profile_t *profile);
+int bcm_flexinstr_srv6_pt_tts_profile_set(int unit, bcm_flexinstr_srv6_pt_tts_profile_t profile);
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexstate-33">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexstate_*</span></code> (33)<a class="headerlink" href="#bcm-flexstate-33" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void bcm_flexstate_apu_alu_config_t_init(bcm_flexstate_apu_alu_config_t *alu_config);
+int bcm_flexstate_apu_cmd_field_get(int unit, bcm_flexstate_apu_cmd_t cmd, int fid, uint32 data, uint32 *val);
+int bcm_flexstate_apu_cmd_field_set(int unit, bcm_flexstate_apu_cmd_t cmd, int fid, uint32 val, uint32 *data);
+void bcm_flexstate_apu_match_t_init(bcm_flexstate_apu_match_t *match);
+void bcm_flexstate_apu_misc_config_t_init(bcm_flexstate_apu_misc_config_t *misc_config);
+int bcm_flexstate_apu_object_info_get(int unit, bcm_flexstate_apu_object_t object, bcm_flexstate_apu_object_info_t *info);
+void bcm_flexstate_apu_object_info_t_init(bcm_flexstate_apu_object_info_t *info);
+void bcm_flexstate_apu_tcam_config_t_init(bcm_flexstate_apu_tcam_config_t *tcam_config);
+int bcm_flexstate_apu_usage_profile_alu_config_get(int unit, bcm_flexstate_apu_stage_t stage, int profile_id, int alu_id, bcm_flexstate_apu_alu_config_t *alu_config);
+int bcm_flexstate_apu_usage_profile_alu_config_set(int unit, bcm_flexstate_apu_stage_t stage, int profile_id, int alu_id, bcm_flexstate_apu_alu_config_t *alu_config);
+int bcm_flexstate_apu_usage_profile_create(int unit, uint32 options, bcm_flexstate_apu_stage_t stage, int *profile_id);
+int bcm_flexstate_apu_usage_profile_destroy(int unit, bcm_flexstate_apu_stage_t stage, int profile_id);
+int bcm_flexstate_apu_usage_profile_id_get_all(int unit, bcm_flexstate_apu_stage_t stage, int array_size, int *profile_id_array, int *count);
+int bcm_flexstate_apu_usage_profile_misc_config_get(int unit, bcm_flexstate_apu_stage_t stage, int profile_id, bcm_flexstate_apu_misc_config_t *misc_config);
+int bcm_flexstate_apu_usage_profile_misc_config_set(int unit, bcm_flexstate_apu_stage_t stage, int profile_id, bcm_flexstate_apu_misc_config_t *misc_config);
+int bcm_flexstate_apu_usage_profile_tcam_config_get(int unit, bcm_flexstate_apu_stage_t stage, int profile_id, bcm_flexstate_apu_tcam_config_t *tcam_config);
+int bcm_flexstate_apu_usage_profile_tcam_config_set(int unit, bcm_flexstate_apu_stage_t stage, int profile_id, bcm_flexstate_apu_tcam_config_t *tcam_config);
+void bcm_flexstate_egr_apu_action_t_init(bcm_flexstate_egr_apu_action_t *action);
+int bcm_flexstate_egr_apu_tcam_add(int unit, uint32 options, bcm_flexstate_apu_match_t *match, bcm_flexstate_egr_apu_action_t *action, int priority);
+int bcm_flexstate_egr_apu_tcam_delete(int unit, bcm_flexstate_apu_match_t *match);
+int bcm_flexstate_egr_apu_tcam_get(int unit, bcm_flexstate_apu_match_t *match, bcm_flexstate_egr_apu_action_t *action, int *priority);
+int bcm_flexstate_egr_apu_tcam_traverse(int unit, bcm_flexstate_egr_apu_tcam_traverse_cb cb, void *user_data);
+void bcm_flexstate_ing_apu_action_t_init(bcm_flexstate_ing_apu_action_t *action);
+int bcm_flexstate_ing_apu_tcam_add(int unit, uint32 options, bcm_flexstate_apu_match_t *match, bcm_flexstate_ing_apu_action_t *action, int priority);
+int bcm_flexstate_ing_apu_tcam_delete(int unit, bcm_flexstate_apu_match_t *match);
+int bcm_flexstate_ing_apu_tcam_get(int unit, bcm_flexstate_apu_match_t *match, bcm_flexstate_ing_apu_action_t *action, int *priority);
+int bcm_flexstate_ing_apu_tcam_traverse(int unit, bcm_flexstate_ing_apu_tcam_traverse_cb cb, void *user_data);
+int bcm_flexstate_object_info_get(int unit, bcm_flexstate_stage_t stage, bcm_flexstate_object_t object, bcm_flexstate_object_info_t *info);
+void bcm_flexstate_object_info_t_init(bcm_flexstate_object_info_t *info);
+int bcm_flexstate_object_overlay_multi_get(int unit, bcm_flexstate_object_t object, int array_size, bcm_flexstate_object_t *overlay_object_array, int *count);
+int bcm_flexstate_pool_action_id_multi_get(int unit, bcm_flexstate_pool_info_t *pool_info, int array_size, uint32 *action_id_array, int *count);
+void bcm_flexstate_pool_info_t_init(bcm_flexstate_pool_info_t *info);
+void bcm_flexstate_truth_table_t_init(bcm_flexstate_truth_table_t *truth_table);
+</pre></div>
+</div>
+</section>
+<section id="bcm-flow-17">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flow_*</span></code> (17)<a class="headerlink" href="#bcm-flow-17" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_FLOW_SPECIAL_FIELD_CLEAR(bcm_flow_special_fields_t *special_fields_struct, bcm_flow_field_id_t *special_field_id);
+void BCM_FLOW_SPECIAL_FIELD_ENABLER_ADD(bcm_flow_special_fields_t *special_fields_struct, bcm_flow_field_id_t *special_field_id);
+void BCM_FLOW_SPECIAL_FIELD_SYMBOL_ADD(bcm_flow_special_fields_t *special_fields_struct, bcm_flow_field_id_t *special_field_id, int *symbol_data);
+void BCM_FLOW_SPECIAL_FIELD_UINT32_ADD(bcm_flow_special_fields_t *special_fields_struct, bcm_flow_field_id_t *special_field_id, uint32 *uint32_data);
+void BCM_FLOW_SPECIAL_FIELD_UINT32_ARR_ADD(bcm_flow_special_fields_t *special_fields_struct, bcm_flow_field_id_t *special_field_id, uint32 *uint32_data);
+void BCM_FLOW_SPECIAL_FIELD_UINT8_ARR_ADD(bcm_flow_special_fields_t *special_fields_struct, bcm_flow_field_id_t *special_field_id, uint8 *uint8_data);
+int bcm_flow_l3_intf_info_create(int unit, bcm_flow_handle_info_t *flow_handle_info, bcm_flow_l3_intf_info_t *l3_intf_info, bcm_flow_special_fields_t *special_fields);
+int bcm_flow_l3_intf_info_destroy(int unit, bcm_flow_handle_info_t *flow_handle_info);
+int bcm_flow_l3_intf_info_get(int unit, bcm_flow_handle_info_t *flow_handle_info, bcm_flow_l3_intf_info_t *l3_intf_info, bcm_flow_special_fields_t *special_fields);
+int bcm_flow_l3_intf_info_traverse(int unit, bcm_flow_handle_info_t *flow_handle_info, bcm_flow_l3_intf_info_traverse_cb cb, void *user_data);
+int bcm_flow_tunnel_initiator_intf_attach(int unit, bcm_gport_t tunnel_id, bcm_if_t intf_id);
+int bcm_flow_tunnel_initiator_intf_detach(int unit, bcm_gport_t tunnel_id, bcm_if_t intf_id);
+int bcm_flow_tunnel_initiator_intf_multi_get(int unit, bcm_gport_t tunnel_id, int intf_arr_size, bcm_if_t *intf_arr, int *num_intf);
+int bcm_flow_vpn_info_create(int unit, bcm_flow_handle_info_t *flow_handle_info, bcm_flow_vpn_info_t *flow_vpn_info, bcm_flow_special_fields_t *special_fields);
+int bcm_flow_vpn_info_destroy(int unit, bcm_flow_handle_info_t *flow_handle_info);
+int bcm_flow_vpn_info_get(int unit, bcm_flow_handle_info_t *flow_handle_info, bcm_flow_vpn_info_t *flow_vpn_info, bcm_flow_special_fields_t *special_fields);
+int bcm_flow_vpn_info_traverse(int unit, bcm_flow_handle_info_t *flow_handle_info, bcm_flow_vpn_info_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-flowtracker-11">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flowtracker_*</span></code> (11)<a class="headerlink" href="#bcm-flowtracker-11" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_flowtracker_counter_info_get(int unit, int max_pools, int *pool_list, int *num_pools, uint32 *action_idx, int *base_idx, int *num_ctrs_per_pool);
+int bcm_flowtracker_drop_event_learn_get(int unit, bcm_pkt_drop_event_t drop_event, uint32 *learn_enable);
+int bcm_flowtracker_drop_event_learn_set(int unit, bcm_pkt_drop_event_t drop_event, uint32 learn_enable);
+int bcm_flowtracker_edk_flowtable_register(int unit, bcm_core_t core_id, int *edk_map_id);
+int bcm_flowtracker_event_register(int unit, bcm_flowtracker_event_callback callback, void *userdata);
+int bcm_flowtracker_event_unregister(int unit);
+int bcm_flowtracker_flow_get(int unit, uint32 options, bcm_flowtracker_flow_entry_t *entry);
+int bcm_flowtracker_flush(int unit, bcm_flowtracker_flush_control_t *flush_control);
+void bcm_flowtracker_flush_control_t_init(bcm_flowtracker_flush_control_t *flush_control);
+int bcm_flowtracker_int_pri_cosq_map_get(int unit, bcm_port_t port, bcm_cos_t priority, bcm_cos_queue_t *cosq);
+int bcm_flowtracker_int_pri_cosq_map_set(int unit, bcm_port_t port, bcm_cos_t priority, bcm_cos_queue_t cosq);
+</pre></div>
+</div>
+</section>
+<section id="bcm-glb-17">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_glb_*</span></code> (17)<a class="headerlink" href="#bcm-glb-17" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_glb_config_get(int unit, bcm_glb_config_t *glb_config);
+int bcm_glb_config_set(int unit, bcm_glb_config_t *glb_config);
+void bcm_glb_config_t_init(bcm_glb_config_t *glb_config);
+int bcm_glb_detach(int unit);
+int bcm_glb_init(int unit);
+int bcm_glb_msg_encap_create(int unit, uint32 options, bcm_glb_msg_encap_t *encap_id, bcm_glb_msg_encap_info_t *glb_msg_encap_info);
+int bcm_glb_msg_encap_destroy(int unit, bcm_glb_msg_encap_t encap_id);
+int bcm_glb_msg_encap_get(int unit, bcm_glb_msg_encap_t encap_id, bcm_glb_msg_encap_info_t *glb_msg_encap_info);
+int bcm_glb_msg_encap_get_all(int unit, int max_size, bcm_glb_msg_encap_t *encap_id_list, int *list_size);
+void bcm_glb_msg_encap_info_t_init(bcm_glb_msg_encap_info_t *glb_msg_encap_info);
+void bcm_glb_path_info_t_init(bcm_glb_path_info_t *glb_path_info);
+int bcm_glb_port_quality_monitor_port_get(int unit, bcm_port_t port, bcm_glb_path_info_t *glb_path_info);
+int bcm_glb_port_quality_monitor_port_set(int unit, bcm_port_t port, bcm_glb_path_info_t *glb_path_info);
+int bcm_glb_switch_dlb_group_get(int unit, uint32 glb_switch_id, bcm_if_t *dlb_ecmp_intf);
+int bcm_glb_switch_dlb_group_set(int unit, uint32 glb_switch_id, bcm_if_t dlb_ecmp_intf);
+int bcm_glb_switch_quality_profile_map_get(int unit, uint32 glb_switch_id, int *path_quality_profile);
+int bcm_glb_switch_quality_profile_map_set(int unit, uint32 glb_switch_id, int path_quality_profile);
+</pre></div>
+</div>
+</section>
+<section id="bcm-gport-20">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_gport_*</span></code> (20)<a class="headerlink" href="#bcm-gport-20" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_GPORT_BACKDOOR_FC_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_BACKDOOR_FC_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_CONGESTION_COE_IDX_GET(int *_gport);
+void BCM_GPORT_CONGESTION_COE_IDX_SET(int *_gport, int *_port, int *_index);
+int BCM_GPORT_GLOBAL_VOQ_INGRESS_PROFILE_GET(bcm_gport_t *_gport);
+void BCM_GPORT_GLOBAL_VOQ_INGRESS_PROFILE_SET(bcm_gport_t *_gport, int *_profile);
+int BCM_GPORT_IS_BACKDOOR_FC_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_GLOBAL_VOQ_INGRESS_PROFILE(bcm_gport_t *_gport);
+int BCM_GPORT_IS_QUEUE_GROUP(int *_gport);
+int BCM_GPORT_MIRROR_MIRROR_AND_STRENGTH_SET(int *_gport, int *_value, int *_strength);
+void BCM_GPORT_MIRROR_SNOOP_AND_STRENGTH_SET(int *_gport, int *_value, int *_strength);
+void BCM_GPORT_MIRROR_STAT_SAMPLE_AND_STRENGTH_SET(int *_gport, int *_value, int *_strength);
+int BCM_GPORT_MIRROR_STRENGTH_GET(int *_gport);
+int BCM_GPORT_MODPORT_DATAPATH_GET(int *_gport);
+int BCM_GPORT_MODPORT_W_DATAPATH_SET(int *_gport, int *_module, int *_module_datapath, int *_port);
+int BCM_GPORT_QUEUE_GROUP_QID_GET(int *_gport);
+void BCM_GPORT_QUEUE_GROUP_QID_SET(int *_gport, int *_qid);
+int BCM_GPORT_QUEUE_GROUP_SYSPORTID_GET(int *_gport);
+void BCM_GPORT_QUEUE_GROUP_SYSQID_SET(int *_gport, int *_sysport_id, int *_qid);
+void BCM_GPORT_SUBPORT_PORT_SVTAG_SET(int *_gport, int *_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-i2c-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_i2c_*</span></code> (2)<a class="headerlink" href="#bcm-i2c-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_i2c_readw(int unit, int fd, uint32 addr, uint16 *data);
+int bcm_i2c_writew(int unit, int fd, uint32 addr, uint16 *data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ifa-5">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ifa_*</span></code> (5)<a class="headerlink" href="#bcm-ifa-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ifa_probe_express_cosq_stat_control_get(int unit, bcm_ifa_cosq_stat_control_t *cosq_control);
+int bcm_ifa_probe_express_cosq_stat_control_set(int unit, bcm_ifa_cosq_stat_control_t *cosq_control);
+int bcm_ifa_probe_express_cosq_stat_select_get(int unit, int *cosq_stat_select);
+int bcm_ifa_probe_express_cosq_stat_select_set(int unit, int cosq_stat_select);
+int bcm_ifa_tx_bytes_flexstate_action_id_get_all(int unit, int max_size, uint32 *action_id_list, int *list_size);
+</pre></div>
+</div>
+</section>
+<section id="bcm-inc-41">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_inc_*</span></code> (41)<a class="headerlink" href="#bcm-inc-41" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_inc_control_get(int unit, bcm_inc_control_t type, bcm_inc_control_info_t *info);
+void bcm_inc_control_info_t_init(bcm_inc_control_info_t *info);
+int bcm_inc_control_set(int unit, bcm_inc_control_t type, bcm_inc_control_info_t *info);
+int bcm_inc_cpu_tx_encap_create(int unit, uint32 options, int *encap_id, bcm_inc_cpu_tx_encap_t *encap);
+int bcm_inc_cpu_tx_encap_destroy(int unit, int encap_id);
+int bcm_inc_cpu_tx_encap_get(int unit, int encap_id, bcm_inc_cpu_tx_encap_t *encap);
+int bcm_inc_cpu_tx_encap_get_all(int unit, int size, int *encap_id, int *count);
+void bcm_inc_cpu_tx_encap_t_init(bcm_inc_cpu_tx_encap_t *encap);
+int bcm_inc_detach(int unit);
+int bcm_inc_group_admin_state_get(int unit, int id, bcm_inc_group_admin_state_t *state);
+int bcm_inc_group_admin_state_set(int unit, int id, bcm_inc_group_admin_state_t state);
+int bcm_inc_group_collective_stats_get(int unit, int group_id, bcm_inc_collective_t collective, bcm_inc_group_collective_stats_t *stats);
+int bcm_inc_group_collective_stats_set(int unit, int group_id, bcm_inc_collective_t collective, bcm_inc_group_collective_stats_t *stats);
+void bcm_inc_group_collective_stats_t_init(bcm_inc_group_collective_stats_t *stats);
+int bcm_inc_group_create(int unit, uint32 options, int *group_id, bcm_inc_group_t *group);
+int bcm_inc_group_destroy(int unit, int group_id);
+int bcm_inc_group_event_register(int unit, bcm_inc_group_event_t event, bcm_inc_group_event_cb cb, void *user_data);
+int bcm_inc_group_event_unregister(int unit, bcm_inc_group_event_t event);
+int bcm_inc_group_get(int unit, int group_id, bcm_inc_group_t *group);
+int bcm_inc_group_get_all(int unit, int size, int *group_id, int *count);
+int bcm_inc_group_member_create(int unit, uint32 options, int *member_id, bcm_inc_group_member_t *member);
+int bcm_inc_group_member_destroy(int unit, int member_id);
+int bcm_inc_group_member_get(int unit, int member_id, bcm_inc_group_member_t *member);
+int bcm_inc_group_member_get_all(int unit, int size, int *member_id, int *count);
+int bcm_inc_group_member_stats_get(int unit, int member_id, bcm_inc_group_member_stats_t *stats);
+int bcm_inc_group_member_stats_set(int unit, int member_id, bcm_inc_group_member_stats_t *stats);
+void bcm_inc_group_member_stats_t_init(bcm_inc_group_member_stats_t *member);
+void bcm_inc_group_member_t_init(bcm_inc_group_member_t *member);
+int bcm_inc_group_members_get(int unit, int group_id, int size, int *member_id, int *count);
+int bcm_inc_group_members_set(int unit, int group_id, int count, int *member_id);
+int bcm_inc_group_status_get(int unit, int group_id, bcm_inc_group_status_t *status);
+void bcm_inc_group_status_t_init(bcm_inc_group_status_t *status);
+void bcm_inc_group_t_init(bcm_inc_group_t *group);
+int bcm_inc_init(int unit);
+int bcm_inc_node_create(int unit, uint32 flags, int *node_id, bcm_inc_node_t *node);
+int bcm_inc_node_destroy(int unit, uint32 flags, int node_id);
+int bcm_inc_node_get(int unit, uint32 flags, int node_id, bcm_inc_node_t *node);
+int bcm_inc_node_member_create(int unit, uint32 flags, int *member_id, bcm_inc_node_member_t *member);
+int bcm_inc_node_member_destroy(int unit, uint32 flags, int member_id);
+int bcm_inc_node_member_get(int unit, uint32 flags, int member_id, bcm_inc_node_member_t *member);
+int bcm_inc_node_members_set(int unit, uint32 flags, int node_id, int count, int *member_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-instru-19">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_instru_*</span></code> (19)<a class="headerlink" href="#bcm-instru-19" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32 BCM_INSTRU_SYNCED_COUNT_PFC_CONFIG_BITMAP_GET(int *arg);
+uint32 BCM_INSTRU_SYNCED_COUNT_PFC_CONFIG_COUNTER_TYPE_GET(int *arg);
+uint32 BCM_INSTRU_SYNCED_COUNT_PFC_CONFIG_SET(int *arg, int *tc_bitmap, int *counter_type);
+int bcm_instru_eventor_control_get(int unit, uint32 flags, bcm_instru_eventor_control_t control, uint64 *value);
+int bcm_instru_eventor_control_set(int unit, uint32 flags, bcm_instru_eventor_control_t control, uint64 value);
+int bcm_instru_eventor_uptime_config_get(int unit, uint32 flags, bcm_eventor_builder_id_t builder, bcm_instru_eventor_uptime_config_t *config);
+int bcm_instru_eventor_uptime_config_set(int unit, uint32 flags, bcm_eventor_builder_id_t builder, bcm_instru_eventor_uptime_config_t *config);
+int bcm_instru_fabric_event_config_get(int unit, int *nof_events, bcm_instru_fabric_event_info_t *event_config);
+int bcm_instru_fabric_event_config_set(int unit, int nof_events, bcm_instru_fabric_event_info_t *event_config);
+int bcm_instru_fabric_event_global_capture_info_alloc(int unit, bcm_instru_fabric_event_global_capture_info_t **info);
+int bcm_instru_fabric_event_global_capture_info_free(int unit, bcm_instru_fabric_event_global_capture_info_t *info);
+int bcm_instru_fabric_event_global_capture_info_get(int unit, uint32 flags, bcm_instru_fabric_event_info_t event, bcm_instru_fabric_event_global_capture_info_t *info);
+int bcm_instru_fabric_event_info_get(int unit, uint32 flags, bcm_pkt_t *pkt, bcm_instru_fabric_event_info_t *event);
+void bcm_instru_fabric_event_info_t_init(bcm_instru_fabric_event_info_t *event);
+int bcm_instru_shel_event_type_config_get(int unit, uint32 flags, bcm_instru_shel_event_type_config_t *config);
+int bcm_instru_shel_event_type_config_set(int unit, uint32 flags, bcm_instru_shel_event_type_config_t *config);
+int bcm_instru_stat_get(int unit, bcm_instru_stat_key_t *stat_key, uint64 *value);
+void bcm_instru_stat_key_t_init(bcm_instru_stat_key_t *instru_stat_key);
+int bcm_instru_stat_multi_get(int unit, int stat_count, bcm_instru_stat_key_t *stat_key, uint64 *value);
+</pre></div>
+</div>
+</section>
+<section id="bcm-keepalive-14">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_keepalive_*</span></code> (14)<a class="headerlink" href="#bcm-keepalive-14" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_keepalive_cleanup(int unit);
+int bcm_keepalive_init(int unit);
+int bcm_keepalive_session_add(int unit, bcm_keepalive_session_t *s, bcm_keepalive_session_handle_t *h);
+int bcm_keepalive_session_del(int unit, bcm_keepalive_session_handle_t h);
+int bcm_keepalive_session_get(int unit, bcm_keepalive_session_handle_t h, bcm_keepalive_session_t *s);
+int bcm_keepalive_session_start(int unit, bcm_keepalive_session_handle_t h);
+int bcm_keepalive_session_status_get(int unit, bcm_keepalive_session_handle_t h, bcm_keepalive_session_status_t *st);
+int bcm_keepalive_session_stop(int unit, bcm_keepalive_session_handle_t h);
+int bcm_keepalive_session_t_init(int unit, bcm_keepalive_session_t *s);
+int bcm_keepalive_session_traverse(int unit, bcm_keepalive_session_traverse_cb trav_cb, void *user_data);
+int bcm_keepalive_session_update(int unit, bcm_keepalive_session_handle_t h, bcm_keepalive_session_t *s);
+int bcm_keepalive_start(int unit);
+int bcm_keepalive_status_get(int unit, bcm_keepalive_status_t *kst);
+int bcm_keepalive_stop(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-knetsync-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_knetsync_*</span></code> (7)<a class="headerlink" href="#bcm-knetsync-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_knetsync_p2p_action_encap_header_set(int unit, bcm_knetsync_p2p_ts_fwd_action_t action, uint8 *encap_hdr, uint16 encap_hdr_len);
+int bcm_knetsync_p2p_instance_deinit(int unit, bcm_knetsync_p2p_instance_t *p2p_instance);
+int bcm_knetsync_p2p_instance_get(int unit, bcm_knetsync_p2p_instance_t *p2p_instance);
+int bcm_knetsync_p2p_instance_init(int unit, bcm_knetsync_p2p_instance_t *p2p_instance);
+int bcm_knetsync_p2p_port_config_get(int unit, bcm_port_t port, bcm_knetsync_p2p_port_config_t *p2p_intf);
+int bcm_knetsync_p2p_port_config_set(int unit, bcm_port_t port, bcm_knetsync_p2p_port_config_t *p2p_intf);
+int bcm_knetsync_p2p_port_stats_get(int unit, bcm_port_t port, bcm_knetsync_p2p_port_stats_t *p2p_port_stats);
+</pre></div>
+</div>
+</section>
+<section id="bcm-l2-20">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_l2_*</span></code> (20)<a class="headerlink" href="#bcm-l2-20" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_l2_addr_count_get(int unit, bcm_l2_addr_count_t *count);
+int bcm_l2_addr_selective_delete(int unit, bcm_l2_addr_t *l2addr);
+int bcm_l2_addr_stat_attach(int unit, bcm_l2_addr_t *l2_addr, uint32 stat_id);
+int bcm_l2_addr_stat_detach(int unit, bcm_l2_addr_t *l2_addr);
+int bcm_l2_addr_stat_id_get(int unit, bcm_l2_addr_t *l2_addr, uint32 *stat_id);
+int bcm_l2_dense_addr_add(int unit, uint32 options, bcm_l2_dense_addr_t *addr, int start_offset, int array_size, bcm_l2_dense_addr_member_t *member_array);
+int bcm_l2_dense_addr_delete(int unit, bcm_l2_dense_addr_t *addr);
+int bcm_l2_dense_addr_delete_all(int unit);
+int bcm_l2_dense_addr_get(int unit, bcm_l2_dense_addr_t *addr, int start_offset, int array_size, bcm_l2_dense_addr_member_t *member_array, int *count);
+void bcm_l2_dense_addr_member_t_init(bcm_l2_dense_addr_member_t *member);
+void bcm_l2_dense_addr_t_init(bcm_l2_dense_addr_t *addr);
+int bcm_l2_dense_addr_traverse(int unit, uint32 flags, bcm_l2_dense_addr_traverse_cb trav_fn, void *user_data);
+int bcm_l2_dense_info_get(int unit, bcm_l2_dense_info_t *info);
+void bcm_l2_dense_info_t_init(bcm_l2_dense_info_t *info);
+int bcm_l2_dense_member_set(int unit, bcm_l2_dense_addr_t *addr, int start_offset, int array_size, bcm_l2_dense_addr_member_t *member_array);
+int bcm_l2_mac_oui_compression_add(int unit, uint32 options, bcm_l2_mac_oui_compression_t *oui_compression);
+int bcm_l2_mac_oui_compression_delete(int unit, bcm_l2_mac_oui_compression_t *oui_compression);
+int bcm_l2_mac_oui_compression_delete_all(int unit);
+int bcm_l2_mac_oui_compression_get(int unit, bcm_l2_mac_oui_compression_t *oui_compression);
+void bcm_l2_mac_oui_compression_t_init(bcm_l2_mac_oui_compression_t *oui_compression);
+</pre></div>
+</div>
+</section>
+<section id="bcm-l3-86">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_l3_*</span></code> (86)<a class="headerlink" href="#bcm-l3-86" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_L3_AR_RESOLUTION_INDEX_SET(int *_resolution_idx, int *_pri_a, int *_alt_a, int *_pri_b, int *_alt_b);
+int bcm_l3_ar_resolution_get(int unit, int ar_resolution_index, bcm_l3_ar_resolution_t *resolution_info);
+int bcm_l3_ar_resolution_set(int unit, int ar_resolution_index, bcm_l3_ar_resolution_t *resolution_info);
+void bcm_l3_ar_resolution_t_init(bcm_l3_ar_resolution_t *resolution_info);
+int bcm_l3_ar_vc_map_add(int unit, bcm_l3_ar_vc_map_t *vc_map);
+int bcm_l3_ar_vc_map_delete(int unit, bcm_l3_ar_vc_map_t *vc_map);
+int bcm_l3_ar_vc_map_delete_all(int unit);
+int bcm_l3_ar_vc_map_get(int unit, bcm_l3_ar_vc_map_t *vc_map);
+void bcm_l3_ar_vc_map_t_init(bcm_l3_ar_vc_map_t *vc_map);
+int bcm_l3_ar_vc_map_traverse(int unit, bcm_l3_ar_vc_map_traverse_cb trav_fn, void *user_data);
+void bcm_l3_dense_member_t_init(bcm_l3_dense_member_t *member);
+int bcm_l3_dense_route_add(int unit, uint32 options, bcm_l3_dense_route_t *route, int base, int num_members, bcm_l3_dense_member_t *member_array);
+int bcm_l3_dense_route_delete(int unit, bcm_l3_dense_route_t *route);
+int bcm_l3_dense_route_delete_all(int unit);
+int bcm_l3_dense_route_find(int unit, bcm_l3_dense_route_t *route, bcm_l3_dense_member_t *member);
+int bcm_l3_dense_route_get(int unit, bcm_l3_dense_route_t *route, int base, int num_members, bcm_l3_dense_member_t *member_array, int *num_actual_members);
+int bcm_l3_dense_route_selective_delete_all(int unit, uint32 flags);
+void bcm_l3_dense_route_t_init(bcm_l3_dense_route_t *route);
+int bcm_l3_dense_route_traverse(int unit, uint32 flags, bcm_l3_dense_route_traverse_cb trav_fn, void *user_data);
+int bcm_l3_ecmp_dlb_member_flexctr_object_get(int unit, bcm_if_t ecmp_intf, bcm_l3_ecmp_member_t *ecmp_member, uint32 *value);
+int bcm_l3_ecmp_dlb_member_quality_adjust_get(int unit, int profile_id, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);
+int bcm_l3_ecmp_dlb_member_quality_adjust_multi_get(int unit, int profile_id, bcm_if_t ecmp_intf, int array_size, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info, int *count);
+int bcm_l3_ecmp_dlb_member_quality_adjust_multi_set(int unit, int profile_id, bcm_if_t ecmp_intf, int array_size, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);
+int bcm_l3_ecmp_dlb_member_quality_adjust_set(int unit, int profile_id, bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);
+void bcm_l3_ecmp_dlb_member_quality_adjust_t_init(bcm_l3_ecmp_dlb_member_quality_adjust_t *adjust_info);
+int bcm_l3_ecmp_dlb_port_map_create(int unit, uint32 options, int *map_id);
+int bcm_l3_ecmp_dlb_port_map_destroy(int unit, int map_id);
+int bcm_l3_ecmp_dlb_port_map_multi_get(int unit, int map_id, int array_size, bcm_port_t *port_array, int *count);
+int bcm_l3_ecmp_dlb_port_map_multi_set(int unit, int map_id, int array_size, bcm_port_t *port_array);
+int bcm_l3_ecmp_dlb_port_pfc_status_get(int unit, bcm_port_t port, int dlb_pfc_cos, bcm_l3_ecmp_dlb_pfc_status_t *status);
+int bcm_l3_ecmp_dlb_port_vc_quality_get(int unit, bcm_l3_ecmp_dlb_port_vc_quality_t *port_vc_quality);
+void bcm_l3_ecmp_dlb_port_vc_quality_t_init(bcm_l3_ecmp_dlb_port_vc_quality_t *port_vc_quality);
+int bcm_l3_ecmp_dlb_quality_adjust_list_add(int unit, bcm_l3_ecmp_dlb_quality_adjust_t adjust);
+int bcm_l3_ecmp_dlb_quality_adjust_list_default_get(int unit, bcm_l3_ecmp_dlb_quality_adjust_t *adjust);
+int bcm_l3_ecmp_dlb_quality_adjust_list_default_set(int unit, bcm_l3_ecmp_dlb_quality_adjust_t adjust);
+int bcm_l3_ecmp_dlb_quality_adjust_list_delete(int unit, bcm_l3_ecmp_dlb_quality_adjust_t adjust);
+int bcm_l3_ecmp_dlb_quality_adjust_list_get_all(int unit, int array_size, bcm_l3_ecmp_dlb_quality_adjust_t *adjust_array, int *count);
+int bcm_l3_ecmp_dlb_quality_adjust_list_max_get(int unit, int *count);
+int bcm_l3_ecmp_dlb_quantization_threshold_get(int unit, int quan_threshold_id, bcm_l3_ecmp_dlb_quantization_threshold_t *quan_threshold);
+int bcm_l3_ecmp_dlb_quantization_threshold_set(int unit, int quan_threshold_id, bcm_l3_ecmp_dlb_quantization_threshold_t *quan_threshold);
+void bcm_l3_ecmp_dlb_quantization_threshold_t_init(bcm_l3_ecmp_dlb_quantization_threshold_t *quan_threshold);
+int bcm_l3_ecmp_dynamic_ip_protocol_get(int unit, uint32 *flags, int protocol_max, int *protocol_array, int *protocol_count);
+int bcm_l3_ecmp_dynamic_ip_protocol_set(int unit, uint32 flags, int protocol_count, int *protocol_array);
+int bcm_l3_ecmp_port_egress_get(int unit, bcm_l3_ecmp_port_egress_t *ecmp_port_egress);
+int bcm_l3_ecmp_port_egress_set(int unit, bcm_l3_ecmp_port_egress_t *ecmp_port_egress);
+void bcm_l3_ecmp_port_egress_t_init(bcm_l3_ecmp_port_egress_t *ecmp_port_egress);
+int bcm_l3_ecmp_port_link_status_get(int unit, bcm_port_t port, int *status);
+int bcm_l3_ecmp_port_link_status_set(int unit, bcm_port_t port, int status);
+int bcm_l3_ecmp_port_vc_fc_status_get(int unit, bcm_l3_ecmp_port_vc_t port_vc, int *status);
+int bcm_l3_ecmp_port_vc_fc_status_set(int unit, bcm_l3_ecmp_port_vc_t port_vc, int status);
+int bcm_l3_ecmp_tertiary_member_add(int unit, bcm_if_t ecmp_group_id, int array_size, bcm_l3_ecmp_member_t *ecmp_member_array);
+int bcm_l3_ecmp_tertiary_member_delete(int unit, bcm_if_t ecmp_group_id, bcm_l3_ecmp_member_t *ecmp_member);
+int bcm_l3_ecmp_tertiary_member_delete_all(int unit, bcm_if_t ecmp_group_id);
+int bcm_l3_ecmp_tertiary_member_get_all(int unit, bcm_if_t ecmp_group_id, int array_size, bcm_l3_ecmp_member_t *ecmp_member_array, int *count);
+int bcm_l3_egress_forwarding_profile_create(int unit, bcm_l3_egress_forwarding_profile_t *info, uint32 *profile_id);
+int bcm_l3_egress_forwarding_profile_destroy(int unit, uint32 profile_id);
+int bcm_l3_egress_forwarding_profile_get(int unit, uint32 profile_id, bcm_l3_egress_forwarding_profile_t *info);
+void bcm_l3_egress_forwarding_profile_t_init(bcm_l3_egress_forwarding_profile_t *info);
+int bcm_l3_egress_nexthop_index_get(int unit, bcm_if_t intf_id, uint32 *index);
+int bcm_l3_intf_traverse(int unit, bcm_l3_intf_traverse_cb trav_fn, void *user_data);
+int bcm_l3_large_nat_egress_control_add(int unit, bcm_l3_large_nat_egress_control_t *nat_info);
+int bcm_l3_large_nat_egress_control_delete(int unit, bcm_l3_large_nat_egress_control_t *nat_info);
+int bcm_l3_large_nat_egress_control_delete_all(int unit, bcm_l3_large_nat_egress_control_t *nat_info);
+int bcm_l3_large_nat_egress_control_get(int unit, bcm_l3_large_nat_egress_control_t *nat_info);
+void bcm_l3_large_nat_egress_control_t_init(bcm_l3_large_nat_egress_control_t *nat_info);
+int bcm_l3_large_nat_egress_control_traverse(int unit, uint32 flags, bcm_l3_large_nat_egress_control_traverse_cb cb, void *user_data);
+int bcm_l3_large_nat_egress_translation_traverse(int unit, uint32 flags, uint32 start, uint32 end, bcm_l3_large_nat_egress_traverse_cb cb, void *user_data);
+int bcm_l3_large_nat_ingress_add(int unit, bcm_l3_large_nat_ingress_t *nat_info);
+int bcm_l3_large_nat_ingress_delete(int unit, bcm_l3_large_nat_ingress_t *nat_info);
+int bcm_l3_large_nat_ingress_delete_all(int unit, bcm_l3_large_nat_ingress_t *nat_info);
+int bcm_l3_large_nat_ingress_get(int unit, bcm_l3_large_nat_ingress_t *nat_info);
+void bcm_l3_large_nat_ingress_t_init(bcm_l3_large_nat_ingress_t *nat_info);
+int bcm_l3_large_nat_ingress_traverse(int unit, uint32 flags, bcm_l3_large_nat_ingress_traverse_cb cb, void *user_data);
+int bcm_l3_max_ecmp_limit_get(int unit, bcm_l3_ecmp_level_t level, int *max);
+int bcm_l3_max_ecmp_limit_set(int unit, bcm_l3_ecmp_level_t level, int max);
+int bcm_l3_mc_randomization_bits_get(int unit, uint8 *num_of_bits);
+int bcm_l3_mc_randomization_bits_set(int unit, uint8 num_of_bits);
+int bcm_l3_nat_info_add(int unit, bcm_l3_nat_info_t *info);
+int bcm_l3_nat_info_delete(int unit, bcm_l3_nat_info_t *info);
+int bcm_l3_nat_info_get(int unit, bcm_l3_nat_info_t *info);
+void bcm_l3_nat_info_t_init(bcm_l3_nat_info_t *info);
+int bcm_l3_nat_info_traverse(int unit, bcm_l3_nat_info_traverse_info_t *additional_info, bcm_l3_nat_info_traverse_cb cb, void *user_data);
+int bcm_l3_nat_ingress_counter_get(int unit, bcm_l3_nat_ingress_counter_t *counter_info, bcm_stat_value_t *counter_values);
+int bcm_l3_nat_ingress_counter_set(int unit, bcm_l3_nat_ingress_counter_t *counter_info, bcm_stat_value_t counter_values);
+int bcm_l3_nat_ingress_counter_sync_get(int unit, bcm_l3_nat_ingress_counter_t *counter_info, bcm_stat_value_t *counter_values);
+int bcm_l3_nat_ingress_counter_t_init(int unit, bcm_l3_nat_ingress_counter_t *counter_info);
+</pre></div>
+</div>
+</section>
+<section id="bcm-mirror-26">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_mirror_*</span></code> (26)<a class="headerlink" href="#bcm-mirror-26" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_mirror_egress_mod_event_group_create(int unit, bcm_egress_drop_event_t *event_array, int num_events, bcm_mirror_egress_mod_event_group_t *group);
+int bcm_mirror_egress_mod_event_group_destroy(int unit, bcm_mirror_egress_mod_event_group_t group);
+int bcm_mirror_egress_mod_event_group_get(int unit, bcm_mirror_egress_mod_event_group_t group, bcm_egress_drop_event_t *event_array, int *count);
+int bcm_mirror_egress_mod_event_group_get_all(int unit, bcm_mirror_egress_mod_event_group_t *group_array, int *count);
+int bcm_mirror_egress_mod_event_profile_create(int unit, bcm_mirror_egress_mod_event_profile_t *profile, int *profile_id);
+int bcm_mirror_egress_mod_event_profile_destroy(int unit, int profile_id);
+int bcm_mirror_egress_mod_event_profile_get(int unit, int profile_id, bcm_mirror_egress_mod_event_profile_t *profile);
+int bcm_mirror_egress_mod_event_profile_get_all(int unit, int *profile_id_array, int *count);
+int bcm_mirror_egress_mod_event_profile_group_add(int unit, int profile_id, bcm_mirror_egress_mod_event_group_t group, int hit);
+int bcm_mirror_egress_mod_event_profile_group_delete(int unit, int profile_id, bcm_mirror_egress_mod_event_group_t group);
+int bcm_mirror_egress_mod_event_profile_group_get(int unit, int profile_id, bcm_mirror_egress_mod_event_group_t group, int *hit);
+int bcm_mirror_egress_mod_event_profile_group_get_all(int unit, int profile_id, bcm_mirror_egress_mod_event_group_t *group_array, int *count);
+void bcm_mirror_egress_mod_event_profile_t_init(bcm_mirror_egress_mod_event_profile_t *profile);
+int bcm_mirror_encap_instance_get(int unit, int mtp_index, bcm_mirror_encap_instance_t *encap_instance);
+int bcm_mirror_ingress_mod_apu_drop_control_get(int unit, bcm_mirror_ingress_mod_event_profile_t *profile);
+int bcm_mirror_ingress_mod_apu_drop_control_set(int unit, bcm_mirror_ingress_mod_event_profile_t *profile);
+int bcm_mirror_ingress_mod_events_get_all(int unit, int max_events, bcm_mirror_ingress_mod_event_t *event_array, int *num_events);
+int bcm_mirror_mon_sample_get(int unit, bcm_mirror_mon_sample_t *sample);
+int bcm_mirror_mon_sample_set(int unit, bcm_mirror_mon_sample_t *sample);
+void bcm_mirror_mon_sample_t_init(bcm_mirror_mon_sample_t *sample);
+int bcm_mirror_on_event_get(int unit, uint32 flags, bcm_mirror_on_event_key_t *key, bcm_mirror_on_event_info_t *info);
+int bcm_mirror_on_event_set(int unit, uint32 flags, bcm_mirror_on_event_key_t *key, bcm_mirror_on_event_info_t *info);
+int bcm_mirror_sample_egress_ports_and_queues_get(int unit, bcm_mirror_sample_egress_ports_and_queues_t *source);
+int bcm_mirror_sample_egress_ports_and_queues_set(int unit, bcm_mirror_sample_egress_ports_and_queues_t *source);
+int bcm_mirror_second_pass_enable_get(int unit, int profile_id, bcm_mirror_encap_instance_t *instance, int *enable);
+int bcm_mirror_second_pass_enable_set(int unit, int profile_id, bcm_mirror_encap_instance_t *instance, int enable);
+</pre></div>
+</div>
+</section>
+<section id="bcm-multi-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_multi_*</span></code> (1)<a class="headerlink" href="#bcm-multi-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void bcm_multi_word_value_t_init(bcm_multi_word_value_t *sample);
+</pre></div>
+</div>
+</section>
+<section id="bcm-multicast-5">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_multicast_*</span></code> (5)<a class="headerlink" href="#bcm-multicast-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_multicast_egress_override_get(int unit, bcm_multicast_t group, bcm_multicast_bitmap_op_t *pbmp_op, bcm_pbmp_t *pbmp);
+int bcm_multicast_egress_override_set(int unit, bcm_multicast_t group, bcm_multicast_bitmap_op_t pbmp_op, bcm_pbmp_t pbmp);
+int bcm_multicast_local_mapping_add(int unit, bcm_multicast_local_mapping_t *info);
+int bcm_multicast_local_mapping_delete(int unit, bcm_multicast_local_mapping_t *info);
+int bcm_multicast_local_mapping_get(int unit, bcm_multicast_local_mapping_t *info);
+</pre></div>
+</div>
+</section>
+<section id="bcm-oam-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_oam_*</span></code> (2)<a class="headerlink" href="#bcm-oam-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_oam_test_id_tlv_dm_up_encap_create(int unit, uint32 flags, bcm_if_t *encap_id);
+int bcm_oam_test_id_tlv_dm_up_encap_destroy(int unit, uint32 flags, bcm_if_t encap_id);
+</pre></div>
+</div>
+</section>
+<section id="bcm-obm-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_obm_*</span></code> (3)<a class="headerlink" href="#bcm-obm-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_obm_control_get(int unit, bcm_port_t port, bcm_obm_control_t type, int *arg);
+int bcm_obm_control_set(int unit, bcm_port_t port, bcm_obm_control_t type, int arg);
+int bcm_obm_traffic_class_pfc_priority_mapping_clear(int unit, bcm_port_t port, bcm_obm_traffic_class_t obm_traffic_class, int max_pri_count, int *priority_list);
+</pre></div>
+</div>
+</section>
+<section id="bcm-onesync-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_onesync_*</span></code> (9)<a class="headerlink" href="#bcm-onesync-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_onesync_deinit(int unit);
+int bcm_onesync_init(int unit, bcm_onesync_info_t onesync_info);
+int bcm_onesync_p2p_instance_deinit(int unit);
+int bcm_onesync_p2p_instance_get(int unit, bcm_onesync_p2p_instance_t *p2p_instance);
+int bcm_onesync_p2p_instance_init(int unit, bcm_onesync_p2p_instance_t *p2p_instance);
+int bcm_onesync_p2p_port_config_get(int unit, bcm_port_t port, bcm_onesync_p2p_port_config_t *p2p_intf);
+int bcm_onesync_p2p_port_config_set(int unit, bcm_port_t port, bcm_onesync_p2p_port_config_t *p2p_intf);
+int bcm_onesync_p2p_port_stats_get(int unit, bcm_port_t port, bcm_onesync_p2p_port_stats_t *p2p_port_stats);
+int bcm_onesync_p2p_tsfwd_action_set(int unit, bcm_onesync_p2p_ts_fwd_action_t action);
+</pre></div>
+</div>
+</section>
+<section id="bcm-pktio-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_pktio_*</span></code> (4)<a class="headerlink" href="#bcm-pktio-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_pktio_pmd_arcid_pkt_format_get(int unit, int array_size, uint32 *arc_id_array, int *count, bcm_pktio_bitmap_t *pkt_format);
+int bcm_pktio_pmd_flex_profiles_get(int unit, bcm_multi_word_value_t *profile);
+int bcm_pktio_resume(int unit);
+int bcm_pktio_suspend(int unit, uint32 flags);
+</pre></div>
+</div>
+</section>
+<section id="bcm-policer-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_policer_*</span></code> (7)<a class="headerlink" href="#bcm-policer-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int BCM_POLICER_DATABASE_GENERIC_KEY_TC_DP_DP_GET(int *key);
+int BCM_POLICER_DATABASE_GENERIC_KEY_TC_DP_SET(int *key, int *tc, int *dp);
+int BCM_POLICER_DATABASE_GENERIC_KEY_TC_DP_TC_GET(int *key);
+int bcm_policer_database_generic_control_get(int unit, uint32 flags, int policer_database_handle, uint32 key, bcm_policer_database_generic_type_t type, uint64 *arg);
+int bcm_policer_database_generic_control_set(int unit, uint32 flags, int policer_database_handle, uint32 key, bcm_policer_database_generic_type_t type, uint64 arg);
+int bcm_policer_group_config_create(int unit, bcm_policer_group_config_t *config, bcm_policer_t *base_policer_id, int *num_policers);
+int bcm_policer_info_get(int unit, uint32 flags, bcm_policer_info_t *info);
+</pre></div>
+</div>
+</section>
+<section id="bcm-port-84">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_port_*</span></code> (84)<a class="headerlink" href="#bcm-port-84" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_PORT_LLR_CONFIG_BUFFER_ALLOC_CUSTOM_CLEAR(int *llr_flags);
+int BCM_PORT_LLR_CONFIG_BUFFER_ALLOC_CUSTOM_GET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_BUFFER_ALLOC_CUSTOM_SET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_DATA_AGE_CLEAR(int *llr_flags);
+int BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_DATA_AGE_GET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_DATA_AGE_SET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_LINK_DOWN_CLEAR(int *llr_flags);
+int BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_LINK_DOWN_GET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_LINK_DOWN_SET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_REPLAY_COUNT_CLEAR(int *llr_flags);
+int BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_REPLAY_COUNT_GET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_FLUSH_INTR_ENABLE_REPLAY_COUNT_SET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_REPEAT_ACK_CLEAR(int *llr_flags);
+int BCM_PORT_LLR_CONFIG_REPEAT_ACK_GET(int *llr_flags);
+void BCM_PORT_LLR_CONFIG_REPEAT_ACK_SET(int *llr_flags);
+void BCM_PORT_LLR_REINIT_ON_DATA_AGE_EXPIRED_CLEAR(int *llr_flags);
+int BCM_PORT_LLR_REINIT_ON_DATA_AGE_EXPIRED_GET(int *llr_flags);
+void BCM_PORT_LLR_REINIT_ON_DATA_AGE_EXPIRED_SET(int *llr_flags);
+void BCM_PORT_LLR_REINIT_ON_REPLAY_MAX_COUNT_CLEAR(int *llr_flags);
+int BCM_PORT_LLR_REINIT_ON_REPLAY_MAX_COUNT_GET(int *llr_flags);
+void BCM_PORT_LLR_REINIT_ON_REPLAY_MAX_COUNT_SET(int *llr_flags);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE_SET(int *lane_config, int *lp_mode);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_OS_DFE_CLEAR(int *lane_config);
+int BCM_PORT_RESOURCE_PHY_LANE_CONFIG_OS_DFE_GET(int *lane_config);
+void BCM_PORT_RESOURCE_PHY_LANE_CONFIG_OS_DFE_SET(int *lane_config);
+int bcm_port_cbfc_config_get(int unit, bcm_port_t port, bcm_port_cbfc_config_t *cbfc_config);
+int bcm_port_cbfc_config_set(int unit, bcm_port_t port, bcm_port_cbfc_config_t *cbfc_config);
+int bcm_port_cbfc_enable_get(int unit, bcm_port_t port, int *enable);
+int bcm_port_cbfc_enable_set(int unit, bcm_port_t port, int enable);
+int bcm_port_clm_callback_register(int unit, bcm_port_clm_callback_t callback, void *userdata);
+int bcm_port_clm_callback_unregister(int unit, bcm_port_clm_callback_t callback, void *userdata);
+int bcm_port_clm_config_get(int unit, bcm_port_t port, bcm_port_clm_config_t *config);
+int bcm_port_clm_config_set(int unit, bcm_port_t port, bcm_port_clm_config_t *config);
+void bcm_port_clm_config_t_init(bcm_port_clm_config_t *config);
+int bcm_port_clm_delay_get(int unit, bcm_port_t port, bcm_port_clm_delay_t *delay);
+void bcm_port_clm_delay_t_init(bcm_port_clm_delay_t *delay);
+int bcm_port_clm_enable_get(int unit, bcm_port_t port, int *enable);
+int bcm_port_clm_enable_set(int unit, bcm_port_t port, int enable);
+int bcm_port_clm_req_pkt_send(int unit, bcm_port_t port, bcm_port_clm_req_pkt_t *packet);
+void bcm_port_clm_req_pkt_t_init(bcm_port_clm_req_pkt_t *packet);
+int bcm_port_enable_mode_get(int unit, bcm_port_t port, uint32 flags, bcm_port_enable_mode_t *enable_mode);
+int bcm_port_enable_mode_set(int unit, bcm_port_t port, uint32 flags, bcm_port_enable_mode_t enable_mode);
+int bcm_port_fec_stat_auto_collect_clear(int unit, bcm_pbmp_t pbmp);
+int bcm_port_fec_stat_auto_collect_config_get(int unit, bcm_port_fec_stat_auto_collect_config_t *config);
+int bcm_port_fec_stat_auto_collect_config_set(int unit, bcm_port_fec_stat_auto_collect_config_t *config);
+int bcm_port_fec_stat_auto_collect_data_get(int unit, bcm_port_t port, bcm_port_fec_stat_auto_collect_data_t *data);
+int bcm_port_fec_stat_auto_collect_start(int unit, bcm_pbmp_t pbmp);
+int bcm_port_fec_stat_auto_collect_stop(int unit, bcm_pbmp_t pbmp);
+int bcm_port_flexe_group_har_action_set(int unit, bcm_gport_t gport, uint32 flags, bcm_port_flexe_group_har_action_t action);
+int bcm_port_flood_block_pbmp_get(int unit, bcm_port_t ingress_port, uint32 flags, bcm_pbmp_t *egress_pbmp);
+int bcm_port_flood_block_pbmp_set(int unit, bcm_port_t ingress_port, uint32 flags, bcm_pbmp_t egress_pbmp);
+int bcm_port_link_training_config_get(int unit, bcm_port_t port, bcm_port_link_training_config_t *config);
+int bcm_port_link_training_config_set(int unit, bcm_port_t port, bcm_port_link_training_config_t *config);
+int bcm_port_llr_config_get(int unit, bcm_port_t port, bcm_port_llr_config_t *llr_config);
+int bcm_port_llr_config_multi_set(int unit, int num_ports, bcm_port_llr_config_t *llr_config);
+int bcm_port_llr_config_set(int unit, bcm_port_t port, bcm_port_llr_config_t *llr_config);
+int bcm_port_llr_config_t_init(int unit, bcm_port_t port, int speed, int num_lanes, int RTT, bcm_port_llr_config_t *config);
+int bcm_port_llr_flush_callback_register(int unit, bcm_port_llr_flush_handler_t handler, void *user_data);
+int bcm_port_llr_flush_callback_unregister(int unit, bcm_port_llr_flush_handler_t handler, void *user_data);
+int bcm_port_llr_mode_enable_get(int unit, bcm_port_t port, bcm_port_llr_mode_type_t mode, int *enable);
+int bcm_port_llr_mode_enable_set(int unit, bcm_port_t port, bcm_port_llr_mode_type_t mode, int enable);
+int bcm_port_llr_status_get(int unit, bcm_port_t port, bcm_port_llr_status_t *llr_status);
+int bcm_port_mpi_diagnostic_get(int unit, bcm_port_t port, bcm_port_mpi_diagnostic_t *mpi_diag);
+int bcm_port_pch_timesync_config_get(int unit, bcm_port_t port, bcm_port_pch_timesync_config_t *pch_ts_config);
+int bcm_port_pch_timesync_config_set(int unit, bcm_port_t port, bcm_port_pch_timesync_config_t *pch_ts_config);
+int bcm_port_phy_am_lock_status_get(int unit, bcm_port_t port, bcm_port_phy_am_lock_status_t *am_lock);
+int bcm_port_phy_firmware_type_get(int unit, bcm_port_t port, bcm_port_phy_firmware_type_t *fw_type);
+int bcm_port_phy_firmware_type_set(int unit, bcm_port_t port, bcm_port_phy_firmware_type_t fw_type);
+int bcm_port_phy_mapping_info_get(int unit, uint32 phy_port, bcm_port_phy_mapping_info_t *mapping_info);
+void bcm_port_phy_mapping_info_t_init(bcm_port_phy_mapping_info_t *mapping_info);
+int bcm_port_phy_rx_get(int unit, bcm_port_t port, bcm_port_phy_rx_t *rx);
+void bcm_port_phy_rx_t_init(bcm_port_phy_rx_t *rx);
+int bcm_port_pipe_pbmp_all_get(int unit, int pipe, bcm_pbmp_t *pbmp);
+int bcm_port_pp_pipe_instance_pbmp_get(int unit, int pipe, int instance, bcm_pbmp_t *pbmp);
+int bcm_port_resource_max_speed_multi_get(int unit, bcm_port_resource_t *in_resource, int size, bcm_port_resource_t *resource, int *actual);
+int bcm_port_serdes_core_info_get(int unit, bcm_port_t port, bcm_port_serdes_core_info_t *core_info);
+void bcm_port_serdes_core_info_t_init(bcm_port_serdes_core_info_t *core_info);
+int bcm_port_shel_mask_get(int unit, uint32 flags, bcm_gport_t gport, uint32 *enabled);
+int bcm_port_shel_mask_set(int unit, uint32 flags, bcm_gport_t gport, uint32 enable);
+int bcm_port_timestamp_two_step_event_get(int unit, uint32 flags, bcm_port_t port, int *enable);
+int bcm_port_timestamp_two_step_event_register(int unit, uint32 flags, bcm_port_timestamp_event_cb_t callback, void *userdata);
+int bcm_port_timestamp_two_step_event_set(int unit, uint32 flags, bcm_port_t port, int enable);
+</pre></div>
+</div>
+</section>
+<section id="bcm-postcard-5">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_postcard_*</span></code> (5)<a class="headerlink" href="#bcm-postcard-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_postcard_control_get(int unit, bcm_postcard_control_t type, bcm_postcard_control_info_t *info);
+void bcm_postcard_control_info_t_init(bcm_postcard_control_info_t *info);
+int bcm_postcard_control_set(int unit, bcm_postcard_control_t type, bcm_postcard_control_info_t *info);
+int bcm_postcard_detach(int unit);
+int bcm_postcard_init(int unit);
+</pre></div>
+</div>
+</section>
+<section id="bcm-ptp-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ptp_*</span></code> (2)<a class="headerlink" href="#bcm-ptp-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_ptp_port_voq_map_config_get(int unit, bcm_ptp_port_voq_map_config_t *port_voq_map);
+int bcm_ptp_port_voq_map_config_set(int unit, bcm_ptp_port_voq_map_config_t *port_voq_map);
+</pre></div>
+</div>
+</section>
+<section id="bcm-qos-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_qos_*</span></code> (3)<a class="headerlink" href="#bcm-qos-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_qos_stat_clear(int unit, bcm_port_t port, bcm_qos_stat_type_t type, bcm_qos_stat_object_t *object);
+int bcm_qos_stat_get(int unit, bcm_port_t port, bcm_qos_stat_type_t type, bcm_qos_stat_object_t *object, uint64 *val);
+int bcm_qos_stat_sync_get(int unit, bcm_port_t port, bcm_qos_stat_type_t type, bcm_qos_stat_object_t *object, uint64 *val);
+</pre></div>
+</div>
+</section>
+<section id="bcm-sat-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_sat_*</span></code> (3)<a class="headerlink" href="#bcm-sat-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_SAT_CTF_TRAP_DATA_SET(int *_trap_data, int *_trap_qual, int *_field_0, int *_field_1);
+int bcm_sat_ctf_trap_config_get(int unit, uint32 flags, bcm_sat_ctf_trap_config_t *config);
+int bcm_sat_ctf_trap_config_set(int unit, uint32 flags, bcm_sat_ctf_trap_config_t *config);
+</pre></div>
+</div>
+</section>
+<section id="bcm-stat-35">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_stat_*</span></code> (35)<a class="headerlink" href="#bcm-stat-35" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_STAT_BITMAP_CLEAR_ALL(bcm_stat_bitmap_t *_bitmap);
+int BCM_STAT_BITMAP_GET(bcm_stat_bitmap_t *_bitmap, int *_bit);
+void BCM_STAT_BITMAP_SET(bcm_stat_bitmap_t *_bitmap, int *_bit);
+int BCM_STAT_GENERIC_KEY_CORE_ID_GET(int *key);
+int BCM_STAT_GENERIC_KEY_CORE_ID_SET(int *key, int *core_id);
+int BCM_STAT_GENERIC_KEY_CPX_EVICTION_MACHINE_ID_GET(int *key);
+int BCM_STAT_GENERIC_KEY_CPX_EVICTION_MACHINE_ID_SET(int *key, int *cpx_evm_id);
+int BCM_STAT_GENERIC_KEY_CPX_INSTANCE_EVICTION_MACHINE_ID_CPX_GET(int *key);
+int BCM_STAT_GENERIC_KEY_CPX_INSTANCE_EVICTION_MACHINE_ID_EVM_GET(int *key);
+int BCM_STAT_GENERIC_KEY_CPX_INSTANCE_EVICTION_MACHINE_ID_SET(int *key, int *cpx_id, int *evm_id);
+int bcm_stat_counter_control_get(int unit, bcm_stat_counter_control_t *counter_ctrl);
+int bcm_stat_counter_control_set(int unit, bcm_stat_counter_control_t *counter_ctrl);
+void bcm_stat_counter_control_t_init(bcm_stat_counter_control_t *counter_ctrl);
+void bcm_stat_counter_set_config_t_init(bcm_stat_counter_set_config_t *set_config);
+int bcm_stat_cpx_database_create(int unit, uint32 flags, bcm_stat_cpx_database_key_t *key, int *database_handle);
+void bcm_stat_database_mapping_t_init(bcm_stat_database_mapping_t *map_config);
+int bcm_stat_ep_recirc_clear(int unit, bcm_pbmp_t pbmp, bcm_stat_ep_recirc_t type);
+int bcm_stat_ep_recirc_get(int unit, bcm_pbmp_t pbmp, bcm_stat_ep_recirc_t type, uint64 *value);
+int bcm_stat_ep_recirc_sync_get(int unit, bcm_pbmp_t pbmp, bcm_stat_ep_recirc_t type, uint64 *value);
+int bcm_stat_mirror_mon_sample_count_get(int unit, bcm_stat_mirror_mon_sample_count_t *count);
+int bcm_stat_mirror_mon_sample_count_set(int unit, bcm_stat_mirror_mon_sample_count_t *count);
+void bcm_stat_mirror_mon_sample_count_t_init(bcm_stat_mirror_mon_sample_count_t *count);
+int bcm_stat_pkt_events_list_get(int unit, bcm_switch_stage_t dir, bcm_stat_pkt_event_type_t evt_type, bcm_stat_pkt_event_info_t *pkt_evt_info, uint32 *count);
+int bcm_stat_rdb_control_get(int unit, bcm_port_t port, bcm_stat_rdb_ctrl_t *rdb_ctrl);
+int bcm_stat_rdb_control_set(int unit, bcm_port_t port, bcm_stat_rdb_ctrl_t *rdb_ctrl);
+int bcm_stat_simple_port_cfg_get(int unit, bcm_stat_simple_port_ctr_cfg_t *simple_port_cfg);
+int bcm_stat_simple_port_cfg_set(int unit, bcm_stat_simple_port_ctr_cfg_t *simple_port_cfg);
+void bcm_stat_simple_port_ctr_cfg_t_init(bcm_stat_simple_port_ctr_cfg_t *simple_port_cfg);
+int bcm_stat_stif_record_extended_format_get(int unit, bcm_core_t core_id, uint32 flags, int format_id, bcm_stat_stif_report_format_t *report_format);
+int bcm_stat_stif_record_extended_format_set(int unit, bcm_core_t core_id, uint32 flags, int format_id, bcm_stat_stif_report_format_t *report_format);
+int bcm_stat_stif_record_qualifier_config_get(int unit, bcm_core_t core_id, uint32 flags, bcm_stat_stif_record_qualifier_key_t *key, bcm_stat_stif_record_qualifier_config_t *qual_config);
+int bcm_stat_stif_record_qualifier_config_set(int unit, bcm_core_t core_id, uint32 flags, bcm_stat_stif_record_qualifier_key_t *key, bcm_stat_stif_record_qualifier_config_t *qual_config);
+int bcm_stat_switch_mon_action_sample_count_get(int unit, bcm_stat_switch_mon_action_sample_count_t *count);
+int bcm_stat_switch_mon_action_sample_count_set(int unit, bcm_stat_switch_mon_action_sample_count_t *count);
+void bcm_stat_switch_mon_action_sample_count_t_init(bcm_stat_switch_mon_action_sample_count_t *count);
+</pre></div>
+</div>
+</section>
+<section id="bcm-subport-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_subport_*</span></code> (7)<a class="headerlink" href="#bcm-subport-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void bcm_subport_cos_to_e2ecc_pri_map_t_init(bcm_subport_cos_to_e2ecc_pri_map_t *cos_to_e2ecc_map);
+int bcm_subport_flow_control_add(int unit, bcm_subport_flow_control_config_t *fc_config);
+void bcm_subport_flow_control_config_t_init(bcm_subport_flow_control_config_t *fc_config);
+int bcm_subport_flow_control_delete(int unit, bcm_subport_flow_control_config_t *fc_config);
+int bcm_subport_flow_control_delete_all(int unit);
+int bcm_subport_flow_control_get(int unit, bcm_subport_flow_control_config_t *fc_config);
+int bcm_subport_flow_control_traverse(int unit, bcm_subport_flow_control_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcm-switch-147">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_switch_*</span></code> (147)<a class="headerlink" href="#bcm-switch-147" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_SWITCH_COMPRESSED_DROP_REASON_ADD(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp, int *reason);
+void BCM_SWITCH_COMPRESSED_DROP_REASON_INIT(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp);
+void BCM_SWITCH_COMPRESSED_DROP_REASON_REMOVE(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp, int *reason);
+int BCM_SWITCH_COMPRESSED_DROP_REASON_TEST(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp, int *reason);
+void BCM_SWITCH_COPYTOSECONADRY_REASON_REMOVE(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp, int *reason);
+void BCM_SWITCH_COPYTOSECONDARY_REASON_ADD(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp, int *reason);
+void BCM_SWITCH_COPYTOSECONDARY_REASON_INIT(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp);
+int BCM_SWITCH_COPYTOSECONDARY_REASON_TEST(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp, int *reason);
+uint32 BCM_SWITCH_EVENT_HARD_RESET_REASON(uint32 *flags);
+uint32 BCM_SWITCH_EVENT_HARD_RESET_REASON_ID(uint32 *flags);
+void BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_ADD(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control, int *enable);
+void BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_INIT(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control);
+void BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_REMOVE(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control, int *enable);
+int BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_TEST(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control, int *enable);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_ADD(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_INIT(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_REMOVE(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control, int *control);
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_TEST(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_ADD(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_ADD(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_INIT(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_REMOVE(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control, int *control);
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_TEST(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_ADD(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_INIT(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_REMOVE(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control, int *control);
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_TEST(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_INIT(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_REMOVE(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control, int *control);
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_TEST(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control, int *control);
+void BCM_SWITCH_TO_SECONDARY_DROP_ADD(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp, int *drop);
+void BCM_SWITCH_TO_SECONDARY_DROP_INIT(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp);
+void BCM_SWITCH_TO_SECONDARY_DROP_REMOVE(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp, int *drop);
+int BCM_SWITCH_TO_SECONDARY_DROP_TEST(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp, int *drop);
+int bcm_switch_afr_hdr_config_add(int unit, uint32 options, bcm_switch_afr_hdr_id_t afr_hdr_id, bcm_switch_afr_pkt_match_criteria_t *criteria, int num_fields, bcm_switch_afr_hdr_field_info_t *field_info_arr);
+int bcm_switch_afr_hdr_config_delete(int unit, bcm_switch_afr_hdr_id_t afr_hdr_id);
+int bcm_switch_afr_hdr_config_get(int unit, bcm_switch_afr_hdr_id_t afr_id, bcm_switch_afr_pkt_match_criteria_t *criteria, int num_fields, bcm_switch_afr_hdr_field_info_t *field_info_arr, int *actual);
+void bcm_switch_afr_hdr_field_info_t_init(bcm_switch_afr_hdr_field_info_t *field_info);
+void bcm_switch_afr_pkt_match_criteria_t_init(bcm_switch_afr_pkt_match_criteria_t *criteria);
+int bcm_switch_cnm_header_config_get(int unit, bcm_switch_cnm_header_config_t *config);
+int bcm_switch_cnm_header_config_set(int unit, bcm_switch_cnm_header_config_t *config);
+void bcm_switch_cnm_header_config_t_init(bcm_switch_cnm_header_config_t *config);
+int bcm_switch_cnp_header_config_get(int unit, bcm_switch_cnp_header_config_t *config);
+int bcm_switch_cnp_header_config_set(int unit, bcm_switch_cnp_header_config_t *config);
+void bcm_switch_cnp_header_config_t_init(bcm_switch_cnp_header_config_t *config);
+int bcm_switch_components_info_get(int unit, uint32 flags, bcm_switch_components_info_key_t *info_key, bcm_switch_components_info_t *info);
+void bcm_switch_components_info_key_t_init(bcm_switch_components_info_key_t *info_key);
+int bcm_switch_compressed_drop_reasons_group_create(int unit, uint32 group_id, bcm_switch_compressed_drop_reason_bmp_t *drop_reasons);
+int bcm_switch_compressed_drop_reasons_group_delete(int unit, uint32 group_id);
+int bcm_switch_compressed_drop_reasons_group_get(int unit, uint32 group_id, bcm_switch_compressed_drop_reason_bmp_t *drop_reasons);
+int bcm_switch_control_multi_word_get(int unit, bcm_switch_control_t type, bcm_multi_word_value_t *arg);
+int bcm_switch_control_multi_word_set(int unit, bcm_switch_control_t type, bcm_multi_word_value_t *arg);
+void bcm_switch_copy_to_secondary_map_action_t_init(bcm_switch_copy_to_secondary_map_action_t *action);
+int bcm_switch_copy_to_secondary_map_add(int unit, uint32 options, bcm_switch_copy_to_secondary_map_match_t *match, bcm_switch_copy_to_secondary_map_action_t *action);
+int bcm_switch_copy_to_secondary_map_delete(int unit, bcm_switch_copy_to_secondary_map_match_t *match);
+int bcm_switch_copy_to_secondary_map_delete_all(int unit);
+int bcm_switch_copy_to_secondary_map_get(int unit, bcm_switch_copy_to_secondary_map_match_t *match, bcm_switch_copy_to_secondary_map_action_t *action);
+void bcm_switch_copy_to_secondary_map_match_t_init(bcm_switch_copy_to_secondary_map_match_t *match);
+int bcm_switch_copy_to_secondary_map_traverse(int unit, bcm_switch_copy_to_secondary_map_traverse_cb cb, void *user_data);
+int bcm_switch_die_voltage_rov_get(int unit, int index, int *rov);
+int bcm_switch_die_voltage_rov_multi_get(int unit, int array_size, int *rov_array, int *count);
+int bcm_switch_dosattack_event_info_get_all(int unit, uint32 options, int size, bcm_switch_dosattack_event_info_t *info, int *actual_size);  /* declared in OpenBCM headers */
+int bcm_switch_dram_is_empty_get(int unit, uint32 flags, uint32 *is_empty);
+int bcm_switch_drop_priority_multi_get(int unit, int ndrops, bcm_switch_drop_t *drop_array, int *priority_array);
+int bcm_switch_drop_priority_multi_set(int unit, int ndrops, bcm_switch_drop_t *drop_array, int *priority_array);
+int bcm_switch_egress_pkt_type_header_id_get(int unit, bcm_switch_egress_pkt_type_t pkt_type, int *header_id);
+int bcm_switch_encap_access_update(int unit, bcm_gport_t gport, uint32 flags, bcm_encap_access_t encap_access, int nof_pointing_gports, bcm_gport_t *pointing_gport_array);
+int bcm_switch_ep_recirc_egress_drop_event_override_add(int unit, int profile_id, int array_size, bcm_egress_drop_event_t *event_array);
+int bcm_switch_ep_recirc_egress_drop_event_override_delete(int unit, int profile_id, int array_size, bcm_egress_drop_event_t *event_array);
+int bcm_switch_ep_recirc_egress_drop_event_override_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_switch_ep_recirc_egress_drop_event_override_profile_destroy(int unit, int profile_id);
+int bcm_switch_ep_recirc_egress_drop_event_override_profile_get(int unit, int profile_id, int array_size, bcm_egress_drop_event_t *event_array, int *count);
+int bcm_switch_event_register_with_type(int unit, uint32 flags, bcm_switch_event_t event_type, bcm_switch_event_cb_t cb, void *userdata);
+int bcm_switch_event_unregister_with_type(int unit, uint32 flags, bcm_switch_event_t event_type, bcm_switch_event_cb_t cb, void *userdata);
+int bcm_switch_hla_appl_result_get(int unit, bcm_switch_hla_appl_result_t *result);
+void bcm_switch_hla_appl_result_t_init(bcm_switch_hla_appl_result_t *result);
+int bcm_switch_hla_appl_run(int unit, uint32 argc, uint32 *argv);
+int bcm_switch_hla_init(int unit);
+int bcm_switch_hla_status_get(int unit, bcm_switch_hla_status_t *status);
+void bcm_switch_hla_status_t_init(bcm_switch_hla_status_t *status);
+int bcm_switch_ifa_ep_recirc_profiles_get(int unit, int max_profiles, int *ifa_recirc_profile_ids, bcm_switch_ifa_ep_recirc_profile_type_t *recirc_profile_type, int *num_profiles);
+int bcm_switch_lt_info_get(int unit, bcm_switch_pt_info_t *pt_info, int array_size, bcm_switch_lt_info_t *lt_info_array, int *count);
+int bcm_switch_mod_ep_recirc_profiles_get(int unit, int max_profiles, int *mod_recirc_profile_ids, bcm_switch_mod_ep_recirc_profile_type_t *recirc_profile_type, int *num_profiles);
+int bcm_switch_mon_action_sample_get(int unit, bcm_switch_mon_action_sample_t *sample);
+int bcm_switch_mon_action_sample_set(int unit, bcm_switch_mon_action_sample_t *sample);
+void bcm_switch_mon_action_sample_t_init(bcm_switch_mon_action_sample_t *sample);
+int bcm_switch_nonsw_pkt_to_secondary_enable_get(int unit, bcm_switch_nonsw_pkt_to_secondary_enable_control_t *enable_control);
+int bcm_switch_nonsw_pkt_to_secondary_enable_set(int unit, bcm_switch_nonsw_pkt_to_secondary_enable_control_t *enable_control);
+int bcm_switch_pll_status_get(int unit, uint32 flags, bcm_switch_pll_control_key_t key, int *status);
+int bcm_switch_port_block_get(int unit, bcm_switch_port_stage_t stage, uint32 flags, bcm_switch_port_source_t *source, int member_max, bcm_switch_port_member_t *member_array, int *member_count);
+int bcm_switch_port_block_set(int unit, bcm_switch_port_stage_t stage, uint32 flags, bcm_switch_port_source_t *source, int member_count, bcm_switch_port_member_t *member_array);
+int bcm_switch_power_throttling_leaky_bucket_params_get(int unit, uint32 flags, bcm_switch_power_throttling_leaky_bucket_params_t *params);
+int bcm_switch_power_throttling_leaky_bucket_params_set(int unit, uint32 flags, bcm_switch_power_throttling_leaky_bucket_params_t params);
+int bcm_switch_power_throttling_profile_get(int unit, uint32 flags, int profile_index, bcm_switch_power_throttling_profile_t *profile);
+int bcm_switch_power_throttling_profile_set(int unit, uint32 flags, int profile_index, bcm_switch_power_throttling_profile_t profile);
+int bcm_switch_power_throttling_state_to_profile_offset_map_get(int unit, uint32 flags, bcm_switch_power_throttling_state_t state, int *profile_offset);
+int bcm_switch_power_throttling_state_to_profile_offset_map_set(int unit, uint32 flags, bcm_switch_power_throttling_state_t state, int profile_offset);
+int bcm_switch_primary_unit_get(int unit, int *primary_unit);
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_create(int unit, bcm_switch_secondary_to_primary_pkt_control_egr_profile_t *pkt_control_egr_profile, int *profile_id);
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_destroy(int unit, int profile_id);
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_destroy_all(int unit);
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_get(int unit, int profile_id, bcm_switch_secondary_to_primary_pkt_control_egr_profile_t *pkt_control_egr_profile);
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_get_all(int unit, int max, int *profile_id_array, int *count);
+void bcm_switch_secondary_to_primary_pkt_control_egr_profile_t_init(bcm_switch_secondary_to_primary_pkt_control_egr_profile_t *profile);
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_create(int unit, bcm_switch_secondary_to_primary_pkt_control_ing_profile_t *pkt_control_ing_profile, int *profile_id);
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_destroy(int unit, int profile_id);
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_destroy_all(int unit);
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_get(int unit, int profile_id, bcm_switch_secondary_to_primary_pkt_control_ing_profile_t *pkt_control_ing_profile);
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_get_all(int unit, int max, int *profile_id_array, int *count);
+void bcm_switch_secondary_to_primary_pkt_control_ing_profile_t_init(bcm_switch_secondary_to_primary_pkt_control_ing_profile_t *profile);
+int bcm_switch_secondary_unit_get(int unit, int *secondary_unit);
+int bcm_switch_ser_mem_capability_test(int unit, uint32 flags, char *log_file);
+int bcm_switch_ser_pt_status_get(int unit, char *pt_name, bcm_switch_ser_pt_status_t *ser_pt_status);
+void bcm_switch_ser_pt_status_t_init(bcm_switch_ser_pt_status_t *ser_pt_status);
+int bcm_switch_ser_report_config_get(int unit, bcm_switch_error_type_t error_type, bcm_switch_ser_report_config_t *ser_report_config);
+int bcm_switch_ser_report_config_set(int unit, bcm_switch_error_type_t error_type, bcm_switch_ser_report_config_t *ser_report_config);
+void bcm_switch_ser_report_config_t_init(bcm_switch_ser_report_config_t *ser_report_config);
+int bcm_switch_smartasf_config_get(int unit, int max_levels, bcm_switch_smartasf_config_t *smartasf_config_list, int *cur_levels);
+int bcm_switch_smartasf_config_set(int unit, int num_levels, bcm_switch_smartasf_config_t *smartasf_config_list);
+void bcm_switch_smartasf_config_t_init(bcm_switch_smartasf_config_t *config);
+int bcm_switch_smartasf_event_register(int unit, bcm_switch_smartasf_event_callback_t callback, void *userdata);
+int bcm_switch_smartasf_event_unregister(int unit, bcm_switch_smartasf_event_callback_t callback, void *userdata);
+int bcm_switch_smartasf_port_control_get(int unit, bcm_port_t port, int *enable);
+int bcm_switch_smartasf_port_control_set(int unit, bcm_port_t port, int enable);
+int bcm_switch_smartasf_port_event_enable_get(int unit, bcm_port_t port, bcm_switch_smartasf_event_type_t event, int level, int *enable);
+int bcm_switch_smartasf_port_event_enable_set(int unit, bcm_port_t port, bcm_switch_smartasf_event_type_t event, int level, int enable);
+int bcm_switch_smartasf_port_stats_get(int unit, bcm_port_t port, bcm_switch_smartasf_stat_type_t stat_type, uint32 *stat_value);
+int bcm_switch_smartasf_port_stats_set(int unit, bcm_port_t port, bcm_switch_smartasf_stat_type_t stat_type, uint32 stat_value);
+void bcm_switch_stat_event_mon_drop_reasons_t_init(bcm_switch_stat_event_mon_drop_reasons_t *drop_reasons);
+int bcm_switch_to_secondary_drop_control_get(int unit, bcm_switch_to_secondary_drop_control_t *drop_control);
+int bcm_switch_to_secondary_drop_control_set(int unit, bcm_switch_to_secondary_drop_control_t *drop_control);
+void bcm_switch_to_secondary_map_action_t_init(bcm_switch_to_secondary_map_action_t *action);
+int bcm_switch_to_secondary_map_add(int unit, uint32 options, bcm_switch_to_secondary_map_match_t *match, bcm_switch_to_secondary_map_action_t *action);
+int bcm_switch_to_secondary_map_delete(int unit, bcm_switch_to_secondary_map_match_t *match);
+int bcm_switch_to_secondary_map_delete_all(int unit);
+int bcm_switch_to_secondary_map_get(int unit, bcm_switch_to_secondary_map_match_t *match, bcm_switch_to_secondary_map_action_t *action);
+void bcm_switch_to_secondary_map_match_t_init(bcm_switch_to_secondary_map_match_t *match);
+int bcm_switch_to_secondary_map_traverse(int unit, bcm_switch_to_secondary_map_traverse_cb cb, void *user_data);
+int bcm_switch_trim_header_config_get(int unit, bcm_switch_trim_header_config_t *config);
+int bcm_switch_trim_header_config_set(int unit, bcm_switch_trim_header_config_t *config);
+void bcm_switch_trim_header_config_t_init(bcm_switch_trim_header_config_t *config);
+int bcm_switch_truncate_length_profile_create(int unit, uint32 options, int *profile_id, bcm_switch_truncate_length_profile_t *profile);
+int bcm_switch_truncate_length_profile_destroy(int unit, int profile_id);
+int bcm_switch_truncate_length_profile_get(int unit, int profile_id, bcm_switch_truncate_length_profile_t *profile);
+void bcm_switch_truncate_length_profile_t_init(bcm_switch_truncate_length_profile_t *profile);
+int bcm_switch_vca_appl_profile_info_get(int unit, bcm_switch_vca_appl_type_t appl_type, int appl_profile_idx, bcm_switch_vca_appl_profile_info_t *info);
+void bcm_switch_vca_appl_profile_info_t_init(bcm_switch_vca_appl_profile_info_t *info);
+</pre></div>
+</div>
+</section>
+<section id="bcm-telemetry-10">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_telemetry_*</span></code> (10)<a class="headerlink" href="#bcm-telemetry-10" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_TELEMETRY_ELEMENT_ADD(bcm_telemetry_element_bmp_t *bmp, int *bit);
+void BCM_TELEMETRY_ELEMENT_REMOVE(bcm_telemetry_element_bmp_t *bmp, int *bit);
+int bcm_telemetry_buffer_config_get(int unit, bcm_telemetry_buffer_config_t *buffer_config);
+int bcm_telemetry_buffer_config_set(int unit, bcm_telemetry_buffer_config_t *buffer_config);
+int bcm_telemetry_export_template_get(int unit, int telemetry_instance, int max_size, uint8 *template_buffer, int *size);
+int bcm_telemetry_instance_report_enable_get(int unit, int telemetry_instance, int *enable);
+int bcm_telemetry_instance_report_enable_set(int unit, int telemetry_instance, int enable);
+int bcm_telemetry_object_capability_get(int unit, bcm_telemetry_object_type_t object_type, uint32 *flags, uint32 *min_poll_interval);
+int bcm_telemetry_report_enable_get(int unit, int *enable);
+int bcm_telemetry_report_enable_set(int unit, int enable);
+</pre></div>
+</div>
+</section>
+<section id="bcm-time-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_time_*</span></code> (4)<a class="headerlink" href="#bcm-time-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_time_gpio_config_get(int unit, int gpio_num, bcm_time_gpio_config_t *gpio_cfg);
+int bcm_time_gpio_config_set(int unit, int gpio_num, bcm_time_gpio_config_t *gpio_cfg);
+int bcm_time_tod_leap_control_get(int unit, bcm_time_tod_leap_control_t *leap_info);
+int bcm_time_tod_leap_control_set(int unit, bcm_time_tod_leap_control_t leap_info);
+</pre></div>
+</div>
+</section>
+<section id="bcm-trunk-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_trunk_*</span></code> (2)<a class="headerlink" href="#bcm-trunk-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_trunk_control_set(int unit, uint32 flags, bcm_trunk_t trunk_id, bcm_trunk_control_t trunk_control, int value);
+int bcm_trunk_flow_agg_clear(int unit, int flow_agg_id, int flags);
+</pre></div>
+</div>
+</section>
+<section id="bcm-twamp-7">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_twamp_*</span></code> (7)<a class="headerlink" href="#bcm-twamp-7" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_TWAMP_EVENT_TYPE_CLEAR(bcm_twamp_event_types_t *_event_types, int *_event_type);
+void BCM_TWAMP_EVENT_TYPE_CLEAR_ALL(bcm_twamp_event_types_t *_event_types);
+int BCM_TWAMP_EVENT_TYPE_GET(bcm_twamp_event_types_t *_event_types, int *_event_type);
+void BCM_TWAMP_EVENT_TYPE_SET(bcm_twamp_event_types_t *_event_types, int *_event_type);
+void BCM_TWAMP_EVENT_TYPE_SET_ALL(bcm_twamp_event_types_t *_event_types);
+int bcm_twamp_event_register(int unit, bcm_twamp_event_types_t event_types, bcm_twamp_event_cb cb, void *user_data);
+int bcm_twamp_event_unregister(int unit, bcm_twamp_event_types_t event_types, bcm_twamp_event_cb cb);
+</pre></div>
+</div>
+</section>
+<section id="bcm-udf-8">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_udf_*</span></code> (8)<a class="headerlink" href="#bcm-udf-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_udf_chunk_alloc_info_get(int unit, bcm_udf_id_t udf_id, int max_count, bcm_udf_chunk_alloc_info_t *alloc_info_arr, int *actual);
+int bcm_udf_chunk_alloc_type_info_get(int unit, bcm_udf_chunk_alloc_type_t type, bcm_udf_chunk_alloc_type_info_t *alloc_type_info);
+void bcm_udf_chunk_alloc_type_info_t_init(bcm_udf_chunk_alloc_type_info_t *alloc_type_info);
+int bcm_udf_layer_supported_list_get(int unit, int max, bcm_udf_layer_t *layer_list, int *actual);
+int bcm_udf_pkt_format_action_config_get(int unit, bcm_udf_pkt_format_id_t pkt_format_id, bcm_udf_pkt_format_action_config_t *action_cfg);
+int bcm_udf_pkt_format_action_config_set(int unit, bcm_udf_pkt_format_id_t pkt_format_id, bcm_udf_pkt_format_action_config_t *action_cfg);
+void bcm_udf_pkt_format_action_config_t_init(bcm_udf_pkt_format_action_config_t *action_cfg);
+int bcm_udf_pkt_format_supported_info_get(int unit, bcm_udf_pkt_format_info_t *pkt_format);
+</pre></div>
+</div>
+</section>
+<section id="bcm-vlan-24">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_vlan_*</span></code> (24)<a class="headerlink" href="#bcm-vlan-24" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_vlan_cross_connect_entry_add(int unit, bcm_vlan_cross_connect_entry_t *vlan_cc_entry);
+int bcm_vlan_cross_connect_entry_delete(int unit, bcm_vlan_cross_connect_entry_t *vlan_cc_entry);
+int bcm_vlan_cross_connect_entry_delete_all(int unit);
+int bcm_vlan_cross_connect_entry_get(int unit, bcm_vlan_cross_connect_entry_t *vlan_cc_entry);
+void bcm_vlan_cross_connect_entry_t_init(bcm_vlan_cross_connect_entry_t *vlan_cc_entry);
+int bcm_vlan_cross_connect_entry_traverse(int unit, bcm_vlan_cross_connect_entry_traverse_cb cb, void *user_data);
+int bcm_vlan_mcast_override_get(int unit, bcm_vlan_t vlan, bcm_vlan_mcast_override_t *override);
+int bcm_vlan_mcast_override_set(int unit, bcm_vlan_t vlan, bcm_vlan_mcast_override_t *override);
+void bcm_vlan_mcast_override_t_init(bcm_vlan_mcast_override_t *override);
+int bcm_vlan_ovid_profile_create(int unit, bcm_vlan_ovid_profile_t *info, uint32 *profile_id);
+int bcm_vlan_ovid_profile_destroy(int unit, uint32 profile_id);
+int bcm_vlan_ovid_profile_get(int unit, uint32 profile_id, bcm_vlan_ovid_profile_t *info);
+void bcm_vlan_ovid_profile_t_init(bcm_vlan_ovid_profile_t *info);
+int bcm_vlan_param_add(int unit, uint32 options, bcm_vlan_param_key_t *param_key, bcm_vlan_param_data_t *param_data, uint32 priority);
+void bcm_vlan_param_data_t_init(bcm_vlan_param_data_t *data);
+int bcm_vlan_param_delete(int unit, bcm_vlan_param_key_t *param_key);
+int bcm_vlan_param_delete_all(int unit);
+int bcm_vlan_param_get(int unit, bcm_vlan_param_key_t *param_key, bcm_vlan_param_data_t *param_data, uint32 *priority);
+void bcm_vlan_param_key_t_init(bcm_vlan_param_key_t *data);
+int bcm_vlan_param_traverse(int unit, bcm_vlan_param_traverse_cb cb, void *user_data);
+int bcm_vlan_tenant_add(int unit, bcm_vlan_t vid, bcm_vlan_tenant_t *tenant);
+int bcm_vlan_tenant_get(int unit, bcm_vlan_t vid, bcm_vlan_tenant_t *tenant);
+int bcm_vlan_tenant_remove(int unit, bcm_vlan_t vid, bcm_vlan_tenant_t *tenant);
+void bcm_vlan_tenant_t_init(bcm_vlan_tenant_t *tenant);
+</pre></div>
+</div>
+</section>
+<section id="bcm-vxlan-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_vxlan_*</span></code> (9)<a class="headerlink" href="#bcm-vxlan-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcm_vxlan_sr_hop_add(int unit, bcm_vxlan_sr_hop_info_t *info);
+int bcm_vxlan_sr_hop_delete(int unit, bcm_vxlan_sr_hop_info_t *info);
+int bcm_vxlan_sr_hop_get(int unit, bcm_vxlan_sr_hop_info_t *info);
+int bcm_vxlan_sr_hop_traverse(int unit, uint32 *flags, bcm_vxlan_sr_hop_traverse_cb cb, void *user_data);
+int bcm_vxlan_vni_terminator_create(int unit, bcm_vxlan_vni_terminator_t *info);
+int bcm_vxlan_vni_terminator_delete(int unit, bcm_vxlan_vni_terminator_t *info);
+int bcm_vxlan_vni_terminator_get(int unit, bcm_vxlan_vni_terminator_t *info);
+void bcm_vxlan_vni_terminator_t_init(bcm_vxlan_vni_terminator_t *vxlan_vni);
+int bcm_vxlan_vni_terminator_traverse(int unit, bcm_vxlan_vni_terminator_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+<section id="bcmlt-entry-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcmlt_entry_*</span></code> (2)<a class="headerlink" href="#bcmlt-entry-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcmlt_entry_field_traverse(bcmlt_entry_handle_t entry_hdl, char **field_name, bcmlt_field_data_info_t *data, uint32_t *search_hdl);  /* declared in OpenBCM headers */
+int bcmlt_entry_fields_extract(bcmlt_entry_handle_t entry_hdl, bcmlt_basic_field_info_t *buf, size_t *num);
+</pre></div>
+</div>
+</section>
+<section id="bcmlt-table-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcmlt_table_*</span></code> (1)<a class="headerlink" href="#bcmlt-table-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int bcmlt_table_wide_field_def_get(int unit, char *table_name, char *field_name, bcmlt_wide_fld_def_t *values);
+</pre></div>
+</div>
+</section>
+<section id="cint-getenv-1">
+<h2><code class="docutils literal notranslate"><span class="pre">cint_getenv_*</span></code> (1)<a class="headerlink" href="#cint-getenv-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>char *cint_getenv(char *name);
+</pre></div>
+</div>
+</section>
+<section id="clock-getres-1">
+<h2><code class="docutils literal notranslate"><span class="pre">clock_getres_*</span></code> (1)<a class="headerlink" href="#clock-getres-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int clock_getres(int clk_id, cint_timespec_t *res);
+</pre></div>
+</div>
+</section>
+<section id="clock-gettime-1">
+<h2><code class="docutils literal notranslate"><span class="pre">clock_gettime_*</span></code> (1)<a class="headerlink" href="#clock-gettime-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int clock_gettime(int clk_id, cint_timespec_t *tp);
+</pre></div>
+</div>
+</section>
+<section id="clock-timespec-3">
+<h2><code class="docutils literal notranslate"><span class="pre">clock_timespec_*</span></code> (3)<a class="headerlink" href="#clock-timespec-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void clock_timespec_add(cint_timespec_t *a, cint_timespec_t *b, cint_timespec_t *res);
+int clock_timespec_cmp(cint_timespec_t *a, cint_timespec_t *b);
+void clock_timespec_sub(cint_timespec_t *a, cint_timespec_t *b, cint_timespec_t *res);
+</pre></div>
+</div>
+</section>
+<section id="compiler-64-1">
+<h2><code class="docutils literal notranslate"><span class="pre">compiler_64_*</span></code> (1)<a class="headerlink" href="#compiler-64-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void COMPILER_64_COPY(uint64 *dst, uint64 src);  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="diag-get-1">
+<h2><code class="docutils literal notranslate"><span class="pre">diag_get_*</span></code> (1)<a class="headerlink" href="#diag-get-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int diag_get_sub_units(int unit, unsigned int *out_nof_sub_units, int *out_sub_units);
+</pre></div>
+</div>
+</section>
+<section id="diag-mem-2">
+<h2><code class="docutils literal notranslate"><span class="pre">diag_mem_*</span></code> (2)<a class="headerlink" href="#diag-mem-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int diag_mem_bits(int unit, char *mem_name, int no_ecc_parity);
+int diag_mem_field_bits(int unit, char *mem_name, char *field_name);
+</pre></div>
+</div>
+</section>
+<section id="diag-reg32-2">
+<h2><code class="docutils literal notranslate"><span class="pre">diag_reg32_*</span></code> (2)<a class="headerlink" href="#diag-reg32-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int diag_reg32_get(int unit, diag_reg_type_t type, uint32_t addr, uint32_t *val);
+int diag_reg32_set(int unit, diag_reg_type_t type, uint32_t addr, uint32_t val);
+</pre></div>
+</div>
+</section>
+<section id="diag-reg64-2">
+<h2><code class="docutils literal notranslate"><span class="pre">diag_reg64_*</span></code> (2)<a class="headerlink" href="#diag-reg64-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int diag_reg64_get(int unit, diag_reg_type_t type, uint32_t addr, uint64_t *val);
+int diag_reg64_set(int unit, diag_reg_type_t type, uint32_t addr, uint64_t val);
+</pre></div>
+</div>
+</section>
+<section id="edki-get-1">
+<h2><code class="docutils literal notranslate"><span class="pre">edki_get_*</span></code> (1)<a class="headerlink" href="#edki-get-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int edki_get_number_of_cores(int unit, int *num_cores);
+</pre></div>
+</div>
+</section>
+<section id="edki-init-1">
+<h2><code class="docutils literal notranslate"><span class="pre">edki_init_*</span></code> (1)<a class="headerlink" href="#edki-init-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int edki_init(int unit, int warm);
+</pre></div>
+</div>
+</section>
+<section id="edki-lt-1">
+<h2><code class="docutils literal notranslate"><span class="pre">edki_lt_*</span></code> (1)<a class="headerlink" href="#edki-lt-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int edki_lt_to_pt_map_get_and_register(void *rproc, char *lt_name, int *ltid);
+</pre></div>
+</div>
+</section>
+<section id="edki-notify-3">
+<h2><code class="docutils literal notranslate"><span class="pre">edki_notify_*</span></code> (3)<a class="headerlink" href="#edki-notify-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int edki_notify_register(void *rproc, uint32 eventid, notify_callback_t callback, void *cookie);
+int edki_notify_send_event(void *rproc, int event, uint64 params);
+int edki_notify_unregister(void *rproc, int event);
+</pre></div>
+</div>
+</section>
+<section id="edki-procmgr-8">
+<h2><code class="docutils literal notranslate"><span class="pre">edki_procmgr_*</span></code> (8)<a class="headerlink" href="#edki-procmgr-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int edki_procmgr_close(void *rproc);
+int edki_procmgr_control(void *rproc, int request, void *params);
+int edki_procmgr_is_core_active(int unit, int core, int *status);
+int edki_procmgr_load(void *rproc, char *exec_file, char *res_file, char *core_file, char *trace_file, char *bootargs, char *appargs);
+int edki_procmgr_open(int unit, int core, void **rproc);
+int edki_procmgr_register_event(void *rproc, uint32 eventid, rproc_callback_t callback, void *cookie);
+int edki_procmgr_unload(void *rproc);
+int edki_procmgr_unregister_event(void *rproc, uint32 eventid);
+</pre></div>
+</div>
+</section>
+<section id="edki-rpc-2">
+<h2><code class="docutils literal notranslate"><span class="pre">edki_rpc_*</span></code> (2)<a class="headerlink" href="#edki-rpc-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int edki_rpc_call_async(void *rproc, char *fx_name, void *inp, int insize, void *outp, int outsize, rpc_callback_t callback, void *cookie, int timeoutms);
+int edki_rpc_call_sync(void *rproc, char *fx_name, void *inp, int insize, void *outp, int outsize, int *retval, int timeoutms);
+</pre></div>
+</div>
+</section>
+<section id="phymod-phy-38">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_phy_*</span></code> (38)<a class="headerlink" href="#phymod-phy-38" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int phymod_phy_am_loss_get(phymod_phy_access_t *phy, uint32 *am_loss);
+int phymod_phy_consecutive_bad_cw_get(phymod_phy_access_t *phy, uint32 *consecutive_bad_cw);
+int phymod_phy_consecutive_bad_cw_set(phymod_phy_access_t *phy, uint32 consecutive_bad_cw);
+int phymod_phy_cpo_rx_set(phymod_phy_access_t *phy, uint32 is_rev_a0);
+int phymod_phy_ctlos_ocode_get(phymod_phy_access_t *phy, uint32 *ctlos_ocode);
+int phymod_phy_ctlos_ocode_set(phymod_phy_access_t *phy, uint32 ctlos_ocode);
+int phymod_phy_die_temperature_get(phymod_phy_access_t *phy, int16 *temp_val);
+int phymod_phy_eye_margin_est_array_get(phymod_phy_access_t *phy, uint32 is_pam4, phymod_eye_margin_value_t *eye_margin);
+int phymod_phy_flt_diagnostic_get(phymod_phy_access_t *phy, phymod_flt_diagnostic_t *rxffe);
+int phymod_phy_hi_ber_get(phymod_phy_access_t *phy, uint32 *hi_ber);
+int phymod_phy_link_time_diagnostic_get(phymod_phy_access_t *phy, uint32 *link_time);
+int phymod_phy_linkcat_parallel(phymod_phy_access_t *phy, phymod_linkcat_config_t linkcat_config);
+int phymod_phy_local_pattern_get(phymod_phy_access_t *phy, uint32 *local_pattern);
+int phymod_phy_local_pattern_set(phymod_phy_access_t *phy, uint32 local_pattern);
+int phymod_phy_medium_type_get(phymod_phy_access_t *phy, phymod_firmware_media_type_t *medium_type);
+int phymod_phy_medium_type_set(phymod_phy_access_t *phy, phymod_firmware_media_type_t medium_type);
+int phymod_phy_mpi_diagnostic_get(phymod_phy_access_t *phy, phymod_mpi_diagnostic_t *mpi_diag);
+int phymod_phy_nr_error_correction_decoder_enable_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_nr_error_correction_decoder_enable_set(phymod_phy_access_t *phy, uint32 enable);
+int phymod_phy_pass_through_config_get(phymod_phy_access_t *phy, uint32 *enable);
+int phymod_phy_pch_config_get(phymod_phy_access_t *phy, phymod_pch_config_t *pch_config);
+int phymod_phy_pch_config_set(phymod_phy_access_t *phy, phymod_pch_config_t *pch_config);
+int phymod_phy_pmd_lane_map_set(phymod_phy_access_t *phy, phymod_lane_map_t *lane_map);
+int phymod_phy_pmd_uc_ram_variable_get(phymod_phy_access_t *phy, phymod_uc_ram_var_t *uc_ram_var, int32 *value);
+int phymod_phy_pmd_uc_ram_variable_set(phymod_phy_access_t *phy, phymod_uc_ram_var_t *uc_ram_var, int32 value);
+int phymod_phy_pmd_usr_event_log_group_mask_get(phymod_phy_access_t *phy, uint32 *event_group_mask);
+int phymod_phy_pmd_usr_event_log_group_mask_set(phymod_phy_access_t *phy, uint32 event_group_mask);
+int phymod_phy_post_aeq_bias_with_hysteresis_set(phymod_phy_access_t *phy, int16 previous_temp, int16 set_temp, uint8 *table_index);
+int phymod_phy_rsfec_sym_err_mem_info_get(phymod_phy_access_t *phy, phymod_rsfec_symbol_err_mem_info_t *rsfec_sym_err_mem_info);
+int phymod_phy_rsfec_symb_err_count_get(phymod_phy_access_t *phy, phymod_rs_fec_lane_map_per_logical_lane_t *fec_lane_map, uint64 *error_count);
+int phymod_phy_rx_snr_get(phymod_phy_access_t *phy, uint32 *rx_snr);
+int phymod_phy_rxffe_diagnostic_get(phymod_phy_access_t *phy, uint32 *rxffe, uint32 *rxffe_cnt);
+int phymod_phy_sw_autoneg_advert_ability_get(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities, phymod_sw_an_ctxt_t *an_ctxt);
+int phymod_phy_sw_autoneg_advert_ability_set(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities, phymod_phy_pll_state_t *old_pll_adv_state, phymod_phy_pll_state_t *new_pll_adv_state, phymod_sw_an_ctxt_t *an_ctxt);
+int phymod_phy_sw_autoneg_remote_advert_ability_get(phymod_phy_access_t *phy, phymod_autoneg_advert_abilities_t *an_advert_abilities, phymod_sw_an_ctxt_t *an_ctxt);
+int phymod_phy_sw_table_reload(phymod_phy_access_t *phy, phymod_sw_table_load_t *table_load);
+int phymod_phy_timesync_rx_deskew_info_dump(phymod_phy_access_t *phy, char *type);
+int phymod_phy_tp_diagnostic_get(phymod_phy_access_t *phy, uint32 *tp, uint32 *tp_cnt);
+</pre></div>
+</div>
+</section>
+<section id="phymod-port-2">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_port_*</span></code> (2)<a class="headerlink" href="#phymod-port-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int phymod_port_crc_poison_mask_tx_get(phymod_phy_access_t *phy, uint32 *crc_poison_mask_tx);
+int phymod_port_crc_poison_mask_tx_set(phymod_phy_access_t *phy, uint32 crc_poison_mask_tx);
+</pre></div>
+</div>
+</section>
+<section id="phymod-serdes-1">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_serdes_*</span></code> (1)<a class="headerlink" href="#phymod-serdes-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int phymod_serdes_core_info_get(phymod_phy_access_t *phy, phymod_serdes_core_info_t *serdes_core_info);
+</pre></div>
+</div>
+</section>
+<section id="portmod-fec-2">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_fec_*</span></code> (2)<a class="headerlink" href="#portmod-fec-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_fec_stat_auto_collect_wb_data_get(int unit, portmod_fec_stat_auto_collect_wb_data_t *wb_data);
+int portmod_fec_stat_auto_collect_wb_data_set(int unit, portmod_fec_stat_auto_collect_wb_data_t *wb_data);
+</pre></div>
+</div>
+</section>
+<section id="portmod-port-19">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_port_*</span></code> (19)<a class="headerlink" href="#portmod-port-19" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int portmod_port_am_lock_status_get(int unit, int port, uint32 *am_lock_status);
+int portmod_port_fdr_control_get(int unit, int port, portmod_fdr_port_control_t *fdr_ctrl);
+int portmod_port_fdr_control_set(int unit, int port, portmod_fdr_port_control_t fdr_ctrl);
+int portmod_port_fdr_stats_get(int unit, int port, portmod_fdr_port_stats_t *fdr_stats);
+int portmod_port_fec_error_inject_config_get(int unit, int port, portmod_fec_error_injection_config_t *error_injection_config);
+int portmod_port_fec_error_inject_config_set(int unit, int port, portmod_fec_error_injection_config_t *error_injection_config);
+int portmod_port_fec_error_inject_enable_get(int unit, int port, portmod_fec_error_injection_enable_t *error_injection_enable);
+int portmod_port_fec_error_inject_enable_set(int unit, int port, portmod_fec_error_injection_enable_t *error_injection_enable);
+int portmod_port_lane_remap_set(int unit, int port, phymod_lane_map_t *lane_map);
+int portmod_port_pch_config_get(int unit, int port, portmod_pch_config_t *pch_config);
+int portmod_port_pch_config_set(int unit, int port, portmod_pch_config_t *pch_config);
+int portmod_port_pcs_enable_set(int unit, int port, uint32 enable);
+int portmod_port_periodic_pause(int unit, int *is_active);
+int portmod_port_periodic_resume(int unit, int is_active);
+int portmod_port_recover_am_idles_get(int unit, int port, uint32 *recover_am_idles);
+int portmod_port_recover_am_idles_set(int unit, int port, uint32 recover_am_idles);
+int portmod_port_serdes_core_info_get(int unit, int port, phymod_serdes_core_info_t *core_info);
+int portmod_port_txpi_config_get(int unit, int port, portmod_txpi_config_t *config);
+int portmod_port_txpi_config_set(int unit, int port, portmod_txpi_config_t config);
+</pre></div>
+</div>
+</section>
+<section id="sal-access-1">
+<h2><code class="docutils literal notranslate"><span class="pre">sal_access_*</span></code> (1)<a class="headerlink" href="#sal-access-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int sal_access(char *path, int mode);
+</pre></div>
+</div>
+</section>
+<section id="sal-boot-1">
+<h2><code class="docutils literal notranslate"><span class="pre">sal_boot_*</span></code> (1)<a class="headerlink" href="#sal-boot-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>unsigned int sal_boot_flags_get(void);  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="sal-remove-1">
+<h2><code class="docutils literal notranslate"><span class="pre">sal_remove_*</span></code> (1)<a class="headerlink" href="#sal-remove-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int sal_remove(char *f);  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="sal-rename-1">
+<h2><code class="docutils literal notranslate"><span class="pre">sal_rename_*</span></code> (1)<a class="headerlink" href="#sal-rename-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int sal_rename(char *f_old, char *f_new);  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="soc-cm-4">
+<h2><code class="docutils literal notranslate"><span class="pre">soc_cm_*</span></code> (4)<a class="headerlink" href="#soc-cm-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>char *soc_cm_config_str_primary_get(int dev, char *name);
+char *soc_cm_config_str_secondary_get(int dev, char *name);
+uint32 soc_cm_iproc_read(int unit, uint32 addr);  /* declared in OpenBCM headers */
+void soc_cm_iproc_write(int unit, uint32 addr, uint32 val);  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="soc-interrupt-2">
+<h2><code class="docutils literal notranslate"><span class="pre">soc_interrupt_*</span></code> (2)<a class="headerlink" href="#soc-interrupt-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int soc_interrupt_instance_convert(int unit, int block_instance, int inter_id);
+int soc_interrupt_is_ser_event(int unit, int interrupt_id);
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Cint API on this build" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="extra-types.html" class="btn btn-neutral float-right" title="Structures and typedefs not in OpenBCM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

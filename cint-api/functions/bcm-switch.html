@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_switch_* (411) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_tdpll_* (74)" href="bcm-tdpll.html" />
+    <link rel="prev" title="bcm_subport_* (50)" href="bcm-subport.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_switch_*</span></code> (411)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-switch-411">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_switch_*</span></code> (411)<a class="headerlink" href="#bcm-switch-411" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_SWITCH_COMPRESSED_DROP_REASON_ADD(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_COMPRESSED_DROP_REASON_INIT(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_COMPRESSED_DROP_REASON_REMOVE(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_COMPRESSED_DROP_REASON_TEST(bcm_switch_compressed_drop_reason_bmp_t *compressed_drop_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_CONTROL_MODID_UNPACK(int *arg);
+int BCM_SWITCH_CONTROL_MODTYPE_UNPACK(int *arg);
+int BCM_SWITCH_CONTROL_MOD_TYPE_PACK(bcm_module_t *modid, int *mod_type);
+void BCM_SWITCH_COPYTOSECONADRY_REASON_REMOVE(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_COPYTOSECONDARY_REASON_ADD(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_COPYTOSECONDARY_REASON_INIT(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_COPYTOSECONDARY_REASON_TEST(bcm_switch_copytosecondary_reason_bmp_t *copytosecondary_reason_bmp, int *reason);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_SWITCH_EVENT_HARD_RESET_REASON(uint32 *flags);  /* not in OpenBCM 6.5.27 */
+uint32 BCM_SWITCH_EVENT_HARD_RESET_REASON_ID(uint32 *flags);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_ADD(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control, int *enable);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_INIT(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_REMOVE(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control, int *enable);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_CONTROL_BMP_TEST(bcm_switch_nonsw_pkt_to_secondary_enable_control_t *switch_nonsw_pkt_to_secondary_enable_control, int *enable);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SDK_TO_WARMBOOT_VERSION_GET(uint8 *_major_release, uint8 *_minor_release, uint8 *_patch_level, uint32 *_warmboot_ver);
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_ADD(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_INIT(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_REMOVE(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_TEST(bcm_switch_secondary_to_primary_pkt_control_egr_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_ADD(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_ADD(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_INIT(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_REMOVE(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_TEST(bcm_switch_secondary_to_primary_pkt_control_ing_ctc_suppress_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_ADD(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_INIT(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_REMOVE(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_TEST(bcm_switch_secondary_to_primary_pkt_control_ing_drop_suppress_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_INIT(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_REMOVE(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_TEST(bcm_switch_secondary_to_primary_pkt_control_ing_bmp_t *pkt_control, int *control);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_TO_SECONDARY_DROP_ADD(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp, int *drop);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_TO_SECONDARY_DROP_INIT(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp);  /* not in OpenBCM 6.5.27 */
+void BCM_SWITCH_TO_SECONDARY_DROP_REMOVE(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp, int *drop);  /* not in OpenBCM 6.5.27 */
+int BCM_SWITCH_TO_SECONDARY_DROP_TEST(bcm_switch_to_secondary_drop_control_bmp_t *switch_to_secondary_drop_bmp, int *drop);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_afr_hdr_config_add(int unit, uint32 options, bcm_switch_afr_hdr_id_t afr_hdr_id, bcm_switch_afr_pkt_match_criteria_t *criteria, int num_fields, bcm_switch_afr_hdr_field_info_t *field_info_arr);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_afr_hdr_config_delete(int unit, bcm_switch_afr_hdr_id_t afr_hdr_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_afr_hdr_config_get(int unit, bcm_switch_afr_hdr_id_t afr_id, bcm_switch_afr_pkt_match_criteria_t *criteria, int num_fields, bcm_switch_afr_hdr_field_info_t *field_info_arr, int *actual);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_afr_hdr_field_info_t_init(bcm_switch_afr_hdr_field_info_t *field_info);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_afr_pkt_match_criteria_t_init(bcm_switch_afr_pkt_match_criteria_t *criteria);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_agm_create(int unit, uint32 options, bcm_switch_agm_info_t *agm_info);
+int bcm_switch_agm_destroy(int unit, bcm_switch_agm_id_t agm_id);
+int bcm_switch_agm_enable_get(int unit, bcm_switch_agm_id_t agm_id, int *enable);
+int bcm_switch_agm_enable_set(int unit, bcm_switch_agm_id_t agm_id, int enable);
+int bcm_switch_agm_get(int unit, bcm_switch_agm_info_t *agm_info);
+void bcm_switch_agm_info_t_init(bcm_switch_agm_info_t *agm_info);
+int bcm_switch_agm_l3_ecmp_attach_get(int unit, bcm_switch_agm_id_t agm_id, bcm_if_t *l3_ecmp_id);
+int bcm_switch_agm_stat_clear(int unit, bcm_switch_agm_id_t agm_id);
+int bcm_switch_agm_stat_get(int unit, bcm_switch_agm_id_t agm_id, int nstat, bcm_switch_agm_stat_t *stat_arr);
+void bcm_switch_agm_stat_t_init(bcm_switch_agm_stat_t *agm_stat);
+int bcm_switch_agm_traverse(int unit, int flags, bcm_switch_agm_traverse_cb trav_fn, void *user_data);
+int bcm_switch_agm_trunk_attach_get(int unit, bcm_switch_agm_id_t agm_id, bcm_trunk_t *trunk_id);
+int bcm_switch_appl_signature_create(int unit, uint32 options, bcm_switch_appl_signature_info_t *appl_signature_info, bcm_switch_appl_signature_t *appl_signature);
+int bcm_switch_appl_signature_destroy(int unit, uint32 options, bcm_switch_appl_signature_t appl_signature);
+int bcm_switch_appl_signature_get(int unit, uint32 options, bcm_switch_appl_signature_t appl_signature, bcm_switch_appl_signature_info_t *appl_signature_info);
+int bcm_switch_appl_signature_get_all(int unit, uint32 options, int size, bcm_switch_appl_signature_t *appl_signature_array, int *count);
+void bcm_switch_appl_signature_info_t_init(bcm_switch_appl_signature_info_t *appl_signature_info);
+int bcm_switch_appl_signature_prio_set(int unit, uint32 options, bcm_switch_appl_signature_t appl_signature, uint32 priority);
+int bcm_switch_chip_info_get(int unit, bcm_switch_chip_info_t info_type, int max_size, void *data_buf, int *actual_size);
+int bcm_switch_cnm_header_config_get(int unit, bcm_switch_cnm_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_cnm_header_config_set(int unit, bcm_switch_cnm_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_cnm_header_config_t_init(bcm_switch_cnm_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_cnp_header_config_get(int unit, bcm_switch_cnp_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_cnp_header_config_set(int unit, bcm_switch_cnp_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_cnp_header_config_t_init(bcm_switch_cnp_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_components_info_get(int unit, uint32 flags, bcm_switch_components_info_key_t *info_key, bcm_switch_components_info_t *info);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_components_info_key_t_init(bcm_switch_components_info_key_t *info_key);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_compressed_drop_reasons_group_create(int unit, uint32 group_id, bcm_switch_compressed_drop_reason_bmp_t *drop_reasons);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_compressed_drop_reasons_group_delete(int unit, uint32 group_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_compressed_drop_reasons_group_get(int unit, uint32 group_id, bcm_switch_compressed_drop_reason_bmp_t *drop_reasons);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_control_get(int unit, bcm_switch_control_t type, int *arg);
+int bcm_switch_control_indexed_get(int unit, bcm_switch_control_key_t key, bcm_switch_control_info_t *value);
+int bcm_switch_control_indexed_port_get(int unit, bcm_port_t port, bcm_switch_control_key_t key, bcm_switch_control_info_t *value);
+int bcm_switch_control_indexed_port_set(int unit, bcm_port_t port, bcm_switch_control_key_t key, bcm_switch_control_info_t value);
+int bcm_switch_control_indexed_set(int unit, bcm_switch_control_key_t key, bcm_switch_control_info_t value);
+int bcm_switch_control_multi_word_get(int unit, bcm_switch_control_t type, bcm_multi_word_value_t *arg);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_control_multi_word_set(int unit, bcm_switch_control_t type, bcm_multi_word_value_t *arg);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_control_port_get(int unit, bcm_port_t port, bcm_switch_control_t type, int *arg);
+int bcm_switch_control_port_set(int unit, bcm_port_t port, bcm_switch_control_t type, int arg);
+int bcm_switch_control_set(int unit, bcm_switch_control_t type, int arg);
+void bcm_switch_copy_to_secondary_map_action_t_init(bcm_switch_copy_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_copy_to_secondary_map_add(int unit, uint32 options, bcm_switch_copy_to_secondary_map_match_t *match, bcm_switch_copy_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_copy_to_secondary_map_delete(int unit, bcm_switch_copy_to_secondary_map_match_t *match);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_copy_to_secondary_map_delete_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_copy_to_secondary_map_get(int unit, bcm_switch_copy_to_secondary_map_match_t *match, bcm_switch_copy_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_copy_to_secondary_map_match_t_init(bcm_switch_copy_to_secondary_map_match_t *match);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_copy_to_secondary_map_traverse(int unit, bcm_switch_copy_to_secondary_map_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_dcn_routing_plane_map_get(int unit, bcm_switch_dcn_routing_plane_map_t *map);
+int bcm_switch_dcn_routing_plane_map_set(int unit, bcm_switch_dcn_routing_plane_map_t *map);
+void bcm_switch_dcn_routing_plane_map_t_init(bcm_switch_dcn_routing_plane_map_t *map);
+int bcm_switch_die_voltage_rov_get(int unit, int index, int *rov);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_die_voltage_rov_multi_get(int unit, int array_size, int *rov_array, int *count);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_dosattack_event_get(int unit, uint32 flags, bcm_switch_dosattack_event_t event, int *arg);
+int bcm_switch_dosattack_event_info_get_all(int unit, uint32 options, int size, bcm_switch_dosattack_event_info_t *info, int *actual_size);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_dosattack_event_set(int unit, uint32 flags, bcm_switch_dosattack_event_t event, int arg);
+int bcm_switch_dram_init(int unit, uint32 flags);
+int bcm_switch_dram_is_empty_get(int unit, uint32 flags, uint32 *is_empty);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_dram_power_down(int unit, uint32 flags);
+int bcm_switch_dram_power_down_cb_register(int unit, uint32 flags, bcm_switch_dram_power_down_callback_t callback, void *userdata);
+int bcm_switch_dram_power_down_cb_unregister(int unit, bcm_switch_dram_power_down_callback_t callback, void *userdata);
+int bcm_switch_dram_traffic_enable_set(int unit, uint32 flags, uint32 enable);
+int bcm_switch_dram_vendor_info_get(int unit, bcm_switch_dram_vendor_info_t *info);
+int bcm_switch_drop_event_mon_get(int unit, bcm_switch_drop_event_mon_t *monitor);
+int bcm_switch_drop_event_mon_set(int unit, bcm_switch_drop_event_mon_t *monitor);
+void bcm_switch_drop_event_mon_t_init(bcm_switch_drop_event_mon_t *monitor);
+int bcm_switch_drop_event_override_get(int unit, bcm_switch_drop_event_override_t *override);
+int bcm_switch_drop_event_override_set(int unit, bcm_switch_drop_event_override_t *override);
+void bcm_switch_drop_event_override_t_init(bcm_switch_drop_event_override_t *override);
+int bcm_switch_drop_priority_multi_get(int unit, int ndrops, bcm_switch_drop_t *drop_array, int *priority_array);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_drop_priority_multi_set(int unit, int ndrops, bcm_switch_drop_t *drop_array, int *priority_array);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_egress_drop_event_add(int unit, bcm_switch_egress_drop_event_group_t group_id, int array_size, bcm_egress_drop_event_t *event_array);
+int bcm_switch_egress_drop_event_delete(int unit, bcm_switch_egress_drop_event_group_t group_id, int array_size, bcm_egress_drop_event_t *event_array);
+int bcm_switch_egress_drop_event_group_create(int unit, uint32 options, bcm_switch_egress_drop_event_group_t *group_id);
+int bcm_switch_egress_drop_event_group_destroy(int unit, bcm_switch_egress_drop_event_group_t group_id);
+int bcm_switch_egress_drop_event_group_get(int unit, bcm_switch_egress_drop_event_group_t group_id, int array_size, bcm_egress_drop_event_t *event_array, int *count);
+int bcm_switch_egress_pkt_type_header_id_get(int unit, bcm_switch_egress_pkt_type_t pkt_type, int *header_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_encap_access_update(int unit, bcm_gport_t gport, uint32 flags, bcm_encap_access_t encap_access, int nof_pointing_gports, bcm_gport_t *pointing_gport_array);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_encap_create(int unit, bcm_switch_encap_info_t *encap_info, bcm_if_t *encap_id);
+int bcm_switch_encap_dest_map_add(int unit, bcm_switch_encap_dest_t *encap_info);
+int bcm_switch_encap_dest_map_delete(int unit, bcm_switch_encap_dest_t *encap_info);
+int bcm_switch_encap_dest_map_get(int unit, bcm_switch_encap_dest_t *encap_info);
+int bcm_switch_encap_dest_map_traverse(int unit, bcm_switch_encap_dest_map_traverse_cb cb_fn, void *user_data);
+int bcm_switch_encap_destroy(int unit, bcm_if_t encap_id);
+int bcm_switch_encap_destroy_all(int unit);
+int bcm_switch_encap_get(int unit, bcm_if_t encap_id, bcm_switch_encap_info_t *encap_info);
+void bcm_switch_encap_info_t_init(bcm_switch_encap_info_t *encap_info);
+int bcm_switch_encap_set(int unit, bcm_if_t encap_id, bcm_switch_encap_info_t *encap_info);
+int bcm_switch_encap_traverse(int unit, bcm_switch_encap_traverse_cb cb_fn, void *user_data);
+void bcm_switch_ep_recirc_cpu_dma_config_t_init(bcm_switch_ep_recirc_cpu_dma_config_t *cpu_dma_config);
+void bcm_switch_ep_recirc_cpu_dma_timestamp_field_config_t_init(bcm_switch_ep_recirc_cpu_dma_timestamp_field_config_t *cpu_dma_timestamp_field);
+int bcm_switch_ep_recirc_drop_event_control_get(int unit, bcm_switch_ep_recirc_drop_event_control_t *drop_event_ctrl);
+int bcm_switch_ep_recirc_drop_event_control_set(int unit, bcm_switch_ep_recirc_drop_event_control_t *drop_event_ctrl);
+void bcm_switch_ep_recirc_drop_event_control_t_init(bcm_switch_ep_recirc_drop_event_control_t *drop_event_ctrl);
+int bcm_switch_ep_recirc_drop_event_min_get(int unit, bcm_pkt_drop_event_t *drop_event_array, int array_size, bcm_pkt_drop_event_t *min_drop_event);
+int bcm_switch_ep_recirc_egress_drop_event_override_add(int unit, int profile_id, int array_size, bcm_egress_drop_event_t *event_array);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ep_recirc_egress_drop_event_override_delete(int unit, int profile_id, int array_size, bcm_egress_drop_event_t *event_array);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ep_recirc_egress_drop_event_override_profile_create(int unit, uint32 options, int *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ep_recirc_egress_drop_event_override_profile_destroy(int unit, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ep_recirc_egress_drop_event_override_profile_get(int unit, int profile_id, int array_size, bcm_egress_drop_event_t *event_array, int *count);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_ep_recirc_nih_config_t_init(bcm_switch_ep_recirc_nih_config_t *nih_config);
+void bcm_switch_ep_recirc_nih_residence_time_field_config_t_init(bcm_switch_ep_recirc_nih_residence_time_field_config_t *nih_residence_time_field);
+int bcm_switch_ep_recirc_override_enable_get(int unit, int profile_id, int offset, int *enable);
+int bcm_switch_ep_recirc_override_enable_set(int unit, int profile_id, int offset, int enable);
+int bcm_switch_ep_recirc_override_profile_create(int unit, uint32 options, int *profile_id);
+int bcm_switch_ep_recirc_override_profile_destroy(int unit, int profile_id);
+int bcm_switch_ep_recirc_profile_control_get(int unit, bcm_switch_ep_recirc_profile_control_t *control);
+int bcm_switch_ep_recirc_profile_control_set(int unit, bcm_switch_ep_recirc_profile_control_t *control);
+void bcm_switch_ep_recirc_profile_control_t_init(bcm_switch_ep_recirc_profile_control_t *control);
+int bcm_switch_ep_recirc_profile_create(int unit, bcm_switch_ep_recirc_profile_t *recirc_profile, int *recirc_profile_id);
+int bcm_switch_ep_recirc_profile_destroy(int unit, int recirc_profile_id);
+int bcm_switch_ep_recirc_profile_get(int unit, int recirc_profile_id, bcm_switch_ep_recirc_profile_t *recirc_profile);
+int bcm_switch_ep_recirc_profile_get_all(int unit, int *recirc_profile_id_array, int *count);
+void bcm_switch_ep_recirc_profile_t_init(bcm_switch_ep_recirc_profile_t *recirc_profile);
+int bcm_switch_ep_recirc_second_pass_profile_create(int unit, uint32 options, bcm_switch_ep_recirc_second_pass_profile_t *profile, int *profile_id);
+int bcm_switch_ep_recirc_second_pass_profile_destroy(int unit, int profile_id);
+int bcm_switch_ep_recirc_second_pass_profile_get(int unit, int profile_id, bcm_switch_ep_recirc_second_pass_profile_t *profile);
+void bcm_switch_ep_recirc_second_pass_profile_t_init(bcm_switch_ep_recirc_second_pass_profile_t *profile);
+int bcm_switch_ep_recirc_second_pass_profile_traverse(int unit, bcm_switch_ep_recirc_second_pass_profile_traverse_cb cb, void *user_data);
+int bcm_switch_ep_recirc_trace_event_control_get(int unit, bcm_switch_ep_recirc_trace_event_control_t *trace_event_ctrl);
+int bcm_switch_ep_recirc_trace_event_control_set(int unit, bcm_switch_ep_recirc_trace_event_control_t *trace_event_ctrl);
+void bcm_switch_ep_recirc_trace_event_control_t_init(bcm_switch_ep_recirc_trace_event_control_t *trace_event_ctrl);
+int bcm_switch_ep_recirc_trace_event_enable_get(int unit, bcm_pkt_trace_event_t trace_event, int *enable);
+int bcm_switch_ep_recirc_trace_event_enable_get_all(int unit, bcm_pkt_trace_event_t *trace_event_array, int *count);
+int bcm_switch_ep_recirc_trace_event_enable_set(int unit, bcm_pkt_trace_event_t trace_event, int enable);
+int bcm_switch_event_control_get(int unit, bcm_switch_event_t event, bcm_switch_event_control_t type, uint32 *value);
+int bcm_switch_event_control_set(int unit, bcm_switch_event_t event, bcm_switch_event_control_t type, uint32 value);
+int bcm_switch_event_register(int unit, bcm_switch_event_cb_t cb, void *userdata);
+int bcm_switch_event_register_with_type(int unit, uint32 flags, bcm_switch_event_t event_type, bcm_switch_event_cb_t cb, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_event_unregister(int unit, bcm_switch_event_cb_t cb, void *userdata);
+int bcm_switch_event_unregister_with_type(int unit, uint32 flags, bcm_switch_event_t event_type, bcm_switch_event_cb_t cb, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_fec_property_get(int unit, bcm_switch_fec_property_config_t *fec_config);
+int bcm_switch_fifo_source_get(int unit, bcm_switch_fifo_source_type_t *src_info);
+int bcm_switch_fifo_source_set(int unit, bcm_switch_fifo_source_type_t *src_info);
+int bcm_switch_gtp_terminator_add(int unit, bcm_switch_gtp_terminator_t *info);
+int bcm_switch_gtp_terminator_delete(int unit, bcm_switch_gtp_terminator_t *info);
+int bcm_switch_gtp_terminator_get(int unit, bcm_switch_gtp_terminator_t *info);
+void bcm_switch_gtp_terminator_t_init(bcm_switch_gtp_terminator_t *config);
+int bcm_switch_gtp_terminator_traverse(int unit, bcm_switch_gtp_terminator_additional_info_t *additional_info, bcm_switch_gtp_terminator_traverse_cb cb, void *user_data);
+int bcm_switch_hard_reset_cb_register(int unit, uint32 flags, bcm_switch_hard_reset_callback_t callback, void *userdata);
+int bcm_switch_hard_reset_cb_unregister(int unit, bcm_switch_hard_reset_callback_t callback, void *userdata);
+int bcm_switch_hash_bank_control_get(int unit, bcm_switch_hash_bank_control_t *bank_control);
+void bcm_switch_hash_bank_control_init(bcm_switch_hash_bank_control_t *bank_control);
+int bcm_switch_hash_bank_control_set(int unit, bcm_switch_hash_bank_control_t *bank_control);
+int bcm_switch_hash_bank_info_get(int unit, bcm_switch_hash_bank_info_t *bank_info);
+void bcm_switch_hash_bank_info_init(bcm_switch_hash_bank_info_t *bank_info);
+int bcm_switch_hash_bank_multi_get(int unit, bcm_switch_hash_table_t hash_table, int array_size, bcm_switch_hash_bank_t *bank_array, int *num_banks);
+int bcm_switch_hash_banks_config_get(int unit, bcm_switch_hash_table_t hash_table, uint32 bank_num, int *hash_type, uint32 *hash_offset);
+int bcm_switch_hash_banks_config_set(int unit, bcm_switch_hash_table_t hash_table, uint32 bank_num, int hash_type, uint32 hash_offset);
+int bcm_switch_hash_banks_max_get(int unit, bcm_switch_hash_table_t hash_table, uint32 *bank_count);
+void bcm_switch_hash_entry_config_t_init(bcm_switch_hash_entry_config_t *config);
+int bcm_switch_hash_entry_create(int unit, bcm_field_group_t group, bcm_hash_entry_t *entry);
+int bcm_switch_hash_entry_create_qset(int unit, bcm_field_qset_t qset, bcm_hash_entry_t *entry);
+int bcm_switch_hash_entry_destroy(int unit, bcm_hash_entry_t entry);
+int bcm_switch_hash_entry_get(int unit, bcm_hash_entry_t entry, bcm_switch_hash_entry_config_t *config);
+int bcm_switch_hash_entry_install(int unit, bcm_hash_entry_t entry, uint32 offset);
+int bcm_switch_hash_entry_reinstall(int unit, bcm_hash_entry_t entry, uint32 offset);
+int bcm_switch_hash_entry_remove(int unit, bcm_hash_entry_t entry);
+int bcm_switch_hash_entry_set(int unit, bcm_hash_entry_t entry, bcm_switch_hash_entry_config_t *config);
+int bcm_switch_hash_entry_traverse(int unit, int flags, bcm_switch_hash_entry_traverse_cb cb_fn, void *user_data);
+int bcm_switch_hash_qualify_data(int unit, bcm_hash_entry_t entry, int qual_id, uint32 data, uint32 mask);
+int bcm_switch_hash_qualify_udf(int unit, bcm_hash_entry_t entry, bcm_udf_id_t udf_id, int length, uint8 *data, uint8 *mask);
+int bcm_switch_hash_qualify_udf_class(int unit, bcm_hash_entry_t entry, uint16 data, uint16 mask);
+int bcm_switch_hash_qualify_udf_class_get(int unit, bcm_hash_entry_t entry, uint16 *data, uint16 *mask);
+int bcm_switch_hash_qualify_udf_get(int unit, bcm_hash_entry_t entry, bcm_udf_id_t udf_id, int max_length, uint8 *data, uint8 *mask, int *actual_length);
+int bcm_switch_hash_table_multi_get(int unit, bcm_switch_hash_bank_t bank_num, int array_size, bcm_switch_hash_table_t *table_array, int *num_tables);
+int bcm_switch_hash_tunnel_hdr_ieu_policy_get(int unit, bcm_hash_entry_t entry, bcm_switch_hash_tunnel_hdr_ieu_policy_t *policy);
+int bcm_switch_hash_tunnel_hdr_ieu_policy_set(int unit, bcm_hash_entry_t entry, bcm_switch_hash_tunnel_hdr_ieu_policy_t policy);
+int bcm_switch_hla_appl_result_get(int unit, bcm_switch_hla_appl_result_t *result);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_hla_appl_result_t_init(bcm_switch_hla_appl_result_t *result);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_hla_appl_run(int unit, uint32 argc, uint32 *argv);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_hla_init(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_hla_status_get(int unit, bcm_switch_hla_status_t *status);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_hla_status_t_init(bcm_switch_hla_status_t *status);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ifa_ep_recirc_profiles_get(int unit, int max_profiles, int *ifa_recirc_profile_ids, bcm_switch_ifa_ep_recirc_profile_type_t *recirc_profile_type, int *num_profiles);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ipv6_reserved_multicast_addr_get(int unit, bcm_ip6_t *ip6_addr, bcm_ip6_t *ip6_mask);
+int bcm_switch_ipv6_reserved_multicast_addr_multi_get(int unit, int inner, int num, bcm_ip6_t *ip6_addr, bcm_ip6_t *ip6_mask);
+int bcm_switch_ipv6_reserved_multicast_addr_multi_set(int unit, int inner, int num, bcm_ip6_t *ip6_addr, bcm_ip6_t *ip6_mask);
+int bcm_switch_ipv6_reserved_multicast_addr_set(int unit, bcm_ip6_t ip6_addr, bcm_ip6_t ip6_mask);
+int bcm_switch_kbp_apptype_info_get(int unit, bcm_core_t core, bcm_field_AppType_t apptype, bcm_switch_kbp_apptype_info_t *apptype_info);
+int bcm_switch_kbp_info_get(int unit, bcm_core_t core, bcm_switch_kbp_info_t *kbp_info);
+int bcm_switch_l3_protocol_group_get(int unit, uint32 *group_members, bcm_l3_protocol_group_id_t *group_id);
+int bcm_switch_l3_protocol_group_set(int unit, uint32 group_members, bcm_l3_protocol_group_id_t group_id);
+int bcm_switch_led_control_data_read(int unit, int led_uc, int offset, uint8 *data, int len);
+int bcm_switch_led_control_data_write(int unit, int led_uc, int offset, uint8 *data, int len);
+int bcm_switch_led_fw_load(int unit, int led_uc, uint8 *data, int len);
+int bcm_switch_led_fw_start_get(int unit, int led_uc, int *data);
+int bcm_switch_led_fw_start_set(int unit, int led_uc, int data);
+int bcm_switch_led_port_to_uc_port_get(int unit, int port, int *led_uc, int *led_uc_port);
+int bcm_switch_led_port_to_uc_port_set(int unit, int port, int led_uc, int led_uc_port);
+int bcm_switch_led_uc_num_get(int unit, int *led_uc_num);
+int bcm_switch_lif_hit_get(int unit, bcm_switch_lif_hit_t *lif_hit);
+int bcm_switch_lif_property_get(int unit, bcm_switch_lif_property_t lif_property, bcm_switch_lif_property_config_t *lif_config);
+int bcm_switch_lif_property_set(int unit, bcm_switch_lif_property_t lif_property, bcm_switch_lif_property_config_t *lif_config);
+int bcm_switch_lt_info_get(int unit, bcm_switch_pt_info_t *pt_info, int array_size, bcm_switch_lt_info_t *lt_info_array, int *count);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_lt_info_t_init(bcm_switch_lt_info_t *lt_info);
+int bcm_switch_match_config_add(int unit, bcm_switch_match_service_t match_service, bcm_switch_match_config_info_t *config_info, int *match_id);
+int bcm_switch_match_config_delete(int unit, bcm_switch_match_service_t match_service, int match_id);
+int bcm_switch_match_config_delete_all(int unit, bcm_switch_match_service_t match_service);
+int bcm_switch_match_config_get(int unit, bcm_switch_match_service_t match_service, int match_id, bcm_switch_match_config_info_t *config_info);
+void bcm_switch_match_config_info_t_init(bcm_switch_match_config_info_t *config_info);
+int bcm_switch_match_config_set(int unit, bcm_switch_match_service_t match_service, int match_id, bcm_switch_match_config_info_t *config_info);
+int bcm_switch_match_config_traverse(int unit, bcm_switch_match_service_t match_service, bcm_switch_match_config_traverse_cb cb_fn, void *user_data);
+int bcm_switch_match_control_get(int unit, bcm_switch_match_service_t match_service, bcm_switch_match_control_type_t control_type, bcm_gport_t gport, bcm_switch_match_control_info_t *control_info);
+void bcm_switch_match_control_info_t_init(bcm_switch_match_control_info_t *control_info);
+int bcm_switch_match_control_set(int unit, bcm_switch_match_service_t match_service, bcm_switch_match_control_type_t control_type, bcm_gport_t gport, bcm_switch_match_control_info_t *control_info);
+int bcm_switch_match_control_traverse(int unit, bcm_switch_match_service_t match_service, bcm_switch_match_control_traverse_cb cb_fn, void *user_data);
+int bcm_switch_mod_ep_recirc_profiles_get(int unit, int max_profiles, int *mod_recirc_profile_ids, bcm_switch_mod_ep_recirc_profile_type_t *recirc_profile_type, int *num_profiles);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_mon_action_sample_get(int unit, bcm_switch_mon_action_sample_t *sample);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_mon_action_sample_set(int unit, bcm_switch_mon_action_sample_t *sample);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_mon_action_sample_t_init(bcm_switch_mon_action_sample_t *sample);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_mon_supported_drops_info_get(int unit, bcm_switch_mon_supported_drops_info_t *drops_info);
+int bcm_switch_network_group_config_get(int unit, bcm_switch_network_group_t source_network_group_id, bcm_switch_network_group_config_t *config);
+int bcm_switch_network_group_config_set(int unit, bcm_switch_network_group_t source_network_group_id, bcm_switch_network_group_config_t *config);
+void bcm_switch_network_group_config_t_init(bcm_switch_network_group_config_t *config);
+int bcm_switch_nonsw_pkt_to_secondary_enable_get(int unit, bcm_switch_nonsw_pkt_to_secondary_enable_control_t *enable_control);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_nonsw_pkt_to_secondary_enable_set(int unit, bcm_switch_nonsw_pkt_to_secondary_enable_control_t *enable_control);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_object_count_get(int unit, bcm_switch_object_t object, int *entries);
+int bcm_switch_object_count_multi_get(int unit, int object_size, bcm_switch_object_t *object_array, int *entries);
+int bcm_switch_obm_classifier_mapping_get(int unit, bcm_gport_t gport, bcm_switch_obm_classifier_type_t switch_obm_classifier_type, bcm_switch_obm_classifier_t *switch_obm_classifier);
+int bcm_switch_obm_classifier_mapping_multi_get(int unit, bcm_gport_t port, bcm_switch_obm_classifier_type_t switch_obm_classifier_type, int array_max, bcm_switch_obm_classifier_t *switch_obm_classifier, int *array_count);
+int bcm_switch_obm_classifier_mapping_multi_set(int unit, bcm_gport_t gport, bcm_switch_obm_classifier_type_t switch_obm_classifier_type, int array_count, bcm_switch_obm_classifier_t *switch_obm_classifier);
+int bcm_switch_obm_classifier_mapping_set(int unit, bcm_gport_t gport, bcm_switch_obm_classifier_type_t switch_obm_classifier_type, bcm_switch_obm_classifier_t *switch_obm_classifier);
+void bcm_switch_obm_classifier_t_init(bcm_switch_obm_classifier_t *switch_obm_classifier);
+int bcm_switch_olp_l2_addr_add(int unit, uint32 options, bcm_switch_olp_l2_addr_t *l2_addr);
+int bcm_switch_olp_l2_addr_delete(int unit, bcm_switch_olp_l2_addr_t *l2_addr);
+int bcm_switch_olp_l2_addr_delete_all(int unit);
+int bcm_switch_olp_l2_addr_get(int unit, bcm_switch_olp_l2_addr_t *l2_addr);
+void bcm_switch_olp_l2_addr_t_init(bcm_switch_olp_l2_addr_t *l2_addr);
+int bcm_switch_olp_l2_addr_traverse(int unit, bcm_switch_olp_l2_addr_traverse_cb cb_fn, void *user_data);
+int bcm_switch_opaque_tag_config_get(int unit, int index, bcm_switch_opaque_tag_params_t *opaque_tag_config);
+int bcm_switch_opaque_tag_config_set(int unit, int index, bcm_switch_opaque_tag_params_t *opaque_tag_config);
+void bcm_switch_opaque_tag_config_t_init(bcm_switch_opaque_tag_params_t *info);
+int bcm_switch_outlif_profile_group_create(int unit, uint32 flags, int *outlif_profile_group, bcm_switch_outlif_profile_group_t *outlif_profile_group_info);
+int bcm_switch_outlif_profile_group_destroy(int unit, int outlif_profile_group);
+int bcm_switch_outlif_profile_group_get(int unit, uint32 flags, int outlif_profile_group, bcm_switch_outlif_profile_group_t *outlif_profile_group_info);
+int bcm_switch_payload_opaque_tag_config_get(int unit, int index, bcm_switch_opaque_tag_params_t *opaque_tag_config);
+int bcm_switch_payload_opaque_tag_config_set(int unit, int index, bcm_switch_opaque_tag_params_t *opaque_tag_config);
+int bcm_switch_pcie_firmware_info_get(int unit, bcm_switch_pcie_firmware_info_t *info);
+void bcm_switch_pcie_firmware_info_t_init(bcm_switch_pcie_firmware_info_t *info);
+void bcm_switch_pkt_control_action_t_init(bcm_switch_pkt_control_action_t *action);
+int bcm_switch_pkt_info_hash_get(int unit, bcm_switch_pkt_info_t *pkt_info, bcm_gport_t *dst_gport, bcm_if_t *dst_intf);
+void bcm_switch_pkt_info_t_init(bcm_switch_pkt_info_t *pkt_info);
+int bcm_switch_pkt_integrity_check_add(int unit, uint32 options, bcm_switch_pkt_integrity_match_t *match, bcm_switch_pkt_control_action_t *action, int priority);
+int bcm_switch_pkt_integrity_check_delete(int unit, bcm_switch_pkt_integrity_match_t *match);
+int bcm_switch_pkt_integrity_check_get(int unit, bcm_switch_pkt_integrity_match_t *match, bcm_switch_pkt_control_action_t *action, int *priority);
+void bcm_switch_pkt_integrity_match_t_init(bcm_switch_pkt_integrity_match_t *match);
+int bcm_switch_pkt_protocol_control_add(int unit, uint32 options, bcm_switch_pkt_protocol_match_t *match, bcm_switch_pkt_control_action_t *action, int priority);
+int bcm_switch_pkt_protocol_control_delete(int unit, bcm_switch_pkt_protocol_match_t *match);
+int bcm_switch_pkt_protocol_control_delete_all(int unit);
+int bcm_switch_pkt_protocol_control_get(int unit, bcm_switch_pkt_protocol_match_t *match, bcm_switch_pkt_control_action_t *action, int *priority);
+int bcm_switch_pkt_protocol_control_traverse(int unit, bcm_switch_pkt_protocol_control_traverse_cb cb, void *user_data);
+void bcm_switch_pkt_protocol_match_t_init(bcm_switch_pkt_protocol_match_t *match);
+int bcm_switch_pkt_trace_info_clear(int unit, bcm_port_t port);
+int bcm_switch_pkt_trace_info_get(int unit, uint32 options, uint8 port, int len, uint8 *data, bcm_switch_pkt_trace_info_t *pkt_trace_info);
+int bcm_switch_pkt_trace_raw_data_get(int unit, uint32 options, uint8 port, int len, uint8 *data, uint32 raw_data_buf_size, uint8 *raw_data, uint32 *raw_data_size);
+int bcm_switch_pll_status_get(int unit, uint32 flags, bcm_switch_pll_control_key_t key, int *status);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_port_block_get(int unit, bcm_switch_port_stage_t stage, uint32 flags, bcm_switch_port_source_t *source, int member_max, bcm_switch_port_member_t *member_array, int *member_count);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_port_block_set(int unit, bcm_switch_port_stage_t stage, uint32 flags, bcm_switch_port_source_t *source, int member_count, bcm_switch_port_member_t *member_array);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_power_throttling_leaky_bucket_params_get(int unit, uint32 flags, bcm_switch_power_throttling_leaky_bucket_params_t *params);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_power_throttling_leaky_bucket_params_set(int unit, uint32 flags, bcm_switch_power_throttling_leaky_bucket_params_t params);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_power_throttling_profile_get(int unit, uint32 flags, int profile_index, bcm_switch_power_throttling_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_power_throttling_profile_set(int unit, uint32 flags, int profile_index, bcm_switch_power_throttling_profile_t profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_power_throttling_state_to_profile_offset_map_get(int unit, uint32 flags, bcm_switch_power_throttling_state_t state, int *profile_offset);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_power_throttling_state_to_profile_offset_map_set(int unit, uint32 flags, bcm_switch_power_throttling_state_t state, int profile_offset);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_primary_unit_get(int unit, int *primary_unit);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_profile_mapping_t_init(bcm_switch_profile_mapping_t *profile_mapping);
+void bcm_switch_pt_info_t_init(bcm_switch_pt_info_t *pt_info);
+int bcm_switch_rcpu_decap_priority_map_get(int unit, int decap_pri, int *internal_cpu_pri);
+int bcm_switch_rcpu_decap_priority_map_set(int unit, int decap_pri, int internal_cpu_pri);
+int bcm_switch_rcpu_encap_priority_map_get(int unit, uint32 flags, int internal_cpu_pri, int *encap_pri);
+int bcm_switch_rcpu_encap_priority_map_set(int unit, uint32 flags, int internal_cpu_pri, int encap_pri);
+int bcm_switch_reflector_create(int unit, uint32 flags, bcm_if_t *encap_id, bcm_switch_reflector_data_t *data);
+void bcm_switch_reflector_data_t_init(bcm_switch_reflector_data_t *data);
+int bcm_switch_reflector_destroy(int unit, uint32 flags, bcm_if_t encap_id);
+int bcm_switch_reflector_get(int unit, uint32 flags, bcm_if_t encap_id, bcm_switch_reflector_data_t *data);
+int bcm_switch_reflector_traverse(int unit, uint32 flags, bcm_switch_reflector_traverse_cb traverse_cb, void *user_data);
+int bcm_switch_resource_utilization_get(int unit, bcm_switch_resource_utilization_query_t *resource, bcm_switch_resource_utilization_t *utilization);
+int bcm_switch_rov_get(int unit, uint32 flags, uint32 *rov);
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_create(int unit, bcm_switch_secondary_to_primary_pkt_control_egr_profile_t *pkt_control_egr_profile, int *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_destroy(int unit, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_destroy_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_get(int unit, int profile_id, bcm_switch_secondary_to_primary_pkt_control_egr_profile_t *pkt_control_egr_profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_egr_profile_get_all(int unit, int max, int *profile_id_array, int *count);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_secondary_to_primary_pkt_control_egr_profile_t_init(bcm_switch_secondary_to_primary_pkt_control_egr_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_create(int unit, bcm_switch_secondary_to_primary_pkt_control_ing_profile_t *pkt_control_ing_profile, int *profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_destroy(int unit, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_destroy_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_get(int unit, int profile_id, bcm_switch_secondary_to_primary_pkt_control_ing_profile_t *pkt_control_ing_profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_to_primary_pkt_control_ing_profile_get_all(int unit, int max, int *profile_id_array, int *count);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_secondary_to_primary_pkt_control_ing_profile_t_init(bcm_switch_secondary_to_primary_pkt_control_ing_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_secondary_unit_get(int unit, int *secondary_unit);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ser_error_stat_clear(int unit, bcm_switch_ser_error_stat_type_t stat_type);
+int bcm_switch_ser_error_stat_get(int unit, bcm_switch_ser_error_stat_type_t stat_type, uint32 *value);
+void bcm_switch_ser_error_stat_type_t_init(bcm_switch_ser_error_stat_type_t *stat_type);
+int bcm_switch_ser_log_info_get(int unit, int id, bcm_switch_ser_log_info_t *info);
+void bcm_switch_ser_log_info_t_init(bcm_switch_ser_log_info_t *info);
+int bcm_switch_ser_mem_capability_test(int unit, uint32 flags, char *log_file);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ser_pt_status_get(int unit, char *pt_name, bcm_switch_ser_pt_status_t *ser_pt_status);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_ser_pt_status_t_init(bcm_switch_ser_pt_status_t *ser_pt_status);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ser_report_config_get(int unit, bcm_switch_error_type_t error_type, bcm_switch_ser_report_config_t *ser_report_config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_ser_report_config_set(int unit, bcm_switch_error_type_t error_type, bcm_switch_ser_report_config_t *ser_report_config);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_ser_report_config_t_init(bcm_switch_ser_report_config_t *ser_report_config);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_service_config_t_init(bcm_switch_service_config_t *config);
+int bcm_switch_service_get(int unit, bcm_switch_service_t service, bcm_switch_service_config_t *config);
+int bcm_switch_service_set(int unit, bcm_switch_service_t service, bcm_switch_service_config_t *config);
+int bcm_switch_smartasf_config_get(int unit, int max_levels, bcm_switch_smartasf_config_t *smartasf_config_list, int *cur_levels);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_config_set(int unit, int num_levels, bcm_switch_smartasf_config_t *smartasf_config_list);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_smartasf_config_t_init(bcm_switch_smartasf_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_event_register(int unit, bcm_switch_smartasf_event_callback_t callback, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_event_unregister(int unit, bcm_switch_smartasf_event_callback_t callback, void *userdata);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_port_control_get(int unit, bcm_port_t port, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_port_control_set(int unit, bcm_port_t port, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_port_event_enable_get(int unit, bcm_port_t port, bcm_switch_smartasf_event_type_t event, int level, int *enable);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_port_event_enable_set(int unit, bcm_port_t port, bcm_switch_smartasf_event_type_t event, int level, int enable);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_port_stats_get(int unit, bcm_port_t port, bcm_switch_smartasf_stat_type_t stat_type, uint32 *stat_value);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_smartasf_port_stats_set(int unit, bcm_port_t port, bcm_switch_smartasf_stat_type_t stat_type, uint32 stat_value);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_stable_register(int unit, bcm_switch_read_func_t rf, bcm_switch_write_func_t wf);
+int bcm_switch_stat_event_mon_drop_reasons_clear(int unit, bcm_switch_stat_stage_t switch_stage, bcm_switch_stat_event_mon_drop_reasons_t *drop_reasons);
+int bcm_switch_stat_event_mon_drop_reasons_get(int unit, bcm_switch_stat_stage_t switch_stage, bcm_switch_stat_event_mon_drop_reasons_t *drop_reasons);
+void bcm_switch_stat_event_mon_drop_reasons_t_init(bcm_switch_stat_event_mon_drop_reasons_t *drop_reasons);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_stat_event_mon_get(int unit, bcm_switch_stat_event_mon_t *monitor);
+int bcm_switch_stat_event_mon_set(int unit, bcm_switch_stat_event_mon_t *monitor);
+void bcm_switch_stat_event_mon_t_init(bcm_switch_stat_event_mon_t *monitor);
+int bcm_switch_svtag_egress_entry_add(int unit, uint32 flags, bcm_gport_t gport, bcm_switch_svtag_egress_info_t *svtag_info);
+int bcm_switch_svtag_egress_entry_delete(int unit, uint32 flags, bcm_gport_t gport);
+int bcm_switch_svtag_egress_entry_get(int unit, uint32 flags, bcm_gport_t gport, bcm_switch_svtag_egress_info_t *svtag_info);
+int bcm_switch_svtag_egress_entry_traverse(int unit, uint32 flags, bcm_switch_svtag_egress_traverse_cb trav_fn, void *user_data);
+int bcm_switch_svtag_encapsulation_add(int unit, bcm_switch_svtag_encapsulation_lookup_info_t *svtag_lookup_info, bcm_switch_svtag_egress_info_t *svtag_info);
+int bcm_switch_svtag_encapsulation_delete(int unit, bcm_switch_svtag_encapsulation_lookup_info_t *svtag_lookup_info);
+int bcm_switch_svtag_encapsulation_get(int unit, bcm_switch_svtag_encapsulation_lookup_info_t *svtag_lookup_info, bcm_switch_svtag_egress_info_t *svtag_info);
+int bcm_switch_svtag_encapsulation_traverse(int unit, uint32 flags, bcm_switch_svtag_encapsulation_traverse_cb trav_fn, void *user_data);
+int bcm_switch_temperature_monitor_get(int unit, int temperature_max, bcm_switch_temperature_monitor_t *temperature_array, int *temperature_count);
+int bcm_switch_thermo_sensor_read(int unit, bcm_switch_thermo_sensor_type_t sensor_type, int interface_id, bcm_switch_thermo_sensor_t *sensor_data);
+int bcm_switch_to_secondary_drop_control_get(int unit, bcm_switch_to_secondary_drop_control_t *drop_control);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_to_secondary_drop_control_set(int unit, bcm_switch_to_secondary_drop_control_t *drop_control);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_to_secondary_map_action_t_init(bcm_switch_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_to_secondary_map_add(int unit, uint32 options, bcm_switch_to_secondary_map_match_t *match, bcm_switch_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_to_secondary_map_delete(int unit, bcm_switch_to_secondary_map_match_t *match);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_to_secondary_map_delete_all(int unit);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_to_secondary_map_get(int unit, bcm_switch_to_secondary_map_match_t *match, bcm_switch_to_secondary_map_action_t *action);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_to_secondary_map_match_t_init(bcm_switch_to_secondary_map_match_t *match);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_to_secondary_map_traverse(int unit, bcm_switch_to_secondary_map_traverse_cb cb, void *user_data);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_tpid_add(int unit, uint32 options, bcm_switch_tpid_info_t *tpid_info);
+int bcm_switch_tpid_class_get(int unit, bcm_switch_tpid_class_t *tpid_class);
+void bcm_switch_tpid_class_t_init(bcm_switch_tpid_class_t *tpid_class);
+int bcm_switch_tpid_delete(int unit, bcm_switch_tpid_info_t *tpid_info);
+int bcm_switch_tpid_delete_all(int unit);
+int bcm_switch_tpid_get(int unit, bcm_switch_tpid_info_t *tpid_info);
+int bcm_switch_tpid_get_all(int unit, int size, bcm_switch_tpid_info_t *tpid_info_array, int *count);
+int bcm_switch_trace_event_mon_get(int unit, bcm_switch_trace_event_mon_t *monitor);
+int bcm_switch_trace_event_mon_set(int unit, bcm_switch_trace_event_mon_t *monitor);
+void bcm_switch_trace_event_mon_t_init(bcm_switch_trace_event_mon_t *monitor);
+int bcm_switch_trim_header_config_get(int unit, bcm_switch_trim_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_trim_header_config_set(int unit, bcm_switch_trim_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_trim_header_config_t_init(bcm_switch_trim_header_config_t *config);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_truncate_length_profile_create(int unit, uint32 options, int *profile_id, bcm_switch_truncate_length_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_truncate_length_profile_destroy(int unit, int profile_id);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_truncate_length_profile_get(int unit, int profile_id, bcm_switch_truncate_length_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_truncate_length_profile_t_init(bcm_switch_truncate_length_profile_t *profile);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_user_buffer_read(int unit, uint32 flags, bcm_switch_user_buffer_type_t buff_type, uint8 *buf, int offset, int nbytes);
+int bcm_switch_user_buffer_write(int unit, uint32 flags, bcm_switch_user_buffer_type_t buff_type, uint8 *buf, int offset, int nbytes);
+int bcm_switch_vca_appl_profile_info_get(int unit, bcm_switch_vca_appl_type_t appl_type, int appl_profile_idx, bcm_switch_vca_appl_profile_info_t *info);  /* not in OpenBCM 6.5.27 */
+void bcm_switch_vca_appl_profile_info_t_init(bcm_switch_vca_appl_profile_info_t *info);  /* not in OpenBCM 6.5.27 */
+int bcm_switch_voltage_monitor_get(int unit, int *avg_voltage);
+int bcm_switch_wide_data_extension_add(int unit, uint32 flags, bcm_switch_wide_data_extension_info_t *info);
+int bcm_switch_wide_data_extension_delete(int unit, uint32 flags, bcm_switch_wide_data_extension_info_t *info);
+int bcm_switch_wide_data_extension_get(int unit, uint32 flags, bcm_switch_wide_data_extension_info_t *info);
+int bcm_switch_wide_data_extension_traverse(int unit, bcm_switch_wide_data_extension_traverse_cb cb, void *user_data);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-subport.html" class="btn btn-neutral float-left" title="bcm_subport_* (50)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-tdpll.html" class="btn btn-neutral float-right" title="bcm_tdpll_* (74)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

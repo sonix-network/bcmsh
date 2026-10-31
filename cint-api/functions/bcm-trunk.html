@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bcm_trunk_* (90) &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="bcm_tsn_* (161)" href="bcm-tsn.html" />
+    <link rel="prev" title="bcm_time_* (56)" href="bcm-time.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extra-constants.html">Constants not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Cint API on this build</a></li>
+          <li class="breadcrumb-item"><a href="index.html">All registered functions</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">bcm_trunk_*</span></code> (90)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bcm-trunk-90">
+<h1><code class="docutils literal notranslate"><span class="pre">bcm_trunk_*</span></code> (90)<a class="headerlink" href="#bcm-trunk-90" title="Link to this heading"></a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void BCM_TRUNK_ID_GROUP_GET(int *group, int *trunk_id);
+int BCM_TRUNK_ID_IS_VALID(int *trunk_id);
+int BCM_TRUNK_ID_POOL_GET(int *pool, int *trunk_id);
+void BCM_TRUNK_ID_SET(int *trunk_id, int *pool, int *group);
+int BCM_TRUNK_STACKING_TID_GET(bcm_trunk_t *tid);
+void BCM_TRUNK_STACKING_TID_SET(bcm_trunk_t *tid, int *peer_tmd);
+int bcm_trunk_agm_attach(int unit, bcm_trunk_t trunk_id, bcm_switch_agm_id_t agm_id);
+int bcm_trunk_agm_attach_get(int unit, bcm_trunk_t trunk_id, bcm_switch_agm_id_t *agm_id);
+int bcm_trunk_agm_detach(int unit, bcm_trunk_t trunk_id, bcm_switch_agm_id_t agm_id);
+int bcm_trunk_bitmap_expand(int unit, bcm_pbmp_t *pbmp_ptr);
+int bcm_trunk_chip_info_get(int unit, bcm_trunk_chip_info_t *ta_info);
+void bcm_trunk_chip_info_t_init(bcm_trunk_chip_info_t *trunk_chip_info);
+int bcm_trunk_control_set(int unit, uint32 flags, bcm_trunk_t trunk_id, bcm_trunk_control_t trunk_control, int value);  /* not in OpenBCM 6.5.27 */
+int bcm_trunk_create(int unit, uint32 flags, bcm_trunk_t *tid);
+int bcm_trunk_destroy(int unit, bcm_trunk_t tid);
+int bcm_trunk_detach(int unit);
+void bcm_trunk_dlb_mon_cfg_t_init(bcm_trunk_dlb_mon_cfg_t *dlb_mon_cfg);
+int bcm_trunk_dlb_mon_config_get(int unit, bcm_trunk_t tid, bcm_trunk_dlb_mon_cfg_t *dlb_mon_cfg);
+int bcm_trunk_dlb_mon_config_set(int unit, bcm_trunk_t tid, bcm_trunk_dlb_mon_cfg_t *dlb_mon_cfg);
+int bcm_trunk_dlb_stat_get(int unit, bcm_trunk_t tid, bcm_trunk_dlb_stat_t type, uint64 *value);
+int bcm_trunk_dlb_stat_set(int unit, bcm_trunk_t tid, bcm_trunk_dlb_stat_t type, uint64 value);
+int bcm_trunk_dlb_stat_sync_get(int unit, bcm_trunk_t tid, bcm_trunk_dlb_stat_t type, uint64 *value);
+int bcm_trunk_egress_get(int unit, bcm_trunk_t tid, bcm_pbmp_t *pbmp);
+int bcm_trunk_egress_set(int unit, bcm_trunk_t tid, bcm_pbmp_t pbmp);
+int bcm_trunk_ethertype_get(int unit, uint32 *flags, int ethertype_max, int *ethertype_array, int *ethertype_count);
+int bcm_trunk_ethertype_set(int unit, uint32 flags, int ethertype_count, int *ethertype_array);
+int bcm_trunk_failover_get(int unit, bcm_trunk_t tid, bcm_gport_t failport, int *psc, uint32 *flags, int array_size, bcm_gport_t *fail_to_array, int *array_count);
+int bcm_trunk_failover_set(int unit, bcm_trunk_t tid, bcm_gport_t failport, int psc, uint32 flags, int count, bcm_gport_t *fail_to_array);
+int bcm_trunk_find(int unit, bcm_module_t modid, bcm_gport_t gport, bcm_trunk_t *tid);
+int bcm_trunk_flexctr_object_get(int unit, bcm_trunk_t tid, uint16 *value);
+int bcm_trunk_flexctr_object_set(int unit, bcm_trunk_t tid, uint16 value);
+int bcm_trunk_flow_agg_clear(int unit, int flow_agg_id, int flags);  /* not in OpenBCM 6.5.27 */
+int bcm_trunk_flow_agg_get(int unit, int flow_agg_id, int flags, bcm_flow_agg_info_t *flow_agg_info);
+int bcm_trunk_flow_agg_set(int unit, int flow_agg_id, int flags, bcm_flow_agg_info_t *flow_agg_info);
+int bcm_trunk_get(int unit, bcm_trunk_t tid, bcm_trunk_info_t *t_data, int member_max, bcm_trunk_member_t *member_array, int *member_count);
+int bcm_trunk_gport_add(int unit, bcm_trunk_t tid, bcm_gport_t gport);
+int bcm_trunk_gport_delete(int unit, bcm_trunk_t tid, bcm_gport_t gport);
+int bcm_trunk_gport_delete_all(int unit, bcm_trunk_t tid);
+int bcm_trunk_gport_get_all(int unit, bcm_trunk_t tid, int gport_size, bcm_gport_t *gport_array, int *count);
+void bcm_trunk_info_t_init(bcm_trunk_info_t *trunk_info);
+int bcm_trunk_init(int unit);
+int bcm_trunk_mcast_join(int unit, bcm_trunk_t tid, bcm_vlan_t vid, bcm_mac_t mac);
+int bcm_trunk_member_add(int unit, bcm_trunk_t tid, bcm_trunk_member_t *member);
+int bcm_trunk_member_block_get(int unit, bcm_trunk_member_block_key_t *key, bcm_pbmp_t *block_pbmp);
+int bcm_trunk_member_block_get_all(int unit, bcm_trunk_member_block_key_t *key, int array_size, bcm_pbmp_t *block_pbmp_array, int *count);
+void bcm_trunk_member_block_key_t_init(bcm_trunk_member_block_key_t *trunk_info);
+int bcm_trunk_member_block_set(int unit, bcm_trunk_member_block_key_t *key, bcm_pbmp_t block_pbmp);
+int bcm_trunk_member_block_set_all(int unit, bcm_trunk_member_block_key_t *key, int array_size, bcm_pbmp_t *block_pbmp_array);
+int bcm_trunk_member_delete(int unit, bcm_trunk_t tid, bcm_trunk_member_t *member);
+int bcm_trunk_member_delete_all(int unit, bcm_trunk_t tid);
+int bcm_trunk_member_gport_block_get(int unit, bcm_trunk_member_block_key_t *key, int max_gports, bcm_gport_t *block_gports, int *num_gports);
+int bcm_trunk_member_gport_block_set(int unit, bcm_trunk_member_block_key_t *key, int num_gports, bcm_gport_t *block_gports);
+int bcm_trunk_member_hash_range_get(int unit, uint32 flags, bcm_trunk_t trunk_id, bcm_gport_t member, bcm_trunk_member_range_t *range);
+int bcm_trunk_member_hash_range_set(int unit, uint32 flags, bcm_trunk_t trunk_id, bcm_gport_t member, bcm_trunk_member_range_t range);
+int bcm_trunk_member_status_get(int unit, bcm_gport_t member, int *status);
+int bcm_trunk_member_status_set(int unit, bcm_gport_t member, int status);
+void bcm_trunk_member_t_init(bcm_trunk_member_t *trunk_member);
+int bcm_trunk_member_update(int unit, bcm_trunk_t trunk_id, uint32 flags, bcm_trunk_member_t *matched_member, bcm_trunk_member_t *updated_member);
+int bcm_trunk_multi_set(int unit, int trunk_count, bcm_trunk_multiset_info_t *trunk_array, int tot_member_count, bcm_trunk_member_t *member_array);
+void bcm_trunk_multiset_info_t_init(bcm_trunk_multiset_info_t *trunk_multiset_info);
+int bcm_trunk_override_ipmc_get(int unit, bcm_port_t port, bcm_trunk_t tid, int idx, int *enable);
+int bcm_trunk_override_ipmc_set(int unit, bcm_port_t port, bcm_trunk_t tid, int idx, int enable);
+int bcm_trunk_override_mcast_get(int unit, bcm_port_t port, bcm_trunk_t tid, int idx, int *enable);
+int bcm_trunk_override_mcast_set(int unit, bcm_port_t port, bcm_trunk_t tid, int idx, int enable);
+int bcm_trunk_override_non_ucast_get(int unit, bcm_trunk_t tid, int *enable);
+int bcm_trunk_override_non_ucast_set(int unit, bcm_trunk_t tid, int enable);
+int bcm_trunk_override_ucast_get(int unit, bcm_port_t port, bcm_trunk_t tid, int modid, int *enable);
+int bcm_trunk_override_ucast_set(int unit, bcm_port_t port, bcm_trunk_t tid, int modid, int enable);
+int bcm_trunk_override_vlan_get(int unit, bcm_port_t port, bcm_trunk_t tid, bcm_vlan_t vid, int *enable);
+int bcm_trunk_override_vlan_set(int unit, bcm_port_t port, bcm_trunk_t tid, bcm_vlan_t vid, int enable);
+int bcm_trunk_pool_get(int unit, bcm_port_t port, bcm_trunk_t tid, int *size, int *weights);
+int bcm_trunk_pool_set(int unit, bcm_port_t port, bcm_trunk_t tid, int size, int *weights);
+int bcm_trunk_pp_port_allocation_get(int unit, bcm_trunk_t trunk_id, uint32 flags, bcm_trunk_pp_port_allocation_info_t *allocation_info);
+void bcm_trunk_pp_port_allocation_info_t_init(bcm_trunk_pp_port_allocation_info_t *allocation_info);
+int bcm_trunk_pp_port_allocation_set(int unit, bcm_trunk_t trunk_id, uint32 flags, bcm_trunk_pp_port_allocation_info_t *allocation_info);
+int bcm_trunk_profile_create(int unit, uint32 flags, bcm_trunk_profile_t *profile, int *profile_id);
+int bcm_trunk_profile_destroy(int unit, uint32 flags, int profile_id);
+int bcm_trunk_profile_get(int unit, uint32 flags, int profile_id, bcm_trunk_profile_t *profile, bcm_trunk_profile_info_t *profile_info);
+int bcm_trunk_profile_set(int unit, uint32 flags, int profile_id, bcm_trunk_profile_t *profile);
+int bcm_trunk_psc_get(int unit, bcm_trunk_t tid, int *psc);
+int bcm_trunk_psc_set(int unit, bcm_trunk_t tid, int psc);
+int bcm_trunk_resilient_replace(int unit, uint32 flags, bcm_trunk_resilient_entry_t *match_entry, int *num_entries, bcm_trunk_resilient_entry_t *replace_entry);
+int bcm_trunk_resilient_traverse(int unit, uint32 flags, bcm_trunk_resilient_entry_t *match_entry, bcm_trunk_resilient_traverse_cb trav_fn, void *user_data);
+int bcm_trunk_set(int unit, bcm_trunk_t tid, bcm_trunk_info_t *trunk_info, int member_count, bcm_trunk_member_t *member_array);
+int bcm_trunk_spa_to_system_phys_port_map_get(int unit, uint32 flags, uint32 system_port_aggregate, bcm_gport_t *gport);
+int bcm_trunk_stat_attach(int unit, bcm_trunk_t tid, uint32 stat_counter_id);
+int bcm_trunk_stat_detach(int unit, bcm_trunk_t tid, uint32 stat_counter_id);
+int bcm_trunk_stat_id_get(int unit, bcm_trunk_t tid, uint32 *stat_counter_id);
+int bcm_trunk_vplag_get(int unit, bcm_trunk_t tid, bcm_gport_t *vplag_port_id);
+int bcm_trunk_with_vplag_create(int unit, uint32 flags, bcm_trunk_t *tid, bcm_gport_t *vplag_port_id);
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bcm-time.html" class="btn btn-neutral float-left" title="bcm_time_* (56)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bcm-tsn.html" class="btn btn-neutral float-right" title="bcm_tsn_* (161)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

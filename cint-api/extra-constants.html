@@ -1,0 +1,2230 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constants not in OpenBCM &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="All registered functions" href="functions/index.html" />
+    <link rel="prev" title="Callback types not in OpenBCM" href="extra-callbacks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Cint API on this build</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#registered-names">Registered names</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#compared-with-openbcm-6-5-27">Compared with OpenBCM 6.5.27</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="extra-functions.html">Functions not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-types.html">Structures and typedefs not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-enums.html">Enums not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extra-callbacks.html">Callback types not in OpenBCM</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Constants not in OpenBCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions/index.html">All registered functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Cint API on this build</a></li>
+      <li class="breadcrumb-item active">Constants not in OpenBCM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="constants-not-in-openbcm">
+<h1>Constants not in OpenBCM<a class="headerlink" href="#constants-not-in-openbcm" title="Link to this heading"></a></h1>
+<p>Constants that the Cint interpreter on this build registers but that
+OpenBCM 6.5.27’s Cint does not, grouped by module. Back to
+<a class="reference internal" href="index.html"><span class="doc">Cint API on this build</span></a>.</p>
+<p>Values are shown as Cint sees them (32-bit integers).</p>
+<section id="bcm-bfd-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_bfd_*</span></code> (3)<a class="headerlink" href="#bcm-bfd-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_BFD_ENDPOINT_FLAGS2_EXTENDED_SIP          0x2000
+#define BCM_BFD_ENDPOINT_FLAGS2_OAMP_STATISTICS_SHIFT 0x1000
+#define BCM_BFD_ENDPOINT_FLAGS2_SRC_IP_CHECK_DISABLE  0x800
+</pre></div>
+</div>
+</section>
+<section id="bcm-cosq-89">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_cosq_*</span></code> (89)<a class="headerlink" href="#bcm-cosq-89" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_COSQ_AQM_ACTION_PROFILE_SOURCE_FTMH                       8
+#define BCM_COSQ_AQM_ACTION_PROFILE_SOURCE_GVA                        2
+#define BCM_COSQ_AQM_ACTION_PROFILE_SOURCE_GVA_TREND                  16
+#define BCM_COSQ_AQM_ACTION_PROFILE_SOURCE_LATENCY                    1
+#define BCM_COSQ_AQM_ACTION_PROFILE_SOURCE_PHANTOM_QUEUE              4
+#define BCM_COSQ_BW_FABRIC_ADJUST_CONFIG_DATAPATH                     0x100000
+#define BCM_COSQ_BW_FABRIC_ADJUST_EFFECTIVE_RCI                       0x80000
+#define BCM_COSQ_BW_FABRIC_ADJUST_RCI_THROTTLING_EXTERNAL_CAPSULE     0x800000
+#define BCM_COSQ_BW_FABRIC_ADJUST_RCI_THROTTLING_INTERNAL_CAPSULE     0x400000
+#define BCM_COSQ_BW_FABRIC_ADJUST_RCI_THROTTLING_LOCAL                0x200000
+#define BCM_COSQ_BW_KBPS                                              0x8000
+#define BCM_COSQ_BW_MBPS                                              0x40000
+#define BCM_COSQ_BW_PPS                                               0x10000
+#define BCM_COSQ_BW_SPS                                               0x20000
+#define BCM_COSQ_CBFC_CREDIT_RX_CONTROL                               1
+#define BCM_COSQ_CBFC_CREDIT_SIZE_128                                 3
+#define BCM_COSQ_CBFC_CREDIT_SIZE_256                                 4
+#define BCM_COSQ_CBFC_CREDIT_SIZE_32                                  0
+#define BCM_COSQ_CBFC_CREDIT_SIZE_324                                 5
+#define BCM_COSQ_CBFC_CREDIT_SIZE_420                                 6
+#define BCM_COSQ_CBFC_CREDIT_SIZE_512                                 7
+#define BCM_COSQ_CBFC_CREDIT_SIZE_56                                  1
+#define BCM_COSQ_CBFC_CREDIT_SIZE_64                                  2
+#define BCM_COSQ_CBFC_PACKET_OVERHEAD_0                               0
+#define BCM_COSQ_CBFC_PACKET_OVERHEAD_16                              1
+#define BCM_COSQ_CBFC_PACKET_OVERHEAD_32                              2
+#define BCM_COSQ_CBFC_PACKET_OVERHEAD_48                              3
+#define BCM_COSQ_CBFC_PACKET_OVERHEAD_64                              4
+#define BCM_COSQ_CBFC_PACKET_OVERHEAD_80                              5
+#define BCM_COSQ_CBFC_PORT_LIMIT                                      1
+#define BCM_COSQ_CBFC_PORT_OVERSHOOT_LIMIT                            16
+#define BCM_COSQ_CBFC_VC_GRP_LIMIT                                    4
+#define BCM_COSQ_CBFC_VC_LIMIT                                        8
+#define BCM_COSQ_CBFC_VC_MIN_LIMIT                                    2
+#define BCM_COSQ_CBFS_SHAPER_ENABLE                                   1
+#define BCM_COSQ_CBFS_STAT_CLEAR_ON_READ                              1
+#define BCM_COSQ_COPY_TO_SECONDARY_OPTIONS_REPLACE                    1
+#define BCM_COSQ_COPY_TO_SECONDARY_REASON_MAX                         4
+#define BCM_COSQ_DELAY_TOLERANCE_PRESET_ATTR_F_LOCAL                  64
+#define BCM_COSQ_DISCARD_CNP                                          64
+#define BCM_COSQ_DISCARD_DRY_RUN                                      64
+#define BCM_COSQ_DISCARD_LOSSLESS                                     128
+#define BCM_COSQ_DISCARD_MAX_VALUES                                   32
+#define BCM_COSQ_DISCARD_MIRROR_ON_CONGESTION                         0x2000000
+#define BCM_COSQ_DROP_REASON_STATUS_F_INGRESS                         1
+#define BCM_COSQ_EBST_MONITOR_DATA_CLEAR                              4
+#define BCM_COSQ_EGRESS_EDITOR_OPERATION_CONDITIONAL_SIGNAL_1         4
+#define BCM_COSQ_EGRESS_EDITOR_OPERATION_CONDITIONAL_SIGNAL_2         8
+#define BCM_COSQ_EGRESS_EDITOR_OPERATION_MASK                         1
+#define BCM_COSQ_EGRESS_EDITOR_OPERATION_SERIAL                       2
+#define BCM_COSQ_EGRESS_EDITOR_PROFILE_MAX_BYTES                      192
+#define BCM_COSQ_EGRESS_EDITOR_PROFILE_WITH_ID                        1
+#define BCM_COSQ_GPORT_INCA_INPUT_QUEUE                               128
+#define BCM_COSQ_GPORT_INCA_OUTPUT_QUEUE                              0x400
+#define BCM_COSQ_GPORT_QUEUE_GROUP                                    64
+#define BCM_COSQ_GPORT_TYPE_E2E_PORT_TC_SCHED                         14
+#define BCM_COSQ_GPORT_TYPE_EGRESS_FC_TC                              30
+#define BCM_COSQ_GPORT_TYPE_MCAST_VOQ                                 9
+#define BCM_COSQ_GPORT_TYPE_UCAST_VOQ                                 8
+#define BCM_COSQ_MOD_CONTROL_COSQ_OVERRIDE                            16
+#define BCM_COSQ_MOD_CONTROL_CPU_COSQ_OVERRIDE                        8
+#define BCM_COSQ_MOD_CONTROL_DEFAULT_MOD_PROFILE_ID                   4
+#define BCM_COSQ_NON_MINIMAL_REMAP_DEFLECT                            2
+#define BCM_COSQ_NON_MINIMAL_REMAP_DLB                                1
+#define BCM_COSQ_NON_MINIMAL_REMAP_PROFILE_OPTIONS_WITH_ID            1
+#define BCM_COSQ_OBQ_PROFILE_OPTIONS_WITH_ID                          1
+#define BCM_COSQ_PFC_DRAM_BLOCK_STATE                                 128
+#define BCM_COSQ_PFC_MAP_TO_QUEUES                                    1
+#define BCM_COSQ_PFC_MONITOR_PORT_CONTROL_PFC_PRI_BMP_ENABLE          1
+#define BCM_COSQ_PKT_FLOW_PARAM_COSQ_OVERRIDE_ENABLE                  1
+#define BCM_COSQ_PRIORITY_GROUP_ID_0                                  76
+#define BCM_COSQ_PRIORITY_GROUP_ID_1                                  77
+#define BCM_COSQ_PRIORITY_GROUP_ID_2                                  78
+#define BCM_COSQ_PRIORITY_GROUP_ID_3                                  79
+#define BCM_COSQ_PRIORITY_GROUP_ID_4                                  80
+#define BCM_COSQ_PRIORITY_GROUP_ID_5                                  81
+#define BCM_COSQ_PRIORITY_GROUP_ID_6                                  82
+#define BCM_COSQ_PRIORITY_GROUP_ID_7                                  83
+#define BCM_COSQ_QUEUE_OFFSET_MAPPING_EGRESS_DEFAULT_PROFILE          4
+#define BCM_COSQ_QUEUE_OFFSET_MAPPING_EXTENDED_OFFSET_RANGE           32
+#define BCM_COSQ_QUEUE_OFFSET_MAPPING_INGRESS_FLOW_DEFAULT_MAPPING    8
+#define BCM_COSQ_QUEUE_OFFSET_MAPPING_INGRESS_SYSPORT_DEFAULT_MAPPING 16
+#define BCM_COSQ_QUEUE_OFFSET_MAPPING_USE_TC_PROFILE_FROM_PP          64
+#define BCM_COSQ_RATE_CLASS_CREATE_ATTR_LOCAL                         32
+#define BCM_COSQ_RATE_CLASS_CREATE_F_USE_FABRIC_DELAY                 1
+#define BCM_COSQ_SCHEDQ_PROFILE_OPTIONS_WITH_ID                       1
+#define BCM_COSQ_SRC_VSQS_GPORT_ADMIT_PROFILE_OVERRIDE                2
+#define BCM_COSQ_VSQ_SHARED                                           8
+#define BCM_COSQ_WEIGHT_DYNAMIC                                       -2
+</pre></div>
+</div>
+</section>
+<section id="bcm-datapath-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_datapath_*</span></code> (1)<a class="headerlink" href="#bcm-datapath-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_DATAPATH_ALL -1
+</pre></div>
+</div>
+</section>
+<section id="bcm-die-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_die_*</span></code> (1)<a class="headerlink" href="#bcm-die-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_DIE_MAX_NUM 16
+</pre></div>
+</div>
+</section>
+<section id="bcm-fabric-27">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_fabric_*</span></code> (27)<a class="headerlink" href="#bcm-fabric-27" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FABRIC_CELL_PROFILE_MAP_ACTION_FORWARDING             1
+#define BCM_FABRIC_CELL_PROFILE_MAP_ACTION_GLOBAL_CAPTURE         4
+#define BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR                 8
+#define BCM_FABRIC_CELL_PROFILE_MAP_ACTION_MIRROR_WITH_STATISTICS 16
+#define BCM_FABRIC_CELL_PROFILE_MAP_ACTION_SOP_ONLY               2
+#define BCM_FABRIC_CELL_PROFILE_MAP_FE1_ONLY                      1
+#define BCM_FABRIC_CELL_PROFILE_MAP_FE3_ONLY                      2
+#define BCM_FABRIC_CGM_LCI_SHAPER_MODE_DYNAMIC_FIXED_FACTOR       2
+#define BCM_FABRIC_CGM_RCI_MODE_EXTERNAL_CAPSULE                  2
+#define BCM_FABRIC_CGM_RCI_MODE_INTERNAL_CAPSULE                  1
+#define BCM_FABRIC_ISOLATE_FULL                                   1
+#define BCM_FABRIC_ISOLATE_NONE                                   0
+#define BCM_FABRIC_ISOLATE_PARTIAL                                2
+#define BCM_FABRIC_JITTER_WMK_IN_NSEC                             1
+#define BCM_FABRIC_LINK_CELL_FORMAT_VSC1K                         5
+#define BCM_FABRIC_LINK_STATUS_SOURCE_FEC                         2
+#define BCM_FABRIC_LINK_STATUS_SOURCE_LEAKY_BUCKET                4
+#define BCM_FABRIC_LINK_STATUS_SOURCE_LINK_INTEGRITY              16
+#define BCM_FABRIC_LINK_STATUS_SOURCE_REMOTE_FAULT                8
+#define BCM_FABRIC_LINK_STATUS_SOURCE_SERDES                      1
+#define BCM_FABRIC_LINK_TOPOLOGY_CONFIG_GROUP                     2
+#define BCM_FABRIC_LINK_TOPOLOGY_CONFIG_MODID_MAP                 1
+#define BCM_FABRIC_MULTICAST_ENABLE                               8
+#define BCM_FABRIC_RCI_BIASING_PROBABILITY_EFFECTIVE_RCI          1
+#define BCM_FABRIC_ROUTE_CONFIG_FLAG_CLEAR                        1
+#define BCM_FABRIC_STAT_FLAG_EXTERNAL_CAPSULE                     2
+#define BCM_FABRIC_STAT_FLAG_INTERNAL_CAPSULE                     1
+</pre></div>
+</div>
+</section>
+<section id="bcm-failover-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_failover_*</span></code> (4)<a class="headerlink" href="#bcm-failover-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FAILOVER_FEC_HIERARCHY_1ST  1
+#define BCM_FAILOVER_FEC_HIERARCHY_2ND  2
+#define BCM_FAILOVER_FEC_HIERARCHY_3RD  3
+#define BCM_FAILOVER_FEC_HIERARCHY_NONE 0
+</pre></div>
+</div>
+</section>
+<section id="bcm-fdr-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_fdr_*</span></code> (2)<a class="headerlink" href="#bcm-fdr-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FDR_MAX_CTR_BINS 2
+#define BCM_FDR_MAX_CW_CTRS  18
+</pre></div>
+</div>
+</section>
+<section id="bcm-field-117">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_field_*</span></code> (117)<a class="headerlink" href="#bcm-field-117" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FIELD_ACTION_ARRAY_DONT_CARE                             15
+#define BCM_FIELD_ACTION_DCN_CANCEL                                  3
+#define BCM_FIELD_ACTION_DCN_INIT                                    1
+#define BCM_FIELD_ACTION_DCN_TERM                                    2
+#define BCM_FIELD_ACTION_FLAG_STATE_COLLECTION_PAYLOAD_CURRENT_STATE 2
+#define BCM_FIELD_ACTION_FLAG_STATE_COLLECTION_PAYLOAD_NEXT_STATE    4
+#define BCM_FIELD_ACTION_INSTR_TYPE_FLEX                             1
+#define BCM_FIELD_ACTION_INSTR_TYPE_IFA                              3
+#define BCM_FIELD_ACTION_INSTR_TYPE_POSTCARD                         2
+#define BCM_FIELD_ACTION_MPB_SIZE_32BYTES_DISABLE                    1
+#define BCM_FIELD_ACTION_MPB_SIZE_FULL                               2
+#define BCM_FIELD_ACTION_NOPARAM_ACTIONS_CANCEL                      0xffff
+#define BCM_FIELD_ACTION_NOPARAM_ACTIONS_DEFAULT                     0
+#define BCM_FIELD_AFR_HDR_FLAGS_AR_ELIGIBLE                          1
+#define BCM_FIELD_AFR_HDR_FLAGS_CNM_ELIGIBLE                         4
+#define BCM_FIELD_AFR_HDR_FLAGS_CNM_PKT                              8
+#define BCM_FIELD_AFR_HDR_FLAGS_FLOW_LABEL_PRESENT                   2
+#define BCM_FIELD_COPY_TO_CPU_REASON_HIGH_CB_STATION_MOVE_FAIL       0x2000
+#define BCM_FIELD_COPY_TO_CPU_REASON_HIGH_DEFAULT                    0x4000
+#define BCM_FIELD_COPY_TO_CPU_REASON_HIGH_FORTE_IPV4_GATEWAY         0x1000
+#define BCM_FIELD_COPY_TO_CPU_REASON_HIGH_SRV6                       0x800
+#define BCM_FIELD_COPY_TO_CPU_REASON_ING_SOURCE_BIND_MISS            8
+#define BCM_FIELD_DESTINATION_ACTION_FWD_TYPE                        0x100
+#define BCM_FIELD_DESTINATION_ACTION_GBP_VALID                       64
+#define BCM_FIELD_DESTINATION_ACTION_INT_CTRL                        32
+#define BCM_FIELD_DESTINATION_ACTION_INT_PRI                         128
+#define BCM_FIELD_DESTINATION_ACTION_SRC_PORT_KNOCKOUT_DISABLE       0x200
+#define BCM_FIELD_DESTINATION_FWD_TYPE_MC                            1
+#define BCM_FIELD_DEVICE_PORT_TYPE_FRONT_PANEL                       1
+#define BCM_FIELD_DEVICE_PORT_TYPE_HIGIG3                            2
+#define BCM_FIELD_DEVICE_PORT_TYPE_LB_LAGFAILOVER                    8
+#define BCM_FIELD_EGRESS_CLASS_SELECT_GBP                            15
+#define BCM_FIELD_EGR_ADAPT_ID_BASE                                  0xb000000
+#define BCM_FIELD_EGR_EM_ID_BASE                                     0x8000000
+#define BCM_FIELD_ENTRY_RETRIEVE_ASET_ONLY                           4
+#define BCM_FIELD_ENTRY_RETRIEVE_FLEXCTR_ONLY                        1
+#define BCM_FIELD_ENTRY_RETRIEVE_OPER_STATUS_ONLY                    8
+#define BCM_FIELD_ENTRY_RETRIEVE_QSET_ONLY                           2
+#define BCM_FIELD_ENTRY_STATUS_CTR_ATTACHED                          64
+#define BCM_FIELD_FAI_DSCP_EXP_PRESERVE                              8
+#define BCM_FIELD_FAI_FALLBACK_TO_BRIDGE                             2
+#define BCM_FIELD_FAI_FWD_RESULT_UNKNOWN                             1
+#define BCM_FIELD_FAI_OAMP_INJECT                                    16
+#define BCM_FIELD_FAI_TTL_DECREMENT_DISABLE                          4
+#define BCM_FIELD_FIELD_ACTION_FLAG_USE_VALID_BIT                    1
+#define BCM_FIELD_FLAG_AACL                                          0x200
+#define BCM_FIELD_FLAG_GROUP_REPLACE                                 0x800
+#define BCM_FIELD_FLAG_HIT                                           0x400
+#define BCM_FIELD_FLAG_KEY_WITH_ID                                   0x1000
+#define BCM_FIELD_FLAG_SECONDARY_GROUP                               0x100
+#define BCM_FIELD_FLEX_CTR_DISABLE_COPY_TO_CPU_COUNT                 2
+#define BCM_FIELD_FLEX_CTR_DISABLE_MIRROR_COUNT                      1
+#define BCM_FIELD_FLEX_CTR_DISABLE_PORT_COUNT                        4
+#define BCM_FIELD_FT2_ID_BASE                                        0xa000000
+#define BCM_FIELD_GBP_TYPE_ETHERNET                                  0
+#define BCM_FIELD_GBP_TYPE_VXLAN                                     1
+#define BCM_FIELD_GRE_FLAGS_CHECKSUM_BIT                             8
+#define BCM_FIELD_GRE_FLAGS_KEY_BIT                                  2
+#define BCM_FIELD_GRE_FLAGS_RESERVED_BIT                             4
+#define BCM_FIELD_GRE_FLAGS_SEQUENCE_NUM_BIT                         1
+#define BCM_FIELD_GROUP_CREATE_FLAGS_2_ALLOCATE_RESERVED_ENTRIES     2
+#define BCM_FIELD_GROUP_CREATE_FLAGS_2_ALLOW_ORTHOGONAL_ACTIONS      1
+#define BCM_FIELD_GROUP_ENTRY_COPY_WITHOUT_POLICER                   4
+#define BCM_FIELD_GROUP_ENTRY_COPY_WITHOUT_STATS                     2
+#define BCM_FIELD_GROUP_ENTRY_COPY_WITHOUT_UDF                       8
+#define BCM_FIELD_GROUP_ENTRY_COPY_WITH_ID                           1
+#define BCM_FIELD_GROUP_ENT_LVL_ASET_ASSIGN                          0x80000000
+#define BCM_FIELD_GROUP_TCAM_ALGO_MIDDLE_ALIGNMENT                   1
+#define BCM_FIELD_GROUP_TCAM_CORE_SHARED                             2
+#define BCM_FIELD_GROUP_UPDATE_QSET                                  1
+#define BCM_FIELD_ING_ADAPT_ID_BASE                                  0xc000000
+#define BCM_FIELD_INT_INGRESS_POOL_BUFFER_USED                       5
+#define BCM_FIELD_ISFP_ID_BASE                                       0x9000000
+#define BCM_FIELD_MISC_CTRL_GBP_DROP                                 4
+#define BCM_FIELD_MMU_NON_SWITCH_COPY_REASON_GEN_CNP                 2
+#define BCM_FIELD_MMU_NON_SWITCH_COPY_REASON_GEN_DCN                 1
+#define BCM_FIELD_MMU_NON_SWITCH_COPY_REASON_GEN_MOD                 4
+#define BCM_FIELD_NAT_CMD_DNAPT                                      8
+#define BCM_FIELD_NAT_CMD_DNAT                                       4
+#define BCM_FIELD_NAT_CMD_NAT_CANCEL                                 0
+#define BCM_FIELD_NAT_CMD_SNAPT                                      2
+#define BCM_FIELD_NAT_CMD_SNAT                                       1
+#define BCM_FIELD_PKT_MISC_CTRL2_L3UC_EXT_VIEW                       2
+#define BCM_FIELD_PKT_MISC_CTRL2_TRUNCATE                            1
+#define BCM_FIELD_PKT_MISC_CTRL3_GOOD_IP_HDR                         2
+#define BCM_FIELD_PKT_MISC_CTRL3_IFA_TRANSIT_VXLAN_TNL               4
+#define BCM_FIELD_PKT_MISC_CTRL3_PKT_TO_CPU                          1
+#define BCM_FIELD_PKT_MISC_CTRL3_PRESERVE_TTL                        8
+#define BCM_FIELD_PROTOCOL_PKT_FWD_CTRL_BPDU                         1
+#define BCM_FIELD_PROTOCOL_PKT_FWD_CTRL_COPY_TO_CPU                  2
+#define BCM_FIELD_PROTOCOL_PKT_FWD_CTRL_DROP                         4
+#define BCM_FIELD_PROTOCOL_PKT_FWD_CTRL_FLOOD                        8
+#define BCM_FIELD_QOS_CNG_VALID                                      2
+#define BCM_FIELD_QOS_INPUT_PRI_VALID                                8
+#define BCM_FIELD_QOS_INT_CN_VALID                                   4
+#define BCM_FIELD_QOS_INT_PRI_VALID                                  1
+#define BCM_FIELD_QUAL_FLAG_IS_RANGED                                1
+#define BCM_FIELD_QUAL_FLAG_STATE_COLLECTION_KEY_ADDRESS             2
+#define BCM_FIELD_QUAL_FLAG_STATE_COLLECTION_KEY_DATA                4
+#define BCM_FIELD_QUAL_FLAG_STATE_COLLECTION_KEY_OPCODE              8
+#define BCM_FIELD_RECIRCLE_HDR_PKT_MODIFIED_CTRL                     1
+#define BCM_FIELD_STAGE_ACTION_INFO_OFFSET_MAX                       16
+#define BCM_FIELD_STAGE_ACTION_PBR_DEFAULT_VALID                     2
+#define BCM_FIELD_STAGE_ACTION_PBR_ENABLED                           1
+#define BCM_FIELD_STAGE_QUAL_INFO_OFFSET_MAX                         128
+#define BCM_FIELD_STAGE_QUAL_INFO_SELECTOR_MAX                       16
+#define BCM_FIELD_STATS_ID_INDEX_MASK                                0xfff
+#define BCM_FIELD_STATS_ID_INDEX_SHIFT                               0
+#define BCM_FIELD_STATS_ID_PIPE_MASK                                 127
+#define BCM_FIELD_STATS_ID_PIPE_SHIFT                                17
+#define BCM_FIELD_STATS_ID_POOL_MASK                                 31
+#define BCM_FIELD_STATS_ID_POOL_SHIFT                                12
+#define BCM_FIELD_STATS_ID_STAGE_MASK                                255
+#define BCM_FIELD_STATS_ID_STAGE_SHIFT                               24
+#define BCM_FIELD_VLAN_TAG_PRESENT_INNER_TAGGED                      2
+#define BCM_FIELD_VLAN_TAG_PRESENT_OUTER_TAGGED                      1
+#define BCM_FIELD_VLAN_TAG_PRESENT_UNTAGGED                          0
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexctr-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexctr_*</span></code> (9)<a class="headerlink" href="#bcm-flexctr-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FLEXCTR_ACTION_FLAGS_PIPE_INST                   32
+#define BCM_FLEXCTR_ACTION_FLAGS_SHADOW_ENABLE               64
+#define BCM_FLEXCTR_ACTION_FLAGS_SNAPSHOT_ENABLE             128
+#define BCM_FLEXCTR_ACTION_FLAGS_STATS_BULK_COL              0x100
+#define BCM_FLEXCTR_GROUP_ACTION_FLAGS_PIPE_INST             2
+#define BCM_FLEXCTR_PACKET_ATTRIBUTE_MAP_FLAGS_OFFSET_MSB    1
+#define BCM_FLEXCTR_PACKET_ATTRIBUTE_PROFILE_FLAGS_PIPE_INST 1
+#define BCM_FLEXCTR_POOL_INFO_FLAGS_PIPE_INST                1
+#define BCM_FLEXCTR_QUANTIZATION_FLAGS_PIPE_INST             8
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexdigest-65">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexdigest_*</span></code> (65)<a class="headerlink" href="#bcm-flexdigest-65" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FLEXDIGEST_FIELD_INNER_UDF_ONE_BYTE_5                    160
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_10                   159
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_11                   161
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_12                   186
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_13                   187
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_14                   198
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_15                   199
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_16                   200
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_17                   201
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_18                   202
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_19                   203
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_20                   204
+#define BCM_FLEXDIGEST_FIELD_INNER_UDF_TWO_BYTE_21                   205
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_LSB32_HI_32_47 182
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_LSB32_HI_48_63 183
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_LSB32_LO_32_47 184
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_LSB32_LO_48_63 185
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_XOR_HI_32_47   174
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_XOR_HI_48_63   175
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_XOR_LO_32_47   176
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_IP_ADDR_XOR_LO_48_63   177
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_XOR_DIP_32_47          168
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_XOR_DIP_48_63          169
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_XOR_SIP_32_47          166
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_INNER_XOR_SIP_48_63          167
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_LSB32_HI_32_47 178
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_LSB32_HI_48_63 179
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_LSB32_LO_32_47 180
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_LSB32_LO_48_63 181
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_XOR_HI_32_47   170
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_XOR_HI_48_63   171
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_XOR_LO_32_47   172
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_IP_ADDR_XOR_LO_48_63   173
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_XOR_DIP_32_47          164
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_XOR_DIP_48_63          165
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_XOR_SIP_32_47          162
+#define BCM_FLEXDIGEST_FIELD_NORMALIZED_OUTER_XOR_SIP_48_63          163
+#define BCM_FLEXDIGEST_FIELD_OUTER_AFR_HDR_FIRST_TWO_BYTES           209
+#define BCM_FLEXDIGEST_FIELD_OUTER_AFR_HDR_FLOW_LABEL                208
+#define BCM_FLEXDIGEST_FIELD_OUTER_L2_INSTR_TAG                      210
+#define BCM_FLEXDIGEST_FIELD_OUTER_MIM_ITAG_0_15                     211
+#define BCM_FLEXDIGEST_FIELD_OUTER_MIM_ITAG_16_31                    212
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_ONE_BYTE_5                    158
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_10                   188
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_11                   189
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_12                   190
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_13                   191
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_14                   192
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_15                   193
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_16                   194
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_17                   195
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_18                   196
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_19                   197
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_20                   206
+#define BCM_FLEXDIGEST_FIELD_OUTER_UDF_TWO_BYTE_21                   207
+#define BCM_FLEXDIGEST_FIXED_HVE1_RESULT2_FRAGMENT_M_BIT             8
+#define BCM_FLEXDIGEST_FIXED_HVE1_RESULT2_NON_FRAGMENT               4
+#define BCM_FLEXDIGEST_FIXED_HVE1_RESULT2_NON_FRAGMENT_OR_FIRST      2
+#define BCM_FLEXDIGEST_FIXED_HVE1_RESULT2_NOT_ENOUGH_BYTE            1
+#define BCM_FLEXDIGEST_FIXED_HVE2_RESULT2_FRAGMENT_M_BIT             8
+#define BCM_FLEXDIGEST_FIXED_HVE2_RESULT2_NON_FRAGMENT               4
+#define BCM_FLEXDIGEST_FIXED_HVE2_RESULT2_NON_FRAGMENT_OR_FIRST      2
+#define BCM_FLEXDIGEST_FIXED_HVE2_RESULT2_NOT_ENOUGH_BYTE            1
+#define BCM_FLEXDIGEST_HASH_FUNCTION_FXT_HASH_HI                     17
+#define BCM_FLEXDIGEST_HASH_FUNCTION_FXT_HASH_LO                     16
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexinstr-10">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexinstr_*</span></code> (10)<a class="headerlink" href="#bcm-flexinstr-10" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FLEXINSTR_ACTION_PROFILE_FLAGS_LOCATOR_UPDATE_ALLOW 2
+#define BCM_FLEXINSTR_ACTION_PROFILE_FLAGS_METRICS_3_AS_LOCATOR 1
+#define BCM_FLEXINSTR_ACTION_PROFILE_OPTIONS_REPLACE            2
+#define BCM_FLEXINSTR_ACTION_PROFILE_OPTIONS_WITH_ID            1
+#define BCM_FLEXINSTR_GMS_PROFILE_OPTIONS_WITH_ID               1
+#define BCM_FLEXINSTR_METADATA_PROFILE_OPTIONS_WITH_ID          1
+#define BCM_FLEXINSTR_METRICS_CONFIG_FLAGS_LOCATOR_UPDATE_ALLOW 1
+#define BCM_FLEXINSTR_RANGE_PROFILE_OPTIONS_WITH_ID             1
+#define BCM_FLEXINSTR_SRV6_PT_PROFILE_OPTIONS_WITH_ID           1
+#define BCM_FLEXINSTR_SRV6_PT_TTS_PROFILE_OPTIONS_WITH_ID       1
+</pre></div>
+</div>
+</section>
+<section id="bcm-flexstate-45">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flexstate_*</span></code> (45)<a class="headerlink" href="#bcm-flexstate-45" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FLEXSTATE_ACTION_FLAGS_OUTPUT_MUX_CTR_A_LOWER        4
+#define BCM_FLEXSTATE_ACTION_FLAGS_OUTPUT_MUX_CTR_A_UPPER        8
+#define BCM_FLEXSTATE_ACTION_FLAGS_OUTPUT_MUX_CTR_B_LOWER        16
+#define BCM_FLEXSTATE_ACTION_FLAGS_OUTPUT_MUX_CTR_B_UPPER        32
+#define BCM_FLEXSTATE_ACTION_FLAGS_OUTPUT_MUX_TRIGGER_STATE_CTRL 64
+#define BCM_FLEXSTATE_ACTION_FLAGS_OUTPUT_MUX_TRUTH_TABLE        128
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_CNP                       3
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_COUNT                     7
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_CTC                       6
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_DCN_DROP                  0
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_EGRESS_MIRROR             4
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_MIRROR                    5
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_MOD                       1
+#define BCM_FLEXSTATE_APU_CMD_EGR_COPY_PDN                       2
+#define BCM_FLEXSTATE_APU_CMD_E_A_EQUAL_B                        8
+#define BCM_FLEXSTATE_APU_CMD_E_A_EQUAL_CONST_0                  1
+#define BCM_FLEXSTATE_APU_CMD_E_A_GREATER_THAN_B                 4
+#define BCM_FLEXSTATE_APU_CMD_E_A_GREATER_THAN_CONST_0           16
+#define BCM_FLEXSTATE_APU_CMD_E_B_EQUAL_CONST_1                  2
+#define BCM_FLEXSTATE_APU_CMD_E_B_GREATER_THAN_CONST_1           32
+#define BCM_FLEXSTATE_APU_CMD_FWD_COUNT                          4
+#define BCM_FLEXSTATE_APU_CMD_FWD_FIELD_TYPE                     3
+#define BCM_FLEXSTATE_APU_CMD_FWD_L3_TUNNEL_DECAP                2
+#define BCM_FLEXSTATE_APU_CMD_FWD_L3_UNICAST_ROUTED              0
+#define BCM_FLEXSTATE_APU_CMD_FWD_VXLAN_TUNNEL_DECAP             1
+#define BCM_FLEXSTATE_APU_TCAM_OPTIONS_REPLACE                   1
+#define BCM_FLEXSTATE_APU_USAGE_PROFILE_OPTIONS_WITH_ID          1
+#define BCM_FLEXSTATE_EGR_APU_ACTION_DISCARD                     1
+#define BCM_FLEXSTATE_EGR_APU_ACTION_ECN_UPDATE                  2
+#define BCM_FLEXSTATE_EGR_APU_ACTION_OBJECT_0_ENABLE             4
+#define BCM_FLEXSTATE_EGR_APU_ACTION_OBJECT_1_ENABLE             8
+#define BCM_FLEXSTATE_EGR_APU_ACTION_OBJECT_2_ENABLE             16
+#define BCM_FLEXSTATE_EGR_APU_ACTION_OBJECT_3_ENABLE             32
+#define BCM_FLEXSTATE_ING_APU_ACTION_CNG_UPDATE                  16
+#define BCM_FLEXSTATE_ING_APU_ACTION_COPY_TO_CPU                 1
+#define BCM_FLEXSTATE_ING_APU_ACTION_COPY_TO_CPU_CANCEL          2
+#define BCM_FLEXSTATE_ING_APU_ACTION_DISCARD                     4
+#define BCM_FLEXSTATE_ING_APU_ACTION_ECN_UPDATE                  8
+#define BCM_FLEXSTATE_ING_APU_ACTION_INT_PRI_UPDATE              64
+#define BCM_FLEXSTATE_ING_APU_ACTION_OBJECT_0_ENABLE             128
+#define BCM_FLEXSTATE_ING_APU_ACTION_OBJECT_1_ENABLE             0x100
+#define BCM_FLEXSTATE_ING_APU_ACTION_OBJECT_2_ENABLE             0x200
+#define BCM_FLEXSTATE_ING_APU_ACTION_OBJECT_3_ENABLE             0x400
+#define BCM_FLEXSTATE_ING_APU_ACTION_UC_COS_UPDATE               32
+#define BCM_FLEXSTATE_TRUTH_TABLE_MAX_SIZE                       8
+</pre></div>
+</div>
+</section>
+<section id="bcm-flow-316">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flow_*</span></code> (316)<a class="headerlink" href="#bcm-flow-316" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FLOW_APP_ARP_INITIATOR                                        19
+#define BCM_FLOW_APP_BIER_BASE_INITIATOR                                  75
+#define BCM_FLOW_APP_BIER_BFR_BITSTR_INITIATOR                            76
+#define BCM_FLOW_APP_BIER_PREFIX_INITIATOR                                77
+#define BCM_FLOW_APP_BIER_TERMINATOR                                      74
+#define BCM_FLOW_APP_BIER_TERM_MATCH                                      73
+#define BCM_FLOW_APP_GTP_INITIATOR                                        17
+#define BCM_FLOW_APP_GTP_TERMINATOR                                       16
+#define BCM_FLOW_APP_GTP_TERM_MATCH                                       18
+#define BCM_FLOW_APP_IPV4_TUNNEL_INITIATOR                                1
+#define BCM_FLOW_APP_IPV4_TUNNEL_MP_EM_TERM_MATCH                         3
+#define BCM_FLOW_APP_IPV4_TUNNEL_P2P_EM_TERM_MATCH                        8
+#define BCM_FLOW_APP_IPV4_TUNNEL_P2P_TCAM_TERM_MATCH                      6
+#define BCM_FLOW_APP_IPV4_TUNNEL_VPBR_P2P_TCAM_TERM_MATCH                 7
+#define BCM_FLOW_APP_IPV6_INTERMEDIATE_TUNNEL_TERMINATOR                  13
+#define BCM_FLOW_APP_IPV6_SRV6_DIP_SLICING_MATCH                          38
+#define BCM_FLOW_APP_IPV6_SRV6_FUNCTION_TERM_MATCH                        34
+#define BCM_FLOW_APP_IPV6_SRV6_INITIATOR                                  31
+#define BCM_FLOW_APP_IPV6_SRV6_LOCATOR_TERMINATOR                         35
+#define BCM_FLOW_APP_IPV6_SRV6_SID_INITIATOR                              36
+#define BCM_FLOW_APP_IPV6_SRV6_SRH_BASE_INITIATOR                         37
+#define BCM_FLOW_APP_IPV6_SRV6_TERMINATOR                                 32
+#define BCM_FLOW_APP_IPV6_SRV6_TERM_MATCH                                 33
+#define BCM_FLOW_APP_IPV6_TUNNEL_INITIATOR                                2
+#define BCM_FLOW_APP_IPV6_TUNNEL_P2P_EM_TERM_MATCH                        10
+#define BCM_FLOW_APP_IPV6_TUNNEL_TCAM_TERM_MATCH                          9
+#define BCM_FLOW_APP_IPVX_TUNNEL_ESP_TERM_MATCH                           11
+#define BCM_FLOW_APP_IPVX_TUNNEL_PPP_INITIATOR                            80
+#define BCM_FLOW_APP_IPVX_TUNNEL_PPP_TERMINATOR                           79
+#define BCM_FLOW_APP_IPVX_TUNNEL_PPP_TERM_MATCH                           78
+#define BCM_FLOW_APP_IPVX_TUNNEL_TERMINATOR                               4
+#define BCM_FLOW_APP_IPVX_TUNNEL_VPBR_TERMINATOR                          5
+#define BCM_FLOW_APP_L2TP_INITIATOR                                       83
+#define BCM_FLOW_APP_L2TP_TERMINATOR                                      82
+#define BCM_FLOW_APP_L2TP_TERM_MATCH                                      81
+#define BCM_FLOW_APP_MIRROR_ERSPAN_INITIATOR                              91
+#define BCM_FLOW_APP_MIRROR_LI_INITIATOR                                  92
+#define BCM_FLOW_APP_MIRROR_RSPAN_HIGH_SCALE_INITIATOR                    93
+#define BCM_FLOW_APP_MIRROR_RSPAN_INITIATOR                               90
+#define BCM_FLOW_APP_MPLS_EVPN_INITIATOR                                  28
+#define BCM_FLOW_APP_MPLS_EVPN_LABEL_TERM_MATCH                           30
+#define BCM_FLOW_APP_MPLS_EVPN_TERMINATOR                                 29
+#define BCM_FLOW_APP_MPLS_PORT_INITIATOR                                  25
+#define BCM_FLOW_APP_MPLS_PORT_LABEL_TERM_MATCH                           27
+#define BCM_FLOW_APP_MPLS_PORT_TERMINATOR                                 26
+#define BCM_FLOW_APP_MPLS_TUNNEL_INITIATOR                                20
+#define BCM_FLOW_APP_MPLS_TUNNEL_LABEL_TERM_MATCH                         23
+#define BCM_FLOW_APP_MPLS_TUNNEL_LABEL_WITH_VLAN_DOMAIN_TERM_MATCH        24
+#define BCM_FLOW_APP_MPLS_TUNNEL_TERMINATOR                               21
+#define BCM_FLOW_APP_OAM_BFD_INITIATOR                                    97
+#define BCM_FLOW_APP_OAM_REFLECTOR_INITIATOR                              98
+#define BCM_FLOW_APP_RCH_CONTROL_TERMINATOR                               100
+#define BCM_FLOW_APP_RCH_INITIATOR                                        99
+#define BCM_FLOW_APP_REFLECTOR_INITIATOR                                  101
+#define BCM_FLOW_APP_TWAMP_REFLECTOR_INITIATOR                            102
+#define BCM_FLOW_APP_VLAN_PORT_C_C_VLAN_TERM_MATCH                        47
+#define BCM_FLOW_APP_VLAN_PORT_C_VLAN_TERM_MATCH                          45
+#define BCM_FLOW_APP_VLAN_PORT_INITIATOR                                  42
+#define BCM_FLOW_APP_VLAN_PORT_L2_EXTENDED_CLASS_UNTAGGED_TERM_MATCH      64
+#define BCM_FLOW_APP_VLAN_PORT_L2_EXTENDED_CLASS_VLAN_STACKED_TERM_MATCH  66
+#define BCM_FLOW_APP_VLAN_PORT_L2_EXTENDED_CLASS_VLAN_TERM_MATCH          65
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_LIF_SCOPED_0_VLAN_TERM_MATCH        54
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_LIF_SCOPED_1_VLAN_TERM_MATCH        55
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_LIF_SCOPED_2_VLAN_TERM_MATCH        56
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_NETWORK_SCOPED_0_VLAN_TERM_MATCH    51
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_NETWORK_SCOPED_1_VLAN_TERM_MATCH    52
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_NETWORK_SCOPED_2_VLAN_TERM_MATCH    53
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_TERMINATOR                          40
+#define BCM_FLOW_APP_VLAN_PORT_NATIVE_TRANSLATE_TERMINATOR                41
+#define BCM_FLOW_APP_VLAN_PORT_PORT_TERM_MATCH                            43
+#define BCM_FLOW_APP_VLAN_PORT_S_C_VLAN_TERM_MATCH                        46
+#define BCM_FLOW_APP_VLAN_PORT_S_S_VLAN_TERM_MATCH                        48
+#define BCM_FLOW_APP_VLAN_PORT_S_VLAN_TERM_MATCH                          44
+#define BCM_FLOW_APP_VLAN_PORT_TCAM_TERM_MATCH                            50
+#define BCM_FLOW_APP_VLAN_PORT_TERMINATOR                                 39
+#define BCM_FLOW_APP_VLAN_PORT_UNTAGGED_TERM_MATCH                        49
+#define BCM_FLOW_APP_VLAN_PORT_VLAN_TRANSLATE_EM_DEFAULT_INITIATOR        70
+#define BCM_FLOW_APP_VLAN_PORT_VLAN_TRANSLATE_EM_LIF_SCOPED_INITIATOR     69
+#define BCM_FLOW_APP_VLAN_PORT_VLAN_TRANSLATE_EM_NAMESPACE_PORT_INITIATOR 72
+#define BCM_FLOW_APP_VLAN_PORT_VLAN_TRANSLATE_EM_NAMESPACE_VSI_INITIATOR  71
+#define BCM_FLOW_APP_VLAN_PORT_VLAN_TRANSLATE_EM_NETWORK_SCOPED_INITIATOR 67
+#define BCM_FLOW_APP_VNI_LIF_SCOPED_TERM_MATCH                            95
+#define BCM_FLOW_APP_VNI_NETWORK_SCOPED_TERM_MATCH                        94
+#define BCM_FLOW_APP_VNI_TERMINATOR                                       96
+#define BCM_FLOW_APP_VXLAN_SRH_INITIATOR                                  104
+#define BCM_FLOW_APP_VXLAN_SR_TRANSIT_INITIATOR                           103
+#define BCM_FLOW_ENCAP_FLAG_MIM_ISID_PCP_DE_SELECT                        0x200000
+#define BCM_FLOW_ENCAP_FLAG_PRI_TPID_REPLACE                              0x100000
+#define BCM_FLOW_ENCAP_PCP_DE_REMARK_VALID                                0x100000
+#define BCM_FLOW_HANDLE_INFO_HIT                                          0x400
+#define BCM_FLOW_HANDLE_INFO_HIT_CLEAR                                    0x200
+#define BCM_FLOW_HANDLE_INFO_HIT_GET                                      0x100
+#define BCM_FLOW_INITIATOR_ELEMENT_OAM_FORCE_ENABLE_VALID                 0x20000
+#define BCM_FLOW_INITIATOR_ELEMENT_QOS_OAM_PRIORITY_VALID                 0x40000
+#define BCM_FLOW_INITIATOR_INFO_LOCAL_NAMESPACE_ONLY                      1
+#define BCM_FLOW_L2VPN_NOF_SERVICE_TAGS_BASED_HEADER_ONLY                 -1
+#define BCM_FLOW_L3_INTF_ELEMENT_ADDITIONAL_DATA_VALID                    0x400
+#define BCM_FLOW_L3_INTF_ELEMENT_EGRESS_QOS_MAP_ID_VALID                  0x100
+#define BCM_FLOW_L3_INTF_ELEMENT_EGRESS_STAT_ID_VALID                     0x800
+#define BCM_FLOW_L3_INTF_ELEMENT_EGRESS_STAT_PP_PROFILE_VALID             128
+#define BCM_FLOW_L3_INTF_ELEMENT_HASH_LAYERS_DISABLE_VALID                0x200
+#define BCM_FLOW_L3_INTF_ELEMENT_INGRESS_QOS_MAP_ID_VALID                 16
+#define BCM_FLOW_L3_INTF_ELEMENT_INGRESS_STAT_ID_VALID                    32
+#define BCM_FLOW_L3_INTF_ELEMENT_INGRESS_STAT_PP_PROFILE_VALID            64
+#define BCM_FLOW_L3_INTF_ELEMENT_L3_INGRESS_INFO_VALID                    4
+#define BCM_FLOW_L3_INTF_ELEMENT_MAC_ADDR_VALID                           2
+#define BCM_FLOW_L3_INTF_ELEMENT_QOS_INGRESS_MODEL_VALID                  8
+#define BCM_FLOW_L3_INTF_ELEMENT_VRF_VALID                                1
+#define BCM_FLOW_MATCH2_ISID_DOT1_PTR_VALID                               1
+#define BCM_FLOW_MATCH2_L2_IIF_VALID                                      4
+#define BCM_FLOW_MATCH2_OPAQUE_CTRL_ID_VALID                              8
+#define BCM_FLOW_MATCH2_SRC_MAC_VALID                                     2
+#define BCM_FLOW_MATCH_FLAG_ALLOW_SECOND_PASS                             0x200
+#define BCM_FLOW_MATCH_FLAG_IP4_PAYLOAD_DROP                              0x1000
+#define BCM_FLOW_MATCH_FLAG_IP6_PAYLOAD_DROP                              0x2000
+#define BCM_FLOW_MATCH_FLAG_KEEP_INNER_DSCP                               0x400
+#define BCM_FLOW_MATCH_FLAG_SRV6_NO_SRH                                   128
+#define BCM_FLOW_MATCH_FLAG_SRV6_SRH_KEEP                                 64
+#define BCM_FLOW_MATCH_FLAG_USE_TUNNEL_TRAFFIC_CLASS                      0x800
+#define BCM_FLOW_MATCH_FLAG_VALIDATE_L2_IIF                               0x100
+#define BCM_FLOW_MATCH_ISID_VALID                                         0x80000000
+#define BCM_FLOW_MATCH_VRF_VALID                                          0x40000000
+#define BCM_FLOW_PORT_ENCAP_FLAG_GBP_EGRESS_A_FLAG                        0x1000000
+#define BCM_FLOW_PORT_ENCAP_FLAG_GBP_EGRESS_D_FLAG                        0x800000
+#define BCM_FLOW_PORT_ENCAP_FLAG_NO_UNDERLAY_EGRESS_HW_BINDING            0x4000000
+#define BCM_FLOW_PORT_ENCAP_FLAG_PRI_TPID_REPLACE                         0x2000000
+#define BCM_FLOW_PORT_ENCAP_TUNNEL_ID_VALID                               0x20000
+#define BCM_FLOW_PORT_GBP_INGRESS_A_FLAG                                  0x4000
+#define BCM_FLOW_PORT_GBP_INGRESS_D_FLAG                                  0x2000
+#define BCM_FLOW_PORT_MULTICAST_GROUP_ATTRIBUTE_CONTROL                   0x8000
+#define BCM_FLOW_S_F_ANTI_SPOOFING_VLAN_NOF_USED_TAGS                     52
+#define BCM_FLOW_S_F_BIER_BFIR_ID                                         80
+#define BCM_FLOW_S_F_BIER_BIFT_ID                                         74
+#define BCM_FLOW_S_F_BIER_BITSTRING                                       73
+#define BCM_FLOW_S_F_BIER_BSL                                             75
+#define BCM_FLOW_S_F_BIER_NIBBLE                                          79
+#define BCM_FLOW_S_F_BIER_OAM                                             77
+#define BCM_FLOW_S_F_BIER_RSV                                             76
+#define BCM_FLOW_S_F_BIER_VER                                             78
+#define BCM_FLOW_S_F_CLASS_ID                                             50
+#define BCM_FLOW_S_F_CLASS_PORT                                           149
+#define BCM_FLOW_S_F_C_INNER_VLAN                                         61
+#define BCM_FLOW_S_F_C_VID                                                57
+#define BCM_FLOW_S_F_C_VID_1                                              60
+#define BCM_FLOW_S_F_DOUBLE_CASCADED_INDICATION                           22
+#define BCM_FLOW_S_F_DST_MAC                                              12
+#define BCM_FLOW_S_F_DST_UDP_PORT                                         39
+#define BCM_FLOW_S_F_ERSPANV2_HEADER_INDEX_17_19                          127
+#define BCM_FLOW_S_F_ERSPANV3_HW_ID                                       129
+#define BCM_FLOW_S_F_ERSPANV3_SWITCH_ID                                   128
+#define BCM_FLOW_S_F_ESTIMATED_ENCAP_SIZE                                 125
+#define BCM_FLOW_S_F_EVPN_ESI_INTF_NAMESPACE                              95
+#define BCM_FLOW_S_F_EVPN_IML                                             94
+#define BCM_FLOW_S_F_EXTENDED_ENCAP                                       15
+#define BCM_FLOW_S_F_FLOW_LABEL                                           150
+#define BCM_FLOW_S_F_GRE_KEY_USE_LB                                       41
+#define BCM_FLOW_S_F_GRE_WITH_SN                                          42
+#define BCM_FLOW_S_F_GTP_EXT_HEADER_TYPE                                  114
+#define BCM_FLOW_S_F_GTP_EXT_SSN_RQI                                      116
+#define BCM_FLOW_S_F_GTP_EXT_SSN_TYPE                                     115
+#define BCM_FLOW_S_F_GTP_FTEID                                            134
+#define BCM_FLOW_S_F_IML_ESI_OFFSET                                       24
+#define BCM_FLOW_S_F_INNER_VLAN                                           64
+#define BCM_FLOW_S_F_INTF_NAMESPACE                                       20
+#define BCM_FLOW_S_F_IPV4_DIP                                             1
+#define BCM_FLOW_S_F_IPV4_DIP_MASK                                        2
+#define BCM_FLOW_S_F_IPV4_HEADER_DF                                       40
+#define BCM_FLOW_S_F_IPV4_SIP                                             3
+#define BCM_FLOW_S_F_IPV4_SIP_MASK                                        4
+#define BCM_FLOW_S_F_IPV4_TOS                                             140
+#define BCM_FLOW_S_F_IPV4_TOS_MASK                                        141
+#define BCM_FLOW_S_F_IPV4_TUNNEL_TYPE                                     81
+#define BCM_FLOW_S_F_IPV6                                                 9
+#define BCM_FLOW_S_F_IPV6_DIP                                             5
+#define BCM_FLOW_S_F_IPV6_DIP_MASK                                        6
+#define BCM_FLOW_S_F_IPV6_EXT_DESTINATION_OPTIONS                         124
+#define BCM_FLOW_S_F_IPV6_MASK                                            10
+#define BCM_FLOW_S_F_IPV6_SIP                                             7
+#define BCM_FLOW_S_F_IPV6_SIP_MASK                                        8
+#define BCM_FLOW_S_F_IPV6_SRV6_CASCADED_MISS_DISABLE_TERM                 122
+#define BCM_FLOW_S_F_IPV6_SRV6_CLASS_ID                                   118
+#define BCM_FLOW_S_F_IPV6_SRV6_DIP_LOCATOR_TYPE                           117
+#define BCM_FLOW_S_F_IPV6_SRV6_END_REPLICATE                              123
+#define BCM_FLOW_S_F_IPV6_SRV6_FUNCTION_MATCH                             119
+#define BCM_FLOW_S_F_IPV6_SRV6_GENERALIZED_SEGMENT_ID_END_OF_COMPRESSION  120
+#define BCM_FLOW_S_F_IPV6_SRV6_USID_FROM_FUNC                             121
+#define BCM_FLOW_S_F_IPV6_TUNNEL_TYPE                                     82
+#define BCM_FLOW_S_F_IPVX_ESP_TUNNEL_TYPE                                 84
+#define BCM_FLOW_S_F_IPVX_TUNNEL_TYPE                                     83
+#define BCM_FLOW_S_F_IP_PROTOCOL                                          137
+#define BCM_FLOW_S_F_IP_TUNNEL_VXLAN_VNI_FLOW_TERMINATOR                  147
+#define BCM_FLOW_S_F_L2VPN_TUNNEL                                         18
+#define BCM_FLOW_S_F_L3_INTF_ID                                           143
+#define BCM_FLOW_S_F_L4_DST_PORT                                          139
+#define BCM_FLOW_S_F_L4_SRC_PORT                                          138
+#define BCM_FLOW_S_F_LAYER_TYPE                                           85
+#define BCM_FLOW_S_F_LIF_WIDE_DATA                                        142
+#define BCM_FLOW_S_F_LI_CONTENT_ID                                        130
+#define BCM_FLOW_S_F_LI_CONTENT_SIZE                                      131
+#define BCM_FLOW_S_F_MPLS_CONTROL_WORD_ENABLE                             88
+#define BCM_FLOW_S_F_MPLS_ENTROPY_LABEL                                   86
+#define BCM_FLOW_S_F_MPLS_ENTROPY_LABEL_INDICATION                        87
+#define BCM_FLOW_S_F_MPLS_EXPECT_BOS                                      90
+#define BCM_FLOW_S_F_MPLS_EXPECT_NON_BOS                                  91
+#define BCM_FLOW_S_F_MPLS_HLM_COUNTER_BASE_ID                             35
+#define BCM_FLOW_S_F_MPLS_KEEP_PAYLOAD                                    133
+#define BCM_FLOW_S_F_MPLS_LABEL                                           27
+#define BCM_FLOW_S_F_MPLS_LABEL_2                                         28
+#define BCM_FLOW_S_F_MPLS_LABEL_3                                         29
+#define BCM_FLOW_S_F_MPLS_LABEL_4                                         30
+#define BCM_FLOW_S_F_MPLS_LABEL_5                                         31
+#define BCM_FLOW_S_F_MPLS_LABEL_6                                         32
+#define BCM_FLOW_S_F_MPLS_LABEL_7                                         33
+#define BCM_FLOW_S_F_MPLS_LABEL_8                                         34
+#define BCM_FLOW_S_F_MPLS_PHP                                             26
+#define BCM_FLOW_S_F_MPLS_VCCV_TYPE                                       89
+#define BCM_FLOW_S_F_NAME_SPACE                                           97
+#define BCM_FLOW_S_F_NATIVE_ROUTING_DISABLE                               148
+#define BCM_FLOW_S_F_NOF_SERVICE_TAGS                                     21
+#define BCM_FLOW_S_F_NOF_SIDS                                             14
+#define BCM_FLOW_S_F_NWK_LIF_IDX                                          17
+#define BCM_FLOW_S_F_OAM_ENCAP_DB                                         96
+#define BCM_FLOW_S_F_OAM_PRIMARY_VLAN                                     136
+#define BCM_FLOW_S_F_OAM_REFLECTOR_OPCODE                                 126
+#define BCM_FLOW_S_F_OAM_TRUNK_MEMBER                                     135
+#define BCM_FLOW_S_F_PCP_DEI_OUTER_VLAN                                   65
+#define BCM_FLOW_S_F_PCP_DEI_OUTER_VLAN_MASK                              66
+#define BCM_FLOW_S_F_PLATFORM_NAMESPACE                                   19
+#define BCM_FLOW_S_F_PON_CHANNEL_ID                                       145
+#define BCM_FLOW_S_F_PON_DTC_TYPE                                         144
+#define BCM_FLOW_S_F_PON_TAG                                              146
+#define BCM_FLOW_S_F_PORT                                                 49
+#define BCM_FLOW_S_F_QOS_DSCP                                             68
+#define BCM_FLOW_S_F_QOS_EXP                                              69
+#define BCM_FLOW_S_F_QOS_EXP_2                                            70
+#define BCM_FLOW_S_F_QOS_PKT_CFI                                          72
+#define BCM_FLOW_S_F_QOS_PKT_PRI                                          71
+#define BCM_FLOW_S_F_RCH_ADDITIONAL_EGRESS_TERMINATION_SIZE               102
+#define BCM_FLOW_S_F_RCH_APP                                              104
+#define BCM_FLOW_S_F_RCH_CONTROL_LIF                                      106
+#define BCM_FLOW_S_F_RCH_COPY_DEST_ENCAP                                  99
+#define BCM_FLOW_S_F_RCH_CROSS_CONNECT                                    100
+#define BCM_FLOW_S_F_RCH_DESTINATION                                      101
+#define BCM_FLOW_S_F_RCH_PORT_INJECTION_MAP                               103
+#define BCM_FLOW_S_F_RCH_QOS_MODEL_INITIAL                                105
+#define BCM_FLOW_S_F_REFLECTOR_MEMBER_LINK_ID                             113
+#define BCM_FLOW_S_F_REFLECTOR_TYPE                                       107
+#define BCM_FLOW_S_F_SCALE_UDP_PORTS                                      38
+#define BCM_FLOW_S_F_SCI                                                  43
+#define BCM_FLOW_S_F_SESSION_ANTI_SPOOFING_TYPE                           109
+#define BCM_FLOW_S_F_SESSION_ID                                           108
+#define BCM_FLOW_S_F_SID                                                  13
+#define BCM_FLOW_S_F_SIDVPN_ENCAP_ACCESS                                  23
+#define BCM_FLOW_S_F_SN_COUNTER_COMMAND_ID                                152
+#define BCM_FLOW_S_F_SN_STAT_CMD                                          151
+#define BCM_FLOW_S_F_SRC_MAC                                              11
+#define BCM_FLOW_S_F_SRC_UDP_PORT                                         37
+#define BCM_FLOW_S_F_SRH_HDR_EXT_LEN                                      16
+#define BCM_FLOW_S_F_SVTAG_PORT                                           54
+#define BCM_FLOW_S_F_SYSTEM_PORT                                          98
+#define BCM_FLOW_S_F_S_INNER_VLAN                                         59
+#define BCM_FLOW_S_F_S_VID                                                56
+#define BCM_FLOW_S_F_TRAP_TTL_0                                           92
+#define BCM_FLOW_S_F_TRAP_TTL_1                                           93
+#define BCM_FLOW_S_F_TUNNEL_CLASS                                         67
+#define BCM_FLOW_S_F_TUNNEL_ENDPOINT_IDENTIFIER                           25
+#define BCM_FLOW_S_F_TUNNEL_GPORT                                         53
+#define BCM_FLOW_S_F_TUNNEL_ID                                            110
+#define BCM_FLOW_S_F_TUNNEL_SRC_NAT                                       153
+#define BCM_FLOW_S_F_TWAMP_REFLECTOR_ERROR_ESTIMATE                       111
+#define BCM_FLOW_S_F_TWAMP_REFLECTOR_TWAMP_IS_LAG                         112
+#define BCM_FLOW_S_F_VID                                                  55
+#define BCM_FLOW_S_F_VID_1                                                58
+#define BCM_FLOW_S_F_VID_OUTER_VLAN                                       63
+#define BCM_FLOW_S_F_VLAN_DOMAIN_PER_CORE                                 51
+#define BCM_FLOW_S_F_VLAN_EDIT_CLASS_ID                                   44
+#define BCM_FLOW_S_F_VLAN_EDIT_NEW_INNER_VLAN                             47
+#define BCM_FLOW_S_F_VLAN_EDIT_NEW_OUTER_VLAN                             46
+#define BCM_FLOW_S_F_VLAN_EDIT_QOS_VLAN_PCP_MAP_ID                        45
+#define BCM_FLOW_S_F_VNI                                                  132
+#define BCM_FLOW_S_F_VRF                                                  36
+#define BCM_FLOW_S_F_VSI                                                  62
+#define BCM_FLOW_S_F_VSI_ASSIGNMENT_MODE                                  48
+#define BCM_FLOW_S_F_VXLAN_SRH_FLAG_RESERVED                              159
+#define BCM_FLOW_S_F_VXLAN_SRH_HOP_ID                                     155
+#define BCM_FLOW_S_F_VXLAN_SRH_HOP_NUMBER                                 156
+#define BCM_FLOW_S_F_VXLAN_SRH_HOP_OFFSET                                 157
+#define BCM_FLOW_S_F_VXLAN_SRH_TID                                        158
+#define BCM_FLOW_TERMINATOR_ELEMENT_OAM_FORCE_ENABLE_VALID                0x40000
+#define BCM_FLOW_TERMINATOR_ELEMENT_TRAP_PROTOCOL_PROFILE_VALID           0x80000
+#define BCM_FLOW_TUNNEL_INIT_IPSEC_UDP_SPORT_VALID                        0x100000
+#define BCM_FLOW_TUNNEL_SRV6_SRH_APPEND                                   0x1000
+#define BCM_FLOW_TUNNEL_SRV6_SRH_ES_ID_VALID                              64
+#define BCM_FLOW_TUNNEL_SRV6_SRH_FUNCTION_VALID                           32
+#define BCM_FLOW_TUNNEL_SRV6_SRH_GSID_PREFIX_LENGTH_VALID                 128
+#define BCM_FLOW_TUNNEL_SRV6_SRH_L3_INTF_ID_VALID                         16
+#define BCM_FLOW_TUNNEL_SRV6_SRH_PREPEND                                  0x2000
+#define BCM_FLOW_TUNNEL_SRV6_SRH_SECOND_PASS_EGRESS_VALID                 0x200
+#define BCM_FLOW_TUNNEL_SRV6_SRH_SELECT_GBP_TAG                           0x800
+#define BCM_FLOW_TUNNEL_SRV6_SRH_TAG_SELECT_VALID                         0x100
+#define BCM_FLOW_TUNNEL_TERM_DMAC_VALID                                   0x10000000
+#define BCM_FLOW_TUNNEL_TERM_FLAGS2_IP4_PAYLOAD_DROP                      128
+#define BCM_FLOW_TUNNEL_TERM_FLAGS2_IP6_PAYLOAD_DROP                      0x100
+#define BCM_FLOW_TUNNEL_TERM_FLAGS2_SRV6_PT_SINK_NODE                     64
+#define BCM_FLOW_VPN_ELEMENT_ADDITIONAL_DATA_VALID                        0x800
+#define BCM_FLOW_VPN_ELEMENT_AGING_CYCLES_VALID                           2
+#define BCM_FLOW_VPN_ELEMENT_DISTRIBUTION_ID_VALID                        0x200
+#define BCM_FLOW_VPN_ELEMENT_EGRESS_STAT_PP_PROFILE_VALID                 16
+#define BCM_FLOW_VPN_ELEMENT_FIELD_CLASS_ID_VALID                         1
+#define BCM_FLOW_VPN_ELEMENT_INGRESS_STAT_PP_PROFILE_VALID                8
+#define BCM_FLOW_VPN_ELEMENT_IPV4_MC_FWD_TYPE_VALID                       64
+#define BCM_FLOW_VPN_ELEMENT_IPV6_MC_FWD_TYPE_VALID                       128
+#define BCM_FLOW_VPN_ELEMENT_LIMIT_VALID                                  0x400
+#define BCM_FLOW_VPN_ELEMENT_STAT_ID_VALID                                4
+#define BCM_FLOW_VPN_ELEMENT_STG_VALID                                    0x100
+#define BCM_FLOW_VPN_ELEMENT_UNKNOWN_DEST_VALID                           32
+</pre></div>
+</div>
+</section>
+<section id="bcm-flowtracker-22">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_flowtracker_*</span></code> (22)<a class="headerlink" href="#bcm-flowtracker-22" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT1_LOWER32b    0x2000
+#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT1_UPPER32b    0x4000
+#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT2_LOWER32b    0x8000
+#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT2_UPPER32b    0x10000
+#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT3_LOWER32b    0x20000
+#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT3_UPPER32b    0x40000
+#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT4_LOWER32b    0x80000
+#define BCM_FLOWTRACKER_CHECK_TIMESTAMP_CHECK_EVENT4_UPPER32b    0x100000
+#define BCM_FLOWTRACKER_FLOW_GET_OPTIONS_HIT_STATUS_CLEAR        1
+#define BCM_FLOWTRACKER_FLOW_GET_OPTIONS_HIT_STATUS_ONLY         2
+#define BCM_FLOWTRACKER_GROUP_COUNTER_DISABLE                    8
+#define BCM_FLOWTRACKER_GROUP_DROP_EVENT_LEARN_ENABLE            16
+#define BCM_FLOWTRACKER_GROUP_MFAP_DEFAULT_FC_INDEX_LEARN_ENABLE 32
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT1_LOWER32b 64
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT1_UPPER32b 128
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT2_LOWER32b 0x100
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT2_UPPER32b 0x200
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT3_LOWER32b 0x400
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT3_UPPER32b 0x800
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT4_LOWER32b 0x1000
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TIMESTAMP_EVENT4_UPPER32b 0x2000
+#define BCM_FLOWTRACKER_TRACKING_PARAM_TYPE_SIZE_DYNAMIC         -1
+</pre></div>
+</div>
+</section>
+<section id="bcm-glb-8">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_glb_*</span></code> (8)<a class="headerlink" href="#bcm-glb-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_GLB_MSG_ENCAP_ETH_HDR_DOUBLE_TAGGED     3
+#define BCM_GLB_MSG_ENCAP_ETH_HDR_SINGLE_TAGGED     2
+#define BCM_GLB_MSG_ENCAP_ETH_HDR_UNTAGGED          1
+#define BCM_GLB_MSG_ENCAP_REPLACE                   2
+#define BCM_GLB_MSG_ENCAP_UDP_FLAGS_CHECKSUM_ENABLE 1
+#define BCM_GLB_MSG_ENCAP_WITH_ID                   1
+#define BCM_GLB_PATH_AGGREGATE_QUAL_AVG             2
+#define BCM_GLB_PATH_MULTI_LINK                     1
+</pre></div>
+</div>
+</section>
+<section id="bcm-gport-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_gport_*</span></code> (1)<a class="headerlink" href="#bcm-gport-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_GPORT_TYPE_QUEUE_GROUP 24
+</pre></div>
+</div>
+</section>
+<section id="bcm-hash-29">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_hash_*</span></code> (29)<a class="headerlink" href="#bcm-hash-29" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_HASH_EXT_FIELD_AFR_HDR_FLOW_LABEL                  0x40000000
+#define BCM_HASH_EXT_FIELD_DSTPORT                             1
+#define BCM_HASH_EXT_FIELD_FLEX_UDF_0                          0x10000000
+#define BCM_HASH_EXT_FIELD_FLEX_UDF_1                          0x20000000
+#define BCM_HASH_EXT_FIELD_PROTOCOL                            8
+#define BCM_HASH_EXT_FIELD_ROCE2_AETH_SYNDROME                 8
+#define BCM_HASH_EXT_FIELD_ROCE2_BTH_OPCODE                    4
+#define BCM_HASH_EXT_FIELD_ROCE2_DQP_15_0                      1
+#define BCM_HASH_EXT_FIELD_ROCE2_DQP_23_16                     2
+#define BCM_HASH_EXT_FIELD_ROCEV2_AETH_SYNDROME                0x8000000
+#define BCM_HASH_EXT_FIELD_ROCEV2_BTH_OPCODE                   0x4000000
+#define BCM_HASH_EXT_FIELD_SRCPORT                             0x2000000
+#define BCM_HASH_EXT_FIELD_SRC_PORT_FLOW_LABEL_19_16           0x10000
+#define BCM_HASH_EXT_FIELD_UDF_6_OR_ENTROPY                    0x400000
+#define BCM_HASH_EXT_FIELD_UDF_7_OR_ROCEV2_BTH_DQP_LO          0x800000
+#define BCM_HASH_EXT_FIELD_UDF_8_OR_ROCEV2_BTH_DQP_HI          0x1000000
+#define BCM_HASH_FIELD0_DISABLE_SRV6_L2_TRANSIT_IP4_PAYLOAD    0x4000
+#define BCM_HASH_FIELD0_DISABLE_SRV6_L2_TRANSIT_IP6_PAYLOAD    0x1000
+#define BCM_HASH_FIELD0_DISABLE_SRV6_L2_TRANSIT_NON_IP_PAYLOAD 0x10000
+#define BCM_HASH_FIELD0_DISABLE_VXLAN_TRANSIT_IP4_PAYLOAD      0x100000
+#define BCM_HASH_FIELD0_DISABLE_VXLAN_TRANSIT_IP6_PAYLOAD      0x40000
+#define BCM_HASH_FIELD0_DISABLE_VXLAN_TRANSIT_NON_IP_PAYLOAD   0x400000
+#define BCM_HASH_FIELD1_DISABLE_SRV6_L2_TRANSIT_IP4_PAYLOAD    0x8000
+#define BCM_HASH_FIELD1_DISABLE_SRV6_L2_TRANSIT_IP6_PAYLOAD    0x2000
+#define BCM_HASH_FIELD1_DISABLE_SRV6_L2_TRANSIT_NON_IP_PAYLOAD 0x20000
+#define BCM_HASH_FIELD1_DISABLE_VXLAN_TRANSIT_IP4_PAYLOAD      0x200000
+#define BCM_HASH_FIELD1_DISABLE_VXLAN_TRANSIT_IP6_PAYLOAD      0x80000
+#define BCM_HASH_FIELD1_DISABLE_VXLAN_TRANSIT_NON_IP_PAYLOAD   0x800000
+#define BCM_HASH_FIELD_BTH_DSTQP                               0x10000
+</pre></div>
+</div>
+</section>
+<section id="bcm-ifa-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_ifa_*</span></code> (2)<a class="headerlink" href="#bcm-ifa-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_IFA_COSQ_STAT_NUM                         8
+#define BCM_IFA_METADATA_FIELD_FLAGS_HPCC_PATH_ENABLE 1
+</pre></div>
+</div>
+</section>
+<section id="bcm-inc-15">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_inc_*</span></code> (15)<a class="headerlink" href="#bcm-inc-15" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_INC_CPU_TX_ENCAP_CREATE_OPTIONS_REPLACE 2
+#define BCM_INC_CPU_TX_ENCAP_CREATE_OPTIONS_WITH_ID 1
+#define BCM_INC_CPU_TX_ENCAP_FLAGS_OUTER_TAGGED     1
+#define BCM_INC_GROUP_CREATE_OPTIONS_REPLACE        2
+#define BCM_INC_GROUP_CREATE_OPTIONS_WITH_ID        1
+#define BCM_INC_GROUP_FLAGS_FLUSH_DENORMALS         2
+#define BCM_INC_GROUP_FLAGS_PKEY_CHECK_ENABLE       1
+#define BCM_INC_GROUP_FLAGS_SATURATE_OVERFLOW       4
+#define BCM_INC_GROUP_MEMBER_CREATE_OPTIONS_REPLACE 2
+#define BCM_INC_GROUP_MEMBER_CREATE_OPTIONS_WITH_ID 1
+#define BCM_INC_GROUP_MEMBER_FLAGS_MATCH_OUTER_VLAN 1
+#define BCM_INC_NODE_CREATE_FLAGS_WITH_ID           1
+#define BCM_INC_NODE_MEMBER_CREATE_FLAGS_WITH_ID    1
+#define BCM_INC_VLAN_SINGLE_TAGGED                  1
+#define BCM_INC_VLAN_UNTAGGED                       0
+</pre></div>
+</div>
+</section>
+<section id="bcm-info-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_info_*</span></code> (1)<a class="headerlink" href="#bcm-info-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_INFO_EXTENDED_RATE 16
+</pre></div>
+</div>
+</section>
+<section id="bcm-instru-37">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_instru_*</span></code> (37)<a class="headerlink" href="#bcm-instru-37" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_INSTRU_ACCESS_FLAG_IS_ARM_DEST                        4
+#define BCM_INSTRU_CONTROL_FLAG_IPFIX_315                         8
+#define BCM_INSTRU_CONTROL_FLAG_IPFIX_IPV6                        4
+#define BCM_INSTRU_CONTROL_SFLOW_FEATURES_UDP_CHECKSUM_OFFSET_FIX 2
+#define BCM_INSTRU_CONTROL_SFLOW_FEATURES_UDP_SOURCE_PORT_RANDOM  1
+#define BCM_INSTRU_EVENTOR_BUILDER_IPFIX_ENABLE                   4
+#define BCM_INSTRU_EVENTOR_BUILDER_RESET_SEQ_NUMBER               2
+#define BCM_INSTRU_EVENTOR_BUILDER_SHEL                           8
+#define BCM_INSTRU_EVENTOR_CORES_GROUP_0                          1
+#define BCM_INSTRU_EVENTOR_CORES_GROUP_1                          2
+#define BCM_INSTRU_EVENTOR_EVENT_ID_SHEL                          1
+#define BCM_INSTRU_FABRIC_EVENT_CELL_HEADER_FLAG_IS_EOP           2
+#define BCM_INSTRU_FABRIC_EVENT_CELL_HEADER_FLAG_IS_F1588         1
+#define BCM_INSTRU_FABRIC_EVENT_CELL_HEADER_FLAG_IS_LOCAL_ROUTE   4
+#define BCM_INSTRU_FABRIC_EVENT_FLAG_CELL_HEADER_INCLUDED         8
+#define BCM_INSTRU_FABRIC_EVENT_FLAG_GLOBAL_CAPTURE               1
+#define BCM_INSTRU_FABRIC_EVENT_FLAG_REARM_TEST_EVENT             0x8000
+#define BCM_INSTRU_FABRIC_EVENT_FLAG_UNREACHABLE                  4
+#define BCM_INSTRU_FABRIC_EVENT_FLAG_WITH_STATISTICS              2
+#define BCM_INSTRU_FABRIC_EVENT_INDEX_NOF                         2
+#define BCM_INSTRU_FABRIC_EVENT_MAX_NOF_DATA_TYPES                3
+#define BCM_INSTRU_IPFIX_ENCAP_IPV6                               4
+#define BCM_INSTRU_IPFIX_INTERFACE_INFO_1                         8
+#define BCM_INSTRU_IPFIX_INTERFACE_INFO_2                         16
+#define BCM_INSTRU_SFLOW_ENCAP_FIELD_CLASS_CS_ID_VALID            128
+#define BCM_INSTRU_STAT_INDEX_NONE                                -1
+#define BCM_INSTRU_STAT_NO_CLEAR                                  1
+#define BCM_INSTRU_STAT_RCI_EXTERNAL                              16
+#define BCM_INSTRU_STAT_RCI_FABRIC                                4
+#define BCM_INSTRU_STAT_RCI_INTERNAL                              8
+#define BCM_INSTRU_STAT_RCI_LOCAL                                 2
+#define BCM_INSTRU_SYNCED_COUNT_PFC_MAX_DURATION                  1
+#define BCM_INSTRU_SYNCED_COUNT_PFC_NOF_ON_TRANSITIONS            2
+#define BCM_INSTRU_SYNCED_COUNT_PFC_ON_CLOCK_CYCLES               0
+#define BCM_INSTRU_SYNCED_TRIGGER_CORES_GROUP_0                   2
+#define BCM_INSTRU_SYNCED_TRIGGER_CORES_GROUP_1                   4
+#define BCM_INSTRU_VIS_SIGNAL_FLAG_USE_KEY_ACCESS_INFO            2
+</pre></div>
+</div>
+</section>
+<section id="bcm-knet-6">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_knet_*</span></code> (6)<a class="headerlink" href="#bcm-knet-6" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_KNET_FILTER_M_OOB_RAW     0x1000
+#define BCM_KNET_FILTER_M_REASON_MASK 0x800
+#define BCM_KNET_FILTER_M_VLAN_MASK   0x400
+#define BCM_KNET_FILTER_OOB_SIZE_MAX  0x100
+#define BCM_KNET_NETIF_F_REPLACE      16
+#define BCM_KNET_NETIF_F_WITH_ID      8
+</pre></div>
+</div>
+</section>
+<section id="bcm-knetsync-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_knetsync_*</span></code> (3)<a class="headerlink" href="#bcm-knetsync-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_KNETSYNC_MAX_L2_HEADER_LENGTH   64
+#define BCM_KNETSYNC_MAX_NETW_ADDR_SIZE     16
+#define BCM_KNETSYNC_P2P_MAX_ENCAP_HDR_SIZE 100
+</pre></div>
+</div>
+</section>
+<section id="bcm-l2-44">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_l2_*</span></code> (44)<a class="headerlink" href="#bcm-l2-44" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_L2_ADDR_COUNT_GPORT                    4
+#define BCM_L2_ADDR_COUNT_TABLE                    1
+#define BCM_L2_ADDR_COUNT_VSI                      2
+#define BCM_L2_ADDR_DIST_EVENT_PROFILE_ID          0x800
+#define BCM_L2_ADDR_DIST_FREE_EVENT_PROFILE        0x1000
+#define BCM_L2_DENSE_ADDR_COMPRESSED_MAC           4
+#define BCM_L2_DENSE_ADDR_DST_MAC                  1
+#define BCM_L2_DENSE_ADDR_SRC_MAC                  2
+#define BCM_L2_DENSE_CALLBACK_AGE_EVENT            8
+#define BCM_L2_DENSE_CALLBACK_DELETE               10
+#define BCM_L2_DENSE_CALLBACK_LEARN_EVENT          7
+#define BCM_L2_DENSE_CALLBACK_MOVE_EVENT           9
+#define BCM_L2_DENSE_MEMBER_DISCARD_SRC            64
+#define BCM_L2_DENSE_MEMBER_HIT                    2
+#define BCM_L2_DENSE_MEMBER_HIT_CLEAR              4
+#define BCM_L2_DENSE_MEMBER_INT_PRI_ASSIGN         32
+#define BCM_L2_DENSE_MEMBER_PENDING                8
+#define BCM_L2_DENSE_MEMBER_SRC_INT_PRI_TRUST      128
+#define BCM_L2_DENSE_MEMBER_STATIC                 16
+#define BCM_L2_DENSE_MEMBER_TGID                   0x100
+#define BCM_L2_DENSE_MEMBER_VALID                  1
+#define BCM_L2_FLAGS2_COPY_TO_SECONDARY            0x8000
+#define BCM_L2_FLAGS2_SWITCH_TO_CPU                0x10000
+#define BCM_L2_FLAGS2_SWITCH_TO_SECONDARY          0x4000
+#define BCM_L2_FLAGS2_TRAVERSE_ERROR               0x2000
+#define BCM_L2_MAC_OUI_COMPRESSION_OPTIONS_REPLACE 1
+#define BCM_L2_REPLACE_ACTION_CLASSID              2
+#define BCM_L2_REPLACE_ACTION_COPY_TO_CPU          32
+#define BCM_L2_REPLACE_ACTION_DEST                 1
+#define BCM_L2_REPLACE_ACTION_DISCARD_DST          16
+#define BCM_L2_REPLACE_ACTION_DISCARD_SRC          64
+#define BCM_L2_REPLACE_ACTION_L3LOOKUP             4
+#define BCM_L2_REPLACE_ACTION_POLICER_COUNTER_ID   128
+#define BCM_L2_REPLACE_ACTION_POLICER_PROFILE_ID   0x100
+#define BCM_L2_REPLACE_ACTION_STATIC               8
+#define BCM_L2_REPLACE_AGE_PROFILE                 0x400
+#define BCM_L2_REPLACE_LEARN_STRENGTH              16
+#define BCM_L2_REPLACE_MATCH_AGE_PROFILE           128
+#define BCM_L2_REPLACE_MATCH_LEARN_STRENGTH        0x800000
+#define BCM_L2_REPLACE_MATCH_MESH_ONLY             128
+#define BCM_L2_STATION_OVERLAY_ONLY                0x200000
+#define BCM_L2_STATION_SECOND_PER_PORT             0x100000
+#define BCM_L2_TRAVERSE_MATCH_AGE_PROFILE          0x2000
+#define BCM_L2_TRAVERSE_MATCH_LEARN_STRENGTH       0x4000
+</pre></div>
+</div>
+</section>
+<section id="bcm-l3-140">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_l3_*</span></code> (140)<a class="headerlink" href="#bcm-l3-140" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_L3_AFR                                           0x10000000
+#define BCM_L3_AFR_FLAGS_EGRESS_VLAN_DELETE                  8
+#define BCM_L3_AFR_FLAGS_EGRESS_VLAN_NO_ACTION               16
+#define BCM_L3_AFR_FLAGS_KEEP_DSTMAC                         1
+#define BCM_L3_AFR_FLAGS_KEEP_SRCMAC                         2
+#define BCM_L3_AFR_FLAGS_KEEP_TPID                           32
+#define BCM_L3_AFR_FLAGS_KEEP_TTL                            4
+#define BCM_L3_AFR_FLAGS_RPE                                 64
+#define BCM_L3_AFR_FLAGS_VLAN_TENANT_DISABLE                 128
+#define BCM_L3_AR_VC_MAP_ALTERNATE_DROP                      4
+#define BCM_L3_AR_VC_MAP_DR_DROP                             64
+#define BCM_L3_AR_VC_MAP_PRIMARY_DROP                        2
+#define BCM_L3_AR_VC_MAP_QUALTIY_METRIC_A                    8
+#define BCM_L3_AR_VC_MAP_QUALTIY_METRIC_B                    16
+#define BCM_L3_AR_VC_MAP_REPLACE                             1
+#define BCM_L3_AR_VC_MAP_RESOLUTION_OVERRIDE                 32
+#define BCM_L3_BLACKHOLE_EGRESS_ID                           0x186a0
+#define BCM_L3_DENSE_MEMBER_COPY_TO_CPU                      2
+#define BCM_L3_DENSE_MEMBER_COPY_TO_SECONDARY                4
+#define BCM_L3_DENSE_MEMBER_DROP                             128
+#define BCM_L3_DENSE_MEMBER_D_HIT                            8
+#define BCM_L3_DENSE_MEMBER_HIT_CLEAR                        16
+#define BCM_L3_DENSE_MEMBER_LOCAL                            1
+#define BCM_L3_DENSE_MEMBER_SWITCH_TO_CPU                    64
+#define BCM_L3_DENSE_MEMBER_SWITCH_TO_SECONDARY              32
+#define BCM_L3_DENSE_OPTIONS_REPLACE                         1
+#define BCM_L3_DENSE_ROUTE_AFR                               8
+#define BCM_L3_DENSE_ROUTE_D_HIT                             16
+#define BCM_L3_DENSE_ROUTE_HIT_CLEAR                         32
+#define BCM_L3_DENSE_ROUTE_IP6_ADDR                          4
+#define BCM_L3_DENSE_ROUTE_IP_ADDR                           2
+#define BCM_L3_DENSE_ROUTE_VRF                               1
+#define BCM_L3_ECMP_DENSE                                    0x20000
+#define BCM_L3_ECMP_DLB_PORT_MAP_ASSIGNED                    0x40000
+#define BCM_L3_ECMP_DLB_PORT_VC_QUALITY_METRIC_A             1
+#define BCM_L3_ECMP_DLB_PORT_VC_QUALITY_METRIC_B             2
+#define BCM_L3_ECMP_DYNAMIC_FC_STATUS_DISABLE                2
+#define BCM_L3_ECMP_DYNAMIC_FC_STATUS_ENABLE                 1
+#define BCM_L3_ECMP_DYNAMIC_FC_STATUS_XOFF                   8
+#define BCM_L3_ECMP_DYNAMIC_FC_STATUS_XON                    4
+#define BCM_L3_ECMP_DYNAMIC_IP_PROTOCOL_ELIGIBLE             1
+#define BCM_L3_ECMP_DYNAMIC_LAST_ASSIGNMENT                  0x10000
+#define BCM_L3_ECMP_DYNAMIC_MODE_DLB_ROUND_ROBIN             10
+#define BCM_L3_ECMP_DYNAMIC_MODE_OPTIMAL_DLB_ROUND_ROBIN     11
+#define BCM_L3_ECMP_DYNAMIC_PORT_EGRESS_BLOCK                1
+#define BCM_L3_ECMP_FLAGS2_ALTERNATE_FOR_FAILOVER            8
+#define BCM_L3_ECMP_FLAGS2_AR_RESOLUTION_OVERRIDE            32
+#define BCM_L3_ECMP_FLAGS2_DR_OVERRIDE                       4
+#define BCM_L3_ECMP_FLAGS2_DR_USE_REGULAR                    2
+#define BCM_L3_ECMP_FLAGS2_MEMBER_SHARED                     1
+#define BCM_L3_ECMP_FLAGS2_SECONDARY_RH_CLONE_ENABLE         16
+#define BCM_L3_ECMP_SINGLE_HIERARHCY                         0x4000
+#define BCM_L3_ECMP_TERTIARY_ENABLE                          0x8000
+#define BCM_L3_EGRESS_FLAGS_MTU_FAIL_COPY_TO_CPU             8
+#define BCM_L3_EGRESS_FLAGS_MTU_FAIL_COPY_TO_SECONDARY       2
+#define BCM_L3_EGRESS_FLAGS_MTU_FAIL_NO_DROP                 4
+#define BCM_L3_EGRESS_FLAGS_MTU_FAIL_SWITCH_TO_SECONDARY     1
+#define BCM_L3_EGRESS_MULTI_FAILOVER_GROUP_OVERLAY           4
+#define BCM_L3_EGRESS_MULTI_FAILOVER_GROUP_UNDERLAY          8
+#define BCM_L3_EGRESS_MULTI_TERTIARY_ECMP_DYNAMIC            16
+#define BCM_L3_EGR_FWD_CHANGE_PRI                            64
+#define BCM_L3_EGR_FWD_DISABLE_VLAN_TENANT                   0x100
+#define BCM_L3_EGR_FWD_IP_ROUTED                             128
+#define BCM_L3_EGR_FWD_KEEP_DST_MAC                          1
+#define BCM_L3_EGR_FWD_KEEP_SRC_MAC                          2
+#define BCM_L3_EGR_FWD_KEEP_TPID                             32
+#define BCM_L3_EGR_FWD_KEEP_TTL                              4
+#define BCM_L3_EGR_FWD_VLAN_TAG_ACTION_DELETE                16
+#define BCM_L3_EGR_FWD_VLAN_TAG_ACTION_NONE                  8
+#define BCM_L3_FLAGS2_FIND_LPM_ROUTE_ONLY                    0x8000000
+#define BCM_L3_FLAGS2_HIT_GET                                32
+#define BCM_L3_FLAGS2_MAC_ADDR_INVALID                       0x20000
+#define BCM_L3_FLAGS2_SWITCH_TO_CPU                          0x4000
+#define BCM_L3_FLAGS2_SWITCH_TO_SECONDARY                    0x2000
+#define BCM_L3_FLAGS2_SYSTEM_DESTINATION                     0x20000000
+#define BCM_L3_FLAGS3_BFD_ENABLE                             0x40000
+#define BCM_L3_FLAGS3_COPY_TO_SECONDARY                      0x800000
+#define BCM_L3_FLAGS3_DEFLECT                                0x10000000
+#define BCM_L3_FLAGS3_ECMP_RH_CLONE_DISABLE                  0x400000
+#define BCM_L3_FLAGS3_ECMP_SECONDARY_RH_CLONE_ENABLE         0x80000000
+#define BCM_L3_FLAGS3_EGRESS_DENSE                           0x20000000
+#define BCM_L3_FLAGS3_EGRESS_SVTAG_ENABLE                    0x1000000
+#define BCM_L3_FLAGS3_EGRESS_VLAN_DELETE                     0x2000000
+#define BCM_L3_FLAGS3_EGRESS_VLAN_NO_ACTION                  0x4000000
+#define BCM_L3_FLAGS3_EXTENDED_NEXTHOP                       0x20000
+#define BCM_L3_FLAGS3_FORCE_LARGE_LOOKUP_CLASS               0x4000
+#define BCM_L3_FLAGS3_HIERARCHICAL_LM                        0x8000
+#define BCM_L3_FLAGS3_KEEP_TPID                              0x200000
+#define BCM_L3_FLAGS3_LOCAL_NAMESPACE_ONLY                   0x80000
+#define BCM_L3_FLAGS3_MPLS_ONLY                              0x100000
+#define BCM_L3_FLAGS3_REDUCED_ROUTE_NO_ECMP_OVERLAP          0x10000
+#define BCM_L3_FLAGS3_UNDERLAY_ASSOCIATE                     0x8000000
+#define BCM_L3_FLAGS3_USE_ISID_AS_MACDA_LSB                  0x40000000
+#define BCM_L3_GLOBAL_ROUTE                                  0x10000000
+#define BCM_L3_INGRESS_FLAGS2_DEDICATED_RPF_VRF_IP4_MCAST    0x8000
+#define BCM_L3_INGRESS_FLAGS2_DEDICATED_RPF_VRF_IP4_UCAST    0x4000
+#define BCM_L3_INGRESS_FLAGS2_DEDICATED_RPF_VRF_IP6_MCAST    0x20000
+#define BCM_L3_INGRESS_FLAGS2_DEDICATED_RPF_VRF_IP6_UCAST    0x10000
+#define BCM_L3_INGRESS_FLAGS2_DST_NAT                        32
+#define BCM_L3_INGRESS_FLAGS2_IP6_HBH_ENABLE                 0x200
+#define BCM_L3_INGRESS_FLAGS2_IPMC_ALPM_ENABLED              0x2000
+#define BCM_L3_INGRESS_FLAGS2_L3INTF_DISABLE_FROM_GV_LOOKUP  2
+#define BCM_L3_INGRESS_FLAGS2_L3INTF_DISABLE_FROM_SGV_LOOKUP 1
+#define BCM_L3_INGRESS_FLAGS2_L3INTF_IP_SUBSCRIBER           4
+#define BCM_L3_INGRESS_FLAGS2_OVERRIDE_PORT_BASED_IP_ENABLE  0x800
+#define BCM_L3_INGRESS_FLAGS2_PARALLEL_NAT                   64
+#define BCM_L3_INGRESS_FLAGS2_ROUTE_DISABLE_SRV6_ENDPOINT    8
+#define BCM_L3_INGRESS_FLAGS2_ROUTE_ENABLE_FLEX_L3HDR        0x100
+#define BCM_L3_INGRESS_FLAGS2_SAME_L3INTF_TOCPU              128
+#define BCM_L3_INGRESS_FLAGS2_SRC_NAT                        16
+#define BCM_L3_INGRESS_FLAGS2_SRV6_PATH_TRACE_ENABLE         0x400
+#define BCM_L3_INGRESS_FLAGS2_VRF_PER_IP_TYPE                0x1000
+#define BCM_L3_INGRESS_SKIP_IPV4_MC_SIP_LOOKUP               0x2000
+#define BCM_L3_INGRESS_SKIP_IPV6_MC_SIP_LOOKUP               0x4000
+#define BCM_L3_INGRESS_VIRTUAL                               0x4000
+#define BCM_L3_INTF_IPMC_L2_BRIDGE                           0x10000
+#define BCM_L3_INTF_OUTER_VLAN_REPLACE                       0x8000
+#define BCM_L3_INTF_PIM_TUNNEL_ENABLE                        0x4000
+#define BCM_L3_INTF_VLAN_TRANSLATION_PORT_GROUP_ENABLE       0x2000
+#define BCM_L3_LARGE_NAT_EGRESS_CTRL_DNAT                    2
+#define BCM_L3_LARGE_NAT_EGRESS_CTRL_NAPT                    4
+#define BCM_L3_LARGE_NAT_EGRESS_CTRL_REPLACE                 8
+#define BCM_L3_LARGE_NAT_EGRESS_CTRL_SNAT                    1
+#define BCM_L3_LARGE_NAT_EGRESS_WITH_ID                      128
+#define BCM_L3_LARGE_NAT_INGRESS_DNAT                        2
+#define BCM_L3_LARGE_NAT_INGRESS_NAPT                        4
+#define BCM_L3_LARGE_NAT_INGRESS_REPLACE                     8
+#define BCM_L3_LARGE_NAT_INGRESS_SNAT                        1
+#define BCM_L3_NAT_INFO_DELETE_ALL                           32
+#define BCM_L3_NAT_INFO_DST                                  4
+#define BCM_L3_NAT_INFO_IP_TUNNEL                            8
+#define BCM_L3_NAT_INFO_PARALLEL                             64
+#define BCM_L3_NAT_INFO_REPLACE                              1
+#define BCM_L3_NAT_INFO_SCALE_TABLE                          16
+#define BCM_L3_NAT_INFO_SRC                                  2
+#define BCM_L3_NAT_INGRESS_PIPE_ALL                          -1
+#define BCM_L3_VLAN_TENANT_DISABLE                           0x20000000
+#define BCM_L3_VPBR_REDIRECT_DEST                            8
+#define BCM_L3_VPBR_VRF_STAR                                 16
+#define BCM_L3_VRRP_OVERLAY_ONLY                             8
+</pre></div>
+</div>
+</section>
+<section id="bcm-mirror-22">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_mirror_*</span></code> (22)<a class="headerlink" href="#bcm-mirror-22" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_MIRROR_CONGESTION_GROUP_BMP_ALL                      -1
+#define BCM_MIRROR_DEST_FLAGS2_COSQ_MOD                          0x80000
+#define BCM_MIRROR_DEST_FLAGS2_DESTINATION_PER_SRC               0x400000
+#define BCM_MIRROR_DEST_FLAGS2_DISABLE                           0x2000000
+#define BCM_MIRROR_DEST_FLAGS2_HEADER_INFO_MIRROR_ENABLE         0x4000000
+#define BCM_MIRROR_DEST_FLAGS2_HIGIG3                            0x20000
+#define BCM_MIRROR_DEST_FLAGS2_IFA_INIT                          0x800000
+#define BCM_MIRROR_DEST_FLAGS2_IFA_TERM                          0x1000000
+#define BCM_MIRROR_DEST_FLAGS2_LOOPBACK_DEST_PORT                0x40000
+#define BCM_MIRROR_DEST_FLAGS2_MIRROR_ON_CONGESTION              0x200000
+#define BCM_MIRROR_DEST_FLAGS2_START_OF_PACKET_STRIP_ENABLE      0x100000
+#define BCM_MIRROR_DEST_FLAGS2_TUNNEL_WITH_KEY                   0x10000
+#define BCM_MIRROR_EGRESS_MOD_EVENT_PROFILE_UNCOMPRESSED_REASONS 1
+#define BCM_MIRROR_ENCAP_INSTANCE_COSQ_MOD                       4
+#define BCM_MIRROR_ENCAP_INSTANCE_EP_RECIRC                      8
+#define BCM_MIRROR_INGRESS_MOD_EVENT_PROFILE_REPLACE             2
+#define BCM_MIRROR_PAYLOAD_TRUNCATE_OFFSET_BASED                 3
+#define BCM_MIRROR_PKT_HEADER_UPDATE_PP_ADMIT_PROFILE            0x100
+#define BCM_MIRROR_PKT_HIGIG3_ENCAP_FLAGS_L3_ROUTED              2
+#define BCM_MIRROR_PKT_HIGIG3_ENCAP_FLAGS_MULTICAST              1
+#define BCM_MIRROR_PORT_DESTINATION_PER_SRC                      0x2000
+#define BCM_MIRROR_SAMPLE_PROFILE_INVALID                        -1
+</pre></div>
+</div>
+</section>
+<section id="bcm-module-6">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_module_*</span></code> (6)<a class="headerlink" href="#bcm-module-6" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_MODULE_EDK       77
+#define BCM_MODULE_FLEXINSTR 76
+#define BCM_MODULE_GLB       74
+#define BCM_MODULE_INC       75
+#define BCM_MODULE_LSM       78
+#define BCM_MODULE_POSTCARD  73
+</pre></div>
+</div>
+</section>
+<section id="bcm-mpls-11">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_mpls_*</span></code> (11)<a class="headerlink" href="#bcm-mpls-11" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_MPLS_EGRESS_LABEL_FLAGS2_HIERARCHICAL_LM          8
+#define BCM_MPLS_PORT2_KEEP_PAYLOAD                           0x2000
+#define BCM_MPLS_PORT3_HIERARCHICAL_LM                        1
+#define BCM_MPLS_RANGE_ACTION_BIER_BIFT_ID                    32
+#define BCM_MPLS_RANGE_ACTION_SPECULATIVE                     64
+#define BCM_MPLS_RANGE_ACTION_SPECULATIVE_CONTROL_WORD_OR_ACH 0x200
+#define BCM_MPLS_RANGE_ACTION_SPECULATIVE_ETHERNET            128
+#define BCM_MPLS_RANGE_ACTION_SPECULATIVE_IPVX                0x100
+#define BCM_MPLS_RANGE_ACTION_SPECULATIVE_NONE                0x400
+#define BCM_MPLS_SWITCH2_CROSS_CONNECT_ENABLE_NATIVE_ROUTING  0x10000
+#define BCM_MPLS_SWITCH2_TERM_LABEL                           0x20000
+</pre></div>
+</div>
+</section>
+<section id="bcm-multi-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_multi_*</span></code> (1)<a class="headerlink" href="#bcm-multi-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_MULTI_WORD_LENGTH_MAX 16
+</pre></div>
+</div>
+</section>
+<section id="bcm-multicast-8">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_multicast_*</span></code> (8)<a class="headerlink" href="#bcm-multicast-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_MULTICAST_EGRESS_GROUP_MAX_EDIT_PROFILES_PER_REP 2
+#define BCM_MULTICAST_EGRESS_WITH_ID                         1
+#define BCM_MULTICAST_ELEMENT_LOCAL                          0x2000
+#define BCM_MULTICAST_ENCAP_DST_MAC_FROM_UC                  4
+#define BCM_MULTICAST_LOCAL_MAPPING_CORE_SCOPE               2
+#define BCM_MULTICAST_LOCAL_MAPPING_REPLACE                  1
+#define BCM_MULTICAST_REP_DEST2_REPLACE                      64
+#define BCM_MULTICAST_REP_DEST_REPLACE                       32
+</pre></div>
+</div>
+</section>
+<section id="bcm-oam-9">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_oam_*</span></code> (9)<a class="headerlink" href="#bcm-oam-9" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_OAM_DELAY_READ_AND_RESET                    0x100
+#define BCM_OAM_DELAY_STAT_ALL_READ_AND_RESET           0x200
+#define BCM_OAM_ENDPOINT_FLAGS2_DISABLE_CCM_TX          0x20000000
+#define BCM_OAM_ENDPOINT_FLAGS2_RX_MEP_BASE_INDEX_VALID 0x80000000
+#define BCM_OAM_ENDPOINT_FLAGS2_SENDER_ID_TLV           0x40000000
+#define BCM_OAM_LOSS_MULTIPLE_SLM                       0x40000
+#define BCM_OAM_OPCODE_MULTIPLE_SLM_RESPONDER           0x2000000
+#define BCM_OAM_OPCODE_ON_DEMAND                        0x1000000
+#define BCM_OAM_TEST_ID_TLV_DM_UP_ENCAP_WITH_ID         1
+</pre></div>
+</div>
+</section>
+<section id="bcm-onesync-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_onesync_*</span></code> (2)<a class="headerlink" href="#bcm-onesync-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_ONESYNC_MAX_L2_HEADER_LENGTH 64
+#define BCM_ONESYNC_MAX_NETW_ADDR_SIZE   16
+</pre></div>
+</div>
+</section>
+<section id="bcm-pkt-43">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_pkt_*</span></code> (43)<a class="headerlink" href="#bcm-pkt-43" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_PKT_F2_GBP_TX                                     0x2000000
+#define BCM_PKT_FORMAT_GSH_HEADER_TYPE_ANY                    0
+#define BCM_PKT_FORMAT_L2_HDR_ANY                             0
+#define BCM_PKT_FORMAT_L2_HDR_INSTRU_4B                       4
+#define BCM_PKT_FORMAT_L2_HDR_INSTRU_8B                       8
+#define BCM_PKT_FORMAT_L2_HDR_UNTAGGED                        1
+#define BCM_PKT_FORMAT_L2_HDR_VLAN                            2
+#define BCM_PKT_FORMAT_L2_HDR_VLAN_INSTRU_4B                  16
+#define BCM_PKT_FORMAT_L2_HDR_VLAN_INSTRU_8B                  32
+#define BCM_PKT_FORMAT_L3_HDR_AFR_HDR_ID_1                    64
+#define BCM_PKT_FORMAT_L3_HDR_AFR_HDR_ID_2                    128
+#define BCM_PKT_FORMAT_L3_HDR_ANY                             0
+#define BCM_PKT_FORMAT_L3_HDR_ARP                             16
+#define BCM_PKT_FORMAT_L3_HDR_IP4_NO_OPTIONS                  4
+#define BCM_PKT_FORMAT_L3_HDR_IP4_WITH_OPTIONS                8
+#define BCM_PKT_FORMAT_L3_HDR_IP6                             2
+#define BCM_PKT_FORMAT_L3_HDR_RARP                            32
+#define BCM_PKT_FORMAT_L3_HDR_UNKNOWN                         1
+#define BCM_PKT_FORMAT_L3_INSTR_HDR_ANY                       0
+#define BCM_PKT_FORMAT_L3_INSTR_HDR_NONE                      2
+#define BCM_PKT_FORMAT_L3_INSTR_HDR_PRESENT                   1
+#define BCM_PKT_FORMAT_L3_INSTR_HDR_TYPE_4B                   1
+#define BCM_PKT_FORMAT_L3_INSTR_HDR_TYPE_8B                   2
+#define BCM_PKT_FORMAT_L3_INSTR_HDR_TYPE_ANY                  0
+#define BCM_PKT_FORMAT_L4_HDR_ANY                             0
+#define BCM_PKT_FORMAT_L4_HDR_TCP                             2
+#define BCM_PKT_FORMAT_L4_HDR_UDP                             4
+#define BCM_PKT_FORMAT_L4_HDR_UNKNOWN                         1
+#define BCM_PKT_FORMAT_MODULE_HDR_ANY                         0
+#define BCM_PKT_FORMAT_MODULE_HDR_NONE                        2
+#define BCM_PKT_FORMAT_MODULE_HDR_PRESENT                     1
+#define BCM_PKT_FORMAT_MODULE_HEADER_TYPE_ANY                 0
+#define BCM_PKT_FORMAT_MODULE_HEADER_TYPE_SECONDARY_TX_MD_HDR 8
+#define BCM_PKT_FORMAT_POST_L4_HDR_ANY                        0
+#define BCM_PKT_FORMAT_POST_L4_HDR_DCN                        4
+#define BCM_PKT_FORMAT_POST_L4_HDR_DCN_ROCE2                  16
+#define BCM_PKT_FORMAT_POST_L4_HDR_IEEE1588                   32
+#define BCM_PKT_FORMAT_POST_L4_HDR_IFA_METADATA               2
+#define BCM_PKT_FORMAT_POST_L4_HDR_ROCE2                      8
+#define BCM_PKT_FORMAT_POST_L4_HDR_UNKNOWN                    1
+#define BCM_PKT_FORMAT_ROCE2_ANY                              0
+#define BCM_PKT_FORMAT_ROCE2_NONE                             2
+#define BCM_PKT_FORMAT_ROCE2_PRESENT                          1
+</pre></div>
+</div>
+</section>
+<section id="bcm-pktio-211">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_pktio_*</span></code> (211)<a class="headerlink" href="#bcm-pktio-211" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_PKTIO_FILTER_F_MATCH_DMA_CHAN                                                  4
+#define BCM_PKTIO_FILTER_M_OPTIONAL_REASON                                                 0x400
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_INC_CTRL_INFO                                         22
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_INC_QP_ID                                             25
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_INC_RSVD_1                                            23
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_INC_RSVD_6                                            26
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_INC_SRC_HOST_PROFILE                                  24
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_INT_CN_CNG                                            20
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_INT_PRI                                               21
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_PACKET_ENTROPY                                        19
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_SOURCE                                                18
+#define BCM_PKTIO_GENERIC_LOOPBACK_T_SVP                                                   17
+#define BCM_PKTIO_LBHDR_INPUT_PRIORITY_MD_ETH                                              37
+#define BCM_PKTIO_LBHDR_VFI_MD_ETH                                                         39
+#define BCM_PKTIO_LBHDR_VFI_VALID_MD_ETH                                                   38
+#define BCM_PKTIO_MATCH_ID_INNER_L2_HDR_NONE                                               82
+#define BCM_PKTIO_MATCH_ID_INNER_L3_L4_HDR_IFA_METADATA                                    81
+#define BCM_PKTIO_MATCH_ID_INNER_L3_L4_HDR_NONE                                            86
+#define BCM_PKTIO_MATCH_ID_OUTER_L2_HDR_AUX_RX_MD_HEADER                                   85
+#define BCM_PKTIO_MATCH_ID_OUTER_L2_HDR_L2_INSTR_4BYTE                                     83
+#define BCM_PKTIO_MATCH_ID_OUTER_L2_HDR_L2_INSTR_8BYTE                                     84
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_DCN_16BYTE                                      87
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_DCN_8BYTE                                       88
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_DEST_OPT_EXT_1                                  89
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_DEST_OPT_EXT_2                                  90
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_FLEX_HOP_BY_HOP_EXT_1                           93
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_FLEX_HOP_BY_HOP_EXT_2                           94
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_FLEX_L3_HDR_1                                   91
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_FLEX_L3_HDR_2                                   92
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_IFA_METADATA_BASE                               95
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_ROCEV2_AETH                                     96
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_ROCEV2_BTH                                      97
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_ROCEV2_DETH                                     98
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_ROCEV2_RETH                                     99
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_ROUT_EXT_1                                      100
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_ROUT_EXT_2                                      101
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_UDPIPSEC                                        104
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_WESP_EXT_1                                      102
+#define BCM_PKTIO_MATCH_ID_OUTER_L3_L4_HDR_WESP_EXT_2                                      103
+#define BCM_PKTIO_MHDR_CTD_COPY                                                            38
+#define BCM_PKTIO_MHDR_EP_TRIGGERED_MIRROR                                                 36
+#define BCM_PKTIO_MHDR_MPB_TYPE                                                            37
+#define BCM_PKTIO_NETIF_F_BIND_TX_PMD                                                      32
+#define BCM_PKTIO_NETIF_F_REPLACE                                                          64
+#define BCM_PKTIO_NETIF_F_WITH_ID                                                          16
+#define BCM_PKTIO_RXPMD_FLEX_IFP_CLASS_ID_15_0                                             0x154
+#define BCM_PKTIO_RXPMD_FLEX_IFP_DO_NOT_MODIFY_TS_CONTROL_ACTION_3_0                       0x155
+#define BCM_PKTIO_RXPMD_FLEX_IFP_VCA_KEY_PROFILE_INDEX_3_0                                 0x166
+#define BCM_PKTIO_RXPMD_FLEX_INC_CTRL_INFO_15_0                                            0x156
+#define BCM_PKTIO_RXPMD_FLEX_INGRESS_DEVICE_PORT_6_0                                       0x152
+#define BCM_PKTIO_RXPMD_FLEX_INGRESS_PP_PORT_ITAG_PRESERVE_15_0                            0x153
+#define BCM_PKTIO_RXPMD_FLEX_ING_PORT_GROUP_ID_3_0_3_0                                     0x169
+#define BCM_PKTIO_RXPMD_FLEX_ING_PORT_GROUP_ID_7_4_3_0                                     0x16a
+#define BCM_PKTIO_RXPMD_FLEX_IP_MMU_DROP_CODE_15_0                                         0x15b
+#define BCM_PKTIO_RXPMD_FLEX_L2_DST_LOOKUP_HIT_INDEX_15_0                                  0x16b
+#define BCM_PKTIO_RXPMD_FLEX_L2_DST_LOOKUP_HIT_INDEX_31_16                                 0x16c
+#define BCM_PKTIO_RXPMD_FLEX_L2_IIF_16_9_0                                                 0x157
+#define BCM_PKTIO_RXPMD_FLEX_L2_OIF_16_9_0                                                 0x158
+#define BCM_PKTIO_RXPMD_FLEX_L3_IIF_16_15_0                                                0x159
+#define BCM_PKTIO_RXPMD_FLEX_L3_OIF_1_11_0                                                 0x15a
+#define BCM_PKTIO_RXPMD_FLEX_MPB_TUNNEL_DECAP_EXT_HDR_INFO_3_0                             0x162
+#define BCM_PKTIO_RXPMD_FLEX_PKT_MISC_CTRL_1_3_0                                           0x167
+#define BCM_PKTIO_RXPMD_FLEX_REASON_AFR_L3_DST_DISCARD                                     78
+#define BCM_PKTIO_RXPMD_FLEX_REASON_AFR_L3_DST_LOOKUP_MISS                                 79
+#define BCM_PKTIO_RXPMD_FLEX_REASON_AFR_UNTAG_DROP                                         77
+#define BCM_PKTIO_RXPMD_FLEX_REASON_AFR_VLAN_TO_VRF_MISS                                   81
+#define BCM_PKTIO_RXPMD_FLEX_REASON_AR_MONITOR_TO_CPU                                      64
+#define BCM_PKTIO_RXPMD_FLEX_REASON_BMAC_CML                                               85
+#define BCM_PKTIO_RXPMD_FLEX_REASON_DEPRECATED_1                                           80
+#define BCM_PKTIO_RXPMD_FLEX_REASON_DOS_ATTACK                                             68
+#define BCM_PKTIO_RXPMD_FLEX_REASON_IDEV_CONFIG_TO_CPU                                     57
+#define BCM_PKTIO_RXPMD_FLEX_REASON_IFP_PROTOCOL_UDF_TCAM                                  59
+#define BCM_PKTIO_RXPMD_FLEX_REASON_INC_FIRST_PSN_MISMATCH                                 82
+#define BCM_PKTIO_RXPMD_FLEX_REASON_INC_FIRST_READ_NAK                                     83
+#define BCM_PKTIO_RXPMD_FLEX_REASON_INC_FIRST_WRITE_NAK                                    84
+#define BCM_PKTIO_RXPMD_FLEX_REASON_INC_MSG                                                67
+#define BCM_PKTIO_RXPMD_FLEX_REASON_ING_ADAPT_OR_MIRROR_SAMPLER_SAMPLED                    87
+#define BCM_PKTIO_RXPMD_FLEX_REASON_IPMC_L3_IIF_OR_RPA_ID_CHECK_FAILED_OR_L3_IIF_EQ_L3_OIF 86
+#define BCM_PKTIO_RXPMD_FLEX_REASON_L2_DST_DISCARD                                         91
+#define BCM_PKTIO_RXPMD_FLEX_REASON_L2_INSTR_UNKNOWN_SIGNAL_TYPE                           62
+#define BCM_PKTIO_RXPMD_FLEX_REASON_L3_DST_DISCARD                                         61
+#define BCM_PKTIO_RXPMD_FLEX_REASON_L3_MTU_CHECK_FAIL                                      74
+#define BCM_PKTIO_RXPMD_FLEX_REASON_MACSA_MULTICAST_IDEV_CONFIG_TO_CPU                     76
+#define BCM_PKTIO_RXPMD_FLEX_REASON_MEMBERSHIP_SPANNING_TREE_CHECK_FAILED                  75
+#define BCM_PKTIO_RXPMD_FLEX_REASON_NHOP_TO_CPU                                            70
+#define BCM_PKTIO_RXPMD_FLEX_REASON_OTHER_DROPS                                            88
+#define BCM_PKTIO_RXPMD_FLEX_REASON_PACKET_TRACE_TO_CPU                                    89
+#define BCM_PKTIO_RXPMD_FLEX_REASON_PARITY_ERROR                                           65
+#define BCM_PKTIO_RXPMD_FLEX_REASON_SECONDARY_L2_DST_LOOKUP_MISS                           90
+#define BCM_PKTIO_RXPMD_FLEX_REASON_SECONDARY_L3_DST_LOOKUP_MISS                           73
+#define BCM_PKTIO_RXPMD_FLEX_REASON_SECONDARY_L3_HDR_ERROR                                 72
+#define BCM_PKTIO_RXPMD_FLEX_REASON_SER_DROP_EPIPE                                         58
+#define BCM_PKTIO_RXPMD_FLEX_REASON_SFLOW                                                  60
+#define BCM_PKTIO_RXPMD_FLEX_REASON_TIME_SYNC                                              69
+#define BCM_PKTIO_RXPMD_FLEX_REASON_TTL_ERROR                                              71
+#define BCM_PKTIO_RXPMD_FLEX_REASON_VLAN_FILTER_DROP                                       63
+#define BCM_PKTIO_RXPMD_FLEX_REASON_VLAN_TO_VRF_MISS                                       66
+#define BCM_PKTIO_RXPMD_FLEX_STORM_CTRL_METER_INDEX_OR_DNAT_INDEX_15_0                     0x168
+#define BCM_PKTIO_RXPMD_FLEX_SWITCH_COPY_DESTINATION_15_0                                  0x15c
+#define BCM_PKTIO_RXPMD_FLEX_SWITCH_COPY_QUEUE_NUM_3_0                                     0x15d
+#define BCM_PKTIO_RXPMD_FLEX_SYSTEM_ENTROPY_15_0                                           0x161
+#define BCM_PKTIO_RXPMD_FLEX_VCA_IF_REQ_SF_PROFILE_3_0                                     0x15e
+#define BCM_PKTIO_RXPMD_FLEX_VCA_QUERY_PORT_NUM_15_0                                       0x163
+#define BCM_PKTIO_RXPMD_FLEX_VCA_QUERY_QUEUE_NUM_3_0                                       0x164
+#define BCM_PKTIO_RXPMD_FLEX_VLAN_TAG_PRESERVE_INC_CTRL_3_0                                0x15f
+#define BCM_PKTIO_RXPMD_FLEX_VRF_7_0                                                       0x165
+#define BCM_PKTIO_RXPMD_FLEX_VRF_AR_GROUP_15_0                                             0x160
+#define BCM_PKTIO_RXPMD_FTMH_SRC_SYSPORT                                                   3
+#define BCM_PKTIO_RXPMD_FTMH_TC                                                            2
+#define BCM_PKTIO_RXPMD_INTERNAL_TRAP_ID                                                   4
+#define BCM_PKTIO_RXPMD_INTERNAL_TRAP_QUALIFIER                                            5
+#define BCM_PKTIO_RXPMD_IS_EGR_TS                                                          97
+#define BCM_PKTIO_RXPMD_MATCHED_RULE_EP                                                    96
+#define BCM_PKTIO_RXPMD_MODIFIED_PKT                                                       98
+#define BCM_PKTIO_RXPMD_NONSW_COPY                                                         95
+#define BCM_PKTIO_RXPMD_RX_AUX_PORT                                                        94
+#define BCM_PKTIO_RXPMD_RX_CHANNEL                                                         1
+#define BCM_PKTIO_RXPMD_SYSTEM_HEADER_LENGTH                                               0
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_IP                                               1
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_L2MPLS_1LABEL                                    2
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_L2MPLS_2_LABELS                                  3
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_L2MPLS_3_LABELS                                  4
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_L3MPLS_1LABEL                                    5
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_L3MPLS_2_LABELS                                  6
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_L3MPLS_3_LABELS                                  7
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_NONE                                             0
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_SRV6_L2                                          9
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_SRV6_SRH                                         10
+#define BCM_PKTIO_RXPMD_TUNNEL_DECAP_TYPE_VXLAN                                            8
+#define BCM_PKTIO_RX_REASON_APU_POLICY_CTC                                                 139
+#define BCM_PKTIO_RX_REASON_DELAYED_CTC                                                    140
+#define BCM_PKTIO_RX_REASON_OUI_COMPRESSION_MISS                                           143
+#define BCM_PKTIO_RX_REASON_PORT_DOWN                                                      141
+#define BCM_PKTIO_RX_REASON_SRV6_CONTROL_PKT                                               142
+#define BCM_PKTIO_SUSPEND_GRACEFUL                                                         1
+#define BCM_PKTIO_TXPMD_COOKIE_7_0                                                         76
+#define BCM_PKTIO_TXPMD_COOKIE_8                                                           77
+#define BCM_PKTIO_TXPMD_CPU_TX_AR_GROUP                                                    87
+#define BCM_PKTIO_TXPMD_CPU_TX_CNG                                                         101
+#define BCM_PKTIO_TXPMD_CPU_TX_CNG_VALID                                                   107
+#define BCM_PKTIO_TXPMD_CPU_TX_COOKIE                                                      74
+#define BCM_PKTIO_TXPMD_CPU_TX_COOKIE_VALID                                                75
+#define BCM_PKTIO_TXPMD_CPU_TX_COS                                                         105
+#define BCM_PKTIO_TXPMD_CPU_TX_COS_VALID                                                   110
+#define BCM_PKTIO_TXPMD_CPU_TX_CPU_TX_TYPE                                                 111
+#define BCM_PKTIO_TXPMD_CPU_TX_CPU_TX_T_INC                                                1
+#define BCM_PKTIO_TXPMD_CPU_TX_CPU_TX_T_MASQUERADE                                         0
+#define BCM_PKTIO_TXPMD_CPU_TX_DESTINATION_T_DEST_PORT                                     10
+#define BCM_PKTIO_TXPMD_CPU_TX_DESTINATION_T_NEXT_HOP                                      12
+#define BCM_PKTIO_TXPMD_CPU_TX_DESTINATION_T_NULL                                          9
+#define BCM_PKTIO_TXPMD_CPU_TX_DESTINATION_T_TGID                                          11
+#define BCM_PKTIO_TXPMD_CPU_TX_DOP_TRIGGER                                                 112
+#define BCM_PKTIO_TXPMD_CPU_TX_FWD_PROFILE                                                 98
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_COLLECTIVE_ID                                           89
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_FLOW_TYPE                                               92
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_GROUP_ID                                                88
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_DATA_FORMAT                                         99
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_DATA_FORMAT_BF16                                    2
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_DATA_FORMAT_FP16                                    1
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_DATA_FORMAT_FP32                                    0
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_DATA_FORMAT_FP8                                     4
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_DATA_FORMAT_INT32                                   3
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_DATA_OFFSET                                         100
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_OPER_TYPE                                           96
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_OPER_T_SUM                                          0
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_ICE_OPER_T_SUM_AND_SCALE                                1
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_INTERNAL_QP_ID                                          90
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_REDN_REQD                                               93
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_REDN_REQD_BROADCAST                                     0
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_REDN_REQD_REDUCE                                        1
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_REPL_REQD                                               94
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_REPL_REQD_BROADCAST                                     1
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_REPL_REQD_REDUCE                                        0
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_SECOND_PASS_DEST                                        95
+#define BCM_PKTIO_TXPMD_CPU_TX_INC_SRC_HOST_PROFILE                                        91
+#define BCM_PKTIO_TXPMD_CPU_TX_INPUT_PRI_VALID                                             109
+#define BCM_PKTIO_TXPMD_CPU_TX_INT_CN_VALID                                                108
+#define BCM_PKTIO_TXPMD_CPU_TX_INT_PRI_VALID                                               106
+#define BCM_PKTIO_TXPMD_CPU_TX_PACKET_ENTROPY                                              102
+#define BCM_PKTIO_TXPMD_CPU_TX_PKT_CTRL_PROFILE                                            104
+#define BCM_PKTIO_TXPMD_CPU_TX_SECONDARY_TO_PRIMARY_CLASS_ID                               113
+#define BCM_PKTIO_TXPMD_CPU_TX_SRC_PORT_NUM                                                103
+#define BCM_PKTIO_TXPMD_CPU_TX_SVP                                                         82
+#define BCM_PKTIO_TXPMD_CPU_TX_VLAN_PROFILE                                                97
+#define BCM_PKTIO_TXPMD_HEADER_T_PRIMARY_CPU_TX                                            1
+#define BCM_PKTIO_TXPMD_HEADER_T_PRIMARY_SOBMH                                             3
+#define BCM_PKTIO_TXPMD_HEADER_T_PRIMARY_TX_MD_HEADER                                      2
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_CELL_ERROR                                         126
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_CELL_LENGTH                                        114
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_CNG                                                120
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_COPY_TO_CPU                                        118
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_COS                                                121
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_EOP                                                115
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_HEADER_TYPE                                        127
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_HEADER_T_FROM_CPU                                  1
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_HEADER_T_RESERVED                                  0
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_INPUT_PRI                                          125
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_PKT_LENGTH                                         117
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_RQE_Q_NUM                                          124
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_RX_CHIP_PORT                                       81
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_SET_L2BM                                           123
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_SOP                                                116
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_START                                              128
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_TX_AUX_PORT                                        79
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_TX_CHIP_PORT                                       80
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_UNICAST                                            122
+#define BCM_PKTIO_TXPMD_SECONDARY_SOBMH_UNICAST_PKT                                        78
+#define BCM_PKTIO_TXPMD_SWITCH_COPY                                                        83
+#define BCM_PKTIO_TXPMD_SWITCH_COPY_COS                                                    86
+#define BCM_PKTIO_TXPMD_SWITCH_COPY_DEST_PORT                                              85
+#define BCM_PKTIO_TXPMD_SWITCH_COPY_TYPE                                                   84
+</pre></div>
+</div>
+</section>
+<section id="bcm-policer-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_policer_*</span></code> (4)<a class="headerlink" href="#bcm-policer-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_POLICER_GROUP_CREATE_WITH_POOL_ID 1
+#define BCM_POLICER_MAX_METER_POOL            8
+#define BCM_POLICER_PROTOCOL_PKT_CONTROL      0x2000000
+#define BCM_POLICER_ROUNDUP                   0x4000000
+</pre></div>
+</div>
+</section>
+<section id="bcm-port-81">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_port_*</span></code> (81)<a class="headerlink" href="#bcm-port-81" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_PORT_ADD_EGRESS_TM_CHANNELIZED                       0x800
+#define BCM_PORT_ADD_HYPER_NIF_MEMBER                            4
+#define BCM_PORT_ADD_HYPER_SINGLE_PRIORITY                       8
+#define BCM_PORT_ADD_IF_TIMESYNC_ADJUST_IN_LINKSCAN              4
+#define BCM_PORT_CLASS_TPID_EGRESS_CLASS_ID_DEFAULT_NATIVE       1
+#define BCM_PORT_CLASS_TPID_EGRESS_CLASS_ID_DEFAULT_PORT         0
+#define BCM_PORT_CLASS_TPID_INGRESS_CLASS_ID_DEFAULT_NATIVE      1
+#define BCM_PORT_CLASS_TPID_INGRESS_CLASS_ID_DEFAULT_PORT        0
+#define BCM_PORT_CLM_REQ_SIZE                                    200
+#define BCM_PORT_CLM_RETRY_TIMES_DEFAULT                         10
+#define BCM_PORT_CLM_RETRY_TIMES_MAX                             100
+#define BCM_PORT_CONTROL_SPECULATIVE_MTU_CHECK_DISABLE           -1
+#define BCM_PORT_ENCAP_IEEE_REDUCED_IPG                          13
+#define BCM_PORT_FLEXE_SOURCE_EVENT_GID_MISMATCH                 4
+#define BCM_PORT_FLEXE_SOURCE_EVENT_LF                           16
+#define BCM_PORT_FLEXE_SOURCE_EVENT_LOF                          1
+#define BCM_PORT_FLEXE_SOURCE_EVENT_LOM                          2
+#define BCM_PORT_FLEXE_SOURCE_EVENT_OOF                          32
+#define BCM_PORT_FLEXE_SOURCE_EVENT_PHYMAP_MISMATCH              8
+#define BCM_PORT_IF_10GQXGMII                                    78
+#define BCM_PORT_IF_20GDXGMII                                    80
+#define BCM_PORT_IF_20GQXGMII                                    79
+#define BCM_PORT_IF_DUMMY                                        81
+#define BCM_PORT_IF_EGR_MULTICAST                                76
+#define BCM_PORT_IF_HYPER                                        75
+#define BCM_PORT_IF_INCA                                         77
+#define BCM_PORT_ING_CELL_LEN_ERR                                2
+#define BCM_PORT_ING_FIFO_OVERRUN_ERR                            8
+#define BCM_PORT_ING_FIFO_UNDERRUN_ERR                           4
+#define BCM_PORT_ING_SOP_EOP_ERR                                 1
+#define BCM_PORT_LINK_STATUS_WRONG_CONNECTIVITY                  6
+#define BCM_PORT_MAX_FEC_NUM_LANE                                32
+#define BCM_PORT_PHY_CLAUSE22                                    128
+#define BCM_PORT_PHY_CONTROL_AM_LOSS                             0x177
+#define BCM_PORT_PHY_CONTROL_AUTONEG_MODE_NONE                   10
+#define BCM_PORT_PHY_CONTROL_CONSECUTIVE_NUM_BAD_CW              0x191
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_HZ_L1                       0x179
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_HZ_L2                       0x17d
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_HZ_R1                       0x17a
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_HZ_R2                       0x17e
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_VT_D1                       0x17c
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_VT_D2                       0x180
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_VT_U1                       0x17b
+#define BCM_PORT_PHY_CONTROL_EYE_VAL_VT_U2                       0x17f
+#define BCM_PORT_PHY_CONTROL_FEC_STAT_AUTO_COLLECT_FDR_BIN       0x190
+#define BCM_PORT_PHY_CONTROL_FLT_M                               0x18c
+#define BCM_PORT_PHY_CONTROL_FLT_S                               0x18d
+#define BCM_PORT_PHY_CONTROL_HI_BER_STATUS                       0x178
+#define BCM_PORT_PHY_CONTROL_LINK_TIME                           0x18e
+#define BCM_PORT_PHY_CONTROL_LOW_POWER_DFE_MODE                  0x18f
+#define BCM_PORT_PHY_CONTROL_LOW_POWER_DFE_MODE1                 1
+#define BCM_PORT_PHY_CONTROL_LOW_POWER_DFE_MODE2                 2
+#define BCM_PORT_PHY_CONTROL_LOW_POWER_DFE_OFF                   0
+#define BCM_PORT_PHY_CONTROL_NR_ECD                              0x182
+#define BCM_PORT_PHY_CONTROL_RXFFE_M                             0x189
+#define BCM_PORT_PHY_CONTROL_RXFFE_N1                            0x188
+#define BCM_PORT_PHY_CONTROL_RXFFE_N2                            0x187
+#define BCM_PORT_PHY_CONTROL_RXFFE_N3                            0x186
+#define BCM_PORT_PHY_CONTROL_RXFFE_P1                            0x18a
+#define BCM_PORT_PHY_CONTROL_RXFFE_P2                            0x18b
+#define BCM_PORT_PHY_CONTROL_RX_SNR                              0x181
+#define BCM_PORT_PHY_CONTROL_TP_0                                0x183
+#define BCM_PORT_PHY_CONTROL_TP_1                                0x184
+#define BCM_PORT_PHY_CONTROL_TP_2                                0x185
+#define BCM_PORT_PHY_RX_AFE_DFE_TAP_MAX                          24
+#define BCM_PORT_PHY_TIMESYNC_IEEE_802_3_CX                      0x20000000
+#define BCM_PORT_REMOVE_FLEXE_PM_RESET                           2
+#define BCM_PORT_RESOURCE_FLEXE_1G_SLOT                          0x200
+#define BCM_PORT_RESOURCE_FLEXE_1P25G_SLOT                       0x400
+#define BCM_PORT_RESOURCE_HAR                                    128
+#define BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE1    1
+#define BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_MODE2    2
+#define BCM_PORT_RESOURCE_PHY_LANE_CONFIG_LOW_POWER_DFE_OFF      0
+#define BCM_PORT_RESOURCE_PIPE_CASCADED                          0x800
+#define BCM_PORT_RESOURCE_RESTORE_DEFAULT_TX_TAPS                0x1000
+#define BCM_PORT_RESOURCE_TVCO_PRIORITIZE_25P781G                0x2000
+#define BCM_PORT_SHEL_KEEP_MSG_PERIOD                            1
+#define BCM_PORT_TIMESYNC_TIMESTAMP_CFUPDATE_EGRESS_ONLY         0x100
+#define BCM_PORT_TIMESYNC_TIMESTAMP_CFUPDATE_INGRESS_ONLY        128
+#define BCM_PORT_TIMESYNC_TIMESTAMP_CONDITIONAL_INGRESS_CFUPDATE 0x200
+#define BCM_PORT_TIMESYNC_TIMESTAMP_EXT_PHY_INGRESS_CFUPDATE     0x400
+</pre></div>
+</div>
+</section>
+<section id="bcm-postcard-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_postcard_*</span></code> (2)<a class="headerlink" href="#bcm-postcard-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_POSTCARD_TUNNEL_ENCAP_MODE_PIPE    1
+#define BCM_POSTCARD_TUNNEL_ENCAP_MODE_UNIFORM 0
+</pre></div>
+</div>
+</section>
+<section id="bcm-qos-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_qos_*</span></code> (3)<a class="headerlink" href="#bcm-qos-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_QOS_MAP_COSQ    0x4000
+#define BCM_QOS_MAP_INITIAL 0x20000
+#define BCM_QOS_MAP_L3_AR   0x20000
+</pre></div>
+</div>
+</section>
+<section id="bcm-range-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_range_*</span></code> (4)<a class="headerlink" href="#bcm-range-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_RANGE_CREATE_STAGE_EGRESS_FORWARDING 8
+#define BCM_RANGE_CREATE_STAGE_EXACTMATCH        4
+#define BCM_RANGE_EGR_FWD_ID_BASE                0x3000000
+#define BCM_RANGE_EM_ID_BASE                     0x2000000
+</pre></div>
+</div>
+</section>
+<section id="bcm-rdb-6">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_rdb_*</span></code> (6)<a class="headerlink" href="#bcm-rdb-6" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_RDB_HI_PRIO_LIMIT_THRESHOLD   32
+#define BCM_RDB_HI_PRIO_RESUME_THRESHOLD  16
+#define BCM_RDB_LO_PRIO_LIMIT_THRESHOLD   2
+#define BCM_RDB_LO_PRIO_RESUME_THRESHOLD  1
+#define BCM_RDB_MID_PRIO_LIMIT_THRESHOLD  8
+#define BCM_RDB_MID_PRIO_RESUME_THRESHOLD 4
+</pre></div>
+</div>
+</section>
+<section id="bcm-rx-8">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_rx_*</span></code> (8)<a class="headerlink" href="#bcm-rx-8" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_RX_FLAG_COS_AS_PROFILE                           1
+#define BCM_RX_TRAP_EG_TX_TRAP_ID_COLOR_BASED                0xc02
+#define BCM_RX_TRAP_FLAGS2_APPEND_POINTER_COMPENSATION_CLEAR 0x10000
+#define BCM_RX_TRAP_FLAGS2_SNIFF_START_PACKET_STRIP_CLEAR    0x20000
+#define BCM_RX_TRAP_FLAGS2_STAMP_PARSING_INFO                0x40000
+#define BCM_RX_TRAP_FLAGS2_START_PACKET_STRIP_CLEAR          0x2000
+#define BCM_RX_TRAP_FLAGS2_TRUNCATE_COMPENSATION_CLEAR       0x8000
+#define BCM_RX_TRAP_FLAGS2_UPDATE_SNOOP_CODE                 0x4000
+</pre></div>
+</div>
+</section>
+<section id="bcm-sat-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_sat_*</span></code> (1)<a class="headerlink" href="#bcm-sat-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_SAT_MAX_NUM_FIELD_SELECT 2
+</pre></div>
+</div>
+</section>
+<section id="bcm-secondary-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_secondary_*</span></code> (1)<a class="headerlink" href="#bcm-secondary-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_SECONDARY_PIPES_MAX 1
+</pre></div>
+</div>
+</section>
+<section id="bcm-stat-15">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_stat_*</span></code> (15)<a class="headerlink" href="#bcm-stat-15" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_STAT_BITMAP_WORD_SIZE                          16
+#define BCM_STAT_COUNTER_MULTIPLE_GET                      4
+#define BCM_STAT_EVICTION_UNIFIED_DATABASE                 4
+#define BCM_STAT_EXPANSION_USE_BITMAP                      1
+#define BCM_STAT_GROUP_DROP_REASONS_PKT_COUNTER            1
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD0_IPV4             1
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD0_IPV4_GOOD_CHKSUM 4
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD0_IPV6             2
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD0_MACDA_DIP_MATCH  8
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD1_L2MC             16
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD1_L2OIF            64
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD1_L3MC             32
+#define BCM_STAT_SIMPLE_PORT_CTR_ING_CMD1_SYSDEST          128
+#define BCM_STAT_SOURCE_MAPPING_ALTERNATING_OPCODE         4
+#define BCM_STAT_STIF_FORCE_RECORD_PROFILE_ID              4
+</pre></div>
+</div>
+</section>
+<section id="bcm-subport-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_subport_*</span></code> (4)<a class="headerlink" href="#bcm-subport-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_SUBPORT_GROUP_TYPE_SUBPORT_TAG_VER_1_1      128
+#define BCM_SUBPORT_GROUP_TYPE_SUBPORT_TAG_VER_3_1      0x100
+#define BCM_SUBPORT_PROPERTY_ALLOW_TPID_DISABLE         2
+#define BCM_SUBPORT_PROPERTY_USE_PRIORITY_FROM_PIPELINE 4
+</pre></div>
+</div>
+</section>
+<section id="bcm-switch-105">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_switch_*</span></code> (105)<a class="headerlink" href="#bcm-switch-105" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_SWITCH_AFR_HDR_CONFIG_ADD_O_REPLACE                           1
+#define BCM_SWITCH_AR_GLOBAL_MODE_AR                                      1
+#define BCM_SWITCH_AR_GLOBAL_MODE_CLASSIC_DLB                             0
+#define BCM_SWITCH_AR_PFC_STATUS_FILTER_DISABLED                          0
+#define BCM_SWITCH_AR_PFC_STATUS_FILTER_NEW_OR_EXISTING_ASSIGNMENT        2
+#define BCM_SWITCH_AR_PFC_STATUS_FILTER_NEW_REASSIGNMENT                  1
+#define BCM_SWITCH_AR_QM_B_DLB                                            0
+#define BCM_SWITCH_AR_QM_B_FLEX                                           1
+#define BCM_SWITCH_AR_REASSIGNMENT_DELTA_USE_MAX                          1
+#define BCM_SWITCH_AR_REASSIGNMENT_DELTA_USE_MIN                          0
+#define BCM_SWITCH_CNM_HEADER_CONFIG_PKT_ECN_REPLACE                      2
+#define BCM_SWITCH_CNM_HEADER_CONFIG_PKT_TTL_REPLACE                      1
+#define BCM_SWITCH_CNP_HEADER_CONFIG_INNER_OPAQUE_TAG_DELETE              8
+#define BCM_SWITCH_CNP_HEADER_CONFIG_INNER_SRC_MAC_REPLACE                2
+#define BCM_SWITCH_CNP_HEADER_CONFIG_OUTER_OPAQUE_TAG_DELETE              16
+#define BCM_SWITCH_CNP_HEADER_CONFIG_OUTER_SRC_MAC_REPLACE                4
+#define BCM_SWITCH_CNP_HEADER_CONFIG_QUEUE_LENGTH_UPDATE                  1
+#define BCM_SWITCH_CNP_HEADER_CONFIG_TOS_REPLACE                          64
+#define BCM_SWITCH_CNP_HEADER_CONFIG_TTL_REPLACE                          32
+#define BCM_SWITCH_COMPONENTS_INFO_MASK_ALL                               0
+#define BCM_SWITCH_COMPONENTS_INFO_MASK_OPER_STATE                        2
+#define BCM_SWITCH_COMPONENTS_INFO_MASK_VER_STR                           1
+#define BCM_SWITCH_COMPONENTS_INFO_VER_STR_LEN                            64
+#define BCM_SWITCH_CONTROL_L3_LEARN_HOST_FWD_ONLY                         0x80000000
+#define BCM_SWITCH_COPYTOSECONDARY_REASON_MAX                             34
+#define BCM_SWITCH_COPY_TO_SECONDARY_OPTIONS_REPLACE                      1
+#define BCM_SWITCH_DROP_REASON_COUNT                                      47
+#define BCM_SWITCH_ENCAP_ACCESS_AUTOMATIC_POINTING_GPORTS                 1
+#define BCM_SWITCH_EP_RECIRC_ADD_TX_MD_HDR                                0x4000
+#define BCM_SWITCH_EP_RECIRC_EGRESS_DROP_EVENT_OVERRIDE_PROFILE_WITH_ID   1
+#define BCM_SWITCH_EP_RECIRC_EGR_TIMESTAMP                                0x10000
+#define BCM_SWITCH_EP_RECIRC_L2_DENSE_MODE_MAC_FLIP                       0x80000
+#define BCM_SWITCH_EP_RECIRC_SECOND_PASS_COUNTER_INDEX_ING_PHY_PORT       0x800
+#define BCM_SWITCH_EP_RECIRC_SECOND_PASS_FIXED_COUNTER_SKIP               0x400
+#define BCM_SWITCH_EP_RECIRC_SECOND_PASS_FLEX_INSTR_PROFILE_ASSIGN        0x200
+#define BCM_SWITCH_EP_RECIRC_SECOND_PASS_SOBMH_EGR_REDIRECT               0x100000
+#define BCM_SWITCH_EP_RECIRC_SER_DROP_RECIRC                              0x8000
+#define BCM_SWITCH_EP_RECIRC_SVP                                          0x20000
+#define BCM_SWITCH_EP_RECIRC_VFI                                          0x40000
+#define BCM_SWITCH_EVENT_CONTROL_SER                                      -2
+#define BCM_SWITCH_EVENT_CONTROL_SINGLE_BIT_ECC_ERROR                     -3
+#define BCM_SWITCH_EVENT_FLAG_INVOKE_SPECIFIC_TYPE_ONLY                   1
+#define BCM_SWITCH_EVENT_HARD_RESET_FLAG_DEVICE_INTERRUPT                 1
+#define BCM_SWITCH_EVENT_HARD_RESET_FLAG_HBM_PARITY_MONITOR               2
+#define BCM_SWITCH_EVENT_HARD_RESET_FLAG_HBM_TEMP_MONITOR                 4
+#define BCM_SWITCH_EVENT_HARD_RESET_FLAG_OTHER                            0
+#define BCM_SWITCH_FEC_PROPERTY_DEFAULT                                   32
+#define BCM_SWITCH_FEC_PROPERTY_VIRTUAL                                   64
+#define BCM_SWITCH_GTP_TERM_FTEID                                         8
+#define BCM_SWITCH_HASH_UDF_FIELD0_SELECT                                 1
+#define BCM_SWITCH_HASH_UDF_FIELD1_SELECT                                 2
+#define BCM_SWITCH_HLA_APPL_RESULT_APPL_ERROR_VALID                       1
+#define BCM_SWITCH_HLA_APPL_RESULT_APPL_MESSAGE_VALID                     2
+#define BCM_SWITCH_HLA_APPL_RESULT_MESSAGE_MAX                            128
+#define BCM_SWITCH_HLA_STATUS_APPL_EXEC_COUNTERS_VALID                    128
+#define BCM_SWITCH_HLA_STATUS_APPL_PRESENT                                8
+#define BCM_SWITCH_HLA_STATUS_APPL_RERUN_ENABLED                          32
+#define BCM_SWITCH_HLA_STATUS_APPL_RUNNING                                16
+#define BCM_SWITCH_HLA_STATUS_COMMAND_IN_PROGRESS                         0x100
+#define BCM_SWITCH_HLA_STATUS_HW_FEATURE_PRESENT                          4
+#define BCM_SWITCH_HLA_STATUS_LICENSE_AUTHENTICATED                       2
+#define BCM_SWITCH_HLA_STATUS_LICENSE_COUNTERS_VALID                      64
+#define BCM_SWITCH_HLA_STATUS_SRAM_UNLOCKED                               1
+#define BCM_SWITCH_MIRROR_DESTINATIONS_MATCH_MAX                          4
+#define BCM_SWITCH_MON_SAMPLE_CPU_PORT                                    1
+#define BCM_SWITCH_MON_SAMPLE_MODE_CONTINUOUS                             1
+#define BCM_SWITCH_MON_SAMPLE_MODE_SOP                                    0
+#define BCM_SWITCH_MON_SAMPLE_NONE                                        0
+#define BCM_SWITCH_MON_SAMPLE_NON_CPU_PORT                                2
+#define BCM_SWITCH_MPB_SIZE_DYNAMIC                                       0
+#define BCM_SWITCH_MPB_SIZE_FULL                                          1
+#define BCM_SWITCH_NONSW_PKT_TO_SECONDARY_ENABLE_MAX                      21
+#define BCM_SWITCH_PORT_BLOCK_ALL                                         32
+#define BCM_SWITCH_PORT_BLOCK_BCAST                                       1
+#define BCM_SWITCH_PORT_BLOCK_KNOWN_MCAST                                 8
+#define BCM_SWITCH_PORT_BLOCK_KNOWN_UCAST                                 16
+#define BCM_SWITCH_PORT_BLOCK_UNKNOWN_MCAST                               4
+#define BCM_SWITCH_PORT_BLOCK_UNKNOWN_UCAST                               2
+#define BCM_SWITCH_PORT_HEADER_TYPE_CPU_RATE_LIMITING                     25
+#define BCM_SWITCH_PORT_HEADER_TYPE_INJECTED_PP                           27
+#define BCM_SWITCH_PORT_HEADER_TYPE_MODIFIED_FABRIC_SYS_HEADERS           26
+#define BCM_SWITCH_PORT_HEADER_TYPE_RCY_TS_F1588                          28
+#define BCM_SWITCH_POWER_THROTTLING_LEAKY_BUCKET_RANGE_NOF                3
+#define BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_EGR_MAX               4
+#define BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_CTC_SUPPRESS_MAX  23
+#define BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_DROP_SUPPRESS_MAX 44
+#define BCM_SWITCH_SECONDARY_TO_PRIMARY_PKT_CONTROL_ING_MAX               12
+#define BCM_SWITCH_SER_LOG_ERR_AUTO_CORRECTED                             128
+#define BCM_SWITCH_SER_LOG_ERR_UNCORRECTED                                0
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_DOUBLE_BITS_ERROR              8
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_EPIPE_BLOCK                    32
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_IPIPE_BLOCK                    16
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_MMU_BLOCK                      64
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_OTHER_BLOCKS                   128
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_SINGLE_BIT_ERROR               4
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_SINGLE_INDEX                   1
+#define BCM_SWITCH_SER_MEM_CAPABILITY_TEST_THREE_INDICES                  2
+#define BCM_SWITCH_SER_PT_NAME_LENGTH_MAX                                 128
+#define BCM_SWITCH_SER_REPORT_SUPPRESS_DISABLE                            1
+#define BCM_SWITCH_STAT_EVENT_MON_DROP_REASON_GLOBAL                      1
+#define BCM_SWITCH_TO_SECONDARY_DROP_MAX                                  47
+#define BCM_SWITCH_TO_SECONDARY_OPTIONS_REPLACE                           1
+#define BCM_SWITCH_TRIM_HEADER_CONFIG_PKT_ECN_REPLACE                     1
+#define BCM_SWITCH_TRUNCATE_LENGTH_PROFILE_OPTIONS_REPLACE                1
+#define BCM_SWITCH_TRUNCATE_LENGTH_PROFILE_OPTIONS_WITH_ID                2
+</pre></div>
+</div>
+</section>
+<section id="bcm-symmetric-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_symmetric_*</span></code> (1)<a class="headerlink" href="#bcm-symmetric-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_SYMMETRIC_HASH_0_L2_ENABLE 0x100
+</pre></div>
+</div>
+</section>
+<section id="bcm-telemetry-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_telemetry_*</span></code> (4)<a class="headerlink" href="#bcm-telemetry-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_TELEMETRY_MAX_ELEMENTS_PER_OBJECT 64
+#define BCM_TELEMETRY_MAX_INSTANCES           8
+#define BCM_TELEMETRY_OBJECT_READ_AND_CLEAR   2
+#define BCM_TELEMETRY_OBJECT_READ_ONLY        1
+</pre></div>
+</div>
+</section>
+<section id="bcm-time-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_time_*</span></code> (4)<a class="headerlink" href="#bcm-time-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_TIME_INTF_PWM_MODE   0x100000
+#define BCM_TIME_SYNC_TARGET_TOD 0x80000
+#define BCM_TIME_SYNC_TARGET_TS0 0x20000
+#define BCM_TIME_SYNC_TARGET_TS1 0x40000
+</pre></div>
+</div>
+</section>
+<section id="bcm-trunk-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_trunk_*</span></code> (2)<a class="headerlink" href="#bcm-trunk-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_TRUNK_FLAG_DONT_RESERVE_SIZE  0x200000
+#define BCM_TRUNK_FLAG_PORT_FAILOVER_ONLY 0x400000
+</pre></div>
+</div>
+</section>
+<section id="bcm-tunnel-18">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_tunnel_*</span></code> (18)<a class="headerlink" href="#bcm-tunnel-18" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_TUNNEL_INIT_ESI_INTF_NAMESPACE                  32
+#define BCM_TUNNEL_INIT_FIXED_IPSEC_UDP_SRC_PORT            0x2000
+#define BCM_TUNNEL_INIT_IML                                 8
+#define BCM_TUNNEL_INIT_INTF_NAMESPACE                      0x100000
+#define BCM_TUNNEL_INIT_PAYLOAD_TOS_PRESERVE                2
+#define BCM_TUNNEL_INIT_SCALE_UDP_PORTS                     0x400000
+#define BCM_TUNNEL_INIT_SRV6_ALLOW_SEPARATE_DOUBLE_FWD_INTF 0x4000000
+#define BCM_TUNNEL_INIT_SRV6_ALLOW_SEPARATE_FWD_INTF        0x2000
+#define BCM_TUNNEL_INIT_SRV6_END_REPLICATE                  0x2000000
+#define BCM_TUNNEL_TERM_CONFIG_VRF_STAR                     1
+#define BCM_TUNNEL_TERM_CROSS_CONNECT_ENABLE_NATIVE_ROUTING 1
+#define BCM_TUNNEL_TERM_DIP_SLICING                         0x20000
+#define BCM_TUNNEL_TERM_FTEID                               0x20000000
+#define BCM_TUNNEL_TERM_IML                                 0x4000000
+#define BCM_TUNNEL_TERM_LEARN_DISABLE                       0x400000
+#define BCM_TUNNEL_TERM_MATCH_NONE                          0x200
+#define BCM_TUNNEL_TERM_SECOND_CASCADED_FUNCT               0x100
+#define BCM_TUNNEL_TERM_SIP_SLICING                         0x200
+</pre></div>
+</div>
+</section>
+<section id="bcm-tunnel2-2">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_tunnel2_*</span></code> (2)<a class="headerlink" href="#bcm-tunnel2-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_TUNNEL2_TERM_IP_VPBR                2
+#define BCM_TUNNEL2_TERM_NATIVE_ROUTING_DISABLE 1
+</pre></div>
+</div>
+</section>
+<section id="bcm-twamp-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_twamp_*</span></code> (1)<a class="headerlink" href="#bcm-twamp-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_TWAMP_SENDER_OVER_LAG 0x100
+</pre></div>
+</div>
+</section>
+<section id="bcm-udf-4">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_udf_*</span></code> (4)<a class="headerlink" href="#bcm-udf-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_UDF_CREATE_O_FLEX_STATE                    0x800
+#define BCM_UDF_CREATE_O_NO_ALLOC                      0x400
+#define BCM_UDF_PKT_FORMAT_ACTION_HASH_MASK_MAX_LENGTH 1
+#define BCM_UDF_PKT_FORMAT_UNKNOWN_HDR_DATA_SIZE       20
+</pre></div>
+</div>
+</section>
+<section id="bcm-vlan-13">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_vlan_*</span></code> (13)<a class="headerlink" href="#bcm-vlan-13" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_VLAN_ACTION_SET_OUTER_PKT_PRI_CFI_NOT_PRESERVE          0x10000000
+#define BCM_VLAN_CONTROL_VLAN_HASH_CTRL_ID_MASK                     0x80000000
+#define BCM_VLAN_CONTROL_VLAN_INGRESS_CLASS_ID_MASK                 0x40000000
+#define BCM_VLAN_CONTROL_VLAN_INGRESS_GBP_SID_MASK                  0x20000000
+#define BCM_VLAN_CROSS_CONNECT_ENTRY_COPY_TO_CPU                    1
+#define BCM_VLAN_CROSS_CONNECT_ENTRY_DISCARD                        2
+#define BCM_VLAN_CROSS_CONNECT_ENTRY_DST_MULTICAST                  8
+#define BCM_VLAN_CROSS_CONNECT_ENTRY_INT_PRI_ASSIGN                 4
+#define BCM_VLAN_FLAGS2_CROSS_CONNECT_ENABLE                        0x1000
+#define BCM_VLAN_FLAGS2_L2_PROTOCOL_PKT_DROP                        0x400
+#define BCM_VLAN_FLAGS2_L2_PROTOCOL_TO_CPU                          0x800
+#define BCM_VLAN_PARAM_OPTIONS_REPLACE                              1
+#define BCM_VLAN_PORT_FLAGS2_LIMITED_INGRESS_WIDE_FIELD_PRESELECTOR 8
+</pre></div>
+</div>
+</section>
+<section id="bcm-vxlan-11">
+<h2><code class="docutils literal notranslate"><span class="pre">bcm_vxlan_*</span></code> (11)<a class="headerlink" href="#bcm-vxlan-11" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCM_VXLAN_NETWORK_DOMAIN_CONFIG_INTF_NAMESPACE           32
+#define BCM_VXLAN_PORT_FLAGS2_GBP_EGRESS_A_FLAG                  64
+#define BCM_VXLAN_PORT_FLAGS2_GBP_EGRESS_D_FLAG                  32
+#define BCM_VXLAN_PORT_FLAGS2_GBP_ENABLE                         4
+#define BCM_VXLAN_PORT_FLAGS2_GBP_INGRESS_A_FLAG                 16
+#define BCM_VXLAN_PORT_FLAGS2_GBP_INGRESS_D_FLAG                 8
+#define BCM_VXLAN_PORT_FLAGS2_VNI_FLOW_TERMINATOR_INTF_NAMESPACE 0x100
+#define BCM_VXLAN_SR_HOP_INFO_REPLACE                            1
+#define BCM_VXLAN_SR_HOP_TRAVERSE_DELETE_ALL                     1
+#define BCM_VXLAN_VNI_TERMINATOR_REPLACE                         2
+#define BCM_VXLAN_VNI_TERMINATOR_WITH_ID                         1
+</pre></div>
+</div>
+</section>
+<section id="bcmlt-ent-1">
+<h2><code class="docutils literal notranslate"><span class="pre">bcmlt_ent_*</span></code> (1)<a class="headerlink" href="#bcmlt-ent-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BCMLT_ENT_ATTR_FILTER_OUTPUT 32
+</pre></div>
+</div>
+</section>
+<section id="boot-18">
+<h2><code class="docutils literal notranslate"><span class="pre">boot_*</span></code> (18)<a class="headerlink" href="#boot-18" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define BOOT_F_BCMSIM        0x400000  /* declared in OpenBCM headers */
+#define BOOT_F_EARLY_DBG     0x8000000  /* declared in OpenBCM headers */
+#define BOOT_F_FAST_REBOOT   0x2000000  /* declared in OpenBCM headers */
+#define BOOT_F_I2C_ACCESS    0x4000000  /* declared in OpenBCM headers */
+#define BOOT_F_NO_ATTACH     0x4000  /* declared in OpenBCM headers */
+#define BOOT_F_NO_INTERRUPTS 0x1000000  /* declared in OpenBCM headers */
+#define BOOT_F_NO_PCIE       0x20000000
+#define BOOT_F_NO_PROBE      0x2000  /* declared in OpenBCM headers */
+#define BOOT_F_NO_RC         0x1000  /* declared in OpenBCM headers */
+#define BOOT_F_PLISIM        0x20000  /* declared in OpenBCM headers */
+#define BOOT_F_QUICKTURN     0x10000  /* declared in OpenBCM headers */
+#define BOOT_F_RELOAD        0x100000  /* declared in OpenBCM headers */
+#define BOOT_F_RTLSIM        0x80000  /* declared in OpenBCM headers */
+#define BOOT_F_SHELL_ON_TRAP 0x8000  /* declared in OpenBCM headers */
+#define BOOT_F_TEST_MODE     0x40000000
+#define BOOT_F_UPGRADE       0x10000000
+#define BOOT_F_WARM_BOOT     0x200000  /* declared in OpenBCM headers */
+#define BOOT_F_XGSSIM        0x800000  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="cint-config-11">
+<h2><code class="docutils literal notranslate"><span class="pre">cint_config_*</span></code> (11)<a class="headerlink" href="#cint-config-11" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define CINT_CONFIG_INCLUDE_CINT_LOAD   0  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_CINT_SOURCE 0  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_DEBUG       1  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_DOUBLES     1  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_DTRACE      1  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_LONGLONGS   1  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_MAIN        0  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_SDK_SAL     1  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_STDLIB      0  /* declared in OpenBCM headers */
+#define CINT_CONFIG_INCLUDE_TEST_DATA   0  /* declared in OpenBCM headers */
+#define CINT_CONFIG_MAX_VARIABLE_NAME   128  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="clock-monotonic-1">
+<h2><code class="docutils literal notranslate"><span class="pre">clock_monotonic_*</span></code> (1)<a class="headerlink" href="#clock-monotonic-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define CLOCK_MONOTONIC 1
+</pre></div>
+</div>
+</section>
+<section id="clock-realtime-1">
+<h2><code class="docutils literal notranslate"><span class="pre">clock_realtime_*</span></code> (1)<a class="headerlink" href="#clock-realtime-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define CLOCK_REALTIME 0  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+<section id="direct-1">
+<h2><code class="docutils literal notranslate"><span class="pre">direct_*</span></code> (1)<a class="headerlink" href="#direct-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define DIRECT_ACCESS_NO_CACHE 0x40000000
+</pre></div>
+</div>
+</section>
+<section id="phymod-acc-5">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_acc_*</span></code> (5)<a class="headerlink" href="#phymod-acc-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_ACC_DEVAD_LLANE_BLOCK_0 0x100
+#define PHYMOD_ACC_DEVAD_LLANE_BLOCK_1 0x200
+#define PHYMOD_ACC_DEVAD_LLANE_BLOCK_2 0x400
+#define PHYMOD_ACC_DEVAD_LLANE_BLOCK_3 0x800
+#define PHYMOD_ACC_F_CPO_PORT          0x200
+</pre></div>
+</div>
+</section>
+<section id="phymod-an-3">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_an_*</span></code> (3)<a class="headerlink" href="#phymod-an-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_AN_CAP_CL73_MSA 0x200
+#define PHYMOD_AN_F_IS_400G    0x800
+#define PHYMOD_AN_F_IS_SW_AN   0x1000
+</pre></div>
+</div>
+</section>
+<section id="phymod-core-1">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_core_*</span></code> (1)<a class="headerlink" href="#phymod-core-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_CORE_INIT_F_UCODE_CUSTOM 0x40000
+</pre></div>
+</div>
+</section>
+<section id="phymod-fec-3">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_fec_*</span></code> (3)<a class="headerlink" href="#phymod-fec-3" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_FEC_DEGRADE_DISABLE 0
+#define PHYMOD_FEC_DEGRADE_ENABLE  1
+#define PHYMOD_FEC_FAILURE_ENABLE  2
+</pre></div>
+</div>
+</section>
+<section id="phymod-int16-1">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_int16_*</span></code> (1)<a class="headerlink" href="#phymod-int16-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_INT16_MAX 0x7fff
+</pre></div>
+</div>
+</section>
+<section id="phymod-intf-1">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_intf_*</span></code> (1)<a class="headerlink" href="#phymod-intf-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_INTF_MODES_L1_ETH 0x4000
+</pre></div>
+</div>
+</section>
+<section id="phymod-max-4">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_max_*</span></code> (4)<a class="headerlink" href="#phymod-max-4" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_MAX_FEC_LANES_PER_LOGICAL_LANE   8
+#define PHYMOD_MAX_RSFEC_SYMBOL_ERROR_MEM_ENTRY 32
+#define PHYMOD_MAX_RXFFE_NUM                    10
+#define PHYMOD_MAX_TP_NUM                       8
+</pre></div>
+</div>
+</section>
+<section id="phymod-pattern-1">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_pattern_*</span></code> (1)<a class="headerlink" href="#phymod-pattern-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_PATTERN_CONFIG_DIRECT_MAPPED 1
+</pre></div>
+</div>
+</section>
+<section id="phymod-timesync-2">
+<h2><code class="docutils literal notranslate"><span class="pre">phymod_timesync_*</span></code> (2)<a class="headerlink" href="#phymod-timesync-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PHYMOD_TIMESYNC_ENABLE_F_TX 16
+#define PHYMOD_TIMESYNC_F_802_3_CX  8
+</pre></div>
+</div>
+</section>
+<section id="portmod-phy-2">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_phy_*</span></code> (2)<a class="headerlink" href="#portmod-phy-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PORTMOD_PHY_RX_AFE_DFE_TAP_MAX 24
+#define PORTMOD_PHY_RX_FFE_TAP_MAX     6
+</pre></div>
+</div>
+</section>
+<section id="portmod-pm-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_pm_*</span></code> (1)<a class="headerlink" href="#portmod-pm-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PORTMOD_PM_SPEED_VALIDATE_F_TVCO_PRIORITIZE_25P781G 32
+</pre></div>
+</div>
+</section>
+<section id="portmod-port-5">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_port_*</span></code> (5)<a class="headerlink" href="#portmod-port-5" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PORTMOD_PORT_ADD_F_802_3_FRAME_LENGTH_CHECK 0x800000
+#define PORTMOD_PORT_ENABLE_FORCE                   32
+#define PORTMOD_PORT_PHY_CONTROL_AUTONEG_MODE_CL37  1
+#define PORTMOD_PORT_PHY_MEDIUM_FIBER               2
+#define PORTMOD_PORT_TIMESYNC_CONFIG_802_3_CX       32
+</pre></div>
+</div>
+</section>
+<section id="portmod-txpi-2">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_txpi_*</span></code> (2)<a class="headerlink" href="#portmod-txpi-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PORTMOD_TXPI_EXT_PD_MODE 1
+#define PORTMOD_TXPI_NORMAL_MODE 0
+</pre></div>
+</div>
+</section>
+<section id="portmod-user-1">
+<h2><code class="docutils literal notranslate"><span class="pre">portmod_user_*</span></code> (1)<a class="headerlink" href="#portmod-user-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define PORTMOD_USER_ACCESS_MDIO_ACC 8
+</pre></div>
+</div>
+</section>
+<section id="san-2">
+<h2><code class="docutils literal notranslate"><span class="pre">san_*</span></code> (2)<a class="headerlink" href="#san-2" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define SAN_IS_ACTIVE 0
+#define SAN_TYPE      0
+</pre></div>
+</div>
+</section>
+<section id="valgrind-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valgrind_*</span></code> (1)<a class="headerlink" href="#valgrind-1" title="Link to this heading"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#define VALGRIND_SUPPORT 0  /* declared in OpenBCM headers */
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="extra-callbacks.html" class="btn btn-neutral float-left" title="Callback types not in OpenBCM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions/index.html" class="btn btn-neutral float-right" title="All registered functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

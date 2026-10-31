@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MPLS label switching &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="VXLAN tunnels" href="vxlan.html" />
+    <link rel="prev" title="Inspecting L3 forwarding" href="l3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MPLS label switching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-router-mac">1. The router MAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vlans-and-l3-interfaces">2. VLANs and L3 interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pushing-a-label">3. Pushing a label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#popping-a-label">4. Popping a label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-other-switch">5. The other switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-the-path">6. Checking the path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#removing-it-again">Removing it again</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MPLS label switching</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mpls-label-switching">
+<h1>MPLS label switching<a class="headerlink" href="#mpls-label-switching" title="Link to this heading"></a></h1>
+<p>Trident 3 can push, swap and pop MPLS labels in hardware, and the MPLS
+module is initialised on a SONiC switch even though SONiC configures no MPLS
+of its own. This page builds a label-switched path in each direction between
+two switches by hand, using only the diag shell, and shows how to check it
+with counters. Each switch is the <em>ingress</em> router for one direction, where
+an IPv4 route pushes a label, and the <em>penultimate</em> router for the other,
+where the incoming label is popped (penultimate-hop popping, PHP) and the
+packet is sent on to the host as plain IPv4.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Switch</p></th>
+<th class="head"><p>Host port</p></th>
+<th class="head"><p>Core port</p></th>
+<th class="head"><p>Router MAC</p></th>
+<th class="head"><p>Pushes</p></th>
+<th class="head"><p>Pops</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sw2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xe3</span></code>, host 192.0.2.11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ce27</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">e0:39:d7:88:3b:00</span></code></p></td>
+<td><p>label 100 for 203.0.113.0/24</p></td>
+<td><p>label 200</p></td>
+</tr>
+<tr class="row-odd"><td><p>sw4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xe3</span></code>, host 203.0.113.11</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ce29</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">b2:e7:73:41:29:b5</span></code></p></td>
+<td><p>label 200 for 192.0.2.0/24</p></td>
+<td><p>label 100</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">ce27</span></code> and <code class="docutils literal notranslate"><span class="pre">ce29</span></code> are cabled to each other. The hosts use the switch’s
+router MAC as their gateway, as a static ARP entry (the chip does not answer
+ARP; see <a class="reference internal" href="l2-switch.html"><span class="doc">Building an L2 switch with VLANs and SVIs</span></a> for giving the switch CPU an address).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Everything here is configured behind SONiC’s back. Use ports that SONiC
+does not use (no VLAN, port channel or IP address on them), VLAN IDs that
+SONiC does not use, and remove it all again when you are done (see
+<a class="reference internal" href="#removing-it-again">Removing it again</a>). A <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restart also removes it.</p>
+</div>
+<section id="the-router-mac">
+<h2>1. The router MAC<a class="headerlink" href="#the-router-mac" title="Link to this heading"></a></h2>
+<p>An MPLS packet is only label-switched if its destination MAC is a <em>station</em>
+of the switch with MPLS termination allowed. SONiC’s router MAC already is
+one: it is the first entry in the station table, and its flags include MPLS:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l2 station show ID=0x02000001</span>
+<span class="go">     SID=0x02000001, priority=0</span>
+<span class="go">     MAC=e0:39:d7:88:3b:0</span>
+<span class="go">     MAC MASK=ff:ff:ff:ff:ff:ff</span>
+<span class="go">     VLAN=0x0</span>
+<span class="go">     VLAN MASK=0x0</span>
+<span class="go">     SourcePort=0x0</span>
+<span class="go">     SourcePort MASK=0x0</span>
+<span class="go">     Flags=0x803c</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Flags=0x803c</span></code> is IPv4 (<code class="docutils literal notranslate"><span class="pre">0x4</span></code>), IPv6 (<code class="docutils literal notranslate"><span class="pre">0x8</span></code>), ARP (<code class="docutils literal notranslate"><span class="pre">0x10</span></code>), MPLS
+(<code class="docutils literal notranslate"><span class="pre">0x20</span></code>) and underlay (<code class="docutils literal notranslate"><span class="pre">0x8000</span></code>). The shell prints the MAC without the
+leading zero of each byte (<code class="docutils literal notranslate"><span class="pre">3b:0</span></code> is <code class="docutils literal notranslate"><span class="pre">3b:00</span></code>). Use this MAC on the L3 interfaces below,
+and as the next-hop MAC towards the other switch.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A station added with <a class="reference internal" href="../reference/l2.html#clicmd-l2-station-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">l2</span> <span class="pre">station</span> <span class="pre">add</span></code></a> and <code class="docutils literal notranslate"><span class="pre">MPLS=true</span></code> but no
+VLAN did not make the switch accept labelled packets for that MAC, with
+or without a VLAN-scoped entry next to it. IPv4 routing to that MAC worked;
+labelled packets were flooded in the VLAN instead (see
+<a class="reference internal" href="#troubleshooting">Troubleshooting</a>). Use the router MAC.</p>
+</div>
+</section>
+<section id="vlans-and-l3-interfaces">
+<h2>2. VLANs and L3 interfaces<a class="headerlink" href="#vlans-and-l3-interfaces" title="Link to this heading"></a></h2>
+<p>Put each port in its own VLAN, untagged, and let untagged frames in (SONiC
+discards them on ports outside a VLAN; see <a class="reference internal" href="l2-switch.html"><span class="doc">Building an L2 switch with VLANs and SVIs</span></a>). Then create an
+L3 interface in each VLAN with the router MAC:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; vlan create 2001 PortBitMap=xe3 UntagBitMap=xe3</span>
+<span class="go">drivshell&gt; vlan create 2002 PortBitMap=ce27 UntagBitMap=ce27</span>
+<span class="go">drivshell&gt; pvlan set xe3 2001</span>
+<span class="go">drivshell&gt; pvlan set ce27 2002</span>
+<span class="go">drivshell&gt; port xe3,ce27 DISCard=None</span>
+<span class="go">drivshell&gt; l3 intf add VLAN=2001 MAC=e0:39:d7:88:3b:00</span>
+<span class="go">drivshell&gt; l3 intf add VLAN=2002 MAC=e0:39:d7:88:3b:00</span>
+<span class="go">drivshell&gt; l3 intf show</span>
+<span class="go">Unit  Intf  VRF Group VLAN    Source Mac     MTU TTL Tunnel InnerVlan  NATRealm</span>
+<span class="go">0     8196  -3    0     2001 e0:39:d7:88:3b:00  16383 0    0     0     0</span>
+<span class="go">0     8197  -3    0     2002 e0:39:d7:88:3b:00  16383 0    0     0     0</span>
+</pre></div>
+</div>
+</div>
+<p>The new interfaces are <code class="docutils literal notranslate"><span class="pre">8196</span></code> (host side) and <code class="docutils literal notranslate"><span class="pre">8197</span></code> (core side).</p>
+</section>
+<section id="pushing-a-label">
+<h2>3. Pushing a label<a class="headerlink" href="#pushing-a-label" title="Link to this heading"></a></h2>
+<p>An egress object with <code class="docutils literal notranslate"><span class="pre">MplsLabel</span></code> pushes that label on every packet sent
+through it. Create one for the host and one, with label 100, for the other
+switch, then a host entry and a route that use them:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; l3 egress add Mac=74:83:ef:3f:2c:fd INtf=8196 Port=xe3</span>
+<span class="go">New egress object index: 132770</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+<span class="go">drivshell&gt; l3 egress add Mac=b2:e7:73:41:29:b5 INtf=8197 Port=ce27 MplsLabel=100</span>
+<span class="go">New egress object index: 132771</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+<span class="go">drivshell&gt; l3 egress show</span>
+<span class="go">Entry  Mac                 Vlan INTF PORT MOD MPLS_LABEL ToCpu Drop RefCount L3MC</span>
+<span class="go">132768  00:00:00:00:00:01    1 8192     0t   0        -1   no   no    0  yes</span>
+<span class="go">132769  00:00:00:00:00:01    1 8192     0t   0        -1   no   no    0   no</span>
+<span class="go">132770  74:83:ef:3f:2c:fd 2001 8196    12    0        -1   no   no    0   no</span>
+<span class="go">132771  b2:e7:73:41:29:b5 2002 8197   115    0       100   no   no    0   no</span>
+<span class="go">132806  e0:39:d7:88:3b:00    1 8194     0    0        -1   no  yes    2   no</span>
+<span class="go">132807  e0:39:d7:88:3b:00    0 16383     0    0        -1   no   no    4   no</span>
+<span class="go">drivshell&gt; l3 l3table add VRF=0 IP=192.0.2.11 Mac=74:83:ef:3f:2c:fd INtf=132770 Port=xe3</span>
+<span class="go">drivshell&gt; l3 defip add VRF=0 IP=203.0.113.0 MaSk=255.255.255.0 INtf=132771</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MPLS_LABEL</span></code> column shows the label the object pushes (<code class="docutils literal notranslate"><span class="pre">-1</span></code> for
+none). Packets to 203.0.113.0/24 now leave <code class="docutils literal notranslate"><span class="pre">ce27</span></code> with label 100 towards
+sw4’s router MAC.</p>
+</section>
+<section id="popping-a-label">
+<h2>4. Popping a label<a class="headerlink" href="#popping-a-label" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/mpls.html#clicmd-mpls-tunnel-switch-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">mpls</span> <span class="pre">tunnel</span> <span class="pre">switch</span> <span class="pre">add</span></code></a> adds an incoming-label entry. <code class="docutils literal notranslate"><span class="pre">ACTion=1</span></code>
+is PHP: pop the label and send the packet to <code class="docutils literal notranslate"><span class="pre">EgrObject</span></code> as IPv4. On a
+SONiC switch the SDK runs in L3 ingress mode, and the command then also needs
+the L3 interface the labelled packets arrive on (<code class="docutils literal notranslate"><span class="pre">IngIntf</span></code>, the core
+interface):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mpls tunnel switch add ACTion=1 IngLabel=200 EgrObject=132770</span>
+<span class="go">L3IngressMode is set - Invalid ingress interface(IngIntf)</span>
+
+<span class="go">Failed to execute the diagnostic command. Error: Operation failed.</span>
+<span class="go">drivshell&gt; mpls tunnel switch add ACTion=1 IngLabel=200 EgrObject=132770 IngIntf=8197</span>
+</pre></div>
+</div>
+</div>
+<p>The action numbers are those of <code class="docutils literal notranslate"><span class="pre">bcm_mpls_switch_action_t</span></code>: 0 swap, 1 PHP,
+2 pop (then look up the payload), 3 pop and forward directly. The shell has
+no command to list incoming-label entries; this Cint program does:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">mpls_ilm.c</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * mpls_ilm.c - list incoming-label (ILM) entries with</span>
+<span class="cm"> * bcm_mpls_tunnel_switch_traverse().  Prints the first 50.  Read-only.</span>
+<span class="cm"> * Run:  cint /root/mpls_ilm.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">ilm_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ilm_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ilm_cb</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_mpls_tunnel_switch_t</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">action</span><span class="p">;</span><span class="w">  </span><span class="cm">/* printf does not take enum values */</span>
+
+<span class="w">    </span><span class="n">ilm_count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ilm_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ilm_limit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"label %d: action %d egress_if %d ingress_if %d port 0x%x flags 0x%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="w">           </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">egress_if</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">ingress_if</span><span class="p">,</span>
+<span class="w">           </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ilm_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ilm_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_mpls_tunnel_switch_traverse</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">ilm_cb</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"rv %d (%s), %d entries</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">ilm_count</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ilm_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE mpls_ilm</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/mpls_ilm.c</span>
+<span class="go">label 200: action 1 egress_if 132770 ingress_if 0 port 0xffffffff flags 0xe0</span>
+<span class="go">rv 0 (Ok), 1 entries</span>
+<span class="go">DONE mpls_ilm</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="the-other-switch">
+<h2>5. The other switch<a class="headerlink" href="#the-other-switch" title="Link to this heading"></a></h2>
+<p>sw4 gets the same configuration with its own ports and MAC, pushing label
+200 towards sw2 and popping label 100:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; vlan create 2001 PortBitMap=xe3 UntagBitMap=xe3</span>
+<span class="go">drivshell&gt; vlan create 2002 PortBitMap=ce29 UntagBitMap=ce29</span>
+<span class="go">drivshell&gt; pvlan set xe3 2001</span>
+<span class="go">drivshell&gt; pvlan set ce29 2002</span>
+<span class="go">drivshell&gt; port xe3,ce29 DISCard=None</span>
+<span class="go">drivshell&gt; l3 intf add VLAN=2001 MAC=b2:e7:73:41:29:b5</span>
+<span class="go">drivshell&gt; l3 intf add VLAN=2002 MAC=b2:e7:73:41:29:b5</span>
+<span class="go">drivshell&gt; l3 egress add Mac=74:83:ef:3f:2c:fd INtf=8195 Port=xe3</span>
+<span class="go">New egress object index: 132770</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+<span class="go">drivshell&gt; l3 egress add Mac=e0:39:d7:88:3b:00 INtf=8196 Port=ce29 MplsLabel=200</span>
+<span class="go">New egress object index: 132771</span>
+<span class="go">Environment variable (egr_object_id) was set</span>
+<span class="go">drivshell&gt; l3 l3table add VRF=0 IP=203.0.113.11 Mac=74:83:ef:3f:2c:fd INtf=132770 Port=xe3</span>
+<span class="go">drivshell&gt; l3 defip add VRF=0 IP=192.0.2.0 MaSk=255.255.255.0 INtf=132771</span>
+<span class="go">drivshell&gt; mpls tunnel switch add ACTion=1 IngLabel=100 EgrObject=132770 IngIntf=8196</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="checking-the-path">
+<h2>6. Checking the path<a class="headerlink" href="#checking-the-path" title="Link to this heading"></a></h2>
+<p>The hosts can now reach each other, and each packet is routed twice (TTL 62
+at the far host):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>switch# ping vrf howto-a 203.0.113.11 repeat 5 timeout 1
+PING 203.0.113.11 (203.0.113.11) 72(100) bytes of data.
+80 bytes from 203.0.113.11: icmp_seq=1 ttl=62 time=0.237 ms
+...
+5 packets transmitted, 5 received, 0% packet loss, time 0ms
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">traceroute</span></code> shows <code class="docutils literal notranslate"><span class="pre">*</span> <span class="pre">*</span> <span class="pre">*</span></code> for both switches: packets whose TTL runs out
+are sent to the CPU, and nothing there answers them.</p>
+<p>On the core ports, <code class="docutils literal notranslate"><span class="pre">RTUN</span></code> counts the labelled packets that were popped:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show counters changed ce29,xe3</span>
+<span class="go">RIPC4_64.xe3             :                    35                 +15</span>
+<span class="go">RUC_64.xe3               :                    40                 +15</span>
+<span class="go">CLMIB_TPKT.xe3                   :                 7,368                 +15</span>
+<span class="go">RIPC4_64.ce29                    :                    30                 +15</span>
+<span class="go">RTUN.ce29                :                    30                 +15</span>
+<span class="go">RUC_64.ce29              :                    58                 +18</span>
+<span class="go">CLMIB_TPKT.ce29          :                 5,911                 +16               1/s</span>
+</pre></div>
+</div>
+</div>
+<p>Each labelled frame is 4 bytes longer than the IPv4 frame it carries. With
+only the 5 pings of a test, the byte counters show it: 590 bytes in on the
+host port, 610 bytes out on the core port.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show counters changed ce27,xe3</span>
+<span class="go">CLMIB_RPKT.xe3                   :                14,787                  +5</span>
+<span class="go">CLMIB_RBYT.xe3                   :             2,278,156                +590</span>
+<span class="go">CLMIB_TPKT.ce27          :                 8,287                  +5</span>
+<span class="go">CLMIB_TBYT.ce27          :             2,622,525                +610</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<p>Labelled packets that the far switch does not pop are dropped on its core
+port and counted in <code class="docutils literal notranslate"><span class="pre">RDBGC0</span></code>. This happens when the label has no
+incoming-label entry:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mpls tunnel switch del IngLabel=100</span>
+<span class="go">drivshell&gt; show counters changed ce29</span>
+<span class="go">RUC_64.ce29              :                    35                  +5</span>
+<span class="go">RDBGC0_64.ce29                   :                    37                  +5</span>
+<span class="go">CLMIB_R127.ce29          :                    35                  +5</span>
+<span class="go">CLMIB_RPKT.ce29          :                 5,892                  +5</span>
+<span class="go">CLMIB_RUCA.ce29          :                    35                  +5</span>
+<span class="go">CLMIB_RPRM.ce29          :                    35                  +5</span>
+<span class="go">CLMIB_RPOK.ce29          :                 5,892                  +5</span>
+<span class="go">CLMIB_RBYT.ce29          :             1,858,539                +610</span>
+<span class="go">CLMIB_RPROG3.ce29        :                    35                  +5</span>
+</pre></div>
+</div>
+</div>
+<p>It also happens when the destination MAC is not a station with MPLS
+termination allowed: the chip then switches the frame in the core VLAN like
+any other frame, finds no other port to send it to, and drops it. <code class="docutils literal notranslate"><span class="pre">RDBGC0</span></code> counts several drop
+reasons together. To see which, list what each debug counter counts with
+this program; the numbers are those of <code class="docutils literal notranslate"><span class="pre">bcm_custom_stat_trigger_t</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">rx_debug_counters.c</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * rx_debug_counters.c - list the drop and event reasons (triggers) that</span>
+<span class="cm"> * each receive debug counter RDBGC0-RDBGC8 counts, as numbers of the</span>
+<span class="cm"> * bcm_custom_stat_trigger_t enum (bcm_stat_custom_check).  Read-only.</span>
+<span class="cm"> * Change rd_port to check another port.</span>
+<span class="cm"> * Run:  cint /root/rx_debug_counters.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">rd_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">115</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">rd_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_stat_val_t</span><span class="w"> </span><span class="n">ctr</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">snmpBcmCustomReceive0</span><span class="p">,</span><span class="w"> </span><span class="n">snmpBcmCustomReceive1</span><span class="p">,</span><span class="w"> </span><span class="n">snmpBcmCustomReceive2</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">snmpBcmCustomReceive3</span><span class="p">,</span><span class="w"> </span><span class="n">snmpBcmCustomReceive4</span><span class="p">,</span><span class="w"> </span><span class="n">snmpBcmCustomReceive5</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">snmpBcmCustomReceive6</span><span class="p">,</span><span class="w"> </span><span class="n">snmpBcmCustomReceive7</span><span class="p">,</span><span class="w"> </span><span class="n">snmpBcmCustomReceive8</span><span class="p">};</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span><span class="w"> </span><span class="n">c</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"RDBGC%d:"</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">130</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_stat_custom_check</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">rd_port</span><span class="p">,</span><span class="w"> </span><span class="n">ctr</span><span class="p">[</span><span class="n">c</span><span class="p">],</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">r</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">BCM_E_NONE</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">" %d"</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">rd_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE rx_debug_counters</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/rx_debug_counters.c</span>
+<span class="go">RDBGC0: 0 4 10 11 15 115 116 117 118</span>
+<span class="go">RDBGC1: 12</span>
+<span class="go">RDBGC2: 14</span>
+<span class="go">RDBGC3: 115 116 117 118</span>
+<span class="go">RDBGC4: 1 3</span>
+<span class="go">RDBGC5: 3</span>
+<span class="go">RDBGC6: 5</span>
+<span class="go">RDBGC7:</span>
+<span class="go">RDBGC8:</span>
+<span class="go">DONE rx_debug_counters</span>
+</pre></div>
+</div>
+</div>
+<p>On SONiC <code class="docutils literal notranslate"><span class="pre">RDBGC0</span></code> counts 0 (IPv4 discards), 4 (IPv6 discards), 10 (port
+not forwarding), 11 (policy discard), 15 (no destination port), and 115–118
+(VLAN and TPID mismatches). Labelled frames sent to a MAC without MPLS
+termination counted as trigger 15 on this setup.</p>
+</section>
+<section id="removing-it-again">
+<h2>Removing it again<a class="headerlink" href="#removing-it-again" title="Link to this heading"></a></h2>
+<p>Undo it in reverse order on each switch, then put the ports back to SONiC’s
+settings for ports outside a VLAN (PVID 1, untagged frames discarded):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mpls tunnel switch del IngLabel=200</span>
+<span class="go">drivshell&gt; l3 defip destroy VRF=0 IP=203.0.113.0 MaSk=255.255.255.0</span>
+<span class="go">drivshell&gt; l3 l3table destroy VRF=0 IP=192.0.2.11</span>
+<span class="go">drivshell&gt; l3 egress delete 132770</span>
+<span class="go">drivshell&gt; l3 egress delete 132771</span>
+<span class="go">drivshell&gt; l3 intf destroy INTF=8196</span>
+<span class="go">drivshell&gt; l3 intf destroy INTF=8197</span>
+<span class="go">drivshell&gt; l2 clear Vlanid=2001</span>
+<span class="go">L2: Deleting static and non-static addresses by VLAN</span>
+<span class="go">drivshell&gt; l2 clear Vlanid=2002</span>
+<span class="go">drivshell&gt; pvlan set xe3,ce27 1</span>
+<span class="go">drivshell&gt; vlan destroy 2001</span>
+<span class="go">drivshell&gt; vlan destroy 2002</span>
+<span class="go">drivshell&gt; port xe3,ce27 DISCard=Untag</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="l3.html" class="btn btn-neutral float-left" title="Inspecting L3 forwarding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vxlan.html" class="btn btn-neutral float-right" title="VXLAN tunnels" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

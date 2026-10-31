@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Port channels and LACP &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Inspecting L3 forwarding" href="l3.html" />
+    <link rel="prev" title="Building an L2 switch with VLANs and SVIs" href="l2-switch.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Port channels and LACP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#finding-the-trunk">Finding the trunk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lacpdus">LACPDUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-member-that-lacp-has-taken-out">A member that LACP has taken out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-member-whose-link-is-down">A member whose link is down</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-trunks">Changing trunks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Port channels and LACP</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="port-channels-and-lacp">
+<h1>Port channels and LACP<a class="headerlink" href="#port-channels-and-lacp" title="Link to this heading"></a></h1>
+<p>A SONiC port channel is a <em>trunk</em> in the switch chip: a group of ports that
+the chip treats as one, spreading traffic over the members by a hash of each
+packet’s headers. LACP itself does not run in the chip. <code class="docutils literal notranslate"><span class="pre">teamd</span></code> on the
+switch CPU sends and receives the LACP packets (LACPDUs) and decides which
+members may carry traffic; the SAI then programs that decision into the
+trunk.</p>
+<p>This page shows how to find a port channel’s trunk, how to see the LACPDUs,
+and how to tell from the diag shell whether a member is really carrying
+traffic. How LACPDUs reach the CPU is covered in <a class="reference internal" href="copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>.</p>
+<section id="finding-the-trunk">
+<h2>Finding the trunk<a class="headerlink" href="#finding-the-trunk" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/trunk.html#clicmd-trunk-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">trunk</span> <span class="pre">show</span></code></a> lists every trunk with its member ports. Each SONiC
+port channel is one trunk; trunk 0 belongs to the SAI and has no ports.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; trunk show</span>
+<span class="go">Device supports 2112 trunk groups:</span>
+<span class="go">  2048 front panel trunks (0..2047), 256 ports/trunk</span>
+<span class="go">  64 fabric trunks (2048..2111), 64 ports/trunk</span>
+<span class="go">trunk 0: (front panel, 0 ports)</span>
+<span class="go">trunk 1: (front panel, 3 ports)=xe0,xe1,xe2 dlf=any mc=any ipmc=any psc=portflow (0x9)</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">PortChannel2</span></code> with members <code class="docutils literal notranslate"><span class="pre">Ethernet8</span></code>–<code class="docutils literal notranslate"><span class="pre">Ethernet10</span></code> is trunk 1 with
+<code class="docutils literal notranslate"><span class="pre">xe0</span></code>–<code class="docutils literal notranslate"><span class="pre">xe2</span></code>. <code class="docutils literal notranslate"><span class="pre">psc=portflow</span></code> is the port-selection criterion: the hash
+over the packet’s addresses and ports that picks a member for each flow.</p>
+</section>
+<section id="lacpdus">
+<h2>LACPDUs<a class="headerlink" href="#lacpdus" title="Link to this heading"></a></h2>
+<p>With the fast LACP timer each side sends one LACPDU per second on every
+member. An LACPDU is 128 bytes on the wire, so it counts in the 128–255 byte
+size bucket and as multicast:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; show c xe2</span>
+<span class="go">CLMIB_R255.xe2                   :               259,050             +32,480</span>
+<span class="go">CLMIB_RPKT.xe2                   :               259,120             +32,490               1/s</span>
+<span class="go">CLMIB_RMCA.xe2                   :               259,055             +32,480</span>
+<span class="go">CLMIB_T255.xe2                   :               250,276             +31,419</span>
+<span class="go">CLMIB_TPKT.xe2                   :               258,715             +32,488               1/s</span>
+<span class="go">CLMIB_TMCA.xe2                   :               258,666             +32,474</span>
+</pre></div>
+</div>
+</div>
+<p>The rate column shows one packet per second in each direction on an
+otherwise idle member. If the receive side stays at zero the partner is not
+sending LACPDUs (or the link is not up); if the transmit side stays at zero,
+<code class="docutils literal notranslate"><span class="pre">teamd</span></code> is not sending. Received LACPDUs are trapped to the CPU by the
+<code class="docutils literal notranslate"><span class="pre">lacp</span></code> CoPP entry (see <a class="reference internal" href="copp.html"><span class="doc">Protecting the CPU with CoPP</span></a>).</p>
+</section>
+<section id="a-member-that-lacp-has-taken-out">
+<h2>A member that LACP has taken out<a class="headerlink" href="#a-member-that-lacp-has-taken-out" title="Link to this heading"></a></h2>
+<p>When the partner stops sending LACPDUs on a member, <code class="docutils literal notranslate"><span class="pre">teamd</span></code> deselects it
+after three missed LACPDUs. SONiC shows it as <code class="docutils literal notranslate"><span class="pre">(D)</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>show<span class="w"> </span>interfaces<span class="w"> </span>portchannel
+<span class="go">...</span>
+<span class="go">    2  PortChannel2  LACP(A)(Up)  Ethernet8(S) Ethernet9(S) Ethernet10(D)</span>
+</pre></div>
+</div>
+<p>The link is still up, and the trunk still lists the port:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; trunk show</span>
+<span class="go">Device supports 2112 trunk groups:</span>
+<span class="go">  2048 front panel trunks (0..2047), 256 ports/trunk</span>
+<span class="go">  64 fabric trunks (2048..2111), 64 ports/trunk</span>
+<span class="go">trunk 0: (front panel, 0 ports)</span>
+<span class="go">trunk 1: (front panel, 3 ports)=xe0,xe1,xe2 dlf=any mc=any ipmc=any psc=portflow (0x9)</span>
+<span class="go">drivshell&gt; ps xe2</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       xe2( 11)  up     1   10G  FD   SW  No   Forward           All    F    XFI  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p>The SAI does not remove a deselected member from the trunk. It disables it
+instead: the port discards everything it receives (<code class="docutils literal notranslate"><span class="pre">All</span></code> in the <code class="docutils literal notranslate"><span class="pre">discrd</span></code>
+column of <code class="docutils literal notranslate"><span class="pre">ps</span></code>; <code class="docutils literal notranslate"><span class="pre">Disc(all)</span></code> in <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">xe2</span></code>), and the trunk member is
+marked as disabled for ingress and egress, so the hash no longer picks it.
+<code class="docutils literal notranslate"><span class="pre">trunk</span> <span class="pre">show</span></code> does not show these member flags; the Cint program below
+does:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">trunk_members.c</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * trunk_members.c - print the member ports of trunk 1 with their</span>
+<span class="cm"> * per-member flags (bcm_trunk_get).  Read-only.</span>
+<span class="cm"> * Change tm_tid to look at another trunk.</span>
+<span class="cm"> * Run:  cint /root/trunk_members.c</span>
+<span class="cm"> */</span>
+<span class="n">cint_reset</span><span class="p">();</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">tm_tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">tm_main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_trunk_info_t</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_trunk_member_t</span><span class="w"> </span><span class="n">m</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">rv</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bcm_port_t</span><span class="w"> </span><span class="n">port</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bcm_trunk_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">tm_tid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">count</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"bcm_trunk_get: %s, %d members, psc %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">bcm_errmsg</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">psc</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bcm_port_local_get</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">gport</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">port</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"  port %3d flags 0x%03x%s%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flags</span><span class="p">,</span>
+<span class="w">               </span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_TRUNK_MEMBER_EGRESS_DISABLE</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">" egress-disabled"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">""</span><span class="p">,</span>
+<span class="w">               </span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BCM_TRUNK_MEMBER_INGRESS_DISABLE</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">" ingress-disabled"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">""</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">tm_main</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"DONE trunk_members</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/trunk_members.c</span>
+<span class="go">bcm_trunk_get: Ok, 3 members, psc 9</span>
+<span class="go">  port   9 flags 0x000</span>
+<span class="go">  port  10 flags 0x000</span>
+<span class="go">  port  11 flags 0x003 egress-disabled ingress-disabled</span>
+<span class="go">DONE trunk_members</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">flags</span> <span class="pre">0x003</span></code> is <code class="docutils literal notranslate"><span class="pre">BCM_TRUNK_MEMBER_INGRESS_DISABLE</span></code> (1) plus
+<code class="docutils literal notranslate"><span class="pre">BCM_TRUNK_MEMBER_EGRESS_DISABLE</span></code> (2). A member that carries traffic has
+flags <code class="docutils literal notranslate"><span class="pre">0x000</span></code> and <code class="docutils literal notranslate"><span class="pre">Untag</span></code> (the normal setting for a port outside any VLAN)
+in the <code class="docutils literal notranslate"><span class="pre">discrd</span></code> column.</p>
+<p>So to see which members of a port channel carry traffic, look at the
+<code class="docutils literal notranslate"><span class="pre">discrd</span></code> column of <a class="reference internal" href="../reference/portstat.html#clicmd-portstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ps</span></code></a> or at the member flags, not at <code class="docutils literal notranslate"><span class="pre">trunk</span>
+<span class="pre">show</span></code>.</p>
+</section>
+<section id="a-member-whose-link-is-down">
+<h2>A member whose link is down<a class="headerlink" href="#a-member-whose-link-is-down" title="Link to this heading"></a></h2>
+<p>A member whose link goes down is handled the same way: it stays in the trunk,
+disabled, with <code class="docutils literal notranslate"><span class="pre">discrd</span></code> <code class="docutils literal notranslate"><span class="pre">All</span></code>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/trunk_members.c</span>
+<span class="go">bcm_trunk_get: Ok, 3 members, psc 9</span>
+<span class="go">  port   9 flags 0x000</span>
+<span class="go">  port  10 flags 0x000</span>
+<span class="go">  port  11 flags 0x003 egress-disabled ingress-disabled</span>
+<span class="go">DONE trunk_members</span>
+<span class="go">drivshell&gt; ps xe2</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       xe2( 11)  down   1   10G  FD   SW  No   Forward           All    F    XFI  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p>When the link comes back and LACP selects the port again, the flags return
+to <code class="docutils literal notranslate"><span class="pre">0x000</span></code>:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; cint /root/trunk_members.c</span>
+<span class="go">bcm_trunk_get: Ok, 3 members, psc 9</span>
+<span class="go">  port   9 flags 0x000</span>
+<span class="go">  port  10 flags 0x000</span>
+<span class="go">  port  11 flags 0x000</span>
+<span class="go">DONE trunk_members</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="changing-trunks">
+<h2>Changing trunks<a class="headerlink" href="#changing-trunks" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/trunk.html#clicmd-trunk-add"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">trunk</span> <span class="pre">add</span></code></a> and <a class="reference internal" href="../reference/trunk.html#clicmd-trunk-remove"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">trunk</span> <span class="pre">remove</span></code></a> change the member list behind
+SONiC’s back: <code class="docutils literal notranslate"><span class="pre">teamd</span></code> keeps its own view of the members and the SAI does
+not notice the change, so the two disagree until the port channel is
+reconfigured. To take a member out for testing, shut down the port or remove
+it from the port channel in SONiC instead.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="l2-switch.html" class="btn btn-neutral float-left" title="Building an L2 switch with VLANs and SVIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="l3.html" class="btn btn-neutral float-right" title="Inspecting L3 forwarding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

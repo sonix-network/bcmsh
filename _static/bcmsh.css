@@ -1,0 +1,17 @@
+.bcmsh-badge-unvalidated, .bcmsh-badge-vmm, .bcmsh-badge-hardware { font-size: 0.8em; font-weight: bold; padding: 0.1em 0.5em; border-radius: 0.3em; color: #fff; }
+.bcmsh-badge-unvalidated { background: #9e9e9e; }
+.bcmsh-badge-vmm { background: #1e88e5; }
+.bcmsh-badge-hardware { background: #2e7d32; }
+.bcmsh-example { margin-bottom: 1.2em; }
+.bcmsh-example .bcmsh-badge { margin-bottom: 0.2em; }
+.bcmsh-evidence { font-size: 0.85em; color: #555; }
+dl.clicmd > dt { font-family: monospace; }
+.bcmsh-research { border-left: 4px solid #8e24aa; background: #f7f0fa; }
+.bcmsh-research > .admonition-title { background: #8e24aa; }
+.bcmsh-research-open-question { border-left-color: #ef6c00; background: #fff4e5; }
+.bcmsh-research-open-question > .admonition-title { background: #ef6c00; }
+/* The RTD theme keeps table cells on one line; let prose cells wrap instead of side-scrolling. */
+.wy-table-responsive table td, .wy-table-responsive table th { white-space: normal; }
+/* Landing-page "Who we are" call-out: logos side by side, vertically centred. */
+.bcmsh-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5em; margin: 0.5em 0 1em; }
+.bcmsh-logos a, .bcmsh-logos img { display: block; margin: 0 !important; }

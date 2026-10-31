@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MKDIR &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MmuDeBuG" href="mmudebug.html" />
+    <link rel="prev" title="MIRror" href="mirror.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Command reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#shell-commands">Shell commands</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="q.html"><code class="docutils literal notranslate"><span class="pre">?</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qq.html"><code class="docutils literal notranslate"><span class="pre">??</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="adc.html"><code class="docutils literal notranslate"><span class="pre">ADC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="age.html"><code class="docutils literal notranslate"><span class="pre">AGE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="alpm.html"><code class="docutils literal notranslate"><span class="pre">ALPM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="asf.html"><code class="docutils literal notranslate"><span class="pre">ASF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html"><code class="docutils literal notranslate"><span class="pre">ASSert</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="attach.html"><code class="docutils literal notranslate"><span class="pre">Attach</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="auth.html"><code class="docutils literal notranslate"><span class="pre">Auth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html"><code class="docutils literal notranslate"><span class="pre">BackGround</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="baseboard.html"><code class="docutils literal notranslate"><span class="pre">BaseBoard</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bcmsai.html"><code class="docutils literal notranslate"><span class="pre">BCMSAI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bfd.html"><code class="docutils literal notranslate"><span class="pre">BFD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bist.html"><code class="docutils literal notranslate"><span class="pre">BIST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bkpmon.html"><code class="docutils literal notranslate"><span class="pre">BKPmon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bpdu.html"><code class="docutils literal notranslate"><span class="pre">BPDU</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="break.html"><code class="docutils literal notranslate"><span class="pre">break</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="broadsync.html"><code class="docutils literal notranslate"><span class="pre">BroadSync</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bsv.html"><code class="docutils literal notranslate"><span class="pre">bsv</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="btimeout.html"><code class="docutils literal notranslate"><span class="pre">BTiMeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="buffer.html"><code class="docutils literal notranslate"><span class="pre">BUFfer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cablediag.html"><code class="docutils literal notranslate"><span class="pre">CABLEdiag</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cache.html"><code class="docutils literal notranslate"><span class="pre">CACHE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cancun.html"><code class="docutils literal notranslate"><span class="pre">CanCun</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="case.html"><code class="docutils literal notranslate"><span class="pre">CASE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cd.html"><code class="docutils literal notranslate"><span class="pre">CD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cfapinit.html"><code class="docutils literal notranslate"><span class="pre">CFAPINIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="check.html"><code class="docutils literal notranslate"><span class="pre">CHecK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cint.html"><code class="docutils literal notranslate"><span class="pre">cint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clear.html"><code class="docutils literal notranslate"><span class="pre">CLEAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clearscreen.html"><code class="docutils literal notranslate"><span class="pre">ClearScreen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clocks.html"><code class="docutils literal notranslate"><span class="pre">CLOCKS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="color.html"><code class="docutils literal notranslate"><span class="pre">COLOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="combo.html"><code class="docutils literal notranslate"><span class="pre">COMBO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html"><code class="docutils literal notranslate"><span class="pre">CONFig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="console.html"><code class="docutils literal notranslate"><span class="pre">CONSole</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy.html"><code class="docutils literal notranslate"><span class="pre">CoPy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cos.html"><code class="docutils literal notranslate"><span class="pre">COS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="counter.html"><code class="docutils literal notranslate"><span class="pre">CounTeR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="customstat.html"><code class="docutils literal notranslate"><span class="pre">CustomSTAT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dac.html"><code class="docutils literal notranslate"><span class="pre">DAC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="date.html"><code class="docutils literal notranslate"><span class="pre">DATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrmemread.html"><code class="docutils literal notranslate"><span class="pre">DDRMemRead</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrmemwrite.html"><code class="docutils literal notranslate"><span class="pre">DDRMemWrite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrphyread.html"><code class="docutils literal notranslate"><span class="pre">DDRPhyRead</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrphytune.html"><code class="docutils literal notranslate"><span class="pre">DDRPhyTune</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddrphywrite.html"><code class="docutils literal notranslate"><span class="pre">DDRPhyWrite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html"><code class="docutils literal notranslate"><span class="pre">DeBug</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="delay.html"><code class="docutils literal notranslate"><span class="pre">DELAY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="delete.html"><code class="docutils literal notranslate"><span class="pre">DELete</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="detach.html"><code class="docutils literal notranslate"><span class="pre">DETach</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device.html"><code class="docutils literal notranslate"><span class="pre">DEVice</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dir.html"><code class="docutils literal notranslate"><span class="pre">DIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dispatch.html"><code class="docutils literal notranslate"><span class="pre">DISPatch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dma.html"><code class="docutils literal notranslate"><span class="pre">DMA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dmaromtest.html"><code class="docutils literal notranslate"><span class="pre">DmaRomTest</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dmirror.html"><code class="docutils literal notranslate"><span class="pre">DMIRror</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dpll.html"><code class="docutils literal notranslate"><span class="pre">DPLL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dscp.html"><code class="docutils literal notranslate"><span class="pre">DSCP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtag.html"><code class="docutils literal notranslate"><span class="pre">DTAG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dump.html"><code class="docutils literal notranslate"><span class="pre">Dump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="echo.html"><code class="docutils literal notranslate"><span class="pre">Echo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="editreg.html"><code class="docutils literal notranslate"><span class="pre">EditReg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="edk.html"><code class="docutils literal notranslate"><span class="pre">EDK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="egress.html"><code class="docutils literal notranslate"><span class="pre">EGRess</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ethernetav.html"><code class="docutils literal notranslate"><span class="pre">EthernetAV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="exit.html"><code class="docutils literal notranslate"><span class="pre">EXIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="expr.html"><code class="docutils literal notranslate"><span class="pre">EXPR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="externaltuning.html"><code class="docutils literal notranslate"><span class="pre">EXTernalTuning</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="externaltuning2.html"><code class="docutils literal notranslate"><span class="pre">EXTernalTuning2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="externaltuningsum.html"><code class="docutils literal notranslate"><span class="pre">EXTernalTuningSum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fieldprocessor.html"><code class="docutils literal notranslate"><span class="pre">FieldProcessor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flashinit.html"><code class="docutils literal notranslate"><span class="pre">FLASHINIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flashsync.html"><code class="docutils literal notranslate"><span class="pre">FLASHSYNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flexport.html"><code class="docutils literal notranslate"><span class="pre">FLEXport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowdb.html"><code class="docutils literal notranslate"><span class="pre">FlowDb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowtracker.html"><code class="docutils literal notranslate"><span class="pre">FlowTracker</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowtrackermon.html"><code class="docutils literal notranslate"><span class="pre">FlowTrackerMON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="flowtrackerremotemon.html"><code class="docutils literal notranslate"><span class="pre">FlowTrackerRemoteMON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="for.html"><code class="docutils literal notranslate"><span class="pre">FOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="getreg.html"><code class="docutils literal notranslate"><span class="pre">Getreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gport.html"><code class="docutils literal notranslate"><span class="pre">GPORT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="h2higig.html"><code class="docutils literal notranslate"><span class="pre">H2HIGIG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="h2higig2.html"><code class="docutils literal notranslate"><span class="pre">H2HIGIG2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hal.html"><code class="docutils literal notranslate"><span class="pre">HAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hash.html"><code class="docutils literal notranslate"><span class="pre">HASH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hashdestination.html"><code class="docutils literal notranslate"><span class="pre">HashDestination</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hclksel.html"><code class="docutils literal notranslate"><span class="pre">HClksel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="headermode.html"><code class="docutils literal notranslate"><span class="pre">HeaderMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">Help</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="history.html"><code class="docutils literal notranslate"><span class="pre">HISTory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hsp.html"><code class="docutils literal notranslate"><span class="pre">HSP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html"><code class="docutils literal notranslate"><span class="pre">I2C</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ibodsync.html"><code class="docutils literal notranslate"><span class="pre">IbodSync</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="if.html"><code class="docutils literal notranslate"><span class="pre">IF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="init.html"><code class="docutils literal notranslate"><span class="pre">INIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="insert.html"><code class="docutils literal notranslate"><span class="pre">Insert</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="intr.html"><code class="docutils literal notranslate"><span class="pre">INTR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipfix.html"><code class="docutils literal notranslate"><span class="pre">IPFIX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipg.html"><code class="docutils literal notranslate"><span class="pre">IPG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipmc.html"><code class="docutils literal notranslate"><span class="pre">IPMC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="iprocread.html"><code class="docutils literal notranslate"><span class="pre">IPROCRead</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="iprocwrite.html"><code class="docutils literal notranslate"><span class="pre">IPROCWrite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="jobs.html"><code class="docutils literal notranslate"><span class="pre">JOBS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kill.html"><code class="docutils literal notranslate"><span class="pre">KILL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="knetctrl.html"><code class="docutils literal notranslate"><span class="pre">KNETctrl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="knetsync.html"><code class="docutils literal notranslate"><span class="pre">KNETSYNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2.html"><code class="docutils literal notranslate"><span class="pre">L2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2learn.html"><code class="docutils literal notranslate"><span class="pre">L2LEARN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2mode.html"><code class="docutils literal notranslate"><span class="pre">L2MODE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="l3.html"><code class="docutils literal notranslate"><span class="pre">L3</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="latency.html"><code class="docutils literal notranslate"><span class="pre">LATency</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcdmsg.html"><code class="docutils literal notranslate"><span class="pre">LCDMSG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html"><code class="docutils literal notranslate"><span class="pre">LED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkscan.html"><code class="docutils literal notranslate"><span class="pre">LINKscan</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="listmem.html"><code class="docutils literal notranslate"><span class="pre">LISTmem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="listreg.html"><code class="docutils literal notranslate"><span class="pre">Listreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lls.html"><code class="docutils literal notranslate"><span class="pre">LLS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="local.html"><code class="docutils literal notranslate"><span class="pre">LOCal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html"><code class="docutils literal notranslate"><span class="pre">LOG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lookup.html"><code class="docutils literal notranslate"><span class="pre">LOOKup</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="loop.html"><code class="docutils literal notranslate"><span class="pre">LOOP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ls.html"><code class="docutils literal notranslate"><span class="pre">LS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="m0.html"><code class="docutils literal notranslate"><span class="pre">M0</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcast.html"><code class="docutils literal notranslate"><span class="pre">MCAST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcscmd.html"><code class="docutils literal notranslate"><span class="pre">MCSCmd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsdump.html"><code class="docutils literal notranslate"><span class="pre">MCSDump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsload.html"><code class="docutils literal notranslate"><span class="pre">MCSLoad</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsmsg.html"><code class="docutils literal notranslate"><span class="pre">MCSMsg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcsstatus.html"><code class="docutils literal notranslate"><span class="pre">MCSStatus</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcstimestamp.html"><code class="docutils literal notranslate"><span class="pre">MCSTimeStamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memfirst.html"><code class="docutils literal notranslate"><span class="pre">MemFirst</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memnext.html"><code class="docutils literal notranslate"><span class="pre">MemNext</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memscan.html"><code class="docutils literal notranslate"><span class="pre">MemSCAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="memwatch.html"><code class="docutils literal notranslate"><span class="pre">MemWatch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mim.html"><code class="docutils literal notranslate"><span class="pre">MIM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mirror.html"><code class="docutils literal notranslate"><span class="pre">MIRror</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">MKDIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mmudebug.html"><code class="docutils literal notranslate"><span class="pre">MmuDeBuG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mode.html"><code class="docutils literal notranslate"><span class="pre">MODE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modify.html"><code class="docutils literal notranslate"><span class="pre">MODify</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modmap.html"><code class="docutils literal notranslate"><span class="pre">ModMap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modreg.html"><code class="docutils literal notranslate"><span class="pre">Modreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="more.html"><code class="docutils literal notranslate"><span class="pre">MORe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="move.html"><code class="docutils literal notranslate"><span class="pre">MoVe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpls.html"><code class="docutils literal notranslate"><span class="pre">MPLS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mspi.html"><code class="docutils literal notranslate"><span class="pre">MSPI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mtimeout.html"><code class="docutils literal notranslate"><span class="pre">MTiMeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="multicast.html"><code class="docutils literal notranslate"><span class="pre">MultiCast</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="muxsel.html"><code class="docutils literal notranslate"><span class="pre">MUXsel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="noecho.html"><code class="docutils literal notranslate"><span class="pre">NOEcho</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvram.html"><code class="docutils literal notranslate"><span class="pre">NVram</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="oam.html"><code class="docutils literal notranslate"><span class="pre">OAM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="onesync.html"><code class="docutils literal notranslate"><span class="pre">ONESYNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packetwatcher.html"><code class="docutils literal notranslate"><span class="pre">PacketWatcher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pause.html"><code class="docutils literal notranslate"><span class="pre">Pause</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pbmp.html"><code class="docutils literal notranslate"><span class="pre">PBMP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcie.html"><code class="docutils literal notranslate"><span class="pre">PCIE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pciephy.html"><code class="docutils literal notranslate"><span class="pre">PCIEPHY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="phy.html"><code class="docutils literal notranslate"><span class="pre">PHY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pktio.html"><code class="docutils literal notranslate"><span class="pre">PKTIO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="poe.html"><code class="docutils literal notranslate"><span class="pre">POE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="poesel.html"><code class="docutils literal notranslate"><span class="pre">POESel</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pop.html"><code class="docutils literal notranslate"><span class="pre">POP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="port.html"><code class="docutils literal notranslate"><span class="pre">PORT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portmod.html"><code class="docutils literal notranslate"><span class="pre">PortMod</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portrate.html"><code class="docutils literal notranslate"><span class="pre">PortRate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portsamp.html"><code class="docutils literal notranslate"><span class="pre">PortSAMp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portsamprate.html"><code class="docutils literal notranslate"><span class="pre">PortSampRate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="portstat.html"><code class="docutils literal notranslate"><span class="pre">PortStat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppdclk.html"><code class="docutils literal notranslate"><span class="pre">PPDclk</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="printenv.html"><code class="docutils literal notranslate"><span class="pre">PRINTENV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="probe.html"><code class="docutils literal notranslate"><span class="pre">PROBE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pscan.html"><code class="docutils literal notranslate"><span class="pre">PSCAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ptp.html"><code class="docutils literal notranslate"><span class="pre">PTP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="push.html"><code class="docutils literal notranslate"><span class="pre">PUSH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="putreg.html"><code class="docutils literal notranslate"><span class="pre">PUTREG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvlan.html"><code class="docutils literal notranslate"><span class="pre">PVlan</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pwd.html"><code class="docutils literal notranslate"><span class="pre">PWD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qcm.html"><code class="docutils literal notranslate"><span class="pre">Qcm</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="quit.html"><code class="docutils literal notranslate"><span class="pre">QUIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rate.html"><code class="docutils literal notranslate"><span class="pre">RATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ratebw.html"><code class="docutils literal notranslate"><span class="pre">RateBw</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rccache.html"><code class="docutils literal notranslate"><span class="pre">RCCache</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rcload.html"><code class="docutils literal notranslate"><span class="pre">RCLoad</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reboot.html"><code class="docutils literal notranslate"><span class="pre">REBOOT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="regcmp.html"><code class="docutils literal notranslate"><span class="pre">RegCMp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="regwatch.html"><code class="docutils literal notranslate"><span class="pre">RegWatch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="remove.html"><code class="docutils literal notranslate"><span class="pre">REMove</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rename.html"><code class="docutils literal notranslate"><span class="pre">REName</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reset.html"><code class="docutils literal notranslate"><span class="pre">RESET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="restest.html"><code class="docutils literal notranslate"><span class="pre">ResTest</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rm.html"><code class="docutils literal notranslate"><span class="pre">RM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmdir.html"><code class="docutils literal notranslate"><span class="pre">RMDIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rx.html"><code class="docutils literal notranslate"><span class="pre">RX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rxcfg.html"><code class="docutils literal notranslate"><span class="pre">RXCfg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rxinit.html"><code class="docutils literal notranslate"><span class="pre">RXInit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rxmon.html"><code class="docutils literal notranslate"><span class="pre">RXMon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="salprofile.html"><code class="docutils literal notranslate"><span class="pre">SalProfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="save.html"><code class="docutils literal notranslate"><span class="pre">SAVE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="schan.html"><code class="docutils literal notranslate"><span class="pre">SCHan</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="search.html"><code class="docutils literal notranslate"><span class="pre">SEArch</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ser.html"><code class="docutils literal notranslate"><span class="pre">SER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="set.html"><code class="docutils literal notranslate"><span class="pre">SET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="setenv.html"><code class="docutils literal notranslate"><span class="pre">SETENV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="setreg.html"><code class="docutils literal notranslate"><span class="pre">Setreg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="shell.html"><code class="docutils literal notranslate"><span class="pre">SHell</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="show.html"><code class="docutils literal notranslate"><span class="pre">SHOW</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="shutdown.html"><code class="docutils literal notranslate"><span class="pre">SHUTDOWN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep.html"><code class="docutils literal notranslate"><span class="pre">SLeep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="soc.html"><code class="docutils literal notranslate"><span class="pre">SOC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="socres.html"><code class="docutils literal notranslate"><span class="pre">SOCRES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi.html"><code class="docutils literal notranslate"><span class="pre">SPI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sram.html"><code class="docutils literal notranslate"><span class="pre">SRAM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sramscan.html"><code class="docutils literal notranslate"><span class="pre">SramSCAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stackmode.html"><code class="docutils literal notranslate"><span class="pre">STACKMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stackportget.html"><code class="docutils literal notranslate"><span class="pre">StackPortGet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stackportset.html"><code class="docutils literal notranslate"><span class="pre">StackPortSet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="startsim.html"><code class="docutils literal notranslate"><span class="pre">StartSim</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stg.html"><code class="docutils literal notranslate"><span class="pre">STG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stimeout.html"><code class="docutils literal notranslate"><span class="pre">STiMeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="stkmode.html"><code class="docutils literal notranslate"><span class="pre">STKMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw-an.html"><code class="docutils literal notranslate"><span class="pre">SW_AN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="switchcontrol.html"><code class="docutils literal notranslate"><span class="pre">SwitchControl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="synth.html"><code class="docutils literal notranslate"><span class="pre">SYnth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="systemsnake.html"><code class="docutils literal notranslate"><span class="pre">SystemSnake</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tcam.html"><code class="docutils literal notranslate"><span class="pre">TCAM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tdpll.html"><code class="docutils literal notranslate"><span class="pre">TDPLL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="techsupport.html"><code class="docutils literal notranslate"><span class="pre">TeCHSupport</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="temperature.html"><code class="docutils literal notranslate"><span class="pre">TEMPerature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testclear.html"><code class="docutils literal notranslate"><span class="pre">TestClear</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testlist.html"><code class="docutils literal notranslate"><span class="pre">TestList</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testmode.html"><code class="docutils literal notranslate"><span class="pre">TestMode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testparameters.html"><code class="docutils literal notranslate"><span class="pre">TestParameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testrun.html"><code class="docutils literal notranslate"><span class="pre">TestRun</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="testselect.html"><code class="docutils literal notranslate"><span class="pre">TestSelect</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html"><code class="docutils literal notranslate"><span class="pre">TIME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tmcheck.html"><code class="docutils literal notranslate"><span class="pre">TMCheck</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tmdumpmem.html"><code class="docutils literal notranslate"><span class="pre">TMDumpMem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tmshow.html"><code class="docutils literal notranslate"><span class="pre">TMShow</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trunk.html"><code class="docutils literal notranslate"><span class="pre">TRUNK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tx.html"><code class="docutils literal notranslate"><span class="pre">TX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txbeacon.html"><code class="docutils literal notranslate"><span class="pre">TXBeacon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txcount.html"><code class="docutils literal notranslate"><span class="pre">TXCount</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txen.html"><code class="docutils literal notranslate"><span class="pre">TXEN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txstart.html"><code class="docutils literal notranslate"><span class="pre">TXSTArt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="txstop.html"><code class="docutils literal notranslate"><span class="pre">TXSTOp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="version.html"><code class="docutils literal notranslate"><span class="pre">Version</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="vlan.html"><code class="docutils literal notranslate"><span class="pre">VLAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="warmboot.html"><code class="docutils literal notranslate"><span class="pre">WARMBOOT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan.html"><code class="docutils literal notranslate"><span class="pre">WLAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="write.html"><code class="docutils literal notranslate"><span class="pre">Write</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xaui.html"><code class="docutils literal notranslate"><span class="pre">XAUI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xclocks.html"><code class="docutils literal notranslate"><span class="pre">XClocks</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xmem.html"><code class="docutils literal notranslate"><span class="pre">xmem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="xpoe.html"><code class="docutils literal notranslate"><span class="pre">XPoe</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#commands-for-other-chip-families">Commands for other chip families</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Command reference</a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">MKDIR</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mkdir">
+<h1><code class="docutils literal notranslate"><span class="pre">MKDIR</span></code><a class="headerlink" href="#mkdir" title="Link to this heading"></a></h1>
+<p>Make a directory</p>
+<dl class="std clicmd">
+<dt class="sig sig-object std" id="clicmd-mkdir">
+<span class="sig-name descname"><span class="pre">MKDIR</span></span><a class="headerlink" href="#clicmd-mkdir" title="Link to this definition"></a></dt>
+<dd><p>Create one directory. Parent directories are not created. Failure prints
+<code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">failed</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">directory:</span> <span class="pre">&lt;path&gt;</span></code>. Paths are inside the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container, and the command runs there as root.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; mkdir /tmp/bcm</span>
+</pre></div>
+</div>
+</div>
+<p class="rubric">Built-in help</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Parameters: &lt;path&gt;
+    Make a directory.
+</pre></div>
+</div>
+<p class="rubric">Further reading</p>
+<p><a class="reference internal" href="../sources.html#bcmsh-src-openbcm-hsdk-getting-started"><span class="std std-ref">SDK-6.5.20 HSDK Getting Started Guide (GS-SDK6520-R), plus SDK-6.5.20/21/22 Release Notes (RN-SDK65xx-R)</span></a>.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mirror.html" class="btn btn-neutral float-left" title="MIRror" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mmudebug.html" class="btn btn-neutral float-right" title="MmuDeBuG" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

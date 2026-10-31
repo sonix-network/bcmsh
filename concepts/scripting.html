@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scripting &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Embedded applications" href="eapps.html" />
+    <link rel="prev" title="The Cint language" href="cint-language.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-language.html">The Cint language</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scripting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expressions-and-conditions">Expressions and conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loops">Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rc-scripts">rc scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-options">Shell options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#diagnostic-tests">Diagnostic tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../howto/knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Scripting</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scripting">
+<h1>Scripting<a class="headerlink" href="#scripting" title="Link to this heading"></a></h1>
+<p>The diag shell has a small scripting language: variables, integer
+expressions, conditions, loops and script files (<em>rc scripts</em>). It is the
+same language at the <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt and inside scripts. How a command
+line is split into words, quoted and chained with <code class="docutils literal notranslate"><span class="pre">;</span></code> is described in
+<a class="reference internal" href="../access.html"><span class="doc">Accessing the shell</span></a>.</p>
+<section id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">$name</span></code> or <code class="docutils literal notranslate"><span class="pre">${name}</span></code> is replaced by the variable’s value. Undefined
+variables expand to nothing. <code class="docutils literal notranslate"><span class="pre">$?name</span></code> expands to <code class="docutils literal notranslate"><span class="pre">1</span></code> if <code class="docutils literal notranslate"><span class="pre">name</span></code> is
+defined and <code class="docutils literal notranslate"><span class="pre">0</span></code> if not, which is the usual test in <a class="reference internal" href="../reference/if.html#clicmd-if"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">if</span></code></a>. Single
+quotes stop expansion and double quotes do not, so use single quotes when a
+command line is stored for later, as in <a class="reference internal" href="../reference/for.html#clicmd-for"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">for</span></code></a> and <a class="reference internal" href="../reference/save.html#clicmd-save"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">save</span></code></a>.</p>
+<p>There are two kinds of variable:</p>
+<ul class="simple">
+<li><p>Local variables, set with <a class="reference internal" href="../reference/local.html#clicmd-local"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">local</span></code></a>, belong to the current
+scope. Every <a class="reference internal" href="../reference/rcload.html#clicmd-rcload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rcload</span></code></a> script gets a new scope, which disappears
+when it ends. The <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt itself has no local scope, so
+<code class="docutils literal notranslate"><span class="pre">local</span></code> at the prompt, and the loop variable of a <a class="reference internal" href="../reference/for.html#clicmd-for"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">for</span></code></a> typed
+there, end up as global variables.</p></li>
+<li><p>Global variables, set with <a class="reference internal" href="../reference/setenv.html#clicmd-setenv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">setenv</span></code></a>, are visible everywhere.
+A local variable of the same name hides a global one.</p></li>
+</ul>
+<p><a class="reference internal" href="../reference/printenv.html#clicmd-printenv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">printenv</span></code></a> lists them. Names beginning with <code class="docutils literal notranslate"><span class="pre">_</span></code> are system
+variables and cannot be set. The shell also sets some variables itself:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$?</span></code>: the result of the last command (0 for success; negative values are
+errors; <a class="reference internal" href="../reference/expr.html#clicmd-expr"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">expr</span></code></a> stores its value here). It reads 0 again in the
+next <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> call, so use it on the same line or inside a script;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$1</span></code>, <code class="docutils literal notranslate"><span class="pre">$2</span></code>, …: the arguments of the running script;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">units</span></code>: the number of devices found by <a class="reference internal" href="../reference/probe.html#clicmd-probe"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">probe</span></code></a>;</p></li>
+<li><p>per-unit variables such as <code class="docutils literal notranslate"><span class="pre">devname</span></code>, and the chip names as flags (set
+to 1), used by Broadcom’s scripts in tests like <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">$?BCM56870_A0</span> <span class="pre">…</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_var_val</span></code> and <code class="docutils literal notranslate"><span class="pre">config_var_not_set</span></code>, after <a class="reference internal" href="../reference/config.html#clicmd-config-get"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">config</span> <span class="pre">get</span></code></a>.</p></li>
+</ul>
+<p>Variables set at the prompt stay set, across <code class="docutils literal notranslate"><span class="pre">bcmcmd</span></code> calls and <code class="docutils literal notranslate"><span class="pre">bcmsh</span></code>
+sessions, until you remove them (<code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">&lt;name&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">setenv</span> <span class="pre">&lt;name&gt;</span></code>) or
+<code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts. <a class="reference internal" href="../reference/printenv.html#clicmd-printenv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">printenv</span></code></a> shows what earlier sessions left
+behind.</p>
+</section>
+<section id="expressions-and-conditions">
+<h2>Expressions and conditions<a class="headerlink" href="#expressions-and-conditions" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/expr.html#clicmd-expr"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">expr</span></code></a> evaluates C-style unsigned 32-bit integer arithmetic. Its
+value becomes the command’s result, and only 0 counts as success. A plain
+number used as a command succeeds when it is non-zero. Together that gives
+two rules for <a class="reference internal" href="../reference/if.html#clicmd-if"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">if</span></code></a>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">$?myvar</span> <span class="pre">&quot;…&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">1</span> <span class="pre">&quot;…&quot;</span></code> work as expected;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">&quot;expr</span> <span class="pre">$n</span> <span class="pre">&gt;</span> <span class="pre">2&quot;</span> <span class="pre">&quot;…&quot;</span></code> is <strong>inverted</strong>: it runs when the comparison is
+false. Write <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">!&quot;expr</span> <span class="pre">$n</span> <span class="pre">&gt;</span> <span class="pre">2&quot;</span> <span class="pre">&quot;…&quot;</span></code>, as Broadcom’s <code class="docutils literal notranslate"><span class="pre">rc.soc</span></code> does.</p></li>
+</ul>
+<p><a class="reference internal" href="../reference/case.html#clicmd-case"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">case</span></code></a> picks a command by exact string match.</p>
+</section>
+<section id="loops">
+<h2>Loops<a class="headerlink" href="#loops" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/loop.html#clicmd-loop"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">loop</span></code></a> repeats command lines a fixed number of times, and
+<a class="reference internal" href="../reference/for.html#clicmd-for"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">for</span></code></a> counts a variable through a range. Both stop at the first
+failing command while the <code class="docutils literal notranslate"><span class="pre">LoopError</span></code> option is on.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">drivshell&gt;</span></code> prompt has no way to interrupt a running command.
+<code class="docutils literal notranslate"><span class="pre">loop</span> <span class="pre">*</span></code> or a long loop runs until it finishes or <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restarts.</p>
+</div>
+<p><a class="reference internal" href="../reference/background.html#clicmd-background"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">background</span></code></a> runs up to two command lines in a separate thread;
+<a class="reference internal" href="../reference/jobs.html#clicmd-jobs"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">jobs</span></code></a> and <a class="reference internal" href="../reference/kill.html#clicmd-kill"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">kill</span></code></a> manage them.</p>
+</section>
+<section id="rc-scripts">
+<h2>rc scripts<a class="headerlink" href="#rc-scripts" title="Link to this heading"></a></h2>
+<p>An rc script is a text file of shell commands, run with <a class="reference internal" href="../reference/rcload.html#clicmd-rcload"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rcload</span></code></a>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span></code> starts a comment, to the end of the line, even inside quotes.</p></li>
+<li><p>A line ending in <code class="docutils literal notranslate"><span class="pre">\</span></code> continues on the next line.</p></li>
+<li><p>Arguments of <code class="docutils literal notranslate"><span class="pre">rcload</span></code> become <code class="docutils literal notranslate"><span class="pre">$1</span></code>, <code class="docutils literal notranslate"><span class="pre">$2</span></code>, ….</p></li>
+<li><p>When a line fails, the script stops, unless the <code class="docutils literal notranslate"><span class="pre">RCError</span></code> option is off.
+Lines starting with <code class="docutils literal notranslate"><span class="pre">expr</span></code> never count as failures. The error message
+names the file and line; <code class="docutils literal notranslate"><span class="pre">RCNoPrintError</span></code> suppresses it.</p></li>
+<li><p>Nesting of scripts and loops is limited (<code class="docutils literal notranslate"><span class="pre">recursion</span> <span class="pre">too</span> <span class="pre">deep</span></code>).</p></li>
+</ul>
+<p>A name containing <code class="docutils literal notranslate"><span class="pre">/</span></code> is opened as given. Any other name is looked up in
+the <a class="reference internal" href="../reference/rccache.html#clicmd-rccache"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">rccache</span></code></a> first, then in each directory of the <code class="docutils literal notranslate"><span class="pre">path</span></code>
+variable, or in the working directory if <code class="docutils literal notranslate"><span class="pre">path</span></code> is unset. Typing an
+unknown command <code class="docutils literal notranslate"><span class="pre">word</span></code> makes the shell try <code class="docutils literal notranslate"><span class="pre">rcload</span> <span class="pre">word.soc</span></code> in the same
+way while the <code class="docutils literal notranslate"><span class="pre">RCLoad</span></code> option is on.</p>
+<p>Scripts live in the <code class="docutils literal notranslate"><span class="pre">syncd</span></code> container. <a class="reference internal" href="../reference/save.html#clicmd-save"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">save</span></code></a> can write a one-line
+script there; copy longer ones in from the host as described in
+<a class="reference internal" href="../access.html#access-files"><span class="std std-ref">Files inside the syncd container</span></a> (copy them to <code class="docutils literal notranslate"><span class="pre">/root</span></code>; <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">cp</span></code> into <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>
+does not work). <a class="reference internal" href="../reference/ls.html#clicmd-ls"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ls</span></code></a>, <a class="reference internal" href="../reference/more.html#clicmd-more"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">more</span></code></a>,
+<a class="reference internal" href="../reference/cd.html#clicmd-cd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">cd</span></code></a> and <a class="reference internal" href="../reference/pwd.html#clicmd-pwd"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">pwd</span></code></a> help to find them. On SONiC the working
+directory is <code class="docutils literal notranslate"><span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">path</span></code> is <code class="docutils literal notranslate"><span class="pre">.</span> <span class="pre">/</span></code>, so names without a <code class="docutils literal notranslate"><span class="pre">/</span></code> are
+looked up in the container’s root directory.</p>
+<p>Example: a script that prints the status of one port every second, three
+times:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># /tmp/watch.soc  -- usage: rcload /tmp/watch.soc &lt;port&gt;
+if !$?1 "echo usage: rcload watch.soc &lt;port&gt;; exit"
+loop 3 "ps $1" "sleep quiet 1"
+</pre></div>
+</div>
+<div class="bcmsh-example bcmsh-unvalidated docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-unvalidated">Unvalidated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; rcload /tmp/watch.soc ce0</span>
+</pre></div>
+</div>
+</div>
+<p>A one-line version can be made without leaving the shell:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; save /tmp/watch.soc 'loop 3 "ps $1" "sleep quiet 1"'</span>
+<span class="go">drivshell&gt; rcload /tmp/watch.soc ce0</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ce0(  1)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ce0(  1)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ce0(  1)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="shell-options">
+<h2>Shell options<a class="headerlink" href="#shell-options" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/set.html#clicmd-set"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">set</span></code></a> shows and changes the options that control error handling
+(<code class="docutils literal notranslate"><span class="pre">IFError</span></code>, <code class="docutils literal notranslate"><span class="pre">LoopError</span></code>, <code class="docutils literal notranslate"><span class="pre">RCError</span></code>, <code class="docutils literal notranslate"><span class="pre">RCNoPrintError</span></code>), the
+<code class="docutils literal notranslate"><span class="pre">WORD.soc</span></code> lookup (<code class="docutils literal notranslate"><span class="pre">RCLoad</span></code>), the test framework (<code class="docutils literal notranslate"><span class="pre">RCTest</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ReportStatus</span></code>, <code class="docutils literal notranslate"><span class="pre">ReportTime</span></code>) and paging in <a class="reference internal" href="../reference/more.html#clicmd-more"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">more</span></code></a>
+(<code class="docutils literal notranslate"><span class="pre">MoreLines</span></code>). The defaults are listed in <a class="reference internal" href="../access.html"><span class="doc">Accessing the shell</span></a>.</p>
+</section>
+<section id="diagnostic-tests">
+<h2>Diagnostic tests<a class="headerlink" href="#diagnostic-tests" title="Link to this heading"></a></h2>
+<p>The shell includes Broadcom’s diagnostic test suite. <a class="reference internal" href="../reference/testlist.html#clicmd-testlist"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">testlist</span></code></a>
+lists the tests, <a class="reference internal" href="../reference/testselect.html#clicmd-testselect"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">testselect</span></code></a> chooses which ones a bare
+<a class="reference internal" href="../reference/testrun.html#clicmd-testrun"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">testrun</span></code></a> runs, <a class="reference internal" href="../reference/testparameters.html#clicmd-testparameters"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">testparameters</span></code></a> sets their arguments,
+<a class="reference internal" href="../reference/testmode.html#clicmd-testmode"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">testmode</span></code></a> sets how they run and <a class="reference internal" href="../reference/testclear.html#clicmd-testclear"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">testclear</span></code></a> resets the
+statistics. Tests reprogram the chip. Run them only on a switch taken out of
+service.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cint-language.html" class="btn btn-neutral float-left" title="The Cint language" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="eapps.html" class="btn btn-neutral float-right" title="Embedded applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

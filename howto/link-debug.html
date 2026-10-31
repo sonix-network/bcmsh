@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debugging a link &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PHYs and RJ-45 SFPs" href="phy.html" />
+    <link rel="prev" title="Debugging ACL rules" href="acl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Debugging a link</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#is-the-port-up">Is the port up?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#signal-and-lock-phy-diag-dsc">Signal and lock: <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">dsc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#eye-diagram">Eye diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bit-error-rate-with-prbs">Bit error rate with PRBS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transmit-fir-taps">Transmit FIR taps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fec">FEC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#speed">Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#putting-it-back">Putting it back</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Debugging a link</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debugging-a-link">
+<h1>Debugging a link<a class="headerlink" href="#debugging-a-link" title="Link to this heading"></a></h1>
+<p>This page walks through the usual questions about a front-panel link that
+is down, flapping or dropping packets: is there a signal, does the receiver
+lock, how open is the eye, what is the bit error rate, and do both ends agree
+on FEC and speed. It also shows how to change the transmit FIR taps, the FEC
+mode and the speed from the shell.</p>
+<p>Every port on a Trident 3 is one or more lanes of an on-chip SerDes, so all
+of this is done with <a class="reference internal" href="../reference/phy.html#clicmd-phy"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span></code></a>, <a class="reference internal" href="../reference/portmod.html#clicmd-portmod"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span></code></a>, <a class="reference internal" href="../reference/portstat.html#clicmd-portstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ps</span></code></a>
+and <a class="reference internal" href="../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a>. Reading is safe on a running switch. Every change on this
+page is made behind SONiC’s back: note the original value first, put it back
+when you are done, and expect a <code class="docutils literal notranslate"><span class="pre">syncd</span></code> restart to undo anything you leave.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Port <em>names</em> in the shell depend on port speeds: 100G ports are named
+<code class="docutils literal notranslate"><span class="pre">ce</span></code>, 10G and 40G ports <code class="docutils literal notranslate"><span class="pre">xe</span></code> and 1G ports <code class="docutils literal notranslate"><span class="pre">ge</span></code>, each numbered in
+port order. When a port changes speed class, it and the later ports of
+both classes are renamed (see <a class="reference internal" href="#howto-link-speed"><span class="std std-ref">Speed</span></a>). Use port <em>numbers</em>, as printed in
+brackets by <code class="docutils literal notranslate"><span class="pre">ps</span></code>, in anything that changes speed or that you script.</p>
+</div>
+<p>The examples use a 100G link between two Trident 3 switches (<code class="docutils literal notranslate"><span class="pre">ce27</span></code> on one,
+<code class="docutils literal notranslate"><span class="pre">ce29</span></code> on the other, CWDM4 optics) and a 10G breakout lane on a copper DAC
+(<code class="docutils literal notranslate"><span class="pre">xe3</span></code>).</p>
+<section id="is-the-port-up">
+<h2>Is the port up?<a class="headerlink" href="#is-the-port-up" title="Link to this heading"></a></h2>
+<p>Start with <a class="reference internal" href="../reference/portstat.html#clicmd-portstat"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">ps</span></code></a> and the full <a class="reference internal" href="../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a> status:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; ps ce27-ce29,xe0-xe3</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">      ce27(115)  up     4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">drivshell&gt; port ce27</span>
+<span class="go">PORT: Status (* indicates PHY link up)</span>
+<span class="go"> *ce27    (EnabledLS(SW Forced((100GFD) Stad(e0:39:d7:88:3b:00) STP(Forward) Disc(untagged) Lrn(FWD) UtPri(0) Pfm(FloodNone) IF(CR4) PH(Slave) Max_frame(9122) MDIX(ForcedNormal, Normal) Medium(None) VLANFILTER(3)</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">*</span></code> in front of the name means the PHY reports link. <code class="docutils literal notranslate"><span class="pre">SW</span> <span class="pre">Forced(100GFD)</span></code>
+is the configured speed with auto-negotiation off, <code class="docutils literal notranslate"><span class="pre">IF(CR4)</span></code> the interface
+type. A port that has no link and receives a fault from its partner, or none
+at all, also shows <code class="docutils literal notranslate"><span class="pre">Fault(Local)</span></code> or <code class="docutils literal notranslate"><span class="pre">Fault(Remote)</span></code>.</p>
+</section>
+<section id="signal-and-lock-phy-diag-dsc">
+<h2>Signal and lock: <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">dsc</span></code><a class="headerlink" href="#signal-and-lock-phy-diag-dsc" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/phy.html#clicmd-phy-diag"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span></code></a> <code class="docutils literal notranslate"><span class="pre">dsc</span></code> prints the
+SerDes core state and one row per lane of the core, followed by a legend
+that explains each column. A healthy 100G port:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Lane rows of a healthy 100G link</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy diag ce27 dsc</span>
+<span class="go">LN (CDRxN  , UC_CFG,UC_STS, RST, STP) SD LCK RXPPM CLK90 CLKP1 PF(M,L)  VGA DCO P1mV M1mV   DFE(1,2,3,4,5,6)      TXPPM TXEQ(n1,m,p1,2,3,rpara)    EYE(L,R,U,D)   LINK_TIME   BER</span>
+<span class="go"> 0 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    29     0    ( 0,1)  12  -2  242  18 (  5,-15,  0,  0,  0,  1)    0   ( 8, 73,19, 0, 0, 0)   (234,296,151,155)    66.8</span>
+<span class="go"> 1 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    28    -1    ( 0,1)  13 -12  240  14 (  2,-15,  0, -1,  0,  2)    0   ( 8, 73,19, 0, 0, 0)   (203,265,147,151)    65.6</span>
+<span class="go"> 2 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    29     0    ( 0,1)  13   1  240  10 (  3,-15, -1,  3, -3,  3)    0   ( 8, 73,19, 0, 0, 0)   (250,328,153,165)    66.5</span>
+<span class="go"> 3 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    28    -1    ( 0,1)  13   0  244   4 (  0,-15,  0,  0, -1,  0)    0   ( 8, 73,19, 0, 0, 0)   (250,312,159,165)    60.5</span>
+</pre></div>
+</div>
+</div>
+<p>The columns that matter most:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">SD</span></code></dt><dd><p>Signal detect: the receiver sees energy on the lane. <code class="docutils literal notranslate"><span class="pre">0</span></code> means no
+signal at all: no cable, no light, a module that is off, or a far end
+that is disabled.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LCK</span></code></dt><dd><p>The receiver’s clock and data recovery is locked to the incoming data.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PF</span></code>, <code class="docutils literal notranslate"><span class="pre">VGA</span></code>, <code class="docutils literal notranslate"><span class="pre">DFE</span></code></dt><dd><p>The receive equalizer: peaking filter, variable gain amplifier
+(<code class="docutils literal notranslate"><span class="pre">0</span></code>–<code class="docutils literal notranslate"><span class="pre">37</span></code>) and decision-feedback taps. A VGA at or near its maximum
+means the incoming signal is weak.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TXEQ(n1,m,p1,…)</span></code></dt><dd><p>This lane’s own transmit FIR taps: pre-cursor, main and post-cursor (see
+<a class="reference internal" href="#howto-link-taps"><span class="std std-ref">Transmit FIR taps</span></a>).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">EYE(L,R,U,D)</span></code></dt><dd><p>Eye margin at 1e-5 as seen by the receiver: left and right in mUI, up and
+down in mV. Small numbers mean a closed eye.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">BER</span></code></dt><dd><p>Only filled in while the PRBS checker runs (see <a class="reference internal" href="#howto-link-prbs"><span class="std std-ref">Bit error rate with PRBS</span></a>).</p>
+</dd>
+</dl>
+<p>With the far end disabled, every lane loses signal detect and lock and the
+eye collapses:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: The same port with the far end shut down</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy diag ce27 dsc</span>
+<span class="go">LN (CDRxN  , UC_CFG,UC_STS, RST, STP) SD LCK RXPPM CLK90 CLKP1 PF(M,L)  VGA DCO P1mV M1mV   DFE(1,2,3,4,5,6)      TXPPM TXEQ(n1,m,p1,2,3,rpara)    EYE(L,R,U,D)   LINK_TIME   BER</span>
+<span class="go"> 0 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 0  0*    0    32     0    (10,0)  37  -3    0   0 (  7,  0,  0,  0,  0,  0)    0   ( 8, 73,19, 0, 0, 0)   (  0,  0,  0,  0)     0.0</span>
+<span class="go"> 1 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 0  0*    0    32     0    (10,0)  37 -12    0   0 (  3,  0,  0,  0,  0,  0)    0   ( 8, 73,19, 0, 0, 0)   (  0,  0,  0,  0)     0.0</span>
+<span class="go"> 2 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 0  0*    0    32     0    (10,0)  37   3    0   0 (  2,  0,  0,  0,  0,  0)    0   ( 8, 73,19, 0, 0, 0)   (  0,  0,  0,  0)     0.0</span>
+<span class="go"> 3 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 0  0*    0    32     0    (10,0)  37   1    0   0 (  0,  0,  0,  0,  0,  0)    0   ( 8, 73,19, 0, 0, 0)   (  0,  0,  0,  0)     0.0</span>
+</pre></div>
+</div>
+</div>
+<p>How to read the combinations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SD</span> <span class="pre">0</span></code>: nothing arrives. Check the cable or module, and that the far end
+is enabled and transmitting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SD</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">LCK</span> <span class="pre">0</span></code>: something arrives but the receiver cannot lock. The
+ends usually disagree on the lane speed, or the signal is too poor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SD</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">LCK</span> <span class="pre">1</span></code> on every lane and still no link: the receivers have
+signal and clock recovery, but this does not establish a working PCS
+link or acceptable error rate. Check FEC, speed, lane mapping and link
+training, then inspect error counters and eye margins (see
+<a class="reference internal" href="#howto-link-fec"><span class="std std-ref">FEC</span></a>).</p></li>
+</ul>
+<p>Take two successive DSC dumps when investigating a flap. An asterisk next
+to <code class="docutils literal notranslate"><span class="pre">SD</span></code> or <code class="docutils literal notranslate"><span class="pre">LCK</span></code> marks a state change since the previous dump; it is
+not another lock level. Compare every lane. The core’s <code class="docutils literal notranslate"><span class="pre">PLL_LOCK</span></code> and
+the lanes’ receiver locks describe different parts of the signal path.</p>
+<p>Decode <code class="docutils literal notranslate"><span class="pre">UC_CFG</span></code> only with the definition for the actual SerDes family
+and firmware. Falcon and Eagle layouts differ, so a bit position from
+another core can give a plausible but incorrect media or training setting.
+Use <a class="reference internal" href="../reference/phy.html#clicmd-phy-info"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">info</span></code></a> and <a class="reference internal" href="../reference/portmod.html#clicmd-portmod-info"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">info</span></code></a> to identify the port’s PHY
+before interpreting raw fields.</p>
+<p><code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">…</span> <span class="pre">pcs</span></code> prints a PCS status table, but on these switches its
+<code class="docutils literal notranslate"><span class="pre">PCS</span> <span class="pre">LINK</span> <span class="pre">STAT</span></code> column reads <code class="docutils literal notranslate"><span class="pre">N</span></code> even on ports that are up. Use <code class="docutils literal notranslate"><span class="pre">ps</span></code>
+and the <code class="docutils literal notranslate"><span class="pre">dsc</span></code> lane rows instead.</p>
+</section>
+<section id="eye-diagram">
+<span id="howto-link-eye"></span><h2>Eye diagram<a class="headerlink" href="#eye-diagram" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/portmod.html#clicmd-portmod-eyescan"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">portmod</span> <span class="pre">eyescan</span></code></a> measures the
+receive eye of one lane and draws it. It takes the port <em>number</em>, not the
+name, and about 15 seconds per lane. Each character is the approximate error
+rate at that point as a power of ten: <code class="docutils literal notranslate"><span class="pre">7</span></code> means about 1e-7, <code class="docutils literal notranslate"><span class="pre">1</span></code> about
+1e-1. The blank area in the middle is the open eye; the wider and taller it
+is, the more margin the link has.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Lane 0 of a healthy 100G CWDM4 link</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; portmod eyescan port=115 mode=fast lane=0</span>
+<span class="go"> Timeout = 1000 ms</span>
+<span class="go"> Hmax    = 31</span>
+<span class="go"> Hmin    = -31</span>
+<span class="go"> Hstep   = 1</span>
+<span class="go"> Vmax    = 31</span>
+<span class="go"> Vmin    = -31</span>
+<span class="go"> Vstep   = 1</span>
+<span class="go"> mode    = 0</span>
+<span class="go">for u=0 p=115 lane_mask=1:</span>
+
+
+
+<span class="go">    +--------------------------------------------------------------------+</span>
+<span class="go">    | EYESCAN Phy: 0x1a9 lane_mask: 0x01                                 |</span>
+<span class="go">    +--------------------------------------------------------------------+</span>
+
+<span class="go"> Each character N represents approximate error rate 1e-N at that location</span>
+<span class="go">  UI/64  : -30  -25  -20  -15  -10  -5    0    5    10   15   20   25   30</span>
+<span class="go">         : -|----|----|----|----|----|----|----|----|----|----|----|----|-</span>
+<span class="go">   128mV : 111111111111111111111222233445677655433322222111111111111111111</span>
+<span class="go">   124mV : 111111111111111111111222334456677765543332222211111111111111111</span>
+<span class="go">   120mV : 1111111111111111111122223344567:  65544332222221111111111111111</span>
+<span class="go">   115mV : 1111111111111111111122233345667: 776554333222221111111111111111</span>
+<span class="go">   111mV : 111111111111111111112223344567 :   6654433322222111111111111111</span>
+<span class="go">   107mV : 111111111111111111122223345567 :   7655433322222111111111111111</span>
+<span class="go">   103mV : 111111111111111111122233345677-+---7665443332222211111111111111</span>
+<span class="go">    99mV : 11111111111111111122223344567  :    765544332222221111111111111</span>
+<span class="go">    95mV : 11111111111111111122223345667  :    776544333222221111111111111</span>
+<span class="go">    91mV : 11111111111111111122233445677  :    776554433222222111111111111</span>
+<span class="go">    86mV : 1111111111111111122223345567   :    :77655433322222111111111111</span>
+<span class="go">    82mV : 1111111111111111122233345677---+----+-7765443322222211111111111</span>
+<span class="go">    78mV : 111111111111111112223344567    :    :  765544332222211111111111</span>
+<span class="go">    74mV : 1111111111111111222233455677   :    : 7766544332222221111111111</span>
+<span class="go">    70mV : 11111111111111112223344567:    :    :  776554333222221111111111</span>
+<span class="go">    66mV : 11111111111111122223344567:    :    :   76654433322222111111111</span>
+<span class="go">    62mV : 1111111111111112222334566-+----+----+----7655443322222111111111</span>
+<span class="go">    57mV : 1111111111111112223344567 :    :    :    :665443332222211111111</span>
+<span class="go">    53mV : 1111111111111122223345567 :    :    :    :766544332222211111111</span>
+<span class="go">    49mV : 1111111111111122233345667 :    :    :    :766554333222221111111</span>
+<span class="go">    45mV : 111111111111122223344567  :    :    :    :776554333222221111111</span>
+<span class="go">    41mV : 11111111111112222334556---+----+----+----+-76654433222221111111</span>
+<span class="go">    37mV : 11111111111112223344566   :    :    :    :  7655433322222111111</span>
+<span class="go">    33mV : 11111111111122223344567   :    :    :    :  7665443322222111111</span>
+<span class="go">    28mV : 11111111111122233345667   :    :    :    :   765543332222211111</span>
+<span class="go">    24mV : 1111111111112223344567    :    :    :    :   776544332222211111</span>
+<span class="go">    20mV : 1111111111122223345567----+----+----+----+----76554333222211111</span>
+<span class="go">    16mV : 1111111111122233445677    :    :    :    :    76654433222211111</span>
+<span class="go">    12mV : 111111111112223344567:    :    :    :    :    77655433322221111</span>
+<span class="go">     8mV : 111111111112223345667:    :    :    :    :    :7765443322221111</span>
+<span class="go">     4mV : 11111111112223344567 :    :    :    :    :    :7765543322221111</span>
+<span class="go">     0mV : 11111111112223344567-+----+----+----+----+----+7765543322221111</span>
+<span class="go">    -4mV : 11111111112223344567 :    :    :    :    :    : 766543322221111</span>
+<span class="go">    -8mV : 11111111112223344567 :    :    :    :    :    :7765543322221111</span>
+<span class="go">   -12mV : 111111111112223345677:    :    :    :    :    :7765443322221111</span>
+<span class="go">   -16mV : 111111111112223344567:    :    :    :    :    77655433322221111</span>
+<span class="go">   -20mV : 111111111112223344567+----+----+----+----+----77654433222211111</span>
+<span class="go">   -24mV : 1111111111122223345567    :    :    :    :   776554333222211111</span>
+<span class="go">   -28mV : 1111111111112223344567    :    :    :    :   776544332222211111</span>
+<span class="go">   -33mV : 11111111111122233345667   :    :    :    :  7765543332222211111</span>
+<span class="go">   -37mV : 11111111111122223344567   :    :    :    :  7765443322222111111</span>
+<span class="go">   -41mV : 111111111111122233445677--+----+----+----+--7655433322222111111</span>
+<span class="go">   -45mV : 111111111111122223345567  :    :    :    :776654433222221111111</span>
+<span class="go">   -49mV : 111111111111112223344567  :    :    :    :776654433222221111111</span>
+<span class="go">   -53mV : 1111111111111122233345667 :    :    :    :776554333222221111111</span>
+<span class="go">   -57mV : 111111111111112222334456  :    :    :    :766544332222211111111</span>
+<span class="go">   -62mV : 1111111111111112223344567-+----+----+----7765443332222211111111</span>
+<span class="go">   -66mV : 11111111111111122223345567:    :    :    7655443322222111111111</span>
+<span class="go">   -70mV : 11111111111111112223344567:    :    :   77654433222222111111111</span>
+<span class="go">   -74mV : 11111111111111112223334567:    :    :   76554333222221111111111</span>
+<span class="go">   -78mV : 111111111111111122223345567    :    :  776544333222221111111111</span>
+<span class="go">   -82mV : 111111111111111112223344567----+----+-7766544332222211111111111</span>
+<span class="go">   -86mV : 111111111111111112223334566    :    :77765443322222211111111111</span>
+<span class="go">   -91mV : 1111111111111111122223345567   :    : 7655433322222111111111111</span>
+<span class="go">   -95mV : 11111111111111111122233445677  :    776654433222222111111111111</span>
+<span class="go">   -99mV : 11111111111111111122223345567  :    :76554333222221111111111111</span>
+<span class="go">  -103mV : 11111111111111111112223344567--+----+66544332222221111111111111</span>
+<span class="go">  -107mV : 111111111111111111122233345667 :   7665443322222211111111111111</span>
+<span class="go">  -111mV : 11111111111111111112222334556  :   7665443322222211111111111111</span>
+<span class="go">  -115mV : 111111111111111111112223344567 :  77654433322222111111111111111</span>
+<span class="go">  -120mV : 1111111111111111111122223345567:  76554333222221111111111111111</span>
+<span class="go">  -124mV : 11111111111111111111122233445677-776544332222221111111111111111</span>
+<span class="go">  -128mV : 111111111111111111111222333455677765543332222211111111111111111</span>
+<span class="go">         : -|----|----|----|----|----|----|----|----|----|----|----|----|-</span>
+<span class="go">  UI/64  : -30  -25  -20  -15  -10  -5    0    5    10   15   20   25   30</span>
+</pre></div>
+</div>
+</div>
+<p>Scan each lane of the port in turn (<code class="docutils literal notranslate"><span class="pre">lane=0</span></code> to <code class="docutils literal notranslate"><span class="pre">lane=3</span></code> for a 4-lane
+port). <code class="docutils literal notranslate"><span class="pre">mode=lowBER</span></code> selects the slower low-BER scan. The <code class="docutils literal notranslate"><span class="pre">EYE(L,R,U,D)</span></code>
+column of <code class="docutils literal notranslate"><span class="pre">dsc</span></code> gives the same margins as four numbers when you only need
+a quick comparison.</p>
+</section>
+<section id="bit-error-rate-with-prbs">
+<span id="howto-link-prbs"></span><h2>Bit error rate with PRBS<a class="headerlink" href="#bit-error-rate-with-prbs" title="Link to this heading"></a></h2>
+<p>A PRBS test replaces the traffic on a link with a pseudo-random pattern and
+counts the bit errors at the receiver. It stops all traffic on the port, so
+the link goes down for SONiC while it runs. Start the generator and checker
+on both ends with the same polynomial (<code class="docutils literal notranslate"><span class="pre">p=3</span></code> is PRBS-31):</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: PRBS-31 on both ends, then read the checker</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy diag ce27 prbs set p=3</span>
+<span class="go">drivshell&gt; phy diag ce27 prbs get</span>
+<span class="go">ce27 (115):  PRBS has -2 errors!</span>
+<span class="go">drivshell&gt; phy diag ce27 prbs get</span>
+<span class="go">ce27 (115):  PRBS OK!</span>
+<span class="go">drivshell&gt; phy diag ce27 dsc</span>
+<span class="go">LN (CDRxN  , UC_CFG,UC_STS, RST, STP) SD LCK RXPPM CLK90 CLKP1 PF(M,L)  VGA DCO P1mV M1mV   DFE(1,2,3,4,5,6)      TXPPM TXEQ(n1,m,p1,2,3,rpara)    EYE(L,R,U,D)   LINK_TIME   BER</span>
+<span class="go"> 0 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    29     0    ( 0,1)  11  -3  231  22 (  6,-15,  0,  0,  0,  1)    0   ( 8, 73,19, 0, 0, 0)   (218,296,140,144)    63.5   &lt;1.2e-09</span>
+<span class="go"> 1 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -2    28    -1    ( 0,1)  12 -11  231  12 (  2,-15,  0, -1,  0,  2)    0   ( 8, 73,19, 0, 0, 0)   (203,265,134,138)    61.5   &lt;1.2e-09</span>
+<span class="go"> 2 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    29     0    ( 0,1)  13   1  242  14 (  3,-15, -1,  3, -3,  3)    0   ( 8, 73,19, 0, 0, 0)   (234,312,153,159)    58.2   &lt;1.2e-09</span>
+<span class="go"> 3 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    28    -1    ( 0,1)  13   0  242   6 (  0,-15,  0,  0, -1,  0)    0   ( 8, 73,19, 0, 0, 0)   (234,296,157,155)    54.0   &lt;1.2e-09</span>
+</pre></div>
+</div>
+</div>
+<p>The first <code class="docutils literal notranslate"><span class="pre">get</span></code> right after <code class="docutils literal notranslate"><span class="pre">set</span></code> can report a negative count such as
+<code class="docutils literal notranslate"><span class="pre">-2</span> <span class="pre">errors</span></code>; read it again. <code class="docutils literal notranslate"><span class="pre">PRBS</span> <span class="pre">OK!</span></code> means no errors since the last
+read. While PRBS runs, the <code class="docutils literal notranslate"><span class="pre">BER</span></code> column of <code class="docutils literal notranslate"><span class="pre">dsc</span></code> shows the measured bit
+error rate per lane, here better than 1.2e-9 on every lane.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: The same on the far end</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy diag ce29 prbs set p=3</span>
+</pre></div>
+</div>
+</div>
+<p>Stop PRBS on <em>both</em> ends; the link comes back by itself:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy diag ce29 prbs clear</span>
+<span class="go">drivshell&gt; phy diag ce27 prbs clear</span>
+<span class="go">drivshell&gt; ps ce27</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">      ce27(115)  up     4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p>On Trident 3 the periodic statistics sub-commands are not available:
+<code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">…</span> <span class="pre">prbsstat</span></code> and <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">…</span> <span class="pre">fecstat</span></code> answer <code class="docutils literal notranslate"><span class="pre">PHY:</span> <span class="pre">Command</span> <span class="pre">not</span>
+<span class="pre">implemented</span></code>, and <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">diag</span> <span class="pre">…</span> <span class="pre">berproj</span></code> answers <code class="docutils literal notranslate"><span class="pre">Feature</span> <span class="pre">unavailable</span></code>.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy diag ce27 fecstat start interval=2</span>
+<span class="go">PHY: Command not implemented</span>
+
+<span class="go">Failed to execute the diagnostic command. Error: Operation failed.</span>
+<span class="go">drivshell&gt; phy diag ce27 berproj sample_time=5</span>
+<span class="go">Getting optimized threshold for all the lanes...</span>
+<span class="go">&lt;nounit&gt;:portmod_pm_phy_ber_proj: Feature unavailable</span>
+<span class="go">&lt;nounit&gt;:portmod_port_diag_ctrl: Feature unavailable</span>
+
+<span class="go">Failed to execute the diagnostic command. Error: Operation failed.</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="transmit-fir-taps">
+<span id="howto-link-taps"></span><h2>Transmit FIR taps<a class="headerlink" href="#transmit-fir-taps" title="Link to this heading"></a></h2>
+<p>The transmitter pre-distorts the signal to make up for the loss of the
+channel. On Trident 3 SerDes it has a pre-cursor, a main and a post-cursor
+tap. <a class="reference internal" href="../reference/phy.html#clicmd-phy-control"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">phy</span> <span class="pre">control</span></code></a> shows them as
+<code class="docutils literal notranslate"><span class="pre">Preemphasis</span></code>, packed as <code class="docutils literal notranslate"><span class="pre">post</span> <span class="pre">&lt;&lt;</span> <span class="pre">16</span> <span class="pre">|</span> <span class="pre">main</span> <span class="pre">&lt;&lt;</span> <span class="pre">8</span> <span class="pre">|</span> <span class="pre">pre</span></code>. For example
+<code class="docutils literal notranslate"><span class="pre">0x14410a</span></code> is pre 10 (<code class="docutils literal notranslate"><span class="pre">0x0a</span></code>), main 65 (<code class="docutils literal notranslate"><span class="pre">0x41</span></code>) and post 20 (<code class="docutils literal notranslate"><span class="pre">0x14</span></code>),
+and <code class="docutils literal notranslate"><span class="pre">dsc</span></code> shows the same values as <code class="docutils literal notranslate"><span class="pre">TXEQ(10,</span> <span class="pre">65,</span> <span class="pre">20,</span> <span class="pre">…)</span></code>.</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy control xe3</span>
+<span class="go">Preemphasis              = 0x14410a</span>
+<span class="go">drivshell&gt; phy diag xe3 dsc</span>
+<span class="go">LN (CDRxN  , UC_CFG,UC_STS, RST, STP) SD LCK RXPPM CLK90 CLKP1 PF(M,L)  VGA DCO P1mV M1mV   DFE(1,2,3,4,5,6)      TXPPM TXEQ(n1,m,p1,2,3,rpara)    EYE(L,R,U,D)   LINK_TIME   BER</span>
+<span class="go"> 0 (OSx2:x2, 0x0400, 0x00 , 0,0, 00 ) 1  1   -30    32     0    ( 5,4)  32   3    0   0 (  0,  0,  0,  0,  0,  0)    0   ( 8, 70,22, 0, 0, 0)   (386,373,263,263)    43.6</span>
+<span class="go"> 1 (OSx2:x2, 0x0400, 0x00 , 0,0, 00 ) 1  1   -30    32     0    ( 5,4)  32   3    0   0 (  0,  0,  0,  0,  0,  0)    0   (10, 65,20, 0, 0, 5)   (386,402,263,263)    36.8</span>
+<span class="go"> 2 (OSx2:x2, 0x0400, 0x00 , 0,0, 00 ) 1  1   -30    32     0    ( 5,4)  32   9    0   0 (  0,  0,  0,  0,  0,  0)    0   (10, 65,20, 0, 0, 5)   (386,359,263,263)    31.7</span>
+<span class="go"> 3 (OSx2:x2, 0x0400, 0x00 , 0,0, 00 ) 1  1   -30    32     0    ( 5,4)  32   2    0   0 (  0,  0,  0,  0,  0,  0)    0   (10, 65,20, 0, 0, 5)   (386,373,263,263)    42.5</span>
+</pre></div>
+</div>
+</div>
+<p>The xe3 row is lane 3 of the core; the other rows belong to the other
+ports of the same core.</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">Preemphasis</span></code> changes all lanes of the port at once and takes
+effect immediately; the link stays up unless the new taps are too poor:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy control xe3 Preemphasis=0x002800</span>
+<span class="go">Current PHY control settings of xe3 -&gt;</span>
+<span class="go">Preemphasis              = 0x2800</span>
+<span class="go">DriverCurrent            = 0xffffffff</span>
+<span class="go">DFE ENable               = False</span>
+<span class="go">LP DFE ENable            = False</span>
+<span class="go">BR DFE ENable            = False</span>
+<span class="go">LinkTraining Enable      = False</span>
+<span class="go">Interface                = 0xa</span>
+<span class="go">CL74                     = False</span>
+<span class="go">CL91                     = False</span>
+<span class="go">CL108                    = False</span>
+</pre></div>
+</div>
+</div>
+<p>The effect is seen by the <em>receiver at the other end</em>, so judge a change by
+the far end’s <code class="docutils literal notranslate"><span class="pre">dsc</span></code> (VGA, DFE, eye) or eye scan, not by your own. On a 10G
+copper DAC, lowering only the main tap gave this at the far end:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Taps (pre, main, post)</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">Preemphasis</span></code></p></th>
+<th class="head"><p>Far-end VGA</p></th>
+<th class="head"><p>Far-end signal detect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>10, 65, 20 (original)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x14410a</span></code></p></td>
+<td><p>26</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>0, 40, 0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x002800</span></code></p></td>
+<td><p>30</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-even"><td><p>0, 20, 0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x001400</span></code></p></td>
+<td><p>37</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>0, 10, 0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0x000a00</span></code></p></td>
+<td><p>45 (saturated)</p></td>
+<td><p>no, link down</p></td>
+</tr>
+</tbody>
+</table>
+<p>With optical modules the host’s taps only drive the short electrical channel
+to the module, which re-times the signal. On a 100G CWDM4 link even a main
+tap of 20 with no pre- or post-cursor caused no errors at the far end’s PRBS
+checker. Tune taps on copper DAC and backplane links; on optical links look
+at the module instead.</p>
+<p>Put the original value back when you are done (<code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">control</span> <span class="pre">xe3</span>
+<span class="pre">Preemphasis=0x14410a</span></code>). On SONiC the taps are normally programmed from the
+platform’s media settings when a module is inserted, so they may also be
+reset when a module is re-seated.</p>
+</section>
+<section id="fec">
+<span id="howto-link-fec"></span><h2>FEC<a class="headerlink" href="#fec" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">control</span></code> also shows which FEC is enabled: <code class="docutils literal notranslate"><span class="pre">CL74</span></code> (BASE-R FEC),
+<code class="docutils literal notranslate"><span class="pre">CL91</span></code> (RS-FEC, the usual one for 100G) and <code class="docutils literal notranslate"><span class="pre">CL108</span></code> (RS-FEC for 25G
+lanes). Change it with the same command:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: RS-FEC on, then turned off on one end</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy control ce27</span>
+<span class="go">CL74                     = False</span>
+<span class="go">CL91                     = True</span>
+<span class="go">CL108                    = False</span>
+<span class="go">drivshell&gt; phy control ce27 CL91=False</span>
+<span class="go">CL91                     = False</span>
+</pre></div>
+</div>
+</div>
+<p>Both ends must use the same FEC. With RS-FEC off on one end only, the link
+goes down on both ends, while the SerDes still shows signal and lock on every
+lane and an open eye. That combination, PMD fine but no link, is the sign of
+a FEC (or PCS) mismatch:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: FEC mismatch</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; ps ce27</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">      ce27(115)  down   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">drivshell&gt; phy diag ce27 dsc</span>
+<span class="go">LN (CDRxN  , UC_CFG,UC_STS, RST, STP) SD LCK RXPPM CLK90 CLKP1 PF(M,L)  VGA DCO P1mV M1mV   DFE(1,2,3,4,5,6)      TXPPM TXEQ(n1,m,p1,2,3,rpara)    EYE(L,R,U,D)   LINK_TIME   BER</span>
+<span class="go"> 0 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*    0    28     0    ( 0,1)  11  -3  236  20 (  3,-15,  0,  0,  0,  1)    0   ( 8, 73,19, 0, 0, 0)   (203,296,144,147)    68.2</span>
+<span class="go"> 1 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    28    -1    ( 0,1)  12 -11  238   4 (  0,-14,  0, -1,  0,  1)    0   ( 8, 73,19, 0, 0, 0)   (218,265,140,149)    62.6</span>
+<span class="go"> 2 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    30     0    ( 0,1)  12   3  231  12 (  5,-15, -1,  3, -3,  3)    0   ( 8, 73,19, 0, 0, 0)   (234,328,147,151)    67.9</span>
+<span class="go"> 3 (OSx1:x1, 0x0424, 0x00 , 0,0, 00 ) 1  1*   -1    28    -1    ( 0,1)  13   0  244   2 (  0,-15,  0,  0, -1,  0)    0   ( 8, 73,19, 0, 0, 0)   (234,296,165,161)    63.1</span>
+</pre></div>
+</div>
+</div>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: The far end at the same time</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; ps ce29</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">      ce29(123)  down   4  100G  FD   SW  No   Forward         Untag    F  CAUI4  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p>Turned off on both ends, the link comes up again without FEC:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; phy control ce27 CL91=False</span>
+<span class="go">CL91                     = False</span>
+<span class="go">drivshell&gt; phy control ce29 CL91=False</span>
+<span class="go">CL91                     = False</span>
+<span class="go">drivshell&gt; ps ce27</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">      ce27(115)  up     4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">drivshell&gt; ps ce29</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">      ce29(123)  up     4  100G  FD   SW  No   Forward         Untag    F  CAUI4  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p>Running without FEC only makes sense on a very clean link; check the
+receive error counters (<code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span> <span class="pre">changed</span> <span class="pre">&lt;port&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">CLMIB_RFCS</span></code>)
+afterwards.</p>
+</section>
+<section id="speed">
+<span id="howto-link-speed"></span><h2>Speed<a class="headerlink" href="#speed" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="../reference/port.html#clicmd-port"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">port</span></code></a> <code class="docutils literal notranslate"><span class="pre">&lt;port&gt;</span> <span class="pre">speed=&lt;Mb/s&gt;</span></code> forces a new speed. Both ends must
+match, and the cable or module must support it; a 100G CWDM4 module, for
+example, only runs at 100G.</p>
+<p>Changing the speed class renames ports. Setting port 1 (<code class="docutils literal notranslate"><span class="pre">ce0</span></code>) to 40G
+turned it into <code class="docutils literal notranslate"><span class="pre">xe0</span></code> and shifted every other name:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span>: Port names after setting port 1 to 40G</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; port ce0 speed=40000</span>
+<span class="go">drivshell&gt; ps 1-13</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       xe0(  1)  !ena   4   40G  FD   SW  No   Forward  TX RX  Untag    F  XLAUI  9122    No          IEEE</span>
+<span class="go">       ce0(  5)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+<span class="go">       xe1(  9)  up     1   10G  FD   SW  No   Forward         Untag    F    XFI  9122    No          IEEE</span>
+<span class="go">       xe2( 10)  up     1   10G  FD   SW  No   Forward         Untag    F    XFI  9122    No          IEEE</span>
+<span class="go">       xe3( 11)  up     1   10G  FD   SW  No   Forward         Untag    F    XFI  9122    No          IEEE</span>
+<span class="go">       xe4( 12)  up     1   10G  FD   SW  No   Forward          None    F    XFI  9122    No          IEEE</span>
+<span class="go">       ce1( 13)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p>Before the change, ports 1, 5, 9–12 and 13 were <code class="docutils literal notranslate"><span class="pre">ce0</span></code>, <code class="docutils literal notranslate"><span class="pre">ce1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">xe0</span></code>–<code class="docutils literal notranslate"><span class="pre">xe3</span></code> and <code class="docutils literal notranslate"><span class="pre">ce2</span></code>. Address the port by number to change it back.
+The speed change also changed the interface type and enabled pause, and
+setting the speed back did not undo that, so compare <code class="docutils literal notranslate"><span class="pre">ps</span></code> with what you
+noted before and set those explicitly:</p>
+<div class="bcmsh-example bcmsh-hardware docutils container">
+<p class="bcmsh-badge"><span class="bcmsh-badge-hardware">Hardware-validated</span></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">drivshell&gt; port 1 speed=100000</span>
+<span class="go">drivshell&gt; ps 1-13</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ce0(  1)  !ena   4  100G  FD   SW  No   Forward  TX RX  Untag    F  CAUI4  9122    No          IEEE</span>
+<span class="go">drivshell&gt; port 1 if=CR4 TxPAUse=false RxPAUse=false</span>
+<span class="go">drivshell&gt; ps 1</span>
+<span class="go">                 ena/        speed/ link auto    STP                  lrn  inter   max   cut   loop</span>
+<span class="go">           port  link  Lns   duplex scan neg?   state   pause  discrd ops   face frame  thru?  back   encap</span>
+<span class="go">       ce0(  1)  !ena   4  100G  FD   SW  No   Forward         Untag    F    CR4  9122    No          IEEE</span>
+</pre></div>
+</div>
+</div>
+<p>Setting the interface type also reset the receive equalizer options (<code class="docutils literal notranslate"><span class="pre">LP</span>
+<span class="pre">DFE</span></code>) to their earlier values; check <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">control</span></code> too.</p>
+</section>
+<section id="putting-it-back">
+<h2>Putting it back<a class="headerlink" href="#putting-it-back" title="Link to this heading"></a></h2>
+<p>Before you leave the shell, compare each port you touched with the values
+you noted: <code class="docutils literal notranslate"><span class="pre">ps</span></code> (speed, interface, pause, link), <code class="docutils literal notranslate"><span class="pre">phy</span> <span class="pre">control</span></code> (taps, FEC,
+DFE) and, if PRBS ran, that <code class="docutils literal notranslate"><span class="pre">prbs</span> <span class="pre">clear</span></code> was given on both ends. SONiC does
+not see any of these changes and will not repair them; restarting <code class="docutils literal notranslate"><span class="pre">syncd</span></code>
+does, by re-initialising the ports from SONiC’s configuration, at the cost
+of a data-plane outage.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="acl.html" class="btn btn-neutral float-left" title="Debugging ACL rules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phy.html" class="btn btn-neutral float-right" title="PHYs and RJ-45 SFPs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
