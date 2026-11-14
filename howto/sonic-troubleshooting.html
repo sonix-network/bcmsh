@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SONiC and SDK troubleshooting &mdash; bcmsh: Broadcom diag shell reference  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/bcmsh.css?v=f5e747d5" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7f41d439"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="KNET and the CPU port" href="knet.html" />
+    <link rel="prev" title="Embedded applications" href="../concepts/eapps.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            bcmsh: Broadcom diag shell reference
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access.html">Accessing the shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Reading this guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Example validation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/units.html">Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/ports.html">Ports and port bitmaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/memories-registers.html">Memories and registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/config.html">Configuration variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint.html">Cint: the C interpreter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/cint-language.html">The Cint language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/scripting.html">Scripting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/eapps.html">Embedded applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SONiC and SDK troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-information">Version information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vlan-configuration-ownership">VLAN configuration ownership</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#counter-comparisons">Counter comparisons</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="knet.html">KNET and the CPU port</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirror-to-cpu.html">Capturing port traffic with tcpdump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copp.html">Protecting the CPU with CoPP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="queues.html">Troubleshooting queues and buffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">Debugging ACL rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="link-debug.html">Debugging a link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phy.html">PHYs and RJ-45 SFPs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2-switch.html">Building an L2 switch with VLANs and SVIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lacp.html">Port channels and LACP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l3.html">Inspecting L3 forwarding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">MPLS label switching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vxlan.html">VXLAN tunnels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ifa.html">In-band Flow Analyzer (IFA 2.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-config.html">Changing the chip configuration live</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cint-recipes.html">Cint recipes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Command reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Command reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cint-api/index.html">Cint API on this build</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Further reading</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">bcmsh: Broadcom diag shell reference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SONiC and SDK troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sonic-and-sdk-troubleshooting">
+<h1>SONiC and SDK troubleshooting<a class="headerlink" href="#sonic-and-sdk-troubleshooting" title="Link to this heading"></a></h1>
+<p>Compare SONiC’s view with the SDK’s view before changing switch state. A
+missing VLAN, an unexpected counter or an unavailable shell can originate at
+different layers. The checks below help narrow the problem without changing
+ASIC configuration.</p>
+<section id="version-information">
+<h2>Version information<a class="headerlink" href="#version-information" title="Link to this heading"></a></h2>
+<p>Record the SONiC image, platform and ASIC model alongside the Broadcom SAI,
+OCP SAI API and SDK versions. These version numbers describe different
+components; an SDK release number alone does not identify the SAI package.
+Use <a class="reference internal" href="../reference/version.html#clicmd-version"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">version</span></code></a> for SDK build information and <a class="reference internal" href="../reference/bsv.html#clicmd-bsv"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">bsv</span></code></a> for the
+SAI and Cancun information available in this shell.</p>
+<p>The syncd initialization log may also contain all three version labels.
+Look for that log in existing logs or a SONiC tech-support bundle. If the
+line is absent, check whether syncd reached initialization; collecting a
+bundle does not guarantee that the information is present. See the
+<a class="reference external" href="https://groups.google.com/g/sonicproject/c/L3Pd2K8KSMc">October 2021 shell-access discussion</a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Chips:</span></code> list from <a class="reference internal" href="../reference/version.html#clicmd-version-all"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">version</span> <span class="pre">all</span></code></a> describes the SDK build.
+Do not use it alone as a compatibility guarantee for a Community SAI
+package, a switch platform or a particular feature. Check the exact package
+and platform combination. The <a class="reference external" href="https://groups.google.com/g/sonicproject/c/Xa_zjQHp9XY">2024–2025 ASIC-support discussion</a> illustrates why
+an SDK chip list and SAI/platform support need to be distinguished.</p>
+</section>
+<section id="vlan-configuration-ownership">
+<h2>VLAN configuration ownership<a class="headerlink" href="#vlan-configuration-ownership" title="Link to this heading"></a></h2>
+<p>Use SONiC’s VLAN configuration commands for a SONiC-managed VLAN. Creating a
+Linux bridge with <code class="docutils literal notranslate"><span class="pre">brctl</span></code> is not a substitute for programming the switch
+through SONiC. Compare the configured VLAN membership with <a class="reference internal" href="../reference/vlan.html#clicmd-vlan-show"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">vlan</span> <span class="pre">show</span></code></a>
+and check tagged versus untagged membership explicitly.</p>
+<p>The <a class="reference external" href="https://groups.google.com/g/sonicproject/c/Ju5WVd11fvo">February 2018 VLAN discussion</a> shows a Linux bridge
+that is absent from the SDK VLAN listing; the reply directs the user to the
+SONiC VLAN CLI. For current CLI syntax, use the help supplied by your SONiC
+image. For an isolated exercise that deliberately configures the SDK directly,
+see <a class="reference internal" href="l2-switch.html"><span class="doc">Building an L2 switch with VLANs and SVIs</span></a> and its cleanup instructions.</p>
+</section>
+<section id="counter-comparisons">
+<h2>Counter comparisons<a class="headerlink" href="#counter-comparisons" title="Link to this heading"></a></h2>
+<p>For surprising interface totals, compare SONiC’s interface counters with
+<a class="reference internal" href="../reference/show.html#clicmd-show-counters"><code class="xref std std-clicmd docutils literal notranslate"><span class="pre">show</span> <span class="pre">counters</span></code></a> for the corresponding SDK port. Resolve the port
+mapping first using <a class="reference internal" href="../concepts/ports.html"><span class="doc">Ports and port bitmaps</span></a>; Linux and SDK port names need
+not match. Record both views close together, along with link state and time
+since boot, before clearing anything.</p>
+<p>If both views contain implausible values, do not assume the problem is only
+SONiC’s display or polling layer. Conversely, a difference between the views
+needs investigation of counter selection and collection timing before it can
+identify a cause. See <a class="reference internal" href="queues.html"><span class="doc">Troubleshooting queues and buffers</span></a> for counter units and drop attribution.</p>
+<p>A <a class="reference external" href="https://groups.google.com/g/sonicproject/c/KRBkl6o1JS4">June 2019 counter report</a> describes unexpectedly
+large totals after cold boot in both SONiC and bcmsh on a Tomahawk switch.
+It is a useful comparison to make, not a documented fix for such counters.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../concepts/eapps.html" class="btn btn-neutral float-left" title="Embedded applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="knet.html" class="btn btn-neutral float-right" title="KNET and the CPU port" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, sonix-network contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
